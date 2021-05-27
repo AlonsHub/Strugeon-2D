@@ -50,6 +50,8 @@ public class HealItem : ActionItem
 
         //pawn.anim.SetTrigger("Heal");
         //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Heal, p.name);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Heal, tgt.name);
+
 
         Invoke("CharacterHeal", healDelay);
         // StartCoroutine("CharacterHeal");

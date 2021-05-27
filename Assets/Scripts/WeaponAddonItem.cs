@@ -21,7 +21,9 @@ public class WeaponAddonItem : ActionItem
          censer = tgt.GetComponent<Censer>();
         //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Censer, pawn.name);
 
-        if(censer.currentNode.GetDistanceToTarget(pawn.tileWalker.currentNode) > 14)
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Rock, tgt.name);
+
+        if (censer.currentNode.GetDistanceToTarget(pawn.tileWalker.currentNode) > 14)
         {
             //walk to censer first
             attachedWeapon.feetItem.Action(censer.gameObject);

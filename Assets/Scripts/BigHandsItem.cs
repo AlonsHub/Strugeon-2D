@@ -50,6 +50,10 @@ public class BigHandsItem : ActionItem
 
         //pawn.transform.LookAt(toHit.transform.position);
 
+
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Rock, tgt.name);
+
+
         pawn.anim.SetTrigger("Throw");
         //pawn.TurnDone = true;
         //StartCoroutine("CharacterThrow");
