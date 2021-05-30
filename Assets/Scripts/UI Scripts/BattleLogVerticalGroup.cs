@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock };
+public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock};
 public class BattleLogVerticalGroup : MonoBehaviour
 {
     public static BattleLogVerticalGroup Instance;
@@ -69,7 +69,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
     void SetupActionSpriteDictionary()
     {
-        for (int i = 0; i < Enum.GetNames(typeof(ActionIcon)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(ActionSymbol)).Length; i++)
         {
             actionIconToSprite.Add((ActionSymbol)i, actionSprites[i]);
         }

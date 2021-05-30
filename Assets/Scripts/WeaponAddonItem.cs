@@ -21,7 +21,7 @@ public class WeaponAddonItem : ActionItem
          censer = tgt.GetComponent<Censer>();
         //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Censer, pawn.name);
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Rock, tgt.name);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Censer, tgt.name);
 
         if (censer.currentNode.GetDistanceToTarget(pawn.tileWalker.currentNode) > 14)
         {
