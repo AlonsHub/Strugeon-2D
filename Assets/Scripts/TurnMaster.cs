@@ -69,11 +69,15 @@ public class TurnMaster : MonoBehaviour
             //Sprites and SA icons are set
 
             turnPlates[i].localPosition = nextTurnPlateTrans.localPosition + new Vector3((i-1) * turnPlateDistance, 0, 0); //(i-1) because the [1] position in the array is the second plate,
-            Image[] imgs = turnPlates[i].GetComponentsInChildren<Image>();
-            imgs[0].sprite = turnTakers[i].PortraitSprite;
+            //Image[] imgs = turnPlates[i].GetComponentsInChildren<Image>();
+            //imgs[0].sprite = turnTakers[i].PortraitSprite;
+            //Image imgs = turnPlates[i].GetComponentInChildren<Image>();
             //imgs[1].sprite = turnTakers[i].PortraitSprite; //add the SA icon, if applicable
-                                                                                                                           //but nextTurnPlateTrans is the second position
-                                                                                                                           //(so on i=1, we need to add (1-1)*delta
+            turnPlates[i].GetComponentInChildren<Image>().sprite = turnTakers[i].PortraitSprite;
+            //but nextTurnPlateTrans is the second position
+            //(so on i=1, we need to add (1-1)*delta
+
+            turnTakers[i].myTurnPlate = turnPlates[i].gameObject;
         }
         //TURN PLATE DISPLAYER!
 
@@ -180,6 +184,7 @@ public class TurnMaster : MonoBehaviour
         Transform t = turnPlates[0];
         turnPlates.Remove(turnPlates[0]);
         turnPlates.Add(t);
+        //turnPlates.(t);
         currentTurnInDisplayer++;
 
         if(currentTurnInDisplayer >= turnPlates.Count) //notice this counts on DISPLAYER PLATES and not TurnTakers
@@ -204,6 +209,11 @@ public class TurnMaster : MonoBehaviour
             //but nextTurnPlateTrans is the second position
             //(so on i=1, we need to add (1-1)*delta                                                                                                    
         }
+    }
+
+    void RemovePlate()
+    {
+
     }
 
     //[ContextMenu("CreateDisplayer")]

@@ -143,11 +143,15 @@ public class MouseBehaviour : MonoBehaviour
 
     public void CloseMenus()
     {
-        PurpleChoosingMode.Instance.ToggleTint(false);
-        Renderer r =
-        PurpleChoosingMode.Instance.actor.GetComponentInChildren<Renderer>();
+        if (PurpleChoosingMode.Instance.isOn)
+        {
+            PurpleChoosingMode.Instance.ToggleTint(false);
+            Renderer r =
+            PurpleChoosingMode.Instance.actor.GetComponentInChildren<Renderer>();
+            r.material.SetFloat("_Thickness", 0f);
+        }
 
-        r.material.SetFloat("_Thickness", 0f);
+
 
         heroButtonCircle.SetActive(false);
         enemyButtonCircle.SetActive(false);

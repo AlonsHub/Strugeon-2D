@@ -19,29 +19,29 @@ public class FeetItem : ActionItem
         {
             //GridPoser gridPoser = tgt.GetComponent<GridPoser>();
             pawn.tileWalker.StartNewPathWithRange(gridPoser.GetGridPos());
-            BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, gridPoser.GetName());
+            //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, gridPoser.GetName());
         }
         else
         {
             pawn.tileWalker.StartNewPathWithRange(targetWalker, currentRangeInTiles);
             //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Walk, targetWalker.pawn.name);
-            BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
+            //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
         }
         // BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Walk, tgt.name);
 
     }
 
 
-    IEnumerator CharacterWalk()
-    {
-        //ownerCharacter.tileWalker.StartNewPath(actionPool[actionIndex].target.GetComponent<TileWalker>());
-        //ownerCharacter.tileWalker.StartNewPathWithRange(targetWalker, ownerCharacter.wa);
-        //BattleLog.Instance.AddLine(name + " Moved towards: " + targetWalker.name);
-        BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
+    //IEnumerator CharacterWalk()
+    //{
+    //    //ownerCharacter.tileWalker.StartNewPath(actionPool[actionIndex].target.GetComponent<TileWalker>());
+    //    //ownerCharacter.tileWalker.StartNewPathWithRange(targetWalker, ownerCharacter.wa);
+    //    //BattleLog.Instance.AddLine(name + " Moved towards: " + targetWalker.name);
+    //    //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
 
-        pawn.tileWalker.StartNewPathWithRange(pawn.tileWalker, currentRangeInTiles);
+    //    pawn.tileWalker.StartNewPathWithRange(pawn.tileWalker, currentRangeInTiles);
 
-        yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
-        pawn.TurnDone = true;
-    }
+    //    yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+    //    pawn.TurnDone = true;
+    //}
 }

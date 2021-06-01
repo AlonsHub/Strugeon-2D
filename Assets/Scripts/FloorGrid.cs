@@ -8,7 +8,8 @@ public class FloorGrid : MonoBehaviour
     [SerializeField]
     bool doBuildFloorOnStart;
 
-    public Vector3 startingPoint;
+    public Transform startingPoint;
+    //public Vector3 startingPoint;
     public Vector2Int floorSize;
     public Vector2 tileSize;
     public Vector2 gapSize;
@@ -47,7 +48,7 @@ public class FloorGrid : MonoBehaviour
     public void BuildFloor()
     {
         floorTiles = new FloorTile[floorSize.x, floorSize.y];
-        tilePlacerPointer.position = startingPoint;
+        tilePlacerPointer.position = startingPoint.position;
 
         for (int i = 0; i < floorSize.x; i++)
         {

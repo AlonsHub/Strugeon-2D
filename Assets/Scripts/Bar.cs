@@ -14,6 +14,7 @@ public class Bar : MonoBehaviour
     private void Start()
     {
         currentValue = maxValue;
+        img = GetComponent<Image>();
     }
     public void SetMaxValue(float value)
     {
@@ -29,11 +30,14 @@ public class Bar : MonoBehaviour
     {
         currentValue += value;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
+        img.fillAmount = currentValue / maxValue;
+
     }
     public void ReduceValue(float value) //redundant? one of them is
     {
         currentValue -= value;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
+        img.fillAmount = currentValue / maxValue;
 
     }
 

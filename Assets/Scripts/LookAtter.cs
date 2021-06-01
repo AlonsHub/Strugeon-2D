@@ -5,7 +5,7 @@ using UnityEngine;
 public class LookAtter : MonoBehaviour
 {
     public Transform tgt;
-    void Update()
+    void FixedUpdate()
     {
         if (tgt)
             transform.LookAt(tgt);

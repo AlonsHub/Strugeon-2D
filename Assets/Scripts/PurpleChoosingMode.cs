@@ -21,6 +21,7 @@ public class PurpleChoosingMode : MonoBehaviour
     [ColorUsage(true)]
     public Color colorOff;
 
+    public bool isOn = false;
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -33,6 +34,7 @@ public class PurpleChoosingMode : MonoBehaviour
 
     public void ToggleTint(bool isOn)
     {
+        this.isOn = isOn;
         Renderer ren;
         Color newColor;
         if (isOn)

@@ -186,8 +186,8 @@ public class TileWalker : MonoBehaviour
     public void FindOwnGridPos() //just in case they get lost somehow
     {
         //approximate location accuratly by dividing the x and z pos, to bet the index - then access that tile and steal its position data
-        float x = (transform.position.x - floorGrid.startingPoint.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x);
-        float y = (transform.position.z - floorGrid.startingPoint.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y);
+        float x = (transform.position.x - floorGrid.startingPoint.position.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x);
+        float y = (transform.position.z - floorGrid.startingPoint.position.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y);
         
         gridPos.x = Mathf.RoundToInt(x);
         gridPos.y = Mathf.RoundToInt(y);

@@ -28,6 +28,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public Transform effectIconParent;
     public GameObject effectIconPrefab;
 
+    public GameObject myTurnPlate;
+
     #region Action Region
 
     List<ActionItem> actionItems;
@@ -238,6 +240,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         }
 
         TurnMaster.Instance.turnTakers.Remove(this);
+        TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
+        Destroy(myTurnPlate);
+        //TurnMaster.Instance.turnPlates.r
         //PartyMaster.Instance.currentMercParty.Remove(PartyMaster.Instance.currentMercParty.Where(x => x.name == name).SingleOrDefault());
         StopAllCoroutines();
         Destroy(gameObject);
