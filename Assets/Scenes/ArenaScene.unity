@@ -876,6 +876,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4363690052461819848, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7e0c8b6af2e36d14daae74638a0461e0,
+        type: 3}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_Transition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.3726415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.3726415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1738391194}
+    - target: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeTimeScale
+      objectReference: {fileID: 0}
     - target: {fileID: 4363690052557108531, guid: e5c48f6728d6d134aa1fdc36462f1366,
         type: 3}
       propertyPath: m_Name
@@ -986,8 +1027,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4363690052846743005, guid: e5c48f6728d6d134aa1fdc36462f1366,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1673807128, guid: e5c48f6728d6d134aa1fdc36462f1366, type: 3}
+    - {fileID: 4363690052846743001, guid: e5c48f6728d6d134aa1fdc36462f1366, type: 3}
+    - {fileID: 4363690052461819893, guid: e5c48f6728d6d134aa1fdc36462f1366, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e5c48f6728d6d134aa1fdc36462f1366, type: 3}
 --- !u!1 &719995142
 GameObject:
@@ -1656,6 +1704,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053009088}
   m_CullTransparentMesh: 0
+--- !u!114 &1109884864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4363690052461819894, guid: e5c48f6728d6d134aa1fdc36462f1366,
+    type: 3}
+  m_PrefabInstance: {fileID: 712665692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1162613872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7201316917568703510, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
@@ -1995,6 +2055,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4447737377822260746}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1738391193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4363690052557108531, guid: e5c48f6728d6d134aa1fdc36462f1366,
+    type: 3}
+  m_PrefabInstance: {fileID: 712665692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1738391194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738391193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScales:
+  - 1
+  - 2
+  - 0
+  buttonImgs:
+  - {fileID: 21300000, guid: 7e0c8b6af2e36d14daae74638a0461e0, type: 3}
+  - {fileID: 21300000, guid: 13fffdb21d8e0364cb567a7608cc2cc6, type: 3}
+  - {fileID: 21300000, guid: a2d7283656efee046b20c43dbaf5c329, type: 3}
+  currentTimeScaleIndex: 0
+  timeToggleButton: {fileID: 1109884864}
 --- !u!224 &1838267182 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 943292932632572491, guid: 9fb1913f7edcf7b4d934250c0eec8341,

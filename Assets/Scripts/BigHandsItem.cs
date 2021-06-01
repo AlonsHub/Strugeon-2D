@@ -31,6 +31,8 @@ public class BigHandsItem : ActionItem
         Destroy(ft.myOccupant);
         ft.myOccupant = null;
 
+        
+
         //tgt.transform.GetChild(1).gameObject.SetActive(false);// destroy?
 
         //roll target
@@ -42,7 +44,9 @@ public class BigHandsItem : ActionItem
 
         //toHit = pawn.targets[Random.Range(0, pawn.targets.Count - 1)]; //should be simplified
         toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
-
+        LookAtter la = GetComponentInChildren<LookAtter>();
+        if (toHit && la)
+            la.tgt = toHit.transform;
         //toHit.TakeDamage(damage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         //GameObject go = Instantiate(weaponGfx, weaponSpawn.position, Quaternion.identity);
         //go.transform.LookAt(toHit.transform.position + Vector3.up*2f);
@@ -94,6 +98,10 @@ public class BigHandsItem : ActionItem
             Debug.LogError("No to hit for some fucking reason for: " + name);
         }
         arr.tgt = toHit.transform;
+
+        LookAtter la = GetComponentInChildren<LookAtter>();
+        if (la)
+            la.tgt = toHit.transform;
 
         StartCoroutine(WaitForArrowToHit(go));
     }

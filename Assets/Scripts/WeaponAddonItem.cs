@@ -53,7 +53,8 @@ public class WeaponAddonItem : ActionItem
     {
         if (attachedWeapon.hasEffect)
         {
-            actionVariations = new List<ActionVariation>(); // INPORTANT!
+            //actionVariations = new List<ActionVariation>(); // INPORTANT!
+            actionVariations.Clear(); // INPORTANT and Better!
             return;
         }
 

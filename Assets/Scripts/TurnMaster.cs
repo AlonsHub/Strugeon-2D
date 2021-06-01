@@ -56,13 +56,13 @@ public class TurnMaster : MonoBehaviour
         turnTakers.Sort(SortByInitiativeScore);
 
         //TURN PLATE DISPLAYER!
-        turnPlates.Add(Instantiate(prefabeTurnPlate, turnPlateParent).transform);
+        GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
+         turnPlates.Add(go.transform);
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
-        //Rect rect = turnPlates[0].GetComponent<RectTransform>().rect;
         turnPlates[0].localScale *= 1.5f;
-    
+        turnTakers[0].myTurnPlate = go;
 
-        for (int i = 1; i < turnTakers.Count; i++)
+        for (int i = 1; i < turnTakers.Count; i++) //start from [1], because [0] is set just above this ^^^^
         {
             turnPlates.Add(Instantiate(prefabeTurnPlate, turnPlateParent).transform);
 
@@ -109,6 +109,11 @@ public class TurnMaster : MonoBehaviour
                 break;
             }
             yield return new WaitForSeconds(turnStartDelay);
+
+            if(currentTurn>= turnTakers.Count)
+            {
+                currentTurn = 0;
+            }
             currentTurnTaker = turnTakers[currentTurn];
 
             if (!currentTurnTaker.DoSkipTurn)

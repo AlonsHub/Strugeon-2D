@@ -63,16 +63,17 @@ public class WeaponItem : ActionItem
 
         toHit = tgt.GetComponent<Pawn>();
 
-        LookAtter la = GetComponentInChildren<LookAtter>();
-
         if (!toHit)
         {
             Debug.Log("word");
             return;
         }
 
+        LookAtter la = GetComponentInChildren<LookAtter>();
         if(tgt && la)
         la.tgt = tgt.transform;
+
+
        
         //pawn.transform.LookAt(tgt.transform);
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
