@@ -164,6 +164,7 @@ MonoBehaviour:
   effectIconParent: {fileID: 6976060224392790412}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
+  myTurnPlate: {fileID: 0}
   actionPool: []
   isEnemy: 0
   audioSource: {fileID: 0}
@@ -707,6 +708,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2164652894106850915}
     m_Modifications:
+    - target: {fileID: 2056508759454216154, guid: e5f9e99a2b0c42a40ba843222b500b66,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2363987959550295367, guid: e5f9e99a2b0c42a40ba843222b500b66,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3698926794327825284, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: pawn
@@ -750,7 +761,7 @@ PrefabInstance:
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.73100007
+      value: -0.612
       objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}

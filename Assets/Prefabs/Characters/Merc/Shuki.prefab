@@ -120,7 +120,7 @@ MonoBehaviour:
   isWeapon: 1
   feetItem: {fileID: 0}
   range: 1
-  damage: 10
+  damage: 20
   arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}
@@ -354,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3911396959775424208}
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.086, y: 0, z: 0.439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2893683853430716741}
@@ -651,12 +651,12 @@ PrefabInstance:
     - target: {fileID: 2056508759454216154, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2363987959550295367, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3698926794327825284, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
@@ -701,7 +701,7 @@ PrefabInstance:
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.73100007
+      value: -0.621
       objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}

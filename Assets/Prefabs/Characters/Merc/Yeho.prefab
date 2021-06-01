@@ -121,7 +121,7 @@ MonoBehaviour:
   isWeapon: 1
   feetItem: {fileID: 0}
   range: 5
-  damage: 10
+  damage: 15
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 1
@@ -163,6 +163,7 @@ MonoBehaviour:
   effectIconParent: {fileID: 6890780919998564073}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
+  myTurnPlate: {fileID: 0}
   actionPool: []
   isEnemy: 0
   audioSource: {fileID: 0}
@@ -340,7 +341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3911396959775424208}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8602757325649611589}
@@ -812,7 +813,7 @@ PrefabInstance:
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.73100007
+      value: -0.634
       objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
