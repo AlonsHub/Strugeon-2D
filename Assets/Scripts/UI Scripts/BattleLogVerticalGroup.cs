@@ -58,7 +58,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn);
         children.Add(go.transform);
-
+        CleanList();
         //while(children.Count >= maxChildren)
         //{
         //    GameObject child = children[children.Count - 1].gameObject;
@@ -89,13 +89,27 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn, number, colour);
         children.Add(go.transform);
-
+        CleanList();
         //while(children.Count >= maxChildren)
         //{
         //    GameObject child = children[children.Count - 1].gameObject;
         //    children.RemoveAt(children.Count - 1);
         //    Destroy(child);
         //}
+    }
+
+    void CleanList()
+    {
+        if(children.Count <= maxChildren)
+        {
+            return;
+        }
+        while (children.Count > maxChildren)
+        {
+            Transform t = children[0];
+            children.RemoveAt(0);
+            Destroy(t.gameObject);
+        }
     }
 
     void SetupActionSpriteDictionary()

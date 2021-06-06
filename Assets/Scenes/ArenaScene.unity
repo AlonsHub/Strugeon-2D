@@ -1174,7 +1174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peekSpeed: 400
   hideSpeed: 400
-  moveAwayAmount: 400
+  moveAwayAmount: 200
+  openSprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
+  closedSprite: {fileID: 21300000, guid: a4a78e3c078f3a249a1e9f8007682f0d, type: 3}
+  sr: {fileID: 8360320058163276643}
 --- !u!1001 &806018866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1759,6 +1762,9 @@ MonoBehaviour:
   peekSpeed: 400
   hideSpeed: 400
   moveAwayAmount: 400
+  openSprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
+  closedSprite: {fileID: 21300000, guid: a4a78e3c078f3a249a1e9f8007682f0d, type: 3}
+  sr: {fileID: 8360320058163276643}
 --- !u!114 &1349992667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 675736815291704728, guid: bee76740b0667654c9a02fdaf32e8d82,
@@ -2118,7 +2124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1740408487}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: FirstPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2140,7 +2146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 347}
+  m_AnchoredPosition: {x: 0, y: 316.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1838267182 stripped
@@ -3668,7 +3674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   children: []
-  entrySize: 150
+  entrySize: 120
   entryPrefab: {fileID: 2848739190557841450, guid: f0306db00ed78154b9b973df4f95ebbe,
     type: 3}
   actionSprites:
@@ -3677,7 +3683,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c797a09b5df36e9459a86ad1fd7dc45e, type: 2}
   - {fileID: 21300000, guid: a245e17437c89a34fb5a4ad4f1006dc8, type: 3}
   - {fileID: 21300000, guid: 904afa078f0ea0d469a2fa18d58bb0b0, type: 3}
-  maxChildren: 4
+  maxChildren: 6
 --- !u!224 &4363690052379410755
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4328,6 +4334,9 @@ MonoBehaviour:
   peekSpeed: 400
   hideSpeed: 400
   moveAwayAmount: 0
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
 --- !u!114 &4363690053684163954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5033,7 +5042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &6352593963727206423
 MeshCollider:
   m_ObjectHideFlags: 0

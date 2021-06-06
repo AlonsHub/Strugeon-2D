@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PeekingMenu : MonoBehaviour
 {
@@ -14,9 +15,16 @@ public class PeekingMenu : MonoBehaviour
     [SerializeField]
     float moveAwayAmount;
 
+    [SerializeField]
+    Sprite openSprite;
+    [SerializeField]
+    Sprite closedSprite;
+
+    public Image sr;
+
     void Start()
     {
-        rectTransform = GetComponent<Transform>();
+        rectTransform = sr.transform;
         originalPos = rectTransform.position;
     }
 
@@ -27,10 +35,13 @@ public class PeekingMenu : MonoBehaviour
          menuOpen = true;
         while (menuOpen)
         {
-            rectTransform.Translate(Vector3.right * hideSpeed * Time.deltaTime);
-            if (rectTransform.position.y >= originalPos.y + moveAwayAmount)
+            rectTransform.Translate(Vector3.down * hideSpeed * Time.deltaTime);
+            if (rectTransform.position.y <= originalPos.y - moveAwayAmount)
             {
                 menuOpen = false; //or break
+                sr.sprite = closedSprite;
+
+
             }
             yield return null;
         }
@@ -42,10 +53,11 @@ public class PeekingMenu : MonoBehaviour
         
         while (!menuOpen)
         {
-            rectTransform.Translate(Vector3.down * peekSpeed * Time.deltaTime);
-            if (rectTransform.position.y <= originalPos.y)
+            rectTransform.Translate(Vector3.up * peekSpeed * Time.deltaTime);
+            if (rectTransform.position.y >= originalPos.y)
             {
                 menuOpen = true; //or break
+                sr.sprite = openSprite;
             }
             yield return null;
         }
