@@ -271,7 +271,7 @@ public interface TurnTaker
 {
     int Initiative { get; set; }
     bool TurnDone { get; set; }
-    string Name { get; set; }
+    string Name { get; }
     bool DoDoubleTurn { get; set; }
     bool DoSkipTurn { get; set; }
     void TakeTurn();

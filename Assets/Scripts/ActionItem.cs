@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActionItem : MonoBehaviour
 {
+    //public string itemName;
     //Cost in this case is considered a positive "weight"-like calculation
     public Pawn pawn;
     //baseCost is the natural weight of any action to occur. Should usually remain as 1, but can change as 

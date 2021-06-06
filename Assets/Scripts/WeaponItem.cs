@@ -79,7 +79,6 @@ public class WeaponItem : ActionItem
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
         pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Attack, tgt.name);
     }
 
     public void ShootProjectile()
@@ -121,6 +120,7 @@ public class WeaponItem : ActionItem
         }
 
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
 
         pawn.TurnDone = true;
         //go.transform.LookAt(tgt.transform);

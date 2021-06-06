@@ -10,6 +10,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 {
     //public PawnStats _stats;
     //public CharacterSheet characterSheet; //either enemy or merc
+    [SerializeField]
+    private string pawnName; //character name (not GameObject name)!
+
     int initiative;
     int initiativeBonus;
 
@@ -70,8 +73,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
 
     //public bool MovementDone { get => movementDone; set => movementDone = value; } // OPTIONAL - to have walk and attack actions
-
-    public string Name { get => name; set => name = value; } // can change the GameObject's name!
+    
+    public string Name { get => pawnName; } 
     public Sprite PortraitSprite { get => portraitSprite; set => portraitSprite = value; }
 
     public static int totalPawns = 0;

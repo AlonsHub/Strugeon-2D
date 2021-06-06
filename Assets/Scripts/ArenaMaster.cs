@@ -43,6 +43,7 @@ public class ArenaMaster : MonoBehaviour
                 newEnemies.Add(go.GetComponent<Pawn>());
                 FloorGrid.Instance.PlaceObjectOnGrid(go, enemySpawnTiles[rnd]);
                 enemySpawnTiles.RemoveAt(rnd);
+                //go.name.("(Clone)");
             }
             RefMaster.Instance.enemies = newEnemies; //sends enemies to refmaster to be kept there as the common ref for all components to use (AND NOT CACHED HERE)
             RefMaster.Instance.SetEnemyCharacters(); //inits enemies

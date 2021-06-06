@@ -48,8 +48,8 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         GameObject go = Instantiate(entryPrefab, transform);
 
-        Rect rect1 = GetComponent<RectTransform>().rect;
-        Rect rect2 = go.GetComponent<RectTransform>().rect;
+        //Rect rect1 = GetComponent<RectTransform>().rect;
+        //Rect rect2 = go.GetComponent<RectTransform>().rect;
 
         //go.transform.localPosition = new Vector3(0, rect1.height / 2 - rect2.height/2, 0);
         go.transform.localPosition = new Vector3(0, (children[children.Count-1].localPosition + Vector3.up * entrySize).y, 0);
@@ -57,6 +57,37 @@ public class BattleLogVerticalGroup : MonoBehaviour
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn);
+        children.Add(go.transform);
+
+        //while(children.Count >= maxChildren)
+        //{
+        //    GameObject child = children[children.Count - 1].gameObject;
+        //    children.RemoveAt(children.Count - 1);
+        //    Destroy(child);
+        //}
+    }
+    public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn, int number, Color colour)
+    {
+        //foreach (Transform t in children)
+        //{
+        //    t.localPosition -= Vector3.up * entrySize;
+        //}
+        for (int i = 0; i < children.Count; i++)
+        {
+            children[i].localPosition -= (Vector3.up * entrySize);
+        }
+
+        GameObject go = Instantiate(entryPrefab, transform);
+
+        //Rect rect1 = GetComponent<RectTransform>().rect;
+        //Rect rect2 = go.GetComponent<RectTransform>().rect;
+
+        //go.transform.localPosition = new Vector3(0, rect1.height / 2 - rect2.height/2, 0);
+        go.transform.localPosition = new Vector3(0, (children[children.Count - 1].localPosition + Vector3.up * entrySize).y, 0);
+
+        BatllelogEntry be = go.GetComponent<BatllelogEntry>();
+
+        be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn, number, colour);
         children.Add(go.transform);
 
         //while(children.Count >= maxChildren)

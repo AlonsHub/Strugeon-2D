@@ -55,7 +55,6 @@ public class BigHandsItem : ActionItem
         //pawn.transform.LookAt(toHit.transform.position);
 
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.name, ActionSymbol.Rock, tgt.name);
 
 
         pawn.anim.SetTrigger("Throw");
@@ -119,6 +118,7 @@ public class BigHandsItem : ActionItem
     {
         float rolledDamage = damage + Random.Range(-5, 6);
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Rock, toHit.Name, (int)rolledDamage, Color.red);
     }
     void EndTurn() //seperated for invoke-sake
     {

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Censer : MonoBehaviour, GridPoser
 {
+    [SerializeField]
+    private string censerName;
+    public string Name { get => censerName; }
+
     public FloorTile currentNode;
     //public WeaponEffect weaponEffect;
     public WeaponEffectAddon effectAddon;
