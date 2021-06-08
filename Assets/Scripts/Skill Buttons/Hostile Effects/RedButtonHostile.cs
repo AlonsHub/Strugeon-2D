@@ -24,6 +24,9 @@ public class RedButtonHostile : SkillButton
         //targetPawn.ApplySpecialEffect(effectIcon, "Red");
         //    targetCharacter.StartCoroutine("IconDestroyer", targetCharacter.DoSkipTurn(), );
         //StartCoroutine("EndWhen");
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
+
+
         base.OnButtonClick();
     }
 

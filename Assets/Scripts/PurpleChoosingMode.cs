@@ -120,8 +120,9 @@ public class PurpleChoosingMode : MonoBehaviour
                 actor.SetupPurpleBuff(hit.collider.gameObject);
                 doUpdate = false;
                 //actor.TurnDone = true;
+                BattleLogVerticalGroup.Instance.AddPsionEntry(actor.Name, PsionActionSymbol.Purple, Color.magenta);
 
-                 Renderer rend = MouseBehaviour.hitTarget.GetComponentInChildren<Renderer>();
+                Renderer rend = MouseBehaviour.hitTarget.GetComponentInChildren<Renderer>();
                 //Color emissionOff = rend.material.GetColor("_EmissionColor");
                 //emissionOff *= 0.025f;
                 //rend.material.SetColor("_EmissionColor", emissionOff);

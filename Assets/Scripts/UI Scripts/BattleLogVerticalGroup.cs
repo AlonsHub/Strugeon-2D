@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock};
+public enum PsionActionSymbol {Red, Blue, Yellow, Purple };
 public class BattleLogVerticalGroup : MonoBehaviour
 {
     public static BattleLogVerticalGroup Instance;
@@ -13,8 +14,11 @@ public class BattleLogVerticalGroup : MonoBehaviour
     public GameObject entryPrefab;
 
     public Dictionary<ActionSymbol, Sprite> actionIconToSprite;
+    public Dictionary<PsionActionSymbol, Sprite> psionActionIconToSprite;
     [SerializeField]
     List<Sprite> actionSprites;
+     [SerializeField]
+    List<Sprite> psionActionSprites;
 
     [SerializeField]
     private float maxChildren = 8;
@@ -32,6 +36,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
         //} //if there's something in there, just add it
 
         actionIconToSprite = new Dictionary<ActionSymbol, Sprite>();
+        psionActionIconToSprite = new Dictionary<PsionActionSymbol, Sprite>();
         SetupActionSpriteDictionary();
     }
 
@@ -98,6 +103,38 @@ public class BattleLogVerticalGroup : MonoBehaviour
         //}
     }
 
+    public void AddPsionEntry(string tgtPawn, PsionActionSymbol psionActionIcon, Color colour)
+    {
+        //foreach (Transform t in children)
+        //{
+        //    t.localPosition -= Vector3.up * entrySize;
+        //}
+        for (int i = 0; i < children.Count; i++)
+        {
+            children[i].localPosition -= (Vector3.up * entrySize);
+        }
+
+        GameObject go = Instantiate(entryPrefab, transform);
+
+        //Rect rect1 = GetComponent<RectTransform>().rect;
+        //Rect rect2 = go.GetComponent<RectTransform>().rect;
+
+        //go.transform.localPosition = new Vector3(0, rect1.height / 2 - rect2.height/2, 0);
+        go.transform.localPosition = new Vector3(0, (children[children.Count - 1].localPosition + Vector3.up * entrySize).y, 0);
+
+        BatllelogEntry be = go.GetComponent<BatllelogEntry>();
+
+        be.Init(tgtPawn, psionActionSprites[(int)psionActionIcon], colour);
+        children.Add(go.transform);
+        CleanList();
+        //while(children.Count >= maxChildren)
+        //{
+        //    GameObject child = children[children.Count - 1].gameObject;
+        //    children.RemoveAt(children.Count - 1);
+        //    Destroy(child);
+        //}
+    }
+
     void CleanList()
     {
         if(children.Count <= maxChildren)
@@ -117,6 +154,10 @@ public class BattleLogVerticalGroup : MonoBehaviour
         for (int i = 0; i < Enum.GetNames(typeof(ActionSymbol)).Length; i++)
         {
             actionIconToSprite.Add((ActionSymbol)i, actionSprites[i]);
+        }
+        for (int i = 0; i < Enum.GetNames(typeof(PsionActionSymbol)).Length; i++)
+        {
+            psionActionIconToSprite.Add((PsionActionSymbol)i, psionActionSprites[i]);
         }
     }
 }

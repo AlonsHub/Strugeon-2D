@@ -566,7 +566,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -577,7 +577,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 5bd0074242c5ee641818d6bff25c8fd5, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -592,7 +592,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1738391194}
-        m_MethodName: ChangeTimeScale
+        m_MethodName: ToggleTimePause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2ed302615ba562d4bb62072b8ffd8989, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36ac7e1d0bfa63d479130cbfdf2d5aa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2104,16 +2104,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScales:
-  - 1
-  - 2
-  - 0
-  buttonImgs:
-  - {fileID: 21300000, guid: 7e0c8b6af2e36d14daae74638a0461e0, type: 3}
-  - {fileID: 21300000, guid: 13fffdb21d8e0364cb567a7608cc2cc6, type: 3}
-  - {fileID: 21300000, guid: a2d7283656efee046b20c43dbaf5c329, type: 3}
+  speedButtonImgs:
+  - {fileID: 21300000, guid: 3d95f79d483073645b5475cce592d30a, type: 3}
+  - {fileID: 21300000, guid: 2ed302615ba562d4bb62072b8ffd8989, type: 3}
+  pauseButtonImgs:
+  - {fileID: 21300000, guid: 36ac7e1d0bfa63d479130cbfdf2d5aa8, type: 3}
+  - {fileID: 21300000, guid: 5bd0074242c5ee641818d6bff25c8fd5, type: 3}
+  speedButton: {fileID: 4363690052826307988}
+  pauseButton: {fileID: 440360628}
   currentTimeScaleIndex: 0
   timeToggleButton: {fileID: 4363690052826308010}
+  fastSpeed: 2
+  isFast: 0
+  isPause: 0
 --- !u!1 &1740408486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,7 +3327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4363690052193623907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3576,16 +3579,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScales:
-  - 0
-  - 0
-  - 0
-  buttonImgs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  speedButtonImgs: []
+  pauseButtonImgs: []
+  speedButton: {fileID: 0}
+  pauseButton: {fileID: 0}
   currentTimeScaleIndex: 0
   timeToggleButton: {fileID: 0}
+  fastSpeed: 0
+  isFast: 0
+  isPause: 0
 --- !u!114 &4363690052325622096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4164,7 +4166,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -4175,7 +4177,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 2ed302615ba562d4bb62072b8ffd8989, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -4190,7 +4192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1738391194}
-        m_MethodName: ChangeTimeScale
+        m_MethodName: ToggleTimeSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4418,7 +4420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8176bff389def644184cae509da65f2e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f458f605fc3227a498b8c331e0a6efdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4642,7 +4644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -210.3, y: 143.8}
+  m_AnchoredPosition: {x: -210.3, y: 75.6}
   m_SizeDelta: {x: 53, y: 81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4363690054005110839
@@ -5042,7 +5044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &6352593963727206423
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5657,7 +5659,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 211, y: 378}
+  m_AnchoredPosition: {x: 211, y: 377.39}
   m_SizeDelta: {x: 403, y: 907}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8360320058163276643
@@ -5680,7 +5682,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5688,7 +5690,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.3
+  m_PixelsPerUnitMultiplier: 1
 --- !u!4 &8680376864255051863
 Transform:
   m_ObjectHideFlags: 0

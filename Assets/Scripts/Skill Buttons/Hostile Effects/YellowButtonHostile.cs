@@ -26,6 +26,10 @@ public class YellowButtonHostile : SkillButton
         targetPawn.DoModifyDamage = true;
         // targetPawn.ApplySpecialEffect(effectIcon, "Blue");
         targetPawn.AddEffectIcon(effectIcon, "yellowDeBuff");
+
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Yellow, Color.yellow);
+
+
         base.OnButtonClick();
     }
 

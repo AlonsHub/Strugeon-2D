@@ -15,6 +15,9 @@ public class YellowBuff : SkillButton
         targetPawn.Heal(healAmount);
         //targetPawn.HP = Mathf.Clamp(targetPawn.HP ,0, targetPawn.maxHP);
 
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Yellow, Color.yellow);
+
+
         base.OnButtonClick();
     }
 

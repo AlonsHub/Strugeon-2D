@@ -6,7 +6,11 @@ using TMPro;
 
 public class BatllelogEntry : MonoBehaviour
 {
-    
+
+    [ColorUsage(true)]
+    public Color colRed;
+    [ColorUsage(true)]
+    public Color colGreen;
 
     public TMP_Text actingPawnNameDisplayer;
     public Image actionImage;
@@ -15,10 +19,30 @@ public class BatllelogEntry : MonoBehaviour
     
     public string actionDescriptionText; //to be accessed by the displayer
 
+    public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
+    {
+        actingPawnNameDisplayer.text = "";
+        actionImage.sprite = psionActionIcon;
+        actionImage.SetNativeSize();
+
+        passivePawnNameDisplayer.text = tgtPawn;
+        passivePawnNameDisplayer.color = colour;
+        numberDisplayer.gameObject.SetActive(false);
+    }
+    //public void Init(string tgtPawn, Sprite psionActionIcon, string psionicEffect Color colour)
+    //{
+    //    actingPawnNameDisplayer.text = "";
+    //    actionImage.sprite = psionActionIcon;
+    //    passivePawnNameDisplayer.text = tgtPawn;
+    //    passivePawnNameDisplayer.color = colour;
+    //    numberDisplayer.gameObject.SetActive(false);
+    //}
+
     public void Init(string actingName, Sprite actionSprite, string passiveName)
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
+        actionImage.SetNativeSize();
         passivePawnNameDisplayer.text = passiveName;
 
         numberDisplayer.gameObject.SetActive(false);
@@ -27,10 +51,20 @@ public class BatllelogEntry : MonoBehaviour
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
+        actionImage.SetNativeSize();
         passivePawnNameDisplayer.text = passiveName;
 
         numberDisplayer.text = number.ToString();
-        numberDisplayer.color = colour;
+
+        if (colour == Color.green)
+        {
+            numberDisplayer.color = colGreen;
+        }
+        else
+        {
+            numberDisplayer.color = colRed;
+        }
+
     }
 
 

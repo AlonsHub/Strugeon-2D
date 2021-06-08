@@ -16,6 +16,9 @@ public class BlueBuff : SkillButton
         targetPawn.DoDoubleTurn = true;
         // targetPawn.ApplySpecialEffect(effectIcon, "Blue");
         targetPawn.AddEffectIcon(effectIcon, "blueBuff");
+
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Blue, Color.blue);
+
         base.OnButtonClick();
     }
 }

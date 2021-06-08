@@ -17,6 +17,9 @@ public class RedBuff : SkillButton
             //targetPawn.ApplySpecialEffect(effectIcon, "Red"); //NEED THIS
         }
         targetPawn.AddEffectIcon(effectIcon, "redBuff");
+
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
+
         base.OnButtonClick();
     }
 }

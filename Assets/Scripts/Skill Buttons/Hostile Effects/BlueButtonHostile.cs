@@ -30,6 +30,8 @@ public class BlueButtonHostile : SkillButton
         //targetPawn.ApplySpecialEffect(effectIcon, "Blue");
         //targetCharacter.StartCoroutine("IconDestroyer");
         //StartCoroutine("EndWhen");
+        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Blue, Color.blue);
+
         base.OnButtonClick();
     }
 
