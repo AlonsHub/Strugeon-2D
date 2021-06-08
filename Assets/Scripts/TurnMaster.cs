@@ -65,9 +65,23 @@ public class TurnMaster : MonoBehaviour
         turnPlates[0].localScale *= 1.5f;
         turnTakers[0].myTurnPlate = go;
 
+        TurnDisplayer tp = go.GetComponent<TurnDisplayer>();
+
+
+        if (tp) //just making sure
+        {
+            //tp.myPawn = turnTakers[0];
+            tp.Init(turnTakers[0]);
+        }
+        else
+        {
+            Debug.LogError("not turnDisplayer component found on the TurnDisplayer prefab");
+        }
+
         for (int i = 1; i < turnTakers.Count; i++) //start from [1], because [0] is set just above this ^^^^
         {
-            turnPlates.Add(Instantiate(prefabeTurnPlate, turnPlateParent).transform);
+            GameObject plate = Instantiate(prefabeTurnPlate, turnPlateParent); 
+            turnPlates.Add(plate.transform);
 
             //Sprites and SA icons are set
 
@@ -76,11 +90,21 @@ public class TurnMaster : MonoBehaviour
             //imgs[0].sprite = turnTakers[i].PortraitSprite;
             //Image imgs = turnPlates[i].GetComponentInChildren<Image>();
             //imgs[1].sprite = turnTakers[i].PortraitSprite; //add the SA icon, if applicable
-            turnPlates[i].GetComponentInChildren<Image>().sprite = turnTakers[i].PortraitSprite;
+            //turnPlates[i].GetComponentInChildren<Image>().sprite = turnTakers[i].PortraitSprite;
             //but nextTurnPlateTrans is the second position
             //(so on i=1, we need to add (1-1)*delta
+            
+            tp = plate.GetComponent<TurnDisplayer>();
 
             turnTakers[i].myTurnPlate = turnPlates[i].gameObject;
+            if (tp) //just making sure
+            {
+                tp.Init(turnTakers[i]);
+            }
+            else
+            {
+                Debug.LogError("not turnDisplayer component found on the TurnDisplayer prefab");
+            }
         }
         //TURN PLATE DISPLAYER!
 
@@ -208,6 +232,13 @@ public class TurnMaster : MonoBehaviour
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
         turnPlates[0].localScale *= 1.5f;
 
+        TurnDisplayer td = turnPlates[0].GetComponent<TurnDisplayer>();
+
+        if (td.hasSA)
+        {
+            td.SAIconCheck();
+        }
+
         for (int i = 1; i < turnTakers.Count; i++)
         {
             turnPlates[i].localPosition = nextTurnPlateTrans.localPosition +
@@ -215,15 +246,13 @@ public class TurnMaster : MonoBehaviour
 
 
             turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
-            //if(i >= turnDisplayerLimit)
-            //{
-            //    turnPlates[i].gameObject.SetActive(false);
-            //}
-            //else
-            //{
-            //    turnPlates[i].gameObject.SetActive(true);
-            //}
 
+
+            td = turnPlates[i].GetComponent<TurnDisplayer>();
+            if (td.hasSA)
+            {
+                td.SAIconCheck();
+            }
             //(i-1) because the [1] position in the array is the second plate,
             //but nextTurnPlateTrans is the second position
             //(so on i=1, we need to add (1-1)*delta                                                                                                    

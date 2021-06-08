@@ -18,6 +18,10 @@ public class HealItem : ActionItem
 
     public List<Pawn> targets;
 
+    //public int _currentCooldown;
+    //public int saCooldown;
+
+
     public override void Awake()
     {
         //ownerCharacter = GetComponent<Character>();
@@ -28,6 +32,8 @@ public class HealItem : ActionItem
     }
     private void Start()
     {
+        pawn._currentCooldown = 0;
+
         if (!pawn.isEnemy)
             targets = RefMaster.Instance.mercs;
         else
@@ -37,7 +43,7 @@ public class HealItem : ActionItem
     public override void Action(GameObject tgt)
     {
         //BattleLog.Instance.AddLine(name + " Healed: " + tgt.name);
-        
+        pawn._currentCooldown = pawn.saCooldown;
         //Character c = tgt.GetComponent<Character>();
         Pawn p = tgt.GetComponent<Pawn>();
         int healRoll = Random.Range(-5, 5) + healAmount;
@@ -66,18 +72,17 @@ public class HealItem : ActionItem
 
     public override void CalculateVariations()
     {
-        if (targets.Count <= 0)
+        actionVariations = new List<ActionVariation>();
+        if (targets.Count <= 0 || pawn._currentCooldown > 0)
         {
-            Debug.Log("No targest in List<Pawn> mercs");
+            pawn._currentCooldown--;
+            Debug.Log("No targest in List<Pawn> mercs or cooldown: " + pawn._currentCooldown.ToString());
             return;
         }
        
-        actionVariations = new List<ActionVariation>();
 
         foreach (Pawn p in targets)
         {
-           
-
             if (p.currentHP >= p.maxHP)
             {
                 continue;

@@ -19,6 +19,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     bool turnDone;
     bool actionDone;
 
+    [SerializeField]
+    bool hasSA;
+    
+    public int _currentCooldown;
+    
+    public int saCooldown;
+
     public List<Pawn> targets;
 
     public TileWalker tileWalker;
@@ -27,6 +34,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
     [SerializeField]
     private Sprite portraitSprite;
+     [SerializeField]
+    private Sprite saSprite;
 
     public Transform effectIconParent;
     public GameObject effectIconPrefab;
@@ -66,6 +75,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
 
     public int Initiative { get => initiative; set => initiative = value + initiativeBonus; }
+    public int SA_Cooldown { get => initiative; set => initiative = value + initiativeBonus; }
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
     public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
@@ -76,6 +86,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     
     public string Name { get => pawnName; } 
     public Sprite PortraitSprite { get => portraitSprite; set => portraitSprite = value; }
+    public Sprite SASprite { get => saSprite; set => saSprite = value; }
 
     public static int totalPawns = 0;
 
@@ -247,7 +258,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         Destroy(myTurnPlate);
         //TurnMaster.Instance.turnPlates.r
         //PartyMaster.Instance.currentMercParty.Remove(PartyMaster.Instance.currentMercParty.Where(x => x.name == name).SingleOrDefault());
-        StopAllCoroutines();
+        //StopAllCoroutines();
         Destroy(gameObject);
     }
 

@@ -158,10 +158,14 @@ MonoBehaviour:
   currentHP: 40
   maxHP: 40
   pawnName: Smadi
+  hasSA: 1
+  _currentCooldown: 0
+  saCooldown: 2
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 0feffdce640636647a25962df2e49c1c, type: 3}
+  saSprite: {fileID: 21300000, guid: 19e69438c697cb149b4d1a02a1936fdc, type: 3}
   effectIconParent: {fileID: 6976060224392790412}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
