@@ -1486,7 +1486,7 @@ MonoBehaviour:
   - {fileID: 157440120}
   - {fileID: 1349992667}
   rechargeAmount: 4
-  turnDisplayerLimit: 4
+  turnDisplayerLimit: 5
 --- !u!4 &901542005
 Transform:
   m_ObjectHideFlags: 0
@@ -2596,6 +2596,9 @@ MonoBehaviour:
   currentHP: 100
   maxHP: 100
   pawnName: 
+  hasSA: 0
+  _currentCooldown: 0
+  saCooldown: 0
   targets:
   - {fileID: 446556522217794888}
   - {fileID: 6409685075399627003, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
