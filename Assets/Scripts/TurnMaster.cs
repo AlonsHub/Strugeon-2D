@@ -32,6 +32,9 @@ public class TurnMaster : MonoBehaviour
 
     public float rechargeAmount;
 
+    [SerializeField]
+    int turnDisplayerLimit;
+
     private void Awake()
     {
         Instance = this;
@@ -209,6 +212,17 @@ public class TurnMaster : MonoBehaviour
         {
             turnPlates[i].localPosition = nextTurnPlateTrans.localPosition +
                 new Vector3((i - 1) * turnPlateDistance, 0, 0);
+
+
+            turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
+            //if(i >= turnDisplayerLimit)
+            //{
+            //    turnPlates[i].gameObject.SetActive(false);
+            //}
+            //else
+            //{
+            //    turnPlates[i].gameObject.SetActive(true);
+            //}
 
             //(i-1) because the [1] position in the array is the second plate,
             //but nextTurnPlateTrans is the second position
