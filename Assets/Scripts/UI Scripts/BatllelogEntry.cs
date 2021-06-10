@@ -21,7 +21,7 @@ public class BatllelogEntry : MonoBehaviour
 
     public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
     {
-        actingPawnNameDisplayer.text = "";
+        actingPawnNameDisplayer.text = "Cast";
         actionImage.sprite = psionActionIcon;
         actionImage.SetNativeSize();
 
@@ -59,10 +59,12 @@ public class BatllelogEntry : MonoBehaviour
         if (colour == Color.green)
         {
             numberDisplayer.color = colGreen;
+            numberDisplayer.text = "+" + numberDisplayer.text;
         }
         else
         {
             numberDisplayer.color = colRed;
+            numberDisplayer.text = "-" + numberDisplayer.text;
         }
 
     }

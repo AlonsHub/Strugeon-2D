@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class PeekingMenu : MonoBehaviour
 {
-    Transform rectTransform;
+    RectTransform rectTransform;
+    Rect rect;
     Vector3 originalPos;
     [SerializeField]
     float peekSpeed;
@@ -22,42 +23,65 @@ public class PeekingMenu : MonoBehaviour
 
     public Image sr;
 
+    bool menuOpen = true;
+
+    [SerializeField]
+    Button peekButton;
+    [SerializeField]
+    Button hideButton;
+
+    
     void Start()
     {
-        rectTransform = sr.transform;
-        originalPos = rectTransform.position;
-    }
+        rectTransform = GetComponent<RectTransform>();
+        //originalPos = rectTransform.position;
 
+
+    }
+    public void HideMenu()
+    {
+        StartCoroutine("MenuSlideClose");
+    }
+     public void ShowMenu()
+    {
+        StartCoroutine("MenuSlideOpen");
+    }
 
     IEnumerator MenuSlideClose()
     {
         StopCoroutine(MenuSlideOpen());
          menuOpen = true;
+
+        Vector3 newScale = Vector3.up;
+
         while (menuOpen)
         {
-            rectTransform.Translate(Vector3.down * hideSpeed * Time.deltaTime);
-            if (rectTransform.position.y <= originalPos.y - moveAwayAmount)
+            //rectTransform.Translate(Vector3.down * hideSpeed * Time.deltaTime);
+            //rectTransform+= hideSpeed * Time.deltaTime;
+            transform.localScale -= newScale * hideSpeed * Time.deltaTime; 
+            if (transform.localScale.y <= .2f)
             {
                 menuOpen = false; //or break
                 sr.sprite = closedSprite;
-
+               //transform.localScale = Vector3.one;
 
             }
             yield return null;
         }
     }
-    bool menuOpen = true;
     IEnumerator MenuSlideOpen()
     {
         StopCoroutine(MenuSlideClose());
-        
+        Vector3 newScale = Vector3.down;
         while (!menuOpen)
         {
-            rectTransform.Translate(Vector3.up * peekSpeed * Time.deltaTime);
-            if (rectTransform.position.y >= originalPos.y)
+            transform.localScale -= newScale * hideSpeed * Time.deltaTime;
+            if (transform.localScale.y >= 1f)
             {
                 menuOpen = true; //or break
                 sr.sprite = openSprite;
+                //transform.localScale = Vector3.one;
+
             }
             yield return null;
         }
