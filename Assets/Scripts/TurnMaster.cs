@@ -105,6 +105,8 @@ public class TurnMaster : MonoBehaviour
             {
                 Debug.LogError("not turnDisplayer component found on the TurnDisplayer prefab");
             }
+
+            turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
         }
         //TURN PLATE DISPLAYER!
 
@@ -225,7 +227,7 @@ public class TurnMaster : MonoBehaviour
         }
         if(currentTurnInDisplayer != currentTurn)
         {
-            Debug.LogError("Current display turn and actual currentTurn are not in sync for some ungodly reason. " + 
+            Debug.LogWarning("Current display turn and actual currentTurn are not in sync for some ungodly reason. " + 
                 currentTurnInDisplayer + " and " + currentTurn);
         }
         
@@ -245,14 +247,14 @@ public class TurnMaster : MonoBehaviour
                 new Vector3((i - 1) * turnPlateDistance, 0, 0);
 
 
-            turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
-
-
             td = turnPlates[i].GetComponent<TurnDisplayer>();
             if (td.hasSA)
             {
                 td.SAIconCheck();
             }
+            
+            turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
+
             //(i-1) because the [1] position in the array is the second plate,
             //but nextTurnPlateTrans is the second position
             //(so on i=1, we need to add (1-1)*delta                                                                                                    

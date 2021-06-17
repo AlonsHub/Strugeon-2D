@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigHandsItem : ActionItem
+public class BigHandsItem : ActionItem, SA_Item
 {
     //private Character ownerCharacter;
     public int damage;
@@ -63,7 +63,8 @@ public class BigHandsItem : ActionItem
     }
     public override void CalculateVariations()
     {
-        actionVariations = new List<ActionVariation>();
+        //actionVariations = new List<ActionVariation>();
+        actionVariations.Clear();
         List<FloorTile> neighbours = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);
         foreach(FloorTile ft in neighbours)
         {
@@ -77,6 +78,17 @@ public class BigHandsItem : ActionItem
                 }
             }
         }
+
+        
+
+        //if(actionVariations.Count > 0)
+        //{
+        //    pawn.SA_CurrentCooldown = 0;
+        //}
+        //else
+        //{
+        //    pawn.SA_CurrentCooldown = 1;
+        //}
 
     }
     //IEnumerator CharacterThrow()
@@ -123,5 +135,23 @@ public class BigHandsItem : ActionItem
     void EndTurn() //seperated for invoke-sake
     {
         pawn.TurnDone = true;
+    }
+
+    public bool SA_Available()
+    {
+        List<FloorTile> neighbours = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);
+        foreach (FloorTile ft in neighbours)
+        {
+            //if(!ft.isEmpty && ft.myOccupant.GetComponent<ObstacleRock>()) //if it is an obstacle rock, we dont really need to cache it -
+            //just to check that it is... maybe test by tag instead?
+            if (!ft.isEmpty && ft.myOccupant)
+            {
+                if (ft.myOccupant.CompareTag("Rock"))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

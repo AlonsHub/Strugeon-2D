@@ -21,6 +21,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
     [SerializeField]
     bool hasSA;
+    public SA_Item saItem;
     
     public int _currentCooldown;
     
@@ -75,7 +76,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
 
     public int Initiative { get => initiative; set => initiative = value + initiativeBonus; }
-    public int SA_Cooldown { get => initiative; set => initiative = value + initiativeBonus; }
+    public int SA_CurrentCooldown { get => _currentCooldown; set => _currentCooldown = value; }
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
     public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
@@ -99,7 +100,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         actionItems = GetComponents<ActionItem>().ToList();
         audioSource = GetComponent<AudioSource>();
         worldSpaceHorizontalGroup = GetComponentInChildren<WorldSpaceHorizontalGroup>();
-
+        saItem = GetComponent<SA_Item>();
 
         if (isEnemy)
         {

@@ -37,7 +37,14 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     public void SAIconCheck()
     {
-        saImage.gameObject.SetActive(myPawn._currentCooldown<=0);
+        if (myPawn.saItem != null)
+        {
+            saImage.gameObject.SetActive(myPawn.saItem.SA_Available());
+        }
+        else
+        {
+            saImage.gameObject.SetActive(myPawn._currentCooldown <= 0);
+        }
     }
 
     
