@@ -15,6 +15,9 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
     public Dictionary<ActionSymbol, Sprite> actionIconToSprite;
     public Dictionary<PsionActionSymbol, Sprite> psionActionIconToSprite;
+
+    public Color[] colours;
+
     [SerializeField]
     List<Sprite> actionSprites;
      [SerializeField]
@@ -124,7 +127,22 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
-        be.Init(tgtPawn, psionActionSprites[(int)psionActionIcon], colour);
+
+        //switch (psionActionIcon)
+        //{
+        //    case PsionActionSymbol.Red:
+        //        break;
+        //    case PsionActionSymbol.Blue:
+        //        break;
+        //    case PsionActionSymbol.Yellow:
+        //        break;
+        //    case PsionActionSymbol.Purple:
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+        be.Init(tgtPawn, psionActionSprites[(int)psionActionIcon], colours[(int)psionActionIcon]);
         children.Add(go.transform);
         CleanList();
         //while(children.Count >= maxChildren)

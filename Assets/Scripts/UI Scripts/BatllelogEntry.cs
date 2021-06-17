@@ -22,6 +22,8 @@ public class BatllelogEntry : MonoBehaviour
     public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
     {
         actingPawnNameDisplayer.text = "Cast";
+        actingPawnNameDisplayer.color = colour;
+
         actionImage.sprite = psionActionIcon;
         actionImage.SetNativeSize();
 
