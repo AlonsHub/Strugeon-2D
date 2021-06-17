@@ -30,6 +30,8 @@ public class PeekingMenu : MonoBehaviour
     [SerializeField]
     Button hideButton;
 
+
+    public Animator anim; //temp set in instpector
     
     void Start()
     {
@@ -40,11 +42,13 @@ public class PeekingMenu : MonoBehaviour
     }
     public void HideMenu()
     {
-        StartCoroutine("MenuSlideClose");
+        //StartCoroutine("MenuSlideClose");
+        anim.SetTrigger("CloseMenu");
     }
      public void ShowMenu()
     {
-        StartCoroutine("MenuSlideOpen");
+        //StartCoroutine("MenuSlideOpen");
+        anim.SetTrigger("OpenMenu");
     }
 
     IEnumerator MenuSlideClose()
@@ -59,11 +63,12 @@ public class PeekingMenu : MonoBehaviour
             //rectTransform.Translate(Vector3.down * hideSpeed * Time.deltaTime);
             //rectTransform+= hideSpeed * Time.deltaTime;
             transform.localScale -= newScale * hideSpeed * Time.deltaTime; 
-            if (transform.localScale.y <= .2f)
+            if (transform.localScale.y <= .5f)
             {
-                menuOpen = false; //or break
-                sr.sprite = closedSprite;
-               //transform.localScale = Vector3.one;
+                //sr.sprite = closedSprite;
+                menuOpen = false; //and/or break
+                break; //decided to also break
+               
 
             }
             yield return null;
@@ -79,7 +84,8 @@ public class PeekingMenu : MonoBehaviour
             if (transform.localScale.y >= 1f)
             {
                 menuOpen = true; //or break
-                sr.sprite = openSprite;
+                break; //decided to also break
+                //sr.sprite = openSprite;
                 //transform.localScale = Vector3.one;
 
             }

@@ -114,7 +114,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
         if (isEnemy)
         {
-            name = totalPawns.ToString() + " Monster";
+            name = "Monster " + totalPawns.ToString();
         }
         else
         {

@@ -1178,8 +1178,9 @@ MonoBehaviour:
   openSprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
   closedSprite: {fileID: 21300000, guid: a4a78e3c078f3a249a1e9f8007682f0d, type: 3}
   sr: {fileID: 8360320058163276643}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
+  peekButton: {fileID: 4363690054005110837}
+  hideButton: {fileID: 8116576392705631786}
+  anim: {fileID: 4363690052453781039}
 --- !u!1001 &806018866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1770,6 +1771,7 @@ MonoBehaviour:
   sr: {fileID: 8360320058163276643}
   peekButton: {fileID: 0}
   hideButton: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!114 &1349992667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 675736815291704728, guid: bee76740b0667654c9a02fdaf32e8d82,
@@ -2154,7 +2156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 316.4}
+  m_AnchoredPosition: {x: 0, y: 327}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1838267182 stripped
@@ -2714,12 +2716,12 @@ GameObject:
   - component: {fileID: 6920027358573980742}
   - component: {fileID: 8116576392705631786}
   m_Layer: 5
-  m_Name: Show/Hide Log Button (1)
+  m_Name: Hide Log Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1317002053061060996
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3290,6 +3292,7 @@ GameObject:
   - component: {fileID: 8304071429949943997}
   - component: {fileID: 8297656605428230971}
   - component: {fileID: 8360320058163276643}
+  - component: {fileID: 3342101439283732582}
   m_Layer: 5
   m_Name: ScrollBG (1)
   m_TagString: Untagged
@@ -3297,6 +3300,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3342101439283732582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342101439283732581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46972f4f8099ca947ad64966985909d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3345551961125080904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,7 +3464,7 @@ RectTransform:
   m_Children:
   - {fileID: 4363690052475127680}
   m_Father: {fileID: 4363690052193623907}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -3491,7 +3506,6 @@ RectTransform:
   - {fileID: 4363690053502378935}
   - {fileID: 4363690052464670340}
   - {fileID: 4363690052453781037}
-  - {fileID: 4363690052379410755}
   - {fileID: 4363690053097035335}
   - {fileID: 4363690052035092716}
   - {fileID: 4363690052766860450}
@@ -3777,7 +3791,7 @@ RectTransform:
   m_Children:
   - {fileID: 4363690053684163965}
   m_Father: {fileID: 4363690052193623907}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -3823,7 +3837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   children: []
-  entrySize: 120
+  entrySize: 100
   entryPrefab: {fileID: 2848739190557841450, guid: f0306db00ed78154b9b973df4f95ebbe,
     type: 3}
   actionSprites:
@@ -3833,10 +3847,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a245e17437c89a34fb5a4ad4f1006dc8, type: 3}
   - {fileID: 21300000, guid: 904afa078f0ea0d469a2fa18d58bb0b0, type: 3}
   psionActionSprites:
-  - {fileID: 21300000, guid: 609ea39b35ae2284cb8d181064e13e60, type: 3}
-  - {fileID: 21300000, guid: e63ea26d4c0dfe24d9690cf3a5e583f4, type: 3}
-  - {fileID: 21300000, guid: b54c48770ad92324d9fb3eecc2b3bec5, type: 3}
-  - {fileID: 21300000, guid: a08c36077411b054390575e9f19922c9, type: 3}
+  - {fileID: 21300000, guid: 8092bb3d32a8d0d42a048670f2c182d4, type: 3}
+  - {fileID: 21300000, guid: ff774edea5eb28444a96dee1d856d78c, type: 3}
+  - {fileID: 21300000, guid: e369ad2fc592b0945b81c4d6883bec59, type: 3}
+  - {fileID: 21300000, guid: 0a0cf18c4fa91954592ab355ff3304d3, type: 3}
   maxChildren: 6
 --- !u!224 &4363690052379410755
 RectTransform:
@@ -3850,13 +3864,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1740408487}
-  m_Father: {fileID: 4363690052193623907}
-  m_RootOrder: 6
+  m_Father: {fileID: 4363690052453781037}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 761.823, y: -68.890045}
-  m_SizeDelta: {x: -1620.6768, y: -234.06824}
+  m_AnchoredPosition: {x: -0.27685547, y: 9.110016}
+  m_SizeDelta: {x: -64.38684, y: -42.468384}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4363690052379410764
 GameObject:
@@ -3897,6 +3911,7 @@ RectTransform:
   - {fileID: 4363690054005110838}
   - {fileID: 8304071429949943997}
   - {fileID: 2817854317549510148}
+  - {fileID: 4363690052379410755}
   m_Father: {fileID: 4363690052193623907}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4197,7 +4212,7 @@ RectTransform:
   m_Children:
   - {fileID: 4363690052202793723}
   m_Father: {fileID: 4363690052193623907}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -4420,7 +4435,7 @@ RectTransform:
   - {fileID: 4363690052826307989}
   - {fileID: 440360626}
   m_Father: {fileID: 4363690052193623907}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -4462,26 +4477,6 @@ RectTransform:
   m_AnchoredPosition: {x: 795, y: 185.9}
   m_SizeDelta: {x: 1407.6812, y: 313.38046}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4363690053684163953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363690053684163966}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 904faeb342e65f0478cb25c5a565854c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  peekSpeed: 400
-  hideSpeed: 400
-  moveAwayAmount: 0
-  openSprite: {fileID: 0}
-  closedSprite: {fileID: 0}
-  sr: {fileID: 0}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
 --- !u!114 &4363690053684163954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4524,18 +4519,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4363690053684163964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4363690053684163953}
-        m_MethodName: ToggleMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!222 &4363690053684163955
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4604,7 +4588,6 @@ GameObject:
   - component: {fileID: 4363690053684163955}
   - component: {fileID: 4363690053684163964}
   - component: {fileID: 4363690053684163954}
-  - component: {fileID: 4363690053684163953}
   m_Layer: 5
   m_Name: Settings_Button
   m_TagString: Untagged
@@ -4761,7 +4744,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 734442810}
-        m_MethodName: ToggleMenu
+        m_MethodName: ShowMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4804,7 +4787,7 @@ GameObject:
   - component: {fileID: 4363690054005110837}
   - component: {fileID: 1211356270}
   m_Layer: 5
-  m_Name: Show/Hide Log Button
+  m_Name: Show Log Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5741,7 +5724,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 734442810}
-        m_MethodName: ToggleMenu
+        m_MethodName: HideMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
