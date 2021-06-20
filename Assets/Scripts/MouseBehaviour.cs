@@ -28,6 +28,10 @@ public class MouseBehaviour : MonoBehaviour
     // - moved.
     //TEMP
     List<SkillButton> skillButtons;
+
+    [SerializeField]
+    float outlineThickness;
+
     void Start()
     {
         Instance = this;
@@ -135,7 +139,7 @@ public class MouseBehaviour : MonoBehaviour
                    // Color emissionOn = hitRenderer.material.GetColor("_EmissionColor");
                     //emissionOn*= 40f; //does this not accumlate tons of emission over time?
 
-                    hitRenderer.material.SetFloat("_Thickness", 0.0017f);
+                    hitRenderer.material.SetFloat("_Thickness", outlineThickness);
                 }
             }
         }

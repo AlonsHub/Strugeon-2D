@@ -1,0 +1,91 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
+[System.Serializable]
+public class MercSlot : MonoBehaviour
+{
+    public Image img;
+    public Sprite defaultSprite;
+    public TMP_Text nameText;
+    public bool isOccupied = false;
+    public bool isPartySlot;
+    public Pawn pawn;
+    public void AddMerc(Pawn p)
+    {
+
+        pawn = p;
+        img.sprite = pawn.PortraitSprite;
+        isOccupied = true;
+        nameText.text = p.Name;
+        //if(isPartySlot)
+        //{
+        //    RefMaster.Instance.selectionScreenDisplayer.availableMercs.Add(pawn);
+        //}
+        //else
+        //{
+
+        //    RefMaster.Instance.selectionScreenDisplayer.partyMercs.Add(pawn);
+
+        //}
+    }
+
+    public void RemoveMerc()
+    {
+        if (isPartySlot)
+        {
+
+            //remove from currentParty
+            //RefMaster.Instance.selectionScreenDisplayer.partyMercs.Remove(pawn);
+            PartyMaster.Instance.currentMercParty.Remove(pawn);
+            // RefMaster.Instance.selectionScreenDisplayer.availableMercSlots[RefMaster.Instance.selectionScreenDisplayer.availableMercs.Count].AddMerc(pawn);
+            //RefMaster.Instance.selectionScreenDisplayer.availableMercs.Add(pawn);
+            PartyMaster.Instance.availableMercs.Add(pawn);
+
+
+
+        }
+        else
+        {
+            if (PartyMaster.Instance.currentMercParty.Count >= 3) //change 3 to PartyMaster.Instance.maxPartyMercs
+            {
+                Debug.Log("PARTY FULL!");
+                return;
+            }
+            //RefMaster.Instance.selectionScreenDisplayer.availableMercs.Remove(pawn);
+            PartyMaster.Instance.availableMercs.Remove(pawn);
+            //RefMaster.Instance.selectionScreenDisplayer.partyMercSlots[PartyMaster.Instance.currentMercParty.Count].AddMerc(pawn);
+            //RefMaster.Instance.selectionScreenDisplayer.partyMercs.Add(pawn);
+            PartyMaster.Instance.currentMercParty.Add(pawn);
+
+
+        }
+        //ClearSlot();
+        RefMaster.Instance.selectionScreenDisplayer.RefreshMercDisplay();
+
+        // RefMaster.Instance.selectionScreenDisplayer.MercOnEnable();
+    }
+
+    public void ClearSlot()
+    {
+        pawn = null;
+        img.sprite = defaultSprite;
+        isOccupied = false;
+        nameText.text = "";
+    }
+
+    public void OnClick()
+    {
+        if(!isOccupied)
+        {
+            Debug.LogWarning("Slot has no Pawn");
+            return;
+        }
+
+       
+  
+            RemoveMerc();
+       
+    }
+}

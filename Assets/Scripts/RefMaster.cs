@@ -9,8 +9,8 @@ public class RefMaster : MonoBehaviour
     public List<Pawn> mercs;
 
 
-
-    // public SelectionScreenDisplayer selectionScreenDisplayer;
+    //just added 20/06
+    public SelectionScreenDisplayer selectionScreenDisplayer;
 
      public Censer censer; //maybe a list?
     //void Awake()
