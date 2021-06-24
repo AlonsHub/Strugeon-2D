@@ -8,7 +8,8 @@ public class SelectionScreenDisplayer : MonoBehaviour
     
 
     //[SerializeField]
-    Level level;
+    Level level; //getting deprecated
+    LevelData levelData;
     public List<Pawn> availableMercs; // get from PartyManager
     public List<Pawn> partyMercs; //DISPLAYERS - set to PartyManager
 
@@ -67,6 +68,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
     {
         gameObject.SetActive(true);
         level = levelToDisplay;
+        
         dwellerNames.text = "";
         foreach (Pawn enemy in level.enemies)
         {
@@ -82,12 +84,35 @@ public class SelectionScreenDisplayer : MonoBehaviour
         levelInfoParent.SetActive(true);
         MercOnEnable();
     }
+    public void EnableAndSet(LevelSO levelToDisplay)
+    {
+        gameObject.SetActive(true);
+        levelData = levelToDisplay.level;
+        dwellerNames.text = "";
+        foreach (Pawn enemy in levelData.enemies)
+        {
+            dwellerNames.text += enemy.name + ", ";
+        }
+        dwellerNames.text = dwellerNames.text.Remove(dwellerNames.text.Length - 2); //kill the last two chars ", "
+        lootText.text = "";
+        foreach (Object loot in levelData.rewards)
+        {
+            lootText.text += loot.name + ", ";
+        }
+        if (lootText.text.Length > 0)
+            lootText.text = lootText.text.Remove(lootText.text.Length - 2); //kill the last two chars ", "
+
+
+        levelInfoParent.SetActive(true);
+        MercOnEnable();
+    }
     public void DisableAndReset()
     {
         levelInfoParent.SetActive(false);
        
         gameObject.SetActive(false);
         level = null;
+        levelData = new LevelData(); // empties it
         dwellerNames.text = null;
         lootText.text = null;
     }

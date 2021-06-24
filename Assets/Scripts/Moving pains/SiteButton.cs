@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]
+    //[SerializeField]
     SelectionScreenDisplayer displayer;
 
     public Level level;
@@ -28,18 +28,12 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public GameObject buttons;
 
-    //public void OnClick()
-    //{
-    //    GameMaster.Instance.LoadLevelSO()
-    //    SceneManager.LoadScene(1);
-    //}
-    //private void Awake()
-    //{
-    //    transform.GetChild(0).gameObject.SetActive(false);
-    //}
+    
     private void Start()
     {
-        if(myDataDisplay)
+        displayer = RefMaster.Instance.selectionScreenDisplayer;
+
+        if (myDataDisplay)
         myDataDisplay.SetActive(false);
     }
     public void OpenArrivedPartyPanel(List<Pawn> newParty) //
@@ -81,33 +75,22 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //displayer.DisableAndReset();+
         if (myDataDisplay)
             myDataDisplay.SetActive(false);
-
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (myDataDisplay)
             myDataDisplay.SetActive(true);
-        //displayer.DisableAndReset();
-        //displayer.Reposition(transform);
-        //displayer.EnableAndSet(level);
-        //Debug.Log("works");
     }
     public void OnClick()
     {
-        OverWorld.Instance._selectedSite = this;
+        OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         displayer.Reposition(transform);
-        displayer.EnableAndSet(level);
+        //displayer.EnableAndSet(level);
+        displayer.EnableAndSet(levelSO);
         displayer.durationText.text = ETA.ToString();
-
-        
-        //buttons.SetActive(true);
-        //buttons.transform.SetParent(RefMaster.Instance.selectionScreenDisplayer.transform);
-        //buttons.transform.SetAsLastSibling();
-       // Debug.Log("works");
     }
     public void CloseMenu()
     {

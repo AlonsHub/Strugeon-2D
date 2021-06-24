@@ -190,16 +190,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 8ce6f633dcd176a48a9667ab7a89d550, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7539286595509921347, guid: 31155a4835afb294f8a618b0cb75f337,
-    type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -260,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39052b8e5cc7bc41a83184ffd262c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 7809154491400839786}
+  img: {fileID: 4528630281153078905}
   defaultSprite: {fileID: 7539286595509921347, guid: 86740df796032c74e84530ecabc2e68a,
     type: 3}
   nameText: {fileID: 7809154491037042129}
@@ -310,12 +309,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7809154491561218230}
-        m_MethodName: 
+      - m_Target: {fileID: 7809154491561218224}
+        m_MethodName: RemoveMerc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
