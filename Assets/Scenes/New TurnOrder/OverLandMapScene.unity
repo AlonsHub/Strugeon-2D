@@ -350,6 +350,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3315305681066325473, guid: 5db9c477f28ddb24d99d02ad61480d5d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315305681066325473, guid: 5db9c477f28ddb24d99d02ad61480d5d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1536917491}
+    - target: {fileID: 3315305681066325473, guid: 5db9c477f28ddb24d99d02ad61480d5d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CreateExpedition
+      objectReference: {fileID: 0}
+    - target: {fileID: 3315305681066325473, guid: 5db9c477f28ddb24d99d02ad61480d5d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3315305681415321081, guid: 5db9c477f28ddb24d99d02ad61480d5d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3153,10 +3173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expeditions: []
-  expeditionPrefab: {fileID: 4324685624910275902, guid: e32c475c512d60c47b38f768f1535f5d,
+  expeditionPrefab: {fileID: 4324685624910275902, guid: c0ff93ea16cc7fa43b39df2502047f31,
     type: 3}
   spawTrans: {fileID: 1439464884}
-  homeSite: {fileID: 0}
+  homeSite: {fileID: 1572234537}
   _selectedSite: {fileID: 0}
 --- !u!1 &1568560035
 GameObject:

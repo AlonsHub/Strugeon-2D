@@ -16,7 +16,7 @@ public class ExpeditionFollower : MonoBehaviour
     public SiteButton destinationSiteButton;
 
 
-    public LevelSO levelSO; //KWA KWA KWA KWA KWA KWA
+    //public LevelSO levelSO; //KWA KWA KWA KWA KWA KWA
     void Start()
     {
         if (pathCreator != null)
