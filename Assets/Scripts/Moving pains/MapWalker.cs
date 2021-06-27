@@ -6,7 +6,7 @@ public class MapWalker : MonoBehaviour
 {
     // start - end
     public Transform origin; //might not need, if they all spawn at tavern
-    public Transform destination;
+    public SiteButton destination;
 
     // speed and time
     public float travelDuration;
@@ -19,10 +19,12 @@ public class MapWalker : MonoBehaviour
     [SerializeField]
     float stepDelay;
 
+    public List<Pawn> party;
+
     //Ref to THIS expeditions part?
 
     //[must haves: origin, destination,]
-    public void Init(Transform og, Transform dest, float _stepDelay, float duration)
+    public void Init(Transform og, SiteButton dest, float _stepDelay, float duration, List<Pawn> pawns)
     {
         origin = og;
         destination = dest;
@@ -31,6 +33,9 @@ public class MapWalker : MonoBehaviour
 
         stepDelay = _stepDelay;
         travelDuration = duration;
+
+        party = new List<Pawn>();
+        party.AddRange(pawns);
 
         CallWalk(); //temp
     }
@@ -42,17 +47,25 @@ public class MapWalker : MonoBehaviour
 
     IEnumerator WalkCorou()
     {
-        currentDistanceToTarget = Vector3.Distance(origin.position, destination.position);
+        currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
         currentTime = 0;
 
-        while (currentDistanceToTarget > stoppingDistance)
+        while (currentTime < travelDuration)
         {
-            transform.position = Vector3.Lerp(origin.position, destination.position, currentTime / travelDuration);
+            transform.position = Vector3.Lerp(origin.position, destination.transform.position, currentTime / travelDuration);
 
             yield return new WaitForSeconds(stepDelay);
             currentTime += stepDelay;
-            currentDistanceToTarget = Vector3.Distance(origin.position, destination.position);
+            currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
         }
+
+        List<Sprite> sprites = new List<Sprite>();
+        foreach (Pawn pawn in party)
+        {
+            sprites.Add(pawn.PortraitSprite);
+        }
+
+        destination.arrivedMissionPanel.SetMe(sprites);
         Debug.LogWarning("Arrived!");
 
         // ArrivedMethod();
@@ -63,7 +76,7 @@ public class MapWalker : MonoBehaviour
     //    if (origin == null || destination == null)
     //        return float.NegativeInfinity;
 
-    //    return Vector3.Distance(origin.position, destination.position);
+    //    return Vector3.Distance(origin.position, destination.transform.position);
     //}
     // send me to destination
 

@@ -41,7 +41,8 @@ public class ExpeditionFollower : MonoBehaviour
         {
             Debug.Log("End journey");
             
-            destinationSiteButton.OpenArrivedPartyPanel(expedition.expeditionPawns);
+            //in comment since arrival panel changed and this whole script is depricated anyways
+            //destinationSiteButton.OpenArrivedPartyPanel(expedition.expeditionPawns);
             
             Destroy(gameObject);
         }

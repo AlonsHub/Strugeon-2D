@@ -18,7 +18,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public PathCreator pathCreator;
     public PathCreator pathCreatorReturn;
 
-    public GameObject arrivedMissionPanel;
+    public ArrivalPanel arrivedMissionPanel;
     public GameObject arrivedMissionIcon;
     [SerializeField]
     private Vector3 arrivedPanelOffset;
@@ -36,32 +36,32 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (myDataDisplay)
         myDataDisplay.SetActive(false);
     }
-    public void OpenArrivedPartyPanel(List<Pawn> newParty) //
-    {
-        //transform.GetChild(0).gameObject.SetActive(true);
-        GameObject go = Instantiate(arrivedMissionPanel, transform.position + arrivedPanelOffset, transform.rotation);
-        go.transform.SetParent(gameObject.GetComponentInParent<Canvas>().transform);
-        go.transform.localPosition = transform.localPosition + arrivedPanelOffset;
+    //public void OpenArrivedPartyPanel(List<Pawn> newParty) //
+    //{
+    //    //transform.GetChild(0).gameObject.SetActive(true);
+    //    GameObject go = Instantiate(arrivedMissionPanel, transform.position + arrivedPanelOffset, transform.rotation);
+    //    go.transform.SetParent(gameObject.GetComponentInParent<Canvas>().transform);
+    //    go.transform.localPosition = transform.localPosition + arrivedPanelOffset;
 
-        ArrivalPanel ap = go.GetComponent<ArrivalPanel>();
+    //    ArrivalPanel ap = go.GetComponent<ArrivalPanel>();
 
-        foreach (var p in newParty)
-        {
-            GameObject icon = Instantiate(arrivedMissionIcon, ap.parent);
-            icon.GetComponent<Image>().sprite = p.PortraitSprite;
-        }
+    //    foreach (var p in newParty)
+    //    {
+    //        GameObject icon = Instantiate(arrivedMissionIcon, ap.parent);
+    //        icon.GetComponent<Image>().sprite = p.PortraitSprite;
+    //    }
 
-        ExpeditionButton expeditionButton = go.GetComponentInChildren<ExpeditionButton>();
-        RecallExpedition recallExpedition = go.GetComponentInChildren<RecallExpedition>();
+    //    ExpeditionButton expeditionButton = go.GetComponentInChildren<ExpeditionButton>();
+    //    RecallExpedition recallExpedition = go.GetComponentInChildren<RecallExpedition>();
 
-        // expeditionButton.SetUpButton(levelSO, p)
-        expeditionButton.levelSO = levelSO;
-        expeditionButton.partyPawns = newParty;
+    //    // expeditionButton.SetUpButton(levelSO, p)
+    //    expeditionButton.levelSO = levelSO;
+    //    expeditionButton.partyPawns = newParty;
 
-        recallExpedition.party = newParty;
-        recallExpedition.siteButton = this;
-        recallExpedition.arrivalPanelToDestroy = go;
-    }
+    //    recallExpedition.party = newParty;
+    //    recallExpedition.siteButton = this;
+    //    recallExpedition.arrivalPanelToDestroy = go;
+    //}
 
     public void GetProperties() //for filling displayers?
     {
