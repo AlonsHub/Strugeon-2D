@@ -8,7 +8,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
     
 
     //[SerializeField]
-    Level level; //getting deprecated
+    //Level level; //getting deprecated
     LevelData levelData;
     public List<Pawn> availableMercs; // get from PartyManager
     public List<Pawn> partyMercs; //DISPLAYERS - set to PartyManager
@@ -64,30 +64,30 @@ public class SelectionScreenDisplayer : MonoBehaviour
         }
     }
 
-    public void EnableAndSet(Level levelToDisplay)
-    {
-        gameObject.SetActive(true);
-        level = levelToDisplay;
+    //public void EnableAndSet(Level levelToDisplay)
+    //{
+    //    gameObject.SetActive(true);
+    //    level = levelToDisplay;
         
-        dwellerNames.text = "";
-        foreach (Pawn enemy in level.enemies)
-        {
-            dwellerNames.text += enemy.name + " ";
-        }
-        lootText.text = "";
-        foreach (Object loot in level.lootList)
-        {
-            lootText.text += loot.name + " ";
-        }
+    //    dwellerNames.text = "";
+    //    foreach (Pawn enemy in level.enemies)
+    //    {
+    //        dwellerNames.text += enemy.name + " ";
+    //    }
+    //    lootText.text = "";
+    //    foreach (Object loot in level.lootList)
+    //    {
+    //        lootText.text += loot.name + " ";
+    //    }
 
         
-        levelInfoParent.SetActive(true);
-        MercOnEnable();
-    }
+    //    levelInfoParent.SetActive(true);
+    //    MercOnEnable();
+    //}
     public void EnableAndSet(LevelSO levelToDisplay)
     {
         gameObject.SetActive(true);
-        levelData = levelToDisplay.level;
+        levelData = levelToDisplay.levelData;
         dwellerNames.text = "";
         foreach (Pawn enemy in levelData.enemies)
         {
@@ -111,7 +111,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
         levelInfoParent.SetActive(false);
        
         gameObject.SetActive(false);
-        level = null;
+        //level = null;
         levelData = new LevelData(); // empties it
         dwellerNames.text = null;
         lootText.text = null;

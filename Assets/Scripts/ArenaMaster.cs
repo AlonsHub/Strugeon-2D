@@ -25,7 +25,7 @@ public class ArenaMaster : MonoBehaviour
     //public void LoadNewLevel(LevelData newLevelData)
     public void LoadNewLevel(int levelNum)
     {
-        levelData = LevelRef.Instance.levelSOs[levelNum].level;
+        levelData = LevelRef.Instance.levelSOs[levelNum].levelData;
         //instantiate level prefab for GFX/Environment assets ONLY
         //levelGFX = Instantiate(levelData.levelPrefab);
         List<Pawn> newEnemies = new List<Pawn>();

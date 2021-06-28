@@ -11,7 +11,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     //[SerializeField]
     SelectionScreenDisplayer displayer;
 
-    public Level level;
+    //public Level level; 
     public LevelSO levelSO;
     [Tooltip("Estiamted duration in minutes")]
     public float ETA; //estiamted duration in minutes

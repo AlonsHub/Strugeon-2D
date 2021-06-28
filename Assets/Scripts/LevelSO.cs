@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class LevelSO : ScriptableObject
 {
-    public LevelData level;
+    public LevelData levelData;
 }
 [System.Serializable]
 public struct LevelData
