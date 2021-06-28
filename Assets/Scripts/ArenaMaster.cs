@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ArenaMaster : MonoBehaviour
@@ -23,13 +24,23 @@ public class ArenaMaster : MonoBehaviour
     }
 
     //public void LoadNewLevel(LevelData newLevelData)
-    public void LoadNewLevel(int levelNum)
+    public void LoadNewLevel()
     {
-        levelData = LevelRef.Instance.levelSOs[levelNum].levelData;
+        levelData = LevelRef.Instance.currentLevel.levelData;
         //instantiate level prefab for GFX/Environment assets ONLY
         //levelGFX = Instantiate(levelData.levelPrefab);
         List<Pawn> newEnemies = new List<Pawn>();
         List<Pawn> newMercs = new List<Pawn>();
+
+        //temp AF
+
+        List<StaticObastacle> staticObastacles = FindObjectsOfType<StaticObastacle>().ToList();
+        foreach (var item in staticObastacles)
+        {
+            item.SpawnMeOnGrid();
+        }
+        //end temp AF
+
         //= levelData.enemies;
         //build floor:
         if (enemySpawnTiles.Count > 0)

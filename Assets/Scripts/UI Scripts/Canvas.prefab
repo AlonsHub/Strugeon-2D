@@ -639,7 +639,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 3
+  speedButtonImgs: []
+  pauseButtonImgs: []
+  speedButton: {fileID: 0}
+  pauseButton: {fileID: 0}
+  currentTimeScaleIndex: 0
+  timeToggleButton: {fileID: 0}
+  fastSpeed: 0
+  isFast: 0
+  isPause: 0
 --- !u!1 &4363690052557108531
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +898,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 0
+  speedButtonImgs: []
+  pauseButtonImgs: []
+  speedButton: {fileID: 0}
+  pauseButton: {fileID: 0}
+  currentTimeScaleIndex: 0
+  timeToggleButton: {fileID: 0}
+  fastSpeed: 0
+  isFast: 0
+  isPause: 0
 --- !u!1 &4363690052733061809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,12 +1034,14 @@ MonoBehaviour:
   children: []
   entrySize: 150
   entryPrefab: {fileID: 8530504082447541239}
+  colours: []
   actionSprites:
   - {fileID: 21300000, guid: 9451e2cf51ded434ca21c789843cd082, type: 3}
   - {fileID: 21300000, guid: 9b8cc7e3c0e7c7d45a0f9ae8125dd495, type: 3}
   - {fileID: 21300000, guid: c797a09b5df36e9459a86ad1fd7dc45e, type: 2}
   - {fileID: 21300000, guid: a245e17437c89a34fb5a4ad4f1006dc8, type: 3}
   - {fileID: 21300000, guid: 904afa078f0ea0d469a2fa18d58bb0b0, type: 3}
+  psionActionSprites: []
   maxChildren: 4
 --- !u!1 &4363690052817233010
 GameObject:
@@ -1119,6 +1137,12 @@ MonoBehaviour:
   peekSpeed: 400
   hideSpeed: 400
   moveAwayAmount: 400
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
+  peekButton: {fileID: 0}
+  hideButton: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &4363690052840430809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,7 +1359,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cc0ee11666b5fc478c476f1422b472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: 1
+  speedButtonImgs: []
+  pauseButtonImgs: []
+  speedButton: {fileID: 0}
+  pauseButton: {fileID: 0}
+  currentTimeScaleIndex: 0
+  timeToggleButton: {fileID: 0}
+  fastSpeed: 0
+  isFast: 0
+  isPause: 0
 --- !u!1 &4363690052962495246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1588,12 @@ MonoBehaviour:
   peekSpeed: 400
   hideSpeed: 400
   moveAwayAmount: 0
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
+  peekButton: {fileID: 0}
+  hideButton: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &4363690053295886955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1739,12 @@ MonoBehaviour:
   peekSpeed: 400
   hideSpeed: 400
   moveAwayAmount: 400
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
+  peekButton: {fileID: 0}
+  hideButton: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &4363690053341869146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,7 +1756,6 @@ GameObject:
   - component: {fileID: 4363690053341869145}
   - component: {fileID: 4363690053341869126}
   - component: {fileID: 4363690053341869127}
-  - component: {fileID: 1673807128}
   m_Layer: 5
   m_Name: TurnDisplayer BAR
   m_TagString: Untagged
@@ -1778,18 +1821,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.3
---- !u!114 &1673807128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4363690053341869146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e0ddd4f531bfa4dafad093074bf12d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4363690053801311260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,12 +2018,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
         type: 2}
+    - target: {fileID: 2848739189732013652, guid: f0306db00ed78154b9b973df4f95ebbe,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2848739190505974730, guid: f0306db00ed78154b9b973df4f95ebbe,
         type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
         type: 2}
+    - target: {fileID: 2848739190505974730, guid: f0306db00ed78154b9b973df4f95ebbe,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2848739190557841450, guid: f0306db00ed78154b9b973df4f95ebbe,
         type: 3}
       propertyPath: m_Name

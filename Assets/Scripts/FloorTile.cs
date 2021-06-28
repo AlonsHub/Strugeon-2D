@@ -8,7 +8,9 @@ public enum TileColors {enemy, hero, blank };
 public class FloorTile : MonoBehaviour
 {
     public Vector2Int gridIndex;
+
     public bool isEmpty;
+    public GameObject myOccupant;
 
     public int gCost;
     public int hCost;
@@ -21,7 +23,6 @@ public class FloorTile : MonoBehaviour
     private LayerMask pawnLayer;
 
 
-    public GameObject myOccupant;
 
     private void Start()
     {

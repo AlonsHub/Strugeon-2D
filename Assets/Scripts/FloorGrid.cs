@@ -159,6 +159,14 @@ public class FloorGrid : MonoBehaviour
         }
     }
 
+    public void SetTileToStaticObstacle(Vector2Int pos, GameObject obstacle)
+    {
+        // check if pos is in-range for the grid...
+
+        floorTiles[pos.x, pos.y].myOccupant = obstacle;
+        floorTiles[pos.x, pos.y].isEmpty = false;
+    }
+
     //private void OnDrawGizmos()
     //{
     //    if(path.Count >0)
