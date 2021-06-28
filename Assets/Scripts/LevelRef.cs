@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum LevelEnum {Forest, Runis, Swamp};
 public class LevelRef : MonoBehaviour
@@ -29,5 +30,17 @@ public class LevelRef : MonoBehaviour
             currentLevel = levelSOs[levelIndex];
         else
             Debug.LogError("now level so in " + levelIndex + " " + (LevelEnum)levelIndex);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                Instantiate(currentLevel.levelData.levelPrefab);
+                break;
+            default:
+                break;
+        }
     }
 }

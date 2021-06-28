@@ -190,7 +190,7 @@ public class TurnMaster : MonoBehaviour
         
 
         Time.timeScale = 1; //just in case
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(0);
     }
     int RollDx(int x)
     {

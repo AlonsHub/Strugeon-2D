@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SendExpeditionButton : MonoBehaviour
 {
@@ -21,5 +22,7 @@ public class SendExpeditionButton : MonoBehaviour
         //    ArenaLauncher.Instance.LoadArena(myLevelSO);
         //}
         LevelRef.Instance.SetCurrentLevel((int)thisLevel);
+        SceneManager.LoadScene("ArenaSceneGeneric");
     }
+    
 }
