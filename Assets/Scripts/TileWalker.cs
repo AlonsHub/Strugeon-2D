@@ -118,8 +118,7 @@ public class TileWalker : MonoBehaviour
 
         currentNode.isEmpty = true;
 
-        FloorTile destNode = currentNode;
-
+        
         int stepsToTake = path.Count - range;
         //if (doLimitSteps && stepsToTake > stepLimit) //currently, if the walker didn't try to move more than the stepLimit - the limit is still active
         //{
@@ -137,20 +136,6 @@ public class TileWalker : MonoBehaviour
             path.RemoveAt(path.Count - 1);
         }
         StartCoroutine(TileByTileWalk(path));
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-
-        //agent.SetDestination(path[stepsToTake - 1].transform.position);
-
-        //yield return new WaitUntil(() => (agent.remainingDistance < .001f || !agent.hasPath));
-
-        //FindOwnGridPos();
-        //destNode = path[stepsToTake-1];
-        //currentNode = destNode;
-        //destNode.isEmpty = false;
-        
-        //hasPath = false; //Finished!
-        //pawn.TurnDone = true; //hmm
-        ////END TURN
     }
 
     IEnumerator TileByTileWalk(List<FloorTile> walkPath) //this has the last "step" removed from it already (meaning we stop just before the target)
@@ -163,7 +148,7 @@ public class TileWalker : MonoBehaviour
         }
         FindOwnGridPos();
         currentNode.isEmpty = false;
-
+        currentNode.myOccupant = gameObject;
         GetComponentInChildren<LookAtter>().tgt = null; //stops rotating
 
         hasPath = false; //Finished!
@@ -174,26 +159,46 @@ public class TileWalker : MonoBehaviour
     public void Step(FloorTile stepDest) //takes one(?) step in a direction on the Array of the map.
     {
         currentNode.isEmpty = true;
-       
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.Warp(stepDest.transform.position + offsetFromGrid);
-       
-        currentNode = stepDest;
+        currentNode.myOccupant = null;
+        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        //agent.Warp(stepDest.transform.position + offsetFromGrid);
+        transform.position = stepDest.transform.position;
 
-        currentNode.isEmpty = false;
+        FindOwnGridPos();
+        //currentNode = stepDest;
+        //currentNode.isEmpty = false;
     }
 
     public void FindOwnGridPos() //just in case they get lost somehow
     {
         //approximate location accuratly by dividing the x and z pos, to bet the index - then access that tile and steal its position data
-        float x = (transform.position.x - floorGrid.startingPoint.position.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x);
-        float y = (transform.position.z - floorGrid.startingPoint.position.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y);
-        
-        gridPos.x = Mathf.RoundToInt(x);
-        gridPos.y = Mathf.RoundToInt(y);
-        currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
-        currentNode.isEmpty = false;
-        transform.position = currentNode.transform.position + offsetFromGrid;
+        //float x = (transform.position.x - floorGrid.startingPoint.position.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x);
+        //float y = (transform.position.z - floorGrid.startingPoint.position.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y);
+
+        //currentNode.isEmpty = true;
+        //currentNode.myOccupant = null;
+
+        //gridPos.x = Mathf.RoundToInt(x);
+        //gridPos.y = Mathf.RoundToInt(y);
+        //currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
+        //currentNode.isEmpty = false;
+        //currentNode.myOccupant = gameObject;
+        //transform.position = currentNode.transform.position + offsetFromGrid;
+
+        int x = Mathf.RoundToInt((transform.position.x - floorGrid.startingPoint.position.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x));
+        int y = Mathf.RoundToInt((transform.position.z - floorGrid.startingPoint.position.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y));
+
+        if (gridPos.x != x || gridPos.y != y)
+        {
+            gridPos.x = Mathf.RoundToInt(x);
+            gridPos.y = Mathf.RoundToInt(y);
+            currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
+            currentNode.isEmpty = false;
+            currentNode.myOccupant = gameObject;
+            transform.position = currentNode.transform.position + offsetFromGrid;
+        }
+
+
     }
         
 }

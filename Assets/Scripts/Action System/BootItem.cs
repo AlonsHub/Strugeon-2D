@@ -44,13 +44,17 @@ public class BootItem : ActionItem
         
         foreach (FloorTile ft in surroundingTiles)
         {
-            if(ft.isEmpty)
+            if (ft.isEmpty)
             {
                 actionVariations.Add(new ActionVariation(this, ft.gameObject, baseCost));
             }
-            else
+            else if (ft.myOccupant != null)
             {
-                hasEnemyAtMelee = ft.myOccupant.GetComponent<Pawn>().isEnemy;
+                if(ft.myOccupant.CompareTag("Enemy"))
+                {
+                    hasEnemyAtMelee = true;
+                }
+                
             }
         }
 
@@ -58,8 +62,8 @@ public class BootItem : ActionItem
         {
             actionVariations.Clear();
 
-            Debug.LogError("Yeho's SA failed due to enemy in melee range");
-
+            Debug.LogError("No enemy in melee range");
+            //Turn off the SA icon
             return;//?
         }
 

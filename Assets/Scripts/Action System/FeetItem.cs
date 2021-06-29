@@ -8,27 +8,46 @@ public class FeetItem : ActionItem
 
     public int currentRangeInTiles = 1;
 
+    LookAtter lookAtter;
+
+    public override void Awake()
+    {
+        lookAtter = GetComponentInChildren<LookAtter>();
+        base.Awake();
+    }
+
     public override void Action(GameObject tgt)
     {
         targetWalker = tgt.GetComponent<TileWalker>(); //Something here is redundant
         GridPoser gridPoser = tgt.GetComponent<GridPoser>(); //Something here is redundant
 
-        GetComponentInChildren<LookAtter>().tgt = tgt.transform;
+        lookAtter.tgt = tgt.transform;
 
         if (gridPoser != null)
         {
-            //GridPoser gridPoser = tgt.GetComponent<GridPoser>();
             pawn.tileWalker.StartNewPathWithRange(gridPoser.GetGridPos());
-            //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, gridPoser.GetName());
         }
         else
         {
             pawn.tileWalker.StartNewPathWithRange(targetWalker, currentRangeInTiles);
-            //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Walk, targetWalker.pawn.name);
-            //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
         }
-        // BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Walk, tgt.name);
+    }
 
+    public void Action(GameObject tgt, ActionItem atDestination)
+    {
+        targetWalker = tgt.GetComponent<TileWalker>(); //Something here is redundant
+        GridPoser gridPoser = tgt.GetComponent<GridPoser>(); //Something here is redundant
+
+        lookAtter.tgt = tgt.transform;
+
+        if (gridPoser != null)
+        {
+            pawn.tileWalker.StartNewPathWithRange(gridPoser.GetGridPos());
+        }
+        else
+        {
+            pawn.tileWalker.StartNewPathWithRange(targetWalker, currentRangeInTiles);
+        }
     }
 
 

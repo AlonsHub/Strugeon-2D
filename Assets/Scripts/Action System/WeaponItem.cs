@@ -152,9 +152,9 @@ public class WeaponItem : ActionItem
             //int currentDistance = tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
             
-            if (currentDistance <= range*14)
+            if (currentDistance <= range *14)
             {
-                if (isRanged && currentDistance <= 14)
+                if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
                     continue;
                 }
