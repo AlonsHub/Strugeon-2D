@@ -10,15 +10,21 @@ public class DamageText : MonoBehaviour
     [SerializeField]
     float riseSpeed;
 
+    [SerializeField]
+    float alphaSpeed;
+
+    [SerializeField]
+    float ttl;
+
     public void SetDamageText(int dmg)
     {
         dmgTextDisplayer.text = dmg.ToString();
-        Destroy(gameObject, 2);
+        Destroy(gameObject, ttl);
     }
     private void Update()
     {
         transform.position += Vector3.forward * riseSpeed * Time.deltaTime;
-        dmgTextDisplayer.alpha -= riseSpeed * Time.deltaTime * .5f;  
+        dmgTextDisplayer.alpha -= riseSpeed * Time.deltaTime * alphaSpeed;  
     }
 
 }

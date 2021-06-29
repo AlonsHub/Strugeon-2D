@@ -137,9 +137,10 @@ public class WeaponItem : ActionItem
 
     public override void CalculateVariations()
     {
-        actionVariations = new List<ActionVariation>();
+        //actionVariations = new List<ActionVariation>();
+        actionVariations.Clear();
 
-        if(targets.Count <= 0)
+        if (targets.Count <= 0)
         {
             Debug.Log(name + " Found no enemies, no weapon action variations added");
             return;// end match
@@ -158,7 +159,7 @@ public class WeaponItem : ActionItem
                 {
                     continue;
                 }
-                weight = 15;
+                weight = 20;
                 actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
             }
             else
