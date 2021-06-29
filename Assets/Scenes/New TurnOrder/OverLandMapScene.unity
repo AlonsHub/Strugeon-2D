@@ -1535,6 +1535,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 423068978}
     m_Modifications:
+    - target: {fileID: 877103899643994530, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633451057361561084, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170340, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
@@ -1547,6 +1557,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1600947ea2996594b950b39e1c596566,
         type: 2}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: maxCooldown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: arrivedMissionPanel
@@ -2006,6 +2021,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 423068978}
     m_Modifications:
+    - target: {fileID: 877103899643994530, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633451057361561084, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170340, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: m_SpriteState.m_PressedSprite
@@ -2023,6 +2048,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: e2dc75e4b5930f04e9d7221017dd4d21,
         type: 2}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: maxCooldown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: myDataDisplay
@@ -3788,6 +3818,11 @@ MonoBehaviour:
   arrivedPanelOffset: {x: 0, y: 0, z: 0}
   myDataDisplay: {fileID: 0}
   buttons: {fileID: 0}
+  maxCooldown: 0
+  clockDelay: 0
+  clockAndTimerParent: {fileID: 0}
+  timeText: {fileID: 0}
+  isCooldown: 0
 --- !u!114 &1572234538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4796,6 +4831,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 423068978}
     m_Modifications:
+    - target: {fileID: 877103899643994530, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633451057361561084, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: levelSO
@@ -4807,6 +4852,11 @@ PrefabInstance:
       propertyPath: displayer
       value: 
       objectReference: {fileID: 857471290}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: maxCooldown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: arrivedMissionPanel
