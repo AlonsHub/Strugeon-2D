@@ -15,8 +15,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public LevelSO levelSO;
     [Tooltip("Estiamted duration in minutes")]
     public float ETA; //estiamted duration in minutes
-    public PathCreator pathCreator;
-    public PathCreator pathCreatorReturn;
+    //public PathCreator pathCreator;
+    //public PathCreator pathCreatorReturn;
 
     public ArrivalPanel arrivedMissionPanel;
     public GameObject arrivedMissionIcon;
@@ -89,6 +89,11 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         displayer.Reposition(transform);
         //displayer.EnableAndSet(level);
+        int rndDifficulty = Random.Range(0, 3);
+
+        levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+
+
         displayer.EnableAndSet(levelSO);
         displayer.durationText.text = ETA.ToString();
     }

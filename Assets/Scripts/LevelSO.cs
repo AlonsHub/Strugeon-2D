@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum LairDifficulty {Easy, Medium, Hard};
 
 [CreateAssetMenu()]
 public class LevelSO : ScriptableObject
@@ -15,7 +16,21 @@ public struct LevelData
 
     public GameObject levelPrefab; //currently holds enemies
 
-    public int risk; //Experimental! might be better as enum
+    public void SetLevelData(LairDifficulty difficulty)
+    {
+        enemies.Clear();
+        rewards.Clear();
+        enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(difficulty);
+        rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(difficulty);
+        //levelPrefab = DifficultyTranslator.Instance.DiffcultyToLevelPrefab(difficulty);
+
+        
+
+    }
+
+    //public int risk; //Experimental! might be better as enum
+
+
 
     //[HideInInspector]
     //public Vector2Int enemySpawnTiles; //set only via SpawnZones

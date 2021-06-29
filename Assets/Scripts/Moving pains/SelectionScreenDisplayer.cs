@@ -89,6 +89,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
         gameObject.SetActive(true);
         levelData = levelToDisplay.levelData;
         dwellerNames.text = "";
+
         foreach (Pawn enemy in levelData.enemies)
         {
             dwellerNames.text += enemy.name + ", ";
