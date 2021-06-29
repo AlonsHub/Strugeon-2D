@@ -28,10 +28,19 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public GameObject buttons;
 
-    
+    public float maxCooldown;
+    public float clockDelay; //time between clock ticks
+
+    public GameObject clockAndTimerParent;
+    public TMPro.TMP_Text timeText;
+
+    public bool isCooldown;
+
     private void Start()
     {
         displayer = RefMaster.Instance.selectionScreenDisplayer;
+
+        isCooldown = false;
 
         if (myDataDisplay)
         myDataDisplay.SetActive(false);
@@ -93,12 +102,34 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 
+        //NOT THE CORRECT PLACE FOR THIS!!
 
+        isCooldown = true;
+        StartCoroutine("StartCooldown");
+        //NOT THE CORRECT PLACE FOR THIS!!
+        
         displayer.EnableAndSet(levelSO);
         displayer.durationText.text = ETA.ToString();
     }
     public void CloseMenu()
     {
         displayer.DisableAndReset();
+    }
+
+    IEnumerator StartCooldown()
+    {
+        isCooldown = true;
+        float timer = 0f;
+        clockAndTimerParent.SetActive(true);
+        timeText.text = "00:" + ((int)(maxCooldown / 60) - (int)timer / 60) + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+
+        while (timer <= maxCooldown)
+        {
+            yield return new WaitForSecondsRealtime(clockDelay);
+            timer += clockDelay;
+            timeText.text = "00:" + ((int)(maxCooldown/60) - (int)timer / 60) + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+        }
+        clockAndTimerParent.SetActive(false);
+        isCooldown = false;
     }
 }

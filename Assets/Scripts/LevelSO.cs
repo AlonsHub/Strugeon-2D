@@ -18,8 +18,8 @@ public struct LevelData
 
     public void SetLevelData(LairDifficulty difficulty)
     {
-        enemies.Clear();
-        rewards.Clear();
+        //enemies.Clear();
+        //rewards.Clear();
         enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(difficulty);
         rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(difficulty);
         //levelPrefab = DifficultyTranslator.Instance.DiffcultyToLevelPrefab(difficulty);
