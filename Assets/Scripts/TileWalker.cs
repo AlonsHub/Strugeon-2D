@@ -24,7 +24,11 @@ public class TileWalker : MonoBehaviour
     public int stepLimit; //if doLimitSteps
 
     public Pawn pawn;
- 
+
+
+    //public ActionVariation afterWalkAction;
+    LookAtter lookAtter;
+
     public void Init()
     {
         pawn = GetComponent<Pawn>();
@@ -34,6 +38,8 @@ public class TileWalker : MonoBehaviour
             floorGrid = FloorGrid.Instance;
         }
         FindOwnGridPos();
+
+        lookAtter = GetComponentInChildren<LookAtter>();
     }
     public bool hasPath = false;
     //int currentPathIndex; //the index of the current node in the path list.
@@ -72,7 +78,7 @@ public class TileWalker : MonoBehaviour
         if (path.Count <= 0)
         {
             Debug.LogError(name + " No path found, passed a null path to tilewalker.");
-            GetComponentInChildren<LookAtter>().tgt = null; //stops rotating
+            lookAtter.tgt = null; //stops rotating
             pawn.TurnDone = true;
         }
         else
@@ -133,7 +139,7 @@ public class TileWalker : MonoBehaviour
         int difference = path.Count - stepsToTake;
         for (int i = 0; i < difference; i++)
         {
-            path.RemoveAt(path.Count - 1);
+            path.RemoveAt(path.Count - 1); // why not trim? 
         }
         StartCoroutine(TileByTileWalk(path));
     }
@@ -149,7 +155,7 @@ public class TileWalker : MonoBehaviour
         FindOwnGridPos();
         currentNode.isEmpty = false;
         currentNode.myOccupant = gameObject;
-        GetComponentInChildren<LookAtter>().tgt = null; //stops rotating
+        lookAtter.tgt = null; //stops rotating
 
         hasPath = false; //Finished!
         pawn.TurnDone = true; //hmm

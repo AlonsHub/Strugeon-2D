@@ -33,12 +33,13 @@ public class FeetItem : ActionItem
         }
     }
 
-    public void Action(GameObject tgt, ActionItem atDestination)
+    public void Action(GameObject tgt, ActionVariation actionOnDestination)
     {
         targetWalker = tgt.GetComponent<TileWalker>(); //Something here is redundant
         GridPoser gridPoser = tgt.GetComponent<GridPoser>(); //Something here is redundant
 
         lookAtter.tgt = tgt.transform;
+
 
         if (gridPoser != null)
         {
@@ -48,8 +49,11 @@ public class FeetItem : ActionItem
         {
             pawn.tileWalker.StartNewPathWithRange(targetWalker, currentRangeInTiles);
         }
+
+
     }
 
+    
 
     //IEnumerator CharacterWalk()
     //{

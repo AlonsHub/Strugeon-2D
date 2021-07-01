@@ -42,27 +42,22 @@ public class HealItem : ActionItem
 
     public override void Action(GameObject tgt)
     {
-        //BattleLog.Instance.AddLine(name + " Healed: " + tgt.name);
+        
         pawn._currentCooldown = pawn.saCooldown;
-        //Character c = tgt.GetComponent<Character>();
+        
+        int dist = tileWalker.gridPos
+
         Pawn p = tgt.GetComponent<Pawn>();
         int healRoll = Random.Range(-5, 5) + healAmount;
 
         p.Heal(healRoll);
 
         GameObject go = Instantiate(healEffect, tgt.transform);
-        //go.transform.position += Vector3.up * .2f;
         Destroy(go, 2);
-
-        //pawn.anim.SetTrigger("Heal");
-        //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Heal, p.name);
-
-        //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgt.name, healRoll, Color.green);
+        
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, p.Name, healRoll, Color.green);
 
-
         Invoke("CharacterHeal", healDelay);
-        // StartCoroutine("CharacterHeal");
     }
 
     void CharacterHeal()
@@ -73,37 +68,51 @@ public class HealItem : ActionItem
     public override void CalculateVariations()
     {
         actionVariations = new List<ActionVariation>();
+
+
         if (targets.Count <= 0 || pawn._currentCooldown > 0)
         {
             pawn._currentCooldown--;
             Debug.Log("No targest in List<Pawn> mercs or cooldown: " + pawn._currentCooldown.ToString());
             return;
         }
-       
+
+
 
         foreach (Pawn p in targets)
         {
-            if (p.currentHP >= p.maxHP)
+            if (p.currentHP >= p.maxHP) // instead of setting weight to 0, we just don't add this ActionVariation
             {
                 continue;
             }
-            int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
 
-            int weight = (1 - (p.currentHP / p.maxHP)) * baseCost;
+             //int weight = (1 - (p.currentHP / p.maxHP)) * baseCost;
+             int weight = 10 * baseCost;
+            //bool isMe
 
-            if (p.currentHP < p.maxHP / 2)
+
+            if (p.currentHP < p.maxHP / 2) //if under half max
             {
-                weight *= 10;
+                weight *= 8; //multiply again by 8
                 if(p.name == name)
                 {
-                    weight *= 2;
-                   // Debug.LogError("Double weighting myself: " + weight);
+                    weight += 2*(weight/8); //effectively makes it "times 10" [by adding (2/8 of 8x) we make it 10x]
                 }
             }
-            //if (currentDistance <= range)
-            //{
+
+            //Adjacency check 
+
+            int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
+            if (currentDistance <= 14) // one tile
+            {
+                weight *= 4;
                 actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-            //}
+            }
+            else
+            {
+                actionVariations.Add(new ActionVariation(this , p.gameObject, weight, true));
+            }
+
             //else
             //{
             //    weight /= 2;

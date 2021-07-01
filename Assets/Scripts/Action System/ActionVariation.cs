@@ -8,6 +8,8 @@ public class ActionVariation
     public GameObject target;
     public int weight; //cost?
 
+    public bool doWalk = false;
+
     //public int specialRange;
     public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight)
     {
@@ -16,6 +18,13 @@ public class ActionVariation
         weight = actWeight;
 
         
+    }
+    public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight, bool walk)
+    {
+        relevantItem = rItem; //usually, the performing item will be the relevantItem
+        target = tgt;
+        weight = actWeight;
+        doWalk = walk;
     }
 
     
@@ -29,6 +38,7 @@ public class ActionVariation
     public void PerformActionOnTarget()
     {
         // relevantItem.Action(target.GetComponent<Character>());
+       
         relevantItem.Action(target);
     }
 
