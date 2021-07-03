@@ -44,9 +44,36 @@ public class HealItem : ActionItem
     {
         
         pawn._currentCooldown = pawn.saCooldown;
-        
-        int dist = tileWalker.gridPos
+        Pawn tgtPawn = tgt.GetComponent<Pawn>();
+        int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
 
+        if(dist > range)
+        {
+            StartCoroutine(WalkThenHeal(tgtPawn));
+            return;
+        }
+
+        //if dist <= 1 - just do this:
+
+        
+        int healRoll = Random.Range(-5, 5) + healAmount;
+
+        tgtPawn.Heal(healRoll);
+
+        GameObject go = Instantiate(healEffect, tgt.transform);
+        Destroy(go, 2);
+        
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgtPawn.Name, healRoll, Color.green);
+
+        Invoke("CharacterHeal", healDelay);
+    }
+
+    IEnumerator WalkThenHeal(Pawn tgt)
+    {
+        pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, range);
+        
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+        
         Pawn p = tgt.GetComponent<Pawn>();
         int healRoll = Random.Range(-5, 5) + healAmount;
 
@@ -54,7 +81,7 @@ public class HealItem : ActionItem
 
         GameObject go = Instantiate(healEffect, tgt.transform);
         Destroy(go, 2);
-        
+
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, p.Name, healRoll, Color.green);
 
         Invoke("CharacterHeal", healDelay);

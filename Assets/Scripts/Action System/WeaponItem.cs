@@ -39,6 +39,8 @@ public class WeaponItem : ActionItem
     public List<Pawn> targets;
     public bool hasRedBuff;
     public Pawn toHit;
+
+    LookAtter la;
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
@@ -56,21 +58,30 @@ public class WeaponItem : ActionItem
         else
             targets = RefMaster.Instance.enemies;
 
-       // arrowSpawn = pawn.arrow
+        // arrowSpawn = pawn.arrow
+        la = GetComponentInChildren<LookAtter>();
+
     }
     public override void Action(GameObject tgt)
     {
-
         toHit = tgt.GetComponent<Pawn>();
 
         if (!toHit)
         {
-            Debug.Log("word");
+            Debug.Log("no tgt to hit");
             return;
         }
 
-        LookAtter la = GetComponentInChildren<LookAtter>();
-        if(tgt && la)
+
+        int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+
+        if (dist > range)
+        {
+            StartCoroutine(WalkThenAttack(toHit));
+            return;
+        }
+
+        if (tgt && la)
         la.tgt = tgt.transform;
 
 
@@ -79,6 +90,21 @@ public class WeaponItem : ActionItem
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
         pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
 
+    }
+
+    IEnumerator WalkThenAttack(Pawn tgt)
+    {
+        pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, range);
+
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+
+
+        
+        if (tgt && la)
+            la.tgt = tgt.transform;
+
+        
+        pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
     }
 
     public void ShootProjectile()
@@ -125,7 +151,7 @@ public class WeaponItem : ActionItem
         pawn.TurnDone = true;
         //go.transform.LookAt(tgt.transform);
         //GetComponent<LookAt>().lookAtTargetPosition = tgt.transform.position;
-        GetComponentInChildren<LookAtter>().tgt = null;
+        la.tgt = null;
     }
     public void AddEffect(WeaponEffectAddon effectAddon)
     {
@@ -165,22 +191,10 @@ public class WeaponItem : ActionItem
             else
             {
                 weight = 5;
-                actionVariations.Add(new ActionVariation(feetItem, p.gameObject, weight));
+                actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
+                //actionVariations.Add(new ActionVariation(feetItem, p.gameObject, weight));
             }
         }
 
-        //Emergency step, to make sure you have SOME actionvariation to use
-        //if(actionVariations.Count == 0)
-        //{
-        //    List<FloorTile> surroundingTiles = FloorGrid.Instance.GetNeighbours(tileWalker.currentNode);
-
-        //    foreach (FloorTile ft in surroundingTiles)
-        //    {
-        //        if (!ft.hasObstacle && !ft.hasEnemy)
-        //        {
-        //            actionVariations.Add(new ActionVariation(this, ft.gameObject, baseCost));
-        //        }
-        //    }
-        //}
     }
 }
