@@ -38,13 +38,27 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void Start()
     {
+        //displayer = RefMaster.Instance.selectionScreenDisplayer;
+
+        //isCooldown = false;
+
+        //if (myDataDisplay)
+        //myDataDisplay.SetActive(false);
+
+        Invoke("LateStart", 1);
+    }
+
+    void LateStart()
+    {
         displayer = RefMaster.Instance.selectionScreenDisplayer;
 
         isCooldown = false;
 
         if (myDataDisplay)
-        myDataDisplay.SetActive(false);
+            myDataDisplay.SetActive(false);
     }
+
+    
     //public void OpenArrivedPartyPanel(List<Pawn> newParty) //
     //{
     //    //transform.GetChild(0).gameObject.SetActive(true);

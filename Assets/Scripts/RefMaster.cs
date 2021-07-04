@@ -26,6 +26,13 @@ public class RefMaster : MonoBehaviour
             Destroy(gameObject);
         else
             Instance = this;
+
+        if(mercs == null)
+        mercs = new List<Pawn>();
+        if(enemies == null)
+        enemies = new List<Pawn>();
+
+        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -56,6 +63,15 @@ public class RefMaster : MonoBehaviour
     public void DoShit()
     {
         Debug.Log(Instance.name);
+    }
+
+    public void SetNewMercList(List<Pawn> newMercs)
+    {
+        mercs.Clear();
+        foreach (var merc in newMercs)
+        {
+            mercs.Add(merc);
+        }
     }
 
     //public void SetNewPawns(List<Pawn> newPawns, bool isEnemy)

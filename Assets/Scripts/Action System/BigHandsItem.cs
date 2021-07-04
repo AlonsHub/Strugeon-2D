@@ -10,6 +10,8 @@ public class BigHandsItem : ActionItem, SA_Item
     public Transform weaponSpawn;
 
     public Pawn toHit;
+
+    LookAtter la;
     /// <summary>
     /// Big hands can pick up things from around the level and throw them as weapons
     /// These can be Rocks and Censer(?) atm
@@ -20,6 +22,7 @@ public class BigHandsItem : ActionItem, SA_Item
     {
         //ownerCharacter = GetComponent<Character>();
         actionVariations = new List<ActionVariation>();
+        la = GetComponentInChildren<LookAtter>();
     }
 
     
@@ -44,7 +47,7 @@ public class BigHandsItem : ActionItem, SA_Item
 
         //toHit = pawn.targets[Random.Range(0, pawn.targets.Count - 1)]; //should be simplified
         toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
-        LookAtter la = GetComponentInChildren<LookAtter>();
+        //LookAtter la = GetComponentInChildren<LookAtter>();
         if (toHit && la)
             la.tgt = toHit.transform;
         //toHit.TakeDamage(damage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)

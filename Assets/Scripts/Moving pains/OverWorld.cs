@@ -87,8 +87,10 @@ public class OverWorld : MonoBehaviour
 
         MapWalker mw = Instantiate(expeditionPrefab, spawTrans.position, Quaternion.identity).GetComponent<MapWalker>();
         mw.transform.SetParent(GetComponentInParent<Canvas>().transform);
-        mw.Init(spawTrans, _selectedSite, .1f, _selectedSite.ETA, PartyMaster.Instance.currentMercParty);
-        
+        mw.Init(spawTrans, _selectedSite, .1f, _selectedSite.ETA, _party);
+
+
+        RefMaster.Instance.SetNewMercList(_party);
 
        // expeditions.Add(expeditionFollower.expedition = new Expedition(sb, sb.pathCreator, _party.ToList()));
 
