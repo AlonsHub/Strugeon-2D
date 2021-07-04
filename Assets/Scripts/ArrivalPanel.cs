@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class ArrivalPanel : MonoBehaviour
 {
-    public List<Image> mercImages;
-    //List<Sprite> mercSprites;
+    public List<Pawn> mercs;
+    public List<Image> mercImgs;
     //public static ArrivalPanel Instance;
     //private void Awake()
     //{
@@ -21,12 +21,12 @@ public class ArrivalPanel : MonoBehaviour
     //    gameObject.SetActive(false); //turns itself off after registration
     //}
 
-    public void SetMe(List<Sprite> sprites)
+    public void SetMe(List<Pawn> pawns)
     {
         gameObject.SetActive(true); //turns itself on after ______(?)
-        for (int i = 0; i < sprites.Count; i++)
+        for (int i = 0; i < pawns.Count; i++)
         {
-            mercImages[i].sprite = sprites[i];
+            mercImgs[i].sprite = pawns[i].PortraitSprite;
         }
     }
 

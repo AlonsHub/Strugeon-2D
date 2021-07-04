@@ -10,6 +10,10 @@ public class SendExpeditionButton : MonoBehaviour
     [SerializeField]
     LevelEnum thisLevel;
 
+
+    [SerializeField]
+    ArrivalPanel ap;
+
     //private void Start()
     //{
     //    myLevelSO = GetComponentInParent<SiteButton>().levelSO;
@@ -21,6 +25,9 @@ public class SendExpeditionButton : MonoBehaviour
         //{
         //    ArenaLauncher.Instance.LoadArena(myLevelSO);
         //}
+        PartyMaster.Instance.currentMercParty = ap.mercs;
+        PartyMaster.Instance.availableMercs.RemoveAll(x => ap.mercs.Contains(x));
+
         LevelRef.Instance.SetCurrentLevel((int)thisLevel);
         SceneManager.LoadScene("ArenaSceneGeneric");
     }

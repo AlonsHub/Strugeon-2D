@@ -59,13 +59,13 @@ public class MapWalker : MonoBehaviour
             currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
         }
 
-        List<Sprite> sprites = new List<Sprite>();
-        foreach (Pawn pawn in party)
-        {
-            sprites.Add(pawn.PortraitSprite);
-        }
+        //List<Sprite> sprites = new List<Sprite>();
+        //foreach (Pawn pawn in party)
+        //{
+        //    sprites.Add(pawn.PortraitSprite);
+        //}
 
-        destination.arrivedMissionPanel.SetMe(sprites);
+        destination.arrivedMissionPanel.SetMe(party);
         Debug.LogWarning("Arrived!");
 
         // ArrivedMethod();
