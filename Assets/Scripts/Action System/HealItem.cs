@@ -47,7 +47,7 @@ public class HealItem : ActionItem
         Pawn tgtPawn = tgt.GetComponent<Pawn>();
         int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
 
-        if(dist > range)
+        if(dist > range * 14)
         {
             StartCoroutine(WalkThenHeal(tgtPawn));
             return;
@@ -130,7 +130,7 @@ public class HealItem : ActionItem
             //Adjacency check 
 
             int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
-            if (currentDistance <= 14) // one tile
+            if (currentDistance <= range * 14) // one tile
             {
                 weight *= 4;
                 actionVariations.Add(new ActionVariation(this, p.gameObject, weight));

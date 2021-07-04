@@ -16,7 +16,7 @@ public class FeetItem : ActionItem
         base.Awake();
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(GameObject tgt) //might be depricated
     {
         targetWalker = tgt.GetComponent<TileWalker>(); //Something here is redundant
         GridPoser gridPoser = tgt.GetComponent<GridPoser>(); //Something here is redundant

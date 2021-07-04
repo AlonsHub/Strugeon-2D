@@ -75,7 +75,7 @@ public class WeaponItem : ActionItem
 
         int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
 
-        if (dist > range)
+        if (dist > range*14)
         {
             StartCoroutine(WalkThenAttack(toHit));
             return;
