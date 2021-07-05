@@ -34,6 +34,8 @@ public class TurnMaster : MonoBehaviour
 
     [SerializeField]
     int turnDisplayerLimit;
+    [SerializeField]
+    private float endGameCheckRate = 2f;
 
     private void Awake()
     {
@@ -60,7 +62,7 @@ public class TurnMaster : MonoBehaviour
 
         //TURN PLATE DISPLAYER!
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
-         turnPlates.Add(go.transform);
+        turnPlates.Add(go.transform);
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
         turnPlates[0].localScale *= 1.5f;
         turnTakers[0].myTurnPlate = go;
@@ -80,20 +82,20 @@ public class TurnMaster : MonoBehaviour
 
         for (int i = 1; i < turnTakers.Count; i++) //start from [1], because [0] is set just above this ^^^^
         {
-            GameObject plate = Instantiate(prefabeTurnPlate, turnPlateParent); 
+            GameObject plate = Instantiate(prefabeTurnPlate, turnPlateParent);
             turnPlates.Add(plate.transform);
 
             //Sprites and SA icons are set
 
-            turnPlates[i].localPosition = nextTurnPlateTrans.localPosition + new Vector3((i-1) * turnPlateDistance, 0, 0); //(i-1) because the [1] position in the array is the second plate,
-            //Image[] imgs = turnPlates[i].GetComponentsInChildren<Image>();
-            //imgs[0].sprite = turnTakers[i].PortraitSprite;
-            //Image imgs = turnPlates[i].GetComponentInChildren<Image>();
-            //imgs[1].sprite = turnTakers[i].PortraitSprite; //add the SA icon, if applicable
-            //turnPlates[i].GetComponentInChildren<Image>().sprite = turnTakers[i].PortraitSprite;
-            //but nextTurnPlateTrans is the second position
-            //(so on i=1, we need to add (1-1)*delta
-            
+            turnPlates[i].localPosition = nextTurnPlateTrans.localPosition + new Vector3((i - 1) * turnPlateDistance, 0, 0); //(i-1) because the [1] position in the array is the second plate,
+                                                                                                                             //Image[] imgs = turnPlates[i].GetComponentsInChildren<Image>();
+                                                                                                                             //imgs[0].sprite = turnTakers[i].PortraitSprite;
+                                                                                                                             //Image imgs = turnPlates[i].GetComponentInChildren<Image>();
+                                                                                                                             //imgs[1].sprite = turnTakers[i].PortraitSprite; //add the SA icon, if applicable
+                                                                                                                             //turnPlates[i].GetComponentInChildren<Image>().sprite = turnTakers[i].PortraitSprite;
+                                                                                                                             //but nextTurnPlateTrans is the second position
+                                                                                                                             //(so on i=1, we need to add (1-1)*delta
+
             tp = plate.GetComponent<TurnDisplayer>();
 
             turnTakers[i].myTurnPlate = turnPlates[i].gameObject;
@@ -120,18 +122,25 @@ public class TurnMaster : MonoBehaviour
 
         isGameRunning = true;
         StartCoroutine("TurnSequence");
+        StartCoroutine("EndGameChecker");
     }
     public void StopTurning()
     {
         StopCoroutine("TurnSequence"); //will need to rearrange lists after. Turn order will be lost
         isGameRunning = false;
-        //consider caching currentTurn
+
+
+        PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
+        PartyMaster.Instance.currentMercParty.Clear();
+
+        Time.timeScale = 1; //just in case
+        SceneManager.LoadScene(0);
     }
     IEnumerator TurnSequence()
     {
-        while(isGameRunning)
+        while (isGameRunning)
         {
-            if(RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemies.Count == 0)
+            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemies.Count == 0)
             {
                 isGameRunning = false;
                 Debug.Log("Game over!");
@@ -139,7 +148,7 @@ public class TurnMaster : MonoBehaviour
             }
             yield return new WaitForSeconds(turnStartDelay);
 
-            if(currentTurn>= turnTakers.Count)
+            if (currentTurn >= turnTakers.Count)
             {
                 currentTurn = 0;
             }
@@ -177,7 +186,7 @@ public class TurnMaster : MonoBehaviour
                 }
 
                 TurnOrderUpdate();
-            //    TurnOrderUpdate();
+                //    TurnOrderUpdate();
             }
             else
             {
@@ -185,7 +194,7 @@ public class TurnMaster : MonoBehaviour
                 ((Pawn)currentTurnTaker).RemoveIconByColor("blueBuff");
             }
 
-            
+
         }
 
         PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
@@ -223,16 +232,16 @@ public class TurnMaster : MonoBehaviour
         //turnPlates.(t);
         currentTurnInDisplayer++;
 
-        if(currentTurnInDisplayer >= turnPlates.Count) //notice this counts on DISPLAYER PLATES and not TurnTakers
+        if (currentTurnInDisplayer >= turnPlates.Count) //notice this counts on DISPLAYER PLATES and not TurnTakers
         {
             currentTurnInDisplayer = 0;
         }
-        if(currentTurnInDisplayer != currentTurn)
+        if (currentTurnInDisplayer != currentTurn)
         {
-            Debug.LogWarning("Current display turn and actual currentTurn are not in sync for some ungodly reason. " + 
+            Debug.LogWarning("Current display turn and actual currentTurn are not in sync for some ungodly reason. " +
                 currentTurnInDisplayer + " and " + currentTurn);
         }
-        
+
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
         turnPlates[0].localScale *= 1.5f;
 
@@ -254,7 +263,7 @@ public class TurnMaster : MonoBehaviour
             {
                 td.SAIconCheck();
             }
-            
+
             turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
 
             //(i-1) because the [1] position in the array is the second plate,
@@ -263,56 +272,26 @@ public class TurnMaster : MonoBehaviour
         }
     }
 
-    void RemovePlate()
+    //void RemovePlate()
+    //{
+
+    //}
+
+    //makes sure the game will end once all mercs/enemies die
+    IEnumerator EndGameChecker()
     {
+        while (isGameRunning)
+        {
+            yield return new WaitForSeconds(endGameCheckRate);
+            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemies.Count == 0)
+            {
+                isGameRunning = false;
+                Debug.Log("Game over!");
+                StopTurning();
+            }
+        }
 
     }
-
-    //[ContextMenu("CreateDisplayer")]
-    //void CreateTurnDisplayer() // After sort by Initiative
-    //{
-    //    if(turnDisplayerParent.childCount > 0)
-    //    {
-    //        int full = turnDisplayerParent.childCount;
-    //        for (int i = 0; i < full; i++)
-    //        {
-    //            Destroy(turnDisplayerParent.GetChild(0).gameObject);
-    //        }
-    //    }    
-
-    //    foreach(TurnTaker tt in turnTakers)
-    //    {
-    //        TurnDisplayer td = Instantiate(prefabeTurnPlate, turnDisplayerParent).GetComponent<TurnDisplayer>();
-    //        td.nameDisplayer.text = tt.Name;
-    //        td.initDisplayer.text = tt.Initiative.ToString();
-    //        td.myPawn = (Pawn)tt;
-    //        td.pawnImage.sprite = ((Pawn) tt).portraitSprite;
-    //        turnDisplayers.Add(td);
-    //    }
-    //}
-    //[ContextMenu("UpdateDisplayer")]
-    //void UpdateTurnDisplayer()
-    //{
-    //    turnDisplayerParent.GetChild(0).SetAsLastSibling();
-    //}
-
-    //public void RemoveTurnTaker(Pawn p)
-    //{
-    //    turnTakers.Remove(p);
-
-    //    if (p.isEnemy)
-    //        RefMaster.Instance.enemies.Remove(p);
-    //    else
-    //        RefMaster.Instance.mercs.Remove(p);
-
-    //    TurnDisplayer tdToDestroy = turnDisplayers.Where(x => x.myPawn.Name == p.Name).SingleOrDefault();
-    //    turnDisplayers.Remove(tdToDestroy);
-    //    Destroy(tdToDestroy.gameObject);
-
-    //    Debug.Log(name.ToString() + " died as Pawn and removed for relevant list in CharacterMaster");
-    //}
-
-   
 }
 public interface TurnTaker
 {

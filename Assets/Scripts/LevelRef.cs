@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public enum LevelEnum {Forest, Runis, Swamp};
 public class LevelRef : MonoBehaviour
@@ -11,6 +12,9 @@ public class LevelRef : MonoBehaviour
 
     public LevelSO currentLevel;
     public List<LevelSO> levelSOs;
+
+    //public SiteButton siteToCooldown;
+    public string siteName; //WORK AROUND!
 
     private void Awake()
     {
@@ -39,6 +43,12 @@ public class LevelRef : MonoBehaviour
             case 1:
                 Instantiate(currentLevel.levelData.levelPrefab);
                 break;
+            case 0:
+                SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
+                SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();
+                sb.StartCooldownCaller();
+                break;
+
             default:
                 break;
         }

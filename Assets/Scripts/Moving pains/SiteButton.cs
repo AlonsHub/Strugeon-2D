@@ -109,7 +109,16 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnClick()
     {
+        if(isCooldown)
+        {
+            Debug.LogError("iscooldown");
+            return;
+        }
+
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        //LevelRef.Instance.siteToCooldown = this;
+        LevelRef.Instance.siteName = name;
+
         displayer.Reposition(transform);
         //displayer.EnableAndSet(level);
         int rndDifficulty = Random.Range(0, 3);
@@ -118,8 +127,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         //NOT THE CORRECT PLACE FOR THIS!!
 
-        isCooldown = true;
-        StartCoroutine("StartCooldown");
+        //isCooldown = true;
+        //StartCoroutine("StartCooldown");
         //NOT THE CORRECT PLACE FOR THIS!!
         
         displayer.EnableAndSet(levelSO);
@@ -130,18 +139,23 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         displayer.DisableAndReset();
     }
 
+    public void StartCooldownCaller()
+    {
+        StartCoroutine("StartCooldown");
+    }
     IEnumerator StartCooldown()
     {
         isCooldown = true;
         float timer = 0f;
         clockAndTimerParent.SetActive(true);
-        timeText.text = "00:" + ((int)(maxCooldown / 60) - (int)timer / 60) + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+        timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+
 
         while (timer <= maxCooldown)
         {
             yield return new WaitForSecondsRealtime(clockDelay);
             timer += clockDelay;
-            timeText.text = "00:" + ((int)(maxCooldown/60) - (int)timer / 60) + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+            timeText.text = "00:" + ((int)((maxCooldown/60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
         }
         clockAndTimerParent.SetActive(false);
         isCooldown = false;
