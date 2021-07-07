@@ -129,8 +129,15 @@ public class TurnMaster : MonoBehaviour
         StopCoroutine("TurnSequence"); //will need to rearrange lists after. Turn order will be lost
         isGameRunning = false;
 
+        if (RefMaster.Instance.mercs.Count != 0)
+        {
+            //Give reward
 
-        PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
+            Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
+
+            PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
+        }
+
         PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
@@ -197,11 +204,12 @@ public class TurnMaster : MonoBehaviour
 
         }
 
-        PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
-        PartyMaster.Instance.currentMercParty.Clear();
+        //PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
+        //PartyMaster.Instance.currentMercParty.Clear();
 
-        Time.timeScale = 1; //just in case
-        SceneManager.LoadScene(0);
+        //Time.timeScale = 1; //just in case
+        //SceneManager.LoadScene(0);
+        StopTurning();
     }
     int RollDx(int x)
     {
@@ -215,15 +223,6 @@ public class TurnMaster : MonoBehaviour
 
     void TurnOrderUpdate()
     {
-        //int delta = currentTurn - currentTurnInDisplayer;
-
-        //if(delta == 0)
-        //{
-        //    return;
-        //}
-
-        //shoud minimize the first/larger portrait?
-        //if(turnPlates[0].localScale.x == turnPlates[1].localScale.x)
         turnPlates[0].localScale /= 1.5f;
 
         Transform t = turnPlates[0];

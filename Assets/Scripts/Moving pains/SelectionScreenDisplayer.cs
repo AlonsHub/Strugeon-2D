@@ -20,7 +20,8 @@ public class SelectionScreenDisplayer : MonoBehaviour
     public GameObject levelInfoParent; //to Enable/Disable
     public TMP_Text dwellerNames; // string separate strings together 
     public TMP_Text lootText; // string separate strings together 
-    public TMP_Text durationText; // string separate strings together 
+    public TMP_Text goldText; 
+    public TMP_Text durationText;
 
 
     public float xOffset;
@@ -103,6 +104,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
         if (lootText.text.Length > 0)
             lootText.text = lootText.text.Remove(lootText.text.Length - 2); //kill the last two chars ", "
 
+        goldText.text = levelData.goldReward.ToString();
 
         levelInfoParent.SetActive(true);
         MercOnEnable();

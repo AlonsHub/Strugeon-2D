@@ -14,6 +14,8 @@ public class DifficultyTranslator : MonoBehaviour
     public List<Object> mediumRewardSet;
     public List<Object> hardRewardSet;
 
+    public int[] goldRewards; //0,1,2 index - easy, medium, hard
+
     //public GameObject easyPrefab;
     //public GameObject mediumPrefab;
     //public GameObject hardPrefab;
@@ -71,6 +73,11 @@ public class DifficultyTranslator : MonoBehaviour
                 return null;
                 break;
         }
+    }
+    public int DifficultyToGoldReward(LairDifficulty difficulty)
+    {
+        //return presets[(int)difficulty];
+        return goldRewards[(int)difficulty] + Random.Range(-5, 6);
     }
     //public GameObject DiffcultyToLevelPrefab(LairDifficulty difficulty)
     //{

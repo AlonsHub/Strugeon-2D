@@ -49,6 +49,8 @@ public class TileWalker : MonoBehaviour
         
         //Pathfinder.Instance.SetTargetAndSeekr(tgt, this);
         //Debug.Log(name + " Targeting ->" + tgt.name);
+
+
         path = PathMaker.Instance.FindPath(this, FloorGrid.Instance.GetTileByIndex(gridPos)); 
 
         if (path.Count <= 0)
