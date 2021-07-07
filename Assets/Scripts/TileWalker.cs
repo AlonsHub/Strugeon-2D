@@ -70,7 +70,7 @@ public class TileWalker : MonoBehaviour
     }
     public void StartNewPathWithRange(TileWalker tgt, int range)
     {
-
+        lookAtter.tgt = tgt.transform;
         //Pathfinder.Instance.SetTargetAndSeekr(tgt, this);
         //Debug.Log(name + " Targeting ->" + tgt.name);
         path = PathMaker.Instance.FindPath(this, tgt); // find path should be the method to take in Target and Seeker - they should never have been local properties
