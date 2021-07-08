@@ -36,13 +36,38 @@ public class LevelRef : MonoBehaviour
             Debug.LogError("now level so in " + levelIndex + " " + (LevelEnum)levelIndex);
     }
 
-    private void OnLevelWasLoaded(int level)
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    switch (level)
+    //    {
+    //        case 1:
+    //            Instantiate(currentLevel.levelData.levelPrefab);
+    //            break;
+    //        case 0:
+    //            SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
+    //            SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();
+    //            sb.StartCooldownCaller();
+    //            break;
+
+    //        default:
+    //            break;
+    //    }
+    //}
+
+    void OnEnable()
     {
-        switch (level)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // called second
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        switch (scene.buildIndex)
         {
             case 1:
                 Instantiate(currentLevel.levelData.levelPrefab);
                 break;
+
             case 0:
                 SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
                 SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();

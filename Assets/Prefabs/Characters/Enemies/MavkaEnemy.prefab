@@ -229,7 +229,6 @@ GameObject:
   m_Component:
   - component: {fileID: 83194850883325796}
   - component: {fileID: 6343527151208602390}
-  - component: {fileID: 5879660779024228580}
   - component: {fileID: 5357307063160447432}
   - component: {fileID: 7140961137990028506}
   - component: {fileID: 462218377637529745}
@@ -277,24 +276,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5879660779024228580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751047712026826206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b417810940ca24c817784abb818db7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 1
-  currentModifier: 1
-  actionVariations: []
-  isWeapon: 0
-  currentRangeInTiles: 1
 --- !u!114 &5357307063160447432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,10 +318,10 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 1
   feetItem: {fileID: 0}
-  range: 1
+  range: 10
   damage: 10
   arrowGfx: {fileID: 0}
-  isRanged: 0
+  isRanged: 1
   arrowSpawn: {fileID: 0}
   effectSpawn: {fileID: 0}
   targetMask:
@@ -373,6 +354,9 @@ MonoBehaviour:
   currentHP: 40
   maxHP: 40
   pawnName: Mavka
+  hasSA: 0
+  _currentCooldown: 0
+  saCooldown: 0
   targets:
   - {fileID: 462218377637529745}
   - {fileID: 0}
@@ -381,6 +365,7 @@ MonoBehaviour:
   tileWalker: {fileID: 5357307063160447432}
   anim: {fileID: 6343527151208602390}
   portraitSprite: {fileID: 21300000, guid: af0c42bf2133fb0428d04d2df93e2dbd, type: 3}
+  saSprite: {fileID: 0}
   effectIconParent: {fileID: 2616495925239223261}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}

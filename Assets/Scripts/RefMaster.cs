@@ -23,7 +23,10 @@ public class RefMaster : MonoBehaviour
     void Awake()
     {
         if (Instance != null && Instance != this)
+        {
             Destroy(gameObject);
+            return;
+        }
         else
             Instance = this;
 

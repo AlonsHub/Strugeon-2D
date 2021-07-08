@@ -173,7 +173,10 @@ public class WeaponItem : ActionItem
         }
 
         int weight = 0;
+
+        if(feetItem)
         feetItem.currentRangeInTiles = range;
+
         foreach(Pawn p in targets)
         {
             //int currentDistance = tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);

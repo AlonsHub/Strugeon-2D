@@ -138,7 +138,7 @@ public class TurnMaster : MonoBehaviour
             PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
         }
 
-        PartyMaster.Instance.currentMercParty.Clear();
+        //PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
         SceneManager.LoadScene(0);
