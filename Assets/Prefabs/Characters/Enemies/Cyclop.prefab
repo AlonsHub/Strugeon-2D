@@ -656,7 +656,7 @@ MonoBehaviour:
   currentHP: 40
   maxHP: 40
   pawnName: Cyclop
-  hasSA: 1
+  hasSAs: 0
   _currentCooldown: 0
   saCooldown: 0
   targets:
@@ -682,7 +682,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0}
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
-  myPrefab: {fileID: 6673386756113323264}
+  myPrefab: {fileID: 0}
   purpleMultiplier: 0
 --- !u!114 &533712136826642490
 MonoBehaviour:
@@ -787,6 +787,7 @@ MonoBehaviour:
     type: 3}
   weaponSpawn: {fileID: 989352517264580374}
   toHit: {fileID: 0}
+  saSprite: {fileID: 21300000, guid: 40bcda067cf9e37499d35cfd0fea83f6, type: 3}
 --- !u!1001 &2476157564038071604
 PrefabInstance:
   m_ObjectHideFlags: 0

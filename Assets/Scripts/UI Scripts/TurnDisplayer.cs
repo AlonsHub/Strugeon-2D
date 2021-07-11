@@ -36,15 +36,15 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         //    saImage.gameObject.SetActive(false);
         //}
         hasSA = pawn.hasSAs;
-        if (hasSA)
-        {
-            saImages = new Image[pawn.saItems.Length];
-            foreach (var saItem in pawn.saItems)
-            {
-                AddSAIcon(saItem);
-            }
+        //if (hasSA)
+        //{
+        //    saImages = new Image[pawn.saItems.Length];
+        //    foreach (var saItem in pawn.saItems)
+        //    {
+        //        AddSAIcon(saItem);
+        //    }
 
-        }
+        //}
         //nameDisplayer.text 
 
     }
@@ -58,6 +58,10 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
                 if(saItem.SA_Available())
                 {
                     AddSAIcon(saItem);
+                }
+                else
+                {
+                    RemoveSAIcon(saItem);
                 }
 
             }
@@ -83,6 +87,13 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     }
     public void RemoveSAIcon(SA_Item sai)
     {
+        if (!iconBySAItem.ContainsKey(sai))
+        {
+            Debug.Log("no SA_Icon of type: " + sai.SA_Name() + " to remove");
+            return;
+        }
+
+
         Destroy(iconBySAItem[sai].gameObject);
         iconBySAItem.Remove(sai);
     }
