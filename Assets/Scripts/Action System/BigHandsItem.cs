@@ -17,6 +17,10 @@ public class BigHandsItem : ActionItem, SA_Item
     /// These can be Rocks and Censer(?) atm
     /// 
     /// </summary>
+    /// 
+
+    [SerializeField]
+    Sprite saSprite;
 
     void Start()
     {
@@ -156,5 +160,20 @@ public class BigHandsItem : ActionItem, SA_Item
             }
         }
         return false;
+    }
+
+    public int CurrentCooldown()
+    {
+        return -1;
+    }
+
+    public void StartCooldown()
+    {
+        return;
+    }
+
+    public Sprite SA_Sprite()
+    {
+        return saSprite;
     }
 }

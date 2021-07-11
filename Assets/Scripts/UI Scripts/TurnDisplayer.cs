@@ -10,26 +10,39 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     //public TMP_Text nameDisplayer;
     //public TMP_Text initDisplayer;
     public Image pawnImage;
-    public Image saImage;
+    public Image[] saImages;
 
     //public TurnTaker myPawn;
     public Pawn myPawn;
 
     public bool hasSA = false;
 
+    public GameObject saIconPrefab;
+
     public void Init(Pawn pawn)
     {
         myPawn = pawn;
         pawnImage.sprite = pawn.PortraitSprite;
 
-        if(pawn.SASprite)
+        //if(pawn.SASprite)
+        //{
+        //    saImage.sprite = pawn.SASprite;
+        //    hasSA = true;
+        //}
+        //else
+        //{
+        //    saImage.gameObject.SetActive(false);
+        //}
+        hasSA = pawn.hasSAs;
+        if (hasSA)
         {
-            saImage.sprite = pawn.SASprite;
-            hasSA = true;
-        }
-        else
-        {
-            saImage.gameObject.SetActive(false);
+            saImages = new Image[pawn.saItems.Length];
+            foreach (var saItem in pawn.saItems)
+            {
+                Image img = Instantiate(saIconPrefab, gameObject.transform).GetComponent<Image>(); //maybe InChildren
+                img.sprite = saItem.SA_Sprite();
+            }
+
         }
         //nameDisplayer.text 
 
@@ -37,14 +50,23 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     public void SAIconCheck()
     {
-        if (myPawn.saItem != null)
+        if (myPawn.saItems != null)
         {
-            saImage.gameObject.SetActive(myPawn.saItem.SA_Available());
+            foreach (var saItem in myPawn.saItems)
+            {
+                saItem.SA_Available();
+            }
+            saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
         }
         else
         {
             saImage.gameObject.SetActive(myPawn._currentCooldown <= 0);
         }
+    }
+
+    void AddSAIcon()
+    {
+        //consider addind to a dict also
     }
 
     

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealItem : ActionItem
+public class HealItem : ActionItem, SA_Item
 {
     public int range;
     public int healAmount;
@@ -18,8 +18,10 @@ public class HealItem : ActionItem
 
     public List<Pawn> targets;
 
-    //public int _currentCooldown;
-    //public int saCooldown;
+    public int _currentCooldown;
+    public int saCooldown;
+    [SerializeField]
+    Sprite healSprite;
 
 
     public override void Awake()
@@ -146,5 +148,25 @@ public class HealItem : ActionItem
             //    actionVariations.Add(new ActionVariation(feetItem, p.gameObject, weight));
             //}
         }
+    }
+
+    public bool SA_Available()
+    {
+        return !(_currentCooldown > 0);
+    }
+
+    public int CurrentCooldown()
+    {
+        return _currentCooldown;
+    }
+
+    public void StartCooldown()
+    {
+        _currentCooldown = saCooldown;
+    }
+
+    public Sprite SA_Sprite()
+    {
+        return healSprite;
     }
 }

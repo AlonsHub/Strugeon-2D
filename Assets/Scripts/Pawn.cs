@@ -20,8 +20,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     bool actionDone;
 
     [SerializeField]
-    bool hasSA;
-    public SA_Item saItem;
+    public bool hasSAs;
+    public SA_Item[] saItems;
     
     public int _currentCooldown;
     
@@ -103,7 +103,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         actionItems = GetComponents<ActionItem>().ToList();
         audioSource = GetComponent<AudioSource>();
         worldSpaceHorizontalGroup = GetComponentInChildren<WorldSpaceHorizontalGroup>();
-        saItem = GetComponent<SA_Item>();
+        saItems = GetComponents<SA_Item>();
+
+        hasSAs = (saItems.Length != 0);
+        
 
         if (isEnemy)
         {
