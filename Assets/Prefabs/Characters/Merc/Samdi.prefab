@@ -100,7 +100,7 @@ MonoBehaviour:
   currentHP: 40
   maxHP: 40
   pawnName: Smadi
-  hasSA: 1
+  hasSAs: 0
   _currentCooldown: 0
   saCooldown: 2
   targets: []
@@ -122,7 +122,7 @@ MonoBehaviour:
   rotation: {x: 0, y: 0, z: 0}
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
-  myPrefab: {fileID: 567321096945766744}
+  myPrefab: {fileID: 0}
   purpleMultiplier: 0
 --- !u!114 &6641408886101910626
 MonoBehaviour:
@@ -226,6 +226,9 @@ MonoBehaviour:
   healEffect: {fileID: 6136953690358548763, guid: 1257efbdaad63b343af597321a45a5c9,
     type: 3}
   targets: []
+  _currentCooldown: 0
+  saCooldown: 2
+  healSprite: {fileID: 21300000, guid: 19e69438c697cb149b4d1a02a1936fdc, type: 3}
 --- !u!1 &1390594824389518320
 GameObject:
   m_ObjectHideFlags: 0

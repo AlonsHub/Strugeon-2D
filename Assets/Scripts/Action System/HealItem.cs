@@ -169,4 +169,9 @@ public class HealItem : ActionItem, SA_Item
     {
         return healSprite;
     }
+
+    public string SA_Name()
+    {
+        return "HealItem";
+    }
 }

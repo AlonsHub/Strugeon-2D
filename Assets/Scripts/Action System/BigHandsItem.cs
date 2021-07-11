@@ -176,4 +176,9 @@ public class BigHandsItem : ActionItem, SA_Item
     {
         return saSprite;
     }
+
+    public string SA_Name()
+    {
+        return "BigHandsItem";
+    }
 }

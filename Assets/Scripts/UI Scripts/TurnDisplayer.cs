@@ -55,7 +55,11 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         {
             foreach (var saItem in myPawn.saItems)
             {
-                saItem.SA_Available();
+                if(saItem.SA_Available())
+                {
+                    AddSAIcon(saItem);
+                }
+
             }
             //saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
         }
@@ -67,14 +71,20 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     void AddSAIcon(SA_Item sai)
     {
-        //consider addind to a dict also
+        if(iconBySAItem.ContainsKey(sai))
+        {
+            Debug.LogError("TurnDisplayer Already containts this SA_Item Icon: " + sai.SA_Name());
+            return;
+        }
+        
         Image img = Instantiate(saIconPrefab, gameObject.transform).GetComponent<Image>(); //maybe InChildren
         img.sprite = sai.SA_Sprite();
         iconBySAItem.Add(sai, img);
     }
     public void RemoveSAIcon(SA_Item sai)
     {
-        iconBySAItem[sai];
+        Destroy(iconBySAItem[sai].gameObject);
+        iconBySAItem.Remove(sai);
     }
 
 
