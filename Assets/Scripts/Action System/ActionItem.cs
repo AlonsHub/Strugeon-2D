@@ -20,10 +20,13 @@ public class ActionItem : MonoBehaviour
     public bool isWeapon; // CAN REMOVE!
     //public List<Character> relevantTargets; // An interesting idea, add actions to the pool per relevant target - regardless of the action type
     //but we should have all possible targets somere
+
+    List<BehaveVariable> behaveVariables;
     public virtual void Awake()
     {
         //actionVariations = new List<ActionVariation>();
         pawn = GetComponent<Pawn>();
+        behaveVariables = new List<BehaveVariable>();
     }
     public virtual void CalculateVariations()
     {
@@ -32,6 +35,19 @@ public class ActionItem : MonoBehaviour
     public virtual void Action(GameObject tgt)
     {
 
+    }
+
+    public void AddBehaveVariable(BehaveVariable behaveVariable)
+    {
+        behaveVariables.Add(behaveVariable);
+    }
+
+    public void CallBehaveVariables()
+    {
+        foreach (var item in behaveVariables)
+        {
+            item.ConditionallyApplyMod();
+        }
     }
 
 }

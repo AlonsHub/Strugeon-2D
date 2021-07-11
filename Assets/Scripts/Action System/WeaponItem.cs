@@ -199,5 +199,7 @@ public class WeaponItem : ActionItem
             }
         }
 
+        CallBehaveVariables();
+
     }
 }

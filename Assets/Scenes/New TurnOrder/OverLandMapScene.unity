@@ -1845,6 +1845,53 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 527385650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &537397248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 537397250}
+  - component: {fileID: 537397249}
+  m_Layer: 0
+  m_Name: MercPrefabber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &537397249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537397248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d377630e480454d8b2b90d851d65c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 567321096945766744, guid: ba7866e859ea5144da4e3258e0ebb137, type: 3}
+  - {fileID: 567321096945766744, guid: 5f31f74479c1c004eb5fb4e224b14943, type: 3}
+  - {fileID: 567321096945766744, guid: bcbf10428aa888f41af356676c0573be, type: 3}
+--- !u!4 &537397250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537397248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 982.04926, y: 500.7265, z: -146.875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550384863
 GameObject:
   m_ObjectHideFlags: 0

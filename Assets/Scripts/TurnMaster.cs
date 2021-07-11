@@ -134,8 +134,11 @@ public class TurnMaster : MonoBehaviour
             //Give reward
 
             Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
-
-            PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
+            foreach (var item in RefMaster.Instance.mercs)
+            {
+                PartyMaster.Instance.availableMercs.Add(item);
+            }
+            
         }
 
         //PartyMaster.Instance.currentMercParty.Clear();

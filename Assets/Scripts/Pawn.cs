@@ -72,6 +72,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public GameObject purpleTgt;
     #endregion
     // Vector2Int GetGridPos { get => tileWalker.gridPos; }
+
+    public Pawn myPrefab;
+
     public bool TurnDone { get => turnDone; set => turnDone = value; } //on a turntakers turn, turn order system waitsUntil TurnDone
 
 
