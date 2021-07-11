@@ -19,11 +19,13 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     public GameObject saIconPrefab;
 
+    Dictionary<SA_Item, Image> iconBySAItem;
+
     public void Init(Pawn pawn)
     {
         myPawn = pawn;
         pawnImage.sprite = pawn.PortraitSprite;
-
+        iconBySAItem = new Dictionary<SA_Item, Image>();
         //if(pawn.SASprite)
         //{
         //    saImage.sprite = pawn.SASprite;
@@ -39,8 +41,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             saImages = new Image[pawn.saItems.Length];
             foreach (var saItem in pawn.saItems)
             {
-                Image img = Instantiate(saIconPrefab, gameObject.transform).GetComponent<Image>(); //maybe InChildren
-                img.sprite = saItem.SA_Sprite();
+                AddSAIcon(saItem);
             }
 
         }
@@ -56,21 +57,28 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             {
                 saItem.SA_Available();
             }
-            saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
+            //saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
         }
-        else
-        {
-            saImage.gameObject.SetActive(myPawn._currentCooldown <= 0);
-        }
+        //else
+        //{
+        //    saImage.gameObject.SetActive(myPawn._currentCooldown <= 0);
+        //}
     }
 
-    void AddSAIcon()
+    void AddSAIcon(SA_Item sai)
     {
         //consider addind to a dict also
+        Image img = Instantiate(saIconPrefab, gameObject.transform).GetComponent<Image>(); //maybe InChildren
+        img.sprite = sai.SA_Sprite();
+        iconBySAItem.Add(sai, img);
+    }
+    public void RemoveSAIcon(SA_Item sai)
+    {
+        iconBySAItem[sai];
     }
 
-    
-    
+
+
 
     //public void OnPointerEnter(PointerEventData eventData)
     //{
