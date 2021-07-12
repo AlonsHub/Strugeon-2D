@@ -5,6 +5,7 @@ using UnityEngine;
 public class RefMaster : MonoBehaviour
 {
     public static RefMaster Instance;
+
     public List<Pawn> enemies;
     public List<Pawn> mercs;
 
