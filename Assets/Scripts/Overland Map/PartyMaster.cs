@@ -21,23 +21,23 @@ public class PartyMaster : MonoBehaviour
     }
 
 
-    public void SwapThisPartyIn(List<Pawn> newParty)
-    {
-        //if(currentMercParty.Count >0)
-        //{
-        //    foreach (var p in currentMercParty)
-        //    {
-        //        a
-        //    }
-        //}
-        currentMercParty.Clear();
-        availableMercs.AddRange(currentMercParty);
-        currentMercParty = newParty;
-        RefMaster.Instance.mercs = currentMercParty;
+    //public void SwapThisPartyIn(List<Pawn> newParty)
+    //{
+    //    //if(currentMercParty.Count >0)
+    //    //{
+    //    //    foreach (var p in currentMercParty)
+    //    //    {
+    //    //        a
+    //    //    }
+    //    //}
+    //    currentMercParty.Clear();
+    //    availableMercs.AddRange(currentMercParty);
+    //    currentMercParty = newParty;
+    //    RefMaster.Instance.mercs = currentMercParty;
 
-        foreach (Pawn p in newParty)
-        {
-            availableMercs.Remove(p);
-        }
-    }
+    //    foreach (Pawn p in newParty)
+    //    {
+    //        availableMercs.Remove(p);
+    //    }
+    //}
 }
