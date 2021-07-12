@@ -23,9 +23,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public bool hasSAs;
     public SA_Item[] saItems;
     
-    public int _currentCooldown;
+    //public int _currentCooldown;
     
-    public int saCooldown;
+    //public int saCooldown;
 
     public List<Pawn> targets;
 
@@ -79,7 +79,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
 
     public int Initiative { get => initiative; set => initiative = value + initiativeBonus; }
-    public int SA_CurrentCooldown { get => _currentCooldown; set => _currentCooldown = value; }
+    //public int SA_CurrentCooldown { get => _currentCooldown; set => _currentCooldown = value; }
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
     public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }

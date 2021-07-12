@@ -34,7 +34,7 @@ public class HealItem : ActionItem, SA_Item
     }
     private void Start()
     {
-        pawn._currentCooldown = 0;
+        _currentCooldown = 0;
 
         if (!pawn.isEnemy)
             targets = RefMaster.Instance.mercs;
@@ -44,8 +44,9 @@ public class HealItem : ActionItem, SA_Item
 
     public override void Action(GameObject tgt)
     {
-        
-        pawn._currentCooldown = pawn.saCooldown;
+
+        StartCooldown();
+
         Pawn tgtPawn = tgt.GetComponent<Pawn>();
         int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
 
@@ -99,10 +100,10 @@ public class HealItem : ActionItem, SA_Item
         actionVariations = new List<ActionVariation>();
 
 
-        if (targets.Count <= 0 || pawn._currentCooldown > 0)
+        if (targets.Count <= 0 || _currentCooldown > 0)
         {
-            pawn._currentCooldown--;
-            Debug.Log("No targest in List<Pawn> mercs or cooldown: " + pawn._currentCooldown.ToString());
+            _currentCooldown--;
+            Debug.Log("No targest in List<Pawn> mercs or cooldown: " + _currentCooldown.ToString());
             return;
         }
 
