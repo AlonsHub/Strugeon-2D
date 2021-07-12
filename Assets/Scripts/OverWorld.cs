@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class OverWorld : MonoBehaviour
 {
-    public List<Expedition> expeditions;
+    //public List<Expedition> expeditions;
     public GameObject expeditionPrefab; //this has, and is controlled by, an ExpeditionFollower
 
     public Transform spawTrans;
 
     public static OverWorld Instance;
 
-    public SiteButton homeSite;
+    //public Transform homeTrans;
     public SiteButton _selectedSite;
 
 
