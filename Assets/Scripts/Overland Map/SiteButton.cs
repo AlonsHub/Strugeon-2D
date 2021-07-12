@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using PathCreation;
 using UnityEngine.UI;
 
 public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
