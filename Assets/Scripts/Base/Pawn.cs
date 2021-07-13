@@ -13,6 +13,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     [SerializeField]
     private string pawnName; //character name (not GameObject name)!
 
+    public MercName mercName;
+
     int initiative;
     int initiativeBonus;
 
