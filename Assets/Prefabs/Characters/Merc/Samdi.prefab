@@ -100,9 +100,8 @@ MonoBehaviour:
   currentHP: 40
   maxHP: 40
   pawnName: Smadi
+  mercName: 0
   hasSAs: 0
-  _currentCooldown: 0
-  saCooldown: 2
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -164,7 +163,7 @@ MonoBehaviour:
   damage: 10
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
-  isRanged: 1
+  isRanged: 0
   arrowSpawn: {fileID: 5703858748983781231}
   effectSpawn: {fileID: 5703858748983781231}
   targetMask:

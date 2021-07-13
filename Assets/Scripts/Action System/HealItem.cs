@@ -108,46 +108,39 @@ public class HealItem : ActionItem, SA_Item
         }
 
 
-
         foreach (Pawn p in targets)
         {
             if (p.currentHP >= p.maxHP) // instead of setting weight to 0, we just don't add this ActionVariation
             {
                 continue;
             }
-
-             //int weight = (1 - (p.currentHP / p.maxHP)) * baseCost;
-             int weight = 10 * baseCost;
-            //bool isMe
-
+            int weight = 4;
 
             if (p.currentHP < p.maxHP / 2) //if under half max
             {
-                weight *= 8; //multiply again by 8
-                if(p.name == name)
+                if (p.name == name)
                 {
-                    weight += 2*(weight/8); //effectively makes it "times 10" [by adding (2/8 of 8x) we make it 10x]
+                    weight *= 10;
+                }
+                else
+                {
+                    weight *= 5;
+                }
+
+                if (p.currentHP < p.maxHP / 5) //if under 20%
+                {
+                    weight *= 10;
                 }
             }
 
-            //Adjacency check 
-
             int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
-            if (currentDistance <= range * 14) // one tile
+            if (currentDistance <= 14) // one tile
             {
-                weight *= 4;
-                actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-            }
-            else
-            {
-                actionVariations.Add(new ActionVariation(this , p.gameObject, weight, true));
+                weight *= 4; //if adjcent
             }
 
-            //else
-            //{
-            //    weight /= 2;
-            //    actionVariations.Add(new ActionVariation(feetItem, p.gameObject, weight));
-            //}
+            actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
+
         }
     }
 

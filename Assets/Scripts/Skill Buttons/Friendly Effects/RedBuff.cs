@@ -13,13 +13,17 @@ public class RedBuff : SkillButton
         WeaponItem weapon = targetPawn.GetComponent<WeaponItem>();
         if (weapon)
         {
+
+            if (weapon.hasRedBuff)
+                return;
+
             weapon.hasRedBuff = true;
             //targetPawn.ApplySpecialEffect(effectIcon, "Red"); //NEED THIS
+            targetPawn.AddEffectIcon(effectIcon, "redBuff");
+            BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
+
+            base.OnButtonClick();
         }
-        targetPawn.AddEffectIcon(effectIcon, "redBuff");
 
-        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
-
-        base.OnButtonClick();
     }
 }

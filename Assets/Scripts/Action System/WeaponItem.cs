@@ -172,30 +172,36 @@ public class WeaponItem : ActionItem
             return;// end match
         }
 
-        int weight = 0;
 
         if(feetItem)
         feetItem.currentRangeInTiles = range;
 
+        int weight = 4;
         foreach(Pawn p in targets)
         {
-            //int currentDistance = tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
-            
+
+            if(p.currentHP > 0)
+            {
+                weight *= 5;
+                if(p.currentHP <= p.maxHP/2.5f) //40%
+                {
+                    weight *= 10;
+                }
+            }
+
             if (currentDistance <= range *14)
             {
                 if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
                     continue;
                 }
-                weight = 20;
-                actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
+                weight *= 20;
             }
-            else
+
+            if (weight != 0)
             {
-                weight = 5;
                 actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-                //actionVariations.Add(new ActionVariation(feetItem, p.gameObject, weight));
             }
         }
 

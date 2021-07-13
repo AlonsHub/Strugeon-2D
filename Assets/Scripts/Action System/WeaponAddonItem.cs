@@ -51,28 +51,38 @@ public class WeaponAddonItem : ActionItem
 
     public override void CalculateVariations()
     {
+            actionVariations.Clear(); // INPORTANT and Better!
         if (attachedWeapon.hasEffect)
         {
-            //actionVariations = new List<ActionVariation>(); // INPORTANT!
-            actionVariations.Clear(); // INPORTANT and Better!
             return;
         }
 
         int currentDistance = attachedWeapon.pawn.tileWalker.currentNode.GetDistanceToTarget(RefMaster.Instance.censer.currentNode);
-        int weight = 0;
+        int weight = 4;
+
         if (currentDistance <= 14)
         {
-            weight = 15;
+            weight *= 10;
         }
-        else
+
+        if (pawn.targets.Count > 0)
         {
-            weight = 10;
+            bool areEnemiesCloser = false;
+            foreach (Pawn potentionalTgt in pawn.targets)
+            {
+                if (pawn.tileWalker.currentNode.GetDistanceToTarget(potentionalTgt.tileWalker.currentNode) <= currentDistance)
+                {
+                    areEnemiesCloser = true;
+                    break;
+                }
+            }
+
+            if (!areEnemiesCloser)
+            {
+                weight *= 5;
+            }
         }
+
         actionVariations.Add(new ActionVariation(this, RefMaster.Instance.censer.gameObject, weight));
-        //else
-        //{
-        //    weight = 10;
-        //    actionVariations.Add(new ActionVariation(attachedWeapon.feetItem, CharacterMaster.Instance.censer.gameObject, weight));
-        //}
     }
 }
