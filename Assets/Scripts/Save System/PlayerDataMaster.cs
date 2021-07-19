@@ -48,7 +48,7 @@ public class PlayerDataMaster : MonoBehaviour
         {
             currentPlayerData.playerName = defualtName;
         }
-        if(CheckForSaveFolderAndFile())
+        if(!CheckForSaveFolderAndFile())
         {
            File.Create(saveFolderPath + saveFileSuffix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
         }
