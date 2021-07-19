@@ -11,6 +11,7 @@ public class MercPrefabs : MonoBehaviour
 
     public List<GameObject> prefabs;
 
+
     Dictionary<MercName, GameObject> enumToPrefab;
 
     void Awake()
