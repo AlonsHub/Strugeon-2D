@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDataMaster : MonoBehaviour
 {
@@ -17,9 +18,6 @@ public class PlayerDataMaster : MonoBehaviour
     //string saveFileSuffix = "savedgame_"; 
     string saveFileSuffix; // + currentPlayerData.playerName. add this after load.
 
-
-
-
     List<string> saveNameList;
     [SerializeField]
     private string defualtName;
@@ -31,16 +29,15 @@ public class PlayerDataMaster : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        Instance = this;
 
-        saveFolderPath = Application.dataPath + "/Saves/";
+        saveFolderPath = Application.dataPath + "/Resources/Saves/";
         saveFileSuffix = "savedgame_";
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadPlayerData(PlayerData pd)
-    {
-        currentPlayerData = pd;
-    }
-    [ContextMenu("save")]
+    [ContextMenu("Save Me")]
     public void SaveDataToDisk()
     {
         //check folder and file
@@ -67,7 +64,6 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
-
     public void LoadDataFromDisk(string dirToSaveFile)
     {
         //check folder and file
@@ -94,7 +90,10 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
-
+    void LoadPlayerData(PlayerData pd)
+    {
+        currentPlayerData = pd;
+    }
     bool CheckForSaveFolderAndFile()
     {
         if(!Directory.Exists(saveFolderPath))
@@ -157,8 +156,31 @@ public class PlayerDataMaster : MonoBehaviour
         return confirmedSaveFileNames;
     }
 
-    void DisplaySaveFiles()
+    void DisplaySaveFiles(List<string> confirmedFileNames)
     {
+        //load up
+    }
 
+    public PlayerData[] GetPlayerDataFromSaveList()
+    {
+        List<string> confirmedList = GetConfirmedSaveFileNames();
+
+        PlayerData[] playerDatas = new PlayerData[confirmedList.Count];
+        for (int i = 0; i < confirmedList.Count; i++)
+        {
+            string s = File.ReadAllText(confirmedList[i]);
+
+            //if (s.Length > 2)
+            //{
+            PlayerData p = JsonUtility.FromJson<PlayerData>(s);
+
+            playerDatas[i] = p;
+            //}
+
+
+            //str.Close();
+        }
+
+        return playerDatas;
     }
 }
