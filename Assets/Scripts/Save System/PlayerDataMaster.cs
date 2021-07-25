@@ -145,7 +145,7 @@ public class PlayerDataMaster : MonoBehaviour
         //List<string> confirmedSaveFileNames = new List<string>();
 
         List<string> confirmedSaveFileNames = files.ToList(); //save names to a new list 
-        confirmedSaveFileNames.RemoveAll(x => !x.Contains(saveFileSuffix)); //removes all entries which do not contain "savegame_" in their filename
+        confirmedSaveFileNames.RemoveAll(x => !x.Contains(saveFileSuffix) || x.Contains("meta")); //removes all entries which do not contain "savegame_" in their filename
 
         if(confirmedSaveFileNames.Count == 0)
         {

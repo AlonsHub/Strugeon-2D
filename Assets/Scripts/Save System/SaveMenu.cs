@@ -19,12 +19,13 @@ public class SaveMenu : MonoBehaviour
         if(PlayerDataMaster.Instance != null)
         {
             //Give me all saves please
-        int saveCount = 0;
+            int saveCount = 0;
             PlayerData[] loadedData = PlayerDataMaster.Instance.GetPlayerDataFromSaveList();
 
             foreach (var item in loadedData)
             {
                 saveFileDisplayers[saveCount].Init(item);
+                saveCount++;
             }
         }
     }
