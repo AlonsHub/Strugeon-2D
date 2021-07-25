@@ -20,7 +20,7 @@ public class PlayerDataMaster : MonoBehaviour
 
     List<string> saveNameList;
     [SerializeField]
-    private string defualtName;
+    private string defualtName = "Psion";
 
     private void Awake()
     {
@@ -93,6 +93,10 @@ public class PlayerDataMaster : MonoBehaviour
     void LoadPlayerData(PlayerData pd)
     {
         currentPlayerData = pd;
+        
+        //Load avail mercs into the ref master and the party master
+        // dont forget to check
+
     }
     bool CheckForSaveFolderAndFile()
     {
@@ -110,20 +114,12 @@ public class PlayerDataMaster : MonoBehaviour
         if (files.Length == 0) //must be the case if folder is new
         {
             //File.Create(saveFolderPath + saveFileSuffix + currentPlayerData.playerName);
+
+
             Debug.Log("no save files found");
             return false;
         }
 
-        // Asserted: folder exists, and it contains files
-
-        //foreach (string s in files)
-        //{
-        //    if(s.Contains(saveFileSuffix))
-        //    {
-        //        //display saved profiles
-        //        saveNameList.Add(s);
-        //    }
-        //}
         return true;
     }
 
@@ -170,17 +166,24 @@ public class PlayerDataMaster : MonoBehaviour
         {
             string s = File.ReadAllText(confirmedList[i]);
 
-            //if (s.Length > 2)
-            //{
             PlayerData p = JsonUtility.FromJson<PlayerData>(s);
 
             playerDatas[i] = p;
-            //}
-
-
-            //str.Close();
         }
 
         return playerDatas;
+    }
+
+
+    public void CreateNewSave(string newPlayerName)
+    {
+        PlayerData newPD = new PlayerData();
+
+        newPD.playerName = newPlayerName;
+
+        //Get starting mercs
+        newPD.availableMercs.AddRange(GameStats.startMercNames);
+        newPD.gold = GameStats.startingGold;
+        //squads should be empty
     }
 }
