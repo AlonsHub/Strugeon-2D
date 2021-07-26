@@ -174,7 +174,6 @@ public class PlayerDataMaster : MonoBehaviour
         return playerDatas;
     }
 
-
     public void CreateNewSave(string newPlayerName)
     {
         PlayerData newPD = new PlayerData();
@@ -182,8 +181,11 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.playerName = newPlayerName;
 
         //Get starting mercs
+        newPD.availableMercs = new List<MercName>();
         newPD.availableMercs.AddRange(GameStats.startMercNames);
         newPD.gold = GameStats.startingGold;
         //squads should be empty
+
+        SaveDataToDisk();
     }
 }
