@@ -94,6 +94,12 @@ public class PlayerDataMaster : MonoBehaviour
     {
         currentPlayerData = pd;
         
+        //PARTY REF?
+
+        //REFMASTER
+
+        //INVENTORY
+
         //Load avail mercs into the ref master and the party master
         // dont forget to check
 
@@ -186,6 +192,21 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.gold = GameStats.startingGold;
         //squads should be empty
 
+        LoadPlayerData(newPD);
+
         SaveDataToDisk();
+    }
+
+    public void GrabAndSaveData()
+    {
+        List<MercName> newNames = new List<MercName>();
+
+        foreach (var merc in PartyMaster.Instance.availableMercs)
+        {
+            newNames.Add(merc.mercName);
+        }
+        currentPlayerData.availableMercs.AddRange(newNames);
+
+        CreateNewSave(currentPlayerData.playerName);
     }
 }

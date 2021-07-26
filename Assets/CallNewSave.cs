@@ -7,8 +7,10 @@ public class CallNewSave : MonoBehaviour
 {
     public TMP_InputField inputField;
 
-    public void Call()
+    public void CallSaveAndStartGame()
     {
         PlayerDataMaster.Instance.CreateNewSave(inputField.text);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1); // 1 - index of "Overworld_Map" scene
     }
 }

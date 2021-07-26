@@ -31,7 +31,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
         RefMaster.Instance.selectionScreenDisplayer = this;
 
         partyMercs = PartyMaster.Instance.currentMercParty;
-        availableMercs = PartyMaster.Instance.availableMercs;
+        //availableMercs = PartyMaster.Instance.availableMercs;
         gameObject.SetActive(false);
     }
 
@@ -42,15 +42,16 @@ public class SelectionScreenDisplayer : MonoBehaviour
     public void RefreshMercDisplay()
     {
         int count1 = 0;
-        foreach (var merc in availableMercs)
+        //availableMercSlots = new MercSlot[availableMercs.Count];
+
+        for (int i = 0; i < availableMercSlots.Length; i++)
+        {
+            availableMercSlots[i].ClearSlot();
+        }
+        foreach (var merc in PartyMaster.Instance.availableMercs)
         {
             availableMercSlots[count1].AddMerc(merc);
             count1++;
-        }
-
-        for (int i = count1; i < availableMercSlots.Length; i++)
-        {
-            availableMercSlots[i].ClearSlot();
         }
 
         int count2 = 0;

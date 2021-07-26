@@ -20,6 +20,28 @@ public class PartyMaster : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void Start()
+    {
+        //LATE START INSTEAD?
+        LoadUpAvailableMercs();
+    }
+
+    public void LoadUpAvailableMercs() //on the loaded party
+    {
+        availableMercs = new List<Pawn>();
+        foreach (MercName mercName in PlayerDataMaster.Instance.currentPlayerData.availableMercs)
+        {
+            availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        }
+    }
+    public void LoadUpAvailableMercs(List<MercName> mercNames)
+    {
+        availableMercs = new List<Pawn>();
+        foreach (MercName mercName in mercNames)
+        {
+            availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        }
+    }
 
     //public void SwapThisPartyIn(List<Pawn> newParty)
     //{

@@ -64,11 +64,11 @@ public class LevelRef : MonoBehaviour
     {
         switch (scene.buildIndex)
         {
-            case 1:
+            case 2:
                 Instantiate(currentLevel.levelData.levelPrefab);
                 break;
 
-            case 0:
+            case 1:
                 SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
                 SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();
                 sb.StartCooldownCaller();

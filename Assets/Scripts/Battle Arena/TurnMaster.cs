@@ -136,15 +136,15 @@ public class TurnMaster : MonoBehaviour
             Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
             foreach (var item in RefMaster.Instance.mercs)
             {
-                PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPrefab(item.mercName).GetComponent<Pawn>());
+                PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
             }
-            
+            PlayerDataMaster.Instance.GrabAndSaveData();
         }
 
         //PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     IEnumerator TurnSequence()
     {
