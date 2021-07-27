@@ -16,7 +16,7 @@ public class PlayerDataMaster : MonoBehaviour
     //string saveFolderPath = Application.dataPath + "Saves/";
     string saveFolderPath;
     //string saveFileSuffix = "savedgame_"; 
-    string saveFileSuffix; // + currentPlayerData.playerName. add this after load.
+    string saveFilePrefix; // + currentPlayerData.playerName. add this after load.
 
     List<string> saveNameList;
     [SerializeField]
@@ -32,7 +32,7 @@ public class PlayerDataMaster : MonoBehaviour
         Instance = this;
 
         saveFolderPath = Application.dataPath + "/Resources/Saves/";
-        saveFileSuffix = "savedgame_";
+        saveFilePrefix = "savedgame_";
 
         DontDestroyOnLoad(gameObject);
     }
@@ -45,9 +45,9 @@ public class PlayerDataMaster : MonoBehaviour
         {
             currentPlayerData.playerName = defualtName;
         }
-        if(!CheckForSaveFolderAndFile())
+        if(!CheckForSaveFolder())
         {
-           File.Create(saveFolderPath + saveFileSuffix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
+           File.Create(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
         }
 
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
@@ -56,7 +56,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         string pdJsonString = JsonUtility.ToJson(currentPlayerData);
 
-        File.WriteAllText(saveFolderPath + saveFileSuffix + currentPlayerData.playerName + ".txt", pdJsonString);
+        File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", pdJsonString);
 
         //consider overwriting 
 
@@ -67,7 +67,7 @@ public class PlayerDataMaster : MonoBehaviour
     public void LoadDataFromDisk(string dirToSaveFile)
     {
         //check folder and file
-        if (!CheckForSaveFolderAndFile())
+        if (!CheckForSaveFolder())
         {
             Debug.LogError("no such save-file/folder");
             //return;
@@ -75,7 +75,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
-        string contents = File.ReadAllText(saveFolderPath + saveFileSuffix);
+        string contents = File.ReadAllText(saveFolderPath + saveFilePrefix);
 
         PlayerData pd = JsonUtility.FromJson<PlayerData>(contents);
 
@@ -104,7 +104,7 @@ public class PlayerDataMaster : MonoBehaviour
         // dont forget to check
 
     }
-    bool CheckForSaveFolderAndFile()
+    bool CheckForSaveFolder() //ensures that a save folder exists and there are files in it to load
     {
         if(!Directory.Exists(saveFolderPath))
         {
@@ -118,6 +118,31 @@ public class PlayerDataMaster : MonoBehaviour
         string[] files = Directory.GetFiles(saveFolderPath);
 
         if (files.Length == 0) //must be the case if folder is new
+        {
+            //File.Create(saveFolderPath + saveFileSuffix + currentPlayerData.playerName);
+
+
+            Debug.Log("no save files found");
+            return false;
+        }
+
+        return true;
+    }
+    bool CheckForSaveFolder(out string[] containedFiles) //ensures that a save folder exists and there are files in it to load
+    {
+        containedFiles = new string[]{""};
+        if (!Directory.Exists(saveFolderPath))
+        {
+            Debug.LogWarning("No folder found in save-folder-path");
+
+            Directory.CreateDirectory(saveFolderPath);
+
+            Debug.LogWarning("Save folder created at: " + saveFolderPath);
+        }
+
+        containedFiles = Directory.GetFiles(saveFolderPath);
+
+        if (containedFiles.Length == 0) //must be the case if folder is new
         {
             //File.Create(saveFolderPath + saveFileSuffix + currentPlayerData.playerName);
 
@@ -147,7 +172,7 @@ public class PlayerDataMaster : MonoBehaviour
         //List<string> confirmedSaveFileNames = new List<string>();
 
         List<string> confirmedSaveFileNames = files.ToList(); //save names to a new list 
-        confirmedSaveFileNames.RemoveAll(x => !x.Contains(saveFileSuffix) || x.Contains("meta")); //removes all entries which do not contain "savegame_" in their filename
+        confirmedSaveFileNames.RemoveAll(x => !x.Contains(saveFilePrefix) || x.Contains("meta")); //removes all entries which do not contain "savegame_" in their filename
 
         if(confirmedSaveFileNames.Count == 0)
         {
@@ -208,5 +233,26 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.availableMercs.AddRange(newNames);
 
         CreateNewSave(currentPlayerData.playerName);
+    }
+
+
+    public string SaveExistsCheck(string playerName)
+    {
+        string[] files;
+        if (!CheckForSaveFolder(out files))
+            return null; //false
+
+        //folder has files in it, and will be "outted" by CheckForSaveFolder(out files), 
+        //which gets its files from CheckSaveFolder(out string[] files)
+
+        foreach (string s in files)
+        {
+            if (s.Contains(saveFilePrefix + currentPlayerData.playerName))
+            {
+                return s;
+            }
+        }
+
+        return null; //false
     }
 }

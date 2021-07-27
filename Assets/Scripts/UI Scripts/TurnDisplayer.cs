@@ -77,7 +77,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     {
         if(iconBySAItem.ContainsKey(sai))
         {
-            Debug.LogError("TurnDisplayer Already containts this SA_Item Icon: " + sai.SA_Name());
+            //Debug.LogError("TurnDisplayer Already containts this SA_Item Icon: " + sai.SA_Name());
             return;
         }
         
@@ -89,11 +89,9 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     {
         if (!iconBySAItem.ContainsKey(sai))
         {
-            Debug.Log("no SA_Icon of type: " + sai.SA_Name() + " to remove");
+            Debug.LogWarning("no SA_Icon of type: " + sai.SA_Name() + " to remove");
             return;
         }
-
-
         Destroy(iconBySAItem[sai].gameObject);
         iconBySAItem.Remove(sai);
     }
