@@ -45,10 +45,17 @@ public class PlayerDataMaster : MonoBehaviour
         {
             currentPlayerData.playerName = defualtName;
         }
-        if(!CheckForSaveFolder())
+        if(!CheckForSaveFolder()) //creates folder if there is none - and returns false if (folder doesn't exists) (files don't exist)
         {
            File.Create(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
         }
+        //else
+        //{
+        //    if (SaveExistsCheck(currentPlayerData.playerName) != null)
+        //    {
+        //        File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", );
+        //    }
+        //}
 
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
@@ -64,7 +71,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
-    public void LoadDataFromDisk(string dirToSaveFile)
+    public void LoadDataFromDisk(string saveName)
     {
         //check folder and file
         if (!CheckForSaveFolder())
@@ -75,7 +82,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
-        string contents = File.ReadAllText(saveFolderPath + saveFilePrefix);
+        string contents = File.ReadAllText(saveFolderPath + saveFilePrefix + saveName + ".txt");
 
         PlayerData pd = JsonUtility.FromJson<PlayerData>(contents);
 
@@ -125,6 +132,9 @@ public class PlayerDataMaster : MonoBehaviour
             Debug.Log("no save files found");
             return false;
         }
+        
+        //not empty, now - is there a save file for this player
+
 
         return true;
     }
@@ -183,10 +193,6 @@ public class PlayerDataMaster : MonoBehaviour
         return confirmedSaveFileNames;
     }
 
-    void DisplaySaveFiles(List<string> confirmedFileNames)
-    {
-        //load up
-    }
 
     public PlayerData[] GetPlayerDataFromSaveList()
     {
@@ -215,6 +221,8 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.availableMercs = new List<MercName>();
         newPD.availableMercs.AddRange(GameStats.startMercNames);
         newPD.gold = GameStats.startingGold;
+
+        
         //squads should be empty
 
         LoadPlayerData(newPD);
@@ -230,9 +238,11 @@ public class PlayerDataMaster : MonoBehaviour
         {
             newNames.Add(merc.mercName);
         }
-        currentPlayerData.availableMercs.AddRange(newNames);
+        currentPlayerData.availableMercs = newNames;
 
-        CreateNewSave(currentPlayerData.playerName);
+
+        //CreateNewSave(currentPlayerData.playerName);
+        SaveDataToDisk();
     }
 
 

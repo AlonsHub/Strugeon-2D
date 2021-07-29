@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class LoadSaveButton : MonoBehaviour
 {
     public PlayerData playerDataToLoad;
-
+    //public string saveDir;
 
     private void Start()
     {
@@ -16,6 +16,6 @@ public class LoadSaveButton : MonoBehaviour
 
     public void LoadMe()
     {
-
+        PlayerDataMaster.Instance.LoadDataFromDisk(playerDataToLoad.playerName);
     }
 }

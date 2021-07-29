@@ -10,5 +10,6 @@ public class GoldUpdater : MonoBehaviour
     public void Start()
     {
         goldDisplater.text = Inventory.Instance.Gold.ToString();
+        //PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
     }
 }

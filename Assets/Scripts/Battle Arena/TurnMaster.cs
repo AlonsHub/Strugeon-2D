@@ -37,10 +37,18 @@ public class TurnMaster : MonoBehaviour
     [SerializeField]
     private float endGameCheckRate = 2f;
 
+
+    //Logged stuff:
+    public List<MercName> theDead;
+    public List<MercName> theCowardly;
+
     private void Awake()
     {
         Instance = this;
         turnPlates = new List<Transform>();
+
+        theDead = new List<MercName>();
+        theCowardly = new List<MercName>();
     }
 
 
@@ -132,20 +140,34 @@ public class TurnMaster : MonoBehaviour
         if (RefMaster.Instance.mercs.Count != 0)
         {
             //Give reward
-
             Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
-            foreach (var item in RefMaster.Instance.mercs)
+            //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER!
+            PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
+            //PLUMBING
+
+            foreach (var item in RefMaster.Instance.mercs) //remaining
             {
                 PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
             }
-            PlayerDataMaster.Instance.GrabAndSaveData();
+            foreach (var item in theDead)
+            {
+                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
+            }
         }
 
+        PlayerDataMaster.Instance.GrabAndSaveData();
         //PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
+
+        Invoke("LoadLater", 5);
+    }
+
+    void LoadLater()
+    {
         SceneManager.LoadScene(1);
     }
+
     IEnumerator TurnSequence()
     {
         while (isGameRunning)

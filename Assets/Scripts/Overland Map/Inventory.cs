@@ -10,7 +10,9 @@ public class Inventory : MonoBehaviour
     private int _gold;
     [SerializeField]
     TMP_Text goldDisplayer;
-    public int Gold {get; set;}
+    public int Gold {get => PlayerDataMaster.Instance.currentPlayerData.gold; 
+                     set => PlayerDataMaster.Instance.currentPlayerData.gold = value; }
+
 
     void Awake()
     {

@@ -250,11 +250,18 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
     IEnumerator DelayedDeath()
     {
+        //simplify Death, YOU IDIOT!
+
+
+
+
         yield return new WaitForSeconds(.1f);
         if (!isEnemy)
         {
             //RefMaster.Instance.mercs.Remove(RefMaster.Instance.mercs.Where(x => x.name == name).SingleOrDefault()); //not ideal
             RefMaster.Instance.mercs.Remove(this); //not ideal
+            PartyMaster.Instance.availableMercs.Remove(this);
+            TurnMaster.Instance.theDead.Add(mercName);
         }
         else
         {
