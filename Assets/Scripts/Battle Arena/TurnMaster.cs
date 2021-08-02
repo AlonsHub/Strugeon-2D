@@ -147,8 +147,10 @@ public class TurnMaster : MonoBehaviour
 
             foreach (var item in RefMaster.Instance.mercs) //remaining
             {
+                //if(!PartyMaster.Instance.availableMercs.Contains)
                 PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
             }
+
             foreach (var item in theDead)
             {
                 PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
@@ -156,11 +158,11 @@ public class TurnMaster : MonoBehaviour
         }
 
         PlayerDataMaster.Instance.GrabAndSaveData();
-        //PartyMaster.Instance.currentMercParty.Clear();
+        PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
 
-        Invoke("LoadLater", 5);
+        Invoke("LoadLater", 1);
     }
 
     void LoadLater()

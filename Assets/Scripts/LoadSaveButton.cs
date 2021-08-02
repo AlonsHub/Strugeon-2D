@@ -17,5 +17,11 @@ public class LoadSaveButton : MonoBehaviour
     public void LoadMe()
     {
         PlayerDataMaster.Instance.LoadDataFromDisk(playerDataToLoad.playerName);
+        Invoke("SlowSceneChange", 1);
+    }
+
+    void SlowSceneChange()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }

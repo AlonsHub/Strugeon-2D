@@ -229,23 +229,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public override void Die()
     {
         StartCoroutine("DelayedDeath");
+    }
+    
+    public void Escape()
+    {
 
-        //  TurnMaster.Instance.RemoveTurnTaker(this);
-        //if (!isEnemy)
-        //{
-        //    //RefMaster.Instance.mercs.Remove(RefMaster.Instance.mercs.Where(x => x.name == name).SingleOrDefault()); //not ideal
-        //    RefMaster.Instance.mercs.Remove(this); //not ideal
-        //}
-        //else
-        //{
-        //    //RefMaster.Instance.enemies.Remove(RefMaster.Instance.enemies.Where(x => x.name == name).SingleOrDefault()); //not ideal
-        //    RefMaster.Instance.enemies.Remove(this); //not ideal
-        //}
-
-        //TurnMaster.Instance.turnTakers.Remove(this);
-        ////PartyMaster.Instance.currentMercParty.Remove(PartyMaster.Instance.currentMercParty.Where(x => x.name == name).SingleOrDefault());
-        //StopAllCoroutines();
-        //Destroy(gameObject, .01f);
     }
 
     IEnumerator DelayedDeath()
@@ -253,7 +241,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         //simplify Death, YOU IDIOT!
 
 
-
+        BattleLogVerticalGroup.Instance.AddEntry(pawnName, ActionSymbol.Death);
 
         yield return new WaitForSeconds(.1f);
         if (!isEnemy)

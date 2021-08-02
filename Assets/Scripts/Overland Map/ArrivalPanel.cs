@@ -23,6 +23,8 @@ public class ArrivalPanel : MonoBehaviour
 
     public void SetMe(List<Pawn> pawns)
     {
+        mercs = pawns;
+
         gameObject.SetActive(true); //turns itself on after ______(?)
         for (int i = 0; i < pawns.Count; i++)
         {

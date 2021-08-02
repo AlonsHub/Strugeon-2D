@@ -19,6 +19,7 @@ public class BatllelogEntry : MonoBehaviour
     
     public string actionDescriptionText; //to be accessed by the displayer
 
+
     public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
     {
         actingPawnNameDisplayer.text = "Cast";
@@ -39,7 +40,15 @@ public class BatllelogEntry : MonoBehaviour
     //    passivePawnNameDisplayer.color = colour;
     //    numberDisplayer.gameObject.SetActive(false);
     //}
+    public void Init(string actingName, Sprite actionSprite)
+    {
+        actingPawnNameDisplayer.text = actingName;
+        actionImage.sprite = actionSprite;
+        actionImage.SetNativeSize();
+        //passivePawnNameDisplayer.text = passiveName;
 
+        numberDisplayer.gameObject.SetActive(false);
+    }
     public void Init(string actingName, Sprite actionSprite, string passiveName)
     {
         actingPawnNameDisplayer.text = actingName;

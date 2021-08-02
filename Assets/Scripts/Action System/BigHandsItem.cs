@@ -32,13 +32,18 @@ public class BigHandsItem : ActionItem, SA_Item
     
     public override void Action(GameObject tgt)
     {
+        //return if no hopeful targets exist for some reason
+        if (RefMaster.Instance.mercs.Count == 0)
+            return;
+
+
         //tgt is the tile on which the obstacle is sitting
         FloorTile ft = tgt.GetComponent<FloorTile>();
         ft.isEmpty = true;
         Destroy(ft.myOccupant);
         ft.myOccupant = null;
 
-        
+
 
         //tgt.transform.GetChild(1).gameObject.SetActive(false);// destroy?
 

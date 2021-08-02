@@ -23,6 +23,11 @@ public class ArenaMaster : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        Invoke("LoadNewLevel", startDelayAmount);
+    }
+
     //public void LoadNewLevel(LevelData newLevelData)
     public void LoadNewLevel()
     {
