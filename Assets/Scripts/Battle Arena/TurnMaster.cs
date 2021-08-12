@@ -154,6 +154,8 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theDead)
             {
                 PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
+                Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).First();
+                PartyMaster.Instance.availableMercs.Remove(MercPrefabs.Instance.EnumToPawnPrefab(item));
             }
         }
 

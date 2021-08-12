@@ -29,10 +29,17 @@ public class SelectionScreenDisplayer : MonoBehaviour
     private void Start()
     {
         RefMaster.Instance.selectionScreenDisplayer = this;
-
+        
+        if(PartyMaster.Instance.currentMercParty != null)
         partyMercs = PartyMaster.Instance.currentMercParty;
         //availableMercs = PartyMaster.Instance.availableMercs;
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if (PartyMaster.Instance.currentMercParty != null)
+            partyMercs = PartyMaster.Instance.currentMercParty;
     }
 
     public  void MercOnEnable()
