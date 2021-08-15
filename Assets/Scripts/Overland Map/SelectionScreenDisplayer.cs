@@ -38,6 +38,14 @@ public class SelectionScreenDisplayer : MonoBehaviour
 
     private void OnEnable()
     {
+        //if (PartyMaster.Instance.currentMercParty != null)
+        //    partyMercs = PartyMaster.Instance.currentMercParty;
+        StartCoroutine("LateOnEnalbe");
+    }
+
+    IEnumerator LateOnEnalbe()
+    {
+        yield return new WaitForSeconds(.1f);
         if (PartyMaster.Instance.currentMercParty != null)
             partyMercs = PartyMaster.Instance.currentMercParty;
     }

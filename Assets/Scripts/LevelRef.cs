@@ -14,7 +14,7 @@ public class LevelRef : MonoBehaviour
     public List<LevelSO> levelSOs;
 
     //public SiteButton siteToCooldown;
-    public string siteName; //WORK AROUND!
+    public string visitedSiteName; //WORK AROUND!
 
     private void Awake()
     {
@@ -69,8 +69,12 @@ public class LevelRef : MonoBehaviour
                 break;
 
             case 1:
+                if(visitedSiteName == null)
+                {
+                    break;
+                }
                 SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
-                SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();
+                SiteButton sb = siteButtons.Where(x => x.name == visitedSiteName).FirstOrDefault();
                 sb.StartCooldownCaller();
                 break;
 

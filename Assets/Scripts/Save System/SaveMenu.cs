@@ -26,6 +26,9 @@ public class SaveMenu : MonoBehaviour
             {
                 saveFileDisplayers[saveCount].Init(item);
                 saveCount++;
+
+                if(saveCount >= saveFileDisplayers.Length)
+                    break;
             }
         }
     }

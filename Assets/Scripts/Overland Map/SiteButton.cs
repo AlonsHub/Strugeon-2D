@@ -116,7 +116,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         //LevelRef.Instance.siteToCooldown = this;
-        LevelRef.Instance.siteName = name;
+        LevelRef.Instance.visitedSiteName = name;
 
         displayer.Reposition(transform);
         //displayer.EnableAndSet(level);
