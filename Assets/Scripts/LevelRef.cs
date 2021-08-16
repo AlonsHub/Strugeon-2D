@@ -69,7 +69,7 @@ public class LevelRef : MonoBehaviour
                 break;
 
             case 1:
-                if(visitedSiteName == null)
+                if(visitedSiteName == null || visitedSiteName == "")
                 {
                     break;
                 }

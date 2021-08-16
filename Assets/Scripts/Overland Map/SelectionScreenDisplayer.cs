@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class SelectionScreenDisplayer : MonoBehaviour
 {
@@ -18,7 +19,12 @@ public class SelectionScreenDisplayer : MonoBehaviour
     public MercSlot[] partyMercSlots; // Set in inspector
 
     public GameObject levelInfoParent; //to Enable/Disable
+
     public TMP_Text dwellerNames; // string separate strings together 
+    //public Sprite[] dwellerPortraits; 
+    public GameObject dwellerPortraitPrefab; 
+    public Transform dwellerPortraitGroupRoot; 
+
     public TMP_Text lootText; // string separate strings together 
     public TMP_Text goldText; 
     public TMP_Text durationText;
@@ -28,6 +34,12 @@ public class SelectionScreenDisplayer : MonoBehaviour
 
     private void Start()
     {
+        if(RefMaster.Instance != null && RefMaster.Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         RefMaster.Instance.selectionScreenDisplayer = this;
         
         if(PartyMaster.Instance.currentMercParty != null)
@@ -106,10 +118,13 @@ public class SelectionScreenDisplayer : MonoBehaviour
         gameObject.SetActive(true);
         levelData = levelToDisplay.levelData;
         dwellerNames.text = "";
+        //dwellerPortraits = new Sprite[levelData.enemies.Count]; //useless? -- yup
 
         foreach (Pawn enemy in levelData.enemies)
         {
             dwellerNames.text += enemy.name + ", ";
+            GameObject go = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot);
+            go.GetComponent<Image>().sprite = enemy.PortraitSprite;
         }
         dwellerNames.text = dwellerNames.text.Remove(dwellerNames.text.Length - 2); //kill the last two chars ", "
         lootText.text = "";

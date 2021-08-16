@@ -104,7 +104,10 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (myDataDisplay)
+        {
             myDataDisplay.SetActive(true);
+            myDataDisplay.GetComponent<SiteDisplayer>().SetMe(this);
+        }
     }
     public void OnClick()
     {
@@ -118,7 +121,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //LevelRef.Instance.siteToCooldown = this;
         LevelRef.Instance.visitedSiteName = name;
 
-        displayer.Reposition(transform);
+        //displayer.Reposition(transform);
         //displayer.EnableAndSet(level);
         int rndDifficulty = Random.Range(0, 3);
 

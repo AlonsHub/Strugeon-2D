@@ -17,13 +17,16 @@ public struct LevelData
     public GameObject levelPrefab; //currently holds enemies
     public int goldReward;
 
-    public void SetLevelData(LairDifficulty difficulty)
+    public LairDifficulty difficulty;
+
+    public void SetLevelData(LairDifficulty newDifficulty)
     {
         //enemies.Clear();
         //rewards.Clear();
-        enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(difficulty);
-        rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(difficulty);
-        goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(difficulty);
+        difficulty = newDifficulty;
+        enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty);
+        rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(newDifficulty);
+        goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty);
         //levelPrefab = DifficultyTranslator.Instance.DiffcultyToLevelPrefab(difficulty);
 
 
