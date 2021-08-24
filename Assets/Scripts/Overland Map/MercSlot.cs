@@ -8,7 +8,7 @@ public class MercSlot : MonoBehaviour
 {
     public Image img;
     public Sprite defaultSprite;
-    public TMP_Text nameText;
+    //public TMP_Text nameText;
     public bool isOccupied = false;
     public bool isPartySlot;
     public Pawn pawn;
@@ -18,7 +18,7 @@ public class MercSlot : MonoBehaviour
         pawn = p;
         img.sprite = pawn.PortraitSprite;
         isOccupied = true;
-        nameText.text = p.Name;
+        //nameText.text = p.Name;
         //if(isPartySlot)
         //{
         //    RefMaster.Instance.selectionScreenDisplayer.availableMercs.Add(pawn);
@@ -72,7 +72,7 @@ public class MercSlot : MonoBehaviour
         pawn = null;
         img.sprite = defaultSprite;
         isOccupied = false;
-        nameText.text = "";
+        //nameText.text = "";
     }
 
     public void OnClick()

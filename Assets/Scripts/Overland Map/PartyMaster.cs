@@ -8,6 +8,8 @@ public class PartyMaster : MonoBehaviour
     public static PartyMaster Instance;
     public List<Pawn> currentMercParty; //Player champions as prefabs/data NOT instantiated objects themselves
     public List<Pawn> availableMercs; //Mercs you HAVE 
+
+    public List<Squad> squads; //both available and OtW
     void Awake()
     {
         if(Instance!=null && Instance!=this)
@@ -16,7 +18,7 @@ public class PartyMaster : MonoBehaviour
             return;
         }
         Instance = this;
-
+        squads = new List<Squad>();
         DontDestroyOnLoad(this);
     }
 

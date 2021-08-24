@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SiteButton : MonoBehaviour, IPointerExitHandler
 {
-    //[SerializeField]
-    SelectionScreenDisplayer displayer;
+    //SelectionScreenDisplayer displayer;
+    [SerializeField]
+    SiteDisplayer displayer;
 
     //public Level level; 
     public LevelSO levelSO;
@@ -49,7 +50,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void LateStart()
     {
-        displayer = RefMaster.Instance.selectionScreenDisplayer;
+        //displayer = RefMaster.Instance.selectionScreenDisplayer;
 
         isCooldown = false;
 
@@ -101,14 +102,14 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             myDataDisplay.SetActive(false);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (myDataDisplay)
-        {
-            myDataDisplay.SetActive(true);
-            myDataDisplay.GetComponent<SiteDisplayer>().SetMe(this);
-        }
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    if (myDataDisplay)
+    //    {
+    //        myDataDisplay.SetActive(true);
+    //        myDataDisplay.GetComponent<SiteDisplayer>().SetMe(this);
+    //    }
+    //}
     public void OnClick()
     {
         if(isCooldown)
@@ -116,6 +117,9 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             Debug.LogError("iscooldown");
             return;
         }
+        //displayer.SetMe(this);
+
+        myDataDisplay.SetActive(true);
 
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         //LevelRef.Instance.siteToCooldown = this;
@@ -123,6 +127,13 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         //displayer.Reposition(transform);
         //displayer.EnableAndSet(level);
+
+        ///
+        /// Check first if site is initiated
+        /// if not, randomize
+        ///
+
+
         int rndDifficulty = Random.Range(0, 3);
 
         levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
@@ -132,13 +143,14 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //isCooldown = true;
         //StartCoroutine("StartCooldown");
         //NOT THE CORRECT PLACE FOR THIS!!
-        
-        displayer.EnableAndSet(levelSO);
-        displayer.durationText.text = ETA.ToString();
+
+        displayer.SetMe(this);
+        //displayer.SetActive(true);
+        //displayer.durationText.text = ETA.ToString();
     }
     public void CloseMenu()
     {
-        displayer.DisableAndReset();
+        //displayer.DisableAndReset();
     }
 
     public void StartCooldownCaller()

@@ -14,6 +14,9 @@ public class SiteDisplayer : MonoBehaviour
     [SerializeField]
     List<Image> dwellerPortraitImgs;
 
+    [SerializeField]
+    Transform goldDisplayer;
+
     LevelData levelData;
 
     [SerializeField]
@@ -27,7 +30,7 @@ public class SiteDisplayer : MonoBehaviour
         {
             if (i >= dwellerPortraitImgs.Count)
             {
-                Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<Image>();
+                Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
                 if (!img)
                 {
                     Debug.LogError("not UI image found on dwellerPortraitPrefab");
@@ -45,12 +48,15 @@ public class SiteDisplayer : MonoBehaviour
             int delta = dwellerPortraitImgs.Count - levelData.enemies.Count;
             for (int i = 1; i <= delta; i++)
             {
-                GameObject go = dwellerPortraitImgs[dwellerPortraitImgs.Count - 1].gameObject;
+                DwellerDisplayer dd = dwellerPortraitImgs[dwellerPortraitImgs.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
                 dwellerPortraitImgs.RemoveAt(dwellerPortraitImgs.Count - 1);
-                Destroy(go);
+                dd.KillMe();
+
+                //Destroy(go);
             }
         }
         difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+        goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString();
     }
 
     //public void UnSetMe()
