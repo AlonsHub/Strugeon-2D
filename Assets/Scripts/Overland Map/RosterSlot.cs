@@ -14,11 +14,16 @@ public class RosterSlot : MonoBehaviour
     public Pawn pawn;
 
     public bool isPartySlot;
-    public void AddMerc(Pawn p)
+
+    [SerializeField]
+    SquadBuilder squadBuilder;
+
+    public void PopulateSlot(Pawn p)
     {
         pawn = p;
         img.sprite = pawn.PortraitSprite;
         isOccupied = true;
+       
         //nameText.text = p.Name;
         //if(isPartySlot)
         //{
@@ -37,11 +42,11 @@ public class RosterSlot : MonoBehaviour
         //on click, if a merc exists, move to relevant pool:
         if (isPartySlot)
         {
-
+            squadBuilder.tempSquad.RemoveMerc(pawn);
         }
         else
         {
-
+            squadBuilder.tempSquad.AddMerc(pawn);
         }
     }
 

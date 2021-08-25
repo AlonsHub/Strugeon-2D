@@ -3420,6 +3420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113ca25434b978646af562f77d5fa5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  availavleSquads: []
   rowParents:
   - {fileID: 102107765}
   - {fileID: 723038914}
@@ -5400,6 +5401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMercParty: []
   availableMercs: []
+  squads: []
 --- !u!4 &1568560037
 Transform:
   m_ObjectHideFlags: 0
@@ -5426,6 +5428,7 @@ GameObject:
   - component: {fileID: 1572234540}
   - component: {fileID: 1572234539}
   - component: {fileID: 1572234538}
+  - component: {fileID: 1572234537}
   m_Layer: 5
   m_Name: Site Button - Tavern
   m_TagString: Untagged
@@ -5453,6 +5456,18 @@ RectTransform:
   m_AnchoredPosition: {x: 19, y: -40}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1572234537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572234535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173a7f07b7b6fb34284c0395bcc1443b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1572234538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5495,7 +5510,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1572234539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1572234537}
+        m_MethodName: LoadTavern
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1572234539
 MonoBehaviour:
   m_ObjectHideFlags: 0

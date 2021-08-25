@@ -10,6 +10,8 @@ public class PartyMaster : MonoBehaviour
     public List<Pawn> availableMercs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
+
+
     void Awake()
     {
         if(Instance!=null && Instance!=this)
@@ -17,6 +19,7 @@ public class PartyMaster : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         squads = new List<Squad>();
         DontDestroyOnLoad(this);
@@ -64,4 +67,11 @@ public class PartyMaster : MonoBehaviour
     //        availableMercs.Remove(p);
     //    }
     //}
+
+    public void AddNewSquad(List<Pawn> ps)
+    {
+        availableMercs.RemoveAll(x => ps.Contains(x));
+
+        squads.Add(new Squad(ps));
+    }
 }
