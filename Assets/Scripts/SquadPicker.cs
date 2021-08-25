@@ -14,6 +14,7 @@ public class SquadPicker : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
+        availavleSquads = PartyMaster.Instance.squads;
     }
 
     public void OnEnable()
@@ -26,7 +27,7 @@ public class SquadPicker : MonoBehaviour
             for (int i = 0; i < availavleSquads[k].pawns.Count; i++)
             {
                 GameObject go = Instantiate(portraitPrefab, rowParents[k].transform);
-                go.GetComponentInChildren<Image>().sprite = availavleSquads[k].pawns[i].PortraitSprite;
+                go.transform.GetChild(0).GetComponentInChildren<Image>().sprite = availavleSquads[k].pawns[i].PortraitSprite;
             }
         }
     }

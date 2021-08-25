@@ -43,11 +43,15 @@ public class RosterSlot : MonoBehaviour
         if (isPartySlot)
         {
             squadBuilder.tempSquad.RemoveMerc(pawn);
+            PartyMaster.Instance.availableMercs.Add(pawn);
+
         }
         else
         {
             squadBuilder.tempSquad.AddMerc(pawn);
+            PartyMaster.Instance.availableMercs.Remove(pawn);
         }
+        squadBuilder.Refresh();
     }
 
     public void ClearSlot()

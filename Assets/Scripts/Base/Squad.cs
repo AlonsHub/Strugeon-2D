@@ -32,6 +32,8 @@ public class Squad
         return sprites;
     }
 
+
+
     public bool AddMerc(Pawn merc) //returns false if couldn't add
     {
         if (pawns.Contains(merc))
