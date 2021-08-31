@@ -35,6 +35,7 @@ public class SquadBuilder : MonoBehaviour
     {
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
         PartyMaster.Instance.AddNewSquad(tempSquad.pawns);
+        PlayerDataMaster.Instance.GrabAndSaveData();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }

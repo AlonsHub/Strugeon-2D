@@ -221,6 +221,7 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.availableMercs = new List<MercName>();
         newPD.availableMercs.AddRange(GameStats.startMercNames);
         newPD.gold = GameStats.startingGold;
+        newPD.squadsAsMercNames = new List<List<MercName>>();
 
         
         //squads should be empty
@@ -239,7 +240,19 @@ public class PlayerDataMaster : MonoBehaviour
             newNames.Add(merc.mercName);
         }
         currentPlayerData.availableMercs = newNames;
+        currentPlayerData.availableSquads = PartyMaster.Instance.squads;
 
+        currentPlayerData.squadsAsMercNames = new List<List<MercName>>();
+
+        for (int i = 0; i < PartyMaster.Instance.squads.Count; i++)
+        {
+            List<MercName> sqaudByName = new List<MercName>();
+            foreach (var item in PartyMaster.Instance.squads[i].pawns)
+            {
+                sqaudByName.Add(item.mercName);
+            }
+            currentPlayerData.squadsAsMercNames.Add(sqaudByName);
+        }
 
         //CreateNewSave(currentPlayerData.playerName);
         SaveDataToDisk();

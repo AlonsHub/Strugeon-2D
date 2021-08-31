@@ -38,6 +38,21 @@ public class PartyMaster : MonoBehaviour
         {
             availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
+        squads = new List<Squad>();
+        PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
+
+        foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
+        {
+            List<Pawn> newPawns = new List<Pawn>();
+            foreach (MercName mercName in mercNamesList)
+            {
+                newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+            }
+            squads.Add(new Squad(newPawns));
+        
+        }
+
+
     }
     public void LoadUpAvailableMercs(List<MercName> mercNames)
     {
@@ -46,6 +61,20 @@ public class PartyMaster : MonoBehaviour
         {
             availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
+        squads = new List<Squad>();
+        PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
+
+        foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
+        {
+            List<Pawn> newPawns = new List<Pawn>();
+            foreach (MercName mercName in mercNamesList)
+            {
+                newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+            }
+            squads.Add(new Squad(newPawns));
+
+        }
+
     }
 
     //public void SwapThisPartyIn(List<Pawn> newParty)

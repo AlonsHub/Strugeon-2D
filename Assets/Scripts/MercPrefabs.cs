@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public enum MercName {Smadi, Shuki, Yeho};
 
 public class MercPrefabs : MonoBehaviour
