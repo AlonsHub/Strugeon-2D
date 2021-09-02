@@ -48,8 +48,7 @@ public class PartyMaster : MonoBehaviour
             {
                 newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
             }
-            squads.Add(new Squad(newPawns));
-        
+            squads.Add(new Squad(newPawns)); 
         }
 
 
