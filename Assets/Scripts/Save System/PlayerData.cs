@@ -15,6 +15,7 @@ public class PlayerData
     public List<Squad> unavailableSquads; //squads that are either: on their way to a site, waiting at a site, or [some third thing yet to be imagined up]
 
     public List<List<MercName>> squadsAsMercNames;
+    public List<MercName> squadsAsMercNameList; // comma seperated
 
     //gold
     public int gold;

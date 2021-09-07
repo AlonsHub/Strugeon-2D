@@ -242,20 +242,38 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.availableMercs = newNames;
         currentPlayerData.availableSquads = PartyMaster.Instance.squads;
 
-        currentPlayerData.squadsAsMercNames = new List<List<MercName>>();
+        //currentPlayerData.squadsAsMercNames = new List<List<MercName>>();
 
-        for (int i = 0; i < PartyMaster.Instance.squads.Count; i++)
-        {
-            List<MercName> sqaudByName = new List<MercName>();
-            foreach (var item in PartyMaster.Instance.squads[i].pawns)
-            {
-                sqaudByName.Add(item.mercName);
-            }
-            currentPlayerData.squadsAsMercNames.Add(sqaudByName);
-        }
+        //for (int i = 0; i < PartyMaster.Instance.squads.Count; i++)
+        //{
+        //    List<MercName> sqaudByName = new List<MercName>();
+        //    foreach (var item in PartyMaster.Instance.squads[i].pawns)
+        //    {
+        //        sqaudByName.Add(item.mercName);
+        //    }
+        //    currentPlayerData.squadsAsMercNames.Add(sqaudByName);
+        //}
+
+        currentPlayerData.squadsAsMercNameList = GetSquadsList();
 
         //CreateNewSave(currentPlayerData.playerName);
         SaveDataToDisk();
+    }
+
+    public List<MercName> GetSquadsList()
+    {
+        List<MercName> toReturn = new List<MercName>();
+
+        foreach(Squad s in PartyMaster.Instance.squads)
+        {
+            toReturn.Add(MercName.None);
+            foreach (Pawn p in s.pawns)
+            {
+                toReturn.Add(p.mercName);
+            }
+        }
+
+        return toReturn;
     }
 
 

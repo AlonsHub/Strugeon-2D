@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public enum MercName {Smadi, Shuki, Yeho};
+public enum MercName {None, Smadi, Shuki, Yeho};
 
 public class MercPrefabs : MonoBehaviour
 {
@@ -13,6 +13,9 @@ public class MercPrefabs : MonoBehaviour
 
 
     Dictionary<MercName, GameObject> enumToPrefab;
+
+
+
 
     void Awake()
     {
@@ -24,7 +27,7 @@ public class MercPrefabs : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        if(prefabs.Count !=  Enum.GetNames(typeof(MercName)).Length)
+        if(prefabs.Count !=  Enum.GetNames(typeof(MercName)).Length-1)
         {
             Debug.LogError("Number of prefabs does not match number of merc names in the enum!");
             return;
@@ -34,7 +37,7 @@ public class MercPrefabs : MonoBehaviour
 
         for (int i = 0; i < prefabs.Count; i++)
         {
-            enumToPrefab.Add((MercName)i, prefabs[i]); //basically the same as a list at this moment,
+            enumToPrefab.Add((MercName)i+1, prefabs[i]); //basically the same as a list at this moment,
                                                        //but this way allows us to add and remove options from/to this dict
         }
 

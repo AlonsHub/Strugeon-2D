@@ -14,20 +14,21 @@ public class SquadPicker : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
-        availavleSquads = PartyMaster.Instance.squads;
+        //availavleSquads = PartyMaster.Instance.squads;
+
     }
 
     public void OnEnable()
     {
-        if (availavleSquads == null || availavleSquads.Count == 0)
+        if (PartyMaster.Instance.squads == null || PartyMaster.Instance.squads.Count == 0)
             return;
         //int i = 0;
-        for(int k = 0; k < availavleSquads.Count; k++)
+        for(int k = 0; k < PartyMaster.Instance.squads.Count; k++)
         {
-            for (int i = 0; i < availavleSquads[k].pawns.Count; i++)
+            for (int i = 0; i < PartyMaster.Instance.squads[k].pawns.Count; i++)
             {
                 GameObject go = Instantiate(portraitPrefab, rowParents[k].transform);
-                go.transform.GetChild(0).GetComponentInChildren<Image>().sprite = availavleSquads[k].pawns[i].PortraitSprite;
+                go.transform.GetChild(0).GetComponentInChildren<Image>().sprite = PartyMaster.Instance.squads[k].pawns[i].PortraitSprite;
             }
         }
     }

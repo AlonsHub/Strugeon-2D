@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PartyMaster : MonoBehaviour
@@ -38,18 +39,22 @@ public class PartyMaster : MonoBehaviour
         {
             availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
-        squads = new List<Squad>();
+        //squads = new List<Squad>();
         PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
 
-        foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
-        {
-            List<Pawn> newPawns = new List<Pawn>();
-            foreach (MercName mercName in mercNamesList)
-            {
-                newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
-            }
-            squads.Add(new Squad(newPawns)); 
-        }
+        squads = ParseSquads();
+        if(squads == null)
+            squads = new List<Squad>();
+
+        //foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
+        //{
+        //    List<Pawn> newPawns = new List<Pawn>();
+        //    foreach (MercName mercName in mercNamesList)
+        //    {
+        //        newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        //    }
+        //    squads.Add(new Squad(newPawns)); 
+        //}
 
 
     }
@@ -63,17 +68,57 @@ public class PartyMaster : MonoBehaviour
         squads = new List<Squad>();
         PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
 
-        foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
-        {
-            List<Pawn> newPawns = new List<Pawn>();
-            foreach (MercName mercName in mercNamesList)
-            {
-                newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
-            }
-            squads.Add(new Squad(newPawns));
+        //foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
+        //{
+        //    List<Pawn> newPawns = new List<Pawn>();
+        //    foreach (MercName mercName in mercNamesList)
+        //    {
+        //        newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        //    }
+        //    squads.Add(new Squad(newPawns));
 
+        //}
+
+    }
+
+    List<Squad> ParseSquads()
+    {
+        List<Squad> toReturn = new List<Squad>();
+
+        if (PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Count == 0)
+            return null;
+
+        int c = PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Where(y => y == MercName.None).Count();
+        int x = -1;
+        List<MercName>[] newList = new List<MercName>[c];
+        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Count; i++)
+        {
+            if(PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList[i] == MercName.None)
+            {
+                x++;
+                newList[x] = new List<MercName>();
+                continue;
+            }
+            newList[x].Add(PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList[i]);
         }
 
+        foreach(List<MercName> mercNames in newList)
+        {
+            toReturn.Add(new Squad(PawnsFromNames(mercNames)));
+        }
+        return toReturn;
+    }
+
+    List<Pawn> PawnsFromNames(List<MercName> names)
+    {
+        List<Pawn> toReturn = new List<Pawn>();
+
+        foreach (MercName mercName in names)
+        {
+            toReturn.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        }
+
+        return toReturn;
     }
 
     //public void SwapThisPartyIn(List<Pawn> newParty)
