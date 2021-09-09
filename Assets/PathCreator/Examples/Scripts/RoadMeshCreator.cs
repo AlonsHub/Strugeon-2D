@@ -12,7 +12,7 @@ namespace PathCreation.Examples {
 
         [Header ("Material settings")]
         public Material roadMaterial;
-        public Material undersideMaterial;
+        //public Material undersideMaterial;
         public float textureTiling = 1;
 
         [SerializeField, HideInInspector]
@@ -146,8 +146,8 @@ namespace PathCreation.Examples {
         }
 
         void AssignMaterials () {
-            if (roadMaterial != null && undersideMaterial != null) {
-                meshRenderer.sharedMaterials = new Material[] { roadMaterial, undersideMaterial, undersideMaterial };
+            if (roadMaterial != null /*&& undersideMaterial != null*/) {
+                meshRenderer.sharedMaterials = new Material[] { roadMaterial/*, undersideMaterial, undersideMaterial */};
                 meshRenderer.sharedMaterials[0].mainTextureScale = new Vector3 (1, textureTiling);
             }
         }
