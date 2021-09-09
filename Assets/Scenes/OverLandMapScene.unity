@@ -651,7 +651,7 @@ MonoBehaviour:
     showVertexPathOptions: 1
     showNormals: 0
     showNormalsHelpInfo: 0
-    tabIndex: 0
+    tabIndex: 1
   initialized: 1
 --- !u!114 &212940174
 MonoBehaviour:
@@ -5731,7 +5731,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -9494,6 +9494,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301782519}
     m_Modifications:
+    - target: {fileID: 587675649073981739, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
+        type: 3}
+      propertyPath: totalTimeToTravel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8198774896638970308, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
         type: 3}
       propertyPath: m_Name
@@ -9597,12 +9602,12 @@ PrefabInstance:
     - target: {fileID: 8198774896638970309, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 109
+      value: 75.2
       objectReference: {fileID: 0}
     - target: {fileID: 8198774896638970309, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 71
+      value: -19.6
       objectReference: {fileID: 0}
     - target: {fileID: 8198774896638970309, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
         type: 3}
@@ -9624,5 +9629,10 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 920618097}
+    - target: {fileID: 8198774896638970330, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
+        type: 3}
+      propertyPath: totalTimeToTravel
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3c5990bd5e1774aa81865d1af69c7d, type: 3}

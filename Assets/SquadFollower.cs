@@ -19,6 +19,7 @@ public class SquadFollower : MonoBehaviour
     private void Start()
     {
         pathFollower = GetComponent<PathFollower>();
+      
     }
 
     public void SetMe(Squad s, float t, PathCreator p)
@@ -26,7 +27,11 @@ public class SquadFollower : MonoBehaviour
         squad = s;
         remainingTime = t;
         path = p;
+
+        pathFollower.speed = p.path.cumulativeLengthAtEachVertex[p.path.cumulativeLengthAtEachVertex.Length - 1]/t;
         pathFollower.pathCreator = path;
+
+        //pathFollower.speed = 
     }
 
     public void Go()
