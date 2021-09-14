@@ -29,11 +29,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 420427565787144542}
+  - {fileID: 420427565944486527}
   - {fileID: 420427566251464862}
   - {fileID: 420427566118305151}
   - {fileID: 420427566029473578}
   - {fileID: 420427566249457653}
-  - {fileID: 420427565944486527}
   - {fileID: 2656965649869144060}
   - {fileID: 5408626540606417441}
   - {fileID: 687896024352479110}
@@ -71,7 +71,7 @@ MonoBehaviour:
   - {fileID: 420427566152057921}
   portraitPrefab: {fileID: 2643728672036005607, guid: 70c3b2b98ec97c3439f672dab72336bd,
     type: 3}
-  offset: {x: 0, y: 0}
+  offset: {x: 500, y: 50}
 --- !u!1 &420427564756926311
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 420427564756926308}
   - component: {fileID: 420427564756926309}
   m_Layer: 5
-  m_Name: Row1
+  m_Name: HorizontalGroup_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 420427565477447635}
   - component: {fileID: 420427565477447632}
   m_Layer: 5
-  m_Name: Row0
+  m_Name: HorizontalGroup_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 420427565522371365}
   - component: {fileID: 420427565522371362}
   m_Layer: 5
-  m_Name: Row2
+  m_Name: HorizontalGroup_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 420427565944486525}
   - component: {fileID: 420427565944486524}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 420427564735629455}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -493,12 +493,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 420427564735629455}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3.1, y: -54.5}
-  m_SizeDelta: {x: 456.25342, y: 154.50555}
+  m_SizeDelta: {x: 453.2489, y: 154.50555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &420427566029473576
 CanvasRenderer:
@@ -567,12 +567,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 420427564735629455}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3.1, y: 105.1}
-  m_SizeDelta: {x: 456.25342, y: 154.50555}
+  m_SizeDelta: {x: 453.2489, y: 154.50555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &420427566118305149
 CanvasRenderer:
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 420427566152057921}
   - component: {fileID: 420427566152057934}
   m_Layer: 5
-  m_Name: Row3
+  m_Name: HorizontalGroup_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 420427566249457651}
   - component: {fileID: 420427566249457650}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ChooseSquad_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +704,7 @@ RectTransform:
   m_Children:
   - {fileID: 420427566763819354}
   m_Father: {fileID: 420427564735629455}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -843,12 +843,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 420427564735629455}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -3.1, y: 25}
-  m_SizeDelta: {x: 456.25342, y: 154.50555}
+  m_SizeDelta: {x: 453.2489, y: 154.50555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &420427566251464860
 CanvasRenderer:
@@ -1032,7 +1032,7 @@ GameObject:
   - component: {fileID: 687896024352479110}
   - component: {fileID: 188614626581170290}
   m_Layer: 5
-  m_Name: Row2 (1)
+  m_Name: Empty Row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,10 +1182,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 0.7028302, b: 0.7028302, a: 0.14117648}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 618272066615675119}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 6056536943934034469}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1220,7 +1220,7 @@ GameObject:
   - component: {fileID: 2825651467003618373}
   - component: {fileID: 7593081162663548671}
   m_Layer: 5
-  m_Name: Row3 (1)
+  m_Name: Empty Row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1286,7 +1286,7 @@ GameObject:
   - component: {fileID: 5408626540606417441}
   - component: {fileID: 2173539569908103743}
   m_Layer: 5
-  m_Name: Row1 (1)
+  m_Name: Empty Row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1436,10 +1436,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 0.7028302, b: 0.7028302, a: 0.14117648}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2455536467345969623}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 6056536943934034469}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1558,10 +1558,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 0.7028302, b: 0.7028302, a: 0.14117648}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3343624432115737437}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 6056536943934034469}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1680,10 +1680,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0}
+    m_HighlightedColor: {r: 1, g: 0.7028302, b: 0.7028302, a: 0.14117648}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3259051598748116113}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 6056536943934034469}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1717,6 +1717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349868456981719803}
   - component: {fileID: 6056536943934034469}
+  - component: {fileID: 3472812250580337165}
   m_Layer: 0
   m_Name: ToggleGroup
   m_TagString: Untagged
@@ -1755,6 +1756,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &3472812250580337165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222596560248166411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea91f873014a3414dadde9a36db90c00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedToggle: -1
 --- !u!1 &8306401037242829209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,7 +1780,7 @@ GameObject:
   - component: {fileID: 2656965649869144060}
   - component: {fileID: 3298801272298041639}
   m_Layer: 5
-  m_Name: Row0 (1)
+  m_Name: Empty Row
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
