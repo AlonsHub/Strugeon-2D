@@ -29,6 +29,10 @@ public class PartyMaster : MonoBehaviour
     private void Start()
     {
         //LATE START INSTEAD?
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            return;
+        }
         LoadUpAvailableMercs();
     }
 

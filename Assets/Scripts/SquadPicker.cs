@@ -12,7 +12,17 @@ public class SquadPicker : MonoBehaviour
     GameObject portraitPrefab;
     [SerializeField]
     private Vector2 offset;
+    [SerializeField]
+    SquadToggler squadToggler; //public?
 
+    [SerializeField]
+    GameObject followerPrefab;
+    [SerializeField]
+    Transform tavernTrans;
+    [SerializeField]
+    Transform canvasTrans;
+
+    SiteButton tgtSite;
     private void Start()
     {
         gameObject.SetActive(false);
@@ -46,7 +56,7 @@ public class SquadPicker : MonoBehaviour
         transform.position = newPos;
 
 
-        if (PartyMaster.Instance.squads == null || PartyMaster.Instance.squads.Count == 0)
+        if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
             return;
 
         for (int k = 0; k < PartyMaster.Instance.squads.Count; k++)
@@ -71,5 +81,24 @@ public class SquadPicker : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SendSquad()
+    {
+        //check if a squad is chosen:
+        if(squadToggler.selectedToggle == -1 || !tgtSite)
+        {
+            Debug.LogError("No squad selected or target site!");
+            return;
+        }
+
+        GameObject go = Instantiate(followerPrefab, canvasTrans);
+        //go.transform.position = tavernTrans.position;
+        go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
+    }
+
+    public void SetSite(SiteButton sb)
+    {
+        tgtSite = sb;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using PathCreation;
 
 public class SiteButton : MonoBehaviour, IPointerExitHandler
 {
@@ -35,23 +36,16 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
     public TMPro.TMP_Text timeText;
 
     public bool isCooldown;
+    
+    public PathCreator pathCreator; //path to site
 
     private void Start()
     {
-        //displayer = RefMaster.Instance.selectionScreenDisplayer;
-
-        //isCooldown = false;
-
-        //if (myDataDisplay)
-        //myDataDisplay.SetActive(false);
-
         Invoke("LateStart", 1);
     }
 
     void LateStart()
     {
-        //displayer = RefMaster.Instance.selectionScreenDisplayer;
-
         isCooldown = false;
 
         if (myDataDisplay)
@@ -102,14 +96,6 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
             myDataDisplay.SetActive(false);
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    if (myDataDisplay)
-    //    {
-    //        myDataDisplay.SetActive(true);
-    //        myDataDisplay.GetComponent<SiteDisplayer>().SetMe(this);
-    //    }
-    //}
     public void OnClick()
     {
         if(isCooldown)
@@ -120,6 +106,8 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
         //displayer.SetMe(this);
 
         myDataDisplay.SetActive(true);
+
+        //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         //LevelRef.Instance.siteToCooldown = this;
@@ -148,10 +136,10 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
         //displayer.SetActive(true);
         //displayer.durationText.text = ETA.ToString();
     }
-    public void CloseMenu()
-    {
-        //displayer.DisableAndReset();
-    }
+    //public void CloseMenu()
+    //{
+    //    //displayer.DisableAndReset();
+    //}
 
     public void StartCooldownCaller()
     {

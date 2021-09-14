@@ -27,8 +27,17 @@ public class SquadFollower : MonoBehaviour
         remainingTime = t;
         path = p;
 
+        pathFollower = GetComponent<PathFollower>();
+
+        //transform.position = p.path.GetPointAtTime(0);
+
         pathFollower.speed = p.path.cumulativeLengthAtEachVertex[p.path.cumulativeLengthAtEachVertex.Length - 1]/t;
+
+        remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
+
         pathFollower.pathCreator = path;
+
+        StartCoroutine("RunTimer");
 
     }
 

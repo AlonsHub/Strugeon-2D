@@ -20,7 +20,7 @@ public class PathFollower : MonoBehaviour
         if (pathCreator != null)
         {
             // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
-            speed = pathCreator.path.cumulativeLengthAtEachVertex[pathCreator.path.cumulativeLengthAtEachVertex.Length - 1] / totalTimeToTravel;
+            //speed = pathCreator.path.cumulativeLengthAtEachVertex[pathCreator.path.cumulativeLengthAtEachVertex.Length - 1] / totalTimeToTravel;
             pathCreator.pathUpdated += OnPathChanged;
         }
     }
@@ -32,10 +32,10 @@ public class PathFollower : MonoBehaviour
             //Debug.LogError(pathCreator.path.cumulativeLengthAtEachVertex[pathCreator.path.cumulativeLengthAtEachVertex.Length - 1] + " is full length?");
             distanceTravelled += speed * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+            //transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
 
-            transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z)); //Avishy
+            //transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z)); //Avishy
         }
     }
 
