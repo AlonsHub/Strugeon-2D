@@ -20,6 +20,7 @@ public class SquadBuilder : MonoBehaviour
     //}
     private void OnEnable()
     {
+
         tempSquad = new Squad();
 
         //set/instantiate empty party-slots by Room_level
@@ -34,7 +35,10 @@ public class SquadBuilder : MonoBehaviour
     public void Confirm()
     {
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
+
+        if(tempSquad.pawns.Count > 0)
         PartyMaster.Instance.AddNewSquad(tempSquad.pawns);
+
         PlayerDataMaster.Instance.GrabAndSaveData();
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");

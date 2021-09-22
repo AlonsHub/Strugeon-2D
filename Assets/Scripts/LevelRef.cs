@@ -35,6 +35,10 @@ public class LevelRef : MonoBehaviour
         else
             Debug.LogError("now level so in " + levelIndex + " " + (LevelEnum)levelIndex);
     }
+    public void SetCurrentLevel(LevelSO lso)
+    {
+        currentLevel = lso;
+    }
 
     //private void OnLevelWasLoaded(int level)
     //{
@@ -74,7 +78,7 @@ public class LevelRef : MonoBehaviour
                     break;
                 }
                 SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
-                SiteButton sb = siteButtons.Where(x => x.name == visitedSiteName).FirstOrDefault();
+                SiteButton sb = siteButtons.Where(x => x.name == visitedSiteName).FirstOrDefault(); //TERRRRRBILE! TBD
                 sb.StartCooldownCaller();
                 break;
 

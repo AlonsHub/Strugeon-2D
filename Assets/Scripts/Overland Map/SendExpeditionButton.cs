@@ -19,18 +19,18 @@ public class SendExpeditionButton : MonoBehaviour
     //    myLevelSO = GetComponentInParent<SiteButton>().levelSO;
     //}
 
-    public void SendExpeditionToMySite()
-    {
-        //if(myLevelSO)
-        //{
-        //    ArenaLauncher.Instance.LoadArena(myLevelSO);
-        //}
-        PartyMaster.Instance.currentMercParty = ap.mercs;
-        //RefMaster.Instance.mercs = ap.mercs;
-        PartyMaster.Instance.availableMercs.RemoveAll(x => ap.mercs.Contains(x));
+    //public void SendExpeditionToMySite()
+    //{
+    //    //if(myLevelSO)
+    //    //{
+    //    //    ArenaLauncher.Instance.LoadArena(myLevelSO);
+    //    //}
+    //    PartyMaster.Instance.currentMercParty = ap.mercs;
+    //    //RefMaster.Instance.mercs = ap.mercs;
+    //    PartyMaster.Instance.availableMercs.RemoveAll(x => ap.mercs.Contains(x));
 
-        LevelRef.Instance.SetCurrentLevel((int)thisLevel);
-        SceneManager.LoadScene("ArenaSceneGeneric");
-    }
+    //    LevelRef.Instance.SetCurrentLevel((int)thisLevel);
+    //    SceneManager.LoadScene("ArenaSceneGeneric");
+    //}
     
 }

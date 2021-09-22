@@ -61,6 +61,9 @@ public class SquadPicker : MonoBehaviour
 
         for (int k = 0; k < PartyMaster.Instance.squads.Count; k++)
         {
+            if (!PartyMaster.Instance.squads[k].isAvailable)
+                continue; //will print an empty line, but it's better than nothing at the moment
+
             for (int i = 0; i < PartyMaster.Instance.squads[k].pawns.Count; i++)
             {
                 GameObject go = Instantiate(portraitPrefab, rowParents[k].transform);
@@ -94,7 +97,8 @@ public class SquadPicker : MonoBehaviour
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         //go.transform.position = tavernTrans.position;
-        go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
+        //go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
+        go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite);
     }
 
     public void SetSite(SiteButton sb)

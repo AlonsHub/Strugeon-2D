@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 [System.Serializable]
 public class Squad 
@@ -32,7 +33,7 @@ public class Squad
         return sprites;
     }
 
-
+    public bool isAvailable = true;
 
     public bool AddMerc(Pawn merc) //returns false if couldn't add
     {
@@ -51,5 +52,9 @@ public class Squad
             return true;
         }
         return false;
+    }
+    public bool RemoveMerc(MercName mercName) //returns false if couldn't remove
+    {
+        return pawns.Remove(pawns.Where(x => x.mercName == mercName).FirstOrDefault());
     }
 }

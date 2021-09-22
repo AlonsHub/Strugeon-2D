@@ -69,8 +69,9 @@ public class ArenaMaster : MonoBehaviour
         if (mercSpawnTiles.Count > 0)
         {
             //foreach (var p in RefMaster.Instance.mercs)
-            
-            foreach (var p in RefMaster.Instance.mercs)
+
+            //foreach (var p in RefMaster.Instance.mercs)
+            foreach (var p in PartyMaster.Instance.currentMercParty)
             {
                 int rnd = Random.Range(0, mercSpawnTiles.Count); //draw random pos
 

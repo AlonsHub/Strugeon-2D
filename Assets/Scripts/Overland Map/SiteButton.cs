@@ -39,6 +39,10 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
     
     public PathCreator pathCreator; //path to site
 
+    public Squad readiedSquad;
+    public bool isReady = false;
+
+
     private void Start()
     {
         Invoke("LateStart", 1);
@@ -103,43 +107,47 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
             Debug.LogError("iscooldown");
             return;
         }
+
+        if(isReady)
+        {
+            SendToArena();
+            return;
+        }
         //displayer.SetMe(this);
 
         myDataDisplay.SetActive(true);
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         //LevelRef.Instance.siteToCooldown = this;
-        LevelRef.Instance.visitedSiteName = name;
-
-        //displayer.Reposition(transform);
-        //displayer.EnableAndSet(level);
+        //LevelRef.Instance.visitedSiteName = name;
 
         ///
         /// Check first if site is initiated
         /// if not, randomize
         ///
-
-
         int rndDifficulty = Random.Range(0, 3);
 
         levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 
-        //NOT THE CORRECT PLACE FOR THIS!!
-
-        //isCooldown = true;
-        //StartCoroutine("StartCooldown");
-        //NOT THE CORRECT PLACE FOR THIS!!
 
         displayer.SetMe(this);
-        //displayer.SetActive(true);
-        //displayer.durationText.text = ETA.ToString();
+       
     }
-    //public void CloseMenu()
-    //{
-    //    //displayer.DisableAndReset();
-    //}
+
+
+    void SendToArena()
+    {
+        OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
+        LevelRef.Instance.SetCurrentLevel(levelSO);
+
+        PartyMaster.Instance.currentSquad = readiedSquad;
+
+        SceneManager.LoadScene("ArenaSceneGeneric");
+    }
+
 
     public void StartCooldownCaller()
     {

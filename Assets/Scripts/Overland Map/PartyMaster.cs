@@ -7,7 +7,11 @@ public class PartyMaster : MonoBehaviour
 {
     
     public static PartyMaster Instance;
-    public List<Pawn> currentMercParty; //Player champions as prefabs/data NOT instantiated objects themselves
+    //public List<Pawn> currentMercParty; //Player champions as prefabs/data NOT instantiated objects themselves
+
+    public List<Pawn> currentMercParty { get => currentSquad.pawns; }
+    public Squad currentSquad;
+
     public List<Pawn> availableMercs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
@@ -44,7 +48,7 @@ public class PartyMaster : MonoBehaviour
             availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
         //squads = new List<Squad>();
-        PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
+        //PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
 
         squads = ParseSquads();
         if(squads == null)
@@ -59,31 +63,34 @@ public class PartyMaster : MonoBehaviour
         //    }
         //    squads.Add(new Squad(newPawns)); 
         //}
-
-
-    }
-    public void LoadUpAvailableMercs(List<MercName> mercNames)
-    {
-        availableMercs = new List<Pawn>();
-        foreach (MercName mercName in mercNames)
+        List<Squad> toRemove = squads.Where(x => x.pawns.Count == 0).ToList();
+        foreach (var s in toRemove)
         {
-            availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+            squads.Remove(s);
         }
-        squads = new List<Squad>();
-        PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
-
-        //foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
-        //{
-        //    List<Pawn> newPawns = new List<Pawn>();
-        //    foreach (MercName mercName in mercNamesList)
-        //    {
-        //        newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
-        //    }
-        //    squads.Add(new Squad(newPawns));
-
-        //}
-
     }
+    //public void LoadUpAvailableMercs(List<MercName> mercNames)
+    //{
+    //    availableMercs = new List<Pawn>();
+    //    foreach (MercName mercName in mercNames)
+    //    {
+    //        availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+    //    }
+    //    squads = new List<Squad>();
+    //    //PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
+
+    //    //foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
+    //    //{
+    //    //    List<Pawn> newPawns = new List<Pawn>();
+    //    //    foreach (MercName mercName in mercNamesList)
+    //    //    {
+    //    //        newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+    //    //    }
+    //    //    squads.Add(new Squad(newPawns));
+
+    //    //}
+
+    //}
 
     List<Squad> ParseSquads()
     {
@@ -108,6 +115,7 @@ public class PartyMaster : MonoBehaviour
 
         foreach(List<MercName> mercNames in newList)
         {
+            if(newList.Length > 0)
             toReturn.Add(new Squad(PawnsFromNames(mercNames)));
         }
         return toReturn;
@@ -151,4 +159,13 @@ public class PartyMaster : MonoBehaviour
 
         squads.Add(new Squad(ps));
     }
+
+    //public void DisbandSquad(int i)
+    //{
+    //    //squads[i].
+    //}
+    //public void DisbandSquad(Squad s)
+    //{
+
+    //}
 }

@@ -22,6 +22,7 @@ public class PlayerDataMaster : MonoBehaviour
     [SerializeField]
     private string defualtName = "Psion";
 
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -63,6 +64,10 @@ public class PlayerDataMaster : MonoBehaviour
 
         string pdJsonString = JsonUtility.ToJson(currentPlayerData);
 
+        //kill any 0 that follows a 0
+
+        //currentPlayerData.squadsAsMercNameList.
+
         File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", pdJsonString);
 
         //consider overwriting 
@@ -71,6 +76,22 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
+    
+    //void KillFollowingZeros(ref List<int> nums)
+    //{
+    //    for (int i = 0; i < nums.Count; i++)
+    //    {
+    //        if(nums[i]==0 && nums[i+1] == 0)
+    //        {
+    //            int k = 1;
+    //            while(nums[i+k]==0)
+    //            {
+    //                k++;
+    //            }
+    //        }
+    //    }
+    //}
+
     public void LoadDataFromDisk(string saveName)
     {
         //check folder and file
@@ -240,7 +261,7 @@ public class PlayerDataMaster : MonoBehaviour
             newNames.Add(merc.mercName);
         }
         currentPlayerData.availableMercs = newNames;
-        currentPlayerData.availableSquads = PartyMaster.Instance.squads;
+        //currentPlayerData.availableSquads = PartyMaster.Instance.squads;
 
         //currentPlayerData.squadsAsMercNames = new List<List<MercName>>();
 

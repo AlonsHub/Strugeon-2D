@@ -16,27 +16,52 @@ public class SquadFollower : MonoBehaviour
 
     PathFollower pathFollower;
 
+    SiteButton siteButton;
+
     private void Start()
     {
         pathFollower = GetComponent<PathFollower>();
     }
 
-    public void SetMe(Squad s, float t, PathCreator p)
+    //public void SetMe(Squad s, float t, PathCreator p)
+    //{
+    //    squad = s;
+    //    remainingTime = t;
+    //    path = p;
+
+    //    pathFollower = GetComponent<PathFollower>();
+
+    //    //transform.position = p.path.GetPointAtTime(0);
+
+    //    pathFollower.speed = p.path.cumulativeLengthAtEachVertex[p.path.cumulativeLengthAtEachVertex.Length - 1]/t;
+
+    //    remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
+
+    //    pathFollower.pathCreator = path;
+
+    //    StartCoroutine("RunTimer");
+
+    //}
+    public void SetMe(Squad s, SiteButton sb)
     {
+
+        siteButton = sb;
+
         squad = s;
-        remainingTime = t;
-        path = p;
+        remainingTime = sb.ETA; //set remainning to full time
+        path = sb.pathCreator;
 
         pathFollower = GetComponent<PathFollower>();
 
         //transform.position = p.path.GetPointAtTime(0);
 
-        pathFollower.speed = p.path.cumulativeLengthAtEachVertex[p.path.cumulativeLengthAtEachVertex.Length - 1]/t;
+        pathFollower.speed = path.path.cumulativeLengthAtEachVertex[path.path.cumulativeLengthAtEachVertex.Length - 1]/ remainingTime; //remainning time is "total time" in this context
 
         remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
 
         pathFollower.pathCreator = path;
 
+        squad.isAvailable = false; // turn back on when/if they return
         StartCoroutine("RunTimer");
 
     }
@@ -55,5 +80,11 @@ public class SquadFollower : MonoBehaviour
             yield return new WaitForSeconds(timerRate);
             remainingTime -= timerRate;
         }
+
+        //enable site to send to arena
+        siteButton.isReady = true;
+        siteButton.readiedSquad = squad;
+        //indicate somehow - also, connect the relevant squad to the site itself? 
+        //AVOID a system that would have problems locating the squad to load-in
     }
 }

@@ -145,11 +145,24 @@ public class TurnMaster : MonoBehaviour
             PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
             //PLUMBING
 
-            foreach (var item in RefMaster.Instance.mercs) //remaining
+            foreach (var item in theDead)
             {
-                //if(!PartyMaster.Instance.availableMercs.Contains)
-                PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
+                PartyMaster.Instance.currentSquad.RemoveMerc(item);
             }
+
+            if (PartyMaster.Instance.currentSquad.pawns.Count > 0)
+            {
+                PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns));
+            }
+        
+
+
+
+            //foreach (var item in RefMaster.Instance.mercs) //remaining
+            //{
+            //    //if(!PartyMaster.Instance.availableMercs.Contains)
+            //    PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
+            //}
 
             foreach (var item in theDead)
             {
