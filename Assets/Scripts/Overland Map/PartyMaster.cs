@@ -95,6 +95,8 @@ public class PartyMaster : MonoBehaviour
     List<Squad> ParseSquads()
     {
         List<Squad> toReturn = new List<Squad>();
+        if (PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList == null)
+            return null;
 
         if (PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Count == 0)
             return null;
