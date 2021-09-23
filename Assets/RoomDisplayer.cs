@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class RoomDisplayer : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class RoomDisplayer : MonoBehaviour
 
     public int price;
 
+    TMP_Text occupantsText;
+
 
     public void BuyMe()
     {
@@ -38,12 +41,25 @@ public class RoomDisplayer : MonoBehaviour
 
         PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms +=1;
 
+        Tavern.Instance.RefreshRooms();
+
         //set number of occupants
        
     }
 
-    public void SetMe(int occupants, int capacity)
-    {
 
+    public void SetMe()
+    {
+        buyButton.SetActive(false);
+        ownedParent.SetActive(true);
+
+        //occupantsText.text = occupants.ToString();
+    }
+    public void SetMe(int occupants)
+    {
+        buyButton.SetActive(false);
+        ownedParent.SetActive(true);
+
+        occupantsText.text = occupants.ToString();
     }
 }

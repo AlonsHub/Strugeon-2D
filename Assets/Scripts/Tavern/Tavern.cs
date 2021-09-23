@@ -28,7 +28,9 @@ public class Tavern : MonoBehaviour
     //GameObject roomPanelPrefab;
     //[SerializeField]
     //GameObject roomPanelPrefab;
-    
+
+    List<RoomDisplayer> roomDisplayers;
+
 
     void Start()
     {
