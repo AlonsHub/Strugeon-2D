@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Tavern : MonoBehaviour
 {
+
+    public static Tavern Instance;
     //SHOULD destroy on load
     //on entering the tavern, it should read the current SaveData and display it
     [SerializeField]
@@ -30,6 +32,33 @@ public class Tavern : MonoBehaviour
 
     void Start()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        RefreshRooms();
+    }
+
+    private void OnEnable()
+    {
+        RefreshRooms();
+    }
+
+    public void RefreshRooms()
+    {
+        if(roomButtons != null)
+        {
+            for (int i = roomButtons.Count-1; i >= 0; i--)
+            {
+                Destroy(roomButtons[i]);
+            }
+            //roomButtons.Clear();
+        }
+           
         roomButtons = new List<GameObject>();
         //set up empty rooms
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms; i++)
@@ -44,7 +73,6 @@ public class Tavern : MonoBehaviour
             roomButtons[c].GetComponentInChildren<Image>().color = Color.red;
             c++;
         }
-        
     }
 
     // public void ReadSaveData()
