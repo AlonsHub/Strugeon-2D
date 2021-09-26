@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using PathCreation;
+using UnityEngine.UI;
 
 public class SquadFollower : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class SquadFollower : MonoBehaviour
     PathFollower pathFollower;
 
     SiteButton siteButton;
+
+    [SerializeField]
+    Image leaderPortrait; //leader is the first merc
 
     private void Start()
     {
@@ -62,6 +66,8 @@ public class SquadFollower : MonoBehaviour
         pathFollower.pathCreator = path;
 
         squad.isAvailable = false; // turn back on when/if they return
+
+        leaderPortrait.sprite = squad.pawns[0].PortraitSprite; //the first merc is the leader - consider making Leader a Squad property
         StartCoroutine("RunTimer");
 
     }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3489341905654630305}
   - component: {fileID: 4836502730982641677}
   m_Layer: 20
-  m_Name: Image (2)
+  m_Name: LeaderPortrait
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.3, y: -48.5}
-  m_SizeDelta: {x: 124.89284, y: 124.89284}
+  m_AnchoredPosition: {x: -3.6, y: 5.4}
+  m_SizeDelta: {x: -17.608154, y: -17.608154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4248410664607246027
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c2788aa0f4f96a3479851c7e0f9a4d72, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0feffdce640636647a25962df2e49c1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -456,5 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squad:
     pawns: []
+    isAvailable: 1
   timeText: {fileID: 607331070338774050}
   timerRate: 0.2
+  leaderPortrait: {fileID: 3489341905654630305}
