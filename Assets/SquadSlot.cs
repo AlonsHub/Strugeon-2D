@@ -54,7 +54,7 @@ public class SquadSlot : MonoBehaviour
     }
     public void UnSetMe()
     {
-        squad = null;
+        //squad = null;
         foreach (var item in mercSlotImages)
         {
             item.sprite = null;
