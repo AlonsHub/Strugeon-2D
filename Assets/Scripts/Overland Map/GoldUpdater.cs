@@ -9,7 +9,11 @@ public class GoldUpdater : MonoBehaviour
     TMP_Text goldDisplater;
     public void Start()
     {
+        RefreshGold();
+    }
+
+    public void RefreshGold()
+    {
         goldDisplater.text = Inventory.Instance.Gold.ToString();
-        //PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
     }
 }

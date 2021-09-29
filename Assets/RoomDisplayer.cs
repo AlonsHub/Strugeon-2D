@@ -30,9 +30,7 @@ public class RoomDisplayer : MonoBehaviour
 
     public void BuyMe()
     {
-        if (Inventory.Instance.Gold >= price)
-            Inventory.Instance.Gold -= price;
-        else
+        if (!Inventory.Instance.TryRemoveGold(price))
             return; //indicate not enough gold
 
         //charge price to inventory

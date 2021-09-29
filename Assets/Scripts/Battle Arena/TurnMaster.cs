@@ -140,7 +140,8 @@ public class TurnMaster : MonoBehaviour
         if (RefMaster.Instance.mercs.Count != 0)
         {
             //Give reward
-            Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
+            //Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
+            Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
             //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER!
             PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
             //PLUMBING
