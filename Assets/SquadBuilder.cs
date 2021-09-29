@@ -14,6 +14,8 @@ public class SquadBuilder : MonoBehaviour
     RosterSlot[] partySlots; //limited by Room_Level (int) - from avishy's room logic
 
     public Squad tempSquad;
+    [SerializeField]
+    MercDataDisplayer mercDataDisplayer;
     //private void Awake()
     //{
     //    //gameObject.SetActive
@@ -43,7 +45,10 @@ public class SquadBuilder : MonoBehaviour
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }
-
+    public void SetMercDisplayer(Pawn merc)
+    {
+        mercDataDisplayer.SetMe(merc);
+    }
     public void Refresh()
     {
         for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)

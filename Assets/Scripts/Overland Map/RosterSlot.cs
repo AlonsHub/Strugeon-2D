@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 [System.Serializable]
-public class RosterSlot : MonoBehaviour
+public class RosterSlot : MonoBehaviour, IPointerClickHandler
 {
     public Image img;
     [SerializeField]
@@ -69,7 +70,15 @@ public class RosterSlot : MonoBehaviour
             Debug.LogWarning("Slot has no Pawn");
             return;
         }
+        squadBuilder.SetMercDisplayer(pawn);
+        //RemoveMerc();
+    }
 
-        RemoveMerc();
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            RemoveMerc();
+        }
     }
 }

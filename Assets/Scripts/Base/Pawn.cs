@@ -37,7 +37,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
     [SerializeField]
     private Sprite portraitSprite;
-     [SerializeField]
+    [SerializeField]
+    private Sprite fullPortraitSprite;
+
+    [SerializeField]
     private Sprite saSprite;
 
     public Transform effectIconParent;
@@ -92,6 +95,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     
     public string Name { get => pawnName; } 
     public Sprite PortraitSprite { get => portraitSprite; set => portraitSprite = value; }
+    public Sprite FullPortraitSprite { get => fullPortraitSprite; set => fullPortraitSprite = value; }
     public Sprite SASprite { get => saSprite; set => saSprite = value; }
 
     public static int totalPawns = 0;
