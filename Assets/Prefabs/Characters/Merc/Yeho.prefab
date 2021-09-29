@@ -160,10 +160,12 @@ MonoBehaviour:
   pawnName: Yeho
   mercName: 3
   hasSAs: 0
+  forDisplayPurposesOnly: {fileID: -3395797105699778925}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: e0c46dbcd3fdfd14db7cabe0617b0f9c, type: 3}
+  fullPortraitSprite: {fileID: 21300000, guid: e5c31f2a59600f747988675004dd8943, type: 3}
   saSprite: {fileID: 0}
   effectIconParent: {fileID: 6890780919998564073}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
@@ -180,6 +182,10 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  SA_Title: Quick Step
+  SA_Description: When in melee range, Yeho can perform a move and shoot action...
+    though characters can just move and attack so this is actually less useful when
+    compared to just moving further away and then attacking normally...
   purpleMultiplier: 0
 --- !u!114 &5092255476189858162
 MonoBehaviour:

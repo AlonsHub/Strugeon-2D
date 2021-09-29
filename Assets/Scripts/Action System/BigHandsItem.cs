@@ -186,4 +186,9 @@ public class BigHandsItem : ActionItem, SA_Item
     {
         return "BigHandsItem";
     }
+
+    public string SA_Description()
+    {
+        throw new System.NotImplementedException();
+    }
 }

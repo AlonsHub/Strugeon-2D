@@ -24,6 +24,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     [SerializeField]
     public bool hasSAs;
     public SA_Item[] saItems;
+
+    public ActionItem forDisplayPurposesOnly;
     
     //public int _currentCooldown;
     
@@ -99,6 +101,16 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public Sprite SASprite { get => saSprite; set => saSprite = value; }
 
     public static int totalPawns = 0;
+
+
+    //TEMP AF
+    [SerializeField]
+    public string SA_Title;
+    [TextArea]
+    [SerializeField]
+    public string SA_Description;
+
+    // end TEMP AF
 
     public override void Init()
     {

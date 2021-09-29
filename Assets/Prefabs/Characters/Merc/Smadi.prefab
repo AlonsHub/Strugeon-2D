@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5092255476189858162}
   - component: {fileID: 2111372755113017349}
   m_Layer: 11
-  m_Name: Samdi
+  m_Name: Smadi
   m_TagString: Merc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,10 +102,12 @@ MonoBehaviour:
   pawnName: Smadi
   mercName: 1
   hasSAs: 0
+  forDisplayPurposesOnly: {fileID: 2111372755113017349}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 0feffdce640636647a25962df2e49c1c, type: 3}
+  fullPortraitSprite: {fileID: 21300000, guid: c2788aa0f4f96a3479851c7e0f9a4d72, type: 3}
   saSprite: {fileID: 21300000, guid: 19e69438c697cb149b4d1a02a1936fdc, type: 3}
   effectIconParent: {fileID: 6976060224392790412}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
@@ -122,6 +124,9 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  SA_Title: Heal Ally
+  SA_Description: Smadi heals an ally or herself because she is an amazing person
+    and we should all aspire to be more like her.
   purpleMultiplier: 0
 --- !u!114 &6641408886101910626
 MonoBehaviour:

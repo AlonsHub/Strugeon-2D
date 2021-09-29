@@ -21,8 +21,8 @@ public class MercDataDisplayer : MonoBehaviour
     [SerializeField]
     TMP_Text nextLevelText;
 
-    //[SerializeField]
-    //Image saImage;
+    [SerializeField]
+    Image saImage;
 
     //public Image mercImage;
     //public Image mercImage;
@@ -37,8 +37,11 @@ public class MercDataDisplayer : MonoBehaviour
         nameText.text = merc.Name; //+ suffix/monicer
         mercImage.sprite = merc.FullPortraitSprite;
 
-        specialAbilityTitle.text = merc.saItems[0].ToString();
-        specialAbilityDescription.text = merc.saItems[0].ToString(); // DESCRIBE!
+        SA_Item sA_Item = merc.forDisplayPurposesOnly as SA_Item;
+        //TEMP AF
+        specialAbilityTitle.text = merc.SA_Title;
+        specialAbilityDescription.text = merc.SA_Description;
+        //end TEMP AF
         specialAbilityIcon.sprite = merc.SASprite;
     }
 }

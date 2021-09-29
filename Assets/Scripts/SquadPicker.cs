@@ -7,6 +7,10 @@ public class SquadPicker : MonoBehaviour
 {
     public List<Squad> availavleSquads;
     public Transform[] rowParents;
+    public SquadSlot[] squadSlots;
+
+    //[SerializeField]
+    //GameObject squadSlotPrefab;
 
     [SerializeField]
     GameObject portraitPrefab;
@@ -56,33 +60,40 @@ public class SquadPicker : MonoBehaviour
         transform.position = newPos;
 
 
+      
+
         if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
             return;
-
-        for (int k = 0; k < PartyMaster.Instance.squads.Count; k++)
+        int count = 0;
+        foreach (var item in PartyMaster.Instance.squads)
         {
-            if (!PartyMaster.Instance.squads[k].isAvailable)
-                continue; //will print an empty line, but it's better than nothing at the moment
+            if (!item.isAvailable)
+                continue;
 
-            for (int i = 0; i < PartyMaster.Instance.squads[k].pawns.Count; i++)
-            {
-                GameObject go = Instantiate(portraitPrefab, rowParents[k].transform);
-                go.transform.GetChild(0).GetComponentInChildren<Image>().sprite = PartyMaster.Instance.squads[k].pawns[i].PortraitSprite;
-            }
+            squadSlots[count].SetMe(item);
+            count++;
         }
+
+       
+        
+
     }
 
     private void OnDisable()
     {
-        foreach(Transform t in rowParents)
+        //foreach(Transform t in rowParents)
+        //{
+        //    if(t.childCount !=0)
+        //    {
+        //        for (int i = t.childCount-1; i >= 0; i--)
+        //        {
+        //            Destroy(t.GetChild(i).gameObject);
+        //        }
+        //    }
+        //}
+        foreach (var item in squadSlots)
         {
-            if(t.childCount !=0)
-            {
-                for (int i = 0; i < t.childCount; i++)
-                {
-                    Destroy(t.GetChild(i).gameObject);
-                }
-            }
+            item.UnSetMe();
         }
     }
 
@@ -98,7 +109,7 @@ public class SquadPicker : MonoBehaviour
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         //go.transform.position = tavernTrans.position;
         //go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
-        go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite);
+        go.GetComponent<SquadFollower>().SetMe(squadSlots[squadToggler.selectedToggle].squad, tgtSite);
     }
 
     public void SetSite(SiteButton sb)

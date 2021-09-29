@@ -10,15 +10,14 @@ public class SquadToggler : MonoBehaviour
 
     //all my toggles
     Toggle[] myToggles;
+   
 
-    GameObject[][] portraits = new GameObject[4][]; //this 4 is dependant on number of squads
-    
     [SerializeField]
-    GameObject[] emptyRowParents;
-    [SerializeField]
-    Sprite offFrame;
-    [SerializeField]
-    Sprite onFrame;
+    SquadSlot[] squadSlots;
+    //[SerializeField]
+    //Sprite offFrame;
+    //[SerializeField]
+    //Sprite onFrame;
 
     //on value changed
 
@@ -31,20 +30,18 @@ public class SquadToggler : MonoBehaviour
             Debug.LogError("No toggles babbbbyyyyyy");
             return;
         }
-
-        //check available squads
-
-        for (int i = 0; i < myToggles.Length; i++)
-        {
-            if (i < PartyMaster.Instance.squads.Count)
-            {
-                myToggles[i].onValueChanged.AddListener(delegate { ValuesChanged(); });
-            }
-            else
-            {
-                myToggles[i].gameObject.SetActive(false);
-            }
-        }
+        OnEnable();
+        //for (int i = 0; i < myToggles.Length; i++)
+        //{
+        //    if (squadSlots[i].isRelevant)
+        //    {
+        //        myToggles[i].onValueChanged.AddListener(delegate { ValuesChanged(); });
+        //    }
+        //    else
+        //    {
+        //        myToggles[i].enabled = false;
+        //    }
+        //}
 
         //foreach (var t in myToggles)
         //{
@@ -52,14 +49,31 @@ public class SquadToggler : MonoBehaviour
         //}
     }
 
+    private void OnEnable()
+    {
+        int count = 0;
+        //check available squads
+        foreach (var item in squadSlots)
+        {
+            if (item.isRelevant)
+            {
+                myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
+                count++;
+                Debug.LogError("ONCE");
+
+            }
+        }
+    }
+
     void ValuesChanged()
     {
         if (selectedToggle != -1)
         {
-            for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
-            {
-                emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = offFrame;
-            }
+            //for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
+            //{
+            //    emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = offFrame;
+            //}
+            squadSlots[selectedToggle].DeSelectMe();
         }
 
         for (int i = 0; i < myToggles.Length; i++)
@@ -71,9 +85,12 @@ public class SquadToggler : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
-        {
-            emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = onFrame;
-        }
+        //for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
+        //{
+        //    emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = onFrame;
+        //}
+        squadSlots[selectedToggle].SelectMe();
+
     }
+
 }

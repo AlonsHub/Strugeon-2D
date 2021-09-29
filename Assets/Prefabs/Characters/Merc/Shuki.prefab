@@ -158,10 +158,12 @@ MonoBehaviour:
   pawnName: Shuki
   mercName: 2
   hasSAs: 0
+  forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: d63822c45f7bfd04f950804a033849e6, type: 3}
+  fullPortraitSprite: {fileID: 21300000, guid: 7e105db05c481f345b6337c11c70d4a7, type: 3}
   saSprite: {fileID: 0}
   effectIconParent: {fileID: 2893683853430716741}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
@@ -178,6 +180,12 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  SA_Title: Ferocity
+  SA_Description: '"You''re getting me wounded... You won''t like me when I''m wounded."
+
+    When
+    HP below threshold (10%) Shuki enters a ferocious rage, increasing his damage
+    and raising his aggerssion.'
   purpleMultiplier: 0
 --- !u!114 &5092255476189858162
 MonoBehaviour:

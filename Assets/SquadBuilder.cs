@@ -5,8 +5,6 @@ using UnityEngine;
 public class SquadBuilder : MonoBehaviour
 {
     [SerializeField]
-    Transform availableSlotsParent;
-    [SerializeField]
     RosterSlot[] availableSlots;
     [SerializeField]
     Transform partySlotsParent;

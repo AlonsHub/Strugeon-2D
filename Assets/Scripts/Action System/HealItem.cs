@@ -166,6 +166,11 @@ public class HealItem : ActionItem, SA_Item
 
     public string SA_Name()
     {
-        return "HealItem";
+        return "Heal Ally";
+    }
+
+    public string SA_Description()
+    {
+        return "Smadi heals an ally or herself because she is an amazing person and we should all aspire to be more like her.";
     }
 }

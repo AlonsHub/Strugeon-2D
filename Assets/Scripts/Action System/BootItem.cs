@@ -7,6 +7,8 @@ public class BootItem : ActionItem
 {
     //public TileWalker tileWalker;
    // Pawn pawn;
+
+
     Pawn myTarget;
 
     WeaponItem weaponItem;
