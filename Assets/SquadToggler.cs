@@ -21,7 +21,7 @@ public class SquadToggler : MonoBehaviour
 
     //on value changed
 
-    private void Start()
+    private void Awake  ()
     {
         myToggles = GetComponentsInChildren<Toggle>();
 
@@ -57,7 +57,7 @@ public class SquadToggler : MonoBehaviour
         {
             if (item.isRelevant)
             {
-                myToggles[count].interactable = true;
+                //myToggles[count].interactable = true;
                 myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
                 count++;
                 Debug.LogError("ONCE");

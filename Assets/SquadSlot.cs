@@ -30,7 +30,7 @@ public class SquadSlot : MonoBehaviour
 
         foreach (var item in mercSlotImages_BGs)
         {
-            Debug.LogError("turbn onsdfs ");
+            //Debug.LogError("turbn onsdfs ");
             item.sprite = onFrameSprite;
         }
     }
