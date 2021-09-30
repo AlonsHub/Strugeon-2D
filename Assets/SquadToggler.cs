@@ -57,11 +57,16 @@ public class SquadToggler : MonoBehaviour
         {
             if (item.isRelevant)
             {
+                myToggles[count].interactable = true;
                 myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
                 count++;
                 Debug.LogError("ONCE");
 
             }
+        }
+        for (int i = count; i < squadSlots.Length; i++)
+        {
+            myToggles[i].interactable = false;
         }
     }
 
@@ -80,6 +85,12 @@ public class SquadToggler : MonoBehaviour
         {
             if(myToggles[i].isOn)
             {
+                if(selectedToggle == i)
+                {
+                    squadSlots[selectedToggle].DeSelectMe();
+                    selectedToggle = -1;
+                    return; // like the "break" two rows below, but also prevents reaching the "SelectMe()"
+                }
                 selectedToggle = i;
                 break;
             }

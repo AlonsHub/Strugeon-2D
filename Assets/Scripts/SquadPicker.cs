@@ -99,6 +99,8 @@ public class SquadPicker : MonoBehaviour
 
     public void SendSquad()
     {
+        //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
+
         //check if a squad is chosen:
         if(squadToggler.selectedToggle == -1 || !tgtSite)
         {
