@@ -70,7 +70,10 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             Debug.LogWarning("Slot has no Pawn");
             return;
         }
+        if (!squadBuilder.isActiveAndEnabled)
+            squadBuilder.gameObject.SetActive(true);
         squadBuilder.SetMercDisplayer(pawn);
+        
         //RemoveMerc();
     }
 

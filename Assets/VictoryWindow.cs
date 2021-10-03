@@ -32,10 +32,16 @@ public class VictoryWindow : MonoBehaviour
             go.GetComponentInChildren<Image>().sprite = pawn.PortraitSprite;
         }
 
-        foreach (var pawn in PartyMaster.Instance.currentMercParty)
+        foreach (var pawn in RefMaster.Instance.mercs)
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP<=0);
+        }
+        foreach (var pawnName in TurnMaster.Instance.theDead)
+        {
+            GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
+            Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName);
+            go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, true);
         }
 
         siteImageDisplayer.sprite = levelSO.levelData.siteIcon;

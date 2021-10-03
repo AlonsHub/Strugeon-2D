@@ -15,6 +15,7 @@ public class TurnMaster : MonoBehaviour
     public float turnStartDelay;
 
     public bool isGameRunning;
+    public bool gameHasBeenReset;
 
     public List<Transform> turnPlates;
     public Transform turnPlateParent;
@@ -54,6 +55,8 @@ public class TurnMaster : MonoBehaviour
 
         theDead = new List<MercName>();
         theCowardly = new List<MercName>();
+
+        gameHasBeenReset = false;
     }
 
 
@@ -139,9 +142,12 @@ public class TurnMaster : MonoBehaviour
     }
     public void StopTurning()
     {
+        if (gameHasBeenReset)
+            return; //don't want to stop twice
+
         StopCoroutine("TurnSequence"); //will need to rearrange lists after. Turn order will be lost
         isGameRunning = false;
-
+        gameHasBeenReset = true;
         if (RefMaster.Instance.mercs.Count != 0)
         {
             //Give reward
@@ -150,6 +156,9 @@ public class TurnMaster : MonoBehaviour
             //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER!
             PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
             //PLUMBING
+
+            victoryWindow.gameObject.SetActive(true);
+            victoryWindow.SetMe(LevelRef.Instance.currentLevel);
 
             foreach (var item in theDead)
             {
@@ -162,8 +171,7 @@ public class TurnMaster : MonoBehaviour
             }
 
 
-            victoryWindow.gameObject.SetActive(true);
-            victoryWindow.SetMe(LevelRef.Instance.currentLevel);
+           
 
             //foreach (var item in RefMaster.Instance.mercs) //remaining
             //{

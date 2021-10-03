@@ -19,9 +19,18 @@ public class SquadSlot : MonoBehaviour
     public Squad squad;
     public bool isRelevant = false;
     public bool isSelected = false;
-    void Start()
+    [SerializeField]
+    Toggle toggle;
+
+    private void Start()
     {
-        
+        toggle.onValueChanged.AddListener(delegate { OnChange(); });
+    }
+    private void OnEnable()
+    {
+        if(!toggle)
+        toggle = GetComponent<Toggle>();
+        toggle.isOn = false;
     }
 
     public void SelectMe()
@@ -60,5 +69,19 @@ public class SquadSlot : MonoBehaviour
             item.sprite = null;
             item.color = new Color(0, 0, 0, 0);
         }
+    }
+
+    public void OnChange()
+    {
+        if (!isRelevant)
+        {
+            Debug.LogError("Irrelevant slot");
+            return;
+        }
+
+        if (isSelected)
+            DeSelectMe();
+        else
+            SelectMe();
     }
 }

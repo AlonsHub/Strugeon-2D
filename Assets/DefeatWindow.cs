@@ -16,10 +16,11 @@ public class DefeatWindow : MonoBehaviour
 
     public void SetMe(LevelSO levelSO)
     {
-        foreach (var pawn in PartyMaster.Instance.currentMercParty)
+        foreach (var pawn in PartyMaster.Instance.currentSquad.pawns)
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
-            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP <= 0);
+            //go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP <= 0);
+            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, true);
         }
 
         siteImageDisplayer.sprite = levelSO.levelData.siteIcon;

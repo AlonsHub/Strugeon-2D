@@ -58,7 +58,7 @@ public class SquadToggler : MonoBehaviour
             if (item.isRelevant)
             {
                 myToggles[count].interactable = true;
-                myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
+                //myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
                 count++;
                 Debug.LogError("ONCE");
 
