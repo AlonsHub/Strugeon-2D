@@ -18,6 +18,7 @@ public struct LevelData
     public int goldReward;
 
     public LairDifficulty difficulty;
+    public Sprite siteIcon;
 
     public void SetLevelData(LairDifficulty newDifficulty)
     {

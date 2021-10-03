@@ -112,6 +112,7 @@ public class SquadPicker : MonoBehaviour
         //go.transform.position = tavernTrans.position;
         //go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
         go.GetComponent<SquadFollower>().SetMe(squadSlots[squadToggler.selectedToggle].squad, tgtSite);
+        PartyMaster.Instance.squads.Remove(squadSlots[squadToggler.selectedToggle].squad);
     }
 
     public void SetSite(SiteButton sb)

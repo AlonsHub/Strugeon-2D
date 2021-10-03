@@ -42,6 +42,11 @@ public class TurnMaster : MonoBehaviour
     public List<MercName> theDead;
     public List<MercName> theCowardly;
 
+    [SerializeField]
+    VictoryWindow victoryWindow;
+    [SerializeField]
+    DefeatWindow defeatWindow;
+
     private void Awake()
     {
         Instance = this;
@@ -155,9 +160,10 @@ public class TurnMaster : MonoBehaviour
             {
                 PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns));
             }
-        
 
 
+            victoryWindow.gameObject.SetActive(true);
+            victoryWindow.SetMe(LevelRef.Instance.currentLevel);
 
             //foreach (var item in RefMaster.Instance.mercs) //remaining
             //{
@@ -173,13 +179,20 @@ public class TurnMaster : MonoBehaviour
                 PartyMaster.Instance.availableMercs.Remove(toRemove);
             }
         }
+        else
+        {
+            defeatWindow.gameObject.SetActive(true);
+            defeatWindow.SetMe(LevelRef.Instance.currentLevel);
+        }
 
         PlayerDataMaster.Instance.GrabAndSaveData();
         PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
 
-        Invoke("LoadLater", 1);
+       
+
+        //Invoke("LoadLater", 1);
     }
 
     void LoadLater()
