@@ -30,7 +30,8 @@ public class SquadToggler : MonoBehaviour
             Debug.LogError("No toggles babbbbyyyyyy");
             return;
         }
-        OnEnable();
+        //OnEnable();
+        RefreshSlots();
         //for (int i = 0; i < myToggles.Length; i++)
         //{
         //    if (squadSlots[i].isRelevant)
@@ -49,10 +50,14 @@ public class SquadToggler : MonoBehaviour
         //}
     }
 
-    private void OnEnable()
-    {
+    //private void OnEnable()
+    //{
+    //    //toggleGroup.SetAllTogglesOff();
+    //    RefreshSlots();
+    //}
 
-        toggleGroup.SetAllTogglesOff();
+    public void RefreshSlots()
+    {
         int count = 0;
         //check available squads
         foreach (var item in squadSlots)

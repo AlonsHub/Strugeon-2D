@@ -59,8 +59,9 @@ public class SquadPicker : MonoBehaviour
 
         transform.position = newPos;
 
+        squadToggler.RefreshSlots();
 
-      
+
 
         if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
             return;
@@ -115,9 +116,6 @@ public class SquadPicker : MonoBehaviour
         //}
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
-        //go.transform.position = tavernTrans.position;
-        //go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
-
         go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
         PartyMaster.Instance.squads.Remove(squadSlots[index].squad);
     }
