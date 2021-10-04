@@ -100,19 +100,26 @@ public class SquadPicker : MonoBehaviour
     public void SendSquad()
     {
         //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
+        int index = squadToggler.SelectedIndex();
 
         //check if a squad is chosen:
-        if(squadToggler.selectedToggle == -1 || !tgtSite)
+        if (index == -1 || !tgtSite)
         {
             Debug.LogError("No squad selected or target site!");
             return;
         }
+        //if(squadToggler.selectedToggle == -1 || !tgtSite)
+        //{
+        //    Debug.LogError("No squad selected or target site!");
+        //    return;
+        //}
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         //go.transform.position = tavernTrans.position;
         //go.GetComponent<SquadFollower>().SetMe(PartyMaster.Instance.squads[squadToggler.selectedToggle], tgtSite.ETA, tgtSite.pathCreator);
-        go.GetComponent<SquadFollower>().SetMe(squadSlots[squadToggler.selectedToggle].squad, tgtSite);
-        PartyMaster.Instance.squads.Remove(squadSlots[squadToggler.selectedToggle].squad);
+
+        go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
+        PartyMaster.Instance.squads.Remove(squadSlots[index].squad);
     }
 
     public void SetSite(SiteButton sb)

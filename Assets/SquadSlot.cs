@@ -21,6 +21,11 @@ public class SquadSlot : MonoBehaviour
     public bool isSelected = false;
     [SerializeField]
     Toggle toggle;
+    [SerializeField]
+    SquadToggler squadToggler;
+
+    
+    public int index;
 
     private void Start()
     {
@@ -82,6 +87,12 @@ public class SquadSlot : MonoBehaviour
         if (isSelected)
             DeSelectMe();
         else
+        {
             SelectMe();
+            //squadToggler.selectedToggle = index;
+        }
+
+
+        isSelected = !isSelected;
     }
 }

@@ -63,7 +63,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //nameText.text = "";
     }
 
-    public void OnClick()
+    public void OnClick() // SET IN INSPECTOR
     {
         if (!isOccupied)
         {
@@ -77,9 +77,15 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //RemoveMerc();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) // SET BY OCDE
     {
-        if(eventData.button == PointerEventData.InputButton.Right)
+        if (!isOccupied)
+        {
+            Debug.LogWarning("Slot has no Pawn");
+            return;
+        }
+
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             RemoveMerc();
         }
