@@ -38,6 +38,7 @@ public class RoomDisplayer : MonoBehaviour
         ownedParent.SetActive(true);
 
         PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms +=1;
+        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room()); // METHOD BELONGS TO ROOMMANAGER!
 
         Tavern.Instance.RefreshRooms();
 
