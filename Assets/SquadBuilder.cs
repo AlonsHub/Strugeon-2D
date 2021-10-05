@@ -12,8 +12,8 @@ public class SquadBuilder : MonoBehaviour
     RosterSlot[] partySlots; //limited by Room_Level (int) - from avishy's room logic
 
     public Squad tempSquad;
-    [SerializeField]
-    MercDataDisplayer mercDataDisplayer;
+    
+    public MercDataDisplayer mercDataDisplayer;
     //private void Awake()
     //{
     //    //gameObject.SetActive

@@ -9,6 +9,7 @@ public class SquadToggler : MonoBehaviour
     public int selectedToggle = -1; //defualt/no-option-picked = -1
     ToggleGroup toggleGroup;
     //all my toggles
+    [SerializeField]
     Toggle[] myToggles;
    
 
@@ -23,7 +24,7 @@ public class SquadToggler : MonoBehaviour
 
     private void Awake  ()
     {
-        myToggles = GetComponentsInChildren<Toggle>();
+        //myToggles = GetComponentsInChildren<Toggle>();
         toggleGroup = GetComponent<ToggleGroup>();
         if (myToggles == null)
         {

@@ -18,6 +18,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
     [SerializeField]
     SquadBuilder squadBuilder;
+    [SerializeField]
+    GameObject mercDisplayer;
 
     public void PopulateSlot(Pawn p)
     {
@@ -70,8 +72,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             Debug.LogWarning("Slot has no Pawn");
             return;
         }
-        if (!squadBuilder.gameObject.activeSelf)
-            squadBuilder.gameObject.SetActive(true);
+        if (!squadBuilder.mercDataDisplayer.gameObject.activeSelf)
+            squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
         squadBuilder.SetMercDisplayer(pawn);
         
         //RemoveMerc();
@@ -88,6 +90,12 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             RemoveMerc();
+        }
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            if (!squadBuilder.gameObject.activeSelf)
+                squadBuilder.gameObject.SetActive(true);
+            squadBuilder.SetMercDisplayer(pawn);
         }
     }
 }
