@@ -63,12 +63,14 @@ public class Tavern : MonoBehaviour
            
         roomButtons = new List<GameObject>();
         //set up empty rooms
-        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms; i++)
+        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             GameObject go = Instantiate(roomPanelPrefab, roomButtonParent);
             roomButtons.Add(go);
         }
         int c = 0;
+
+
         //load squads into rooms (if applicable)
         foreach (var squad in PartyMaster.Instance.squads)
         {
@@ -81,7 +83,7 @@ public class Tavern : MonoBehaviour
     // Takes the available mercs from current save data
     public void TryOpenNewSquadMenu()
     {
-        if(PartyMaster.Instance.squads.Count == PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms)
+        if(PartyMaster.Instance.squads.Count == PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
         {
             noMoreRoomsWindow.SetActive(true);
             return;

@@ -30,17 +30,10 @@ public class RoomDisplayer : MonoBehaviour
 
     public void BuyMe()
     {
-        if (!Inventory.Instance.TryRemoveGold(price))
-            return; //indicate not enough gold
-
+        
         //charge price to inventory
         buyButton.SetActive(false);
         ownedParent.SetActive(true);
-
-        PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms +=1;
-        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room()); // METHOD BELONGS TO ROOMMANAGER!
-
-        Tavern.Instance.RefreshRooms();
 
         //set number of occupants
        
@@ -51,8 +44,6 @@ public class RoomDisplayer : MonoBehaviour
     {
         buyButton.SetActive(false);
         ownedParent.SetActive(true);
-
-        //occupantsText.text = occupants.ToString();
     }
     public void SetMe(int occupants)
     {

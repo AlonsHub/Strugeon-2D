@@ -242,9 +242,11 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.availableMercs = new List<MercName>();
         newPD.availableMercs.AddRange(GameStats.startMercNames);
         newPD.gold = GameStats.startingGold;
-        newPD.squadsAsMercNames = new List<List<MercName>>();
+        newPD.rooms = new List<Room>();
+        newPD.rooms.Add(new Room());
+        //newPD.squadsAsMercNames = new List<List<MercName>>();
 
-        
+
         //squads should be empty
 
         LoadPlayerData(newPD);

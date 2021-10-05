@@ -17,7 +17,7 @@ public class PlayerData
     //public List<Squad> availableSquads; //holds mercs that are already gourped-up, 
     //public List<Squad> unavailableSquads; //squads that are either: on their way to a site, waiting at a site, or [some third thing yet to be imagined up]
 
-    public int totalSquadRooms = 1; // the total number of rooms available/occupied for/by a squad. defualt starting amount: 2
+    //public int totalSquadRooms = 1; // the total number of rooms available/occupied for/by a squad. defualt starting amount: 2
     public List<Room> rooms; // list of Merc Capacity per room
 
     //gold
