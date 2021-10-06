@@ -40,8 +40,8 @@ public class SquadBuilder : MonoBehaviour
         PartyMaster.Instance.AddNewSquad(tempSquad.pawns);
 
         PlayerDataMaster.Instance.GrabAndSaveData();
-
-        UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
+        gameObject.SetActive(false);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }
     public void SetMercDisplayer(Pawn merc)
     {

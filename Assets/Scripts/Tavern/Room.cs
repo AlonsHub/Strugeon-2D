@@ -10,6 +10,8 @@ public class Room
 
     public Squad squad;
 
+    public bool isOccupied;
+
     public Room()
     {
         size = 1;

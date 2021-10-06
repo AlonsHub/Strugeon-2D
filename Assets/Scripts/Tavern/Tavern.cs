@@ -29,7 +29,7 @@ public class Tavern : MonoBehaviour
     //[SerializeField]
     //GameObject roomPanelPrefab;
 
-    List<RoomDisplayer> roomDisplayers;
+    List<RoomBuildDisplayer> roomDisplayers;
 
 
     void Start()
@@ -67,15 +67,11 @@ public class Tavern : MonoBehaviour
         {
             GameObject go = Instantiate(roomPanelPrefab, roomButtonParent);
             roomButtons.Add(go);
-        }
-        int c = 0;
+            if(PlayerDataMaster.Instance.currentPlayerData.rooms[i].isOccupied)
+            {
+                roomButtons[i].GetComponentInChildren<Image>().color = Color.red;
 
-
-        //load squads into rooms (if applicable)
-        foreach (var squad in PartyMaster.Instance.squads)
-        {
-            roomButtons[c].GetComponentInChildren<Image>().color = Color.red;
-            c++;
+            }
         }
     }
 

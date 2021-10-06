@@ -160,6 +160,14 @@ public class PartyMaster : MonoBehaviour
         availableMercs.RemoveAll(x => ps.Contains(x));
 
         squads.Add(new Squad(ps));
+        foreach(Room r in PlayerDataMaster.Instance.currentPlayerData.rooms)
+        {
+            if (r.isOccupied)
+                continue;
+
+            r.isOccupied = true;
+            r.squad = squads[squads.Count - 1];
+        }
     }
 
     //public void DisbandSquad(int i)

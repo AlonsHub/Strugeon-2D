@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class RoomDisplayer : MonoBehaviour
+public class RoomBuildDisplayer : MonoBehaviour
 {
     bool isBought = false;
     public int capacity = 2; //default capacity is 2

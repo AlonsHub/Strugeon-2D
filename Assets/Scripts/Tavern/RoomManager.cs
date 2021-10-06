@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour
 {
     [SerializeField]
-    List<RoomDisplayer> roomDisplayers; //set in inspector
+    List<RoomBuildDisplayer> roomDisplayers; //set in inspector
 
     [SerializeField]
     GameObject notEnoughGoldText;
@@ -37,5 +37,13 @@ public class RoomManager : MonoBehaviour
         PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room()); 
 
         Tavern.Instance.RefreshRooms();
+
+        if (roomDisplayers == null)
+            return;
+
+        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
+        {
+            roomDisplayers[i].SetMe();//send squad here?
+        }
     }
 }
