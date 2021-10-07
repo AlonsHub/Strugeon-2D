@@ -292,6 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8774570851823559403}
+  - component: {fileID: 8665667986920454544}
   m_Layer: 5
   m_Name: RoomButton
   m_TagString: Untagged
@@ -321,3 +322,25 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: 333}
   m_SizeDelta: {x: 406, y: 130.95361}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8665667986920454544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6974856289881808978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a911c57d1111a0499e389f2775c64ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  room:
+    squad:
+      pawns: []
+      isAvailable: 1
+    isOccupied: 0
+  isOccupied: 0
+  leaderIcon: {fileID: 1460492442242327958}
+  statusText: {fileID: 1460492441289906329}
+  defualtSprite: {fileID: 5942704498625079392, guid: 31155a4835afb294f8a618b0cb75f337,
+    type: 3}

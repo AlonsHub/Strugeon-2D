@@ -20,7 +20,8 @@ public class Tavern : MonoBehaviour
     [SerializeField]
     Transform roomButtonParent;
 
-    List<GameObject> roomButtons;
+    //List<GameObject> roomButtons;
+    List<RoomButton> _roomButtons;
 
     //[SerializeField]
     //Image ;
@@ -52,26 +53,24 @@ public class Tavern : MonoBehaviour
 
     public void RefreshRooms()
     {
-        if(roomButtons != null)
+        if(_roomButtons != null)
         {
-            for (int i = roomButtons.Count-1; i >= 0; i--)
+            for (int i = _roomButtons.Count-1; i >= 0; i--)
             {
-                Destroy(roomButtons[i]);
+                Destroy(_roomButtons[i].gameObject);
             }
             //roomButtons.Clear();
         }
            
-        roomButtons = new List<GameObject>();
+        //roomButtons = new List<GameObject>();
+        _roomButtons = new List<RoomButton>();
         //set up empty rooms
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             GameObject go = Instantiate(roomPanelPrefab, roomButtonParent);
-            roomButtons.Add(go);
-            if(PlayerDataMaster.Instance.currentPlayerData.rooms[i].isOccupied)
-            {
-                roomButtons[i].GetComponentInChildren<Image>().color = Color.red;
-
-            }
+            _roomButtons.Add(go.GetComponent<RoomButton>());
+            //roomButtons.Add(go);
+            _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
         }
     }
 
@@ -87,5 +86,15 @@ public class Tavern : MonoBehaviour
 
         newSquadMenu.SetActive(true);
     }
+
+    public void EditSquadMenu(Squad s)
+    {
+        //disassembles a squad
+        PartyMaster.Instance.squads.Remove(s);
+        //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
+        newSquadMenu.SetActive(true);
+        newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns);
+    }
+
 
 }

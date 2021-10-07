@@ -79,4 +79,14 @@ public class SquadBuilder : MonoBehaviour
             partySlots[i].ClearSlot();
         }
     }
+
+    public void EditSquadMode(List<Pawn> oldSquad)
+    {
+        //for (int i = 0; i < oldSquad.Count; i++)
+        //{
+        //    partySlots[i].SetMe(oldSquad[i]);
+        //}
+        tempSquad.pawns = oldSquad;
+        Refresh();
+    }
 }
