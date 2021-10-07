@@ -35,6 +35,9 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
 
         //unset room
         leaderIcon.sprite = defualtSprite;
+        isOccupied = room.isOccupied = false;
+        room.squad = null;
+        //room = null;
         //status text change
 
     }
