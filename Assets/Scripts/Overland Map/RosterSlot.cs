@@ -21,7 +21,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     GameObject mercDisplayer;
 
-    public void PopulateSlot(Pawn p)
+    public void SetMe(Pawn p)
     {
         pawn = p;
         img.sprite = pawn.PortraitSprite;

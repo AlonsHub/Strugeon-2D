@@ -167,6 +167,7 @@ public class PartyMaster : MonoBehaviour
 
             r.isOccupied = true;
             r.squad = squads[squads.Count - 1];
+            return;
         }
     }
 

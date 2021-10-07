@@ -45,10 +45,10 @@ public class Tavern : MonoBehaviour
         RefreshRooms();
     }
 
-    private void OnEnable()
-    {
-        RefreshRooms();
-    }
+    //private void OnEnable()
+    //{
+    //    RefreshRooms();
+    //}
 
     public void RefreshRooms()
     {

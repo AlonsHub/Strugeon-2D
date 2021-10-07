@@ -36,6 +36,7 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
     public TMPro.TMP_Text timeText;
 
     public bool isCooldown;
+    public bool isWaitingForSquad;
     
     public PathCreator pathCreator; //path to site
 
@@ -102,9 +103,9 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
 
     public void OnClick()
     {
-        if(isCooldown)
+        if(isCooldown || isWaitingForSquad)
         {
-            Debug.LogError("iscooldown");
+            Debug.LogError("isCooldown or isWaitingForSquad");
             return;
         }
 

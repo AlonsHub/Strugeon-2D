@@ -65,6 +65,14 @@ public class SquadPicker : MonoBehaviour
 
         if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
             return;
+
+        ///Consider unsetting all slots before setting them to avoid the GhostPrint of unavailable squads
+
+        //foreach (var item in squadSlots)
+        //{
+        //    item.UnSetMe();
+        //}
+
         int count = 0;
         foreach (var item in PartyMaster.Instance.squads)
         {
@@ -118,6 +126,7 @@ public class SquadPicker : MonoBehaviour
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
         PartyMaster.Instance.squads.Remove(squadSlots[index].squad);
+        
     }
 
     public void SetSite(SiteButton sb)

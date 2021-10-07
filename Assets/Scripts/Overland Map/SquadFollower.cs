@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 using System;
 using PathCreation;
 using UnityEngine.UI;
 
-public class SquadFollower : MonoBehaviour
+public class SquadFollower : MonoBehaviour, IPointerClickHandler
 {
     public Squad squad;
     public TMP_Text timeText;
@@ -55,6 +56,8 @@ public class SquadFollower : MonoBehaviour
         remainingTime = sb.ETA; //set remainning to full time
         path = sb.pathCreator;
 
+        sb.isWaitingForSquad = true; //should be a handled by SiteButton itself
+
         pathFollower = GetComponent<PathFollower>();
 
         //transform.position = p.path.GetPointAtTime(0);
@@ -89,8 +92,25 @@ public class SquadFollower : MonoBehaviour
 
         //enable site to send to arena
         siteButton.isReady = true;
+        siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
         siteButton.readiedSquad = squad;
+
         //indicate somehow - also, connect the relevant squad to the site itself? 
         //AVOID a system that would have problems locating the squad to load-in
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        //cancel expedition window?
+        CancelExpeditionWindow.Instance.SetMe(this);
+    }
+
+    public void CancelMe()
+    {
+        squad.isAvailable = true;
+        siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
+        siteButton.readiedSquad = null; //?
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
 }

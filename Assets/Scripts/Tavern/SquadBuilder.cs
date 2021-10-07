@@ -28,7 +28,7 @@ public class SquadBuilder : MonoBehaviour
         //print all availables:
         for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
         {
-            availableSlots[i].PopulateSlot(PartyMaster.Instance.availableMercs[i]);
+            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
         }
     }
 
@@ -40,6 +40,18 @@ public class SquadBuilder : MonoBehaviour
         PartyMaster.Instance.AddNewSquad(tempSquad.pawns);
 
         PlayerDataMaster.Instance.GrabAndSaveData();
+
+        foreach (var item in partySlots)
+        {
+            item.ClearSlot();
+        }
+        foreach (var item in availableSlots)
+        {
+            item.ClearSlot();
+        }
+
+        Tavern.Instance.RefreshRooms();
+
         gameObject.SetActive(false);
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }
@@ -51,7 +63,7 @@ public class SquadBuilder : MonoBehaviour
     {
         for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
         {
-            availableSlots[i].PopulateSlot(PartyMaster.Instance.availableMercs[i]);
+            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
         }
         for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
         {
@@ -60,7 +72,7 @@ public class SquadBuilder : MonoBehaviour
 
         for (int i = 0; i < tempSquad.pawns.Count; i++)
         {
-            partySlots[i].PopulateSlot(tempSquad.pawns[i]);
+            partySlots[i].SetMe(tempSquad.pawns[i]);
         }
         for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
         {
