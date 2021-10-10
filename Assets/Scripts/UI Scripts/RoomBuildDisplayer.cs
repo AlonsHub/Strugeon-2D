@@ -24,9 +24,10 @@ public class RoomBuildDisplayer : MonoBehaviour
     //Sprite upgradeSprite;
 
     public int price;
-
-    TMP_Text occupantsText;
-
+    [SerializeField]
+    TMP_Text capacityText;
+    [SerializeField]
+    Room room;
 
     public void BuyMe()
     {
@@ -34,22 +35,33 @@ public class RoomBuildDisplayer : MonoBehaviour
         //charge price to inventory
         buyButton.SetActive(false);
         ownedParent.SetActive(true);
-
+        isBought = true;
         //set number of occupants
        
     }
 
 
-    public void SetMe()
+    public void SetMe(Room r)
     {
-        buyButton.SetActive(false);
-        ownedParent.SetActive(true);
-    }
-    public void SetMe(int occupants)
-    {
+        room = r;
         buyButton.SetActive(false);
         ownedParent.SetActive(true);
 
-        occupantsText.text = occupants.ToString();
+        capacityText.text = room.size.ToString();
     }
+
+    public void TryUpgrade()
+    {
+        if(room.TryUpgrade())
+        {
+            capacityText.text = room.size.ToString();
+        }
+    }
+    //public void SetMe(int occupants)
+    //{
+    //    buyButton.SetActive(false);
+    //    ownedParent.SetActive(true);
+
+    //    capacityText.text = occupants.ToString();
+    //}
 }

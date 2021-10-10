@@ -19,7 +19,7 @@ public class RoomManager : MonoBehaviour
 
             for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
             {
-                roomDisplayers[i].SetMe();//send squad here?
+                roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
             } 
         
     }
@@ -34,7 +34,8 @@ public class RoomManager : MonoBehaviour
         }
 
         //PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms += 1;
-        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room()); 
+        Room r = new Room();
+        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(r); 
 
         Tavern.Instance.RefreshRooms();
 
@@ -43,7 +44,7 @@ public class RoomManager : MonoBehaviour
 
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
-            roomDisplayers[i].SetMe();//send squad here?
+            roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
         }
     }
 }

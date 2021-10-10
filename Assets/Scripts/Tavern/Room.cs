@@ -14,6 +14,18 @@ public class Room
 
     public Room()
     {
-        size = 1;
+        size = 2;
+    }
+
+    public bool TryUpgrade()
+    {
+        int price = size * 5;
+
+        if (Inventory.Instance.TryRemoveGold(price))
+        {
+            size++;
+            return true;
+        }
+        return false;
     }
 }

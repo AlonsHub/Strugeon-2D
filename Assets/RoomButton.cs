@@ -15,6 +15,9 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
     //Image leaderIcon;
     [SerializeField]
     TMP_Text statusText; //resting, away, etc...
+    //[SerializeField]
+    //TMP_Text capacityText; //resting, away, etc...
+
     [SerializeField]
     Sprite defualtSprite;
     public void SetMe(Room r)
@@ -24,6 +27,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         if (isOccupied)
         {
             //go red?
+            //capacityText.text = r.size.ToString();
             leaderIcon.sprite = r.squad.pawns[0].PortraitSprite;
         }
     }
