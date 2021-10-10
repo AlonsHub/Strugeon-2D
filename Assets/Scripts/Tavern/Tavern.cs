@@ -71,11 +71,21 @@ public class Tavern : MonoBehaviour
             _roomButtons.Add(go.GetComponent<RoomButton>());
             //roomButtons.Add(go);
             _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
+            _roomButtons[i].room.roomNumber = i;
         }
     }
 
     // public void ReadSaveData()
     // Takes the available mercs from current save data
+    public void TryOpenNewSquadMenu(Room r)
+    {
+        newSquadMenu.SetActive(true);
+
+        newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r);
+    }
+
+
+
     public void TryOpenNewSquadMenu()
     {
         if(PartyMaster.Instance.squads.Count == PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
@@ -84,16 +94,33 @@ public class Tavern : MonoBehaviour
             return;
         }
 
-        newSquadMenu.SetActive(true);
+        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
+        {
+            if (!PlayerDataMaster.Instance.currentPlayerData.rooms[i].isOccupied)
+            {
+                newSquadMenu.SetActive(true);
+
+                newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
+                break;
+            }
+        }
+        //decide which room to fill and send to newSquadMenu
     }
 
-    public void EditSquadMenu(Squad s)
+    public void EditSquadMenu(Squad s, Room room)
     {
         //disassembles a squad
-        PartyMaster.Instance.squads.Remove(s);
         //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
-        newSquadMenu.SetActive(true);
-        newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns);
+            newSquadMenu.SetActive(true);
+            newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
+        if (s != null)
+        {
+            PartyMaster.Instance.squads.Remove(s);
+            newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns);
+            return;
+        }
+
+        TryOpenNewSquadMenu(room);
     }
 
 

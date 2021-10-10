@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Room 
 {
-    public int size { get; set; }
-    public int roomNumber { get; set; }
+    public int size;
+    public int roomNumber;
 
     public Squad squad;
 

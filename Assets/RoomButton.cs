@@ -23,19 +23,24 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
     public void SetMe(Room r)
     {
         room = r;
-        isOccupied = room.isOccupied;
-        if (isOccupied)
+        if (room.isOccupied)
         {
             //go red?
             //capacityText.text = r.size.ToString();
             leaderIcon.sprite = r.squad.pawns[0].PortraitSprite;
+            statusText.text = "Team " + r.squad.pawns[0].Name;
+        }
+        else
+        {
+            leaderIcon.sprite = defualtSprite;
+            statusText.text = "Vacant";
         }
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         //edit squad if there is one
-        Tavern.Instance.EditSquadMenu(room.squad);
+        Tavern.Instance.EditSquadMenu(room.squad, room);
 
         //unset room
         leaderIcon.sprite = defualtSprite;

@@ -4495,11 +4495,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8466413234321585030}
+      objectReference: {fileID: 8466413234321585029}
     - target: {fileID: 3872910271997602713, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872910271997602713, guid: f26afa161bb63854da54141d6504e30c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TryUpgrade
       objectReference: {fileID: 0}
     - target: {fileID: 6462161301801402033, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
@@ -4536,9 +4541,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ee00a799bc8b84b8355b12034e29e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8466413234321585030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1216671275208462379, guid: f26afa161bb63854da54141d6504e30c,
-    type: 3}
-  m_PrefabInstance: {fileID: 8466413234321585027}
-  m_PrefabAsset: {fileID: 0}

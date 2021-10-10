@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PathCreation;
 
-public class SiteButton : MonoBehaviour, IPointerExitHandler
+public class SiteButton : MonoBehaviour
 {
     //SelectionScreenDisplayer displayer;
     [SerializeField]
@@ -95,11 +95,11 @@ public class SiteButton : MonoBehaviour, IPointerExitHandler
        
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (myDataDisplay)
-            myDataDisplay.SetActive(false);
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    if (myDataDisplay)
+    //        myDataDisplay.SetActive(false);
+    //}
 
     public void OnClick()
     {

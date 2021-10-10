@@ -12,6 +12,7 @@ public class SquadBuilder : MonoBehaviour
     RosterSlot[] partySlots; //limited by Room_Level (int) - from avishy's room logic
 
     public Squad tempSquad;
+    Room toRoom;
     
     public MercDataDisplayer mercDataDisplayer;
     //private void Awake()
@@ -30,6 +31,27 @@ public class SquadBuilder : MonoBehaviour
         {
             availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
         }
+
+        
+    }
+    public void SetToRoom(Room r)
+    {
+        toRoom = r;
+
+        //set partySlots by toRoom.size
+        for (int i = toRoom.size; i < partySlots.Length; i++)
+        {
+                partySlots[i].gameObject.SetActive(false);
+        }
+    }
+    public void OnDisable()
+    {
+        mercDataDisplayer.gameObject.SetActive(false);
+        foreach (var item in partySlots)
+        {
+            item.gameObject.SetActive(true);
+            item.ClearSlot();
+        }
     }
 
     public void Confirm()
@@ -37,7 +59,8 @@ public class SquadBuilder : MonoBehaviour
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
 
         if(tempSquad.pawns.Count > 0)
-        PartyMaster.Instance.AddNewSquad(tempSquad.pawns);
+        PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom);
+        //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
 
         PlayerDataMaster.Instance.GrabAndSaveData();
 
@@ -79,7 +102,6 @@ public class SquadBuilder : MonoBehaviour
             partySlots[i].ClearSlot();
         }
     }
-
     public void EditSquadMode(List<Pawn> oldSquad)
     {
         //for (int i = 0; i < oldSquad.Count; i++)

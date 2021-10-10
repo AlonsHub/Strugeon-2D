@@ -171,6 +171,17 @@ public class PartyMaster : MonoBehaviour
         }
     }
 
+    public void AddNewSquadToRoom(List<Pawn> ps, Room r)
+    {
+        availableMercs.RemoveAll(x => ps.Contains(x));
+        Squad s = new Squad(ps);
+        //r.squad = s;
+        PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].squad = s;
+        PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].isOccupied = true;
+        squads.Add(s);
+        
+    }
+
     //public void DisbandSquad(int i)
     //{
     //    //squads[i].
