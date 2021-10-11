@@ -42,6 +42,8 @@ public class SiteButton : MonoBehaviour
 
     public Squad readiedSquad;
     public bool isReady = false;
+    public bool isSet = false; //set means all level data has been set and hadn't been "used" yet. 
+                               //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
 
 
     private void Start()
@@ -57,50 +59,10 @@ public class SiteButton : MonoBehaviour
             myDataDisplay.SetActive(false);
     }
 
-    
-    //public void OpenArrivedPartyPanel(List<Pawn> newParty) //
-    //{
-    //    //transform.GetChild(0).gameObject.SetActive(true);
-    //    GameObject go = Instantiate(arrivedMissionPanel, transform.position + arrivedPanelOffset, transform.rotation);
-    //    go.transform.SetParent(gameObject.GetComponentInParent<Canvas>().transform);
-    //    go.transform.localPosition = transform.localPosition + arrivedPanelOffset;
-
-    //    ArrivalPanel ap = go.GetComponent<ArrivalPanel>();
-
-    //    foreach (var p in newParty)
-    //    {
-    //        GameObject icon = Instantiate(arrivedMissionIcon, ap.parent);
-    //        icon.GetComponent<Image>().sprite = p.PortraitSprite;
-    //    }
-
-    //    ExpeditionButton expeditionButton = go.GetComponentInChildren<ExpeditionButton>();
-    //    RecallExpedition recallExpedition = go.GetComponentInChildren<RecallExpedition>();
-
-    //    // expeditionButton.SetUpButton(levelSO, p)
-    //    expeditionButton.levelSO = levelSO;
-    //    expeditionButton.partyPawns = newParty;
-
-    //    recallExpedition.party = newParty;
-    //    recallExpedition.siteButton = this;
-    //    recallExpedition.arrivalPanelToDestroy = go;
-    //}
-
     public void GetProperties() //for filling displayers?
     {
 
     }
-
-    private void OnMouseOver()
-    {
-       
-    }
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    if (myDataDisplay)
-    //        myDataDisplay.SetActive(false);
-    //}
-
     public void OnClick()
     {
         if(isCooldown || isWaitingForSquad)
@@ -115,7 +77,7 @@ public class SiteButton : MonoBehaviour
             return;
         }
         //displayer.SetMe(this);
-
+        SiteDisplayer.SetActiveToAllInstances(false);
         myDataDisplay.SetActive(true);
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -128,9 +90,15 @@ public class SiteButton : MonoBehaviour
         /// Check first if site is initiated
         /// if not, randomize
         ///
-        int rndDifficulty = Random.Range(0, 3);
+        if (!isSet)
+        {
+            int rndDifficulty = Random.Range(0, 3);
 
-        levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+            levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+
+            isSet = true;
+        }
+
 
 
         displayer.SetMe(this);

@@ -104,6 +104,7 @@ public class SquadPicker : MonoBehaviour
         {
             item.UnSetMe();
         }
+        SiteDisplayer.SetActiveToAllInstances(false);
     }
 
     public void SendSquad()
