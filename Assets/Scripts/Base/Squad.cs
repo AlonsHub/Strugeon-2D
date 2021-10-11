@@ -35,6 +35,8 @@ public class Squad
 
     public bool isAvailable = true;
 
+    public int roomNumber = -1;
+
     public bool AddMerc(Pawn merc) //returns false if couldn't add
     {
         if (pawns.Contains(merc))

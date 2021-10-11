@@ -24,7 +24,7 @@ public class VictoryWindow : MonoBehaviour
     {
         goldDisplayer.text = levelSO.levelData.goldReward.ToString();
 
-        Debug.LogError(levelSO.levelData.enemies.Count);
+        //Debug.LogError(levelSO.levelData.enemies.Count);
 
         foreach (var pawn in levelSO.levelData.enemies)
         {

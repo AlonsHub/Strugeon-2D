@@ -40,7 +40,7 @@ public class SquadSlot : MonoBehaviour
 
     public void SelectMe()
     {
-        Debug.LogError("began");
+
 
         foreach (var item in mercSlotImages_BGs)
         {

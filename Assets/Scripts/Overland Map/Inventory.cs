@@ -28,7 +28,6 @@ public class Inventory : MonoBehaviour
     }
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
-        Debug.LogError("on scene");
 
         goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
         if (!goldUpdater)
@@ -39,7 +38,6 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogError("start");
 
         goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
         if (!goldUpdater)

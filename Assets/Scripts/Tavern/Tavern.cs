@@ -44,6 +44,7 @@ public class Tavern : MonoBehaviour
         Instance = this;
 
         RefreshRooms();
+       
     }
 
     //private void OnEnable()

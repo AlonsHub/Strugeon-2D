@@ -179,6 +179,7 @@ public class PartyMaster : MonoBehaviour
         PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].squad = s;
         PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].isOccupied = true;
         squads.Add(s);
+        s.roomNumber = r.roomNumber;
         
     }
 

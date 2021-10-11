@@ -184,8 +184,11 @@ public class TurnMaster : MonoBehaviour
                 PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
                 Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).FirstOrDefault(); //TEST IF THIS IS EVER NOT DEFAULT!
                     //PAWNS ARE LIKELY REMOVED ELSEWHERE
-                PartyMaster.Instance.availableMercs.Remove(toRemove);
+                PartyMaster.Instance.availableMercs.Remove(toRemove); // is this ever useful?
             }
+
+            //put squad back in their room
+            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns);
         }
         else
         {
