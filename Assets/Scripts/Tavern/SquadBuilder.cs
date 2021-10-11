@@ -31,6 +31,10 @@ public class SquadBuilder : MonoBehaviour
         {
             availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
         }
+        for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
+        {
+            availableSlots[i].SetMe();
+        }
 
         
     }
@@ -110,5 +114,18 @@ public class SquadBuilder : MonoBehaviour
         //}
         tempSquad.pawns = oldSquad;
         Refresh();
+    }
+
+    public void TurnAllOff()
+    {
+        foreach (var item in partySlots)
+        {
+            item.FrameToggle(false);
+        }
+        foreach (var item in availableSlots)
+        {
+            item.FrameToggle(false);
+        }
+
     }
 }

@@ -7,9 +7,16 @@ using TMPro;
 [System.Serializable]
 public class RosterSlot : MonoBehaviour, IPointerClickHandler
 {
+    
     public Image img;
+    public Image bg_img;
     [SerializeField]
-    Sprite defaultSprite;
+    Sprite defaultPortraitSprite;
+    [SerializeField]
+    Sprite onBgSprite;
+    [SerializeField]
+    Sprite offBgSprite;
+
     //public TMP_Text nameText;
     public bool isOccupied = false;
     public Pawn pawn;
@@ -21,23 +28,19 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     GameObject mercDisplayer;
 
+    public SquadBuilder sb;
+
     public void SetMe(Pawn p)
     {
         pawn = p;
         img.sprite = pawn.PortraitSprite;
+        img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
-       
-        //nameText.text = p.Name;
-        //if(isPartySlot)
-        //{
-        //    RefMaster.Instance.selectionScreenDisplayer.availableMercs.Add(pawn);
-        //}
-        //else
-        //{
-
-        //    RefMaster.Instance.selectionScreenDisplayer.partyMercs.Add(pawn);
-
-        //}
+    }
+    public void SetMe()
+    {
+        img.color = new Color(0,0,0,0);
+        isOccupied = false;
     }
 
     public void RemoveMerc()
@@ -60,7 +63,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     public void ClearSlot()
     {
         pawn = null;
-        img.sprite = defaultSprite;
+        img.sprite = defaultPortraitSprite;
+        bg_img.sprite = offBgSprite;
         isOccupied = false;
         //nameText.text = "";
     }
@@ -96,6 +100,22 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             if (!squadBuilder.gameObject.activeSelf)
                 squadBuilder.gameObject.SetActive(true);
             squadBuilder.SetMercDisplayer(pawn);
+
+            squadBuilder.TurnAllOff();
+            FrameToggle(true);
+            //bg_img.sprite = onBgSprite;
+        }
+    }
+
+    public void FrameToggle(bool turnOn)
+    {
+        if(turnOn)
+        {
+            bg_img.sprite = onBgSprite;
+        }
+        else
+        {
+            bg_img.sprite = offBgSprite;
         }
     }
 }
