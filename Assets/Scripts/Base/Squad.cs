@@ -15,11 +15,6 @@ public class Squad
     {
         pawns = new List<Pawn>();
     }
-    public Squad(List<Pawn> newPawns)
-    {
-        pawns = new List<Pawn>();
-        pawns.AddRange(newPawns);
-    }
 
     public List<Sprite> IconSprites()
     {
@@ -36,6 +31,16 @@ public class Squad
     public bool isAvailable = true;
 
     public int roomNumber = -1;
+    public Squad(List<Pawn> newPawns)
+    {
+        pawns = new List<Pawn>();
+        pawns.AddRange(newPawns);
+    }
+    public Squad(List<Pawn> newPawns, int roomNumber)
+    {
+        pawns = new List<Pawn>();
+        pawns.AddRange(newPawns);
+    }
 
     public bool AddMerc(Pawn merc) //returns false if couldn't add
     {

@@ -12,6 +12,7 @@ public class Room
 
     public bool isOccupied;
 
+    public string statusText;
     public Room()
     {
         size = 2;
@@ -27,5 +28,10 @@ public class Room
             return true;
         }
         return false;
+    }
+
+    public void SetStatusText(string newText)
+    {
+        statusText = newText;
     }
 }

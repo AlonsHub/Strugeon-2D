@@ -29,12 +29,20 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
             //capacityText.text = r.size.ToString();
             leaderIcon.sprite = r.squad.pawns[0].PortraitSprite;
             statusText.text = "Team " + r.squad.pawns[0].Name;
+            //perhaps read the Room.statusText instead?
         }
         else
         {
             leaderIcon.sprite = defualtSprite;
             statusText.text = "Vacant";
+            //perhaps read the Room.statusText instead?
+            //should'nt vacant rooms exist already? just have a room with no squad in it... sounds right?
         }
+    }
+
+    public void SetStatusText(string newText)
+    {
+        statusText.text = newText;
     }
 
     public void OnPointerClick(PointerEventData eventData)

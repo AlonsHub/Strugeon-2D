@@ -263,23 +263,11 @@ public class PlayerDataMaster : MonoBehaviour
             newNames.Add(merc.mercName);
         }
         currentPlayerData.availableMercs = newNames;
-        //currentPlayerData.availableSquads = PartyMaster.Instance.squads;
 
-        //currentPlayerData.squadsAsMercNames = new List<List<MercName>>();
-
-        //for (int i = 0; i < PartyMaster.Instance.squads.Count; i++)
-        //{
-        //    List<MercName> sqaudByName = new List<MercName>();
-        //    foreach (var item in PartyMaster.Instance.squads[i].pawns)
-        //    {
-        //        sqaudByName.Add(item.mercName);
-        //    }
-        //    currentPlayerData.squadsAsMercNames.Add(sqaudByName);
-        //}
 
         currentPlayerData.squadsAsMercNameList = GetSquadsList();
 
-        //CreateNewSave(currentPlayerData.playerName);
+
         SaveDataToDisk();
     }
 
@@ -287,15 +275,25 @@ public class PlayerDataMaster : MonoBehaviour
     {
         List<MercName> toReturn = new List<MercName>();
 
-        foreach(Squad s in PartyMaster.Instance.squads)
+        //foreach(Squad s in PartyMaster.Instance.squads)
+        //{
+        //    toReturn.Add(MercName.None);
+        //    foreach (Pawn p in s.pawns)
+        //    {
+        //        toReturn.Add(p.mercName);
+        //    }
+        //}
+        foreach (Room s in Instance.currentPlayerData.rooms) //sets squads in order of rooms!!!!!!
         {
             toReturn.Add(MercName.None);
-            foreach (Pawn p in s.pawns)
+            if (s.isOccupied)
             {
-                toReturn.Add(p.mercName);
+                foreach (Pawn p in s.squad.pawns)
+                {
+                    toReturn.Add(p.mercName);
+                }
             }
         }
-
         return toReturn;
     }
 

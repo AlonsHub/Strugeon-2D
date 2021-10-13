@@ -127,6 +127,7 @@ public class SquadPicker : MonoBehaviour
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
         PartyMaster.Instance.squads.Remove(squadSlots[index].squad);
+
         
     }
 

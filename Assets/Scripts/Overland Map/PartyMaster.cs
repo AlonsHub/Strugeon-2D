@@ -47,22 +47,13 @@ public class PartyMaster : MonoBehaviour
         {
             availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
-        //squads = new List<Squad>();
-        //PlayerDataMaster.Instance.currentPlayerData.availableSquads = new List<Squad>();
+
 
         squads = ParseSquads();
-        if(squads == null)
+        if (squads == null)
             squads = new List<Squad>();
 
-        //foreach (List<MercName> mercNamesList in PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNames)
-        //{
-        //    List<Pawn> newPawns = new List<Pawn>();
-        //    foreach (MercName mercName in mercNamesList)
-        //    {
-        //        newPawns.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
-        //    }
-        //    squads.Add(new Squad(newPawns)); 
-        //}
+        
         List<Squad> toRemove = squads.Where(x => x.pawns.Count == 0).ToList();
         foreach (var s in toRemove)
         {
@@ -114,11 +105,12 @@ public class PartyMaster : MonoBehaviour
             }
             newList[x].Add(PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList[i]);
         }
-
+        int count = 0;
         foreach(List<MercName> mercNames in newList)
         {
-            if(newList.Length > 0)
-            toReturn.Add(new Squad(PawnsFromNames(mercNames)));
+            //if(newList.Length > 0) //????
+            toReturn.Add(new Squad(PawnsFromNames(mercNames), count));
+            count++;
         }
         return toReturn;
     }
