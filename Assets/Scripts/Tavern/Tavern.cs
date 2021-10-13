@@ -47,11 +47,6 @@ public class Tavern : MonoBehaviour
        
     }
 
-    //private void OnEnable()
-    //{
-    //    RefreshRooms();
-    //}
-
     public void RefreshRooms()
     {
         if(_roomButtons != null)
@@ -113,11 +108,11 @@ public class Tavern : MonoBehaviour
         //disassembles a squad
         //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
             newSquadMenu.SetActive(true);
-            newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
+            //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
         if (s != null)
         {
             PartyMaster.Instance.squads.Remove(s);
-            newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns);
+            newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns, room);
             return;
         }
 

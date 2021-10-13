@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SquadBuilder : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class SquadBuilder : MonoBehaviour
 
     public Squad tempSquad;
     Room toRoom;
+
+    bool isEdit = false;
     
     public MercDataDisplayer mercDataDisplayer;
     //private void Awake()
@@ -50,6 +53,15 @@ public class SquadBuilder : MonoBehaviour
     }
     public void OnDisable()
     {
+        if(isEdit)
+        {
+            isEdit = false;
+            if (partySlots.Any(x => x.isOccupied))
+            {
+                Confirm();
+            }
+        }
+
         mercDataDisplayer.gameObject.SetActive(false);
         foreach (var item in partySlots)
         {
@@ -106,13 +118,17 @@ public class SquadBuilder : MonoBehaviour
             partySlots[i].ClearSlot();
         }
     }
-    public void EditSquadMode(List<Pawn> oldSquad)
+    public void EditSquadMode(List<Pawn> oldSquad, Room room)
     {
         //for (int i = 0; i < oldSquad.Count; i++)
         //{
         //    partySlots[i].SetMe(oldSquad[i]);
         //}
         tempSquad.pawns = oldSquad;
+        isEdit = true;
+
+        SetToRoom(room);
+
         Refresh();
     }
 
