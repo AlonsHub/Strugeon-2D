@@ -12,18 +12,26 @@ public class RoomManager : MonoBehaviour
 
     public int roomPrice = 5; //default for now
 
+    [SerializeField]
+    TogglePopout myButton;
+
     private void OnEnable()
     {
         if (roomDisplayers == null)
             return;
 
-            for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
+        myButton.Toggle(true);
+
+        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
             {
                 roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
             } 
         
     }
-
+    private void OnDisable()
+    {
+        myButton.Toggle(false);
+    }
     public void TryAddRoom()
     {
         //

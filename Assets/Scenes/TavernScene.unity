@@ -1074,6 +1074,7 @@ GameObject:
   - component: {fileID: 828125716}
   - component: {fileID: 828125715}
   - component: {fileID: 828125717}
+  - component: {fileID: 828125718}
   m_Layer: 5
   m_Name: NewSquadMenu_Button
   m_TagString: Untagged
@@ -1097,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -867, y: -487}
+  m_AnchoredPosition: {x: -867, y: -492}
   m_SizeDelta: {x: 192.94962, y: 192.94962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &828125715
@@ -1202,6 +1203,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &828125718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828125713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f356005374e82f40bb43e3a08120054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 0.3
+  hideDuration: 0.3
+  moveUpAmount: 40
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
 --- !u!1 &907910320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1779,7 @@ GameObject:
   - component: {fileID: 1705591484}
   - component: {fileID: 1705591483}
   - component: {fileID: 1705591485}
+  - component: {fileID: 1705591486}
   m_Layer: 5
   m_Name: Tavern_MGMT_Button
   m_TagString: Untagged
@@ -1783,7 +1803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -687.4, y: -487}
+  m_AnchoredPosition: {x: -687.4, y: -492}
   m_SizeDelta: {x: 192.94962, y: 192.94962}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705591483
@@ -1888,6 +1908,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1705591486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705591481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f356005374e82f40bb43e3a08120054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peekDuration: 0.3
+  hideDuration: 0.3
+  moveUpAmount: 40
+  openSprite: {fileID: 0}
+  closedSprite: {fileID: 0}
+  sr: {fileID: 0}
 --- !u!1 &1877019384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,6 +2932,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753702393289401021, guid: 7f8e9bf668fb5374f8170fda62e37429,
+        type: 3}
+      propertyPath: myButton
+      value: 
+      objectReference: {fileID: 828125718}
     - target: {fileID: 2753702393289401023, guid: 7f8e9bf668fb5374f8170fda62e37429,
         type: 3}
       propertyPath: m_Name
@@ -3399,6 +3442,7 @@ MonoBehaviour:
   - {fileID: 785599735}
   notEnoughGoldText: {fileID: 0}
   roomPrice: 5
+  myButton: {fileID: 1705591486}
 --- !u!222 &4002794815414683078
 CanvasRenderer:
   m_ObjectHideFlags: 0

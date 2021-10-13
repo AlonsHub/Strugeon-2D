@@ -35,7 +35,7 @@ public class PeekingMenu : MonoBehaviour
     
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
+        //rectTransform = GetComponent<RectTransform>();
         //originalPos = rectTransform.position;
 
 

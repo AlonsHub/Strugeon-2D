@@ -18,6 +18,9 @@ public class SquadBuilder : MonoBehaviour
     bool isEdit = false;
     
     public MercDataDisplayer mercDataDisplayer;
+
+    [SerializeField]
+    TogglePopout myButton;
     //private void Awake()
     //{
     //    //gameObject.SetActive
@@ -38,18 +41,8 @@ public class SquadBuilder : MonoBehaviour
         {
             availableSlots[i].SetMe();
         }
+        myButton.Toggle(true);
 
-        
-    }
-    public void SetToRoom(Room r)
-    {
-        toRoom = r;
-
-        //set partySlots by toRoom.size
-        for (int i = toRoom.size; i < partySlots.Length; i++)
-        {
-                partySlots[i].gameObject.SetActive(false);
-        }
     }
     public void OnDisable()
     {
@@ -67,6 +60,17 @@ public class SquadBuilder : MonoBehaviour
         {
             item.gameObject.SetActive(true);
             item.ClearSlot();
+        }
+        myButton.Toggle(false);
+    }
+    public void SetToRoom(Room r)
+    {
+        toRoom = r;
+
+        //set partySlots by toRoom.size
+        for (int i = toRoom.size; i < partySlots.Length; i++)
+        {
+                partySlots[i].gameObject.SetActive(false);
         }
     }
 
