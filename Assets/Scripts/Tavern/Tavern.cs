@@ -67,11 +67,13 @@ public class Tavern : MonoBehaviour
         //set up empty rooms
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
-            GameObject go = Instantiate(roomPanelPrefab, roomButtonParent);
-            _roomButtons.Add(go.GetComponent<RoomButton>());
+            RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
+            _roomButtons.Add(go);
             //roomButtons.Add(go);
-            _roomButtons[i].room.roomNumber = i; //RENUMBERS ROOMS?!
-            _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
+            //go.room.roomNumber = i; //RENUMBERS ROOMS?!
+            
+            go.SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
+          
         }
     }
 
