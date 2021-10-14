@@ -22,6 +22,8 @@ public class PlayerDataMaster : MonoBehaviour
     [SerializeField]
     private string defualtName = "Psion";
 
+    public int RoomCount { get => currentPlayerData.rooms.Count; }
+    public int MaxRoomCount { get => 4; } //temp
 
     private void Awake()
     {

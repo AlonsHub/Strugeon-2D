@@ -10,7 +10,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     GameObject notEnoughGoldText;
 
-    public int roomPrice = 5; //default for now
+    public int RoomPrice { get => PlayerDataMaster.Instance.RoomCount * Prices.roomBasePrice;} //default for now
 
     [SerializeField]
     TogglePopout myButton;
@@ -22,11 +22,15 @@ public class RoomManager : MonoBehaviour
 
         myButton.Toggle(true);
 
-        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
-            {
-                roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
-            } 
-        
+        for (int i = 0; i < PlayerDataMaster.Instance.RoomCount; i++)
+        {
+            roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
+        }
+        for (int i = PlayerDataMaster.Instance.RoomCount; i < PlayerDataMaster.Instance.MaxRoomCount; i++)
+        {
+            roomDisplayers[i].SetBuyPriceText(RoomPrice);//send squad here?
+        }
+
     }
     private void OnDisable()
     {
@@ -35,7 +39,7 @@ public class RoomManager : MonoBehaviour
     public void TryAddRoom()
     {
         //
-        if(!Inventory.Instance.TryRemoveGold(roomPrice))
+        if(!Inventory.Instance.TryRemoveGold(RoomPrice))
         {
             notEnoughGoldText.SetActive(true);
             return;
@@ -53,6 +57,7 @@ public class RoomManager : MonoBehaviour
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
+            roomDisplayers[i].SetBuyPriceText(RoomPrice);
         }
     }
 }

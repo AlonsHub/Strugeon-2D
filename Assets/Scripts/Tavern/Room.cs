@@ -6,6 +6,7 @@ using UnityEngine;
 public class Room 
 {
     public int size;
+    //public int price; //not needed, it's based on how many rooms already exist
     public int roomNumber;
 
     public Squad squad;
