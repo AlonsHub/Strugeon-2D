@@ -57,7 +57,10 @@ public class RoomManager : MonoBehaviour
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
-            roomDisplayers[i].SetBuyPriceText(RoomPrice);
+        }
+        for (int i = PlayerDataMaster.Instance.RoomCount; i < PlayerDataMaster.Instance.MaxRoomCount; i++)
+        {
+            roomDisplayers[i].SetBuyPriceText(RoomPrice);//send squad here?
         }
     }
 }
