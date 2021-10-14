@@ -21,9 +21,9 @@ public class Room
 
     public bool TryUpgrade()
     {
-        int price = size * 5;
+        //int price = size * 5;
 
-        if (Inventory.Instance.TryRemoveGold(price))
+        if (Inventory.Instance.TryRemoveGold(size * Prices.upgradeRoomBasePrice))
         {
             size++;
             return true;
