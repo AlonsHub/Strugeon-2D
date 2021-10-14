@@ -38,7 +38,7 @@ public class SquadRoomDisplayer : MonoBehaviour
     {
         if (squadSlots != null)
         {
-            for (int i = 0; i < squadSlots.Length; i++)
+            for (int i = squadSlots.Length-1; i >= 0; i--)
             {
                 Destroy(squadSlots[i].gameObject);
             }
@@ -48,19 +48,18 @@ public class SquadRoomDisplayer : MonoBehaviour
     {
 
         squadSlots = new BasicMercSlot[room.size];
-        for (int i = 0; i < squadSlots.Length; i++)
+
+
+        for (int i = 0; i < room.size; i++)
         {
             squadSlots[i] = Instantiate(squadSlotPrefab, slotParent).GetComponent<BasicMercSlot>();
-            squadSlots[i].squadRoomDisplayer = this; 
-            if (i < room.squad.pawns.Count)
-            {
-                squadSlots[i].SetMe(room.squad.pawns[i]);
-            }
-            else
-            {
+            squadSlots[i].squadRoomDisplayer = this;
+            if (i >= room.squad.pawns.Count)
                 squadSlots[i].SetMe();
-            }
+            else
+                squadSlots[i].SetMe(room.squad.pawns[i]);
         }
+
     }
 
     public void ClickedMercSlot(BasicMercSlot mercSlot)

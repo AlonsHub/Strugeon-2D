@@ -26,6 +26,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
     public void SetMe(Room r, int i)
     {
         room = r;
+        room.roomNumber = i;
         if (room.isOccupied)
         {
             //go red?
@@ -41,6 +42,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
             //perhaps read the Room.statusText instead?
             //should'nt vacant rooms exist already? just have a room with no squad in it... sounds right?
         }
+        isOccupied = room.isOccupied;
         roomNumber.text = (i+1).ToString();
     }
 
@@ -52,6 +54,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         //SquadRoomDisplayer.Instance.SetMe(room);
+        if(room.isOccupied)
         Tavern.Instance.SquadRoomSetup(this);
         //edit squad if there is one
         
