@@ -66,8 +66,8 @@ public class Tavern : MonoBehaviour
             GameObject go = Instantiate(roomPanelPrefab, roomButtonParent);
             _roomButtons.Add(go.GetComponent<RoomButton>());
             //roomButtons.Add(go);
-            _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
-            _roomButtons[i].room.roomNumber = i;
+            _roomButtons[i].room.roomNumber = i; //RENUMBERS ROOMS?!
+            _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
         }
     }
 

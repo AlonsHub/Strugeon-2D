@@ -15,12 +15,15 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
     //Image leaderIcon;
     [SerializeField]
     TMP_Text statusText; //resting, away, etc...
+    [SerializeField]
+    TMP_Text roomNumber; //resting, away, etc...
+    
     //[SerializeField]
     //TMP_Text capacityText; //resting, away, etc...
 
     [SerializeField]
     Sprite defualtSprite;
-    public void SetMe(Room r)
+    public void SetMe(Room r, int i)
     {
         room = r;
         if (room.isOccupied)
@@ -38,6 +41,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
             //perhaps read the Room.statusText instead?
             //should'nt vacant rooms exist already? just have a room with no squad in it... sounds right?
         }
+        roomNumber.text = (i+1).ToString();
     }
 
     public void SetStatusText(string newText)
