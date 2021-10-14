@@ -51,7 +51,14 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        //SquadRoomDisplayer.Instance.SetMe(room);
+        Tavern.Instance.SquadRoomSetup(this);
         //edit squad if there is one
+        
+
+    }
+    public void EditMe()
+    {
         Tavern.Instance.EditSquadMenu(room.squad, room);
 
         //unset room
@@ -60,6 +67,6 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         room.squad = null;
         //room = null;
         //status text change
-
+        SetStatusText("Editing...");
     }
 }

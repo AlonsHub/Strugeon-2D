@@ -15,7 +15,7 @@ public class BasicMercSlot : MonoBehaviour, IPointerClickHandler
 
     //should NOT be in the basic form
     [SerializeField]
-    SquadRoomDisplayer squadRoomDisplayer;
+    public SquadRoomDisplayer squadRoomDisplayer;
     [SerializeField]
     Sprite onSprite;
     [SerializeField]

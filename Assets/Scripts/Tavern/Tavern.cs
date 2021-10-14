@@ -20,6 +20,7 @@ public class Tavern : MonoBehaviour
     [SerializeField]
     Transform roomButtonParent;
 
+    public RoomManager roomManager;
     //List<GameObject> roomButtons;
     List<RoomButton> _roomButtons;
 
@@ -31,6 +32,9 @@ public class Tavern : MonoBehaviour
     //GameObject roomPanelPrefab;
 
     List<RoomBuildDisplayer> roomDisplayers;
+
+    [SerializeField]
+    SquadRoomDisplayer squadRoomDisplayer;
 
 
     void Start()
@@ -119,5 +123,18 @@ public class Tavern : MonoBehaviour
         TryOpenNewSquadMenu(room);
     }
 
+    RoomButton activeRoomButton;
+    public void SquadRoomSetup(RoomButton roomButton)
+    {
+        if (!squadRoomDisplayer.gameObject.activeSelf)
+            squadRoomDisplayer.gameObject.SetActive(true);
 
+        squadRoomDisplayer.SetMe(roomButton.room);
+        activeRoomButton = roomButton;
+    }
+
+    public void EditActiveSquad()
+    {
+        activeRoomButton.EditMe();
+    }
 }
