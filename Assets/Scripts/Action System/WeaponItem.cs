@@ -181,14 +181,16 @@ public class WeaponItem : ActionItem
         {
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
 
-            if(p.currentHP > 0)
-            {
-                weight *= 5;
+            if (p.currentHP <= 0)
+                continue;
+            //if(p.currentHP > 0)
+            //{
+            //    weight *= 5;
                 if(p.currentHP <= p.maxHP/2.5f) //40%
                 {
                     weight *= 10;
                 }
-            }
+            //}
 
             if (currentDistance <= range *14)
             {
@@ -196,7 +198,7 @@ public class WeaponItem : ActionItem
                 {
                     continue;
                 }
-                weight *= 20;
+                weight *= 2; // changed from 20
             }
 
             if (weight != 0)
