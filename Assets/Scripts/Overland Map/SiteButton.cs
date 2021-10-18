@@ -8,13 +8,15 @@ using PathCreation;
 
 public class SiteButton : MonoBehaviour
 {
+    public static Dictionary<string, float> SiteCooldowns; // on cooldown as long as the value is greater than 0
+
     //SelectionScreenDisplayer displayer;
     [SerializeField]
     SiteDisplayer displayer;
 
     //public Level level; 
     public LevelSO levelSO;
-    [Tooltip("Estiamted duration in minutes")]
+    [Tooltip("Estiamted traveling duration in seconds")]
     public float ETA; //estiamted duration in minutes
     //public PathCreator pathCreator;
     //public PathCreator pathCreatorReturn;
@@ -45,18 +47,47 @@ public class SiteButton : MonoBehaviour
     public bool isSet = false; //set means all level data has been set and hadn't been "used" yet. 
                                //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
 
-
+    private void Awake()
+    {
+        if (SiteCooldowns == null)
+            SiteCooldowns = new Dictionary<string, float>();
+    }
     private void Start()
     {
+        //read if any site cooldown times exist
+        
+        if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
+        {
+            if (PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] < maxCooldown)
+            {
+                SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
+                isCooldown = true;
+            }
+            else
+            {
+                isCooldown = false; ///NOT ALWAYS
+                SiteCooldowns[levelSO.name] = maxCooldown;
+            }
+        }
+        else
+        {
+                isCooldown = false; ///NOT ALWAYS
+                SiteCooldowns.Add(levelSO.name, maxCooldown);/// NOT ALWAYS
+
+            ////////////////////////////// PROBLEMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+        }
+
         Invoke("LateStart", 1);
     }
 
     void LateStart()
     {
-        isCooldown = false;
-
         if (myDataDisplay)
             myDataDisplay.SetActive(false);
+
+        if (isCooldown)
+            StartCooldownCaller();
+
     }
 
     public void GetProperties() //for filling displayers?
@@ -112,6 +143,8 @@ public class SiteButton : MonoBehaviour
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
         LevelRef.Instance.SetCurrentLevel(levelSO);
 
+        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown;
+
         PartyMaster.Instance.currentSquad = readiedSquad;
 
         SceneManager.LoadScene("ArenaSceneGeneric");
@@ -122,10 +155,12 @@ public class SiteButton : MonoBehaviour
     {
         StartCoroutine("StartCooldown");
     }
+    float timer = float.MaxValue;
+
     IEnumerator StartCooldown()
     {
         isCooldown = true;
-        float timer = 0f;
+        timer = 0f;
         clockAndTimerParent.SetActive(true);
         timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
 
@@ -138,5 +173,13 @@ public class SiteButton : MonoBehaviour
         }
         clockAndTimerParent.SetActive(false);
         isCooldown = false;
+    }
+
+    private void OnDisable()
+    {
+        //if(timer < maxCooldown)
+        //{
+            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer;
+        //}
     }
 }

@@ -16,16 +16,33 @@ public class EscapeItem : ActionItem
 
     public override void Action(GameObject tgt)
     {
-        //walk to edge of screen and disappear!
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Escape);
 
 
+
+        StartCoroutine("WalkToEscape");
+        //pawn.Escape()
+    }
+    IEnumerator WalkToEscape()
+    {
+        //walk to edge of screen and disappear!
+        pawn.tileWalker.StartNewPathWithRange(ArenaMaster.Instance.escapeTile);
+
+        //tilewalk to PlayerDataMaster.Instance.currentLevel.escapeTile
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+
+        pawn.Escape();
+        //disappear
+
+        pawn.TurnDone = true;
     }
 
     public override void CalculateVariations()
     {
-        if(pawn.currentHP >= pawn.maxHP/escapeThreshold)
+        actionVariations.Clear();
+
+        if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
             actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight));
         }

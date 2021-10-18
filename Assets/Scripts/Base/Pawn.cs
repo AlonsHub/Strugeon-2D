@@ -249,7 +249,25 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     
     public void Escape()
     {
+        //walk to the escape square - by tilePos(?)
+        //Removes self from squad (permanently, for now)
+        if (PartyMaster.Instance.currentSquad.pawns.Remove(this))
+        {
+            Debug.LogWarning("Escaped and destroyed!");
+        }
+        else
+        {
+            Debug.LogWarning("Escaped and destroyed!");
+        }
+        //Add to the list of the Cowardly (TurnMaster)
+        RefMaster.Instance.mercs.Remove(this); //not ideal
+        PartyMaster.Instance.availableMercs.Remove(this);
+        TurnMaster.Instance.theCowardly.Add(mercName);
+        TurnMaster.Instance.turnTakers.Remove(this);
+        TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
+        Destroy(myTurnPlate);
 
+        Destroy(gameObject, .5f); //just for now, nukes it
     }
 
     IEnumerator DelayedDeath()

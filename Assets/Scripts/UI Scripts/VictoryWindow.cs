@@ -35,13 +35,19 @@ public class VictoryWindow : MonoBehaviour
         foreach (var pawn in RefMaster.Instance.mercs)
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
-            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP<=0);
+            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP<=0, false);
         }
         foreach (var pawnName in TurnMaster.Instance.theDead)
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName);
-            go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, true);
+            go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, true, false);
+        }
+        foreach (var pawnName in TurnMaster.Instance.theCowardly)
+        {
+            GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
+            Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName); //need enum to portrait in stead (dict)
+            go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, false, true);
         }
 
         siteImageDisplayer.sprite = levelSO.levelData.siteIcon;

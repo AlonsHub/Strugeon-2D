@@ -20,6 +20,8 @@ public struct LevelData
     public LairDifficulty difficulty;
     public Sprite siteIcon;
 
+    public Vector2Int escapeTile;
+
     public void SetLevelData(LairDifficulty newDifficulty)
     {
         //enemies.Clear();

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 853967901895232535}
   - component: {fileID: 5092255476189858162}
   - component: {fileID: -1024576177371926576}
+  - component: {fileID: 2021261266725811000}
   m_Layer: 11
   m_Name: Shuki
   m_TagString: Merc
@@ -218,7 +219,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   affectedBehaviour: {fileID: 7974199490736343132}
   modifier: 10
-  hpThresholdPerect: 10
+  hpThresholdPercent: 20
+--- !u!114 &2021261266725811000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b92dd58d59dcb4caf6107572f008fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 3
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  escapeThreshold: 2
+  escapeWeight: 50
 --- !u!1 &2273014384348288631
 GameObject:
   m_ObjectHideFlags: 0

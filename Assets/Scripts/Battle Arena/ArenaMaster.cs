@@ -15,6 +15,8 @@ public class ArenaMaster : MonoBehaviour
 
     public List<Vector2Int> mercSpawnTiles;
     public List<Vector2Int> enemySpawnTiles;
+    [SerializeField]
+    public Vector2Int escapeTile;
     
     public float startDelayAmount;
 
@@ -32,6 +34,8 @@ public class ArenaMaster : MonoBehaviour
     public void LoadNewLevel()
     {
         levelData = LevelRef.Instance.currentLevel.levelData;
+
+        escapeTile = levelData.escapeTile;
         //instantiate level prefab for GFX/Environment assets ONLY
         //levelGFX = Instantiate(levelData.levelPrefab);
         List<Pawn> newEnemies = new List<Pawn>();

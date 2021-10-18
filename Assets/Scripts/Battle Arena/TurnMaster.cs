@@ -149,6 +149,7 @@ public class TurnMaster : MonoBehaviour
         isGameRunning = false;
         gameHasBeenReset = true;
         if (RefMaster.Instance.mercs.Count != 0)
+            //if (PartyMaster.Instance.currentMercParty.Count != 0)
         {
             //Give reward
             //Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
@@ -194,6 +195,8 @@ public class TurnMaster : MonoBehaviour
         {
             defeatWindow.gameObject.SetActive(true);
             defeatWindow.SetMe(LevelRef.Instance.currentLevel);
+
+
         }
 
         PlayerDataMaster.Instance.GrabAndSaveData();

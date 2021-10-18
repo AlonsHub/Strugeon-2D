@@ -20,7 +20,7 @@ public class DefeatWindow : MonoBehaviour
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             //go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP <= 0);
-            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, true);
+            go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, true, false);
         }
 
         siteImageDisplayer.sprite = levelSO.levelData.siteIcon;

@@ -24,6 +24,7 @@ public class PlayerDataMaster : MonoBehaviour
 
     public int RoomCount { get => currentPlayerData.rooms.Count; }
     public int MaxRoomCount { get => 4; } //temp
+    public Dictionary<string, float> SavedCooldowns { get => currentPlayerData.SiteCooldownTimes; private set => currentPlayerData.SiteCooldownTimes = value; } //to be read from and to
 
     private void Awake()
     {
@@ -36,6 +37,8 @@ public class PlayerDataMaster : MonoBehaviour
 
         saveFolderPath = Application.dataPath + "/Resources/Saves/";
         saveFilePrefix = "savedgame_";
+
+        //SavedCooldowns = new Dictionary<string, float>();
 
         DontDestroyOnLoad(gameObject);
     }
