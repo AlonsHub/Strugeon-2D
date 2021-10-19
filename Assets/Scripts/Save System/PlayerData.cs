@@ -11,7 +11,7 @@ public class PlayerData
     public List<MercName> availableMercs;
 
     //squads
-    public List<List<MercName>> squadsAsMercNames;
+    //public List<List<MercName>> squadsAsMercNames;
     public List<MercName> squadsAsMercNameList; // comma seperated
 
     //public List<Squad> availableSquads; //holds mercs that are already gourped-up, 

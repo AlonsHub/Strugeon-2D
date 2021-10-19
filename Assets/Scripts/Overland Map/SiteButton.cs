@@ -69,13 +69,13 @@ public class SiteButton : MonoBehaviour
                 SiteCooldowns[levelSO.name] = maxCooldown;
             }
         }
-        else
-        {
-                isCooldown = false; ///NOT ALWAYS
-                SiteCooldowns.Add(levelSO.name, maxCooldown);/// NOT ALWAYS
+        //else
+        //{
+        //        isCooldown = false; ///NOT ALWAYS
+        //        SiteCooldowns.Add(levelSO.name, maxCooldown);/// NOT ALWAYS
 
-            ////////////////////////////// PROBLEMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-        }
+        //    ////////////////////////////// PROBLEMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+        //}
 
         Invoke("LateStart", 1);
     }
@@ -143,7 +143,7 @@ public class SiteButton : MonoBehaviour
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
         LevelRef.Instance.SetCurrentLevel(levelSO);
 
-        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown;
+        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = 0;
 
         PartyMaster.Instance.currentSquad = readiedSquad;
 
@@ -155,7 +155,7 @@ public class SiteButton : MonoBehaviour
     {
         StartCoroutine("StartCooldown");
     }
-    float timer = float.MaxValue;
+    float timer;
 
     IEnumerator StartCooldown()
     {
@@ -175,11 +175,11 @@ public class SiteButton : MonoBehaviour
         isCooldown = false;
     }
 
-    private void OnDisable()
-    {
-        //if(timer < maxCooldown)
-        //{
-            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer;
-        //}
-    }
+    //private void OnDisable()
+    //{
+    //    //if(timer < maxCooldown)
+    //    //{
+    //        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer;
+    //    //}
+    //}
 }
