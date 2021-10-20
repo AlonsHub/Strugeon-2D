@@ -39,7 +39,7 @@ public class SiteButton : MonoBehaviour
 
     public bool isCooldown;
     public bool isWaitingForSquad;
-    
+
     public PathCreator pathCreator; //path to site
 
     public Squad readiedSquad;
@@ -55,19 +55,24 @@ public class SiteButton : MonoBehaviour
     private void Start()
     {
         //read if any site cooldown times exist
-        
+
         if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
         {
             if (PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] < maxCooldown)
             {
-                SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
+                timer = SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
                 isCooldown = true;
+                
             }
             else
             {
                 isCooldown = false; ///NOT ALWAYS
-                SiteCooldowns[levelSO.name] = maxCooldown;
+                timer = SiteCooldowns[levelSO.name] = maxCooldown;
             }
+        }
+        else
+        {
+            timer = maxCooldown;
         }
         //else
         //{
@@ -96,13 +101,13 @@ public class SiteButton : MonoBehaviour
     }
     public void OnClick()
     {
-        if(isCooldown || isWaitingForSquad)
+        if (isCooldown || isWaitingForSquad)
         {
             Debug.LogError("isCooldown or isWaitingForSquad");
             return;
         }
 
-        if(isReady)
+        if (isReady)
         {
             SendToArena();
             return;
@@ -133,7 +138,7 @@ public class SiteButton : MonoBehaviour
 
 
         displayer.SetMe(this);
-       
+
     }
 
 
@@ -169,17 +174,17 @@ public class SiteButton : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(clockDelay);
             timer += clockDelay;
-            timeText.text = "00:" + ((int)((maxCooldown/60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+            timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
         }
         clockAndTimerParent.SetActive(false);
         isCooldown = false;
     }
 
-    //private void OnDisable()
-    //{
-    //    //if(timer < maxCooldown)
-    //    //{
-    //        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer;
-    //    //}
-    //}
+    private void OnDisable()
+    {
+        if (timer < maxCooldown)
+        {
+            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
+        }
+    }
 }
