@@ -22,9 +22,11 @@ public class PlayerData
 
     //gold
     public int gold;
-
+    
     public Dictionary<string, float> SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
 
+    public List<string> keys; //sitenames
+    public List<float> values; //cooldowns
     //site cooldowns?
     //
 }

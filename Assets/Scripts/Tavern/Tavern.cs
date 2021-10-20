@@ -139,4 +139,9 @@ public class Tavern : MonoBehaviour
     {
         activeRoomButton.EditMe();
     }
+
+    //private void OnDisable()
+    //{
+    //    PlayerDataMaster.Instance.GrabAndSaveData();
+    //}
 }

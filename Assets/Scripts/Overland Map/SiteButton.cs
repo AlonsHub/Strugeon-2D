@@ -165,7 +165,16 @@ public class SiteButton : MonoBehaviour
     IEnumerator StartCooldown()
     {
         isCooldown = true;
-        timer = 0f;
+
+        //timer =  PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name];
+        //if (PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name] > 0)
+        //{
+
+        //}
+        //else
+        //{
+        //    timer = 0f;
+        //}
         clockAndTimerParent.SetActive(true);
         timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
 

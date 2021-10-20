@@ -66,6 +66,8 @@ public class PlayerDataMaster : MonoBehaviour
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
 
+        currentPlayerData.values = currentPlayerData.SiteCooldownTimes.Values.ToList();
+        currentPlayerData.keys = currentPlayerData.SiteCooldownTimes.Keys.ToList();
 
         string pdJsonString = JsonUtility.ToJson(currentPlayerData);
 
@@ -115,6 +117,7 @@ public class PlayerDataMaster : MonoBehaviour
         if(pd != null)
         {
             LoadPlayerData(pd);
+
         }
 
         //consider overwriting 
@@ -126,7 +129,23 @@ public class PlayerDataMaster : MonoBehaviour
     void LoadPlayerData(PlayerData pd)
     {
         currentPlayerData = pd;
-        
+
+        currentPlayerData.SiteCooldownTimes = new Dictionary<string, float>();
+        if (currentPlayerData.values == null && currentPlayerData.keys == null)
+        {
+            return;
+        }
+        if (currentPlayerData.values.Count != currentPlayerData.keys.Count)
+        {
+            Debug.LogError("key and value amounts don't match");
+        }
+
+        for (int i = 0; i < currentPlayerData.values.Count; i++)
+        {
+            currentPlayerData.SiteCooldownTimes.Add(currentPlayerData.keys[i], currentPlayerData.values[i]);
+        }
+
+
         //PARTY REF?
 
         //REFMASTER
@@ -321,5 +340,10 @@ public class PlayerDataMaster : MonoBehaviour
         }
 
         return null; //false
+    }
+
+    private void OnApplicationQuit()
+    {
+        
     }
 }
