@@ -27,6 +27,7 @@ public class PurpleChoosingMode : MonoBehaviour
         if(Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
         Instance = this;
     }
@@ -45,23 +46,28 @@ public class PurpleChoosingMode : MonoBehaviour
         {
             newColor = colorOff;
             ren = actor.GetComponentInChildren<Renderer>();
-            ren.material.SetFloat("_Thickness", 0f);
+            ren.material.SetFloat("_Thickness", 0f); // the selection for psion powers in general
         }
 
-        foreach (Pawn p in RefMaster.Instance.mercs)
-        {
-            ren = p.GetComponentInChildren<Renderer>();
-            ren.material.SetColor("_Tint", newColor);
-        }
         foreach (Pawn p in RefMaster.Instance.enemies)
         {
             ren = p.GetComponentInChildren<Renderer>();
             ren.material.SetColor("_Tint", newColor);
         }
-        ren = actor.GetComponentInChildren<Renderer>();
-        ren.material.SetColor("_Tint", colorOff); //the actor always has their color off
+
+        if (actor.ActionItems.Any(x => x.targetAllies))
+        {
+            foreach (Pawn p in RefMaster.Instance.mercs)
+            {
+                ren = p.GetComponentInChildren<Renderer>();
+                ren.material.SetColor("_Tint", newColor);
+            }
+        }
+        //ren = actor.GetComponentInChildren<Renderer>();
+        //ren.material.SetColor("_Tint", colorOff); //the actor always has their color off
 
         //ADD CENSER
+        //ADD ESCAPE OPTION
 
     }
 
@@ -75,13 +81,6 @@ public class PurpleChoosingMode : MonoBehaviour
         //Very similar to "ToggleTint()" but this is on Setup and we're looping through them anyways
 
         Renderer ren;
-        foreach (Pawn p in RefMaster.Instance.mercs)
-        {
-          ren = p.GetComponentInChildren<Renderer>();
-            ren.material.SetColor("_Tint", colorOn);
-            purpleTargets.Add(p);
-
-        }
         foreach (Pawn p in RefMaster.Instance.enemies)
         {
             ren = p.GetComponentInChildren<Renderer>();
@@ -90,8 +89,17 @@ public class PurpleChoosingMode : MonoBehaviour
             purpleTargets.Add(p);
 
         }
-        ren = actor.GetComponentInChildren<Renderer>();
-        ren.material.SetColor("_Tint", colorOff);
+        if (actor.ActionItems.Any(x => x.targetAllies))
+        {
+            foreach (Pawn p in RefMaster.Instance.mercs)
+            {
+                ren = p.GetComponentInChildren<Renderer>();
+                ren.material.SetColor("_Tint", colorOn);
+                purpleTargets.Add(p);
+            }
+        }
+        //ren = actor.GetComponentInChildren<Renderer>();
+        //ren.material.SetColor("_Tint", colorOff);
 
         //purpleTargets.AddRange(RefMaster.Instance.mercs);
         //purpleTargets.AddRange(RefMaster.Instance.enemies);

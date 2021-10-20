@@ -18,6 +18,7 @@ public class ActionItem : MonoBehaviour
     public int currentModifier = 1;
     public List<ActionVariation> actionVariations;
     public bool isWeapon; // CAN REMOVE!
+    public bool targetAllies; 
     //public List<Character> relevantTargets; // An interesting idea, add actions to the pool per relevant target - regardless of the action type
     //but we should have all possible targets somere
 

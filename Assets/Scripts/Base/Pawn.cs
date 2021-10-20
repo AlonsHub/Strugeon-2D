@@ -100,6 +100,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public Sprite FullPortraitSprite { get => fullPortraitSprite; set => fullPortraitSprite = value; }
     public Sprite SASprite { get => saSprite; set => saSprite = value; }
 
+
+    public List<ActionItem> ActionItems { get => actionItems; }
+
     public static int totalPawns = 0;
 
 

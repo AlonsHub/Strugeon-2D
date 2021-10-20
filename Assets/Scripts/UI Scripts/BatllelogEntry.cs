@@ -22,7 +22,8 @@ public class BatllelogEntry : MonoBehaviour
 
     public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
     {
-        actingPawnNameDisplayer.text = "Cast";
+        //actingPawnNameDisplayer.text = "You cast";
+        actingPawnNameDisplayer.text = PlayerDataMaster.Instance.currentPlayerData.playerName;
         actingPawnNameDisplayer.color = colour;
 
         actionImage.sprite = psionActionIcon;

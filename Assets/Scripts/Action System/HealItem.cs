@@ -30,6 +30,9 @@ public class HealItem : ActionItem, SA_Item
         tileWalker = GetComponent<TileWalker>();
         actionVariations = new List<ActionVariation>(); //not needed?
         feetItem = GetComponent<FeetItem>();
+
+        targetAllies = true;
+
         base.Awake();
     }
     private void Start()
