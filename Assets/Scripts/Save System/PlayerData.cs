@@ -9,6 +9,7 @@ public class PlayerData
 
     //availavle mercs
     public List<MercName> availableMercs;
+    public List<MercName> hireableMercs;
 
     //squads
     //public List<List<MercName>> squadsAsMercNames;

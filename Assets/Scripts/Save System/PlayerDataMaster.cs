@@ -237,8 +237,6 @@ public class PlayerDataMaster : MonoBehaviour
 
         return confirmedSaveFileNames;
     }
-
-
     public PlayerData[] GetPlayerDataFromSaveList()
     {
         List<string> confirmedList = GetConfirmedSaveFileNames();
@@ -321,7 +319,6 @@ public class PlayerDataMaster : MonoBehaviour
         return toReturn;
     }
 
-
     public string SaveExistsCheck(string playerName)
     {
         string[] files;
@@ -341,7 +338,19 @@ public class PlayerDataMaster : MonoBehaviour
 
         return null; //false
     }
-
+    public void AddHireableMerc(MercName mercName)
+    {
+        if (currentPlayerData.hireableMercs == null)
+        {
+            currentPlayerData.hireableMercs = new List<MercName>();
+        }
+        else if (currentPlayerData.hireableMercs.Contains(mercName))
+        {
+            Debug.LogWarning("You have this merc already");
+            return;
+        }
+        currentPlayerData.hireableMercs.Add(mercName);
+    }
     private void OnApplicationQuit()
     {
         

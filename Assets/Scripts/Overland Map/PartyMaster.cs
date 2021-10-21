@@ -16,7 +16,7 @@ public class PartyMaster : MonoBehaviour
 
     public List<Squad> squads; //both available and OtW
 
-    public List<MercName> AllMercs()
+    public List<MercName> AllMercs() //including hireables
     {
         List<MercName> toReturn = new List<MercName>();
 
@@ -29,6 +29,13 @@ public class PartyMaster : MonoBehaviour
             foreach (var x in squad.pawns)
             {
                 toReturn.Add(x.mercName);
+            }
+        }
+        if(PlayerDataMaster.Instance.currentPlayerData.hireableMercs != null && PlayerDataMaster.Instance.currentPlayerData.hireableMercs.Count >0)
+        {
+            foreach (var item in PlayerDataMaster.Instance.currentPlayerData.hireableMercs)
+            {
+                toReturn.Add(item);
             }
         }
 
@@ -77,6 +84,10 @@ public class PartyMaster : MonoBehaviour
         {
             squads.Remove(s);
         }
+
+        //loadup hireable mercs? //not here, and honestly, we don't need to do this since we only need the MercNames anyway
+
+
     }
     //public void LoadUpAvailableMercs(List<MercName> mercNames)
     //{
