@@ -6,4 +6,5 @@ public static class Prices
 {
     public static int roomBasePrice = 25;
     public static int upgradeRoomBasePrice = 10;
+    public static int mercBasePrice = 50;
 }

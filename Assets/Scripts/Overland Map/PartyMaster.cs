@@ -16,6 +16,24 @@ public class PartyMaster : MonoBehaviour
 
     public List<Squad> squads; //both available and OtW
 
+    public List<MercName> AllMercs()
+    {
+        List<MercName> toReturn = new List<MercName>();
+
+        foreach (var item in availableMercs)
+        {
+            toReturn.Add(item.mercName);
+        }
+        foreach (var squad in squads)
+        {
+            foreach (var x in squad.pawns)
+            {
+                toReturn.Add(x.mercName);
+            }
+        }
+
+        return toReturn;
+    }
 
     void Awake()
     {
