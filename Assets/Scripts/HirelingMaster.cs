@@ -6,11 +6,28 @@ using UnityEngine;
 
 public class HirelingMaster : MonoBehaviour
 {
+    public static HirelingMaster Instance;
+
     [SerializeField]
     Transform idleLogParent;
     [SerializeField]
     GameObject newArrivalPrefab;
 
+    [SerializeField]
+    Animator anim;
+
+    private void Awake()
+    {
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        //DontDestroyOnLoad(gameObject);
+    }
 
     public void PromptNewHireling()
     {
@@ -39,9 +56,16 @@ public class HirelingMaster : MonoBehaviour
 
         HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();
         //List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
-        hirelingWindow.SetMe(missing[rand]);
+        hirelingWindow.SetMe(missing[rand], this);
         PlayerDataMaster.Instance.AddHireableMerc(missing[rand]);
 
+        anim.SetTrigger("Open");
+
+    }
+
+    public void CloseMe()
+    {
+        anim.SetTrigger("Close");
     }
 
     bool CheckForArrivals() //returns true if new mercs can arrive

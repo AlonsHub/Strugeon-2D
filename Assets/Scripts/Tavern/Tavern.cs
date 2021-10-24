@@ -24,13 +24,6 @@ public class Tavern : MonoBehaviour
     //List<GameObject> roomButtons;
     List<RoomButton> _roomButtons;
 
-    //[SerializeField]
-    //Image ;
-    //[SerializeField]
-    //GameObject roomPanelPrefab;
-    //[SerializeField]
-    //GameObject roomPanelPrefab;
-
     List<RoomBuildDisplayer> roomDisplayers;
 
     [SerializeField]
@@ -48,7 +41,8 @@ public class Tavern : MonoBehaviour
         Instance = this;
 
         RefreshRooms();
-       
+
+        Invoke("TryPromptNewHireling", 3);
     }
 
     public void RefreshRooms()
@@ -61,19 +55,14 @@ public class Tavern : MonoBehaviour
             }
             //roomButtons.Clear();
         }
-           
-        //roomButtons = new List<GameObject>();
         _roomButtons = new List<RoomButton>();
         //set up empty rooms
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
             _roomButtons.Add(go);
-            //roomButtons.Add(go);
-            //go.room.roomNumber = i; //RENUMBERS ROOMS?!
             
             go.SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
-          
         }
     }
 
@@ -140,8 +129,10 @@ public class Tavern : MonoBehaviour
         activeRoomButton.EditMe();
     }
 
-    //private void OnDisable()
-    //{
-    //    PlayerDataMaster.Instance.GrabAndSaveData();
-    //}
+    //SUPER TEMP
+    void TryPromptNewHireling()
+    {
+        //SHOULD HAAPEN EVERY X AND AGAIN
+        HirelingMaster.Instance.PromptNewHireling();
+    }
 }

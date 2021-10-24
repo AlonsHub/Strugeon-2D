@@ -17,14 +17,19 @@ public class HirelingWindow : MonoBehaviour
 
     public int price;
 
-    public void SetMe(MercName newMerc)
+    public HirelingMaster hirelingMaster;
+
+    public void SetMe(MercName newMerc, HirelingMaster hm)
     {
         mercName = newMerc;
         nameText.text = newMerc.ToString(); //interesting if this works or not
 
         portrait.sprite = MercPrefabs.Instance.EnumToPawnPrefab(mercName).PortraitSprite;
         //price
+
+        hirelingMaster = hm;
     }
+
 
     public void TryHire()
     {
