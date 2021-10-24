@@ -355,4 +355,10 @@ public class PlayerDataMaster : MonoBehaviour
     {
         
     }
+
+    public void HireMerc(MercName mn)
+    {
+        PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
+        currentPlayerData.hireableMercs.Remove(mn);
+    }
 }

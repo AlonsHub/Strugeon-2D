@@ -40,7 +40,10 @@ public class HirelingWindow : MonoBehaviour
         }
 
         //success
-        PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        //PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+        PlayerDataMaster.Instance.HireMerc(mercName);
+
+        HirelingMaster.Instance.CloseMe();
 
         //close and destroy stuff
     }

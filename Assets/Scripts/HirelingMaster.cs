@@ -60,7 +60,6 @@ public class HirelingMaster : MonoBehaviour
         PlayerDataMaster.Instance.AddHireableMerc(missing[rand]);
 
         anim.SetTrigger("Open");
-
     }
 
     public void CloseMe()
