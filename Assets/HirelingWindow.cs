@@ -43,7 +43,12 @@ public class HirelingWindow : MonoBehaviour
         //PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         PlayerDataMaster.Instance.HireMerc(mercName);
 
-        HirelingMaster.Instance.CloseMe();
+        if (transform.parent.childCount < 1) // other hireling windows
+        {
+            HirelingMaster.Instance.CloseMe();
+        }
+
+        Destroy(gameObject);
 
         //close and destroy stuff
     }

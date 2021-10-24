@@ -174,7 +174,7 @@ public class WeaponItem : ActionItem
 
 
         if(feetItem)
-        feetItem.currentRangeInTiles = range;
+        feetItem.currentRangeInTiles = range; // maybe do this at Start()?
 
         int weight = 4;
         foreach(Pawn p in targets)
