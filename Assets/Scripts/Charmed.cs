@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ public class Charmed : MonoBehaviour
     {
         weaponItem = wi;
         lifetime = totalLifetime;
-        weaponItem.targets = RefMaster.Instance.mercs;
+        //weaponItem.targets = RefMaster.Instance.mercs.Where(x => x.Name != wi.pawn.Name).ToList(); // <- "Why would you hit yourself?!"
+        weaponItem.targets = RefMaster.Instance.mercs; // <- "Why not?"
 
         StartCoroutine(TurnCounter());
     }
