@@ -22,13 +22,10 @@ public class TurnMaster : MonoBehaviour
     public Transform currenTurnPlateTrans;
     public Transform nextTurnPlateTrans;
 
-    //public TurnDisplayer turnDisplayer;
-    //public Transform turnDisplayerParent;
+    
     public GameObject prefabeTurnPlate;
     public float turnPlateDistance;
-    //List<TurnDisplayer> turnDisplayers;
-
-    //public TurnDisplayer turnDisplayer;
+    
     public List<Bar> bars;
 
     public float rechargeAmount;
@@ -361,6 +358,20 @@ public class TurnMaster : MonoBehaviour
             }
         }
 
+    }
+
+
+    public void AddNewTurnTaker(Pawn newPawn) //adding after the current turn taker
+    {
+        //position self
+        newPawn.Init();
+        newPawn.tileWalker.FindOwnGridPos();
+
+        GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
+        turnPlates.Add(go.transform);
+
+
+        turnTakers.Insert(currentTurn ,newPawn);
     }
 }
 public interface TurnTaker

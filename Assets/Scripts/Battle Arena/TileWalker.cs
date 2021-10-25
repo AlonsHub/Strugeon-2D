@@ -196,7 +196,7 @@ public class TileWalker : MonoBehaviour
         int x = Mathf.RoundToInt((transform.position.x - floorGrid.startingPoint.position.x)/(floorGrid.gapSize.x + floorGrid.tileSize.x));
         int y = Mathf.RoundToInt((transform.position.z - floorGrid.startingPoint.position.z)/(floorGrid.gapSize.y + floorGrid.tileSize.y));
 
-        if (gridPos.x != x || gridPos.y != y)
+        if (currentNode == null || gridPos.x != x || gridPos.y != y)
         {
             gridPos.x = Mathf.RoundToInt(x);
             gridPos.y = Mathf.RoundToInt(y);

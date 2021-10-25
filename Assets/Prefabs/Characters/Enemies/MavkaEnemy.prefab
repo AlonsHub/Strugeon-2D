@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 7140961137990028506}
   - component: {fileID: 462218377637529745}
   - component: {fileID: 8061769375003922179}
+  - component: {fileID: -2381371511239876949}
   m_Layer: 12
   m_Name: MavkaEnemy
   m_TagString: Enemy
@@ -405,6 +406,28 @@ MonoBehaviour:
   charmDuration: 2
   initialWeight: 20
   targets: []
+  maxCooldown: 4
+--- !u!114 &-2381371511239876949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751047712026826206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59eb79c69381e7c44bd5213b4b2c183b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 1
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  targetAllies: 0
+  drownedSpiritPrefab: {fileID: 6673386756113323264, guid: 595829a95bbdb3e49ae95116890c9ea1,
+    type: 3}
+  cooldown: 0
   maxCooldown: 4
 --- !u!1 &4445243598318866218
 GameObject:

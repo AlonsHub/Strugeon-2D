@@ -43,7 +43,7 @@ public class CharmItem : ActionItem
 
     public override void CalculateVariations()
     {
-        actionVariations.Clear();
+        actionVariations.Clear(); //Most important to do this! when a merc looks for actionVariations - he may find stale ones here (even if returned on cooldown > 0)
 
         if(currentCooldown >0)
         {
@@ -55,7 +55,9 @@ public class CharmItem : ActionItem
             Debug.Log(name + " Found no enemies, no weapon action variations added");
             return;// end match
         }
+
         int weight = initialWeight;
+
         foreach (Pawn p in targets)
         {
             actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
