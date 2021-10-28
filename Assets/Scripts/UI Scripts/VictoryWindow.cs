@@ -29,7 +29,8 @@ public class VictoryWindow : MonoBehaviour
         foreach (var pawn in levelSO.levelData.enemies)
         {
             GameObject go = Instantiate(enemyPortraitPrefab, enemyPortraitGridParent);
-            go.GetComponentInChildren<Image>().sprite = pawn.PortraitSprite;
+            //go.GetComponentInChildren<Image>().sprite = pawn.PortraitSprite;
+            go.GetComponent<EnemySummary>().SetMe( pawn.PortraitSprite);
         }
 
         foreach (var pawn in RefMaster.Instance.mercs)

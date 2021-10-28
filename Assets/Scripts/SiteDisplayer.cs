@@ -49,12 +49,12 @@ public class SiteDisplayer : MonoBehaviour
                 {
                     Debug.LogError("not UI image found on dwellerPortraitPrefab");
                 }
-                img.sprite = levelData.enemies[i].PortraitSprite; //consider keeping them somewhere
+                img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
                 dwellerPortraitImgs.Add(img);
             }
             else
             {
-                dwellerPortraitImgs[i].sprite = levelData.enemies[i].PortraitSprite;
+                dwellerPortraitImgs[i].sprite = levelData.enemies[i].FullPortraitSprite;
             }
         }
         if (levelData.enemies.Count < dwellerPortraitImgs.Count) // BADDDD and easy to do otherwise
