@@ -42,7 +42,7 @@ public class Tavern : MonoBehaviour
 
         RefreshRooms();
 
-        Invoke("TryPromptNewHireling", 3);
+        Invoke("TryPromptNewHireling", 1);
     }
 
     public void RefreshRooms()
