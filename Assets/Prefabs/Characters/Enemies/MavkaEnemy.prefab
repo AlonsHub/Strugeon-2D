@@ -357,11 +357,7 @@ MonoBehaviour:
   mercName: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
-  targets:
-  - {fileID: 462218377637529745}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targets: []
   tileWalker: {fileID: 5357307063160447432}
   anim: {fileID: 6343527151208602390}
   portraitSprite: {fileID: 21300000, guid: 99c29cf995552b14abe8610a64af2728, type: 3}
@@ -406,6 +402,8 @@ MonoBehaviour:
   charmDuration: 2
   initialWeight: 20
   targets: []
+  charmVFX: {fileID: 6136953690358548763, guid: 607df88062ee0de4d9381226b039f4f6,
+    type: 3}
   maxCooldown: 4
 --- !u!114 &-2381371511239876949
 MonoBehaviour:
@@ -425,10 +423,12 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 0
   targetAllies: 0
-  drownedSpiritPrefab: {fileID: 6673386756113323264, guid: 595829a95bbdb3e49ae95116890c9ea1,
+  drownedSpiritPrefab: {fileID: 6673386756113323264, guid: 6a60b5f153d0064479958102762bcfc0,
     type: 3}
   cooldown: 0
   maxCooldown: 4
+  summonVFX: {fileID: 6136953690358548763, guid: 99bc00321565749439b5ade3744cf794,
+    type: 3}
 --- !u!1 &4445243598318866218
 GameObject:
   m_ObjectHideFlags: 0

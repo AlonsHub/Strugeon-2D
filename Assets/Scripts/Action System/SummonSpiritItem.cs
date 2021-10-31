@@ -10,7 +10,9 @@ public class SummonSpiritItem : ActionItem
     [SerializeField]
     int cooldown; //start full
     [SerializeField]
-    int maxCooldown; 
+    int maxCooldown;
+    [SerializeField]
+    GameObject summonVFX;
 
     [ContextMenu("Summon")]
     public override void Action(GameObject tgt)
@@ -19,8 +21,22 @@ public class SummonSpiritItem : ActionItem
         GameObject go = Instantiate(drownedSpiritPrefab);
         Pawn p = go.GetComponent<Pawn>();
 
+        GameObject go2 = Instantiate(summonVFX, go.transform);
+
+        go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
+
+        //Vector3 v = (Vector3)Vector2.one * (FloorGrid.Instance.tileSize.x + FloorGrid.Instance.gapSize.x);
+
+        //Random.Range(-4, 4);
+
+        //go.transform.position += v; 
+        //Battlelog entry! // ADD CHARM AND SUMMON TO ENUM with repectvie sprites
+
+        RefMaster.Instance.enemies.Add(p);
         TurnMaster.Instance.AddNewTurnTaker(p);
         cooldown = maxCooldown;
+        pawn.anim.SetTrigger("Summon");
+
         //endturn
         pawn.TurnDone = true;
     }
