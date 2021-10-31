@@ -167,6 +167,21 @@ public class FloorGrid : MonoBehaviour
         floorTiles[pos.x, pos.y].isEmpty = false;
     }
 
+    public FloorTile GetRandomFreeTile()
+    {
+        List<FloorTile> freeTiles = new List<FloorTile>();
+
+        foreach (var ft in floorTiles) 
+        {
+            if(ft.isEmpty)
+            {
+                freeTiles.Add(ft);
+            }
+        }
+
+        return freeTiles[Random.Range(0, freeTiles.Count)];
+    }
+
     //private void OnDrawGizmos()
     //{
     //    if(path.Count >0)

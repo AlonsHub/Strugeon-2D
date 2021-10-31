@@ -368,10 +368,15 @@ public class TurnMaster : MonoBehaviour
         newPawn.tileWalker.FindOwnGridPos();
 
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
+        go.GetComponent<TurnDisplayer>().Init(newPawn);
         turnPlates.Add(go.transform);
 
 
-        turnTakers.Insert(currentTurn ,newPawn);
+        int newTurnNum = currentTurn + 3 >= turnPlates.Count ? 
+                        (currentTurn + 3) - turnPlates.Count : turnPlates.Count - (currentTurn + 3);
+
+
+        turnTakers.Insert(newTurnNum, newPawn);
     }
 }
 public interface TurnTaker

@@ -386,7 +386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36ac7e1d0bfa63d479130cbfdf2d5aa8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7b90d22eea3ffa4aa788b83dbb019fe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2318,11 +2318,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedButtonImgs:
-  - {fileID: 21300000, guid: 3d95f79d483073645b5475cce592d30a, type: 3}
-  - {fileID: 21300000, guid: 2ed302615ba562d4bb62072b8ffd8989, type: 3}
+  - {fileID: 21300000, guid: 10562b03698a3c44d9e66cc4d659a579, type: 3}
+  - {fileID: 21300000, guid: 69c54053700eb594dadd6baa6671f69a, type: 3}
   pauseButtonImgs:
-  - {fileID: 21300000, guid: 36ac7e1d0bfa63d479130cbfdf2d5aa8, type: 3}
-  - {fileID: 21300000, guid: 5bd0074242c5ee641818d6bff25c8fd5, type: 3}
+  - {fileID: 21300000, guid: d7b90d22eea3ffa4aa788b83dbb019fe, type: 3}
+  - {fileID: 21300000, guid: 4c395bd6de40dcb4595b39ba5631937a, type: 3}
   speedButton: {fileID: 4363690052826307988}
   pauseButton: {fileID: 440360628}
   currentTimeScaleIndex: 0
@@ -2362,7 +2362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 327}
+  m_AnchoredPosition: {x: 0, y: 361.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1817855385
@@ -3112,6 +3112,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 298747759746570737, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ae5e64a2a81af9543b20aa479de34b81,
+        type: 3}
     - target: {fileID: 675736815291704728, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: maxValue
@@ -3122,6 +3128,18 @@ PrefabInstance:
       propertyPath: currentValue
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 753866534880781749, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 390990338ce549447ac1e52aebc4b9a8,
+        type: 3}
+    - target: {fileID: 797251775532527908, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad6aade66aee629498f18c126e4be8a2,
+        type: 3}
     - target: {fileID: 1054131705468993335, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -3332,6 +3350,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -160
       objectReference: {fileID: 0}
+    - target: {fileID: 5052887461052534490, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 211745ede2fee29458a561fc555ecea6,
+        type: 3}
     - target: {fileID: 5180357494855911324, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3352,6 +3376,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 100.79999
       objectReference: {fileID: 0}
+    - target: {fileID: 5565357567366798511, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fda3c8291c630934b8d9f5263f0572e5,
+        type: 3}
     - target: {fileID: 6082976943121904865, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3372,6 +3402,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 6841373964076725017, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 390990338ce549447ac1e52aebc4b9a8,
+        type: 3}
     - target: {fileID: 6914622206071182589, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -3399,19 +3435,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7019766676279396661, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 68012d2aa10a96247bb399454f207037,
+        type: 3}
+    - target: {fileID: 7019766676279396661, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7098826406808760522, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7d976e8355dd39a4f8350e5626430bc2,
+        type: 3}
     - target: {fileID: 7355737764973791897, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 7507141754603466831, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 390990338ce549447ac1e52aebc4b9a8,
+        type: 3}
+    - target: {fileID: 7678427794596866492, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922543250254949017, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b9f1f211e2356f4d822e3ed7fe5fe28,
+        type: 3}
     - target: {fileID: 8115672543185633251, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_Name
       value: Panel - Bars
       objectReference: {fileID: 0}
+    - target: {fileID: 8344088000784309879, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fc245df282e4d9c41bb279e63e5e3c3d,
+        type: 3}
     - target: {fileID: 8367361999277230224, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -3452,6 +3523,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 11.02
       objectReference: {fileID: 0}
+    - target: {fileID: 8588123028127471688, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 390990338ce549447ac1e52aebc4b9a8,
+        type: 3}
     - target: {fileID: 8976896256266547139, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3986,7 +4063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e23a156169d803c4598cbf4d4e688a6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: acab691319f3c394ea9d0116a0ca6d32, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4550,7 +4627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d95f79d483073645b5475cce592d30a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10562b03698a3c44d9e66cc4d659a579, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5434,6 +5511,7 @@ MonoBehaviour:
   currentModifier: 1
   actionVariations: []
   isWeapon: 0
+  targetAllies: 0
 --- !u!114 &5890881706954310973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5451,6 +5529,7 @@ MonoBehaviour:
   currentModifier: 1
   actionVariations: []
   isWeapon: 0
+  targetAllies: 0
   currentRangeInTiles: 1
 --- !u!64 &6352593963727206423
 MeshCollider:
@@ -5730,6 +5809,7 @@ MonoBehaviour:
   currentModifier: 1
   actionVariations: []
   isWeapon: 1
+  targetAllies: 0
   feetItem: {fileID: 0}
   range: 1
   damage: 10
