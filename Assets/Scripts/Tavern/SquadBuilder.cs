@@ -12,8 +12,11 @@ public class SquadBuilder : MonoBehaviour
     [SerializeField]
     RosterSlot[] partySlots; //limited by Room_Level (int) - from avishy's room logic
 
+    public RosterSlot[] PartySlots { get => partySlots;}
+
     public Squad tempSquad;
     Room toRoom;
+    public Room ToRoom { get => toRoom; }
 
     bool isEdit = false;
     
@@ -58,9 +61,10 @@ public class SquadBuilder : MonoBehaviour
         mercDataDisplayer.gameObject.SetActive(false);
         foreach (var item in partySlots)
         {
-            item.gameObject.SetActive(true);
+            item.gameObject.SetActive(true); //turns all party slots (those will be closed on SetToRoom() before the Create/EditSquad mode is activated)
             item.ClearSlot();
         }
+        if(myButton)
         myButton.Toggle(false);
     }
     public void SetToRoom(Room r)
