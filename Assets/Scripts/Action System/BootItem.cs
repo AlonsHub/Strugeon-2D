@@ -31,9 +31,9 @@ public class BootItem : ActionItem
     IEnumerator CharacterStep()
     {
         //at this moment, a step moves the hero to another tile, and then they attack a random enemy character
-        int randomEnemy = UnityEngine.Random.Range(0, RefMaster.Instance.enemies.Count - 1); //Exclusive?
+        int randomEnemy = UnityEngine.Random.Range(0, weaponItem.targets.Count - 1); //Exclusive?
         //weaponItem.Action(RefMaster.Instance.enemies[randomEnemy].gameObject);
-        weaponItem.Action(pawn.targets[randomEnemy].gameObject);
+        weaponItem.Action(weaponItem.targets[randomEnemy].gameObject);
 
         Debug.Log("Stepped!");
        // BattleLog.Instance.AddLine(name + " Step-back attacked: " + RefMaster.Instance.enemies[randomEnemy].name);
