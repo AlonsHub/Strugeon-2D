@@ -24,7 +24,10 @@ public class SquadSlot : MonoBehaviour
     [SerializeField]
     SquadToggler squadToggler;
 
-    
+    [SerializeField]
+    GameObject indicator;
+
+
     public int index;
 
     private void Start()
@@ -35,25 +38,30 @@ public class SquadSlot : MonoBehaviour
     {
         if(!toggle)
         toggle = GetComponent<Toggle>();
+
         toggle.isOn = false;
+        indicator.SetActive(false);
     }
 
     public void SelectMe()
     {
+        //turn on selected indicator
+        indicator.SetActive(true);
 
-
-        foreach (var item in mercSlotImages_BGs)
-        {
-            //Debug.LogError("turbn onsdfs ");
-            item.sprite = onFrameSprite;
-        }
+        //foreach (var item in mercSlotImages_BGs)
+        //{
+        //    //Debug.LogError("turbn onsdfs ");
+        //    item.sprite = onFrameSprite;
+        //}
     }
     public void DeSelectMe()
     {
-        foreach (var item in mercSlotImages_BGs)
-        {
-            item.sprite = offFrameSprite;
-        }
+        indicator.SetActive(false);
+
+        //foreach (var item in mercSlotImages_BGs)
+        //{
+        //    item.sprite = offFrameSprite;
+        //}
     }
 
     public void SetMe(Squad s)
