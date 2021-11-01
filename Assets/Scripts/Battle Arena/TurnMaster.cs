@@ -77,7 +77,7 @@ public class TurnMaster : MonoBehaviour
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
         turnPlates.Add(go.transform);
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
-        turnPlates[0].localScale *= 1.5f;
+        //turnPlates[0].localScale *= 1.5f;
         turnTakers[0].myTurnPlate = go;
 
         TurnDisplayer tp = go.GetComponent<TurnDisplayer>();
@@ -87,6 +87,7 @@ public class TurnMaster : MonoBehaviour
         {
             //tp.myPawn = turnTakers[0];
             tp.Init(turnTakers[0]);
+            tp.ToggleScale(true);
         }
         else
         {
@@ -289,30 +290,22 @@ public class TurnMaster : MonoBehaviour
         return -a.Initiative.CompareTo(b.Initiative);
     }
 
+
+  
     void TurnOrderUpdate()
     {
-        turnPlates[0].localScale /= 1.5f;
+        turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
 
         Transform t = turnPlates[0];
         turnPlates.Remove(turnPlates[0]);
         turnPlates.Add(t);
-        //turnPlates.(t);
-        currentTurnInDisplayer++;
-
-        if (currentTurnInDisplayer >= turnPlates.Count) //notice this counts on DISPLAYER PLATES and not TurnTakers
-        {
-            currentTurnInDisplayer = 0;
-        }
-        if (currentTurnInDisplayer != currentTurn)
-        {
-            Debug.LogWarning("Current display turn and actual currentTurn are not in sync for some ungodly reason. " +
-                currentTurnInDisplayer + " and " + currentTurn);
-        }
+        
 
         turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
-        turnPlates[0].localScale *= 1.5f;
+
 
         TurnDisplayer td = turnPlates[0].GetComponent<TurnDisplayer>();
+        td.ToggleScale(true);
 
         if (td.hasSA)
         {
@@ -321,6 +314,14 @@ public class TurnMaster : MonoBehaviour
 
         for (int i = 1; i < turnTakers.Count; i++)
         {
+            if(i >= turnDisplayerLimit)
+            {
+                turnPlates[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            turnPlates[i].gameObject.SetActive(true);
+
             turnPlates[i].localPosition = nextTurnPlateTrans.localPosition +
                 new Vector3((i - 1) * turnPlateDistance, 0, 0);
 
@@ -331,13 +332,15 @@ public class TurnMaster : MonoBehaviour
                 td.SAIconCheck();
             }
 
-            turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
+            //turnPlates[i].gameObject.SetActive(i < turnDisplayerLimit); //disables all displayer past turnDisplayerLimit
 
             //(i-1) because the [1] position in the array is the second plate,
             //but nextTurnPlateTrans is the second position
             //(so on i=1, we need to add (1-1)*delta                                                                                                    
         }
     }
+
+    
 
     //void RemovePlate()
     //{
@@ -370,15 +373,20 @@ public class TurnMaster : MonoBehaviour
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
         go.GetComponent<TurnDisplayer>().Init(newPawn);
 
-        turnPlates.Add(go.transform);
 
 
-        int newTurnNum = currentTurn + 2 >= turnPlates.Count ? 
-                        (currentTurn + 2) - turnPlates.Count : turnPlates.Count - (currentTurn + 2);
+        //int newTurnNum = currentTurn + 2 >= turnPlates.Count ? 
+        //                (currentTurn + 2) - turnPlates.Count : turnPlates.Count - (currentTurn + 2);
+
+        int newTurnNum = currentTurn - 1 > 0 ? currentTurn - 1 : turnPlates.Count-1;
+
+        turnPlates.Insert(newTurnNum, go.transform);
+        turnTakers.Add(newPawn);
 
 
-        turnTakers.Insert(newTurnNum, newPawn);
     }
+
+   
 }
 public interface TurnTaker
 {

@@ -21,8 +21,8 @@ public class SquadPicker : MonoBehaviour
 
     [SerializeField]
     GameObject followerPrefab;
-    [SerializeField]
-    Transform tavernTrans;
+    //[SerializeField]
+    //Transform tavernTrans;
     [SerializeField]
     Transform canvasTrans;
 

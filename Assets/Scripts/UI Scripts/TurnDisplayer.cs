@@ -21,32 +21,25 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     Dictionary<SA_Item, Image> iconBySAItem;
 
+    bool isScaled;
+
     public void Init(Pawn pawn)
     {
         myPawn = pawn;
         pawnImage.sprite = pawn.PortraitSprite;
         iconBySAItem = new Dictionary<SA_Item, Image>();
-        //if(pawn.SASprite)
-        //{
-        //    saImage.sprite = pawn.SASprite;
-        //    hasSA = true;
-        //}
-        //else
-        //{
-        //    saImage.gameObject.SetActive(false);
-        //}
+       
+        isScaled = false;
         hasSA = pawn.hasSAs;
-        //if (hasSA)
-        //{
-        //    saImages = new Image[pawn.saItems.Length];
-        //    foreach (var saItem in pawn.saItems)
-        //    {
-        //        AddSAIcon(saItem);
-        //    }
+       
+    }
+    public void ToggleScale(bool scaleUp)
+    {
+        if (scaleUp == isScaled)
+            return;
 
-        //}
-        //nameDisplayer.text 
-
+        transform.localScale = (scaleUp) ? transform.localScale * 1.5f : transform.localScale / 1.5f;
+        isScaled = scaleUp;
     }
 
     public void SAIconCheck()
@@ -95,26 +88,4 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         Destroy(iconBySAItem[sai].gameObject);
         iconBySAItem.Remove(sai);
     }
-
-
-
-
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    if (myPawn != null)
-    //    {
-    //        //Set Character Hover Display 
-    //        CharacterHoverDisplayer.Instance.SetHoverToMerc((Pawn)myPawn, transform.position.x);
-    //        //Display Character Hover Display
-    //        CharacterHoverDisplayer.Instance.OnOffToggel(true);
-    //    }
-
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    CharacterHoverDisplayer.Instance.OnOffToggel(false);
-    //    //Close Character Hover Display
-    //}
-
 }
