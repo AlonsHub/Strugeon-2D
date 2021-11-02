@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public enum MercName {None, Smadi, Shuki, Yeho};
+public enum MercName {None, Smadi, Shuki, Yeho, Cheeto};
 
 public class MercPrefabs : MonoBehaviour
 {
