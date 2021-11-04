@@ -16,6 +16,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public MercName mercName;
 
     int initiative;
+    [SerializeField]
     int initiativeBonus;
 
     bool turnDone;

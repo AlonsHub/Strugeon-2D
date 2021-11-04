@@ -122,14 +122,14 @@ MonoBehaviour:
   feetItem: {fileID: 0}
   range: 4
   damage: 15
-  arrowGfx: {fileID: 4948670397089572388, guid: dda0d6165f5c0c049a39fa1f6dde6fe7,
+  arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 1
   arrowSpawn: {fileID: 8602757325649611589}
   effectSpawn: {fileID: 8602757325649611589}
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   elementIconObj: {fileID: 0}
   hasEffect: 0
   effectColour: {r: 0, g: 0, b: 0, a: 0}
@@ -156,8 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 40
   maxHP: 40
-  pawnName: Yeho
-  mercName: 3
+  pawnName: Cheeto
+  mercName: 4
+  initiativeBonus: 20
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
   targets: []
@@ -181,10 +182,8 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
-  SA_Title: Quick Step
-  SA_Description: When in melee range, Yeho can perform a move and shoot action...
-    though characters can just move and attack so this is actually less useful when
-    compared to just moving further away and then attacking normally...
+  SA_Title: 
+  SA_Description: 
   purpleMultiplier: 0
 --- !u!114 &5092255476189858162
 MonoBehaviour:
@@ -420,7 +419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5016945437701499270}
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.15, y: -2.07, z: -0}
+  m_LocalPosition: {x: -0.12800005, y: -1.3730001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2633907388270866008}

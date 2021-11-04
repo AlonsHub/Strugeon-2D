@@ -93,7 +93,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if(sb.tempSquad.pawns.Count < sb.ToRoom.size)
+            if(isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
             RemoveMerc();
         }
         if (eventData.button == PointerEventData.InputButton.Left)
