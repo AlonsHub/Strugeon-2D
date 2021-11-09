@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharmItem : ActionItem
+public class CharmItem : ActionItem //,SAITEM!!!!
 {
     [SerializeField]
     int charmDuration; //in number of turns. Defualt value is 2
@@ -21,7 +21,7 @@ public class CharmItem : ActionItem
 
     private void Start()
     {
-        targets = RefMaster.Instance.mercs;
+        targets = RefMaster.Instance.mercs; //because they are the only ones who can be charmed... should still be more dynamic though
     }
 
     public override void Action(GameObject tgt)

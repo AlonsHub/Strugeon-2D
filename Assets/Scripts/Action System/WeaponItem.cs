@@ -145,6 +145,9 @@ public class WeaponItem : ActionItem
             pawn.RemoveIconByColor("redBuff");
         }
 
+        if (rolledDamage < 0)
+            rolledDamage = 0;
+
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
 
