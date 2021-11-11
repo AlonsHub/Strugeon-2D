@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlindDebuff : MonoBehaviour
+public class Blinded : MonoBehaviour
 {
     [SerializeField]
     WeaponItem weaponItem;

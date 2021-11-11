@@ -36,8 +36,8 @@ public class CharmItem : ActionItem //,SAITEM!!!!
 
 
         currentCooldown = maxCooldown;
-        pawn.TurnDone = true;
         StartCoroutine(CountDownCool());
+        pawn.TurnDone = true;
     }
 
     IEnumerator CountDownCool()
@@ -54,7 +54,7 @@ public class CharmItem : ActionItem //,SAITEM!!!!
     {
         actionVariations.Clear(); //Most important to do this! when a merc looks for actionVariations - he may find stale ones here (even if returned on cooldown > 0)
 
-        if(currentCooldown >0)
+        if(currentCooldown > 0)
         {
             return;
         }
