@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public enum DamageType {Slashing, Bludgening, Piercing, Pure}; // Pure? True? 
@@ -41,6 +42,13 @@ public class WeaponItem : ActionItem
     public Pawn toHit;
 
     LookAtter la;
+
+    public UnityAction attackAction;
+    //public void AddToAction()
+    //{
+
+    //}
+
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
@@ -107,12 +115,13 @@ public class WeaponItem : ActionItem
         pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
     }
 
+    
     public void ShootProjectile()
     {
         GameObject effectGo = Instantiate(arrowGfx, arrowSpawn.position, arrowSpawn.rotation);
         effectGo.GetComponent<Arrow>().tgt = toHit.transform;
         StartCoroutine(WaitForArrowToHit(effectGo));
-    }
+    }// called by animation events exclusively (11/11/2021)
 
     IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
     {
@@ -150,6 +159,18 @@ public class WeaponItem : ActionItem
 
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
+
+        pawn.TurnDone = true;
+        //go.transform.LookAt(tgt.transform);
+        //GetComponent<LookAt>().lookAtTargetPosition = tgt.transform.position;
+        la.tgt = null;
+    }
+    public void ExtraDamageTarget(int minDmg, int maxDmg)
+    {
+        float rolledDamage = Random.Range(minDmg, maxDmg);
+
+        toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
 
         pawn.TurnDone = true;
         //go.transform.LookAt(tgt.transform);
