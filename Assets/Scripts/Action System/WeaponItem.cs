@@ -43,7 +43,7 @@ public class WeaponItem : ActionItem
 
     LookAtter la;
 
-    public UnityAction attackAction;
+    public System.Action attackAction;
     //public void AddToAction()
     //{
 
@@ -56,6 +56,9 @@ public class WeaponItem : ActionItem
         hasEffect = false;
         hasRedBuff = false;
         feetItem = GetComponent<FeetItem>();
+
+        attackAction += OnAttack;
+
         base.Awake();
     }
 
@@ -94,10 +97,10 @@ public class WeaponItem : ActionItem
 
 
        
+        attackAction?.Invoke();
         //pawn.transform.LookAt(tgt.transform);
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
         pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
-
     }
 
     IEnumerator WalkThenAttack(Pawn tgt)
@@ -111,7 +114,7 @@ public class WeaponItem : ActionItem
         if (tgt && la)
             la.tgt = tgt.transform;
 
-        
+        attackAction?.Invoke();
         pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
     }
 
@@ -184,7 +187,6 @@ public class WeaponItem : ActionItem
 
         pawn.TurnDone = true;
     }
-
     public override void CalculateVariations()
     {
         //actionVariations = new List<ActionVariation>();
@@ -233,5 +235,10 @@ public class WeaponItem : ActionItem
 
         CallBehaveVariables();
 
+    }
+
+    void OnAttack() //just something to have in the attackAction. Currently holds nothing
+    {
+        Debug.Log("ON ATTACK ACTION " + name);
     }
 }

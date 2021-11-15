@@ -195,5 +195,9 @@ public class SiteButton : MonoBehaviour
         {
             PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
         }
+        else
+        {
+            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything
+        }
     }
 }

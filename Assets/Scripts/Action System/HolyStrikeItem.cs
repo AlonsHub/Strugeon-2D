@@ -25,6 +25,7 @@ public class HolyStrikeItem : MonoBehaviour
         //roll chance (15% as GDD)
         int roll = Random.Range(0, 101);
 
+            Debug.Log("Something!");
         if(roll < chanceToProc)
         {
             Debug.Log("Yes strike");

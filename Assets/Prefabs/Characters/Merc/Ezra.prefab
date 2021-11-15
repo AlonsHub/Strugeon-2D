@@ -71,11 +71,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 40
-  maxHP: 40
+  currentHP: 150
+  maxHP: 150
   pawnName: Ezra
   mercName: 5
-  initiativeBonus: 0
+  initiativeBonus: 10
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
   targets: []
@@ -239,7 +239,7 @@ MonoBehaviour:
   isWeapon: 0
   targetAllies: 0
   escapeThreshold: 2
-  escapeWeight: 50
+  escapeWeight: 0
 --- !u!1 &1667078419819343595
 GameObject:
   m_ObjectHideFlags: 0
