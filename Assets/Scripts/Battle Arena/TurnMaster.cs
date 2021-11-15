@@ -112,7 +112,7 @@ public class TurnMaster : MonoBehaviour
 
             tp = plate.GetComponent<TurnDisplayer>();
 
-            turnTakers[i].myTurnPlate = turnPlates[i].gameObject;
+            turnTakers[i].myTurnPlate = turnPlates[i].gameObject; //TERRRRIIIBBBLLLEEE
             if (tp) //just making sure
             {
                 tp.Init(turnTakers[i]);

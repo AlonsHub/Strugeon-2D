@@ -44,6 +44,15 @@ public class SquadBuilder : MonoBehaviour
         {
             availableSlots[i].SetMe();
         }
+
+        for (int i = 0; i < tempSquad.pawns.Count; i++)
+        {
+            partySlots[i].SetMe(tempSquad.pawns[i]);
+        }
+        for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
+        {
+            partySlots[i].ClearSlot();
+        }
         myButton.Toggle(true);
 
     }

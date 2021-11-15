@@ -31,7 +31,9 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
        
         isScaled = false;
         hasSA = pawn.hasSAs;
-       
+        myPawn.myTurnPlate = gameObject;
+
+
     }
     public void ToggleScale(bool scaleUp)
     {

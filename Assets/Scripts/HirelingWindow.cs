@@ -26,7 +26,8 @@ public class HirelingWindow : MonoBehaviour
 
         portrait.sprite = MercPrefabs.Instance.EnumToPawnPrefab(mercName).PortraitSprite;
         //price
-
+        price = PlayerDataMaster.Instance.currentPlayerData.mercPrice;
+        priceText.text = price.ToString();
         hirelingMaster = hm;
     }
 
@@ -43,7 +44,7 @@ public class HirelingWindow : MonoBehaviour
         //PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         PlayerDataMaster.Instance.HireMerc(mercName);
 
-        if (transform.parent.childCount < 1) // other hireling windows
+        if (transform.parent.childCount <= 1) // other hireling windows
         {
             HirelingMaster.Instance.CloseMe();
         }

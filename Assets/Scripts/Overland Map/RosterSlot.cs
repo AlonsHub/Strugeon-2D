@@ -39,6 +39,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     }
     public void SetMe()
     {
+        img.sprite = defaultPortraitSprite;
         img.color = new Color(0,0,0,0);
         isOccupied = false;
     }
@@ -64,6 +65,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     {
         pawn = null;
         img.sprite = defaultPortraitSprite;
+        img.color = new Color(0, 0, 0, 0);
         bg_img.sprite = offBgSprite;
         isOccupied = false;
         //nameText.text = "";

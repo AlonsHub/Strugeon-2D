@@ -23,7 +23,9 @@ public class PlayerData
 
     //gold
     public int gold;
-    
+
+    public int mercPrice = 20;
+
     public Dictionary<string, float> SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
 
     public List<string> keys; //sitenames
