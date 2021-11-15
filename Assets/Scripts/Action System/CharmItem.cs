@@ -33,7 +33,7 @@ public class CharmItem : ActionItem //,SAITEM!!!!
 
         GameObject go = Instantiate(charmVFX, tgt.transform);
 
-
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Charm, tgt.GetComponent<Pawn>().Name);
 
         currentCooldown = maxCooldown;
         StartCoroutine(CountDownCool());

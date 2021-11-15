@@ -19,7 +19,7 @@ public class SummonSpiritItem : ActionItem
     {
         //tgt is the spawn-tile 
         GameObject go = Instantiate(drownedSpiritPrefab);
-        Pawn p = go.GetComponent<Pawn>();
+        Pawn newSpirit = go.GetComponent<Pawn>();
 
         GameObject go2 = Instantiate(summonVFX, go.transform);
 
@@ -31,9 +31,10 @@ public class SummonSpiritItem : ActionItem
 
         //go.transform.position += v; 
         //Battlelog entry! // ADD CHARM AND SUMMON TO ENUM with repectvie sprites
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
 
-        RefMaster.Instance.enemies.Add(p);
-        TurnMaster.Instance.AddNewTurnTaker(p);
+        RefMaster.Instance.enemies.Add(newSpirit);
+        TurnMaster.Instance.AddNewTurnTaker(newSpirit);
         cooldown = maxCooldown;
         pawn.anim.SetTrigger("Summon");
 
