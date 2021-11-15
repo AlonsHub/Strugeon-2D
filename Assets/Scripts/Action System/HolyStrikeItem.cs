@@ -15,6 +15,9 @@ public class HolyStrikeItem : MonoBehaviour
     [Tooltip("As % chance to occur")]
     [SerializeField]
     int chanceToProc; //out of a hundred
+
+    [SerializeField]
+    GameObject addonPrefab;
     private void Start()
     {
         weaponItem = GetComponent<WeaponItem>();
@@ -23,7 +26,7 @@ public class HolyStrikeItem : MonoBehaviour
     public void OnAttack()
     {
         //roll chance (15% as GDD)
-        int roll = Random.Range(0, 101);
+        int roll = Random.Range(1, 101);
 
             Debug.Log("Something!");
         if(roll < chanceToProc)
@@ -32,6 +35,7 @@ public class HolyStrikeItem : MonoBehaviour
             //add extra VFX
             //add extra damage (perhaps with its own dmg txt)
             weaponItem.ExtraDamageTarget(minDmg, maxDmg);
+            BattleLogVerticalGroup.Instance.AddToNextEntry(addonPrefab);
         }
         else
         {

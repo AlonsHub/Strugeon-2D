@@ -60,6 +60,13 @@ public class BattleLogVerticalGroup : MonoBehaviour
         be.Init(actingPawn, actionIconToSprite[actionIcon]);
         children.Add(go.transform);
 
+
+        foreach (var item in preLoadedAddons)
+        {
+            Instantiate(item, go.transform);
+        }
+        preLoadedAddons.Clear();
+
         CleanList();
     }
     public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn)
@@ -78,6 +85,12 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn);
         children.Add(go.transform);
+
+        foreach (var item in preLoadedAddons)
+        {
+            Instantiate(item, go.transform);
+        }
+        preLoadedAddons.Clear();
 
         CleanList();
     }
@@ -104,6 +117,13 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn, number, colour);
         children.Add(go.transform);
+
+        foreach (var item in preLoadedAddons)
+        {
+            Instantiate(item, go.transform);
+        }
+        preLoadedAddons.Clear();
+
         CleanList();
         //while(children.Count >= maxChildren)
         //{
@@ -111,6 +131,29 @@ public class BattleLogVerticalGroup : MonoBehaviour
         //    children.RemoveAt(children.Count - 1);
         //    Destroy(child);
         //}
+    }
+    public void AddToLastEntry(GameObject prefab) //things like bonus damage should have their own designated way of adding information to log entries
+    {
+        //This should work generically by way of pasting a prefab onto the first transform in children
+        //Different add-on types would be placed/slotted at different offsets in the prefab
+        //E.g. "Censer Bonus Damage" - appears at the bottom-right corner of regular damage logged
+        //     "Added Weapon Effects Damage" - appears at the top-right corener of regular damage logged 
+        //     "Added Weapon Effect Icon" - appears at the top-left corener of the regular action-icon logged 
+        Instantiate(prefab, children[children.Count-1]);
+
+    }
+    List<GameObject> preLoadedAddons = new List<GameObject>();
+    public void AddToNextEntry(GameObject prefab) //same idea, but preloads an addition to an entry about to be added
+    {
+        //This should work generically by way of pasting a prefab onto the first transform in children
+        //Different add-on types would be placed/slotted at different offsets in the prefab
+        //E.g. "Censer Bonus Damage" - appears at the bottom-right corner of regular damage logged
+        //     "Added Weapon Effects Damage" - appears at the top-right corener of regular damage logged 
+        //     "Added Weapon Effect Icon" - appears at the top-left corener of the regular action-icon logged 
+
+        ///THIS MUST BE CHECKED FOR BY ALL AddEntry overloads!
+        //Instantiate(prefab, children[children.Count-1]);
+        preLoadedAddons.Add(prefab);
     }
 
     public void AddPsionEntry(string tgtPawn, PsionActionSymbol psionActionIcon, Color colour)
