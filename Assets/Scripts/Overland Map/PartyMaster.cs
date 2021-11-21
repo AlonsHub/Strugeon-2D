@@ -138,7 +138,8 @@ public class PartyMaster : MonoBehaviour
         foreach(List<MercName> mercNames in newList)
         {
             //if(newList.Length > 0) //????
-            toReturn.Add(new Squad(PawnsFromNames(mercNames), count));
+            toReturn.Add(new Squad(PawnsFromNames(mercNames), count)); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+            //toReturn.Add(new Squad(PawnsFromNames(mercNames)));
             count++;
         }
         return toReturn;

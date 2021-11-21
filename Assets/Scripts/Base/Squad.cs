@@ -11,6 +11,8 @@ public class Squad
     //could instead have list of names and a DIFFERENT list for modifiers (if any)
     
     public List<Pawn> pawns;
+    public string squadName;
+
     public Squad()
     {
         pawns = new List<Pawn>();
@@ -35,11 +37,14 @@ public class Squad
     {
         pawns = new List<Pawn>();
         pawns.AddRange(newPawns);
+        squadName = pawns[0].Name + " Squad";
     }
-    public Squad(List<Pawn> newPawns, int roomNumber)
+    public Squad(List<Pawn> newPawns, int roomNum) //weird that I don't use this...
     {
         pawns = new List<Pawn>();
         pawns.AddRange(newPawns);
+        roomNumber = roomNum;
+        squadName = pawns[0].Name + " Squad";
     }
 
     public bool AddMerc(Pawn merc) //returns false if couldn't add
