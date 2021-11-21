@@ -82,7 +82,7 @@ public class SiteButton : MonoBehaviour
         //    ////////////////////////////// PROBLEMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
         //}
 
-        Invoke("LateStart", 1);
+        Invoke("LateStart", .2f); //give data displayers time to find themselves with their own starts/awakes - this sucks
     }
 
     void LateStart()
@@ -186,6 +186,7 @@ public class SiteButton : MonoBehaviour
             timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
         }
         clockAndTimerParent.SetActive(false);
+        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything
         isCooldown = false;
     }
 
@@ -195,9 +196,7 @@ public class SiteButton : MonoBehaviour
         {
             PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
         }
-        else
-        {
-            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything
-        }
+
+        
     }
 }
