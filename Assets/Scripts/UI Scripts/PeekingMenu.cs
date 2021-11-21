@@ -23,7 +23,7 @@ public class PeekingMenu : MonoBehaviour
 
     public Image sr;
 
-    bool menuOpen = true;
+    public bool menuOpen = false;
 
     [SerializeField]
     Button peekButton;
@@ -33,22 +33,24 @@ public class PeekingMenu : MonoBehaviour
 
     public Animator anim; //temp set in instpector
     
-    void Start()
-    {
-        //rectTransform = GetComponent<RectTransform>();
-        //originalPos = rectTransform.position;
+    //void Start()
+    //{
+    //    //rectTransform = GetComponent<RectTransform>();
+    //    //originalPos = rectTransform.position;
 
 
-    }
+    //}
     public void HideMenu()
     {
         //StartCoroutine("MenuSlideClose");
-        anim.SetTrigger("CloseMenu");
+        anim.SetTrigger("Close");
+        menuOpen = false;
     }
      public void ShowMenu()
     {
         //StartCoroutine("MenuSlideOpen");
-        anim.SetTrigger("OpenMenu");
+        anim.SetTrigger("Open");
+        menuOpen = true;
     }
 
     IEnumerator MenuSlideClose()
@@ -104,9 +106,9 @@ public class PeekingMenu : MonoBehaviour
         //    StartCoroutine(MenuSlideOpen());
         //}
         if (menuOpen)
-            anim.SetTrigger("CloseMenu");
+            anim.SetTrigger("Close");
         else
-            anim.SetTrigger("OpenMenu");
+            anim.SetTrigger("Open");
 
         menuOpen = !menuOpen;
     }
