@@ -470,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSquad:
     pawns: []
+    squadName: 
     isAvailable: 1
     roomNumber: -1
   availableMercs: []
@@ -1089,6 +1090,7 @@ MonoBehaviour:
   openSprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
   closedSprite: {fileID: 21300000, guid: a4a78e3c078f3a249a1e9f8007682f0d, type: 3}
   sr: {fileID: 8360320058163276643}
+  menuOpen: 0
   peekButton: {fileID: 4363690054005110837}
   hideButton: {fileID: 8116576392705631786}
   anim: {fileID: 4363690052453781039}
@@ -1970,6 +1972,7 @@ MonoBehaviour:
   openSprite: {fileID: 21300000, guid: 164cb6dad10af204fab3369c39c7b3f1, type: 3}
   closedSprite: {fileID: 21300000, guid: a4a78e3c078f3a249a1e9f8007682f0d, type: 3}
   sr: {fileID: 8360320058163276643}
+  menuOpen: 0
   peekButton: {fileID: 0}
   hideButton: {fileID: 0}
   anim: {fileID: 0}
@@ -2298,7 +2301,7 @@ MonoBehaviour:
   mercSpawnTiles: []
   enemySpawnTiles: []
   escapeTile: {x: 0, y: 0}
-  startDelayAmount: 3
+  startDelayAmount: 1.5
 --- !u!4 &1692516679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8513105152347915411, guid: 1a833c74f95c7fc49ba342e3696af908,
@@ -4291,7 +4294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1722.1, y: -62.8}
+  m_AnchoredPosition: {x: 1722.1, y: -62.80005}
   m_SizeDelta: {x: 363.71008, y: -161.20367}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4363690052453781038
