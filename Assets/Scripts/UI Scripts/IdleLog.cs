@@ -54,7 +54,7 @@ public class IdleLog : MonoBehaviour
 
         if (basicMessage.textBoxes.Count != texts.Count)
         {
-            Debug.LogError("Bugged out, texts and boxes not alligned");
+            Debug.LogError("Bugged out. texts and boxes not alligned");
             return;
         }
 
