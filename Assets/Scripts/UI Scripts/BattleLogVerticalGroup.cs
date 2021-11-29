@@ -26,6 +26,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
     [SerializeField]
     private float maxChildren = 8;
 
+    List<GameObject> preLoadedAddons = new List<GameObject>();
     private void Awake()
     {
         Instance = this;
@@ -43,13 +44,20 @@ public class BattleLogVerticalGroup : MonoBehaviour
         SetupActionSpriteDictionary();
     }
 
-    public void AddEntry(string actingPawn, ActionSymbol actionIcon)
+    private void PushListDown()
     {
-
         for (int i = 0; i < children.Count; i++)
         {
             children[i].localPosition -= (Vector3.up * entrySize);
+            if(i>=maxChildren)
+            {
+                children[i].gameObject.SetActive(false);
+            }
         }
+    }
+    public void AddEntry(string actingPawn, ActionSymbol actionIcon)
+    {
+        PushListDown();
 
         GameObject go = Instantiate(entryPrefab, transform);
 
@@ -65,17 +73,19 @@ public class BattleLogVerticalGroup : MonoBehaviour
         {
             Instantiate(item, go.transform);
         }
+
         preLoadedAddons.Clear();
 
-        CleanList();
+        //CleanList();
     }
     public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn)
     {
-       
-        for (int i = 0; i < children.Count; i++)
-        {
-            children[i].localPosition -= (Vector3.up * entrySize);
-        }
+
+        //for (int i = 0; i < children.Count; i++)
+        //{
+        //    children[i].localPosition -= (Vector3.up * entrySize);
+        //}
+        PushListDown();
 
         GameObject go = Instantiate(entryPrefab, transform);
 
@@ -92,25 +102,14 @@ public class BattleLogVerticalGroup : MonoBehaviour
         }
         preLoadedAddons.Clear();
 
-        CleanList();
+        //CleanList();
     }
     public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn, int number, Color colour)
     {
-        //foreach (Transform t in children)
-        //{
-        //    t.localPosition -= Vector3.up * entrySize;
-        //}
-        for (int i = 0; i < children.Count; i++)
-        {
-            children[i].localPosition -= (Vector3.up * entrySize);
-        }
+        PushListDown();
 
         GameObject go = Instantiate(entryPrefab, transform);
 
-        //Rect rect1 = GetComponent<RectTransform>().rect;
-        //Rect rect2 = go.GetComponent<RectTransform>().rect;
-
-        //go.transform.localPosition = new Vector3(0, rect1.height / 2 - rect2.height/2, 0);
         go.transform.localPosition = new Vector3(0, (children[children.Count - 1].localPosition + Vector3.up * entrySize).y, 0);
 
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
@@ -124,14 +123,10 @@ public class BattleLogVerticalGroup : MonoBehaviour
         }
         preLoadedAddons.Clear();
 
-        CleanList();
-        //while(children.Count >= maxChildren)
-        //{
-        //    GameObject child = children[children.Count - 1].gameObject;
-        //    children.RemoveAt(children.Count - 1);
-        //    Destroy(child);
-        //}
+        //CleanList();
     }
+
+
     public void AddToLastEntry(GameObject prefab) //things like bonus damage should have their own designated way of adding information to log entries
     {
         //This should work generically by way of pasting a prefab onto the first transform in children
@@ -142,7 +137,6 @@ public class BattleLogVerticalGroup : MonoBehaviour
         Instantiate(prefab, children[children.Count-1]);
 
     }
-    List<GameObject> preLoadedAddons = new List<GameObject>();
     public void AddToNextEntry(GameObject prefab) //same idea, but preloads an addition to an entry about to be added
     {
         //This should work generically by way of pasting a prefab onto the first transform in children
@@ -203,19 +197,34 @@ public class BattleLogVerticalGroup : MonoBehaviour
         //}
     }
 
-    void CleanList()
-    {
-        if(children.Count <= maxChildren)
-        {
-            return;
-        }
-        while (children.Count > maxChildren)
-        {
-            Transform t = children[0];
-            children.RemoveAt(0);
-            Destroy(t.gameObject);
-        }
-    }
+    
+    //void CleanList()
+    //{
+    //    if (children.Count <= maxChildren)
+    //    {
+    //        return;
+    //    }
+
+    //    for (int i = 0; i < children.Count-maxChildren; i++)
+    //    {
+
+    //    }
+
+
+    //    //------------- OLD Method TO CLEAN THE LOG -----------------------
+    //    //if(children.Count <= maxChildren)
+    //    //{
+    //    //    return;
+    //    //}
+    //    //while (children.Count > maxChildren)
+    //    //{
+    //    //    Transform t = children[0];
+    //    //    children.RemoveAt(0);
+    //    //    Destroy(t.gameObject);
+    //    //}
+    //    //------------- OLD Method TO CLEAN THE LOG -----------------------
+
+    //}
 
     void SetupActionSpriteDictionary()
     {
