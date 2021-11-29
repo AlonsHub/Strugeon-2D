@@ -1976,6 +1976,49 @@ MonoBehaviour:
   peekButton: {fileID: 0}
   hideButton: {fileID: 0}
   anim: {fileID: 0}
+--- !u!1 &1220669127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1220669129}
+  - component: {fileID: 1220669128}
+  m_Layer: 0
+  m_Name: SpacePauser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1220669128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220669127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558053fffea25e847ab9c82edb492684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1220669129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220669127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1349992667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 675736815291704728, guid: bee76740b0667654c9a02fdaf32e8d82,
@@ -3493,7 +3536,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3342101439283732581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46972f4f8099ca947ad64966985909d5, type: 3}
   m_Name: 
@@ -3678,7 +3721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &4363690052325622103
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3712,12 +3755,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9451e2cf51ded434ca21c789843cd082, type: 3}
   - {fileID: 21300000, guid: 9b8cc7e3c0e7c7d45a0f9ae8125dd495, type: 3}
   - {fileID: 21300000, guid: c797a09b5df36e9459a86ad1fd7dc45e, type: 2}
-  - {fileID: 21300000, guid: a245e17437c89a34fb5a4ad4f1006dc8, type: 3}
+  - {fileID: 21300000, guid: cc1271eaaf828de4c968c54374c9c586, type: 3}
   - {fileID: 21300000, guid: 904afa078f0ea0d469a2fa18d58bb0b0, type: 3}
-  - {fileID: -7568524073924095226, guid: 31155a4835afb294f8a618b0cb75f337, type: 3}
-  - {fileID: -950096140469595123, guid: 31155a4835afb294f8a618b0cb75f337, type: 3}
-  - {fileID: 4884337891824352890, guid: 31155a4835afb294f8a618b0cb75f337, type: 3}
-  - {fileID: 7685470968617421020, guid: 31155a4835afb294f8a618b0cb75f337, type: 3}
+  - {fileID: 21300000, guid: 8e9bfd180d33f2f45974d6e7a275ab4f, type: 3}
+  - {fileID: 21300000, guid: bb32a93f2cc202245821a2a922a23404, type: 3}
+  - {fileID: 21300000, guid: 803da265189a67542938dc53edb8ec35, type: 3}
+  - {fileID: 21300000, guid: 1a3e5b17be4098a489e623fb80f9d04c, type: 3}
   psionActionSprites:
   - {fileID: 21300000, guid: 8092bb3d32a8d0d42a048670f2c182d4, type: 3}
   - {fileID: 21300000, guid: ff774edea5eb28444a96dee1d856d78c, type: 3}
@@ -3805,7 +3848,7 @@ GameObject:
   - component: {fileID: 734442810}
   - component: {fileID: 4363690052453781039}
   m_Layer: 5
-  m_Name: BattlelogScaler
+  m_Name: BattleLog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

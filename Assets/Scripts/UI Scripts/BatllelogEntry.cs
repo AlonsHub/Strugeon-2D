@@ -27,7 +27,7 @@ public class BatllelogEntry : MonoBehaviour
         actingPawnNameDisplayer.color = colour;
 
         actionImage.sprite = psionActionIcon;
-        actionImage.SetNativeSize();
+        //actionImage.SetNativeSize();
 
         passivePawnNameDisplayer.text = tgtPawn;
         passivePawnNameDisplayer.color = colour;
@@ -45,7 +45,7 @@ public class BatllelogEntry : MonoBehaviour
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
-        actionImage.SetNativeSize();
+        //actionImage.SetNativeSize();
         //passivePawnNameDisplayer.text = passiveName;
 
         numberDisplayer.gameObject.SetActive(false);
@@ -54,7 +54,7 @@ public class BatllelogEntry : MonoBehaviour
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
-        actionImage.SetNativeSize();
+        //actionImage.SetNativeSize();
         passivePawnNameDisplayer.text = passiveName;
 
         numberDisplayer.gameObject.SetActive(false);
@@ -63,7 +63,7 @@ public class BatllelogEntry : MonoBehaviour
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
-        actionImage.SetNativeSize();
+        //actionImage.SetNativeSize();
         passivePawnNameDisplayer.text = passiveName;
 
         numberDisplayer.text = number.ToString();

@@ -10,6 +10,11 @@ public class Blinded : MonoBehaviour
     int lifetime; //current number of turns left
 
     int oldDamage;
+    Sprite iconToAddOn;
+    private void Awake()
+    {
+        iconToAddOn = Resources.Load<Sprite>("/Icons/BlindIcon.png");
+    }
 
     public void SetMe(WeaponItem wi, int totalLifetime)
     {
@@ -19,6 +24,11 @@ public class Blinded : MonoBehaviour
         //weaponItem.targets = RefMaster.Instance.mercs; // <- "Why not?"
         oldDamage = weaponItem.damage;
         weaponItem.damage = -20; //makes sure the damage is less than 0 beacuse damage that is less than 0 becomes 0.
+
+        //target gets the icon set on it.
+
+
+
         StartCoroutine(TurnCounter());
     }
 

@@ -263,13 +263,18 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         {
             Debug.LogWarning("Escaped and destroyed!");
         }
+
         //Add to the list of the Cowardly (TurnMaster)
-        RefMaster.Instance.mercs.Remove(this); //not ideal
+        RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
         PartyMaster.Instance.availableMercs.Remove(this);
         TurnMaster.Instance.theCowardly.Add(mercName);
         TurnMaster.Instance.turnTakers.Remove(this);
         TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
         Destroy(myTurnPlate);
+        
+        // THIS MIGHT BE WHERE ESCAPED mercs ARE CONSIDERED DEAD
+        //by being destroyed and then -> counded as missing from the list
+        //and somehow still getting into the "Cowardly list"
 
         Destroy(gameObject, .5f); //just for now, nukes it
     }
@@ -277,8 +282,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     IEnumerator DelayedDeath()
     {
         //simplify Death, YOU IDIOT!
-
-
         BattleLogVerticalGroup.Instance.AddEntry(pawnName, ActionSymbol.Death);
 
         yield return new WaitForSeconds(.1f);
@@ -297,10 +300,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
         TurnMaster.Instance.turnTakers.Remove(this);
         TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
+
         Destroy(myTurnPlate);
-        //TurnMaster.Instance.turnPlates.r
-        //PartyMaster.Instance.currentMercParty.Remove(PartyMaster.Instance.currentMercParty.Where(x => x.name == name).SingleOrDefault());
-        //StopAllCoroutines();
         Destroy(gameObject);
     }
 

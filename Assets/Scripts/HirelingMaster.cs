@@ -59,12 +59,14 @@ public class HirelingMaster : MonoBehaviour
         hirelingWindow.SetMe(missing[rand], this);
         PlayerDataMaster.Instance.AddHireableMerc(missing[rand]);
 
-        anim.SetTrigger("Open");
+        //anim.SetTrigger("Open");
+        idleLogParent.GetComponentInParent<PeekingMenu>().ShowMenu();
     }
 
     public void CloseMe()
     {
-        anim.SetTrigger("Close");
+        //anim.SetTrigger("Close");
+        idleLogParent.GetComponentInParent<PeekingMenu>().HideMenu();
     }
 
     bool CheckForArrivals() //returns true if new mercs can arrive
