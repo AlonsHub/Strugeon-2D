@@ -46,10 +46,10 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
     private void PushListDown()
     {
-        for (int i = 0; i < children.Count; i++)
+        for (int i = children.Count-1; i >= 0; i--)
         {
             children[i].localPosition -= (Vector3.up * entrySize);
-            if(i>=maxChildren)
+            if(children.Count - i >= maxChildren)
             {
                 children[i].gameObject.SetActive(false);
             }
@@ -172,44 +172,17 @@ public class BattleLogVerticalGroup : MonoBehaviour
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
 
-        //switch (psionActionIcon)
-        //{
-        //    case PsionActionSymbol.Red:
-        //        break;
-        //    case PsionActionSymbol.Blue:
-        //        break;
-        //    case PsionActionSymbol.Yellow:
-        //        break;
-        //    case PsionActionSymbol.Purple:
-        //        break;
-        //    default:
-        //        break;
-        //}
+        
 
         be.Init(tgtPawn, psionActionSprites[(int)psionActionIcon], colours[(int)psionActionIcon]);
         children.Add(go.transform);
-        CleanList();
-        //while(children.Count >= maxChildren)
-        //{
-        //    GameObject child = children[children.Count - 1].gameObject;
-        //    children.RemoveAt(children.Count - 1);
-        //    Destroy(child);
-        //}
+        //CleanList();
+        
     }
 
     
     //void CleanList()
     //{
-    //    if (children.Count <= maxChildren)
-    //    {
-    //        return;
-    //    }
-
-    //    for (int i = 0; i < children.Count-maxChildren; i++)
-    //    {
-
-    //    }
-
 
     //    //------------- OLD Method TO CLEAN THE LOG -----------------------
     //    //if(children.Count <= maxChildren)
