@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock, Death, Escape, Summon, Charm};
 public enum PsionActionSymbol {Red, Blue, Yellow, Purple };
 public class BattleLogVerticalGroup : MonoBehaviour
@@ -27,6 +28,11 @@ public class BattleLogVerticalGroup : MonoBehaviour
     private float maxChildren = 8;
 
     List<GameObject> preLoadedAddons = new List<GameObject>();
+
+    [SerializeField]
+    Scrollbar scrollbar;
+
+    Vector3 startPos;
     private void Awake()
     {
         Instance = this;
@@ -42,6 +48,9 @@ public class BattleLogVerticalGroup : MonoBehaviour
         actionIconToSprite = new Dictionary<ActionSymbol, Sprite>();
         psionActionIconToSprite = new Dictionary<PsionActionSymbol, Sprite>();
         SetupActionSpriteDictionary();
+
+        scrollbar.onValueChanged.AddListener((float val) => OnScrollbarTouch(val));
+        startPos = transform.localPosition;
     }
 
     private void PushListDown()
@@ -49,12 +58,44 @@ public class BattleLogVerticalGroup : MonoBehaviour
         for (int i = children.Count-1; i >= 0; i--)
         {
             children[i].localPosition -= (Vector3.up * entrySize);
-            if(children.Count - i >= maxChildren)
-            {
-                children[i].gameObject.SetActive(false);
-            }
+
+            ////----------------MAY NOT BE REQUIRED! the mask hides just enough but generally speaking, it's good practice to just shut them off)
+            ////Otherwise you should maybe find a way to better implement them as parts of a sequence that can move it's memebers down
+            ////like a stack or something more clever that will itterate and also handle things on movement/push
+            ////---------------- Because of this we need to hook into the onvaluehanged of the scrollbar so we can turn all messages
+            ////on when the player touches the scrollbar and needs to see all the relevant messages
+            ////-------- may be turn on pockets of messages by relevant distance of the scroll bar
+            //if(children.Count - i >= maxChildren)
+            //{
+            //    children[i].gameObject.SetActive(false);
+            //}
+            // ------------ DEIMPLIMENTED ATM
         }
     }
+
+
+
+    public void OnScrollbarTouch(float val)
+    {
+        if(children.Count < maxChildren)
+        {
+            return;
+        }
+        float maxSize = (children.Count - maxChildren) * entrySize; //basically the entire lengths of all logs, minus the length of 1 full scroll/page
+        Vector3 endPos = startPos + Vector3.up * maxSize;
+
+        transform.localPosition = Vector3.Lerp(startPos, endPos, val); 
+
+    }
+    //maybe need this?
+    //public void OnScrollbarLeave()
+    //{
+    //    foreach (var c in children)
+    //    {
+    //        c.gameObject.SetActive(true);
+    //    }
+    //}
+
     public void AddEntry(string actingPawn, ActionSymbol actionIcon)
     {
         PushListDown();
@@ -76,7 +117,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         preLoadedAddons.Clear();
 
-        //CleanList();
+        ScaleScrollHandle();
     }
     public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn)
     {
@@ -102,7 +143,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
         }
         preLoadedAddons.Clear();
 
-        //CleanList();
+        ScaleScrollHandle();
     }
     public void AddEntry(string actingPawn, ActionSymbol actionIcon, string passivePawn, int number, Color colour)
     {
@@ -123,7 +164,12 @@ public class BattleLogVerticalGroup : MonoBehaviour
         }
         preLoadedAddons.Clear();
 
-        //CleanList();
+        ScaleScrollHandle();
+    }
+    void ScaleScrollHandle()
+    {
+        //scrollbar.size = (maxChildren / children.Count < 1) ? maxChildren / children.Count : 1;
+        scrollbar.size = Mathf.Clamp(maxChildren / children.Count, .1f, 1f);
     }
 
 
@@ -180,6 +226,9 @@ public class BattleLogVerticalGroup : MonoBehaviour
         
     }
 
+    //on addentry there should be a change to the scrollbar's total size
+
+    
     
     //void CleanList()
     //{
