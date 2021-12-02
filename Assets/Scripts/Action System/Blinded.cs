@@ -10,10 +10,11 @@ public class Blinded : MonoBehaviour
     int lifetime; //current number of turns left
 
     int oldDamage;
+    [SerializeField]
     Sprite iconToAddOn;
     private void Awake()
     {
-        iconToAddOn = Resources.Load<Sprite>("/Icons/BlindIcon.png");
+        iconToAddOn = Resources.Load<Sprite>("Icons/BlindIcon");
     }
 
     public void SetMe(WeaponItem wi, int totalLifetime)
@@ -34,12 +35,14 @@ public class Blinded : MonoBehaviour
 
     IEnumerator TurnCounter()
     {
+        weaponItem.pawn.AddEffectIcon(iconToAddOn, "blinded");
         while (lifetime > 0)
         {
             yield return new WaitUntil(() => weaponItem.pawn.TurnDone);
             lifetime--;
             yield return new WaitUntil(() => !weaponItem.pawn.TurnDone);
         }
+        weaponItem.pawn.RemoveIconByColor("blinded");
         // change pawn back
         //weaponItem.targets = RefMaster.Instance.enemies;
         weaponItem.damage = oldDamage;

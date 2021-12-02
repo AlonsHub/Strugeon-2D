@@ -183,7 +183,8 @@ public class SiteButton : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(clockDelay);
             timer += clockDelay;
-            timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+            int secondsLeft = (int)maxCooldown - (int)timer;  
+            timeText.text = "00:" + (secondsLeft/60).ToString("00") + ":" + (secondsLeft - (secondsLeft/60)*60).ToString("00");
         }
         clockAndTimerParent.SetActive(false);
         PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything

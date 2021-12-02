@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5092255476189858162}
   - component: {fileID: 1105644228005410149}
   - component: {fileID: 6496638347147669397}
+  - component: {fileID: -4737283758176797648}
   m_Layer: 11
   m_Name: Cheeto
   m_TagString: Merc
@@ -244,9 +245,27 @@ MonoBehaviour:
   targetAllies: 0
   duration: 2
   targets: []
-  chanceToProc: 15
+  chanceToProc: 100
   addonPrefab: {fileID: 4991725304625527649, guid: 6698d3c8f68b43a49855c7b82c100a41,
     type: 3}
+--- !u!114 &-4737283758176797648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd624bdc2265b9c4abbbcc842b38337c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 1
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  targetAllies: 0
 --- !u!1 &1667078419819343595
 GameObject:
   m_ObjectHideFlags: 0

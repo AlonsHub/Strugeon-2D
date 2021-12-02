@@ -197,7 +197,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -51.4}
-  m_SizeDelta: {x: 78.637695, y: 19.659424}
+  m_SizeDelta: {x: 95.98193, y: 19.659424}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8251468034042759477
 CanvasRenderer:
@@ -228,8 +228,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10a0ae3dc864dfd45931ed9750879fa0, type: 2}
-  m_sharedMaterial: {fileID: -4292132827718555013, guid: 10a0ae3dc864dfd45931ed9750879fa0,
+  m_fontAsset: {fileID: 11400000, guid: 51faa2f4e484a064bbb8a5df5a873e47, type: 2}
+  m_sharedMaterial: {fileID: -6194277388077630947, guid: 51faa2f4e484a064bbb8a5df5a873e47,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 19.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -456,7 +456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squad:
     pawns: []
+    squadName: 
     isAvailable: 1
+    roomNumber: -1
   timeText: {fileID: 607331070338774050}
   timerRate: 0.2
   leaderPortrait: {fileID: 3489341905654630305}

@@ -73,6 +73,7 @@ public class SquadSlot : MonoBehaviour
             mercSlotImages[i].color = Color.white;
         }
         isRelevant = true;
+        toggle.interactable = true;
     }
     public void UnSetMe()
     {

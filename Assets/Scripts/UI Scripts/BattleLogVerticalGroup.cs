@@ -169,7 +169,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
     void ScaleScrollHandle()
     {
         //scrollbar.size = (maxChildren / children.Count < 1) ? maxChildren / children.Count : 1;
-        scrollbar.size = Mathf.Clamp(maxChildren / children.Count, .1f, 1f);
+        scrollbar.size = Mathf.Clamp(maxChildren / children.Count, .1f, 1f); //amazing
     }
 
 

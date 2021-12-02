@@ -63,8 +63,8 @@ public class SquadPicker : MonoBehaviour
 
 
 
-        if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
-            return;
+        //if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
+        //    return;
 
         ///Consider unsetting all slots before setting them to avoid the GhostPrint of unavailable squads
 

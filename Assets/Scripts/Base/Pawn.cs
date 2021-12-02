@@ -282,9 +282,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     IEnumerator DelayedDeath()
     {
         //simplify Death, YOU IDIOT!
-        BattleLogVerticalGroup.Instance.AddEntry(pawnName, ActionSymbol.Death);
+
+
 
         yield return new WaitForSeconds(.1f);
+        BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         if (!isEnemy)
         {
             //RefMaster.Instance.mercs.Remove(RefMaster.Instance.mercs.Where(x => x.name == name).SingleOrDefault()); //not ideal
@@ -332,19 +334,22 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     {
         if (effectIcons.Count > 0)
         {
-            GameObject toRemove = new GameObject(); //shouldn't and dont need to
-            foreach (GameObject icon in effectIcons)
-            {
-                if (icon.name == colorName)
-                {
-                    toRemove = icon;
-                }
-            }
-            if (toRemove != null)
-            {
-                effectIcons.Remove(toRemove);
-                Destroy(toRemove);
-            }
+            GameObject toRemove = effectIcons.Where(x => x.name == colorName).SingleOrDefault();
+            effectIcons.Remove(toRemove);
+            Destroy(toRemove);
+            //GameObject toRemove;// = new GameObject(); //shouldn't and dont need to
+            //foreach (GameObject icon in effectIcons)
+            //{
+            //    if (icon.name == colorName)
+            //    {
+            //        toRemove = icon;
+            //    }
+            //}
+            //if (toRemove != null)
+            //{
+            //    effectIcons.Remove(toRemove);
+            //    Destroy(toRemove);
+            //}
         }
         worldSpaceHorizontalGroup.UpdateGroup();
 

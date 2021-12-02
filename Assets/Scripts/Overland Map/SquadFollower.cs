@@ -84,7 +84,8 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
     {
         while (remainingTime >= 0)
         {
-            TimeSpan ts = new TimeSpan(0, (int)remainingTime/60, (int)remainingTime);
+
+            TimeSpan ts = new TimeSpan(0, (int)remainingTime/60, (int)remainingTime); //WRONG
             timeText.text = string.Format("{0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
             yield return new WaitForSeconds(timerRate);
             remainingTime -= timerRate;
