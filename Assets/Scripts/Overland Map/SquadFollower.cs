@@ -96,7 +96,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
         siteButton.readiedSquad = squad;
 
-        IdleLog.Instance.RecieveNewMessage(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite});
+        IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite}, siteButton);
 
         //indicate somehow - also, connect the relevant squad to the site itself? 
         //AVOID a system that would have problems locating the squad to load-in
