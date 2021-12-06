@@ -475,6 +475,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 128d97338ec2cdb4bbebb19915605382, type: 3}
   - {fileID: 21300000, guid: 16dc3571b782d354885e17c3bb68cf5f, type: 3}
   - {fileID: 21300000, guid: a0236a393f2d9ed4f9bc651bc873b6b4, type: 3}
+  isSiteSet: 0
 --- !u!1 &3920714377507366920
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +830,15 @@ MonoBehaviour:
   clockAndTimerParent: {fileID: 7110442686729587695}
   timeText: {fileID: 5358688705183161741}
   isCooldown: 0
+  isWaitingForSquad: 0
+  pathCreator: {fileID: 0}
+  readiedSquad:
+    pawns: []
+    squadName: 
+    isAvailable: 1
+    roomNumber: -1
+  isReady: 0
+  isSet: 0
 --- !u!1 &5060595659542990494
 GameObject:
   m_ObjectHideFlags: 0
