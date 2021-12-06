@@ -74,6 +74,7 @@ MonoBehaviour:
   maxHP: 40
   pawnName: Shuki
   mercName: 2
+  initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
   targets: []
@@ -101,8 +102,8 @@ MonoBehaviour:
   SA_Description: '"You''re getting me wounded... You won''t like me when I''m wounded."
 
     When
-    HP below threshold (10%) Shuki enters a ferocious rage, increasing his damage
-    and raising his aggerssion.'
+    Shuki''s HP is below 10%, Shuki enters a ferocious rage, increasing his damage
+    by 20% and raising his aggerssion.'
   purpleMultiplier: 0
 --- !u!114 &5182301774868751694
 MonoBehaviour:
