@@ -108,6 +108,8 @@ public class SquadBuilder : MonoBehaviour
 
         Tavern.Instance.RefreshRooms();
 
+        isEdit = false; //just making sure that we won't double confirm
+
         gameObject.SetActive(false);
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }
@@ -159,6 +161,5 @@ public class SquadBuilder : MonoBehaviour
         {
             item.FrameToggle(false);
         }
-
     }
 }

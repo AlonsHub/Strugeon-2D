@@ -71,19 +71,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 150
-  maxHP: 150
+  currentHP: 80
+  maxHP: 80
   pawnName: Ezra
   mercName: 5
-  initiativeBonus: 10
+  initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 33c674b46f2f5e940a1c1e8330a5d192, type: 3}
-  fullPortraitSprite: {fileID: 21300000, guid: d9b389235f265be4cbd63119da927ab3, type: 3}
-  saSprite: {fileID: 0}
+  fullPortraitSprite: {fileID: 21300000, guid: 8a673845c100da8449f19fa5b6a4b010, type: 3}
+  saSprite: {fileID: 21300000, guid: 8f780dba74f968a4a8a31d3a3fc48e56, type: 3}
   effectIconParent: {fileID: 6890780919998564073}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
@@ -99,8 +99,10 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
-  SA_Title: 
-  SA_Description: 
+  SA_Title: Holy Strike
+  SA_Description: When the Gods "feel like it", they may choose to divinely empower
+    Ezra's attacks. Inspired by his faith, Ezra deals immense bonus damage onto his
+    enemies - such is the wrath of his Gods
   purpleMultiplier: 0
 --- !u!114 &6869497759092309598
 MonoBehaviour:
