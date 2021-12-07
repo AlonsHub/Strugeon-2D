@@ -192,7 +192,7 @@ public class WeaponItem : ActionItem
         //actionVariations = new List<ActionVariation>();
         actionVariations.Clear();
 
-        if (targets.Count <= 0)
+        if (targets.Count == 0)
         {
             Debug.Log(name + " Found no enemies, no weapon action variations added");
             return;// end match

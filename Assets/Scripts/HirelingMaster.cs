@@ -57,7 +57,8 @@ public class HirelingMaster : MonoBehaviour
         HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();
         //List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
         hirelingWindow.SetMe(missing[rand], this);
-        PlayerDataMaster.Instance.AddHireableMerc(missing[rand]);
+
+        PlayerDataMaster.Instance.AddHireableMerc(missing[rand]); //Kinda sucks...
 
         //anim.SetTrigger("Open");
         idleLogParent.GetComponentInParent<PeekingMenu>().ShowMenu();

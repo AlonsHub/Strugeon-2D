@@ -264,6 +264,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
             Debug.LogWarning("Escaped and destroyed!");
         }
 
+        PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+
         //Add to the list of the Cowardly (TurnMaster)
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
         PartyMaster.Instance.availableMercs.Remove(this);
@@ -293,6 +295,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
             RefMaster.Instance.mercs.Remove(this); //not ideal
             PartyMaster.Instance.availableMercs.Remove(this);
             TurnMaster.Instance.theDead.Add(mercName);
+            PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
         }
         else
         {

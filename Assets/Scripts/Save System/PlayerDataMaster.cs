@@ -9,9 +9,9 @@ using Google.Apis;
 public class PlayerDataMaster : MonoBehaviour
 {
     public static PlayerDataMaster Instance;
-    
+
     public PlayerData currentPlayerData;
-    
+
     public GameObject loadedSavePrefab;
 
     //string saveFolderPath = Application.dataPath + "Saves/";
@@ -29,7 +29,7 @@ public class PlayerDataMaster : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
@@ -48,13 +48,13 @@ public class PlayerDataMaster : MonoBehaviour
     public void SaveDataToDisk()
     {
         //check folder and file
-        if(currentPlayerData.playerName.Length == 0 || currentPlayerData.playerName == null)
+        if (currentPlayerData.playerName.Length == 0 || currentPlayerData.playerName == null)
         {
             currentPlayerData.playerName = defualtName;
         }
-        if(!CheckForSaveFolder()) //creates folder if there is none - and returns false if (folder doesn't exists) (files don't exist)
+        if (!CheckForSaveFolder()) //creates folder if there is none - and returns false if (folder doesn't exists) (files don't exist)
         {
-           File.Create(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
+            File.Create(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
         }
         //else
         //{
@@ -84,7 +84,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
-    
+
     //void KillFollowingZeros(ref List<int> nums)
     //{
     //    for (int i = 0; i < nums.Count; i++)
@@ -115,7 +115,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         PlayerData pd = JsonUtility.FromJson<PlayerData>(contents);
 
-        if(pd != null)
+        if (pd != null)
         {
             LoadPlayerData(pd);
 
@@ -159,7 +159,7 @@ public class PlayerDataMaster : MonoBehaviour
     }
     bool CheckForSaveFolder() //ensures that a save folder exists and there are files in it to load
     {
-        if(!Directory.Exists(saveFolderPath))
+        if (!Directory.Exists(saveFolderPath))
         {
             Debug.LogWarning("No folder found in save-folder-path");
 
@@ -178,7 +178,7 @@ public class PlayerDataMaster : MonoBehaviour
             Debug.Log("no save files found");
             return false;
         }
-        
+
         //not empty, now - is there a save file for this player
 
 
@@ -186,7 +186,7 @@ public class PlayerDataMaster : MonoBehaviour
     }
     bool CheckForSaveFolder(out string[] containedFiles) //ensures that a save folder exists and there are files in it to load
     {
-        containedFiles = new string[]{""};
+        containedFiles = new string[] { "" };
         if (!Directory.Exists(saveFolderPath))
         {
             Debug.LogWarning("No folder found in save-folder-path");
@@ -230,7 +230,7 @@ public class PlayerDataMaster : MonoBehaviour
         List<string> confirmedSaveFileNames = files.ToList(); //save names to a new list 
         confirmedSaveFileNames.RemoveAll(x => !x.Contains(saveFilePrefix) || x.Contains("meta")); //removes all entries which do not contain "savegame_" in their filename
 
-        if(confirmedSaveFileNames.Count == 0)
+        if (confirmedSaveFileNames.Count == 0)
         {
             Debug.Log("Save files either do not exist, or for whatever reason could not be confirmed - make sure that the Contains(saveFileSuffix) check is actually checking for a string that is contained within ANY savefile for this game");
             return null;
@@ -354,12 +354,24 @@ public class PlayerDataMaster : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        
+
     }
 
     public void HireMerc(MercName mn)
     {
         PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
         currentPlayerData.hireableMercs.Remove(mn);
+        currentPlayerData.availableMercs.Add(mn);
+    }
+
+    public List<System.Object> GetLog
+    {
+        get => new List<System.Object> { currentPlayerData.playerName,
+        currentPlayerData.victories,
+        currentPlayerData.losses,
+        currentPlayerData.numOfavailableMercs,
+        currentPlayerData.deadMercs,
+        currentPlayerData.cowardMercs,
+        currentPlayerData.gold};
     }
 }

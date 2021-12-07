@@ -32,4 +32,11 @@ public class PlayerData
     public List<float> values; //cooldowns
     //site cooldowns?
     //
+
+    public int deadMercs = 0;
+    public int cowardMercs = 0;
+    public int victories = 0;
+    public int losses = 0;
+    //public int numOfavailableMercs { get => PartyMaster.Instance.; }
+    public int numOfavailableMercs { get => availableMercs.Count; }
 }

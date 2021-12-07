@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq ;
 using System.Collections.Generic;
 using UnityEngine;
 using Google.Apis.Services;
@@ -28,7 +29,7 @@ public class GoogleSheetMaster : MonoBehaviour
     void Start()
     {
         SetUpCredentials();
-        PrintCell();
+        LogPlayer();
     }
 
     // Update is called once per frame
@@ -55,6 +56,62 @@ public class GoogleSheetMaster : MonoBehaviour
         else
         {
             Debug.Log("No data");
+        }
+    }
+    public List<string> GetRows(string range)
+    {
+        var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
+
+        var response = request.Execute();
+        var values = response.Values;
+
+        if (values != null && values.Count >= 0)
+        {
+            //return (List<string>)values;
+            List<string> rowsFirstCells = new List<string>();
+            foreach (var row in values)
+            {
+                rowsFirstCells.Add((string)row[0]);
+            }
+            return rowsFirstCells;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public void LogPlayer()
+    {
+        var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
+        var objectList = new List<System.Object>(); //fill object list with things!
+
+        List<string> strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
+        
+        
+        if (strings !=null && strings.Count >0 && strings.Contains(PlayerDataMaster.Instance.currentPlayerData.playerName)) 
+        {
+            //True - the player is already logged:
+            int i = strings.IndexOf(PlayerDataMaster.Instance.currentPlayerData.playerName);
+
+            string newRange = "A" + (i+1);
+            //objectList = new List<System.Object>() { PlayerDataMaster.Instance.currentPlayerData.playerName, PlayerDataMaster.Instance.currentPlayerData.lostMercs, PlayerDataMaster.Instance.currentPlayerData.numOfavailableMercs, PlayerDataMaster.Instance.currentPlayerData.gold};
+            valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog};
+
+            var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetID, newRange);
+            updateRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
+            var updateResponse = updateRequest.Execute();
+        }
+        else
+        {
+            //objectList = new List<System.Object>() { PlayerDataMaster.Instance.currentPlayerData.playerName, PlayerDataMaster.Instance.currentPlayerData.deadMercs, PlayerDataMaster.Instance.currentPlayerData.numOfavailableMercs, PlayerDataMaster.Instance.currentPlayerData.gold };
+
+            valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog };
+            //valueRange.Values = new List<IList<object>> { objectList };
+
+            var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "A2"); //just adds under A
+            appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+            var appendResponse = appendRequest.Execute();
         }
     }
 }
