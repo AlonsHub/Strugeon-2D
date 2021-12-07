@@ -35,6 +35,25 @@ public class HolyStrikeItem : MonoBehaviour
             //add extra VFX
             //add extra damage (perhaps with its own dmg txt)
             weaponItem.ExtraDamageTarget(minDmg, maxDmg);
+
+            List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
+            foreach (var neighbour in neigbourTiles)
+            {
+                if(neighbour.isEmpty)
+                {
+                    continue;
+                }
+                Pawn check = neighbour.myOccupant.GetComponent<Pawn>();
+                if (check == null)
+                {
+                    continue;
+                }
+                if(check.isEnemy)
+                {
+                    check.TakeDamage(Random.Range(minDmg, maxDmg));
+                }
+            }
+
             BattleLogVerticalGroup.Instance.AddToNextEntry(addonPrefab);
         }
         else

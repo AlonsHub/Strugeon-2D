@@ -77,7 +77,7 @@ public class DifficultyTranslator : MonoBehaviour
     public int DifficultyToGoldReward(LairDifficulty difficulty)
     {
         //return presets[(int)difficulty];
-        return goldRewards[(int)difficulty] + Random.Range(-5, 6);
+        return goldRewards[(int)difficulty] + Random.Range(0, 6);
     }
     //public GameObject DiffcultyToLevelPrefab(LairDifficulty difficulty)
     //{

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class BatllelogEntry : MonoBehaviour
+public class BatllelogEntry : Hoverable
 {
 
     [ColorUsage(true)]
@@ -18,8 +18,14 @@ public class BatllelogEntry : MonoBehaviour
     public TMP_Text numberDisplayer;
     
     public string actionDescriptionText; //to be accessed by the displayer
+    
 
+    //public override string GetMyData => ReturnMyData();//base.GetMyData;
 
+    //string ReturnMyData()
+    //{
+    //    return actionDescriptionText;
+    //}
     public void Init(string tgtPawn, Sprite psionActionIcon, Color colour)
     {
         //actingPawnNameDisplayer.text = "You cast";
@@ -32,6 +38,8 @@ public class BatllelogEntry : MonoBehaviour
         passivePawnNameDisplayer.text = tgtPawn;
         passivePawnNameDisplayer.color = colour;
         numberDisplayer.gameObject.SetActive(false);
+
+        //SetMyData= "You have cast: a" + colour.ToString() +" psion ability on: " + tgtPawn;
     }
     //public void Init(string tgtPawn, Sprite psionActionIcon, string psionicEffect Color colour)
     //{

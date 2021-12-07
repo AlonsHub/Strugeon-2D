@@ -7,6 +7,10 @@ public class Hoverable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     [SerializeField] string myData;
 
+    public string SetMyData { set => myData = value; }
+
+    public virtual string GetMyData { get => myData; }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         HoverTextBoard.Instance.SetMe(myData, transform);
