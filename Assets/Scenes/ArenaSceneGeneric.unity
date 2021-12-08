@@ -3058,8 +3058,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10562b03698a3c44d9e66cc4d659a579, type: 3}
   - {fileID: 21300000, guid: 69c54053700eb594dadd6baa6671f69a, type: 3}
   pauseButtonImgs:
-  - {fileID: 21300000, guid: d7b90d22eea3ffa4aa788b83dbb019fe, type: 3}
   - {fileID: 21300000, guid: 4c395bd6de40dcb4595b39ba5631937a, type: 3}
+  - {fileID: 21300000, guid: d7b90d22eea3ffa4aa788b83dbb019fe, type: 3}
   speedButton: {fileID: 4363690052826307988}
   pauseButton: {fileID: 440360628}
   currentTimeScaleIndex: 0
@@ -4190,7 +4190,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2521551412197279747, guid: 765d6b2675d40b443818070cb8dde200, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 765d6b2675d40b443818070cb8dde200, type: 3}
 --- !u!224 &2817854317549510148
 RectTransform:

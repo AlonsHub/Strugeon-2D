@@ -110,7 +110,8 @@ public class MouseBehaviour : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit, 50f, layerMask)) //not sure about max length yet, but we should add a LayerMask
             {
-                Time.timeScale = menuSlowTime;
+                //Time.timeScale = menuSlowTime;
+                TimeChanger.Instance.ToggleTimePause(true);
                 hitTarget = hit.collider.gameObject.GetComponentInParent<Pawn>();
 
                 //Debug.Log(hitTarget.name);
@@ -160,7 +161,8 @@ public class MouseBehaviour : MonoBehaviour
         heroButtonCircle.SetActive(false);
         enemyButtonCircle.SetActive(false);
         areButtonsOpen = false;
-        Time.timeScale = preferedTimeScale;
+        //Time.timeScale = preferedTimeScale;
+        TimeChanger.Instance.ToggleTimePause(false);
     }
     public void HideMenus()
     {
