@@ -78,6 +78,9 @@ public class PlayerDataMaster : MonoBehaviour
 
         File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", pdJsonString);
 
+        if(GoogleSheetMaster.Instance)
+        GoogleSheetMaster.Instance.LogPlayer();
+
         //consider overwriting 
 
         //try save
@@ -362,6 +365,8 @@ public class PlayerDataMaster : MonoBehaviour
         PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
         currentPlayerData.hireableMercs.Remove(mn);
         currentPlayerData.availableMercs.Add(mn);
+
+        //GoogleSheetMaster.Instance.LogPlayer(); //saves these changes
     }
 
     public List<System.Object> GetLog

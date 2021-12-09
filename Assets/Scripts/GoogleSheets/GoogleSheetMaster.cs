@@ -24,20 +24,22 @@ public class GoogleSheetMaster : MonoBehaviour
 
         sheetsService = new SheetsService(new BaseClientService.Initializer() { HttpClientInitializer = serviceAccountCredential });
     }
-
+    public static GoogleSheetMaster Instance;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError("Google Sheets Master perfoms start");
+        if(Instance!=null && Instance!=this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         SetUpCredentials();
         LogPlayer();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PrintCell()
     {
         var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, "A1");

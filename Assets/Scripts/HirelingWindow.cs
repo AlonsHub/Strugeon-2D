@@ -43,6 +43,7 @@ public class HirelingWindow : MonoBehaviour
         //success
         //PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         PlayerDataMaster.Instance.HireMerc(mercName);
+        Tavern.Instance.squadBuilder.Refresh();
 
         if (transform.parent.childCount <= 1) // other hireling windows
         {

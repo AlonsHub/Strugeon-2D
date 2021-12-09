@@ -15,7 +15,7 @@ public class PartyMaster : MonoBehaviour
     public List<Pawn> availableMercs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
-
+    
     public List<MercName> AllMercs() //including hireables
     {
         List<MercName> toReturn = new List<MercName>();
@@ -39,6 +39,19 @@ public class PartyMaster : MonoBehaviour
             }
         }
 
+        return toReturn;
+    }
+    public int NumOfMercsInSquads() //including hireables
+    {
+        int toReturn = 0;
+
+        foreach (var squad in squads)
+        {
+            foreach (var x in squad.pawns)
+            {
+                toReturn++;
+            }
+        }
         return toReturn;
     }
 

@@ -40,12 +40,17 @@ public class VictoryWindow : MonoBehaviour
         }
         foreach (var pawnName in TurnMaster.Instance.theDead)
         {
+            PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+
+
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName);
             go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, true, false);
         }
         foreach (var pawnName in TurnMaster.Instance.theCowardly)
         {
+            PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName); //need enum to portrait in stead (dict)
             go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, false, true);

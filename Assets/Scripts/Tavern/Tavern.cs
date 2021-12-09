@@ -13,6 +13,7 @@ public class Tavern : MonoBehaviour
     GameObject noMoreRoomsWindow;
     [SerializeField]
     GameObject newSquadMenu;
+    public SquadBuilder squadBuilder;
 
     [SerializeField]
     GameObject roomPanelPrefab;
@@ -41,7 +42,7 @@ public class Tavern : MonoBehaviour
         Instance = this;
 
         RefreshRooms();
-
+        squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
         Invoke("TryPromptNewHireling", 1);
     }
 
@@ -72,7 +73,7 @@ public class Tavern : MonoBehaviour
     {
         newSquadMenu.SetActive(true);
 
-        newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r);
+        newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
 

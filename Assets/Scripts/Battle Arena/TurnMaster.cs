@@ -149,6 +149,9 @@ public class TurnMaster : MonoBehaviour
         if (RefMaster.Instance.mercs.Count != 0)
             //if (PartyMaster.Instance.currentMercParty.Count != 0)
         {
+
+            PlayerDataMaster.Instance.currentPlayerData.victories++;
+
             //Give reward
             //Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
             Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
@@ -164,7 +167,7 @@ public class TurnMaster : MonoBehaviour
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
             }
 
-            if (PartyMaster.Instance.currentSquad.pawns.Count > 0)
+            if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
             {
                 PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns));
             }
@@ -184,6 +187,8 @@ public class TurnMaster : MonoBehaviour
                 Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).FirstOrDefault(); //TEST IF THIS IS EVER NOT DEFAULT!
                     //PAWNS ARE LIKELY REMOVED ELSEWHERE
                 PartyMaster.Instance.availableMercs.Remove(toRemove); // is this ever useful?
+                //PlayerDataMaster.Instance.currentPlayerData.deadMercs++; // set in Victory Window instead, since cowards are dealt there
+
             }
 
             //put squad back in their room
@@ -191,10 +196,19 @@ public class TurnMaster : MonoBehaviour
         }
         else
         {
+            PlayerDataMaster.Instance.currentPlayerData.losses++;
+
+            foreach (var item in theCowardly)
+            {
+                PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+            }
+            foreach (var item in theDead)
+            {
+                PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+            }
+
             defeatWindow.gameObject.SetActive(true);
             defeatWindow.SetMe(LevelRef.Instance.currentLevel);
-
-
         }
 
         PlayerDataMaster.Instance.GrabAndSaveData();
