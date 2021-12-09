@@ -11,7 +11,7 @@ using System.IO;
 public class GoogleSheetMaster : MonoBehaviour
 {
     static string spreadsheetID = "1VUnI_fzIOlRspR7lmM812egyi-kXYP0ltf7qUb7ufQw";
-    static string path = "/Resources/Sheets/credentials.json";
+    static string path = "/StreamingAssets/credentials.json";
     static SheetsService sheetsService;
 
     void SetUpCredentials()
