@@ -84,7 +84,7 @@ MonoBehaviour:
   portraitSprite: {fileID: 21300000, guid: 33c674b46f2f5e940a1c1e8330a5d192, type: 3}
   fullPortraitSprite: {fileID: 21300000, guid: 8a673845c100da8449f19fa5b6a4b010, type: 3}
   saSprite: {fileID: 21300000, guid: 8f780dba74f968a4a8a31d3a3fc48e56, type: 3}
-  effectIconParent: {fileID: 6890780919998564073}
+  effectIconParent: {fileID: 7891262091630222569}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
   myTurnPlate: {fileID: 0}
@@ -371,51 +371,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1725565, y: 0.990613, z: 0.1}
   m_Center: {x: 0.08627829, y: 0.18808651, z: -8.7984277e-16}
---- !u!1 &4031180088359466030
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6890780919998564073}
-  - component: {fileID: 7542046236858177678}
-  m_Layer: 11
-  m_Name: IconParent
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6890780919998564073
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031180088359466030}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: -0.552, y: 0, z: -0.366}
-  m_LocalScale: {x: 0.30769223, y: 0.20000002, z: 0.20000002}
-  m_Children: []
-  m_Father: {fileID: 1701941312780363250}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7542046236858177678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4031180088359466030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a603ad917bcfdc34ea9179a2fd9e84e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  count: 0
-  positions: []
 --- !u!1 &5016945437701499270
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +577,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3639027241314032955, guid: e5f9e99a2b0c42a40ba843222b500b66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3698926794327825284, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: pawn
@@ -642,6 +602,11 @@ PrefabInstance:
       propertyPath: spriteMaskTrans
       value: 
       objectReference: {fileID: 2247149921131727890}
+    - target: {fileID: 4624198582374010304, guid: e5f9e99a2b0c42a40ba843222b500b66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_RootOrder
@@ -650,7 +615,7 @@ PrefabInstance:
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.65000015
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
@@ -665,7 +630,7 @@ PrefabInstance:
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.634
+      value: -0.89
       objectReference: {fileID: 0}
     - target: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
@@ -712,6 +677,12 @@ PrefabInstance:
 --- !u!4 &1701941312780363250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5232492778487538720, guid: e5f9e99a2b0c42a40ba843222b500b66,
+    type: 3}
+  m_PrefabInstance: {fileID: 6846332277511553490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7891262091630222569 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3639027241314032955, guid: e5f9e99a2b0c42a40ba843222b500b66,
     type: 3}
   m_PrefabInstance: {fileID: 6846332277511553490}
   m_PrefabAsset: {fileID: 0}

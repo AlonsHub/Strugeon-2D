@@ -5,14 +5,19 @@ using UnityEngine;
 public class WorldSpaceHorizontalGroup : MonoBehaviour
 {
     //public Transform origin;
-    public int count = 0;
+    //int count = 0;
+    [SerializeField]
     float delta = 1.35f; //set in inspector
-    public List<Vector3> positions;
 
-    private void Start()
-    {
-        positions = new List<Vector3>();
-    }
+    [SerializeField]
+    Transform startPos;
+
+    //public List<Vector3> positions;
+
+    //private void Start()
+    //{
+    //    positions = new List<Vector3>();
+    //}
 
     //public void AddEffectIconToGroup(GameObject go)
     //{
@@ -25,14 +30,14 @@ public class WorldSpaceHorizontalGroup : MonoBehaviour
     //    count--;
     //    UpdateGroup();
     //}
-
+    [ContextMenu("Update Group")]
     public void UpdateGroup()
     {
-        count = transform.childCount;
+        //count = transform.childCount;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).localPosition = delta * i * Vector3.right;
+            transform.GetChild(i).localPosition = startPos.localPosition + delta * i * Vector3.right;
         }
     }
 }

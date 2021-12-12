@@ -39,7 +39,7 @@ public class HpBar : MonoBehaviour
 
         //Should be made into a "damage delt" event
 
-        spriteMaskTrans.localScale = new Vector3 (2f * ((float)pawn.currentHP / (float)pawn.maxHP), 1, 1); //full hp is (2,1,1)
+        spriteMaskTrans.localScale = new Vector3 (((float)pawn.currentHP / (float)pawn.maxHP), 1, 1); //full hp is (2,1,1)
 
 
 

@@ -24,7 +24,16 @@ public class HoverTextBoard : MonoBehaviour
 
         root.SetActive(false);
     }
+    public void SetMe(string newText)
+    {
+        root.SetActive(true);
 
+        textBox.text = newText;
+        //position me
+        root.transform.position = Input.mousePosition+ offset;
+
+        //scale me?
+    }
     public void SetMe(string newText, Transform trans)
     {
         root.SetActive(true);
