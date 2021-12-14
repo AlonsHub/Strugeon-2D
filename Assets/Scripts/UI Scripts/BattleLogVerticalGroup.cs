@@ -107,7 +107,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
         be.Init(actingPawn, actionIconToSprite[actionIcon]);
-        be.SetMyData = actingPawn + " " + actionIcon.ToString(); //escaped only, I think
+        be.SetMyData = actionIcon.ToString(); //escaped only, I think
         children.Add(go.transform);
 
 
@@ -136,7 +136,8 @@ public class BattleLogVerticalGroup : MonoBehaviour
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn);
-        be.SetMyData = actingPawn + " " + actionIcon.ToString() + " " + passivePawn;
+        //be.SetMyData = actingPawn + " " + actionIcon.ToString() + " " + passivePawn;
+        be.SetMyData = actionIcon.ToString();
         children.Add(go.transform);
 
         foreach (var item in preLoadedAddons)
@@ -159,7 +160,8 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         be.Init(actingPawn, actionIconToSprite[actionIcon], passivePawn, number, colour);
 
-        be.SetMyData = actingPawn + " " + actionIcon.ToString() + " " + passivePawn + " for: " + number;
+        //be.SetMyData = actingPawn + " " + actionIcon.ToString() + " " + passivePawn + " for: " + number;
+        be.SetMyData = actionIcon.ToString();
 
         children.Add(go.transform);
 
@@ -226,7 +228,7 @@ public class BattleLogVerticalGroup : MonoBehaviour
         
 
         be.Init(tgtPawn, psionActionSprites[(int)psionActionIcon], colours[(int)psionActionIcon]);
-        be.SetMyData = "You have used the: " + psionActionIcon.ToString() +" on: " + tgtPawn;
+        be.SetMyData = psionActionIcon.ToString();
         children.Add(go.transform);
         //CleanList();
         

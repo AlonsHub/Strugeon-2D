@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e610b0c5d4cc84098ed91033aef576, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: 
   colRed: {r: 0.5882353, g: 0.15686275, b: 0.08235294, a: 1}
   colGreen: {r: 0.1764706, g: 0.57254905, b: 0.2627451, a: 1}
   actingPawnNameDisplayer: {fileID: 2848739190505974730}
@@ -395,7 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
