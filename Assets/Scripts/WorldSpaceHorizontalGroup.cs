@@ -7,7 +7,7 @@ public class WorldSpaceHorizontalGroup : MonoBehaviour
     //public Transform origin;
     //int count = 0;
     [SerializeField]
-    float delta = 1.35f; //set in inspector
+    float delta; //set in inspector
 
     [SerializeField]
     Transform startPos;
@@ -34,10 +34,15 @@ public class WorldSpaceHorizontalGroup : MonoBehaviour
     public void UpdateGroup()
     {
         //count = transform.childCount;
+        int count =0;
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).localPosition = startPos.localPosition + delta * i * Vector3.right;
+            if (transform.GetChild(i).gameObject.activeSelf)
+            {
+                transform.GetChild(i).localPosition = delta * (count) * Vector3.right;
+                count++;
+            }
         }
     }
 }

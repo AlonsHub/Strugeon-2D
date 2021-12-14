@@ -47,11 +47,11 @@ public class HpBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 newRot = rotatingParent.rotation.eulerAngles;
+        Vector3 newRot = rotatingParent.eulerAngles;
         //float div = newRot.y / 45f;
         newRot = (int)(newRot.y / 90) * 90 * Vector3.up;
 
-        myParent.rotation = Quaternion.Euler(newRot); 
+        myParent.eulerAngles = newRot; 
         
     }
 }
