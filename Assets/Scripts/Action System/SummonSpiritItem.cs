@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SummonSpiritItem : ActionItem
+public class SummonSpiritItem : ActionItem, SA_Item
 {
     [SerializeField]
     GameObject drownedSpiritPrefab;
@@ -13,6 +13,11 @@ public class SummonSpiritItem : ActionItem
     int maxCooldown;
     [SerializeField]
     GameObject summonVFX;
+
+    //public int _currentCooldown;
+    public int saCooldown;
+    [SerializeField]
+    Sprite summonSprite;
 
     [ContextMenu("Summon")]
     public override void Action(GameObject tgt)
@@ -56,6 +61,34 @@ public class SummonSpiritItem : ActionItem
             cooldown--;
         }
     }
-    //summon the shit
+
+    public bool SA_Available()
+    {
+        return !(cooldown > 0);
+    }
+
+    public int CurrentCooldown()
+    {
+        return cooldown;
+    }
+
+    public void StartCooldown()
+    {
+        cooldown = saCooldown;
+    }
+
+    public Sprite SA_Sprite()
+    {
+        return summonSprite;
+    }
+    public string SA_Name()
+    {
+        return "Summon Drowned Spirit";
+    }
+
+    public string SA_Description()
+    {
+        return "is this ever relevant?"; //we'll see...
+    }
 
 }

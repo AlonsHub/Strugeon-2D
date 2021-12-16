@@ -23,6 +23,12 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
 
     bool isScaled;
 
+    //SA sorting section
+    List<Transform> sa_Icons;
+    [SerializeField]
+    Transform SA_Parent;
+    float saDistance = 50f;
+
     public void Init(Pawn pawn)
     {
         myPawn = pawn;
@@ -32,7 +38,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         isScaled = false;
         hasSA = pawn.hasSAs;
         myPawn.myTurnPlate = gameObject;
-
+        sa_Icons = new List<Transform>();
 
     }
     public void ToggleScale(bool scaleUp)
@@ -76,8 +82,11 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             return;
         }
         
-        Image img = Instantiate(saIconPrefab, gameObject.transform).GetComponent<Image>(); //maybe InChildren
+        Image img = Instantiate(saIconPrefab, SA_Parent).GetComponent<Image>(); //maybe InChildren
         img.sprite = sai.SA_Sprite();
+        sa_Icons.Add(img.transform);
+        SA_IconUpdate();
+        //OnAddSAIcon(img.transform);
         iconBySAItem.Add(sai, img);
     }
     public void RemoveSAIcon(SA_Item sai)
@@ -87,7 +96,17 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             Debug.LogWarning("no SA_Icon of type: " + sai.SA_Name() + " to remove");
             return;
         }
+        sa_Icons.Remove(iconBySAItem[sai].transform);
         Destroy(iconBySAItem[sai].gameObject);
+        SA_IconUpdate();
         iconBySAItem.Remove(sai);
+    }
+
+    void SA_IconUpdate()
+    {
+        for (int i = 0; i < sa_Icons.Count; i++)
+        {
+            sa_Icons[i].localPosition = Vector3.zero + saDistance * Vector3.right * i;
+        }
     }
 }

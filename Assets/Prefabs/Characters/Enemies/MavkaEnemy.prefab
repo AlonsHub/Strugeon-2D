@@ -310,7 +310,7 @@ MonoBehaviour:
   pawnName: Mavka
   mercName: 0
   initiativeBonus: 0
-  hasSAs: 0
+  hasSAs: 1
   forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5357307063160447432}
@@ -360,6 +360,9 @@ MonoBehaviour:
   charmVFX: {fileID: 6136953690358548763, guid: 607df88062ee0de4d9381226b039f4f6,
     type: 3}
   maxCooldown: 4
+  _currentCooldown: 0
+  saCooldown: 0
+  charmSprite: {fileID: 21300000, guid: 80eecaec26878984da4c9e8fee0a70d4, type: 3}
 --- !u!114 &-2381371511239876949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +387,9 @@ MonoBehaviour:
   maxCooldown: 4
   summonVFX: {fileID: 6136953690358548763, guid: 99bc00321565749439b5ade3744cf794,
     type: 3}
+  _currentCooldown: 0
+  saCooldown: 4
+  summonSprite: {fileID: 21300000, guid: 803da265189a67542938dc53edb8ec35, type: 3}
 --- !u!1001 &2762522664996448364
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharmItem : ActionItem //,SAITEM!!!!
+public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
 {
     [SerializeField]
     int charmDuration; //in number of turns. Defualt value is 2
@@ -18,6 +18,10 @@ public class CharmItem : ActionItem //,SAITEM!!!!
     int currentCooldown = 0;
     [SerializeField]
     int maxCooldown; //set in inspector
+
+    public int saCooldown;
+    [SerializeField]
+    Sprite charmSprite;
 
     private void Start()
     {
@@ -71,5 +75,34 @@ public class CharmItem : ActionItem //,SAITEM!!!!
         {
             actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
         }
+    }
+
+    public bool SA_Available()
+    {
+        return !(currentCooldown > 0);
+    }
+
+    public int CurrentCooldown()
+    {
+        return currentCooldown;
+    }
+
+    public void StartCooldown()
+    {
+        currentCooldown = saCooldown;
+    }
+
+    public Sprite SA_Sprite()
+    {
+        return charmSprite;
+    }
+    public string SA_Name()
+    {
+        return "Summon Drowned Spirit";
+    }
+
+    public string SA_Description()
+    {
+        return "is this ever relevant?"; //we'll see...
     }
 }
