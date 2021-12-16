@@ -30,7 +30,7 @@ public class HoverTextBoard : MonoBehaviour
 
         textBox.text = newText;
         //position me
-        root.transform.position = Input.mousePosition+ offset/2;
+        root.transform.position = Input.mousePosition+ offset/1.5f;
 
         //scale me?
     }

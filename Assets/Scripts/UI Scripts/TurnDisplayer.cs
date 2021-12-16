@@ -84,8 +84,8 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             if (!iconBySAItem[sai].gameObject.activeSelf)
                 //iconBySAItem[sai].gameObject.SetActive(true);
                 iconBySAItem[sai].color = Color.white;
-            else
-                Debug.LogError("TurnDisplayer Already contains: " + sai.SA_Name() + " and it is active");
+            //else
+                //Debug.LogError("TurnDisplayer Already contains: " + sai.SA_Name() + " and it is active");
 
             //either way, return
             return;
