@@ -78,10 +78,20 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     {
         if(iconBySAItem.ContainsKey(sai))
         {
-            //Debug.LogError("TurnDisplayer Already containts this SA_Item Icon: " + sai.SA_Name());
+            //if one does exist, and is not active -> activate.
+            //if active, it shouldn't happen
+
+            if (!iconBySAItem[sai].gameObject.activeSelf)
+                //iconBySAItem[sai].gameObject.SetActive(true);
+                iconBySAItem[sai].color = Color.white;
+            else
+                Debug.LogError("TurnDisplayer Already contains: " + sai.SA_Name() + " and it is active");
+
+            //either way, return
             return;
         }
         
+        //if one does not exist, add one
         Image img = Instantiate(saIconPrefab, SA_Parent).GetComponent<Image>(); //maybe InChildren
         img.sprite = sai.SA_Sprite();
         sa_Icons.Add(img.transform);
@@ -96,10 +106,14 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             Debug.LogWarning("no SA_Icon of type: " + sai.SA_Name() + " to remove");
             return;
         }
-        sa_Icons.Remove(iconBySAItem[sai].transform);
-        Destroy(iconBySAItem[sai].gameObject);
+
+        //Destroy(iconBySAItem[sai].gameObject);
+        //iconBySAItem[sai].gameObject.SetActive(false);
+        iconBySAItem[sai].color = Color.gray;
         SA_IconUpdate();
-        iconBySAItem.Remove(sai);
+
+        //sa_Icons.Remove(iconBySAItem[sai].transform); //should remain
+        //iconBySAItem.Remove(sai);
     }
 
     void SA_IconUpdate()
