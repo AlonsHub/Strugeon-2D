@@ -14,7 +14,7 @@ public class Blinded : MonoBehaviour
     Sprite iconToAddOn;
     private void Awake()
     {
-        iconToAddOn = Resources.Load<Sprite>("Icons/BlindIcon");
+        iconToAddOn = Resources.Load<Sprite>("Icons/Blind");
     }
 
     public void SetMe(WeaponItem wi, int totalLifetime)

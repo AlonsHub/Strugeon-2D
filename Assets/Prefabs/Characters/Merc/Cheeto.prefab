@@ -250,6 +250,9 @@ MonoBehaviour:
   chanceToProc: 100
   addonPrefab: {fileID: 4991725304625527649, guid: 6698d3c8f68b43a49855c7b82c100a41,
     type: 3}
+  maxCooldown: 0
+  saCooldown: 0
+  blindSprite: {fileID: 21300000, guid: f84ddc7ec03edd444804f38700b1ddbb, type: 3}
 --- !u!114 &-4737283758176797648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,7 +612,7 @@ PrefabInstance:
     - target: {fileID: 3639027241314032955, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.53
+      value: -0.475
       objectReference: {fileID: 0}
     - target: {fileID: 3639027241314032955, guid: e5f9e99a2b0c42a40ba843222b500b66,
         type: 3}

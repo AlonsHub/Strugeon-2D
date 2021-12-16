@@ -116,6 +116,7 @@ public class TurnMaster : MonoBehaviour
             if (tp) //just making sure
             {
                 tp.Init(turnTakers[i]);
+                tp.SAIconCheck();
             }
             else
             {
@@ -215,10 +216,6 @@ public class TurnMaster : MonoBehaviour
         PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
-
-       
-
-        //Invoke("LoadLater", 1);
     }
 
     void LoadLater()

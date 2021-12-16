@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlindingItem : ActionItem //, SA_Item
+public class BlindingItem : ActionItem, SA_Item //, SA_Item
 {
     [SerializeField]
     int duration;
@@ -18,6 +18,15 @@ public class BlindingItem : ActionItem //, SA_Item
 
     [SerializeField]
     GameObject addonPrefab;
+
+    int currentCooldown = 0;
+    [SerializeField]
+    int maxCooldown; //set in inspector
+
+    public int saCooldown;
+    [SerializeField]
+    Sprite blindSprite;
+
     private void Start()
     {
         weaponItem = GetComponent<WeaponItem>();
@@ -43,6 +52,35 @@ public class BlindingItem : ActionItem //, SA_Item
         {
             Debug.Log("No Blind");
         }
+    }
+
+    public bool SA_Available()
+    {
+        return !(currentCooldown > 0);
+    }
+
+    public int CurrentCooldown()
+    {
+        return currentCooldown;
+    }
+
+    public void StartCooldown()
+    {
+        currentCooldown = saCooldown;
+    }
+
+    public Sprite SA_Sprite()
+    {
+        return blindSprite;
+    }
+    public string SA_Name()
+    {
+        return "Blinding Dart";
+    }
+
+    public string SA_Description()
+    {
+        return "Cheeto flings a Blinding Dart at an enemy, dealing regular damage and Blinding that enemy for 2 turns. Blinded enemie's attacks deal 0 damage."; //we'll see...
     }
 
     //private void Start()

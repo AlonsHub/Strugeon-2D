@@ -11,4 +11,5 @@ public class IconToStringHoverable : Hoverable
         img = GetComponent<Image>();
         SetMyData = img.sprite.name;
     }
+    //public override string GetMyData => img.sprite.name;
 }
