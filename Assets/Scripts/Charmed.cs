@@ -15,7 +15,7 @@ public class Charmed : MonoBehaviour
     Sprite iconToAddOn;
     private void Awake()
     {
-        iconToAddOn = Resources.Load<Sprite>("Icons/CharmIcon");
+        iconToAddOn = Resources.Load<Sprite>("Icons/Charm");
     }
 
     public void SetMe(WeaponItem wi, int totalLifetime)

@@ -7,10 +7,11 @@ public class StatusIcon : WorldSpaceHoverable
 {
     SpriteRenderer sr; //just in case, if not used - save the string name of the icon's sprite
 
-    public override string GetMyData => _getMyData();
-    private void Awake()
+    //public override string GetMyData => _getMyData();
+    private void Start()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
+        SetMyData = _getMyData();
     }
 
     string _getMyData()
