@@ -58,14 +58,33 @@ public class SquadBuilder : MonoBehaviour
     }
     public void OnDisable()
     {
-        if(isEdit)
+
+        //if(isEdit)
+        //{
+        //    isEdit = false;
+        //    if (partySlots.Any(x => x.isOccupied))
+        //    {
+        //        Confirm();
+        //    }
+        //    else
+        //    {
+        //        toRoom.SetStatusText("Vacant");
+        //    }
+        //}
+        if (partySlots.Any(x => x.isOccupied))
         {
-            isEdit = false;
-            if (partySlots.Any(x => x.isOccupied))
+            if (isEdit)
             {
+                isEdit = false;
                 Confirm();
             }
         }
+        else
+        {
+            toRoom.SetStatusText("Vacant");
+        }
+            
+        
 
         mercDataDisplayer.gameObject.SetActive(false);
         foreach (var item in partySlots)

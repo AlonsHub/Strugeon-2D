@@ -36,17 +36,23 @@ public class SquadRoomDisplayer : MonoBehaviour
     }
     private void OnDisable()
     {
+        DestroySquadSlots();
+    }
+
+    void DestroySquadSlots()
+    {
         if (squadSlots != null)
         {
-            for (int i = squadSlots.Length-1; i >= 0; i--)
+            for (int i = squadSlots.Length - 1; i >= 0; i--)
             {
                 Destroy(squadSlots[i].gameObject);
             }
+            squadSlots = null;
         }
     }
     public void SetMe(Room room)
     {
-
+        DestroySquadSlots();
         squadSlots = new BasicMercSlot[room.size];
 
 
@@ -54,10 +60,18 @@ public class SquadRoomDisplayer : MonoBehaviour
         {
             squadSlots[i] = Instantiate(squadSlotPrefab, slotParent).GetComponent<BasicMercSlot>();
             squadSlots[i].squadRoomDisplayer = this;
-            if (i >= room.squad.pawns.Count)
-                squadSlots[i].SetMe();
+            if (room.squad != null) //if it is, just have to empty slot there
+            {
+                if (i < room.squad.pawns.Count)
+                    squadSlots[i].SetMe(room.squad.pawns[i]);
+                else
+                    squadSlots[i].SetMe();
+            }
             else
-                squadSlots[i].SetMe(room.squad.pawns[i]);
+            {
+                squadSlots[i].SetMe();
+            }
+
         }
 
     }

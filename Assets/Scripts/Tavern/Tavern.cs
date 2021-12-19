@@ -120,7 +120,11 @@ public class Tavern : MonoBehaviour
     {
         if (!squadRoomDisplayer.gameObject.activeSelf)
             squadRoomDisplayer.gameObject.SetActive(true);
-
+        //else
+        //{
+        //    //if it IS on
+        //    squadRoomDisplayer.SetMe();
+        //}
         squadRoomDisplayer.SetMe(roomButton.room);
         activeRoomButton = roomButton;
     }
