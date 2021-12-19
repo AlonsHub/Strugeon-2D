@@ -154,9 +154,10 @@ public class TurnMaster : MonoBehaviour
             PlayerDataMaster.Instance.currentPlayerData.victories++;
 
             //Give reward
-            //Inventory.Instance.Gold += LevelRef.Instance.currentLevel.levelData.goldReward;
+           
             Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
-            //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER!
+            //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER! 
+            //gold should either be directly linked to between inventory and currentPlayerData - or have an OnValueChanged() for the displayer and player data to subscribe to
             PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
             //PLUMBING
 
@@ -167,10 +168,18 @@ public class TurnMaster : MonoBehaviour
             {
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
             }
+             foreach (var item in theCowardly)
+            {
+                PartyMaster.Instance.currentSquad.RemoveMerc(item);
+            }
 
             if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
             {
                 PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns));
+            }
+            else
+            {
+                Debug.LogError("Victory,but TurnMaster can't return the squad home, because somehow they're all dead.");
             }
 
 

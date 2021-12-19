@@ -175,7 +175,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
                 break;
             }
         }
-        //In previous version: I checked for double turn here, to subtract turn order by 1 to make the next turn mine again
+        
         actionPool[actionIndex].PerformActionOnTarget();
     }
 
