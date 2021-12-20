@@ -81,7 +81,7 @@ public class SquadBuilder : MonoBehaviour
         }
         else
         {
-            toRoom.SetStatusText("Vacant");
+            toRoom.roomButton.SetStatusText("Vacant");
         }
             
         

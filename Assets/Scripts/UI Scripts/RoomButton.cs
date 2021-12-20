@@ -28,6 +28,8 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         room = r;
         room.roomNumber = i;
 
+        room.roomButton = this;
+
         //r.squad.pawns.TrimExcess();
         r.isOccupied = (r.squad!=null && r.squad.pawns.Count > 0);
 

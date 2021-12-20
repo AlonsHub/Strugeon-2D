@@ -14,6 +14,8 @@ public class Room
     public bool isOccupied;
 
     public string statusText;
+
+    public RoomButton roomButton;
     public Room()
     {
         size = 2;
