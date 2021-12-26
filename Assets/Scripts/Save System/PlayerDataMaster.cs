@@ -301,14 +301,6 @@ public class PlayerDataMaster : MonoBehaviour
     {
         List<MercName> toReturn = new List<MercName>();
 
-        //foreach(Squad s in PartyMaster.Instance.squads)
-        //{
-        //    toReturn.Add(MercName.None);
-        //    foreach (Pawn p in s.pawns)
-        //    {
-        //        toReturn.Add(p.mercName);
-        //    }
-        //}
         foreach (Room s in Instance.currentPlayerData.rooms) //sets squads in order of rooms!!!!!!
         {
             toReturn.Add(MercName.None);
@@ -320,6 +312,7 @@ public class PlayerDataMaster : MonoBehaviour
                 }
             }
         }
+
         return toReturn;
     }
 

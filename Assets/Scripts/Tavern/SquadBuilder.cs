@@ -17,7 +17,7 @@ public class SquadBuilder : MonoBehaviour
     public Squad tempSquad;
     Room toRoom;
     public Room ToRoom { get => toRoom; }
-
+    [SerializeField]
     bool isEdit = false;
     
     public MercDataDisplayer mercDataDisplayer;
@@ -71,15 +71,14 @@ public class SquadBuilder : MonoBehaviour
         //        toRoom.SetStatusText("Vacant");
         //    }
         //}
-        if (partySlots.Any(x => x.isOccupied))
+        //if (partySlots.Any(x => x.isOccupied)) //maybe try something more wholistic like checking the tempSquad
+        if (isEdit)
         {
-            if (isEdit)
-            {
-                isEdit = false;
-                Confirm();
-            }
+            isEdit = false;
+            Confirm();
         }
-        else
+
+        if (tempSquad.pawns.Count == 0) //maybe try something more wholistic like checking the tempSquad
         {
             toRoom.roomButton.SetStatusText("Vacant");
         }

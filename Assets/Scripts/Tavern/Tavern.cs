@@ -80,6 +80,12 @@ public class Tavern : MonoBehaviour
 
     public void TryOpenNewSquadMenu()
     {
+        
+        if(PartyMaster.Instance.squads.Count > PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
+        {
+            Debug.LogError("There are more squads than there are rooms at the moment. This shouldn't happen");
+        }
+
         if(PartyMaster.Instance.squads.Count == PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
         {
             noMoreRoomsWindow.SetActive(true);

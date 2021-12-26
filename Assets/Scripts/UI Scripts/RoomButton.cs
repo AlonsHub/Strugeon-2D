@@ -31,14 +31,14 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         room.roomButton = this;
 
         //r.squad.pawns.TrimExcess();
-        r.isOccupied = (r.squad!=null && r.squad.pawns.Count > 0);
+        room.isOccupied = (room.squad!=null && room.squad.pawns.Count > 0);
 
         if (room.isOccupied)
         {
             //go red?
             //capacityText.text = r.size.ToString();
-            leaderIcon.sprite = r.squad.pawns[0].PortraitSprite;
-            statusText.text = "Team " + r.squad.pawns[0].Name;
+            leaderIcon.sprite = room.squad.pawns[0].PortraitSprite;
+            statusText.text = "Team " + room.squad.pawns[0].Name;
             //perhaps read the Room.statusText instead?
         }
         else
@@ -74,6 +74,7 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         leaderIcon.sprite = defualtSprite;
         isOccupied = room.isOccupied = false;
         room.squad = null;
+        //room.squad.pawns.Clear();
         //room = null;
         //status text change
         SetStatusText("Editing...");

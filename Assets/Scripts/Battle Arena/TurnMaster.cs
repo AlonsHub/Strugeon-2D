@@ -217,12 +217,19 @@ public class TurnMaster : MonoBehaviour
                 PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
             }
 
+
+
             defeatWindow.gameObject.SetActive(true);
             defeatWindow.SetMe(LevelRef.Instance.currentLevel);
         }
 
+        //empty the room:
+        
+        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber] = null;
+
+        PartyMaster.Instance.currentSquad = null;
+        //PartyMaster.Instance.currentMercParty.Clear();
         PlayerDataMaster.Instance.GrabAndSaveData();
-        PartyMaster.Instance.currentMercParty.Clear();
 
         Time.timeScale = 1; //just in case
     }
