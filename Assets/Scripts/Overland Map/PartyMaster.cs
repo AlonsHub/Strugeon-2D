@@ -41,16 +41,19 @@ public class PartyMaster : MonoBehaviour
 
         return toReturn;
     }
-    public int NumOfMercsInSquads() //including hireables
+    public int NumOfMercsInSquads() 
     {
         int toReturn = 0;
 
+
+
         foreach (var squad in squads)
         {
-            foreach (var x in squad.pawns)
-            {
-                toReturn++;
-            }
+            toReturn += squad.pawns.Count;
+            //foreach (var x in squad.pawns)
+            //{
+            //    toReturn++;
+            //}
         }
         return toReturn;
     }

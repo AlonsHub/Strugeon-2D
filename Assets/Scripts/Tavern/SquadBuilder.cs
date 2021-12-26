@@ -77,11 +77,17 @@ public class SquadBuilder : MonoBehaviour
             isEdit = false;
             Confirm();
         }
-
-        if (tempSquad.pawns.Count == 0) //maybe try something more wholistic like checking the tempSquad
+        else if (tempSquad.pawns.Count == 0) //maybe try something more wholistic like checking the tempSquad
         {
             toRoom.roomButton.SetStatusText("Vacant");
         }
+        //    else 
+        //{
+        //    foreach (var p in tempSquad.pawns)
+        //    {
+        //        PartyMaster.Instance.availableMercs.Add(p);
+        //    }
+        //}
             
         
 
