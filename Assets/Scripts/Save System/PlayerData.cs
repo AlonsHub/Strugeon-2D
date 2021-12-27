@@ -37,6 +37,6 @@ public class PlayerData
     public int cowardMercs = 0;
     public int victories = 0;
     public int losses = 0;
-    public int numOfavailableMercs { get => availableMercs.Count+PartyMaster.Instance.NumOfMercsInSquads(); }
+    public int numOfavailableMercs { get => availableMercs.Count + PartyMaster.Instance.NumOfMercsInSquads(); }
     //public int numOfavailableMercs { get => availableMercs.Count ; }
 }
