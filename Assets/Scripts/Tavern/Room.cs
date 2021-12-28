@@ -9,7 +9,7 @@ public class Room
     //public int price; //not needed, it's based on how many rooms already exist
     public int roomNumber;
 
-    public Squad squad;
+    public Squad squad; 
 
     public bool isOccupied;
 

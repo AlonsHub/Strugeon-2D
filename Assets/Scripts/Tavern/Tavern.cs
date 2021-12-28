@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -111,8 +112,10 @@ public class Tavern : MonoBehaviour
             //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
         if (s != null)
         {
-            PartyMaster.Instance.squads.Remove(s);
-            newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns, room);
+            PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault());
+            
+                newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns, room);
+           
             return;
         }
 

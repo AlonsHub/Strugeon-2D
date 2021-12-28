@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 [System.Serializable]
-public class Squad 
+public class Squad : IEquatable<Squad>
 {
     //data group of which pawns make this group up
 
@@ -68,5 +69,20 @@ public class Squad
     public bool RemoveMerc(MercName mercName) //returns false if couldn't remove
     {
         return pawns.Remove(pawns.Where(x => x.mercName == mercName).FirstOrDefault());
+    }
+
+    public bool Equals(Squad other)
+    {
+        List<Pawn> tempList = new List<Pawn>(pawns);
+
+        if(pawns.Count != other.pawns.Count)
+        {
+            return false; 
+        }
+        foreach (Pawn p in other.pawns)
+        {
+            tempList.Remove(p);
+        }
+       return tempList.Count==0;
     }
 }
