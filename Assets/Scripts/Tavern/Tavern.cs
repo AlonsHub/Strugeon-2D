@@ -112,9 +112,16 @@ public class Tavern : MonoBehaviour
             //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
         if (s != null)
         {
-            PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault());
-            
+            if(PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault()))
+            {
+
                 newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns, room);
+            }
+            else
+            {
+                Debug.LogError("Failed to remove party from room");
+            }
+            
            
             return;
         }
