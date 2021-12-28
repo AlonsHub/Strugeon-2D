@@ -110,7 +110,7 @@ public class Tavern : MonoBehaviour
         //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
             newSquadMenu.SetActive(true);
             //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
-        if (s != null)
+        if (s != null && s.pawns.Count > 0)
         {
             if(PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault()))
             {
