@@ -71,7 +71,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //nameText.text = "";
     }
 
-    public void OnClick() // SET IN INSPECTOR
+    public void OnClick() // THIS MIGHT BE REDUNDANT IF ITS USED IT MAY CAUSE ISSUES!
     {
         if (!isOccupied)
         {

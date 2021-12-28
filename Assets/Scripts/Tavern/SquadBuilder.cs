@@ -24,6 +24,9 @@ public class SquadBuilder : MonoBehaviour
 
     [SerializeField]
     TogglePopout myButton;
+
+    [SerializeField]
+    List<Pawn> uneditedSquadPawns;
     //private void Awake()
     //{
     //    //gameObject.SetActive
@@ -75,6 +78,20 @@ public class SquadBuilder : MonoBehaviour
         if (isEdit)
         {
             isEdit = false;
+            //Differences between tempSquad and uneditedSquadPawns needs to be unset:
+
+            //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
+            //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
+
+            //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
+
+            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercs.Contains(x)).ToList();
+
+            PartyMaster.Instance.availableMercs.AddRange(backToAvailable);
+
+            //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
+            tempSquad.pawns = uneditedSquadPawns;
+
             Confirm();
         }
         else if (tempSquad.pawns.Count == 0) //maybe try something more wholistic like checking the tempSquad
@@ -100,7 +117,7 @@ public class SquadBuilder : MonoBehaviour
         if(myButton)
         myButton.Toggle(false);
     }
-    public void SetToRoom(Room r)
+    public void SetToRoom(Room r) /// this is the problem, fix the room setting issue
     {
         toRoom = r;
 
@@ -117,7 +134,7 @@ public class SquadBuilder : MonoBehaviour
         isEdit = false; //just making sure that we won't double confirm
 
         if (tempSquad.pawns.Count > 0)
-        PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom);
+        PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
         //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
 
         PlayerDataMaster.Instance.GrabAndSaveData();
@@ -168,6 +185,7 @@ public class SquadBuilder : MonoBehaviour
         //    partySlots[i].SetMe(oldSquad[i]);
         //}
         tempSquad.pawns = oldSquad;
+        uneditedSquadPawns = new List<Pawn>(oldSquad);
         isEdit = true;
 
         SetToRoom(room);
