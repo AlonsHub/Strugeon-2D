@@ -114,8 +114,9 @@ public class SquadBuilder : MonoBehaviour
     public void Confirm()
     {
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
+        isEdit = false; //just making sure that we won't double confirm
 
-        if(tempSquad.pawns.Count > 0)
+        if (tempSquad.pawns.Count > 0)
         PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom);
         //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
 
@@ -132,7 +133,6 @@ public class SquadBuilder : MonoBehaviour
 
         Tavern.Instance.RefreshRooms();
 
-        isEdit = false; //just making sure that we won't double confirm
 
         gameObject.SetActive(false);
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");

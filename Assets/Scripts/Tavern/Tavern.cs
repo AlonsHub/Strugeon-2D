@@ -76,8 +76,6 @@ public class Tavern : MonoBehaviour
         newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
-
-
     public void TryOpenNewSquadMenu()
     {
         
