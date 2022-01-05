@@ -122,8 +122,9 @@ MonoBehaviour:
   isWeapon: 1
   targetAllies: 0
   feetItem: {fileID: 0}
-  range: 4
-  damage: 15
+  range: 5
+  minDamage: 10
+  maxDamage: 13
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 1
@@ -156,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 40
-  maxHP: 40
+  currentHP: 100
+  maxHP: 100
   pawnName: Cheeto
   mercName: 4
   initiativeBonus: 0

@@ -39,7 +39,8 @@ public class CharacterHoverDisplayer : MonoBehaviour
     {
         nameDisplayer.text = pawn.Name;
         currentHPDisplayer.text = pawn.currentHP.ToString();
-        damageDisplayer.text = pawn.GetComponent<WeaponItem>().damage.ToString();
+        WeaponItem wi = pawn.GetComponent<WeaponItem>();
+        damageDisplayer.text = wi.minDamage+"-"+ wi.maxDamage;
         transform.position = new Vector3(xValue, transform.position.y, transform.position.z);
 
          

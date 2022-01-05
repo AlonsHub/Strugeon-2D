@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 80
-  maxHP: 80
+  currentHP: 180
+  maxHP: 180
   pawnName: Ezra
   mercName: 5
   initiativeBonus: 0
@@ -142,7 +142,8 @@ MonoBehaviour:
   targetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  damage: 15
+  minDamage: 15
+  maxDamage: 20
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 1

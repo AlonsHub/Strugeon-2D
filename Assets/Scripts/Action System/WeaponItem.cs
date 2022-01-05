@@ -12,7 +12,7 @@ public class WeaponItem : ActionItem
 
     //added params:Range, Damage, ?
     public int range;
-    public int damage;
+    public int minDamage, maxDamage;
 
     public GameObject arrowGfx; //arrow or spear
     [SerializeField]
@@ -44,10 +44,8 @@ public class WeaponItem : ActionItem
     LookAtter la;
 
     public System.Action attackAction;
-    //public void AddToAction()
-    //{
 
-    //}
+
 
     public override void Awake()
     {
@@ -134,7 +132,8 @@ public class WeaponItem : ActionItem
     }
     public void DamageTarget()
     {
-        float rolledDamage = damage + Random.Range(-5, 6);
+        //float rolledDamage = damage + Random.Range(-5, 6);
+        float rolledDamage = Random.Range(minDamage, maxDamage);
         if (hasEffect)
         {
             int bonusDamage = effectData.bonusDamage + Random.Range(-5, 6);

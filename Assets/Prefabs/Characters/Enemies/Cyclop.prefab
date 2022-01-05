@@ -323,8 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 40
-  maxHP: 40
+  currentHP: 200
+  maxHP: 200
   pawnName: Cyclop
   mercName: 0
   initiativeBonus: 0
@@ -421,7 +421,8 @@ MonoBehaviour:
   targetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  damage: 10
+  minDamage: 10
+  maxDamage: 15
   arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}

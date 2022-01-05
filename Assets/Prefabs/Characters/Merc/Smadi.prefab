@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 60
-  maxHP: 60
+  currentHP: 150
+  maxHP: 150
   pawnName: Smadi
   mercName: 1
   initiativeBonus: 0
@@ -165,7 +165,8 @@ MonoBehaviour:
   targetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  damage: 10
+  minDamage: 13
+  maxDamage: 18
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 0

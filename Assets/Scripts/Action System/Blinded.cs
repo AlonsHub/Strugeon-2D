@@ -9,7 +9,7 @@ public class Blinded : MonoBehaviour
     [SerializeField]
     int lifetime; //current number of turns left
 
-    int oldDamage;
+    Vector2Int oldDamage;
     [SerializeField]
     Sprite iconToAddOn;
     private void Awake()
@@ -23,8 +23,9 @@ public class Blinded : MonoBehaviour
         lifetime = totalLifetime;
         //weaponItem.targets = RefMaster.Instance.mercs.Where(x => x.Name != wi.pawn.Name).ToList(); // <- "Why would you hit yourself?!"
         //weaponItem.targets = RefMaster.Instance.mercs; // <- "Why not?"
-        oldDamage = weaponItem.damage;
-        weaponItem.damage = -20; //makes sure the damage is less than 0 beacuse damage that is less than 0 becomes 0.
+        oldDamage = new Vector2Int(weaponItem.minDamage, weaponItem.maxDamage);
+        weaponItem.minDamage = -20; //makes sure the damage is less than 0 beacuse damage that is less than 0 becomes 0.
+        weaponItem.maxDamage = -20; //makes sure the damage is less than 0 beacuse damage that is less than 0 becomes 0.
 
         //target gets the icon set on it.
 
@@ -45,7 +46,8 @@ public class Blinded : MonoBehaviour
         weaponItem.pawn.RemoveIconByColor("blinded");
         // change pawn back
         //weaponItem.targets = RefMaster.Instance.enemies;
-        weaponItem.damage = oldDamage;
-        Destroy(this); //just this Charmed component! 
+        weaponItem.minDamage = oldDamage.x;
+        weaponItem.maxDamage = oldDamage.y;
+        Destroy(this); //just this Blinded component! 
     }
 }

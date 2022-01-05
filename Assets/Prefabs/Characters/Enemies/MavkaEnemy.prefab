@@ -273,7 +273,8 @@ MonoBehaviour:
   targetAllies: 0
   feetItem: {fileID: 0}
   range: 10
-  damage: 10
+  minDamage: 5
+  maxDamage: 7
   arrowGfx: {fileID: 0}
   isRanged: 1
   arrowSpawn: {fileID: 0}
@@ -305,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 40
-  maxHP: 40
+  currentHP: 150
+  maxHP: 150
   pawnName: Mavka
   mercName: 0
   initiativeBonus: 0
@@ -360,7 +361,6 @@ MonoBehaviour:
   charmVFX: {fileID: 6136953690358548763, guid: 607df88062ee0de4d9381226b039f4f6,
     type: 3}
   maxCooldown: 4
-  _currentCooldown: 0
   saCooldown: 0
   charmSprite: {fileID: 21300000, guid: 80eecaec26878984da4c9e8fee0a70d4, type: 3}
 --- !u!114 &-2381371511239876949
@@ -387,7 +387,6 @@ MonoBehaviour:
   maxCooldown: 4
   summonVFX: {fileID: 6136953690358548763, guid: 99bc00321565749439b5ade3744cf794,
     type: 3}
-  _currentCooldown: 0
   saCooldown: 4
   summonSprite: {fileID: 21300000, guid: 803da265189a67542938dc53edb8ec35, type: 3}
 --- !u!1001 &2762522664996448364

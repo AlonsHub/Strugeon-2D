@@ -150,14 +150,14 @@ public class PartyMaster : MonoBehaviour
             }
             newList[x].Add(PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList[i]);
         }
-        int count = 0;
+        int ind = 0;
         foreach(List<MercName> mercNames in newList)
         {
             
             if(mercNames.Count> 0) //???? //these question marks are actually on-to something. An empty room will regiester as two following zeros 
-            toReturn.Add(new Squad(PawnsFromNames(mercNames), count)); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+            toReturn.Add(new Squad(PawnsFromNames(mercNames), ind)); //for some reason im adding them with the roomCount, but that overload doesnt use it...
             //toReturn.Add(new Squad(PawnsFromNames(mercNames)));
-            count++;
+            ind++;
         }
         return toReturn;
     }

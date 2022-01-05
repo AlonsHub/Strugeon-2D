@@ -41,6 +41,7 @@ public class Tavern : MonoBehaviour
         }
 
         Instance = this;
+        _roomButtons = new List<RoomButton>();
 
         RefreshRooms();
         squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
@@ -57,7 +58,7 @@ public class Tavern : MonoBehaviour
             }
             //roomButtons.Clear();
         }
-        _roomButtons = new List<RoomButton>();
+        _roomButtons.Clear();
         //set up empty rooms
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {

@@ -304,7 +304,7 @@ public class PlayerDataMaster : MonoBehaviour
         foreach (Room s in Instance.currentPlayerData.rooms) //sets squads in order of rooms!!!!!!
         {
             toReturn.Add(MercName.None);
-            if (s.isOccupied)
+            if (s!=null && s.isOccupied)
             {
                 foreach (Pawn p in s.squad.pawns)
                 {
