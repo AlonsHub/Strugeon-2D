@@ -5,6 +5,8 @@ using UnityEngine;
 public class HealItem : ActionItem, SA_Item
 {
     public int range;
+    public int minHeal;
+    public int maxHeal;
     public int healAmount;
     public float healDelay;
     [SerializeField]
@@ -62,7 +64,7 @@ public class HealItem : ActionItem, SA_Item
         //if dist <= 1 - just do this:
 
         
-        int healRoll = Random.Range(-5, 5) + healAmount;
+        int healRoll = Random.Range(minHeal, maxHeal);
 
         tgtPawn.Heal(healRoll);
 
@@ -81,7 +83,7 @@ public class HealItem : ActionItem, SA_Item
         yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
         
         Pawn p = tgt.GetComponent<Pawn>();
-        int healRoll = Random.Range(-5, 5) + healAmount;
+        int healRoll = Random.Range(minHeal, maxHeal);
 
         p.Heal(healRoll);
 

@@ -6,6 +6,8 @@ public class BigHandsItem : ActionItem, SA_Item
 {
     //private Character ownerCharacter;
     public int damage;
+    public int minDamage;
+    public int maxDamage;
     public GameObject weaponGfx;
     public Transform weaponSpawn;
 
@@ -140,7 +142,7 @@ public class BigHandsItem : ActionItem, SA_Item
     }
     public void DamageTargetRock()
     {
-        float rolledDamage = damage + Random.Range(-5, 6);
+        float rolledDamage = Random.Range(minDamage, maxDamage);
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Rock, toHit.Name, (int)rolledDamage, Color.red);
     }
