@@ -155,8 +155,15 @@ public class PartyMaster : MonoBehaviour
         {
             
             if(mercNames.Count> 0) //???? //these question marks are actually on-to something. An empty room will regiester as two following zeros 
-            toReturn.Add(new Squad(PawnsFromNames(mercNames), ind)); //for some reason im adding them with the roomCount, but that overload doesnt use it...
-            //toReturn.Add(new Squad(PawnsFromNames(mercNames)));
+            {
+
+                Squad s = new Squad(PawnsFromNames(mercNames), ind);
+                    toReturn.Add(s); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+
+                PlayerDataMaster.Instance.currentPlayerData.rooms[ind].squad = s;
+            }
+            
+            // ADD s
             ind++;
         }
         return toReturn;
