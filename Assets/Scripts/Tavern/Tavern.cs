@@ -37,6 +37,8 @@ public class Tavern : MonoBehaviour
     /// 
     /// 1) Have a list of the main "tier" of windows. such that when one element within the group is activeated - the rest MUST be deactivated
     /// </summary>
+    
+    [SerializeField]
     List<GameObject> windowTier1;
 
     void Start()
@@ -50,7 +52,7 @@ public class Tavern : MonoBehaviour
         Instance = this;
         _roomButtons = new List<RoomButton>();
 
-        windowTier1 = new List<GameObject>();
+        //windowTier1 = new List<GameObject>();
 
         windowTier1.Add(newSquadMenu);
         windowTier1.Add(squadRoomDisplayer.gameObject);
