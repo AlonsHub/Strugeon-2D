@@ -1133,12 +1133,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 2025096323596832070, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: roomManager
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 6462161301801402033, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_Name
@@ -2930,7 +2930,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 993942120308875964, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2965,7 +2965,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roomManager
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 3872910271997602713, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -4209,7 +4209,7 @@ MonoBehaviour:
   roomPanelPrefab: {fileID: 6974856289881808978, guid: 9437b988284c04f48b08259b9f43e89c,
     type: 3}
   roomButtonParent: {fileID: 2084075442}
-  roomManager: {fileID: 3060183600385562799}
+  roomManager: {fileID: 3060183600223692149}
   squadRoomDisplayer: {fileID: 526671454}
 --- !u!4 &1051127990
 Transform:
@@ -6606,7 +6606,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 993942120308875964, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -6616,7 +6616,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roomManager
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 6462161301801402033, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_Name
@@ -7687,13 +7687,33 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3060183600223692151}
+  - component: {fileID: 3060183600223692149}
   m_Layer: 5
-  m_Name: TavernManagementMenu
+  m_Name: RoomManagementMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &3060183600223692149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3060183600223692148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3835beb47acaf4d826975f7436b8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomDisplayers:
+  - {fileID: 8466413234321585029}
+  - {fileID: 278759938}
+  - {fileID: 2067020312}
+  - {fileID: 785599735}
+  notEnoughGoldText: {fileID: 399947374}
+  myButton: {fileID: 1705591486}
 --- !u!224 &3060183600223692151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7748,7 +7768,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3060183600385562785}
-  - component: {fileID: 3060183600385562799}
   m_Layer: 5
   m_Name: MGMTWindow
   m_TagString: Untagged
@@ -7756,25 +7775,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3060183600385562799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3060183600385562798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d3835beb47acaf4d826975f7436b8a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomDisplayers:
-  - {fileID: 8466413234321585029}
-  - {fileID: 278759938}
-  - {fileID: 2067020312}
-  - {fileID: 785599735}
-  notEnoughGoldText: {fileID: 399947374}
-  myButton: {fileID: 1705591486}
 --- !u!222 &4002794815414683078
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8257,7 +8257,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roomManager
       value: 
-      objectReference: {fileID: 3060183600385562799}
+      objectReference: {fileID: 0}
     - target: {fileID: 6462161301801402033, guid: f26afa161bb63854da54141d6504e30c,
         type: 3}
       propertyPath: m_Name

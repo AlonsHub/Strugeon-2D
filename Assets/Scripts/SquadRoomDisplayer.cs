@@ -39,6 +39,11 @@ public class SquadRoomDisplayer : MonoBehaviour
         DestroySquadSlots();
     }
 
+    private void OnEnable()
+    {
+        Tavern.Instance.DisableWindowTier1(name);
+    }
+
     void DestroySquadSlots()
     {
         if (squadSlots != null)

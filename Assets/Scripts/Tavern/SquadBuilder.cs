@@ -33,6 +33,7 @@ public class SquadBuilder : MonoBehaviour
     //}
     private void OnEnable()
     {
+        Tavern.Instance.DisableWindowTier1(name);
 
         tempSquad = new Squad();
 

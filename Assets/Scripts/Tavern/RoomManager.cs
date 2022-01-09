@@ -20,6 +20,8 @@ public class RoomManager : MonoBehaviour
         if (roomDisplayers == null)
             return;
 
+        Tavern.Instance.DisableWindowTier1(name);
+
         myButton.Toggle(true);
 
         for (int i = 0; i < PlayerDataMaster.Instance.RoomCount; i++)
