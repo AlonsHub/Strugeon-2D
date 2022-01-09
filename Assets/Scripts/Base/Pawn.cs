@@ -153,6 +153,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         //grab art?
     }
 
+    public void SetCharacterSheet()
+    {
+
+    }
+
     public void TakeTurn()
     {
         TurnDone = false;
