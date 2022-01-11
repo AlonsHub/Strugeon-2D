@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SummonSpiritItem : ActionItem, SA_Item
@@ -28,7 +29,29 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         GameObject go2 = Instantiate(summonVFX, go.transform);
 
-        go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
+
+        List<FloorTile> adjTiles = new List<FloorTile>();
+        //NEW
+        foreach (var merc in pawn.targets)
+        {
+            //
+            adjTiles.AddRange(FloorGrid.Instance.GetNeighbours(pawn.tileWalker.gridPos));
+        }
+        if (adjTiles.Count == 0)
+        {
+            FloorTile ft = FloorGrid.Instance.GetRandomFreeTile();
+            FloorGrid.Instance.SpawnObjectOnGrid(go, ft.gridIndex);
+        }
+        else
+        {
+            List<FloorTile> emptyAdjTiles = adjTiles.Where(x => x.isEmpty).ToList();
+
+            //go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
+            FloorTile ft = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
+
+            FloorGrid.Instance.SpawnObjectOnGrid(go, ft.gridIndex);
+        }
+        //
 
         //Vector3 v = (Vector3)Vector2.one * (FloorGrid.Instance.tileSize.x + FloorGrid.Instance.gapSize.x);
 
@@ -53,7 +76,27 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         if (cooldown <= 0)
         {
-            actionVariations.Add(new ActionVariation(this,FloorGrid.Instance.GetTileByIndex(new Vector2Int(3,3)).gameObject , 1000));
+            baseCost = 4;
+
+            if (pawn.isEnemy) //honestly should also check what happens if Mavka is ever charmed and then summons a spirit... Almost ironically, charms should work just fine when she's charmed
+            {
+                if (RefMaster.Instance.mercs.Count > 1)
+                {
+                    baseCost *= 10;
+                }
+            }
+            else //doesn't ever happen as of now, but who knows?
+            {
+                if (RefMaster.Instance.enemies.Count > 1)
+                {
+                    baseCost *= 10;
+                }
+            }
+            if(pawn.maxHP/pawn.currentHP >2)
+                baseCost *= 10;
+
+            //actionVariations.Add(new ActionVariation(this,FloorGrid.Instance.GetTileByIndex(new Vector2Int(3,3)).gameObject , baseCost));
+            actionVariations.Add(new ActionVariation(this,gameObject , baseCost)); //tgt is meaningless here
         }
         else
         {

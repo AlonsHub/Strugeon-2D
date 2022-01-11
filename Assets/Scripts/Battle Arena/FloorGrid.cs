@@ -116,6 +116,23 @@ public class FloorGrid : MonoBehaviour
         }
         return toReturn;
     }
+    public List<FloorTile> GetNeighbours(Vector2Int pos)
+    {
+        List<FloorTile> toReturn = new List<FloorTile>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
+
+                int checkX = x + pos.x;
+                int checkY = y + pos.y;
+                if (checkX >= 0 && checkX < floorSize.x && checkY >= 0 && checkY < floorSize.y)
+                    toReturn.Add(floorTiles[checkX, checkY]);
+            }
+        }
+        return toReturn;
+    }
 
     public List<FloorTile> path;
 

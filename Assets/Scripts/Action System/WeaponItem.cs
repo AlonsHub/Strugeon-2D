@@ -221,6 +221,7 @@ public class WeaponItem : ActionItem
             {
                 if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
+                    //according to GDD this should multiply by 10 and shouldn't "continue" (meaning the loop should not break)
                     continue;
                 }
                 weight *= 2; // changed from 20
