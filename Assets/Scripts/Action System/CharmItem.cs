@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
@@ -69,10 +70,22 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
             return;// end match
         }
 
-        int weight = initialWeight;
+        bool isFlanked = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.gridPos).Where(x => (!x.isEmpty && x.myOccupant.CompareTag("Merc"))).ToList().Count > 1;
 
         foreach (Pawn p in targets)
         {
+            int weight = initialWeight;
+            if (pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode) / 14 == 1)
+            {
+                weight *= 10;
+                if(pawn.maxHP/pawn.currentHP >=2) //50%
+                {
+                    weight *= 10;
+                }
+                if (isFlanked)
+                    weight *= 5;
+            }
+
             actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
         }
     }

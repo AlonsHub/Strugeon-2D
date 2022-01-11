@@ -119,7 +119,7 @@ public class HealItem : ActionItem, SA_Item
             {
                 continue;
             }
-            int weight = 4;
+            int weight = baseCost;
 
             if (p.currentHP < p.maxHP / 2) //if under half max
             {

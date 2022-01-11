@@ -141,7 +141,7 @@ public class FloorGrid : MonoBehaviour
         return floorTiles[index.x, index.y];
     }
 
-    public void SpawnObjectOnGrid(GameObject toSpawn, Vector2Int gridPos)
+    public GameObject SpawnObjectOnGrid(GameObject toSpawn, Vector2Int gridPos)
     {
         GameObject go = Instantiate(toSpawn, floorTiles[gridPos.x, gridPos.y].transform.position, toSpawn.transform.rotation);
         //go.GetComponent<GridPoser>().SetGridPos(new Vector2Int(gridPos.x, gridPos.y)); //grid poser might be best for snapping and positioning
@@ -150,6 +150,8 @@ public class FloorGrid : MonoBehaviour
 
         floorTiles[gridPos.x, gridPos.y].isEmpty = false; 
         floorTiles[gridPos.x, gridPos.y].myOccupant = go;
+
+        return go;
     }
 
     public void PlaceObjectOnGrid(GameObject toPlace, Vector2Int gridPos)

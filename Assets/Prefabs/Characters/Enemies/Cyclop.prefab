@@ -455,12 +455,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 20
+  baseCost: 4
   currentModifier: 1
   actionVariations: []
   isWeapon: 0
   targetAllies: 0
-  damage: 20
+  minDamage: 10
+  maxDamage: 15
   weaponGfx: {fileID: 4948670397089572388, guid: dda0d6165f5c0c049a39fa1f6dde6fe7,
     type: 3}
   weaponSpawn: {fileID: 989352517264580374}

@@ -211,20 +211,23 @@ public class WeaponItem : ActionItem
             //if(p.currentHP > 0)
             //{
             //    weight *= 5;
-                if(p.currentHP <= p.maxHP/2.5f) //40%
-                {
-                    weight *= 10;
-                }
+                
             //}
 
             if (currentDistance <= range *14)
             {
+                weight = baseCost;
                 if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
                     //according to GDD this should multiply by 10 and shouldn't "continue" (meaning the loop should not break)
                     continue;
                 }
                 weight *= 2; // changed from 20
+
+                if (p.currentHP <= p.maxHP / 2.5f) //40%
+                {
+                    weight *= 10;
+                }
             }
 
             if (weight != 0)

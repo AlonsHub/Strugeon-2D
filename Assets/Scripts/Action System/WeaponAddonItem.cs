@@ -58,7 +58,7 @@ public class WeaponAddonItem : ActionItem
         }
 
         int currentDistance = attachedWeapon.pawn.tileWalker.currentNode.GetDistanceToTarget(RefMaster.Instance.censer.currentNode);
-        int weight = 4;
+        int weight = baseCost;
 
         if (currentDistance <= 14)
         {

@@ -5,7 +5,6 @@ using UnityEngine;
 public class BigHandsItem : ActionItem, SA_Item
 {
     //private Character ownerCharacter;
-    public int damage;
     public int minDamage;
     public int maxDamage;
     public GameObject weaponGfx;
@@ -45,73 +44,50 @@ public class BigHandsItem : ActionItem, SA_Item
         Destroy(ft.myOccupant);
         ft.myOccupant = null;
 
-
-
-        //tgt.transform.GetChild(1).gameObject.SetActive(false);// destroy?
-
-        //roll target
-        //if(pawn.targets != null)
-        //{
-        //    pawn.targets = RefMaster.Instance.mercs;
-        //    //pawn.targets.
-        //}
-
-        //toHit = pawn.targets[Random.Range(0, pawn.targets.Count - 1)]; //should be simplified
         toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
         //LookAtter la = GetComponentInChildren<LookAtter>();
         if (toHit && la)
             la.tgt = toHit.transform;
-        //toHit.TakeDamage(damage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
-        //GameObject go = Instantiate(weaponGfx, weaponSpawn.position, Quaternion.identity);
-        //go.transform.LookAt(toHit.transform.position + Vector3.up*2f);
-        //go.GetComponent<Arrow>().tgt = toHit.transform;
-
-        //pawn.transform.LookAt(toHit.transform.position);
-
-
-
-
+        
         pawn.anim.SetTrigger("Throw");
-        //pawn.TurnDone = true;
-        //StartCoroutine("CharacterThrow");
     }
     public override void CalculateVariations()
     {
-        //actionVariations = new List<ActionVariation>();
+        
         actionVariations.Clear();
         List<FloorTile> neighbours = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);
         foreach(FloorTile ft in neighbours)
         {
+            int weight = baseCost; //4
+
             //if(!ft.isEmpty && ft.myOccupant.GetComponent<ObstacleRock>()) //if it is an obstacle rock, we dont really need to cache it -
             //just to check that it is... maybe test by tag instead?
             if (!ft.isEmpty && ft.myOccupant)
             {
                 if (ft.myOccupant.CompareTag("Rock"))
                 {
-                    actionVariations.Add(new ActionVariation(this, ft.gameObject, baseCost)); //no other calculations involved yet
+                    if(pawn.isEnemy)
+                    {
+                        int counter = 0;
+                        foreach (var m in RefMaster.Instance.mercs)
+                        {
+                            if (pawn.tileWalker.currentNode.GetDistanceToTarget(m.tileWalker.currentNode)/14 >= 2)
+                            {
+                                counter++;
+                            }
+                        } 
+                        if(counter>=2)
+                        {
+                            weight *= 5;
+                        }
+                    }
+
+                    actionVariations.Add(new ActionVariation(this, ft.gameObject, weight)); //no other calculations involved yet
                 }
             }
         }
-
-        
-
-        //if(actionVariations.Count > 0)
-        //{
-        //    pawn.SA_CurrentCooldown = 0;
-        //}
-        //else
-        //{
-        //    pawn.SA_CurrentCooldown = 1;
-        //}
-
     }
-    //IEnumerator CharacterThrow()
-    //{
-    //    yield return new WaitForSeconds(ownerCharacter.delayAfterAttack);
-    //    //if (ownerCharacter.doDoubleTurn)
-    //    //    TurnOrder.Instance.currentTurn--;
-    //    TurnOrder.Instance.NextTurn();
-    //}
+   
     public void ShootRock()
     {
 
@@ -132,8 +108,6 @@ public class BigHandsItem : ActionItem, SA_Item
     }
     IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
     {
-        //yield return new WaitForSeconds(.1f);
-        //arrow.GetComponent<Arrow>().tgt = toHit.transform;
         yield return new WaitUntil(() => (arrow == null));
         Debug.Log("Boulder hit");
         DamageTargetRock();

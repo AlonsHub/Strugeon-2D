@@ -24,23 +24,30 @@ public class SummonSpiritItem : ActionItem, SA_Item
     public override void Action(GameObject tgt)
     {
         //tgt is the spawn-tile 
-        GameObject go = Instantiate(drownedSpiritPrefab);
-        Pawn newSpirit = go.GetComponent<Pawn>();
+        GameObject go;
 
-        GameObject go2 = Instantiate(summonVFX, go.transform);
 
 
         List<FloorTile> adjTiles = new List<FloorTile>();
         //NEW
+        if (pawn.isEnemy)
+        {
+            pawn.targets = RefMaster.Instance.mercs;
+        }
+        else
+        {
+            pawn.targets = RefMaster.Instance.enemies;
+        }
+
         foreach (var merc in pawn.targets)
         {
             //
-            adjTiles.AddRange(FloorGrid.Instance.GetNeighbours(pawn.tileWalker.gridPos));
+            adjTiles.AddRange(FloorGrid.Instance.GetNeighbours(merc.tileWalker.gridPos));
         }
         if (adjTiles.Count == 0)
         {
             FloorTile ft = FloorGrid.Instance.GetRandomFreeTile();
-            FloorGrid.Instance.SpawnObjectOnGrid(go, ft.gridIndex);
+            go =FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
         }
         else
         {
@@ -49,16 +56,11 @@ public class SummonSpiritItem : ActionItem, SA_Item
             //go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
             FloorTile ft = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
 
-            FloorGrid.Instance.SpawnObjectOnGrid(go, ft.gridIndex);
+            go = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
         }
-        //
+        Pawn newSpirit = go.GetComponent<Pawn>();
+        GameObject go2 = Instantiate(summonVFX, go.transform);
 
-        //Vector3 v = (Vector3)Vector2.one * (FloorGrid.Instance.tileSize.x + FloorGrid.Instance.gapSize.x);
-
-        //Random.Range(-4, 4);
-
-        //go.transform.position += v; 
-        //Battlelog entry! // ADD CHARM AND SUMMON TO ENUM with repectvie sprites
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
 
         RefMaster.Instance.enemies.Add(newSpirit);
@@ -76,27 +78,27 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         if (cooldown <= 0)
         {
-            baseCost = 4;
+            int weight = baseCost;
 
             if (pawn.isEnemy) //honestly should also check what happens if Mavka is ever charmed and then summons a spirit... Almost ironically, charms should work just fine when she's charmed
             {
                 if (RefMaster.Instance.mercs.Count > 1)
                 {
-                    baseCost *= 10;
+                    weight *= 10;
                 }
             }
             else //doesn't ever happen as of now, but who knows?
             {
                 if (RefMaster.Instance.enemies.Count > 1)
                 {
-                    baseCost *= 10;
+                    weight *= 10;
                 }
             }
             if(pawn.maxHP/pawn.currentHP >2)
-                baseCost *= 10;
+                weight *= 10;
 
             //actionVariations.Add(new ActionVariation(this,FloorGrid.Instance.GetTileByIndex(new Vector2Int(3,3)).gameObject , baseCost));
-            actionVariations.Add(new ActionVariation(this,gameObject , baseCost)); //tgt is meaningless here
+            actionVariations.Add(new ActionVariation(this,gameObject , weight)); //tgt is meaningless here
         }
         else
         {
