@@ -283,7 +283,8 @@ public class TurnMaster : MonoBehaviour
                     {
                         foreach (Bar b in bars)
                         {
-                            b.AddValue(rechargeAmount);
+                            //b.AddValue(rechargeAmount);
+                            b.Regen();
                         }
                     }
                 }

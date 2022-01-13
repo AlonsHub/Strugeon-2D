@@ -10,6 +10,7 @@ public class Bar : MonoBehaviour
     
     public float maxValue;
     public float currentValue;
+    public float regenRate;
     public Image img;
     private void Start()
     {
@@ -29,6 +30,13 @@ public class Bar : MonoBehaviour
     public void AddValue(float value)//redundant? one of them is
     {
         currentValue += value;
+        currentValue = Mathf.Clamp(currentValue, 0, maxValue);
+        img.fillAmount = currentValue / maxValue;
+
+    }
+    public void Regen()//redundant? one of them is
+    {
+        currentValue += regenRate;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         img.fillAmount = currentValue / maxValue;
 

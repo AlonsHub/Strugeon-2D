@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class CharacterSheet
 {
-    int _experience;
-    int _level;
-    int _expToNextLevel;
+    public string characterName; //will this be enough to ref the merc-prefab
 
+    int _experience = 0;
+    int _level = 1;
+
+    public int _expToNextLevel => GameStats.ExpThresholdByLevel(_level);
     public int _minDamageBonus => GameStats.minDmgPerLevel * _level;
     public int _maxDamageBonus => GameStats.maxDmgPerLevel * _level;
+    public int _maxHpBonus => GameStats.maxHpBonusPerLevel * _level;
 
-    public CharacterSheet()
+    public void ResetSheet()
     {
         _experience = 0;
         _level = 1;
@@ -39,4 +42,6 @@ public class CharacterSheet
         }
         return false;
     }
+
+    
 }
