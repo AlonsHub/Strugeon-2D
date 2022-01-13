@@ -15,7 +15,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
     public MercName mercName;
 
-    public CharacterSheet characterSheet; //these are created and constructed as level 1 with 0 exp when they are created.
+    public MercSheet characterSheet; //these are created and constructed as level 1 with 0 exp when they are created.
                                          //in any other case they are loaded as data and not constructed at all
 
     int initiative;

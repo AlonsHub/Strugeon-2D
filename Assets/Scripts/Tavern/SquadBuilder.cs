@@ -36,6 +36,7 @@ public class SquadBuilder : MonoBehaviour
         Tavern.Instance.DisableWindowTier1(name);
 
         tempSquad = new Squad();
+        mercDataDisplayer.gameObject.SetActive(true);
 
         //set/instantiate empty party-slots by Room_level
 
@@ -43,6 +44,14 @@ public class SquadBuilder : MonoBehaviour
         for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
         {
             availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
+        }
+        if(availableSlots[0].isOccupied)
+        {
+            mercDataDisplayer.SetMe(availableSlots[0].pawn);
+        }
+        else
+        {
+            Debug.LogError("You have no mercs... or at least, you don't have a FIRST merc to show... which is just weird");
         }
         for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
         {

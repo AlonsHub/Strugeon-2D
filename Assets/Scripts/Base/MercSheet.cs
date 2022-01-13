@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSheet
+public class MercSheet
 {
-    public string characterName; //will this be enough to ref the merc-prefab
+    public MercName characterName; //will this be enough to ref the merc-prefab
 
     int _experience = 0;
     int _level = 1;

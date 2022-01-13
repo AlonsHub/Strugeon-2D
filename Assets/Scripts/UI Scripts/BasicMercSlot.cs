@@ -20,8 +20,8 @@ public class BasicMercSlot : MonoBehaviour, IPointerClickHandler
     Sprite onSprite;
     [SerializeField]
     Sprite offSprite;
-    [SerializeField]
-    bool isOccupied;
+    //[SerializeField]
+    bool isOccupied; //essentialy useless... it may also be confusing when serialized, so for now it is not
 
 
     public void SetMe(Pawn p)

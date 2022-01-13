@@ -39,18 +39,18 @@ public class DifficultyTranslator : MonoBehaviour
         {
             case LairDifficulty.Easy:
                 return easySet;
-                break;
+                //break;
             case LairDifficulty.Medium:
                 return mediumSet;
 
-                break;
+                //break;
             case LairDifficulty.Hard:
                 return hardSet;
 
-                break;
+                //break;
             default:
                 return null;
-                break;
+                //break;
         }
     }
     public List<Object> DifficultyToRewardPreset(LairDifficulty difficulty)
@@ -60,18 +60,18 @@ public class DifficultyTranslator : MonoBehaviour
         {
             case LairDifficulty.Easy:
                 return easyRewardSet;
-                break;
+                //break;
             case LairDifficulty.Medium:
                 return mediumRewardSet;
 
-                break;
+                //break;
             case LairDifficulty.Hard:
                 return hardRewardSet;
 
-                break;
+                //break;
             default:
                 return null;
-                break;
+                //break;
         }
     }
     public int DifficultyToGoldReward(LairDifficulty difficulty)

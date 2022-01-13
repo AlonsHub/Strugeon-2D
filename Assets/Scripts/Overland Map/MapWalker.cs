@@ -13,7 +13,7 @@ public class MapWalker : MonoBehaviour
     float walkSpeed; //derrived from travelTime
     public float currentDistanceToTarget; //calculated locally, might not NEED to be public
     float currentTime;
-    float stoppingDistance = .1f; //temp
+    //float stoppingDistance = .1f; //temp
 
     [Tooltip("The time to wait between steps. From this, the path's Vertex Resolution derrives from this")]
     [SerializeField]
