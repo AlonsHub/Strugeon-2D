@@ -291,7 +291,7 @@ public class PlayerDataMaster : MonoBehaviour
     {
         List<MercName> newNames = new List<MercName>();
 
-        foreach (var merc in PartyMaster.Instance.availableMercs)
+        foreach (var merc in PartyMaster.Instance.availableMercPrefabs)
         {
             newNames.Add(merc.mercName);
         }
@@ -363,11 +363,26 @@ public class PlayerDataMaster : MonoBehaviour
 
     public void HireMerc(MercName mn)
     {
-        PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
+        PartyMaster.Instance.availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
         currentPlayerData.hireableMercs.Remove(mn);
         currentPlayerData.availableMercs.Add(mn);
 
         //GoogleSheetMaster.Instance.LogPlayer(); //saves these changes
+    }
+    public void RemoveMercSheet(MercName mn)
+    {
+        currentPlayerData.RemoveMercSheet(mn);
+    }
+
+    public List<MercName> SheetsAsNames()
+    {
+        List<MercName> toReturn = new List<MercName>();
+        foreach (var item in currentPlayerData.mercSheets)
+        {
+            toReturn.Add(item.characterName);
+        }
+
+        return toReturn;
     }
 
     public List<System.Object> GetLog

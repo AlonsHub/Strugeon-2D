@@ -12,7 +12,7 @@ public class PartyMaster : MonoBehaviour
     public List<Pawn> currentMercParty { get => currentSquad.pawns; }
     public Squad currentSquad;
 
-    public List<Pawn> availableMercs; //Mercs you HAVE 
+    public List<Pawn> availableMercPrefabs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
     
@@ -20,7 +20,7 @@ public class PartyMaster : MonoBehaviour
     {
         List<MercName> toReturn = new List<MercName>();
 
-        foreach (var item in availableMercs)
+        foreach (var item in availableMercPrefabs)
         {
             toReturn.Add(item.mercName);
         }
@@ -81,12 +81,13 @@ public class PartyMaster : MonoBehaviour
         LoadUpAvailableMercs();
     }
 
+    //START Save System FIX HERE 16/01/22
     public void LoadUpAvailableMercs() //on the loaded party
     {
-        availableMercs = new List<Pawn>();
+        availableMercPrefabs = new List<Pawn>();
         foreach (MercName mercName in PlayerDataMaster.Instance.currentPlayerData.availableMercs)
         {
-            availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+            availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
 
 
@@ -100,6 +101,8 @@ public class PartyMaster : MonoBehaviour
         {
             squads.Remove(s);
         }
+
+        //check that all mercSheet mercs exist in available and 
 
         //loadup hireable mercs? //not here, and honestly, we don't need to do this since we only need the MercNames anyway
 
@@ -169,7 +172,7 @@ public class PartyMaster : MonoBehaviour
         return toReturn;
     }
 
-    List<Pawn> PawnsFromNames(List<MercName> names)
+    List<Pawn> PawnsFromNames(List<MercName> names) /// CHANGE TBD OVER HERE - these refs to pawn prefabs should be mercsheets (that CAN get refs to their prefabs, via paramaters/method that calls MercPerfabs
     {
         List<Pawn> toReturn = new List<Pawn>();
 
@@ -219,8 +222,9 @@ public class PartyMaster : MonoBehaviour
 
     public void AddNewSquadToRoom(List<Pawn> ps, Room r)
     {
-        availableMercs.RemoveAll(x => ps.Contains(x));
-        Squad s = new Squad(ps);
+        availableMercPrefabs.RemoveAll(x => ps.Contains(x));
+        //Squad s = new Squad(ps);
+        Squad s = new Squad(ps, r.roomNumber);
 
         //r.squad = s;
         PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].squad = s;

@@ -41,7 +41,7 @@ public class MercSlot : MonoBehaviour
             PartyMaster.Instance.currentMercParty.Remove(pawn);
             // RefMaster.Instance.selectionScreenDisplayer.availableMercSlots[RefMaster.Instance.selectionScreenDisplayer.availableMercs.Count].AddMerc(pawn);
             //RefMaster.Instance.selectionScreenDisplayer.availableMercs.Add(pawn);
-            PartyMaster.Instance.availableMercs.Add(pawn);
+            PartyMaster.Instance.availableMercPrefabs.Add(pawn);
 
 
 
@@ -54,7 +54,7 @@ public class MercSlot : MonoBehaviour
                 return;
             }
             //RefMaster.Instance.selectionScreenDisplayer.availableMercs.Remove(pawn);
-            PartyMaster.Instance.availableMercs.Remove(pawn);
+            PartyMaster.Instance.availableMercPrefabs.Remove(pawn);
             //RefMaster.Instance.selectionScreenDisplayer.partyMercSlots[PartyMaster.Instance.currentMercParty.Count].AddMerc(pawn);
             //RefMaster.Instance.selectionScreenDisplayer.partyMercs.Add(pawn);
             PartyMaster.Instance.currentMercParty.Add(pawn);

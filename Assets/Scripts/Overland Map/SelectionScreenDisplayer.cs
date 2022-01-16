@@ -75,7 +75,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
         {
             availableMercSlots[i].ClearSlot();
         }
-        foreach (var merc in PartyMaster.Instance.availableMercs)
+        foreach (var merc in PartyMaster.Instance.availableMercPrefabs)
         {
             availableMercSlots[count1].AddMerc(merc);
             count1++;

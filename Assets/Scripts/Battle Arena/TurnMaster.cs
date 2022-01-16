@@ -147,14 +147,20 @@ public class TurnMaster : MonoBehaviour
         StopCoroutine("TurnSequence"); //will need to rearrange lists after. Turn order will be lost
         isGameRunning = false;
         gameHasBeenReset = true;
+
+        foreach (var item in theCowardly)
+        {
+            theDead.Remove(item); //just in case some escaped mercs also dies somehow
+        }
+
         if (RefMaster.Instance.mercs.Count != 0)
-            //if (PartyMaster.Instance.currentMercParty.Count != 0)
+        //if (PartyMaster.Instance.currentMercParty.Count != 0)
         {
 
             PlayerDataMaster.Instance.currentPlayerData.victories++;
 
             //Give reward
-           
+
             Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
             //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER! 
             //gold should either be directly linked to between inventory and currentPlayerData - or have an OnValueChanged() for the displayer and player data to subscribe to
@@ -167,10 +173,13 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theDead)
             {
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
+                PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
-             foreach (var item in theCowardly)
+            foreach (var item in theCowardly)
             {
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
+                PlayerDataMaster.Instance.RemoveMercSheet(item);
+
             }
 
             if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
@@ -183,26 +192,21 @@ public class TurnMaster : MonoBehaviour
             }
 
 
-           
 
-            //foreach (var item in RefMaster.Instance.mercs) //remaining
+            //Commented out since these mercs should not be available at all
+
+            //foreach (var item in theDead)
             //{
-            //    //if(!PartyMaster.Instance.availableMercs.Contains)
-            //    PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(item.mercName));
+            //    PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
+            //    Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).FirstOrDefault(); //TEST IF THIS IS EVER NOT DEFAULT!
+            //        //PAWNS ARE LIKELY REMOVED ELSEWHERE
+            //    PartyMaster.Instance.availableMercs.Remove(toRemove); // is this ever useful?
+            //    //PlayerDataMaster.Instance.currentPlayerData.deadMercs++; // set in Victory Window instead, since cowards are dealt there
+
             //}
 
-            foreach (var item in theDead)
-            {
-                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
-                Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).FirstOrDefault(); //TEST IF THIS IS EVER NOT DEFAULT!
-                    //PAWNS ARE LIKELY REMOVED ELSEWHERE
-                PartyMaster.Instance.availableMercs.Remove(toRemove); // is this ever useful?
-                //PlayerDataMaster.Instance.currentPlayerData.deadMercs++; // set in Victory Window instead, since cowards are dealt there
-
-            }
-
             //put squad back in their room
-            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns);
+            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns); //werid but it works fine
         }
         else
         {
@@ -211,21 +215,23 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theCowardly)
             {
                 PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+                PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
             foreach (var item in theDead)
             {
                 PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+                PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
 
 
 
             defeatWindow.gameObject.SetActive(true);
             defeatWindow.SetMe(LevelRef.Instance.currentLevel);
+            //empty the room:
+
+            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber] = null;
         }
 
-        //empty the room:
-        
-        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber] = null;
 
         PartyMaster.Instance.currentSquad = null;
         //PartyMaster.Instance.currentMercParty.Clear();

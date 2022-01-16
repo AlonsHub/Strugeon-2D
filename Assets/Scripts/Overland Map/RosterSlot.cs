@@ -50,13 +50,13 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         if (isPartySlot)
         {
             squadBuilder.tempSquad.RemoveMerc(pawn);
-            PartyMaster.Instance.availableMercs.Add(pawn);
+            PartyMaster.Instance.availableMercPrefabs.Add(pawn);
 
         }
         else
         {
             squadBuilder.tempSquad.AddMerc(pawn);
-            PartyMaster.Instance.availableMercs.Remove(pawn);
+            PartyMaster.Instance.availableMercPrefabs.Remove(pawn);
         }
         squadBuilder.Refresh();
     }

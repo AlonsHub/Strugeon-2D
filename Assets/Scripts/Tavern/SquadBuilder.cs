@@ -41,9 +41,9 @@ public class SquadBuilder : MonoBehaviour
         //set/instantiate empty party-slots by Room_level
 
         //print all availables:
-        for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
+        for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
         {
-            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
+            availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
         }
         if(availableSlots[0].isOccupied)
         {
@@ -53,7 +53,7 @@ public class SquadBuilder : MonoBehaviour
         {
             Debug.LogError("You have no mercs... or at least, you don't have a FIRST merc to show... which is just weird");
         }
-        for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
+        for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
         {
             availableSlots[i].SetMe(); //empty
         }
@@ -95,9 +95,9 @@ public class SquadBuilder : MonoBehaviour
 
             //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
 
-            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercs.Contains(x)).ToList();
+            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
 
-            PartyMaster.Instance.availableMercs.AddRange(backToAvailable);
+            PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
 
             //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
             tempSquad.pawns = uneditedSquadPawns;
@@ -170,11 +170,11 @@ public class SquadBuilder : MonoBehaviour
     }
     public void Refresh()
     {
-        for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
+        for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
         {
-            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
+            availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]);
         }
-        for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
+        for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
         {
             availableSlots[i].ClearSlot();
         }

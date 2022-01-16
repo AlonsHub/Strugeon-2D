@@ -276,7 +276,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
         //Add to the list of the Cowardly (TurnMaster)
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
-        PartyMaster.Instance.availableMercs.Remove(this);
+        PartyMaster.Instance.availableMercPrefabs.Remove(this);
         TurnMaster.Instance.theCowardly.Add(mercName);
         TurnMaster.Instance.turnTakers.Remove(this);
         TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
@@ -301,7 +301,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         {
             //RefMaster.Instance.mercs.Remove(RefMaster.Instance.mercs.Where(x => x.name == name).SingleOrDefault()); //not ideal
             RefMaster.Instance.mercs.Remove(this); //not ideal
-            PartyMaster.Instance.availableMercs.Remove(this);
+            PartyMaster.Instance.availableMercPrefabs.Remove(this);
             TurnMaster.Instance.theDead.Add(mercName);
             PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
         }

@@ -10,7 +10,7 @@ public class Squad : IEquatable<Squad>
 
     //contains modified-pawns (as refs to prefabs?)
     //could instead have list of names and a DIFFERENT list for modifiers (if any)
-    
+
     public List<Pawn> pawns;
     public string squadName;
 
@@ -40,10 +40,29 @@ public class Squad : IEquatable<Squad>
         pawns.AddRange(newPawns);
         squadName = pawns[0].Name + " Squad";
     }
-    public Squad(List<Pawn> newPawns, int roomNum) //weird that I don't use this...
+    public Squad(List<Pawn> newPawns, int roomNum) //weird that I don't use this... // USING IT NOW, thanks <3
     {
         pawns = new List<Pawn>();
-        pawns.AddRange(newPawns);
+        pawns.AddRange(newPawns); //reminder that these are just references to the prefabs, will be replaced with list of MercSheets
+
+
+
+        List<MercName> mercNames = PawnsAsNames();
+        List<MercName> sheetNames = PlayerDataMaster.Instance.SheetsAsNames();
+
+        foreach (var item in mercNames)
+        {
+
+            if (!sheetNames.Contains(item))
+            {
+                Debug.LogError("Inconsistent mercs and sheets");
+            }
+        }
+
+        //foreach (var p in pawns)
+        //{
+        //    p.characterSheet.SetToState(MercAssignment.Room, roomNum);
+        //}
         roomNumber = roomNum;
         squadName = pawns[0].Name + " Squad";
     }
@@ -75,14 +94,25 @@ public class Squad : IEquatable<Squad>
     {
         List<Pawn> tempList = new List<Pawn>(pawns);
 
-        if(pawns.Count != other.pawns.Count)
+        if (pawns.Count != other.pawns.Count)
         {
-            return false; 
+            return false;
         }
         foreach (Pawn p in other.pawns)
         {
             tempList.Remove(p);
         }
-       return tempList.Count==0;
+        return tempList.Count == 0;
+    }
+
+    List<MercName> PawnsAsNames()
+    {
+        List<MercName> toReturn = new List<MercName>();
+        foreach (var item in pawns)
+        {
+            toReturn.Add(item.mercName);
+        }
+
+        return toReturn;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,6 +10,7 @@ public class PlayerData
 
     //availavle mercs
     public List<MercName> availableMercs = new List<MercName>();
+    public List<MercSheet> availableMercSheet = new List<MercSheet>();
     public List<MercName> hireableMercs;
 
     //squads
@@ -73,6 +75,16 @@ public class PlayerData
             // SHOULD I NOT JUST ADD THeSe MERCs TO THE LOG HERE?
         }
     }
+
+    public void RemoveMercSheet(MercName mn)
+    {
+
+        if(!mercSheets.Remove(mercSheets.Where(x => x.characterName == mn).SingleOrDefault()))
+        {
+            Debug.LogError("couldn't find " + mn.ToString() + " to remove");
+        }
+    }
+
 
 
 
