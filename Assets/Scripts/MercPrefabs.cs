@@ -51,4 +51,8 @@ public class MercPrefabs : MonoBehaviour
     {
         return enumToPrefab[mn].GetComponent<Pawn>();
     }
+    public T EnumToT<T>(MercName mn)
+    {
+        return enumToPrefab[mn].GetComponent<T>();
+    }
 }

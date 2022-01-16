@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MercAssignment {Null,AwaySquad,Room,Available, Hireable, NotAvailable};
+
+[System.Serializable]
 public class MercSheet
 {
     public MercName characterName; //will this be enough to ref the merc-prefab
+    public MercAssignment currentAssignment;
+    public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
 
     int _experience = 0;
     int _level = 1;
@@ -14,7 +19,43 @@ public class MercSheet
     public int _maxDamageBonus => GameStats.maxDmgPerLevel * _level;
     public int _maxHpBonus => GameStats.maxHpBonusPerLevel * _level;
 
-    public void ResetSheet()
+    public MercSheet()
+    {
+        characterName = MercName.None;
+
+        ResetSheet(); //exp and level set to base
+        currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
+        roomOrSquadNumber = -2; //still unclear 
+    }
+    public MercSheet(MercName mercName)
+    {
+        characterName = mercName;
+
+        ResetSheet(); //exp and level set to base
+        currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
+        roomOrSquadNumber = -1; //still unclear 
+    }
+    public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
+    {
+        characterName = mercName;
+
+        ResetSheet(); //exp and level set to base
+        SetToState(assignment, relevantNum); 
+    }
+
+    //public GameObject MyPawnPrefabRef() //might still prefer this for some reason if EnumToT proves to be a brat
+    //{
+    //    return MercPrefabs.Instance.EnumToPrefab(characterName);
+    //}
+    public T MyPawnPrefabRef<T>()
+    {
+        if (MercPrefabs.Instance)
+            return MercPrefabs.Instance.EnumToT<T>(characterName);
+        else
+            throw new System.Exception();
+    }
+
+    public void ResetSheet() //DOES NOT RESET ASSIGNMENT YET!
     {
         _experience = 0;
         _level = 1;
@@ -43,5 +84,25 @@ public class MercSheet
         return false;
     }
 
-    
+    public void SetToState(MercAssignment assignment, int relevantNum)
+    {
+        //switch (assignment)
+        //{
+        //    case MercAssignment.Null:
+        //        Debug.LogWarning("Merc assignment shouldn't be turned into null as far as I know, but for some reason - we're here now");
+        //        //could be useful for resetting?
+        //        break;
+        //    case MercAssignment.AwaySquad:
+        //        ro
+        //        break;
+        //    case MercAssignment.Room:
+        //        break;
+        //    case MercAssignment.Available:
+        //        break;
+        //    default:
+        //        break;
+        //}
+        currentAssignment = assignment;
+        roomOrSquadNumber = relevantNum;
+    }
 }

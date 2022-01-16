@@ -67,8 +67,12 @@ public class PlayerDataMaster : MonoBehaviour
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
 
-        currentPlayerData.values = currentPlayerData.SiteCooldownTimes.Values.ToList();
-        currentPlayerData.keys = currentPlayerData.SiteCooldownTimes.Keys.ToList();
+        currentPlayerData.siteCooldowns = currentPlayerData.SiteCooldownTimes.Values.ToList();
+        currentPlayerData.siteNames = currentPlayerData.SiteCooldownTimes.Keys.ToList();
+
+
+       
+
 
         string pdJsonString = JsonUtility.ToJson(currentPlayerData);
 
@@ -135,18 +139,18 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData = pd;
 
         currentPlayerData.SiteCooldownTimes = new Dictionary<string, float>();
-        if (currentPlayerData.values == null && currentPlayerData.keys == null)
+        if (currentPlayerData.siteCooldowns == null && currentPlayerData.siteNames == null)
         {
             return;
         }
-        if (currentPlayerData.values.Count != currentPlayerData.keys.Count)
+        if (currentPlayerData.siteCooldowns.Count != currentPlayerData.siteNames.Count)
         {
             Debug.LogError("key and value amounts don't match");
         }
 
-        for (int i = 0; i < currentPlayerData.values.Count; i++)
+        for (int i = 0; i < currentPlayerData.siteCooldowns.Count; i++)
         {
-            currentPlayerData.SiteCooldownTimes.Add(currentPlayerData.keys[i], currentPlayerData.values[i]);
+            currentPlayerData.SiteCooldownTimes.Add(currentPlayerData.siteNames[i], currentPlayerData.siteCooldowns[i]);
         }
 
 
@@ -265,16 +269,19 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.playerName = newPlayerName;
 
         //Get starting mercs
-        newPD.availableMercs = new List<MercName>();
-        newPD.availableMercs.AddRange(GameStats.startMercNames);
-        newPD.gold = GameStats.startingGold;
-        newPD.rooms = new List<Room>();
-        newPD.rooms.Add(new Room());
-        //newPD.squadsAsMercNames = new List<List<MercName>>();
+        //newPD.availableMercs = new List<MercName>(); //NEVER DO THIS! WHY INIT A LIST REMOTELY?! SHOULD ALL LISTS BE PRIVATE?! THIS IS A RULE NOW!
+        //newPD.availableMercs.AddRange(GameStats.startMercNames);
+
+        newPD.CreateAddMercs(GameStats.startMercNames);
+
+        newPD.gold = GameStats.startingGold; //THESE SHOULD ALL be Init()
+        newPD.rooms = new List<Room>();//THESE SHOULD ALL be Init()
+        newPD.rooms.Add(new Room());//THESE SHOULD ALL be Init()
+
 
 
         //squads should be empty
-
+        //take merc sheets from available mercs only? or use one method for a sweep-collection?
         LoadPlayerData(newPD);
 
         SaveDataToDisk();
@@ -291,8 +298,9 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.availableMercs = newNames;
 
 
-        currentPlayerData.squadsAsMercNameList = GetSquadsList();
+        currentPlayerData.squadsAsMercNameList = GetSquadsList(); //being phased out
 
+        //currentPlayerData.mercSheets
 
         SaveDataToDisk();
     }

@@ -43,7 +43,7 @@ public class SquadBuilder : MonoBehaviour
         //print all availables:
         for (int i = 0; i < PartyMaster.Instance.availableMercs.Count; i++)
         {
-            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]);
+            availableSlots[i].SetMe(PartyMaster.Instance.availableMercs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
         }
         if(availableSlots[0].isOccupied)
         {
@@ -55,7 +55,7 @@ public class SquadBuilder : MonoBehaviour
         }
         for (int i = PartyMaster.Instance.availableMercs.Count; i < availableSlots.Length; i++)
         {
-            availableSlots[i].SetMe();
+            availableSlots[i].SetMe(); //empty
         }
 
         for (int i = 0; i < tempSquad.pawns.Count; i++)
@@ -64,7 +64,7 @@ public class SquadBuilder : MonoBehaviour
         }
         for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
         {
-            partySlots[i].ClearSlot();
+            partySlots[i].ClearSlot(); //empty
         }
         myButton.Toggle(true);
 
