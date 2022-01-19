@@ -11,10 +11,11 @@ public class MercSheet
     public MercAssignment currentAssignment;
     public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
 
-    int _experience = 0;
-    int _level = 1;
+    public int _experience = 0;
+    public int _level = 1;
 
     public int _expToNextLevel => GameStats.ExpThresholdByLevel(_level);
+    public Vector2Int _expFromAndToNextLevel => GameStats.ExpThresholdsByLevel(_level);
     public int _minDamageBonus => GameStats.minDmgPerLevel * _level;
     public int _maxDamageBonus => GameStats.maxDmgPerLevel * _level;
     public int _maxHpBonus => GameStats.maxHpBonusPerLevel * _level;

@@ -272,7 +272,7 @@ public class PlayerDataMaster : MonoBehaviour
         //newPD.availableMercs = new List<MercName>(); //NEVER DO THIS! WHY INIT A LIST REMOTELY?! SHOULD ALL LISTS BE PRIVATE?! THIS IS A RULE NOW!
         //newPD.availableMercs.AddRange(GameStats.startMercNames);
 
-        newPD.CreateAddMercs(GameStats.startMercNames);
+        newPD.CreateAddMercs(GameStats.startMercNames, MercAssignment.Available);
 
         newPD.gold = GameStats.startingGold; //THESE SHOULD ALL be Init()
         newPD.rooms = new List<Room>();//THESE SHOULD ALL be Init()
@@ -365,7 +365,9 @@ public class PlayerDataMaster : MonoBehaviour
     {
         PartyMaster.Instance.availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
         currentPlayerData.hireableMercs.Remove(mn);
-        currentPlayerData.availableMercs.Add(mn);
+
+        //currentPlayerData.availableMercs.Add(mn);
+        currentPlayerData.CreateAddMercs(new List<MercName>{mn}, MercAssignment.Hireable);
 
         //GoogleSheetMaster.Instance.LogPlayer(); //saves these changes
     }
@@ -383,6 +385,14 @@ public class PlayerDataMaster : MonoBehaviour
         }
 
         return toReturn;
+    }
+    public MercSheet SheetByName(MercName mercName)
+    {
+        MercSheet toReturn = currentPlayerData.mercSheets.Where(x => x.characterName == mercName).SingleOrDefault();
+        if (toReturn.characterName == mercName)
+            return toReturn;
+        else
+            return null;
     }
 
     public List<System.Object> GetLog

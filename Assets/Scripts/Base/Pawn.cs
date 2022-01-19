@@ -14,10 +14,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     private string pawnName; //character name (not GameObject name)!
 
     public MercName mercName;
-
-    public MercSheet characterSheet; //these are created and constructed as level 1 with 0 exp when they are created.
-                                         //in any other case they are loaded as data and not constructed at all
-
+    [SerializeField]
+    //MercSheet _characterSheet;
+    public MercSheet _characterSheet;
+    public MercSheet GetCharacterSheet { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
+                                                                                                  //in any other case they are loaded as data and not constructed at all
+    bool isSheetInit = false;
     int initiative;
     [SerializeField]
     int initiativeBonus;
@@ -140,17 +142,24 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         else
         {
             targets = RefMaster.Instance.enemies;
-          //  RefMaster.Instance.mercs.Add(this);
+            //  RefMaster.Instance.mercs.Add(this);
+            name.Replace("(Clone)", "");
+
+            if((_characterSheet = GetCharacterSheet) == null)
+            {
+                Debug.LogError("No sheet with merc name of: " + mercName.ToString());
+            }
+            //Load MercSheet on-to prefab - prefabs are always inited like this so they would always have relevant data
         }
 
-        if (isEnemy)
-        {
-            name = "Monster " + totalPawns.ToString();
-        }
-        else
-        {
-            name.Replace("(Clone)", "");
-        }
+        //if (isEnemy)
+        //{
+        //    name = "Monster " + totalPawns.ToString();
+        //}
+        //else
+        //{
+        //    name.Replace("(Clone)", "");
+        //}
 
         totalPawns++;
         //grab art?

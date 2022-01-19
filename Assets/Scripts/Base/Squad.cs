@@ -38,6 +38,12 @@ public class Squad : IEquatable<Squad>
     {
         pawns = new List<Pawn>();
         pawns.AddRange(newPawns);
+
+        //foreach (var item in pawns)
+        //{
+        //    item.characterSheet = PlayerDataMaster.Instance.SheetByName(item.mercName);
+        //}
+
         squadName = pawns[0].Name + " Squad";
     }
     public Squad(List<Pawn> newPawns, int roomNum) //weird that I don't use this... // USING IT NOW, thanks <3
@@ -45,24 +51,11 @@ public class Squad : IEquatable<Squad>
         pawns = new List<Pawn>();
         pawns.AddRange(newPawns); //reminder that these are just references to the prefabs, will be replaced with list of MercSheets
 
-
-
-        List<MercName> mercNames = PawnsAsNames();
-        List<MercName> sheetNames = PlayerDataMaster.Instance.SheetsAsNames();
-
-        foreach (var item in mercNames)
+        foreach (var item in pawns)
         {
-
-            if (!sheetNames.Contains(item))
-            {
-                Debug.LogError("Inconsistent mercs and sheets");
-            }
+            item.GetCharacterSheet.SetToState(MercAssignment.Room, roomNum);
         }
 
-        //foreach (var p in pawns)
-        //{
-        //    p.characterSheet.SetToState(MercAssignment.Room, roomNum);
-        //}
         roomNumber = roomNum;
         squadName = pawns[0].Name + " Squad";
     }

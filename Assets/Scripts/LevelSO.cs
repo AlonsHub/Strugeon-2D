@@ -13,7 +13,7 @@ public struct LevelData
 {
     public List<Pawn> enemies; //Ref and if we want random placement or easier picking from a range
     public List<Object> rewards; //Objects TBD
-
+    public int expReward;
     public GameObject levelPrefab; //currently holds enemies
     public int goldReward;
 
@@ -30,6 +30,8 @@ public struct LevelData
         enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty);
         rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(newDifficulty);
         goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty);
+
+        expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty);
         //levelPrefab = DifficultyTranslator.Instance.DiffcultyToLevelPrefab(difficulty);
 
 

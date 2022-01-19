@@ -37,4 +37,10 @@ public class Room
     {
         statusText = newText;
     }
+
+    public void ClearRoom()
+    {
+        isOccupied = false;
+        squad = null;
+    }
 }

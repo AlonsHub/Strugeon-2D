@@ -23,14 +23,8 @@ public class MercDataDisplayer : MonoBehaviour
 
     [SerializeField]
     Image saImage;
-
-    //public Image mercImage;
-    //public Image mercImage;
-
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    Image expSlider;
 
     public void SetMe(Pawn merc)
     {
@@ -43,5 +37,10 @@ public class MercDataDisplayer : MonoBehaviour
         specialAbilityDescription.text = merc.SA_Description;
         //end TEMP AF
         specialAbilityIcon.sprite = merc.SASprite;
+        Vector2 fromAndTo = merc.GetCharacterSheet._expFromAndToNextLevel; //casted into Vector2 (not int) just to make sure they float 
+
+        expSlider.fillAmount = (merc._characterSheet._experience - fromAndTo.x)/(fromAndTo.y - fromAndTo.x); //current EXP, minus previous threshold
+         
+
     }
 }

@@ -25,4 +25,20 @@ public static class GameStats
         }
         return threshhold;
     }
+    public static Vector2Int ExpThresholdsByLevel(int level)
+    {
+        int start = expToLevel2;
+        int pre = 0;
+        int threshhold = 0;
+        
+        for (int i = 1; i <= level; i++)
+        {
+            threshhold = pre + start;
+            pre = start;
+            start = threshhold;
+        }
+
+        return new Vector2Int(pre, threshhold);
+    }
+
 }
