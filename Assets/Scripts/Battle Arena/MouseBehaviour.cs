@@ -156,7 +156,8 @@ public class MouseBehaviour : MonoBehaviour
             r.material.SetFloat("_Thickness", 0f);
         }
 
-
+        //shut down the text box as well
+        HoverTextBoard.Instance.UnSetMe();
 
         heroButtonCircle.SetActive(false);
         enemyButtonCircle.SetActive(false);

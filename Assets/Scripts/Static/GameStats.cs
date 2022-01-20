@@ -37,6 +37,10 @@ public static class GameStats
             pre = start;
             start = threshhold;
         }
+        if(level == 1) //Fibbonachi can't work with an initial 0
+        {
+            pre = 0; //Sets inital "threshold" to be 0 (since no experience is needed to get from level 0 to 1)
+        }
 
         return new Vector2Int(pre, threshhold);
     }
