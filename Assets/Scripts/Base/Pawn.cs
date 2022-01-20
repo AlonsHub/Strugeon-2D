@@ -54,7 +54,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public Transform effectIconParent;
     public GameObject effectIconPrefab;
 
-    public GameObject myTurnPlate;
+    public TurnDisplayer myTurnPlate;
 
     #region Action Region
 
@@ -293,9 +293,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
         PartyMaster.Instance.availableMercPrefabs.Remove(this);
         TurnMaster.Instance.theCowardly.Add(mercName);
-        TurnMaster.Instance.turnTakers.Remove(this);
-        TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
-        Destroy(myTurnPlate);
+        TurnMaster.Instance.RemoveTurnTaker(this);
+
+        //TurnMaster.Instance.turnTakers.Remove(this);
+        //TurnMaster.Instance.turnPlates.Remove(myTurnPlate); //replace with clear method
+        //Destroy(myTurnPlate.gameObject);
         
         // THIS MIGHT BE WHERE ESCAPED mercs ARE CONSIDERED DEAD
         //by being destroyed and then -> counded as missing from the list
@@ -326,10 +328,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
             RefMaster.Instance.enemies.Remove(this); //not ideal
         }
 
-        TurnMaster.Instance.turnTakers.Remove(this);
-        TurnMaster.Instance.turnPlates.Remove(myTurnPlate.transform);
+        TurnMaster.Instance.RemoveTurnTaker(this);
 
-        Destroy(myTurnPlate);
+        //TurnMaster.Instance.turnTakers.Remove(this);
+        //TurnMaster.Instance.turnPlates.Remove(myTurnPlate);
+
+        //Destroy(myTurnPlate.gameObject);
         Destroy(gameObject);
     }
 

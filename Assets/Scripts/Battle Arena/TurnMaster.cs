@@ -17,7 +17,7 @@ public class TurnMaster : MonoBehaviour
     public bool isGameRunning;
     public bool gameHasBeenReset;
 
-    public List<Transform> turnPlates;
+    public List<TurnDisplayer> turnPlates;
     public Transform turnPlateParent;
     public Transform currenTurnPlateTrans;
     public Transform nextTurnPlateTrans;
@@ -48,7 +48,7 @@ public class TurnMaster : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        turnPlates = new List<Transform>();
+        turnPlates = new List<TurnDisplayer>();
 
         theDead = new List<MercName>();
         theCowardly = new List<MercName>();
@@ -75,12 +75,13 @@ public class TurnMaster : MonoBehaviour
 
         //TURN PLATE DISPLAYER!
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
-        turnPlates.Add(go.transform);
-        turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
-        //turnPlates[0].localScale *= 1.5f;
-        turnTakers[0].myTurnPlate = go;
-
         TurnDisplayer tp = go.GetComponent<TurnDisplayer>();
+        turnPlates.Add(tp);
+        turnPlates[0].transform.localPosition = currenTurnPlateTrans.localPosition; //the first and only at the moment
+        //turnPlates[0].localScale *= 1.5f;
+        turnTakers[0].myTurnPlate = tp;
+
+        //TurnDisplayer tp = go.GetComponent<TurnDisplayer>();
 
 
         if (tp) //just making sure
@@ -97,11 +98,12 @@ public class TurnMaster : MonoBehaviour
         for (int i = 1; i < turnTakers.Count; i++) //start from [1], because [0] is set just above this ^^^^
         {
             GameObject plate = Instantiate(prefabeTurnPlate, turnPlateParent);
-            turnPlates.Add(plate.transform);
+            tp = plate.GetComponent<TurnDisplayer>();
+            turnPlates.Add(tp);
 
             //Sprites and SA icons are set
 
-            turnPlates[i].localPosition = nextTurnPlateTrans.localPosition + new Vector3((i - 1) * turnPlateDistance, 0, 0); //(i-1) because the [1] position in the array is the second plate,
+            turnPlates[i].transform.localPosition = nextTurnPlateTrans.localPosition + new Vector3((i - 1) * turnPlateDistance, 0, 0); //(i-1) because the [1] position in the array is the second plate,
                                                                                                                              //Image[] imgs = turnPlates[i].GetComponentsInChildren<Image>();
                                                                                                                              //imgs[0].sprite = turnTakers[i].PortraitSprite;
                                                                                                                              //Image imgs = turnPlates[i].GetComponentInChildren<Image>();
@@ -110,9 +112,8 @@ public class TurnMaster : MonoBehaviour
                                                                                                                              //but nextTurnPlateTrans is the second position
                                                                                                                              //(so on i=1, we need to add (1-1)*delta
 
-            tp = plate.GetComponent<TurnDisplayer>();
 
-            turnTakers[i].myTurnPlate = turnPlates[i].gameObject; //TERRRRIIIBBBLLLEEE
+            //turnTakers[i].myTurnPlate = turnPlates[i]; 
             if (tp) //just making sure
             {
                 tp.Init(turnTakers[i]);
@@ -216,12 +217,12 @@ public class TurnMaster : MonoBehaviour
 
             foreach (var item in theCowardly)
             {
-                PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+                //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
                 PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
             foreach (var item in theDead)
             {
-                PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+                //PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
                 PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
 
@@ -327,17 +328,56 @@ public class TurnMaster : MonoBehaviour
     }
 
 
-  
+    public void RemoveTurnPlate(TurnDisplayer turnPlate)
+    {
+        turnPlates.Remove(turnPlate);
+
+        //order check
+        
+    }
+    public void RemoveTurnTaker(TurnTaker tt)
+    {
+        turnTakers.Remove(tt as Pawn);
+        Destroy((tt as Pawn).myTurnPlate.gameObject);
+
+        SetTurnOrder();
+    }
+    void SetTurnOrder() //doesnt advance the order, just sets it - also safe checks
+    {
+        turnTakers[0].myTurnPlate.transform.localPosition = currenTurnPlateTrans.localPosition;
+        turnTakers[0].myTurnPlate.ToggleScale(true);
+
+        if (turnTakers[0].myTurnPlate.hasSA)
+        {
+            turnTakers[0].myTurnPlate.SAIconCheck();
+        }
+
+        for (int i = 1; i < turnDisplayerLimit; i++)
+        {
+            turnTakers[i].myTurnPlate.gameObject.SetActive(true);
+            turnTakers[i].myTurnPlate.ToggleScale(false);
+            turnTakers[i].myTurnPlate.transform.localPosition = nextTurnPlateTrans.localPosition +
+                                                     new Vector3((i - 1) * turnPlateDistance, 0, 0);
+            if(turnTakers[i].myTurnPlate.hasSA)
+            turnTakers[i].myTurnPlate.SAIconCheck();
+        }
+        for (int i = turnDisplayerLimit; i < turnTakers.Count; i++)
+        {
+            //turnTakers[i].myTurnPlate.ToggleScale(false);
+            turnTakers[i].myTurnPlate.gameObject.SetActive(false);
+        }
+    }
     void TurnOrderUpdate()
     {
-        turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
+        //turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
+        turnPlates[0].ToggleScale(false); //shrinks back the Current Turn Portrait
 
-        Transform t = turnPlates[0];
+        TurnDisplayer t = turnPlates[0];
         turnPlates.Remove(turnPlates[0]);
         turnPlates.Add(t);
         
 
-        turnPlates[0].localPosition = currenTurnPlateTrans.localPosition;
+        turnPlates[0].transform.localPosition = currenTurnPlateTrans.localPosition;
 
 
         TurnDisplayer td = turnPlates[0].GetComponent<TurnDisplayer>();
@@ -355,10 +395,10 @@ public class TurnMaster : MonoBehaviour
                 turnPlates[i].gameObject.SetActive(false);
                 continue;
             }
-
+            
             turnPlates[i].gameObject.SetActive(true);
 
-            turnPlates[i].localPosition = nextTurnPlateTrans.localPosition +
+            turnPlates[i].transform.localPosition = nextTurnPlateTrans.localPosition +
                 new Vector3((i - 1) * turnPlateDistance, 0, 0);
 
 
@@ -376,12 +416,6 @@ public class TurnMaster : MonoBehaviour
         }
     }
 
-    
-
-    //void RemovePlate()
-    //{
-
-    //}
 
     //makes sure the game will end once all mercs/enemies die
     IEnumerator EndGameChecker()
@@ -407,7 +441,9 @@ public class TurnMaster : MonoBehaviour
         newPawn.tileWalker.FindOwnGridPos();
 
         GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
-        go.GetComponent<TurnDisplayer>().Init(newPawn);
+        TurnDisplayer td =
+        go.GetComponent<TurnDisplayer>();
+        td.Init(newPawn);
 
 
 
@@ -416,7 +452,7 @@ public class TurnMaster : MonoBehaviour
 
         int newTurnNum = currentTurn - 1 > 0 ? currentTurn - 1 : turnPlates.Count-1;
 
-        turnPlates.Insert(newTurnNum, go.transform);
+        turnPlates.Insert(newTurnNum, td);
         turnTakers.Add(newPawn);
 
 

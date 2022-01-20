@@ -19,6 +19,7 @@ public class SquadBuilder : MonoBehaviour
     public Room ToRoom { get => toRoom; }
     [SerializeField]
     bool isEdit = false;
+    bool isConfirmed = false;
     
     public MercDataDisplayer mercDataDisplayer;
 
@@ -85,29 +86,50 @@ public class SquadBuilder : MonoBehaviour
         //    }
         //}
         //if (partySlots.Any(x => x.isOccupied)) //maybe try something more wholistic like checking the tempSquad
-        if (isEdit)
+        if (!isConfirmed)
         {
-            isEdit = false;
-            //Differences between tempSquad and uneditedSquadPawns needs to be unset:
 
-            //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
-            //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
+            if (isEdit)
+            {
+                //isEdit = false;//confirm cancels edit!
+                //Differences between tempSquad and uneditedSquadPawns needs to be unset:
 
-            //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
+                //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
+                //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
 
-            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
+                //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
 
-            PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
+                List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
 
-            //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
-            tempSquad.pawns = uneditedSquadPawns;
+                PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
 
-            Confirm();
-        }
-        else if (tempSquad.pawns.Count == 0) //maybe try something more wholistic like checking the tempSquad
-        {
+                //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
+                tempSquad.pawns = uneditedSquadPawns;
+
+                Confirm();
+            }
+            else 
+            {
             toRoom.roomButton.SetStatusText("Vacant");
+                if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
+                {
+                    foreach (var item in tempSquad.pawns)
+                    {
+                        PartyMaster.Instance.availableMercPrefabs.Add(item);
+                    }
+                }
+            }
         }
+        else
+        {
+            if(isEdit)
+            {
+
+            }
+            isConfirmed = false;
+        }
+        
+                //tempSquad = null;
         //    else 
         //{
         //    foreach (var p in tempSquad.pawns)
@@ -140,9 +162,9 @@ public class SquadBuilder : MonoBehaviour
 
     public void Confirm()
     {
+        //isEdit = false; //just making sure that we won't double confirm
+        isConfirmed = true;
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
-        isEdit = false; //just making sure that we won't double confirm
-
         if (tempSquad.pawns.Count > 0)
         PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
         //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];

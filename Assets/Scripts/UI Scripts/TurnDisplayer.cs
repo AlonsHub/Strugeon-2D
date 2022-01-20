@@ -37,7 +37,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
        
         isScaled = false;
         hasSA = pawn.hasSAs;
-        myPawn.myTurnPlate = gameObject;
+        myPawn.myTurnPlate = this;
         sa_Icons = new List<Transform>();
 
     }
