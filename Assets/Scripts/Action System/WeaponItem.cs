@@ -43,7 +43,7 @@ public class WeaponItem : ActionItem
 
     LookAtter la;
 
-    public System.Action attackAction;
+    public System.Action attackAction; //not sure if this is even used
 
 
 
@@ -201,7 +201,7 @@ public class WeaponItem : ActionItem
         if(feetItem)
         feetItem.currentRangeInTiles = range; // maybe do this at Start()?
 
-        int weight = 4;
+        int weight = baseCost;
         foreach(Pawn p in targets)
         {
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
@@ -238,6 +238,14 @@ public class WeaponItem : ActionItem
 
         CallBehaveVariables();
 
+    }
+
+    public void ApplySheet(MercSheet ms)
+    {
+        //takes the whole MercSheet just in case we want to get more info later
+
+        minDamage += ms._minDamageBonus;
+        maxDamage += ms._maxDamageBonus;
     }
 
     void OnAttack() //just something to have in the attackAction. Currently holds nothing

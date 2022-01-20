@@ -53,7 +53,7 @@ public class Squad : IEquatable<Squad>
 
         foreach (var item in pawns)
         {
-            item.GetCharacterSheet.SetToState(MercAssignment.Room, roomNum);
+            item.GetMercSheet.SetToState(MercAssignment.Room, roomNum);
         }
 
         roomNumber = roomNum;

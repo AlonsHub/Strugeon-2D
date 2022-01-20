@@ -34,7 +34,7 @@ public class MercDataDisplayer : MonoBehaviour
     {
         nameText.text = merc.Name; //+ suffix/monicer
         mercImage.sprite = merc.FullPortraitSprite;
-        MercSheet ms = merc.GetCharacterSheet;
+        MercSheet ms = merc.GetMercSheet;
         maxHPText.text = (merc.maxHP + ms._maxHpBonus).ToString();
         WeaponItem wi = merc.GetComponent<WeaponItem>();
         if (!wi)

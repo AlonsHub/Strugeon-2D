@@ -16,8 +16,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     public MercName mercName;
     [SerializeField]
     //MercSheet _characterSheet;
-    public MercSheet _characterSheet;
-    public MercSheet GetCharacterSheet { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
+    public MercSheet _mercSheet;
+    public MercSheet GetMercSheet { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
                                                                                                   //in any other case they are loaded as data and not constructed at all
     bool isSheetInit = false;
     int initiative;
@@ -138,30 +138,36 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         if (isEnemy)
         {
             targets = RefMaster.Instance.mercs;
+            name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
         }
         else
         {
-            targets = RefMaster.Instance.enemies;
-            //  RefMaster.Instance.mercs.Add(this);
-            name.Replace("(Clone)", "");
-
-            if((_characterSheet = GetCharacterSheet) == null)
+            if ((_mercSheet = GetMercSheet) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
             }
+            //APPLY MERC SHEET
+            //minmax dmg to weapon
+            if(_mercSheet.characterName != mercName)
+            {
+                Debug.LogError("probably, no mercsheet exists for this pawn " + mercName.ToString());
+            }
+
+
+            GetComponent<WeaponItem>().ApplySheet(_mercSheet); //SHOULD crash and burn if fails, because this should never fail!
+
+            //max hp bonus
+            maxHP = currentHP += _mercSheet._maxHpBonus;
+
+            targets = RefMaster.Instance.enemies;
+            
+            name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
+
+            
             //Load MercSheet on-to prefab - prefabs are always inited like this so they would always have relevant data
         }
 
-        //if (isEnemy)
-        //{
-        //    name = "Monster " + totalPawns.ToString();
-        //}
-        //else
-        //{
-        //    name.Replace("(Clone)", "");
-        //}
-
-        totalPawns++;
+        totalPawns++; //static counter
         //grab art?
     }
 

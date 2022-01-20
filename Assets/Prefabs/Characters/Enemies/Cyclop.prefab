@@ -327,6 +327,12 @@ MonoBehaviour:
   maxHP: 200
   pawnName: Cyclop
   mercName: 0
+  _characterSheet:
+    characterName: 0
+    currentAssignment: 0
+    roomOrSquadNumber: -2
+    _experience: 0
+    _level: 1
   initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
@@ -414,7 +420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 1
+  baseCost: 4
   currentModifier: 1
   actionVariations: []
   isWeapon: 1

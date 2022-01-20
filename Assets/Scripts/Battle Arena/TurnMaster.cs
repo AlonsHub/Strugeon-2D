@@ -205,7 +205,7 @@ public class TurnMaster : MonoBehaviour
             //}
             foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             {
-                item.GetCharacterSheet.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
+                item.GetMercSheet.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
             }
             //put squad back in their room
             PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
