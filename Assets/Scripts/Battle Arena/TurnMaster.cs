@@ -266,6 +266,8 @@ public class TurnMaster : MonoBehaviour
             }
             currentTurnTaker = turnTakers[currentTurn];
 
+            TurnOrderUpdate(1); //int 1 to engage overload
+
             if (!currentTurnTaker.DoSkipTurn)
             {
                 currentTurnTaker.TurnDone = false;
@@ -298,7 +300,7 @@ public class TurnMaster : MonoBehaviour
                     }
                 }
 
-                TurnOrderUpdate();
+                //TurnOrderUpdate(1);
                 //    TurnOrderUpdate();
             }
             else
@@ -338,9 +340,10 @@ public class TurnMaster : MonoBehaviour
     public void RemoveTurnTaker(TurnTaker tt)
     {
         turnTakers.Remove(tt as Pawn);
+        turnPlates.Remove((tt as Pawn).myTurnPlate);
         Destroy((tt as Pawn).myTurnPlate.gameObject);
 
-        SetTurnOrder();
+        //SetTurnOrder();
     }
     void SetTurnOrder() //doesnt advance the order, just sets it - also safe checks
     {
@@ -415,6 +418,64 @@ public class TurnMaster : MonoBehaviour
             //(so on i=1, we need to add (1-1)*delta                                                                                                    
         }
     }
+    void TurnOrderUpdate(int previousTurn) //not really needed, just keeping it as over load
+    {
+        //turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
+        turnPlates[previousTurn].ToggleScale(false); //shrinks back the Current Turn Portrait
+
+       
+        turnPlates[currentTurn].transform.localPosition = currenTurnPlateTrans.localPosition;
+        turnPlates[currentTurn].ToggleScale(true);
+
+        if (turnPlates[currentTurn].hasSA)
+        {
+            turnPlates[currentTurn].SAIconCheck();
+        }
+
+        int count = 0;
+        for (int i = currentTurn+1; i < turnPlates.Count(); i++)
+        {
+            count++;
+            if(count >= turnDisplayerLimit)
+            {
+                turnPlates[i].gameObject.SetActive(false);
+                continue;
+            }
+            turnPlates[i].gameObject.SetActive(true);
+            turnPlates[i].ToggleScale(false);
+
+            turnPlates[i].transform.localPosition = nextTurnPlateTrans.localPosition +
+                new Vector3((count-1) * turnPlateDistance, 0, 0);
+
+            if(turnPlates[i].hasSA)
+            {
+                turnPlates[i].SAIconCheck();
+            }
+        } //this counts to the end of the row
+
+        //now count FORWARD from 0 to current turn-1
+        for (int i = 0; i < currentTurn-1; i++)
+        {
+            count++;
+            if (count >= turnDisplayerLimit)
+            {
+                turnPlates[i].gameObject.SetActive(false);
+                continue;
+            }
+            turnPlates[i].gameObject.SetActive(true);
+            turnPlates[i].ToggleScale(false);
+
+            turnPlates[i].transform.localPosition = nextTurnPlateTrans.localPosition +
+                new Vector3((count-1) * turnPlateDistance, 0, 0);
+
+            if (turnPlates[i].hasSA)
+            {
+                turnPlates[i].SAIconCheck();
+            }
+        }
+
+
+    }
 
 
     //makes sure the game will end once all mercs/enemies die
@@ -440,12 +501,12 @@ public class TurnMaster : MonoBehaviour
         newPawn.Init();
         newPawn.tileWalker.FindOwnGridPos();
 
-        GameObject go = Instantiate(prefabeTurnPlate, turnPlateParent);
+        GameObject turnPlateGo = Instantiate(prefabeTurnPlate, turnPlateParent);
         TurnDisplayer td =
-        go.GetComponent<TurnDisplayer>();
+        turnPlateGo.GetComponent<TurnDisplayer>();
         td.Init(newPawn);
 
-
+        turnPlateGo.SetActive(false);
 
         //int newTurnNum = currentTurn + 2 >= turnPlates.Count ? 
         //                (currentTurn + 2) - turnPlates.Count : turnPlates.Count - (currentTurn + 2);
@@ -453,7 +514,10 @@ public class TurnMaster : MonoBehaviour
         int newTurnNum = currentTurn - 1 > 0 ? currentTurn - 1 : turnPlates.Count-1;
 
         turnPlates.Insert(newTurnNum, td);
-        turnTakers.Add(newPawn);
+        turnTakers.Insert(newTurnNum, newPawn);
+
+        TurnOrderUpdate(1);
+        //turnTakers.Add(newPawn);
 
 
     }

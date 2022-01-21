@@ -25,7 +25,17 @@ public class Charmed : MonoBehaviour
         //weaponItem.targets = RefMaster.Instance.mercs.Where(x => x.Name != wi.pawn.Name).ToList(); // <- "Why would you hit yourself?!"
         weaponItem.targets = RefMaster.Instance.mercs; // <- "Why not?"
 
-        StartCoroutine(TurnCounter());
+        Charmed[] existingBlindedComponent = GetComponents<Charmed>();
+
+        if (existingBlindedComponent.Length > 1)
+        {
+            existingBlindedComponent[0].lifetime = totalLifetime;
+            Destroy(this);
+        }
+        else
+        {
+            StartCoroutine(TurnCounter());
+        }
     }
 
     IEnumerator TurnCounter()
