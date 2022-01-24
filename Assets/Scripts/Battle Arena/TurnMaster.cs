@@ -232,7 +232,7 @@ public class TurnMaster : MonoBehaviour
             defeatWindow.SetMe(LevelRef.Instance.currentLevel);
             //empty the room:
 
-            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber] = null;
+            PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].ClearRoom(); //FIXED to ClearRoom() from = null
         }
 
 

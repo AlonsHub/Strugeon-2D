@@ -14,7 +14,6 @@ public class Bar : MonoBehaviour
     public Image img;
     private void Start()
     {
-        currentValue = maxValue;
         img = GetComponent<Image>();
     }
     public void SetMaxValue(float value)

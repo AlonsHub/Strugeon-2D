@@ -323,7 +323,30 @@ public class PlayerDataMaster : MonoBehaviour
 
         return toReturn;
     }
-
+    public List<MercName> GetMercNamesByAssignments(List<MercAssignment> mercAssignments)
+    {
+        List<MercName> toReturn = new List<MercName>();
+        List<MercSheet> relevantMercs = currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();
+        foreach (var item in relevantMercs)
+        {
+            toReturn.Add(item.characterName);
+        }
+        return toReturn;
+    }
+    public List<MercName> GetMercNamesByAssignment(MercAssignment mercAssignments)
+    {
+        List<MercName> toReturn = new List<MercName>();
+        List<MercSheet> relevantMercs = currentPlayerData.mercSheets.Where(x => mercAssignments==x.currentAssignment).ToList();
+        foreach (var item in relevantMercs)
+        {
+            toReturn.Add(item.characterName);
+        }
+        return toReturn;
+    }
+    public List<MercSheet> GetMercSheetsByAssignments(List<MercAssignment> mercAssignments)
+    {
+        return currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();
+    }
     public string SaveExistsCheck(string playerName)
     {
         string[] files;
@@ -345,16 +368,13 @@ public class PlayerDataMaster : MonoBehaviour
     }
     public void AddHireableMerc(MercName mercName)
     {
-        if (currentPlayerData.hireableMercs == null)
-        {
-            currentPlayerData.hireableMercs = new List<MercName>();
-        }
-        else if (currentPlayerData.hireableMercs.Contains(mercName))
+        if (currentPlayerData.hireableMercs.Contains(mercName))
         {
             Debug.LogWarning("You have this merc already");
             return;
         }
-        currentPlayerData.hireableMercs.Add(mercName);
+        currentPlayerData.CreateAddMercs(new List<MercName> { mercName }, MercAssignment.Hireable);
+        //currentPlayerData.hireableMercs.Add(mercName);
     }
     private void OnApplicationQuit()
     {
@@ -363,15 +383,16 @@ public class PlayerDataMaster : MonoBehaviour
 
     public void HireMerc(MercName mn)
     {
-        PartyMaster.Instance.availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn));
         currentPlayerData.hireableMercs.Remove(mn);
 
         //currentPlayerData.availableMercs.Add(mn);
-        currentPlayerData.CreateAddMercs(new List<MercName>{mn}, MercAssignment.Hireable);
+        //currentPlayerData.CreateAddMercs(new List<MercName>{mn}, MercAssignment.Available);
+        PartyMaster.Instance.availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn)); //consider unifying with ChangeMercAssignment - perhaps switch(newAssignment)
+        currentPlayerData.ChangeMercAssignment(mn, MercAssignment.Available);
 
         //GoogleSheetMaster.Instance.LogPlayer(); //saves these changes
     }
-    public void RemoveMercSheet(MercName mn)
+    public void RemoveMercSheet(MercName mn) //specifically DOESNT remove any other members from lists (such as PartyMaster). Could do it if we also got a MercAssignment and switch on which list to remove from, but each time this is called - is specific and should manage its own removals individually
     {
         currentPlayerData.RemoveMercSheet(mn);
     }

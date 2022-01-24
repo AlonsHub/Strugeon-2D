@@ -28,7 +28,13 @@ public class HirelingMaster : MonoBehaviour
 
         //DontDestroyOnLoad(gameObject);
     }
-
+    public void LoadExistingHireablesToLog()
+    {
+        foreach (var item in PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Hireable))
+        {
+            AddHireableToLog(item);
+        }
+    }
     public void PromptNewHireling()
     {
         if(!CheckForArrivals())
@@ -37,7 +43,8 @@ public class HirelingMaster : MonoBehaviour
             return;
         }
 
-        List<MercName> existing = PartyMaster.Instance.AllMercs();
+        //List<MercName> existing = PartyMaster.Instance.AllMercs();
+        List<MercName> existing = PlayerDataMaster.Instance.GetMercNamesByAssignments(new List<MercAssignment> {MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Hireable, MercAssignment.Room});
         List<MercName> missing = new List<MercName>();
         for (int i = 1; i < Enum.GetNames(typeof(MercName)).Length; i++) //0 == None
         {
@@ -54,11 +61,28 @@ public class HirelingMaster : MonoBehaviour
 
         int rand = UnityEngine.Random.Range(0, missing.Count); //0 is fine here since it's within the list "missing" not the mercName as int
 
+        AddHireableToLog(missing[rand]);
+
+        //^^^ Extracte to this AddHireableToLog
+        //HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();
+        ////List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
+        //hirelingWindow.SetMe(missing[rand], this);
+
+        //PlayerDataMaster.Instance.AddHireableMerc(missing[rand]); //Kinda sucks...
+
+        ////anim.SetTrigger("Open");
+        //idleLogParent.GetComponentInParent<PeekingMenu>().ShowMenu();
+        //End of Extraction
+    }
+
+    void AddHireableToLog(MercName mn)
+    {
         HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();
         //List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
-        hirelingWindow.SetMe(missing[rand], this);
+        hirelingWindow.SetMe(mn, this);
 
-        PlayerDataMaster.Instance.AddHireableMerc(missing[rand]); //Kinda sucks...
+        //PlayerDataMaster.Instance.AddHireableMerc(missing[rand]); //Kinda sucks...
+        PlayerDataMaster.Instance.AddHireableMerc(mn); //Doesnt suck now!
 
         //anim.SetTrigger("Open");
         idleLogParent.GetComponentInParent<PeekingMenu>().ShowMenu();
@@ -72,7 +96,8 @@ public class HirelingMaster : MonoBehaviour
 
     bool CheckForArrivals() //returns true if new mercs can arrive
     {
-        if (PartyMaster.Instance.AllMercs().Count == Enum.GetNames(typeof(MercName)).Length-1) // minus 1 because MercName has a 0 value of None
+        //if (PartyMaster.Instance.AllMercs().Count == Enum.GetNames(typeof(MercName)).Length-1) // minus 1 because MercName has a 0 value of None
+        if (PlayerDataMaster.Instance.GetMercNamesByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Hireable, MercAssignment.Room }).Count >= Enum.GetNames(typeof(MercName)).Length - 1) 
         {
             return false;
         }

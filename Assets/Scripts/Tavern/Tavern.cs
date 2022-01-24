@@ -61,7 +61,12 @@ public class Tavern : MonoBehaviour
 
         RefreshRooms();
         squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
+
+        HirelingMaster.Instance.LoadExistingHireablesToLog();
         Invoke("TryPromptNewHireling", 1);
+
+        //Populate with existing hireables
+        //Maybe test here if they are still hireable or if they left the tavern for greater adventures elsewhere?
     }
 
     public void DisableWindowTier1(string dontDisable)

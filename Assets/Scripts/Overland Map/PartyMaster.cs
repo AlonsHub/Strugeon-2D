@@ -16,31 +16,31 @@ public class PartyMaster : MonoBehaviour
 
     public List<Squad> squads; //both available and OtW
     
-    public List<MercName> AllMercs() //including hireables
-    {
-        List<MercName> toReturn = new List<MercName>();
+    //public List<MercName> AllMercs() //including hireables // KILL THIS WITH FIREEEE
+    //{
+    //    List<MercName> toReturn = new List<MercName>();
 
-        foreach (var item in availableMercPrefabs)
-        {
-            toReturn.Add(item.mercName);
-        }
-        foreach (var squad in squads)
-        {
-            foreach (var x in squad.pawns)
-            {
-                toReturn.Add(x.mercName);
-            }
-        }
-        if(PlayerDataMaster.Instance.currentPlayerData.hireableMercs != null && PlayerDataMaster.Instance.currentPlayerData.hireableMercs.Count >0)
-        {
-            foreach (var item in PlayerDataMaster.Instance.currentPlayerData.hireableMercs)
-            {
-                toReturn.Add(item);
-            }
-        }
+    //    foreach (var item in availableMercPrefabs)
+    //    {
+    //        toReturn.Add(item.mercName);
+    //    }
+    //    foreach (var squad in squads)
+    //    {
+    //        foreach (var x in squad.pawns)
+    //        {
+    //            toReturn.Add(x.mercName);
+    //        }
+    //    }
+    //    if(PlayerDataMaster.Instance.currentPlayerData.hireableMercs != null && PlayerDataMaster.Instance.currentPlayerData.hireableMercs.Count >0)
+    //    {
+    //        foreach (var item in PlayerDataMaster.Instance.currentPlayerData.hireableMercs)
+    //        {
+    //            toReturn.Add(item);
+    //        }
+    //    }
 
-        return toReturn;
-    }
+    //    return toReturn;
+    //}
     public int NumOfMercsInSquads() 
     {
         int toReturn = 0;

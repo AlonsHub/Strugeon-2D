@@ -11,7 +11,7 @@ public class PlayerData
     //availavle mercs
     public List<MercName> availableMercs = new List<MercName>();
     public List<MercSheet> availableMercSheet = new List<MercSheet>();
-    public List<MercName> hireableMercs;
+    public List<MercName> hireableMercs = new List<MercName>();
 
     //squads
     //public List<List<MercName>> squadsAsMercNames;
@@ -50,7 +50,8 @@ public class PlayerData
     public int cowardMercs = 0;
     public int victories = 0;
     public int losses = 0;
-    public int numOfavailableMercs { get => availableMercs.Count + PartyMaster.Instance.NumOfMercsInSquads(); } //this needs to die
+    //public int numOfavailableMercs { get => availableMercs.Count + PartyMaster.Instance.NumOfMercsInSquads(); } //this needs to die
+    public int numOfavailableMercs { get => PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room }).Count; } //ACCESS LIST BY METHOD!!!!
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 
     {
@@ -69,7 +70,8 @@ public class PlayerData
                 mercSheets.Add(newSheet);
                 break;
             case MercAssignment.Hireable:
-                availableMercs.Add(newName);
+                //availableMercs.Add(newName);
+                hireableMercs.Add(newName);
                 newSheet = new MercSheet(newName, MercAssignment.Hireable, -1);
                 mercSheets.Add(newSheet);
                 break;
@@ -96,6 +98,10 @@ public class PlayerData
             CreateAddMerc(newName, assignment);
             // SHOULD I NOT JUST ADD THeSe MERCs TO THE LOG HERE?
         }
+    }
+    public void ChangeMercAssignment(MercName mercName, MercAssignment mercAssignment)
+    {
+        mercSheets.Where(x => x.characterName == mercName).SingleOrDefault().currentAssignment = mercAssignment;
     }
 
     public void RemoveMercSheet(MercName mn)

@@ -14,18 +14,7 @@ public class GoogleSheetMaster : MonoBehaviour
     static string path = "/StreamingAssets/credentials.json";
     static SheetsService sheetsService;
 
-    void SetUpCredentials()
-    {
-        string fullPath = Application.dataPath + path;
-
-        Stream creds = File.Open(fullPath, FileMode.Open);
-
-        ServiceAccountCredential serviceAccountCredential = ServiceAccountCredential.FromServiceAccountData(creds);
-
-        sheetsService = new SheetsService(new BaseClientService.Initializer() { HttpClientInitializer = serviceAccountCredential });
-    }
     public static GoogleSheetMaster Instance;
-    // Start is called before the first frame update
     void Start()
     {
         Debug.LogError("Google Sheets Master perfoms start");
@@ -40,6 +29,17 @@ public class GoogleSheetMaster : MonoBehaviour
         SetUpCredentials();
         LogPlayer();
     }
+    void SetUpCredentials()
+    {
+        string fullPath = Application.dataPath + path;
+
+        Stream creds = File.Open(fullPath, FileMode.Open);
+
+        ServiceAccountCredential serviceAccountCredential = ServiceAccountCredential.FromServiceAccountData(creds);
+
+        sheetsService = new SheetsService(new BaseClientService.Initializer() { HttpClientInitializer = serviceAccountCredential });
+    }
+    
     public void PrintCell()
     {
         var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, "A1");
@@ -83,14 +83,22 @@ public class GoogleSheetMaster : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+        LogPlayer();
+    }
     public void LogPlayer()
     {
         var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
         var objectList = new List<System.Object>(); //fill object list with things!
 
         List<string> strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
-        
-        
+
+        ///Solution to player limit
+        ///loop that collects GetRows of a set size from A##:A[##+sizePerLoopItteration] and checks if the last memeber has any value
+        ///if not, the loop ends
+        ///if it does hold value, the loop goes again, collecting another [sizePerLoopItteration] of users, checking again if the last one holds any value
+
         if (strings !=null && strings.Count >0 && strings.Contains(PlayerDataMaster.Instance.currentPlayerData.playerName)) 
         {
             //True - the player is already logged:
