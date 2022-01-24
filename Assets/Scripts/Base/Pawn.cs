@@ -282,12 +282,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         {
             Debug.LogWarning("Escaped and destroyed!");
         }
-        else
-        {
-            Debug.LogWarning("Escaped and destroyed!");
-        }
+        //else
+        //{
+        //    Debug.LogWarning("Escaped and destroyed!");
+        //}
 
-        PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+        //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++; //MOVED To EscapeItem's Action()
 
         //Add to the list of the Cowardly (TurnMaster)
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************

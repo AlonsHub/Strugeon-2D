@@ -19,7 +19,7 @@ public class EscapeItem : ActionItem
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Escape);
 
-
+        PlayerDataMaster.Instance.currentPlayerData.cowardMercs++; // WILL BE A PROBLEM IS MERCS TRY TO ESCAPE BUT CANT!
 
         StartCoroutine("WalkToEscape");
         //pawn.Escape()
@@ -41,6 +41,8 @@ public class EscapeItem : ActionItem
     public override void CalculateVariations()
     {
         actionVariations.Clear();
+
+        //CHECK IF EVEN POSSIBLE!!!!!!
 
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
