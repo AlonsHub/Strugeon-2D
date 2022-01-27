@@ -2229,6 +2229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be9c7e8ac7f9054089aeeec59ea7777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disabler: {fileID: 1390221229}
   sceneName: OverLandMapScene
 --- !u!114 &451186279
 MonoBehaviour:
@@ -6273,7 +6274,7 @@ PrefabInstance:
     - target: {fileID: 2521551412197279751, guid: 765d6b2675d40b443818070cb8dde200,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -46.700012
+      value: -46.700073
       objectReference: {fileID: 0}
     - target: {fileID: 2521551412197279751, guid: 765d6b2675d40b443818070cb8dde200,
         type: 3}
@@ -6538,7 +6539,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0

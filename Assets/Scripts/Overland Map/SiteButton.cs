@@ -113,7 +113,7 @@ public class SiteButton : MonoBehaviour
             return;
         }
         //displayer.SetMe(this);
-        SiteDisplayer.SetActiveToAllInstances(false);
+        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
         myDataDisplay.SetActive(true);
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -199,5 +199,18 @@ public class SiteButton : MonoBehaviour
         }
 
         
+    }
+
+    public void UnSetMe() //for cancelExpedition cases
+    {
+        isReady = false;
+        isWaitingForSquad = false;
+        readiedSquad = null;
+    }
+    public void SetArrivedSquad(Squad s) //for cancelExpedition cases
+    {
+        isReady = true;
+        isWaitingForSquad = false; 
+        readiedSquad = s;
     }
 }

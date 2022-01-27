@@ -134,6 +134,15 @@ public class WeaponItem : ActionItem
     {
         //float rolledDamage = damage + Random.Range(-5, 6);
         float rolledDamage = Random.Range(minDamage, maxDamage);
+        if (toHit == null || toHit.currentHP <= 0)
+        {
+            BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
+
+            la.tgt = null;
+            pawn.TurnDone = true;
+            return;
+        }
+
         if (hasEffect)
         {
             int bonusDamage = effectData.bonusDamage + Random.Range(-5, 6);
@@ -147,6 +156,15 @@ public class WeaponItem : ActionItem
                 effectData = null;
                 pawn.RemoveIconByColor("fireBuff");
                 effectColour = Color.black;
+            }
+
+            if(toHit == null || toHit.currentHP <= 0)
+            {
+                BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
+
+                la.tgt = null;
+                pawn.TurnDone = true;
+                return;
             }
         }
         if (hasRedBuff)
@@ -162,10 +180,10 @@ public class WeaponItem : ActionItem
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
 
+        la.tgt = null;
         pawn.TurnDone = true;
         //go.transform.LookAt(tgt.transform);
         //GetComponent<LookAt>().lookAtTargetPosition = tgt.transform.position;
-        la.tgt = null;
     }
     public void ExtraDamageTarget(int minDmg, int maxDmg)
     {

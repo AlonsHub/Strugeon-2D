@@ -421,9 +421,10 @@ public class TurnMaster : MonoBehaviour
     void TurnOrderUpdate(int previousTurn) //not really needed, just keeping it as over load
     {
         //turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
-        turnPlates[previousTurn].ToggleScale(false); //shrinks back the Current Turn Portrait
+        //turnPlates[previousTurn].ToggleScale(false); //shrinks back the Current Turn Portrait
+        //turnPlates[previousTurn].gameObject.SetActive(false); //will be SetActive(true) if needed
 
-       
+
         turnPlates[currentTurn].transform.localPosition = currenTurnPlateTrans.localPosition;
         turnPlates[currentTurn].ToggleScale(true);
 

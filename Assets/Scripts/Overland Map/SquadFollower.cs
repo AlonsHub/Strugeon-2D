@@ -56,7 +56,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         remainingTime = sb.ETA; //set remainning to full time
         path = sb.pathCreator;
 
-        sb.isWaitingForSquad = true; //should be a handled by SiteButton itself
+        siteButton.isWaitingForSquad = true; //should be a handled by SiteButton itself
 
         pathFollower = GetComponent<PathFollower>();
 
@@ -92,9 +92,11 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         }
 
         //enable site to send to arena
-        siteButton.isReady = true;
-        siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
-        siteButton.readiedSquad = squad;
+        //THIS SHOULD BE A METHOD in SITE BUTTON
+        //siteButton.isReady = true;
+        //siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
+        //siteButton.readiedSquad = squad;
+        siteButton.SetArrivedSquad(squad);
 
         IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite}, siteButton);
 
@@ -111,8 +113,10 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
     public void CancelMe()
     {
         squad.isAvailable = true;
-        siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
-        siteButton.readiedSquad = null; //?
+        //siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
+        //siteButton.readiedSquad = null; //?
+        siteButton.UnSetMe();
+
         StopAllCoroutines();
         Destroy(gameObject);
     }

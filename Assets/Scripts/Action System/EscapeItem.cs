@@ -44,6 +44,8 @@ public class EscapeItem : ActionItem
 
         //CHECK IF EVEN POSSIBLE!!!!!!
 
+        //IF THEY HAVE NO PATH, THEY CAN'T ESCAPEEEE!!@!!
+
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
             actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight));

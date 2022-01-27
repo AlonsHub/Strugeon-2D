@@ -39,7 +39,7 @@ public class HolyStrikeItem : MonoBehaviour
             List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
             foreach (var neighbour in neigbourTiles)
             {
-                if(neighbour.isEmpty)
+                if(neighbour.isEmpty || neighbour.myOccupant == null)
                 {
                     continue;
                 }
