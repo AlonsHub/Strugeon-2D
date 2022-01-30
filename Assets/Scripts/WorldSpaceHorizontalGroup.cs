@@ -9,27 +9,6 @@ public class WorldSpaceHorizontalGroup : MonoBehaviour
     [SerializeField]
     float delta; //set in inspector
 
-    [SerializeField]
-    Transform startPos;
-
-    //public List<Vector3> positions;
-
-    //private void Start()
-    //{
-    //    positions = new List<Vector3>();
-    //}
-
-    //public void AddEffectIconToGroup(GameObject go)
-    //{
-    //    count++;
-    //    UpdateGroup();
-
-    //}
-    //public void RemoveEffectIconToGroup(GameObject go)
-    //{
-    //    count--;
-    //    UpdateGroup();
-    //}
     [ContextMenu("Update Group")]
     public void UpdateGroup()
     {
@@ -38,7 +17,7 @@ public class WorldSpaceHorizontalGroup : MonoBehaviour
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.activeSelf)
+            if (transform.GetChild(i).gameObject.activeInHierarchy)
             {
                 transform.GetChild(i).localPosition = delta * (count) * Vector3.right;
                 count++;
