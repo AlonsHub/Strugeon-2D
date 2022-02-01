@@ -11,6 +11,11 @@ public static class GameStats
     public static int minDmgPerLevel = 2;
     public static int maxDmgPerLevel = 3;
 
+    /// <summary>
+    /// Tavern Stats
+    /// </summary>
+    public static int maxRoomSize = 3;
+
     public static int ExpThresholdByLevel(int level)
     {
         int start = expToLevel2;

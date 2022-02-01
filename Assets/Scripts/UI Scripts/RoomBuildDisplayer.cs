@@ -71,8 +71,19 @@ public class RoomBuildDisplayer : MonoBehaviour
 
         capacityText.text = room.size.ToString();
         roomNumberText.text = (room.roomNumber+1).ToString();
+        if (room.size < GameStats.maxRoomSize)
+        {
+            upgradePriceText.text = (room.size * Prices.upgradeRoomBasePrice).ToString();
+        }
+        else
+        {
+            GameObject upgradeButton = GetComponentInParent<UnityEngine.UI.Button>().gameObject;
 
-        upgradePriceText.text = (room.size * Prices.upgradeRoomBasePrice).ToString();
+
+            upgradePriceText.text = "Max";
+            upgradePriceText.GetComponentInParent<UnityEngine.UI.Button>().colors = new UnityEngine.UI.ColorBlock { colorMultiplier = 1f, selectedColor = Color.black, normalColor = Color.red, highlightedColor = Color.gray, disabledColor = Color.red };
+            upgradePriceText.GetComponentInParent<UnityEngine.UI.Button>().interactable = false;
+        }
     }
 
     public void TryUpgrade()
