@@ -24,6 +24,8 @@ public class MercDataDisplayer : MonoBehaviour
     TMP_Text maxHPText; 
     [SerializeField]
     TMP_Text dmgRangeText;
+    [SerializeField]
+    TMP_Text expText;
 
     [SerializeField]
     Image saImage;
@@ -58,6 +60,9 @@ public class MercDataDisplayer : MonoBehaviour
 
         Vector2 fromAndTo = ms._expFromAndToNextLevel; //casted into Vector2 (not int) just to make sure they float 
         expSlider.fillAmount = (ms._experience - fromAndTo.x)/(fromAndTo.y - fromAndTo.x); //current EXP, minus previous threshold
-        
+
+        expText.text = ms._experience.ToString() + " / " + fromAndTo.y;
+
+
     }
 }
