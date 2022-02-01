@@ -21,16 +21,18 @@ public class EscapeItem : ActionItem
 
         PlayerDataMaster.Instance.currentPlayerData.cowardMercs++; // WILL BE A PROBLEM IS MERCS TRY TO ESCAPE BUT CANT!
 
-        StartCoroutine("WalkToEscape");
+        StartCoroutine(nameof(WalkToEscape));
         //pawn.Escape()
     }
     IEnumerator WalkToEscape()
     {
         //walk to edge of screen and disappear!
-        pawn.tileWalker.StartNewPathWithRange(ArenaMaster.Instance.escapeTile);
+        pawn.tileWalker.StartNewPathWithRange(ArenaMaster.Instance.escapeTile); //should just be "walk to one edge of the screen"
 
         //tilewalk to PlayerDataMaster.Instance.currentLevel.escapeTile
         yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+
+        //what happenes if not?!
 
         pawn.Escape();
         //disappear
@@ -48,6 +50,7 @@ public class EscapeItem : ActionItem
 
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
+            //check here if there is a path to escape - by either trying to get a route there, or inversely checking if hes not surrounded
             actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight));
         }
     }

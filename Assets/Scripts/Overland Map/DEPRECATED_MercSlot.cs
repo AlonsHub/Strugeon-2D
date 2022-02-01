@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 [System.Serializable]
-public class MercSlot : MonoBehaviour
+public class DEPRECATED_MercSlot : MonoBehaviour
 {
     public Image img;
     public Sprite defaultSprite;
@@ -12,6 +12,9 @@ public class MercSlot : MonoBehaviour
     public bool isOccupied = false;
     public bool isPartySlot;
     public Pawn pawn;
+
+    //[SerializeField]
+    float doubleClickGraceTime = 1f;
     public void AddMerc(Pawn p)
     {
 
@@ -83,9 +86,32 @@ public class MercSlot : MonoBehaviour
             return;
         }
 
-       
-  
+        if (isOneClicked)
+        {
+
             RemoveMerc();
-       
+        }
+        else
+        {
+            isOneClicked = true;
+            StartCoroutine(nameof(DoubleClickWaiter));
+        }
+    }
+    bool isOneClicked = false;
+    IEnumerator DoubleClickWaiter()
+    {
+        isOneClicked = true;
+
+        yield return new WaitForSeconds(doubleClickGraceTime);
+        isOneClicked = false;
+
+        //float count = 0;
+        //while (count <= doubleClickGraceTime)
+        //{
+        //    if()
+
+        //    yield return null;
+        //    count += Time.deltaTime;
+        //}
     }
 }

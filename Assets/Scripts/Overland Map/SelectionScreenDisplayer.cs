@@ -15,8 +15,8 @@ public class SelectionScreenDisplayer : MonoBehaviour
     public List<Pawn> partyMercs; //DISPLAYERS - set to PartyManager
 
     //Displayers:
-    public  MercSlot[] availableMercSlots; // Set in inspector
-    public MercSlot[] partyMercSlots; // Set in inspector
+    public  DEPRECATED_MercSlot[] availableMercSlots; // Set in inspector
+    public DEPRECATED_MercSlot[] partyMercSlots; // Set in inspector
 
     public GameObject levelInfoParent; //to Enable/Disable
 

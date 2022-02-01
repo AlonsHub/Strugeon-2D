@@ -93,12 +93,41 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        if (eventData.button == PointerEventData.InputButton.Right)
+        //if (eventData.button == PointerEventData.InputButton.Right)
+        //{
+        //    if(isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
+        //    RemoveMerc();
+        //}
+        //else
+        //if (eventData.button == PointerEventData.InputButton.Left)
+        //{
+        //    if (!squadBuilder.gameObject.activeSelf)
+        //        squadBuilder.gameObject.SetActive(true);
+        //    squadBuilder.SetMercDisplayer(pawn);
+
+        //    squadBuilder.TurnAllOff();
+        //    FrameToggle(true);
+        //    //bg_img.sprite = onBgSprite;
+        //}
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
             if(isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
-            RemoveMerc();
+            {
+                if (isOneClicked)
+                {
+
+                    RemoveMerc();
+                }
+                else
+                {
+                    isOneClicked = true;
+                    StartCoroutine(nameof(DoubleClickWaiter));
+                }
+            }
+            //RemoveMerc();
         }
-        if (eventData.button == PointerEventData.InputButton.Left)
+        else
+        if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (!squadBuilder.gameObject.activeSelf)
                 squadBuilder.gameObject.SetActive(true);
@@ -108,6 +137,17 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             FrameToggle(true);
             //bg_img.sprite = onBgSprite;
         }
+    }
+
+    bool isOneClicked = false;
+    float doubleClickGraceTime = 1;
+    IEnumerator DoubleClickWaiter()
+    {
+        isOneClicked = true;
+
+        yield return new WaitForSeconds(doubleClickGraceTime);
+        isOneClicked = false;
+
     }
 
     public void FrameToggle(bool turnOn)
