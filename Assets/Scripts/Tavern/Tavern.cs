@@ -80,22 +80,48 @@ public class Tavern : MonoBehaviour
 
     public void RefreshRooms()
     {
-        if(_roomButtons != null)
-        {
-            for (int i = _roomButtons.Count-1; i >= 0; i--)
-            {
-                Destroy(_roomButtons[i].gameObject);
-            }
-            //roomButtons.Clear();
-        }
-        _roomButtons.Clear();
-        //set up empty rooms
+        //if(_roomButtons != null && _roomButtons.Count > 0)
+        //{
+        //    for (int i = _roomButtons.Count-1; i >= 0; i--)
+        //    {
+        //        Destroy(_roomButtons[i].gameObject);
+        //    }
+        //    //roomButtons.Clear();
+        //}
+        //_roomButtons.Clear();
+
+        //if(_roomButtons.Count != PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
+        //{
+        //    if(_roomButtons.Count > PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
+        //    {
+        //        for (int i = _roomButtons.Count-1; i > PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i--)
+        //        {
+        //            Destroy(_roomButtons[i]);
+        //            _roomButtons.RemoveAt(i);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        for (int i = _roomButtons.Count; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
+        //        {
+        //            RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
+        //            _roomButtons.Add(go);
+        //        }
+        //    }
+        //}
+        
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
-            RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
-            _roomButtons.Add(go);
-            
-            go.SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
+            if (_roomButtons.Count - 1 < i)
+            {
+                RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
+                _roomButtons.Add(go);
+                go.SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
+            }
+            else
+            {
+                _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
+            }
         }
     }
 
@@ -135,6 +161,8 @@ public class Tavern : MonoBehaviour
         //decide which room to fill and send to newSquadMenu
     }
 
+
+
     public void EditSquadMenu(Squad s, Room room)
     {
         //disassembles a squad
@@ -163,15 +191,24 @@ public class Tavern : MonoBehaviour
     RoomButton activeRoomButton;
     public void SquadRoomSetup(RoomButton roomButton)
     {
-        if (!squadRoomDisplayer.gameObject.activeSelf)
-            squadRoomDisplayer.gameObject.SetActive(true);
-        //else
-        //{
-        //    //if it IS on
-        //    squadRoomDisplayer.SetMe();
-        //}
-        squadRoomDisplayer.SetMe(roomButton.room);
-        activeRoomButton = roomButton;
+
+        if (roomButton.isOccupied)
+        {
+
+            if (!squadRoomDisplayer.gameObject.activeSelf)
+                squadRoomDisplayer.gameObject.SetActive(true);
+            //else
+            //{
+            //    //if it IS on
+            //    squadRoomDisplayer.SetMe();
+            //}
+            squadRoomDisplayer.SetMe(roomButton.room);
+            activeRoomButton = roomButton;
+        }
+        else
+        {
+            TryOpenNewSquadMenu(roomButton.room);
+        }
     }
 
     public void EditActiveSquad()
