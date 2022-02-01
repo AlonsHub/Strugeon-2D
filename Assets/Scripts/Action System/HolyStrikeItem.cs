@@ -39,8 +39,10 @@ public class HolyStrikeItem : MonoBehaviour
             List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
             foreach (var neighbour in neigbourTiles)
             {
-                if(neighbour.isEmpty || neighbour.myOccupant == null)
+                if(neighbour.isEmpty || !neighbour.myOccupant)
                 {
+                    neighbour.isEmpty = true;
+                    neighbour.myOccupant = null; //makes sure that IF ONE then ALSO THE OTHER 
                     continue;
                 }
                 Pawn check = neighbour.myOccupant.GetComponent<Pawn>();

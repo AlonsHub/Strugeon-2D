@@ -10,7 +10,7 @@ public class FloorTile : MonoBehaviour
     public Vector2Int gridIndex;
 
     public bool isEmpty;
-    public GameObject myOccupant;
+    public GameObject myOccupant; //all direct access to myOccupant is absolute bullshit that needs fixing
 
     public int gCost;
     public int hCost;

@@ -271,7 +271,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     }
     public override void Die()
     {
-        StartCoroutine("DelayedDeath");
+        StartCoroutine(nameof(DelayedDeath));
     }
     
     public void Escape()
@@ -310,8 +310,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
     {
         //simplify Death, YOU IDIOT!
 
-
-
         yield return new WaitForSeconds(.1f);
         BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         if (!isEnemy)
@@ -329,11 +327,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         }
 
         TurnMaster.Instance.RemoveTurnTaker(this);
-
-        //TurnMaster.Instance.turnTakers.Remove(this);
-        //TurnMaster.Instance.turnPlates.Remove(myTurnPlate);
-
-        //Destroy(myTurnPlate.gameObject);
         Destroy(gameObject);
     }
 

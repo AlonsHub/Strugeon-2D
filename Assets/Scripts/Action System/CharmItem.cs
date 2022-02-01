@@ -70,7 +70,7 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
             return;// end match
         }
 
-        bool isFlanked = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.gridPos).Where(x => (!x.isEmpty && x.myOccupant.CompareTag("Merc"))).ToList().Count > 1;
+        bool isFlanked = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.gridPos).Where(x => x.myOccupant && x.myOccupant.CompareTag("Merc")).ToList().Count > 1;
 
         foreach (Pawn p in targets)
         {

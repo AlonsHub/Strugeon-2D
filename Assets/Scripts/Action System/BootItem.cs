@@ -55,13 +55,9 @@ public class BootItem : ActionItem
             {
                 actionVariations.Add(new ActionVariation(this, ft.gameObject, baseCost));
             }
-            else if (ft.myOccupant != null)
+            else if (ft.myOccupant != null && ft.myOccupant.CompareTag("Enemy"))
             {
-                if(ft.myOccupant.CompareTag("Enemy"))
-                {
                     hasEnemyAtMelee = true;
-                }
-                
             }
         }
 

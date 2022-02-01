@@ -66,7 +66,7 @@ public class BigHandsItem : ActionItem, SA_Item
             {
                 if (ft.myOccupant.CompareTag("Rock"))
                 {
-                    if(pawn.isEnemy)
+                    if(pawn.isEnemy)//should just be aimed at "Targets"
                     {
                         int counter = 0;
                         foreach (var m in RefMaster.Instance.mercs)
