@@ -43,11 +43,15 @@ public class PeekingMenu : MonoBehaviour
     public void HideMenu()
     {
         //StartCoroutine("MenuSlideClose");
+        if (!menuOpen)
+            return;
         anim.SetTrigger("Close");
         menuOpen = false;
     }
     public void ShowMenu()
     {
+        if (menuOpen)
+            return;
         //StartCoroutine("MenuSlideOpen");
         anim.SetTrigger("Open");
         menuOpen = true;

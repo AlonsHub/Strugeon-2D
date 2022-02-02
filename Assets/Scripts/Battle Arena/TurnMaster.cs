@@ -149,6 +149,8 @@ public class TurnMaster : MonoBehaviour
         isGameRunning = false;
         gameHasBeenReset = true;
 
+        MouseBehaviour.Instance.ShutDown();
+
         foreach (var item in theCowardly)
         {
             theDead.Remove(item); //just in case some escaped mercs also dies somehow

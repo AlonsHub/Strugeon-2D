@@ -52,9 +52,10 @@ public class BasicMercSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!isOccupied)
+            return;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-
             squadRoomDisplayer.ClickedMercSlot(this);
             //bg_img.sprite = onBgSprite;
         }

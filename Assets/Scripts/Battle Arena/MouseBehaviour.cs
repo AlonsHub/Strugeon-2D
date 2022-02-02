@@ -22,7 +22,7 @@ public class MouseBehaviour : MonoBehaviour
     public static Pawn hitTarget;
     
     public Vector3 offset;
-
+    
     //TEMP
     //this and all values stored in "Bar"s and "UI"s and so on, should all move to a dedicated Player class.
     // - moved.
@@ -31,6 +31,8 @@ public class MouseBehaviour : MonoBehaviour
 
     [SerializeField]
     float outlineThickness;
+
+    bool gameRunning = true;
 
     void Start()
     {
@@ -80,6 +82,9 @@ public class MouseBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!gameRunning)
+            return;
+
         if (areButtonsOpen)
         {
             if(hitTarget == null) // disables the menus in cases of Death and Escape(Flee)
@@ -145,7 +150,11 @@ public class MouseBehaviour : MonoBehaviour
             }
         }
     }
-
+    public void ShutDown()
+    {
+        CloseMenus();
+        gameRunning = false;
+    }
     public void CloseMenus()
     {
         if (PurpleChoosingMode.Instance.isOn)
