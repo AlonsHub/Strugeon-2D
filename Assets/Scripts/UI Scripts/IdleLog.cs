@@ -10,7 +10,7 @@ public class IdleLog : MonoBehaviour
     public static IdleLog Instance;
 
     [SerializeField]
-    GameObject basicEntryPrefab;
+    GameObject basicEntryPrefab; //relevant only for the OverlandMap Version of the idle log
 
     [SerializeField]
     Transform logParent;
@@ -46,56 +46,56 @@ public class IdleLog : MonoBehaviour
         }
     }
 
-    public void RecieveNewMessage(List<string> texts) //THIS SHOULD BE IN THE GENERIC METHOD
-    {
-        GameObject go = Instantiate(basicEntryPrefab, logParent);
+    //public void RecieveNewMessage(List<string> texts) //THIS SHOULD BE IN THE GENERIC METHOD
+    //{
+    //    GameObject go = Instantiate(basicEntryPrefab, logParent);
 
-        BasicMessage basicMessage = go.GetComponent<BasicMessage>();
-        //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
+    //    BasicMessage basicMessage = go.GetComponent<BasicMessage>();
+    //    //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
 
-        if (basicMessage.textBoxes.Count != texts.Count)
-        {
-            Debug.LogError("Bugged out. texts and boxes not alligned");
-            return;
-        }
+    //    if (basicMessage.textBoxes.Count != texts.Count)
+    //    {
+    //        Debug.LogError("Bugged out. texts and boxes not alligned");
+    //        return;
+    //    }
 
-        for (int i = 0; i < texts.Count; i++)
-        {
-            basicMessage.textBoxes[i].text = texts[i];
-        }
+    //    for (int i = 0; i < texts.Count; i++)
+    //    {
+    //        basicMessage.textBoxes[i].text = texts[i];
+    //    }
 
-        if(!peekingMenu.menuOpen)
-        {
-            peekingMenu.ShowMenu();
-        }
-    }
-    public void RecieveNewMessage(List<string> texts, List<Sprite> sprites) //THIS SHOULD BE IN THE GENERIC METHOD
-    {
-        GameObject go = Instantiate(basicEntryPrefab, logParent);
+    //    if(!peekingMenu.menuOpen)
+    //    {
+    //        peekingMenu.ShowMenu();
+    //    }
+    //}
+    //public void RecieveNewMessage(List<string> texts, List<Sprite> sprites) //THIS SHOULD BE IN THE GENERIC METHOD
+    //{
+    //    GameObject go = Instantiate(basicEntryPrefab, logParent);
 
-        BasicMessage basicMessage = go.GetComponent<BasicMessage>();
-        //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
+    //    BasicMessage basicMessage = go.GetComponent<BasicMessage>();
+    //    //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
 
-        if (basicMessage.textBoxes.Count != texts.Count || basicMessage.images.Count != sprites.Count)
-        {
-            Debug.LogError("Bugged out. \"texts and boxes\" or \"images and sprites\" count not alligned");
-            return;
-        }
+    //    if (basicMessage.textBoxes.Count != texts.Count || basicMessage.images.Count != sprites.Count)
+    //    {
+    //        Debug.LogError("Bugged out. \"texts and boxes\" or \"images and sprites\" count not alligned");
+    //        return;
+    //    }
 
-        for (int i = 0; i < texts.Count; i++)
-        {
-            basicMessage.textBoxes[i].text = texts[i];
-        }
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            basicMessage.images[i].sprite = sprites[i];
-        }
+    //    for (int i = 0; i < texts.Count; i++)
+    //    {
+    //        basicMessage.textBoxes[i].text = texts[i];
+    //    }
+    //    for (int i = 0; i < sprites.Count; i++)
+    //    {
+    //        basicMessage.images[i].sprite = sprites[i];
+    //    }
 
-        if(!peekingMenu.menuOpen)
-        {
-            peekingMenu.ShowMenu();
-        }
-    }
+    //    if(!peekingMenu.menuOpen)
+    //    {
+    //        peekingMenu.ShowMenu();
+    //    }
+    //}
     public void RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, SiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
     {
         GameObject go = Instantiate(basicEntryPrefab, logParent);

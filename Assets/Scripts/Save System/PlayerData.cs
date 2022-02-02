@@ -51,7 +51,8 @@ public class PlayerData
     public int victories = 0;
     public int losses = 0;
     //public int numOfavailableMercs { get => availableMercs.Count + PartyMaster.Instance.NumOfMercsInSquads(); } //this needs to die
-    public int numOfavailableMercs { get => PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room }).Count; } //ACCESS LIST BY METHOD!!!!
+    public int numOfavailableMercs { get => PlayerDataMaster.Instance.GetAmountOfMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room }); } //ACCESS LIST BY METHOD!!!!
+    public int totalMercLevel { get => PlayerDataMaster.Instance.GetTotalMercLevel(); }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 
     {

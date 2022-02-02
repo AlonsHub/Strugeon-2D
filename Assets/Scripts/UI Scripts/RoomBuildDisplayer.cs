@@ -77,7 +77,7 @@ public class RoomBuildDisplayer : MonoBehaviour
         }
         else
         {
-            GameObject upgradeButton = GetComponentInParent<UnityEngine.UI.Button>().gameObject;
+            GameObject upgradeButton = upgradePriceText.GetComponentInParent<UnityEngine.UI.Button>().gameObject;
 
 
             upgradePriceText.text = "Max";

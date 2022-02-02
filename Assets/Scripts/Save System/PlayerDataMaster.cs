@@ -333,6 +333,17 @@ public class PlayerDataMaster : MonoBehaviour
         }
         return toReturn;
     }
+    public int GetTotalMercLevel()
+    {
+        List<MercSheet> mercSheets = GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room });
+
+        int toReturn = 0;
+        foreach (var m in mercSheets)
+        {
+            toReturn += m._level;
+        }
+        return toReturn;
+    }
     public List<MercName> GetMercNamesByAssignment(MercAssignment mercAssignments)
     {
         List<MercName> toReturn = new List<MercName>();
@@ -346,6 +357,10 @@ public class PlayerDataMaster : MonoBehaviour
     public List<MercSheet> GetMercSheetsByAssignments(List<MercAssignment> mercAssignments)
     {
         return currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();
+    }
+    public int GetAmountOfMercSheetsByAssignments(List<MercAssignment> mercAssignments)
+    {
+        return currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList().Count;
     }
     public string SaveExistsCheck(string playerName)
     {
@@ -422,8 +437,9 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.victories,
         currentPlayerData.losses,
         currentPlayerData.numOfavailableMercs,
-        currentPlayerData.deadMercs,
         currentPlayerData.cowardMercs,
-        currentPlayerData.gold};
+        currentPlayerData.deadMercs,
+        currentPlayerData.gold,
+        currentPlayerData.totalMercLevel };
     }
 }
