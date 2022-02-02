@@ -58,6 +58,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             squadBuilder.tempSquad.AddMerc(pawn);
             PartyMaster.Instance.availableMercPrefabs.Remove(pawn);
         }
+        isOccupied = false;
+        FrameToggle(false);
         squadBuilder.Refresh();
     }
 
@@ -71,19 +73,19 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //nameText.text = "";
     }
 
-    public void OnClick() // THIS MIGHT BE REDUNDANT IF ITS USED IT MAY CAUSE ISSUES!
-    {
-        if (!isOccupied)
-        {
-            Debug.LogWarning("Slot has no Pawn");
-            return;
-        }
-        if (!squadBuilder.mercDataDisplayer.gameObject.activeSelf)
-            squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
-        squadBuilder.SetMercDisplayer(pawn);
+    //public void OnClick() // THIS MIGHT BE REDUNDANT IF ITS USED IT MAY CAUSE ISSUES!
+    //{
+    //    if (!isOccupied)
+    //    {
+    //        Debug.LogWarning("Slot has no Pawn");
+    //        return;
+    //    }
+    //    if (!squadBuilder.mercDataDisplayer.gameObject.activeSelf)
+    //        squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
+    //    squadBuilder.SetMercDisplayer(pawn);
         
-        //RemoveMerc();
-    }
+    //    //RemoveMerc();
+    //}
 
     public void OnPointerClick(PointerEventData eventData) // SET BY OCDE
     {
@@ -111,32 +113,39 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //}
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
+            //if(isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
+            //{
+            if (isOneClicked)
             {
-                if (isOneClicked)
-                {
-
+                if (isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
                     RemoveMerc();
-                }
-                else
-                {
-                    isOneClicked = true;
-                    StartCoroutine(nameof(DoubleClickWaiter));
-                }
             }
+            else
+            {
+                isOneClicked = true;
+
+                if (!squadBuilder.gameObject.activeInHierarchy)
+                    squadBuilder.gameObject.SetActive(true);
+                squadBuilder.SetMercDisplayer(pawn);
+                squadBuilder.TurnAllFramesOff();
+                FrameToggle(true);
+
+                StartCoroutine(nameof(DoubleClickWaiter));
+            }
+            //}
             //RemoveMerc();
         }
-        else
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (!squadBuilder.gameObject.activeSelf)
-                squadBuilder.gameObject.SetActive(true);
-            squadBuilder.SetMercDisplayer(pawn);
+        //else
+        //if (eventData.button == PointerEventData.InputButton.Right)
+        //{
+        //    if (!squadBuilder.gameObject.activeSelf)
+        //        squadBuilder.gameObject.SetActive(true);
+        //    squadBuilder.SetMercDisplayer(pawn);
 
-            squadBuilder.TurnAllOff();
-            FrameToggle(true);
-            //bg_img.sprite = onBgSprite;
-        }
+        //    squadBuilder.TurnAllOff();
+        //    FrameToggle(true);
+        //    //bg_img.sprite = onBgSprite;
+        //}
     }
 
     bool isOneClicked = false;

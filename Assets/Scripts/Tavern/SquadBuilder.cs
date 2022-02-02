@@ -225,7 +225,7 @@ public class SquadBuilder : MonoBehaviour
         Refresh();
     }
 
-    public void TurnAllOff()
+    public void TurnAllFramesOff()
     {
         foreach (var item in partySlots)
         {
