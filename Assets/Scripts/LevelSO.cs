@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum LairDifficulty {Easy, Medium, Hard};
@@ -12,7 +13,7 @@ public class LevelSO : ScriptableObject
 public struct LevelData
 {
     public List<Pawn> enemies; //Ref and if we want random placement or easier picking from a range
-    public List<Object> rewards; //Objects TBD
+    public List<UnityEngine.Object> rewards; //Objects TBD
     public int expReward;
     public GameObject levelPrefab; //currently holds enemies
     public int goldReward;
@@ -22,16 +23,24 @@ public struct LevelData
 
     public Vector2Int escapeTile;
 
+    
+    public TimeSpan waitTime; //this is not serializable, or at least it doesn't show up in inspector
+    public int waitTimeHours, waitTimeMinutes, waitTimeSeconds;
+
     public void SetLevelData(LairDifficulty newDifficulty)
     {
         //enemies.Clear();
         //rewards.Clear();
         difficulty = newDifficulty;
+
+         //this just needs to be one method... 
         enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty);
         rewards = DifficultyTranslator.Instance.DifficultyToRewardPreset(newDifficulty);
         goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty);
-
         expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty);
+        //this just needs to be one method... [end]
+
+        waitTime = new TimeSpan(waitTimeHours, waitTimeMinutes, waitTimeSeconds);
         //levelPrefab = DifficultyTranslator.Instance.DiffcultyToLevelPrefab(difficulty);
 
 

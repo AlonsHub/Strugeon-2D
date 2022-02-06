@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PathCreation;
+using System;
 
 public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public static Dictionary<string, float> SiteCooldowns; // on cooldown as long as the value is greater than 0
+    //public static Dictionary<string, float> SiteCooldowns; // on cooldown as long as the value is greater than 0
 
     //SelectionScreenDisplayer displayer;
     [SerializeField]
@@ -32,7 +33,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public GameObject buttons;
 
     public float maxCooldown;
-    public float clockDelay; //time between clock ticks
+    private int clockDelay = 1; //time between clock ticks
 
     public GameObject clockAndTimerParent;
     public TMPro.TMP_Text timeText;
@@ -51,32 +52,43 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField]
     GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
 
-    private void Awake()
-    {
-        if (SiteCooldowns == null)
-            SiteCooldowns = new Dictionary<string, float>();
-    }
+    //private void Awake()
+    //{
+    //    if (SiteCooldowns == null)
+    //        SiteCooldowns = new Dictionary<string, float>();
+    //}
+
+    Button thisButton;
     private void Start()
     {
         //read if any site cooldown times exist
-
-        if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
+        thisButton = GetComponent<Button>();
+        //if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
+        if (PlayerDataMaster.Instance.SiteCooldowns.ContainsKey(levelSO.name) && PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].HasValue)
         {
-            if (PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] < maxCooldown)
+            //if (PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] < maxCooldown)
+            if (DateTime.Compare(PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].Value, DateTime.Now) <= 0) // -1 if cooldown date is earlier than now (i.e. passed date, cooldown is off), 0 is equal (unlikely)
             {
-                timer = SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
-                isCooldown = true;
-                
+                isCooldown = false;
+                timerSpan = TimeSpan.Zero;
+                PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name);
+                //timer = SiteCooldowns[levelSO.name] = maxCooldown;
+
             }
             else
             {
-                isCooldown = false; ///NOT ALWAYS
-                timer = SiteCooldowns[levelSO.name] = maxCooldown;
+                //timer = SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
+                timerSpan = PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].Value - DateTime.Now;
+                isCooldown = true;
+                
             }
         }
         else
         {
-            timer = maxCooldown;
+            //timer = maxCooldown;
+            isCooldown = false;
+            timerSpan = TimeSpan.Zero;
+            PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name);//also adds it to the dict if it doesnt exist
         }
         //else
         //{
@@ -116,7 +128,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             SendToArena();
             return;
         }
-        
+        squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable
         //Debug.Log("Irrelevant click");
         //displayer.SetMe(this);
         //SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
@@ -154,8 +166,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
         LevelRef.Instance.SetCurrentLevel(levelSO);
 
-        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = 0;
-
+        //PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = 0; //what if it is not there yet, YOU COLLOSAL IDIOT
+        PlayerDataMaster.Instance.AddSiteCooldown(levelSO.name, DateTime.Now.Add(levelSO.levelData.waitTime));
         PartyMaster.Instance.currentSquad = readiedSquad;
 
         SceneManager.LoadScene("ArenaSceneGeneric");
@@ -167,11 +179,12 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         StartCoroutine("StartCooldown");
     }
     float timer;
+    TimeSpan timerSpan;
 
     IEnumerator StartCooldown()
     {
-        isCooldown = true;
-
+        isCooldown = true; //just making sure
+        thisButton.interactable = false;
         //timer =  PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name];
         //if (PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name] > 0)
         //{
@@ -182,30 +195,36 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //    timer = 0f;
         //}
         clockAndTimerParent.SetActive(true);
-        timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
+        //timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
 
+        timeText.text = timerSpan.ToString(@"hh\:mm\:ss");
 
-        while (timer <= maxCooldown)
+        while (timerSpan.TotalSeconds >= 0)
         {
             yield return new WaitForSecondsRealtime(clockDelay);
-            timer += clockDelay;
-            int secondsLeft = (int)maxCooldown - (int)timer;  
-            timeText.text = "00:" + (secondsLeft/60).ToString("00") + ":" + (secondsLeft - (secondsLeft/60)*60).ToString("00");
+            //timerSpan.Add(new TimeSpan(0,0,clockDelay) += clockDelay;
+            timerSpan = timerSpan.Subtract(new TimeSpan(0, 0, clockDelay));
+            //int secondsLeft = (int)maxCooldown - (int)timer;  
+            //timeText.text = "00:" + (secondsLeft/60).ToString("00") + ":" + (secondsLeft - (secondsLeft/60)*60).ToString("00");
+            timeText.text = timerSpan.ToString(@"hh\:mm\:ss");
         }
         clockAndTimerParent.SetActive(false);
-        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything
+        //PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything ///06/02 omg this is charming!!!
+        PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name); 
         isCooldown = false;
+        thisButton.interactable = true;
+
     }
 
-    private void OnDisable()
-    {
-        if (timer < maxCooldown)
-        {
-            PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
-        }
+    //private void OnDisable()
+    //{
+    //    if (timerSpan < maxCooldown)
+    //    {
+    //        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
+    //    }
 
-        
-    }
+
+    //}
 
     public void UnSetMe() //for cancelExpedition cases
     {
@@ -216,7 +235,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void SetArrivedSquad(Squad s) //for cancelExpedition cases
     {
         isReady = true;
-        isWaitingForSquad = false; 
+        isWaitingForSquad = false;
         readiedSquad = s;
     }
 
@@ -235,7 +254,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (isCooldown || isWaitingForSquad || isReady)
         {
-            Debug.LogError("isCooldown or isWaitingForSquad or ready");
+            //Debug.LogError("isCooldown or isWaitingForSquad or ready");
             return;
         }
         SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
@@ -253,7 +272,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         ///
         if (!isSet)
         {
-            int rndDifficulty = Random.Range(0, 3);
+            int rndDifficulty = UnityEngine.Random.Range(0, 3);
 
             levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 

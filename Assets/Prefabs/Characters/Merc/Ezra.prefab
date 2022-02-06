@@ -75,10 +75,12 @@ MonoBehaviour:
   maxHP: 180
   pawnName: Ezra
   mercName: 5
-  characterSheet:
+  _mercSheet:
     characterName: 0
     currentAssignment: 0
-    roomOrSquadNumber: -1
+    roomOrSquadNumber: -2
+    _experience: 0
+    _level: 1
   initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
@@ -150,7 +152,7 @@ MonoBehaviour:
   maxDamage: 20
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
-  isRanged: 1
+  isRanged: 0
   arrowSpawn: {fileID: 0}
   effectSpawn: {fileID: 8602757325649611589}
   targetMask:

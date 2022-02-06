@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Google.Apis;
+using System;
 
 public class PlayerDataMaster : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerDataMaster : MonoBehaviour
     public int RoomCount { get => currentPlayerData.rooms.Count; }
     public int MaxRoomCount { get => 4; } //temp
     public Dictionary<string, float> SavedCooldowns { get => currentPlayerData.SiteCooldownTimes; private set => currentPlayerData.SiteCooldownTimes = value; } //to be read from and to
+    public Dictionary<string, DateTime?> SiteCooldowns { get => currentPlayerData._siteCooldowns; private set => currentPlayerData._siteCooldowns = value; } //to be read from and to
 
     private void Awake()
     {
@@ -67,8 +69,9 @@ public class PlayerDataMaster : MonoBehaviour
         //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
         //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
 
-        currentPlayerData.siteCooldowns = currentPlayerData.SiteCooldownTimes.Values.ToList();
-        currentPlayerData.siteNames = currentPlayerData.SiteCooldownTimes.Keys.ToList();
+        //currentPlayerData.siteCooldowns = currentPlayerData.SiteCooldownTimes.Values.ToList();
+        //currentPlayerData.siteNames = currentPlayerData.SiteCooldownTimes.Keys.ToList();
+        currentPlayerData.SaveCooldownsToLists();
 
 
        
@@ -138,7 +141,7 @@ public class PlayerDataMaster : MonoBehaviour
     {
         currentPlayerData = pd;
 
-        currentPlayerData.SiteCooldownTimes = new Dictionary<string, float>();
+        //currentPlayerData.SiteCooldownTimes = new Dictionary<string, float>();
         if (currentPlayerData.siteCooldowns == null && currentPlayerData.siteNames == null)
         {
             return;
@@ -150,7 +153,10 @@ public class PlayerDataMaster : MonoBehaviour
 
         for (int i = 0; i < currentPlayerData.siteCooldowns.Count; i++)
         {
-            currentPlayerData.SiteCooldownTimes.Add(currentPlayerData.siteNames[i], currentPlayerData.siteCooldowns[i]);
+            if (currentPlayerData.siteCooldowns[i] == "nocooldown")
+                ClearSiteCooldown(currentPlayerData.siteNames[i]);
+            else
+                AddSiteCooldown(currentPlayerData.siteNames[i], DateTime.Parse(currentPlayerData.siteCooldowns[i]));
         }
 
 
@@ -429,6 +435,29 @@ public class PlayerDataMaster : MonoBehaviour
             return toReturn;
         else
             return null;
+    }
+
+    public void AddSiteCooldown(string levelSOName, DateTime dateTime)
+    {
+        if(!SiteCooldowns.ContainsKey(levelSOName))
+        {
+            SiteCooldowns.Add(levelSOName, dateTime);
+        }
+        else
+        {
+            SiteCooldowns[levelSOName] = dateTime;
+        }
+    }
+    public void ClearSiteCooldown(string levelSOName)
+    {
+        if (!SiteCooldowns.ContainsKey(levelSOName))
+        {
+            SiteCooldowns.Add(levelSOName, null);
+        }
+        else
+        {
+            SiteCooldowns[levelSOName] = null;
+        }
     }
 
     public List<System.Object> GetLog

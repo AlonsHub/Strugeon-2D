@@ -25,7 +25,7 @@ public class SquadPicker : MonoBehaviour
     //Transform tavernTrans;
     [SerializeField]
     Transform canvasTrans;
-
+    [SerializeField]
     SiteButton tgtSite;
     private void Start()
     {
@@ -115,7 +115,7 @@ public class SquadPicker : MonoBehaviour
         //check if a squad is chosen:
         if (index == -1 || !tgtSite)
         {
-            Debug.LogError("No squad selected or target site!");
+            //Debug.LogError("No squad selected or target site!");
             return;
         }
         //if(squadToggler.selectedToggle == -1 || !tgtSite)

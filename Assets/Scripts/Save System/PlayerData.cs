@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -40,9 +41,10 @@ public class PlayerData
     public int mercPrice = 20;
 
     public Dictionary<string, float> SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
+    public Dictionary<string, DateTime?> _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
 
-    public List<string> siteNames; //sitenames
-    public List<float> siteCooldowns; //cooldowns
+    public List<string> siteNames = new List<string>(); //sitenames
+    public List<string> siteCooldowns = new List<string>(); //cooldowns to string
     //site cooldowns?
     //
 
@@ -114,7 +116,20 @@ public class PlayerData
         }
     }
 
-
+    public void SaveCooldownsToLists()
+    {
+        siteCooldowns.Clear();
+        siteNames.Clear();
+        foreach (var item in _siteCooldowns.Values.ToList())
+        {
+            if (!item.HasValue)
+                siteCooldowns.Add("nocooldown");
+            else
+                siteCooldowns.Add(item.ToString());
+        }
+        //siteCooldowns = _siteCooldowns.Values.ToList();
+        siteNames = _siteCooldowns.Keys.ToList();
+    }
 
 
 }
