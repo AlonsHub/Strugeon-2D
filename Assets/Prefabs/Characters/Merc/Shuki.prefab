@@ -74,10 +74,12 @@ MonoBehaviour:
   maxHP: 200
   pawnName: Shuki
   mercName: 2
-  characterSheet:
+  _mercSheet:
     characterName: 0
     currentAssignment: 0
-    roomOrSquadNumber: 0
+    roomOrSquadNumber: -2
+    _experience: 0
+    _level: 1
   initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 0}
@@ -297,7 +299,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c239c3ecc1051d4a8b0beb5991e2107, type: 2}
+  - {fileID: 2100000, guid: 009aa00cfa3e3fd4c97623f3dbcc805f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -318,7 +320,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 4028326253658584185, guid: d75a23a3150ac8d4d9678c97e4b91cc7,
+  m_Sprite: {fileID: -6896539421202036261, guid: f503cb3b9d7a0944b979b7569b960639,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

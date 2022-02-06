@@ -98,10 +98,12 @@ MonoBehaviour:
   maxHP: 150
   pawnName: Smadi
   mercName: 1
-  characterSheet:
+  _mercSheet:
     characterName: 0
     currentAssignment: 0
-    roomOrSquadNumber: 1
+    roomOrSquadNumber: -2
+    _experience: 0
+    _level: 1
   initiativeBonus: 0
   hasSAs: 0
   forDisplayPurposesOnly: {fileID: 2111372755113017349}
@@ -424,7 +426,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6c76f4e699293804d8c121b8147cc48a, type: 2}
+  - {fileID: 2100000, guid: 009aa00cfa3e3fd4c97623f3dbcc805f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

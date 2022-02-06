@@ -98,6 +98,7 @@ public class MouseBehaviour : MonoBehaviour
            
             overCircle = distanceFromButtonCircle <= buttonCircleRadius && distanceFromButtonCircle >= buttonInnerCircleRadius;
 
+            //if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)) //changed from right to left button
             if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
             {
                 Renderer rend = hitTarget.GetComponentInChildren<Renderer>();
@@ -109,7 +110,8 @@ public class MouseBehaviour : MonoBehaviour
                 //PurpleChoosingMode.Instance.ToggleTint(false);
             }
         }
-        else if(Input.GetMouseButtonDown(1))
+        //else if(Input.GetMouseButtonDown(1)) //changed from right to left button
+        else if (Input.GetMouseButtonDown(0))
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -180,9 +182,9 @@ public class MouseBehaviour : MonoBehaviour
         enemyButtonCircle.SetActive(false);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(ray.origin, ray.origin + ray.direction * 50f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawLine(ray.origin, ray.origin + ray.direction * 50f);
+    //}
 }

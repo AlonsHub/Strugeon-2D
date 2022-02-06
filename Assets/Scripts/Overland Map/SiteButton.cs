@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PathCreation;
 
-public class SiteButton : MonoBehaviour
+public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public static Dictionary<string, float> SiteCooldowns; // on cooldown as long as the value is greater than 0
 
@@ -46,6 +46,10 @@ public class SiteButton : MonoBehaviour
     public bool isReady = false;
     public bool isSet = false; //set means all level data has been set and hadn't been "used" yet. 
                                //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
+
+
+    [SerializeField]
+    GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
 
     private void Awake()
     {
@@ -112,32 +116,34 @@ public class SiteButton : MonoBehaviour
             SendToArena();
             return;
         }
+        
+        //Debug.Log("Irrelevant click");
         //displayer.SetMe(this);
-        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
-        myDataDisplay.SetActive(true);
+        //SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
+        //myDataDisplay.SetActive(true);
 
-        //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        ////THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
-        //LevelRef.Instance.siteToCooldown = this;
-        //LevelRef.Instance.visitedSiteName = name;
+        ////OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        ////LevelRef.Instance.siteToCooldown = this;
+        ////LevelRef.Instance.visitedSiteName = name;
 
-        ///
-        /// Check first if site is initiated
-        /// if not, randomize
-        ///
-        if (!isSet)
-        {
-            int rndDifficulty = Random.Range(0, 3);
+        /////
+        ///// Check first if site is initiated
+        ///// if not, randomize
+        /////
+        //if (!isSet)
+        //{
+        //    int rndDifficulty = Random.Range(0, 3);
 
-            levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+        //    levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 
-            isSet = true;
-        }
+        //    isSet = true;
+        //}
 
 
 
-        displayer.SetMe(this);
+        //displayer.SetMe(this);
 
     }
 
@@ -212,5 +218,51 @@ public class SiteButton : MonoBehaviour
         isReady = true;
         isWaitingForSquad = false; 
         readiedSquad = s;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //nothing should have happened, but could be that site-info was open - and then squad arrived... should maybe close site data displayer?
+        if (isCooldown || isWaitingForSquad || isReady)
+        {
+            Debug.LogError("the site is not available to disable display info for");
+            return;
+        }
+
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (isCooldown || isWaitingForSquad || isReady)
+        {
+            Debug.LogError("isCooldown or isWaitingForSquad or ready");
+            return;
+        }
+        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
+        myDataDisplay.SetActive(true);
+
+        //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        //LevelRef.Instance.siteToCooldown = this;
+        //LevelRef.Instance.visitedSiteName = name;
+
+        ///
+        /// Check first if site is initiated
+        /// if not, randomize
+        ///
+        if (!isSet)
+        {
+            int rndDifficulty = Random.Range(0, 3);
+
+            levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+
+            isSet = true;
+        }
+
+
+
+        displayer.SetMe(this);
+
     }
 }
