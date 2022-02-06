@@ -241,6 +241,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
         anim.SetTrigger("Hit");
         //Spawn damage text (numbers)
         GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
+
+        if(DamageModifier != 0)
+        {
+            damage =(int)(damage * damageModifier);
+            DamageModifier = 0;
+            RemoveIconByColor("yellowDeBuff");
+        }
+
         go.GetComponent<DamageText>().SetDamageText(damage);
 
         currentHP -= damage;
