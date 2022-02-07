@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class Pawn : LiveBody, TurnTaker, GridPoser
+public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 {
     //public PawnStats _stats;
     //public CharacterSheet characterSheet; //either enemy or merc
@@ -108,6 +108,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
 
 
     public List<ActionItem> ActionItems { get => actionItems; }
+
+    public GameObject asPurpleTgtGameObject => gameObject;
+
+    //GameObject PurpleTarget.gameObject { get => gameObject;}
 
     public static int totalPawns = 0;
 
@@ -214,18 +218,22 @@ public class Pawn : LiveBody, TurnTaker, GridPoser
             actionPool.AddRange(ai.actionVariations);
 
         }
-        int runningTotal = 0;
 
-        if(hasPurple)
+        if(hasPurple && purpleTgt != null)
         {
-            ActionVariation possibleAction = actionPool.Where(x => x.target == purpleTgt).FirstOrDefault();
-            if (possibleAction != null)
+            ActionVariation[] possibleActions = actionPool.Where(x => x.target.Equals(purpleTgt)).ToArray();
+            if (possibleActions != null && possibleActions.Length > 0)
             {
-                possibleAction.weight *= purpleMultiplier;
+                foreach (var possibleAction in possibleActions)
+                {
+                    possibleAction.weight *= purpleMultiplier;
+                }
                 hasPurple = false;
+                purpleTgt = null;
             }
         }
 
+        int runningTotal = 0;
         foreach (ActionVariation av in actionPool)
         {
             runningTotal += av.weight;

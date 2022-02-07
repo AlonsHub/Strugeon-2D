@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Censer : MonoBehaviour, GridPoser
+public class Censer : MonoBehaviour, GridPoser, PurpleTarget
 {
     [SerializeField]
     private string censerName;
     public string Name { get => censerName; }
+
+    public GameObject asPurpleTgtGameObject => gameObject;
 
     public FloorTile currentNode;
     //public WeaponEffect weaponEffect;
@@ -19,6 +21,7 @@ public class Censer : MonoBehaviour, GridPoser
     public int duration;
 
     public Vector2Int gridPos;
+
 
     public Vector2Int GetGridPos()
     {

@@ -123,41 +123,15 @@ public class PurpleChoosingMode : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, layerMask))
             {
-                //ActionVariation actionVariation = actor.actionPool.Where(x => x.target == hit.collider.gameObject).Single();
-                //actor.actionPool.Where(x => x.target == hit.collider.gameObject).Single().weight *= 10;
-                actor.SetupPurpleBuff(hit.collider.gameObject);
+                PurpleTarget justAnInterface = hit.collider.GetComponentInParent<PurpleTarget>(); //could be Pawn or Censer at the moment 07/02/22 
+
+                actor.SetupPurpleBuff(justAnInterface.asPurpleTgtGameObject); //pass on as the gameobject on which there is an empty interface of PurpleTarget, tagging only by Pawn and Censer 
                 doUpdate = false;
                 //actor.TurnDone = true;
                 BattleLogVerticalGroup.Instance.AddPsionEntry(actor.Name, PsionActionSymbol.Purple, Color.magenta);
 
                 Renderer rend = MouseBehaviour.hitTarget.GetComponentInChildren<Renderer>();
-                //Color emissionOff = rend.material.GetColor("_EmissionColor");
-                //emissionOff *= 0.025f;
-                //rend.material.SetColor("_EmissionColor", emissionOff);
-
-
-
-                //MouseBehaviour.Instance.CloseMenus();
-                //rend.material.SetFloat("_EmissionAmount", 0f);
-                //rend.material.SetColor("_Tint", colorOff);
-
-                //Renderer ren;
-                //foreach (Pawn p in RefMaster.Instance.mercs)
-                //{
-                //    ren = p.GetComponentInChildren<Renderer>();
-                //    //ren.material.SetFloat("_EmissionAmount", 0f);
-                //    ren.material.SetColor("_Tint", colorOff);
-                //    purpleTargets.Add(p);
-
-                //}
-                //foreach (Pawn p in RefMaster.Instance.enemies)
-                //{
-                //    ren = p.GetComponentInChildren<Renderer>();
-                //    //ren.material.SetFloat("_EmissionAmount", 0f);
-                //    ren.material.SetColor("_Tint", colorOff);
-                //    purpleTargets.Add(p);
-
-                //}
+                
                 ToggleTint(false);
                 MouseBehaviour.Instance.CloseMenus();
             }

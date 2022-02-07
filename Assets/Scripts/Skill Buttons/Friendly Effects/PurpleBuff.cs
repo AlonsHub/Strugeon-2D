@@ -16,7 +16,8 @@ public class PurpleBuff : SkillButton
     {
         targetPawn = MouseBehaviour.hitTarget;
         purpleChoosingMode.gameObject.SetActive(true);
-        Time.timeScale = slowerTime;
+        //Time.timeScale = slowerTime;
+        TimeChanger.Instance.ToggleTimePause(true);
         purpleChoosingMode.Setup(targetPawn);
         mouseBehaviour.HideMenus();
 
