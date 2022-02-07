@@ -528,7 +528,14 @@ public class TurnMaster : MonoBehaviour
 
     public void Run() //Abandon match
     {
+        foreach (var item in RefMaster.Instance.mercs)
+        {
+            //if not contanis in either coawrdly nor dead, add to cowardly
+            theCowardly.Add(item.mercName); //check for doubles?
 
+        }
+        RefMaster.Instance.mercs.Clear();
+        StartCoroutine(nameof(StopTurning));
     }
    
 }
