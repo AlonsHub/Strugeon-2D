@@ -105,15 +105,16 @@ public class WeaponItem : ActionItem
     {
         pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, range);
 
-        yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath || pawn.TurnDone);
 
+        if (!pawn.TurnDone) //in case of step limiters
+        {
+            if (tgt && la)
+                la.tgt = tgt.transform;
 
-        
-        if (tgt && la)
-            la.tgt = tgt.transform;
-
-        attackAction?.Invoke();
-        pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
+            attackAction?.Invoke();
+            pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
+        }
     }
 
     

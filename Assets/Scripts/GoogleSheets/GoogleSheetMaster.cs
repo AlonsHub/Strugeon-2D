@@ -17,6 +17,9 @@ public class GoogleSheetMaster : MonoBehaviour
     public static GoogleSheetMaster Instance;
 
     List<string> strings; //all A1:A35 first lines in the 
+
+    string currentRangeName;
+    int rowsPerIterration = 10;
     void Start()
     {
         Debug.LogError("Google Sheets Master perfoms start");
@@ -30,8 +33,12 @@ public class GoogleSheetMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SetUpCredentials();
 
-        strings = GetRows("A1:A35");
+        //strings = GetRows("A1:A35");
+        if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
+        {
+            //currentRangeName is already set to null
 
+        }
         LogPlayer(); // not sure we should
     }
     void SetUpCredentials() //this must also be done async  
@@ -97,41 +104,107 @@ public class GoogleSheetMaster : MonoBehaviour
         var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
         var objectList = new List<System.Object>(); //fill object list with things!
 
-        if(strings==null)
-        strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
+        //if(strings==null)
+        //strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
 
-
+        if(currentRangeName == null)
+        {
+            if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
+            {
+                Debug.LogError("somehow you don't have an entry in the scoreboard, so I'll make one for you - no problems! - you being: " + PlayerDataMaster.Instance.currentPlayerData.playerName);
+                LogNewPlayer();
+            }
+            else
+            {
+                //all is good, assume currentRangeName is correct
+            }
+        }
 
         ///Solution to player limit
         ///loop that collects GetRows of a set size from A##:A[##+sizePerLoopItteration] and checks if the last memeber has any value
         ///if not, the loop ends
         ///if it does hold value, the loop goes again, collecting another [sizePerLoopItteration] of users, checking again if the last one holds any value
 
-        if (strings !=null && strings.Count >0 && strings.Contains(PlayerDataMaster.Instance.currentPlayerData.playerName)) 
-        {
-            //True - the player is already logged:
-            int i = strings.IndexOf(PlayerDataMaster.Instance.currentPlayerData.playerName);
+        //if (strings !=null && strings.Count >0 && strings.Contains(PlayerDataMaster.Instance.currentPlayerData.playerName)) 
+        //{
+        //    //True - the player is already logged:
+        //    int i = strings.IndexOf(PlayerDataMaster.Instance.currentPlayerData.playerName);
 
-            string newRange = "A" + (i+1);
+        //    string newRange = "A" + (i+1);
             //objectList = new List<System.Object>() { PlayerDataMaster.Instance.currentPlayerData.playerName, PlayerDataMaster.Instance.currentPlayerData.lostMercs, PlayerDataMaster.Instance.currentPlayerData.numOfavailableMercs, PlayerDataMaster.Instance.currentPlayerData.gold};
             valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog};
 
-            var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetID, newRange);
+            var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetID, currentRangeName);
             updateRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
             //var updateResponse = updateRequest.Execute();
             var updateResponse = updateRequest.ExecuteAsync();
-        }
-        else
+        //}
+        //else
+        //{
+        //    //objectList = new List<System.Object>() { PlayerDataMaster.Instance.currentPlayerData.playerName, PlayerDataMaster.Instance.currentPlayerData.deadMercs, PlayerDataMaster.Instance.currentPlayerData.numOfavailableMercs, PlayerDataMaster.Instance.currentPlayerData.gold };
+
+        //    valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog };
+        //    //valueRange.Values = new List<IList<object>> { objectList };
+
+        //    var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "A2"); //just adds under A
+        //    appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+        //    //var appendResponse = appendRequest.Execute();
+        //    var appendResponse = appendRequest.ExecuteAsync();
+        //}
+    }
+    public void LogNewPlayer()
+    {
+        var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
+        var objectList = new List<System.Object>(); //fill object list with things!
+
+
+        valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog };
+        //valueRange.Values = new List<IList<object>> { objectList };
+
+        var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "A2"); //just adds under A
+        appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+        //var appendResponse = appendRequest.Execute();
+        var appendResponse = appendRequest.ExecuteAsync();
+
+    }
+
+    bool FindRangeForName(string nameToSearch) //sets currentRangeName
+    {
+        int start = 2;
+        int end = start + rowsPerIterration;
+        bool keepGoing = true;
+        while (keepGoing)
         {
-            //objectList = new List<System.Object>() { PlayerDataMaster.Instance.currentPlayerData.playerName, PlayerDataMaster.Instance.currentPlayerData.deadMercs, PlayerDataMaster.Instance.currentPlayerData.numOfavailableMercs, PlayerDataMaster.Instance.currentPlayerData.gold };
+            List<string> s = GetRows("A" + start + ":A" + end);
+            if (s == null)
+            {
+                currentRangeName = null;
+                return false; //couldn't find name
+            }
+            
+            if (s.Count > 0 )
+            {
+                if (s.Contains(PlayerDataMaster.Instance.currentPlayerData.playerName))
+                {
+                    int i = s.IndexOf(PlayerDataMaster.Instance.currentPlayerData.playerName);
 
-            valueRange.Values = new List<IList<object>> { PlayerDataMaster.Instance.GetLog };
-            //valueRange.Values = new List<IList<object>> { objectList };
+                    currentRangeName = "A" + (i + 2); //names start at line 2, i starts at 0
+                    keepGoing = false; //redundant
+                    break;
+                }
+                //if(s[s.Count-1] == "")
+                if(s.Count() < rowsPerIterration)
+                {
+                    keepGoing = false; //redundant
+                    currentRangeName = "A"+(s.Count()+2).ToString();
+                    return false;
+                }
+            }
 
-            var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "A2"); //just adds under A
-            appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-            //var appendResponse = appendRequest.Execute();
-            var appendResponse = appendRequest.ExecuteAsync();
+            start = end + 1;
+            end = start + rowsPerIterration;
+
         }
+        return true;
     }
 }
