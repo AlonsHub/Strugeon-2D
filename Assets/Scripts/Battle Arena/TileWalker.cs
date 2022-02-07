@@ -96,30 +96,7 @@ public class TileWalker : MonoBehaviour
         }
     }
 
-    //public void StartEspacePath(TileWalker tgt)
-    //{
-    //    EscapeFinder.Instance.SetTargetAndSeekr(tgt, this);
-    //    path = EscapeFinder.Instance.FindPath();
-    //    if (path.Count <= 0)
-    //    {
-    //        Debug.LogError("No path found, passed a null path to tilewalker.");
-    //    }
-    //    else
-    //    {
-    //        hasPath = true;
-    //        // passedHalfPath = false;
-    //        currentPathIndex = 0;
-    //        //Walk(); //start walk sequence
-
-    //        //SUPER TEMP! this needs to be StartWalking(int range)
-           
-          
-    //            StartCoroutine("StartWalkingTo");
-            
-    //        //SUPER TEMP!
-
-    //    }
-    //}
+    
     void WalkWithRange(int range) //rangeInTiles (1 = 10 || 14)
     {
         FindOwnGridPos();
@@ -128,16 +105,7 @@ public class TileWalker : MonoBehaviour
 
         
         int stepsToTake = path.Count - range;
-        //if (doLimitSteps && stepsToTake > stepLimit) //currently, if the walker didn't try to move more than the stepLimit - the limit is still active
-        //{
-        //    doLimitSteps = false; //this kills the effect with a Coroutine called "EndWhen"
-        //    //GetComponent<Character>().EndSpecialEffect();//only applies to the icon ATM || ALSO! TileWalker might need to know their OwnerCharacters
-        //   // character.RemoveIconByTag("Blue");
-        //    stepsToTake = stepLimit;
-        //}
-
-
-        //List<FloorTile> walkList = path.
+       
         int difference = path.Count - stepsToTake;
         for (int i = 0; i < difference; i++)
         {
@@ -148,7 +116,15 @@ public class TileWalker : MonoBehaviour
 
     IEnumerator TileByTileWalk(List<FloorTile> walkPath) //this has the last "step" removed from it already (meaning we stop just before the target)
     {
-        for (int i = 0; i < walkPath.Count; i++)
+        int stepsToTake = walkPath.Count;
+        if(doLimitSteps)
+        {
+            stepsToTake = stepLimit;
+            doLimitSteps = false;
+            pawn.RemoveIconByColor("blueDeBuff");
+        }
+
+        for (int i = 0; i < stepsToTake; i++)
         {
             transform.position = walkPath[i].transform.position + offsetFromGrid;
             //transform.rotation = Quaternion.Euler(0, 0, );

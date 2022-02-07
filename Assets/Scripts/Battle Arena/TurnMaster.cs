@@ -278,6 +278,7 @@ public class TurnMaster : MonoBehaviour
             else
             {
                 ((Pawn)currentTurnTaker).RemoveIconByColor("redDeBuff");
+                currentTurnTaker.DoSkipTurn = false;
                 currentTurnTaker.TurnDone = true;
             }
             //MAYBE have an else {currentTurnTaker.TurnDone = true; }

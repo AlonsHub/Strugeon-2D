@@ -55,16 +55,5 @@ public class FeetItem : ActionItem
 
     
 
-    //IEnumerator CharacterWalk()
-    //{
-    //    //ownerCharacter.tileWalker.StartNewPath(actionPool[actionIndex].target.GetComponent<TileWalker>());
-    //    //ownerCharacter.tileWalker.StartNewPathWithRange(targetWalker, ownerCharacter.wa);
-    //    //BattleLog.Instance.AddLine(name + " Moved towards: " + targetWalker.name);
-    //    //BattleLogVerticalGroup.Instance.AddEntry(name, ActionSymbol.Walk, targetWalker.name);
-
-    //    pawn.tileWalker.StartNewPathWithRange(pawn.tileWalker, currentRangeInTiles);
-
-    //    yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
-    //    pawn.TurnDone = true;
-    //}
+    
 }
