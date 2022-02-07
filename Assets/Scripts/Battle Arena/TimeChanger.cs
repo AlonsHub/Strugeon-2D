@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI; 
-
+//public enum TimeSpeed {Pause, Play, Fast};
 public class TimeChanger : MonoBehaviour
 {
     public static TimeChanger Instance;
@@ -12,7 +12,12 @@ public class TimeChanger : MonoBehaviour
     [SerializeField]
     Image pauseButton;
 
-    [SerializeField] int currentTimeScaleIndex;
+
+    //[SerializeField]
+    //int[] speeds;
+
+    //TimeSpeed oldSpeed = TimeSpeed.Play; //should be enumed - 0 pause, 1 play, 2 doublespeed, 3 turbo
+    //public TimeSpeed currentTimeSpeed; 
 
     [SerializeField] Button timeToggleButton;
 
@@ -30,19 +35,21 @@ public class TimeChanger : MonoBehaviour
         }
 
         Instance = this;
+        //currentTimeScaleIndex = 1;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isPause)
-                Time.timeScale = 1;
-            else
-                Time.timeScale = 0;
+            //if (isPause)
+            //    Time.timeScale = 1;
+            //else
+            //    Time.timeScale = 0;
 
-            isPause = !isPause;
-            pauseButton.sprite = pauseButtonImgs[(int)Time.timeScale];
+            //isPause = !isPause;
+            //pauseButton.sprite = pauseButtonImgs[(int)Time.timeScale];
+            ToggleTimePause();
         }
     }
 
@@ -77,9 +84,8 @@ public class TimeChanger : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
+            Time.timeScale = isFast ? fastSpeed : 1;
             pauseButton.sprite = pauseButtonImgs[1];
-
         }
     }
     public void ToggleTimePause(bool b)
@@ -93,11 +99,40 @@ public class TimeChanger : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
+            Time.timeScale = isFast ? fastSpeed : 1;
             pauseButton.sprite = pauseButtonImgs[1];
 
         }
     }
+
+    //void _SetTimeSpeed(TimeSpeed timeSpeed) //INTERNAL method to set the time and it's buttons - used by all types of outside methods
+    //{
+    //    //pauseButton.sprite = pauseButtonImgs[(timeSpeed == 0) ? 0 : 1]; // BEAUTIFUL!!!
+
+    //     //consider checking if the current and new speeds are not the same - in which case, saving-over the oldSpeed might make a "freak double-pause" become a "premanent pause"
+    //    oldSpeed = currentTimeSpeed;
+    //    isPause = (timeSpeed == 0);
+
+    //    switch (timeSpeed)
+    //    {
+    //        case TimeSpeed.Pause:
+    //            pauseButton.sprite = pauseButtonImgs[0];
+    //            Time.timeScale = 0;
+    //            break;
+
+    //        case TimeSpeed.Play:
+    //            pauseButton.sprite = pauseButtonImgs[1];
+    //            Time.timeScale = speeds[(int)oldSpeed];
+    //            break;
+
+    //        case TimeSpeed.Fast:
+    //            break;
+    //        default:
+    //            break;
+    //    }
+
+    //    currentTimeSpeed = timeSpeed;
+    //}
 
     //public void ChangeTimeScale()
     //{
