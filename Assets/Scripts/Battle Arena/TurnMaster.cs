@@ -458,7 +458,7 @@ public class TurnMaster : MonoBehaviour
         } //this counts to the end of the row
 
         //now count FORWARD from 0 to current turn-1
-        for (int i = 0; i < currentTurn-1; i++)
+        for (int i = 0; i < currentTurn; i++)
         {
             count++;
             if (count >= turnDisplayerLimit)
@@ -526,6 +526,10 @@ public class TurnMaster : MonoBehaviour
 
     }
 
+    public void Run() //Abandon match
+    {
+
+    }
    
 }
 public interface TurnTaker
