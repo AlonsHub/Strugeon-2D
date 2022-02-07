@@ -33,7 +33,7 @@ public class TurnMaster : MonoBehaviour
     [SerializeField]
     int turnDisplayerLimit;
     [SerializeField]
-    private float endGameCheckRate = 2f;
+    private float endGameCheckRate = 1f;
 
 
     //Logged stuff:
@@ -526,7 +526,7 @@ public class TurnMaster : MonoBehaviour
 
     }
 
-    public void Run() //Abandon match
+    public void Run() //Abandon match - used by forefit button in UI
     {
         foreach (var item in RefMaster.Instance.mercs)
         {

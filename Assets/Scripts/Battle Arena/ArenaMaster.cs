@@ -59,7 +59,7 @@ public class ArenaMaster : MonoBehaviour
             foreach (var p in levelData.enemies)
             {
                 int rnd = Random.Range(0, enemySpawnTiles.Count); //draw random pos
-                GameObject go = Instantiate(p.gameObject);
+                GameObject go = Instantiate(p.gameObject, p.gameObject.transform.position, p.gameObject.transform.rotation); // have enemy PARENT
                 newEnemies.Add(go.GetComponent<Pawn>());
                 FloorGrid.Instance.PlaceObjectOnGrid(go, enemySpawnTiles[rnd]);
                 enemySpawnTiles.RemoveAt(rnd);
@@ -79,9 +79,9 @@ public class ArenaMaster : MonoBehaviour
             {
                 int rnd = Random.Range(0, mercSpawnTiles.Count); //draw random pos
 
-                GameObject go = Instantiate(p.gameObject);
+                GameObject go = Instantiate(p.gameObject); // have merc PARENT
                 //RefMaster.Instance.mercs.Add(go);
-                newMercs.Add(go.GetComponent<Pawn>());
+                newMercs.Add(go.GetComponent<Pawn>()); 
 
                 FloorGrid.Instance.PlaceObjectOnGrid(go, mercSpawnTiles[rnd]);
                 mercSpawnTiles.RemoveAt(rnd);
