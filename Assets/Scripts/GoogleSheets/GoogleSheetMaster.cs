@@ -15,6 +15,8 @@ public class GoogleSheetMaster : MonoBehaviour
     static SheetsService sheetsService;
 
     public static GoogleSheetMaster Instance;
+
+    List<string> strings; //all A1:A35 first lines in the 
     void Start()
     {
         Debug.LogError("Google Sheets Master perfoms start");
@@ -27,9 +29,12 @@ public class GoogleSheetMaster : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SetUpCredentials();
-        LogPlayer();
+
+        strings = GetRows("A1:A35");
+
+        LogPlayer(); // not sure we should
     }
-    void SetUpCredentials()
+    void SetUpCredentials() //this must also be done async  
     {
         string fullPath = Application.dataPath + path;
 
@@ -92,7 +97,10 @@ public class GoogleSheetMaster : MonoBehaviour
         var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
         var objectList = new List<System.Object>(); //fill object list with things!
 
-        List<string> strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
+        if(strings==null)
+        strings = GetRows("A1:A35"); //currently limited to 35 different players. Disregards any new name after the 35th, but will continue to update any of the first 35
+
+
 
         ///Solution to player limit
         ///loop that collects GetRows of a set size from A##:A[##+sizePerLoopItteration] and checks if the last memeber has any value
@@ -110,7 +118,8 @@ public class GoogleSheetMaster : MonoBehaviour
 
             var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetID, newRange);
             updateRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
-            var updateResponse = updateRequest.Execute();
+            //var updateResponse = updateRequest.Execute();
+            var updateResponse = updateRequest.ExecuteAsync();
         }
         else
         {
@@ -121,7 +130,8 @@ public class GoogleSheetMaster : MonoBehaviour
 
             var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "A2"); //just adds under A
             appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-            var appendResponse = appendRequest.Execute();
+            //var appendResponse = appendRequest.Execute();
+            var appendResponse = appendRequest.ExecuteAsync();
         }
     }
 }
