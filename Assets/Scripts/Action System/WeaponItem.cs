@@ -105,7 +105,7 @@ public class WeaponItem : ActionItem
     {
         pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, range);
 
-        yield return new WaitUntil(() => !pawn.tileWalker.hasPath || pawn.TurnDone);
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath || pawn.TurnDone); // 
 
         if (!pawn.TurnDone) //in case of step limiters
         {

@@ -40,6 +40,7 @@ public class TileWalker : MonoBehaviour
         FindOwnGridPos();
 
         lookAtter = GetComponentInChildren<LookAtter>();
+        doLimitSteps = false;
     }
     public bool hasPath = false;
     //int currentPathIndex; //the index of the current node in the path list.
@@ -120,8 +121,10 @@ public class TileWalker : MonoBehaviour
         if(doLimitSteps)
         {
             stepsToTake = stepLimit;
-            doLimitSteps = false;
             pawn.RemoveIconByColor("blueDeBuff");
+
+            stepLimit = 0; //resets 
+            doLimitSteps = false;
         }
 
         for (int i = 0; i < stepsToTake; i++)
@@ -136,7 +139,7 @@ public class TileWalker : MonoBehaviour
         lookAtter.tgt = null; //stops rotating
 
         hasPath = false; //Finished!
-        pawn.TurnDone = true; //hmm
+        //pawn.TurnDone = true; //hmm
         //END TURN
     }
 

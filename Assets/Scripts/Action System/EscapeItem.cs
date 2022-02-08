@@ -51,7 +51,7 @@ public class EscapeItem : ActionItem
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
             //check here if there is a path to escape - by either trying to get a route there, or inversely checking if hes not surrounded
-            actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight));
+            actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight
         }
     }
 }
