@@ -51,6 +51,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     [SerializeField]
     GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
+    SquadPicker _squadPicker; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
 
     //private void Awake()
     //{
@@ -62,6 +63,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private void Start()
     {
         //read if any site cooldown times exist
+        _squadPicker = squadPickerObject.GetComponent<SquadPicker>();
         thisButton = GetComponent<Button>();
         //if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
         if (PlayerDataMaster.Instance.SiteCooldowns.ContainsKey(levelSO.name) && PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].HasValue)
@@ -117,7 +119,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnClick()
     {
-        if (isCooldown || isWaitingForSquad)
+        if (isCooldown || isWaitingForSquad || squadPickerObject.activeInHierarchy)
         {
             Debug.LogError("isCooldown or isWaitingForSquad");
             return;
@@ -128,35 +130,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             SendToArena();
             return;
         }
-        squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable
-        //Debug.Log("Irrelevant click");
-        //displayer.SetMe(this);
-        //SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
-        //myDataDisplay.SetActive(true);
-
-        ////THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        ////OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
-        ////LevelRef.Instance.siteToCooldown = this;
-        ////LevelRef.Instance.visitedSiteName = name;
-
-        /////
-        ///// Check first if site is initiated
-        ///// if not, randomize
-        /////
-        //if (!isSet)
-        //{
-        //    int rndDifficulty = Random.Range(0, 3);
-
-        //    levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
-
-        //    isSet = true;
-        //}
-
-
-
-        //displayer.SetMe(this);
-
+        squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
+        _squadPicker.Refresh(); //chache this earlier! //cached :)
     }
 
 

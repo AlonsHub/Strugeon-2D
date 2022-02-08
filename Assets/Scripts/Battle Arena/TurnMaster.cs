@@ -515,10 +515,18 @@ public class TurnMaster : MonoBehaviour
         //int newTurnNum = currentTurn + 2 >= turnPlates.Count ? 
         //                (currentTurn + 2) - turnPlates.Count : turnPlates.Count - (currentTurn + 2);
 
-        int newTurnNum = currentTurn - 1 > 0 ? currentTurn - 1 : turnPlates.Count-1;
+        //int newTurnNum = (currentTurn - 1) > 0 ? currentTurn - 1 : turnPlates.Count-1; //if (true) - should add to currentTurn++, or it would bump the summoner 1 turn later
+        //giving them the next turn!!!
 
-        turnPlates.Insert(newTurnNum, td);
-        turnTakers.Insert(newTurnNum, newPawn);
+        //int newTurnNum;
+        //if(cu)
+        ///why not just add to the end - even if it is the next turn?
+
+
+        //turnPlates.Insert(newTurnNum, td);
+        //turnTakers.Insert(newTurnNum, newPawn);
+        turnPlates.Add(td );
+        turnTakers.Add(newPawn);
 
         TurnOrderUpdate(1);
         //turnTakers.Add(newPawn);

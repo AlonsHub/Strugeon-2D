@@ -33,8 +33,11 @@ public class SquadPicker : MonoBehaviour
         //availavleSquads = PartyMaster.Instance.squads;
 
     }
-
-    public void OnEnable()
+    private void OnEnable()
+    {
+        Refresh();
+    }
+    public void Refresh()
     {
         //int i = 0;
         Vector2 newPos = Vector2.zero;
@@ -56,6 +59,8 @@ public class SquadPicker : MonoBehaviour
         {
             newPos.y = Input.mousePosition.y + offset.y;
         }
+
+        newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 4);
 
         transform.position = newPos;
 

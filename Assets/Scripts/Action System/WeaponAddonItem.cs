@@ -29,7 +29,7 @@ public class WeaponAddonItem : ActionItem
             attachedWeapon.feetItem.Action(censer.gameObject);
         }
         //StartCoroutine("AddFireEffectIcon"); //walk AND use, or just use - may want to add another waitforseconds between them
-        StartCoroutine("AddFireEffect"); //walk AND use, or just use - may want to add another waitforseconds between them
+        StartCoroutine(nameof(AddFireEffect)); //walk AND use, or just use - may want to add another waitforseconds between them
 
 
     }
@@ -60,9 +60,9 @@ public class WeaponAddonItem : ActionItem
         int currentDistance = attachedWeapon.pawn.tileWalker.currentNode.GetDistanceToTarget(RefMaster.Instance.censer.currentNode);
         int weight = baseCost;
 
-        if (currentDistance <= 14)
+        if (currentDistance <= 14) //distance of 1 tile
         {
-            weight *= 10;
+            weight *= 5;// changed from 10 - 08/02/22
         }
 
         if (pawn.targets.Count > 0)

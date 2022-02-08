@@ -11,7 +11,7 @@ public class PurpleChoosingMode : MonoBehaviour
 
     public List<GridPoser> purpleTargets;
     private bool doUpdate;
-
+    public bool IsOn { get => doUpdate; }
     public LayerMask layerMask;
 
     public Camera cam;
@@ -21,7 +21,7 @@ public class PurpleChoosingMode : MonoBehaviour
     [ColorUsage(true)]
     public Color colorOff;
 
-    public bool isOn = false;
+    //public bool isOn = false;
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -35,7 +35,7 @@ public class PurpleChoosingMode : MonoBehaviour
 
     public void ToggleTint(bool isOn)
     {
-        this.isOn = isOn;
+        //this.isOn = isOn;
         Renderer ren;
         Color newColor;
         if (isOn)
@@ -124,7 +124,7 @@ public class PurpleChoosingMode : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, layerMask))
             {
                 PurpleTarget justAnInterface = hit.collider.GetComponentInParent<PurpleTarget>(); //could be Pawn or Censer at the moment 07/02/22 
-
+                
                 actor.SetupPurpleBuff(justAnInterface.asPurpleTgtGameObject); //pass on as the gameobject on which there is an empty interface of PurpleTarget, tagging only by Pawn and Censer 
                 doUpdate = false;
                 //actor.TurnDone = true;

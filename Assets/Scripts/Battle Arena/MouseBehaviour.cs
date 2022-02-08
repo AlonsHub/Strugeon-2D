@@ -92,14 +92,17 @@ public class MouseBehaviour : MonoBehaviour
                 CloseMenus();
                 return;
             }
+
+            //I dont think im using this
             float distanceFromButtonCircle;
             Vector3 circlePos = cam.WorldToScreenPoint(hitTarget.transform.position);
             distanceFromButtonCircle = Vector3.Distance(Input.mousePosition, circlePos);
            
             overCircle = distanceFromButtonCircle <= buttonCircleRadius && distanceFromButtonCircle >= buttonInnerCircleRadius;
+            //I dont think im using this[end]
 
-            //if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)) //changed from right to left button
-            if(Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+            
+            if(!PurpleChoosingMode.Instance.IsOn &&( Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)))
             {
                 Renderer rend = hitTarget.GetComponentInChildren<Renderer>();
                 //Color emissionOff = rend.material.GetColor("_EmissionColor");
@@ -159,13 +162,13 @@ public class MouseBehaviour : MonoBehaviour
     }
     public void CloseMenus()
     {
-        if (PurpleChoosingMode.Instance.isOn)
-        {
-            PurpleChoosingMode.Instance.ToggleTint(false);
-            Renderer r =
-            PurpleChoosingMode.Instance.actor.GetComponentInChildren<Renderer>();
-            r.material.SetFloat("_Thickness", 0f);
-        }
+        //if (PurpleChoosingMode.Instance.IsOn)
+        //{
+        //    PurpleChoosingMode.Instance.ToggleTint(false);
+        //    Renderer r =
+        //    PurpleChoosingMode.Instance.actor.GetComponentInChildren<Renderer>();
+        //    r.material.SetFloat("_Thickness", 0f);
+        //}
 
         //shut down the text box as well
         HoverTextBoard.Instance.UnSetMe();

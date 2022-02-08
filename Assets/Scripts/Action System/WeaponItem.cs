@@ -34,7 +34,7 @@ public class WeaponItem : ActionItem
     public Color effectColour; //default: red
 
     [SerializeField]
-    EffectAddonDataType effectData;
+    EffectAddonDataType effectData; //GET WHAT EVER SETS THIS
     public DamageType damageType;
 
     public List<Pawn> targets;
