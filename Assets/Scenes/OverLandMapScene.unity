@@ -1622,6 +1622,11 @@ PrefabInstance:
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: dataDisplayCenterTrans
+      value: 
+      objectReference: {fileID: 348749202}
     - target: {fileID: 1718309484027170360, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1829,6 +1834,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae9874371fcfd7449ca326cf5c31789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &348749202 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 708374766, guid: 638acd5ddcf27224d911be5ca1930480,
+    type: 3}
+  m_PrefabInstance: {fileID: 348749199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &373064361
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3157,11 @@ PrefabInstance:
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: dataDisplayCenterTrans
+      value: 
+      objectReference: {fileID: 804710186}
     - target: {fileID: 1718309484027170360, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3365,6 +3381,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae9874371fcfd7449ca326cf5c31789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &804710186 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 708374766, guid: 638acd5ddcf27224d911be5ca1930480,
+    type: 3}
+  m_PrefabInstance: {fileID: 804710183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &824089758 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1746638452964045066, guid: 59f9c4e7737c30946bd021510dc538fd,
@@ -4944,6 +4966,11 @@ PrefabInstance:
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: dataDisplayCenterTrans
+      value: 
+      objectReference: {fileID: 1183155471}
     - target: {fileID: 1718309484027170360, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5169,6 +5196,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae9874371fcfd7449ca326cf5c31789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1183155471 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 708374766, guid: 638acd5ddcf27224d911be5ca1930480,
+    type: 3}
+  m_PrefabInstance: {fileID: 1183155468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1200038072 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 68320384666234634, guid: 035aec8effae0d74abaf81f7de9796b9,
@@ -7661,8 +7694,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 420427564735629452, guid: 9a99f73c39b688a4a9684ed0f5b501c9,
         type: 3}
+      propertyPath: offset.x
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 420427564735629452, guid: 9a99f73c39b688a4a9684ed0f5b501c9,
+        type: 3}
       propertyPath: offset.y
-      value: 20
+      value: 260
       objectReference: {fileID: 0}
     - target: {fileID: 420427564735629452, guid: 9a99f73c39b688a4a9684ed0f5b501c9,
         type: 3}

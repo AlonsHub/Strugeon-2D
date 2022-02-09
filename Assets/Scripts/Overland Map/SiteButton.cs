@@ -28,6 +28,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Vector3 arrivedPanelOffset;
 
     public GameObject myDataDisplay;
+    public Transform dataDisplayCenterTrans; //in scene named "image" - it is the best transform as it is the background image for the DataDisplayer
     //   public GameObject levelPrefab;
 
     public GameObject buttons;
@@ -119,7 +120,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnClick()
     {
-        if (isCooldown || isWaitingForSquad || squadPickerObject.activeInHierarchy)
+        if (isCooldown || isWaitingForSquad)
         {
             Debug.LogError("isCooldown or isWaitingForSquad");
             return;
@@ -131,7 +132,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
         squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
-        _squadPicker.Refresh(); //chache this earlier! //cached :)
+        _squadPicker.Refresh(dataDisplayCenterTrans); //chache this earlier! //cached :)
     }
 
 

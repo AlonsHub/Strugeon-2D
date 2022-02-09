@@ -33,10 +33,10 @@ public class SquadPicker : MonoBehaviour
         //availavleSquads = PartyMaster.Instance.squads;
 
     }
-    private void OnEnable()
-    {
-        Refresh();
-    }
+    //private void OnEnable()
+    //{
+    //    Refresh();
+    //}
     public void Refresh()
     {
         //int i = 0;
@@ -58,6 +58,61 @@ public class SquadPicker : MonoBehaviour
         else
         {
             newPos.y = Input.mousePosition.y + offset.y;
+        }
+
+        newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 4);
+
+        transform.position = newPos;
+
+        squadToggler.RefreshSlots();
+
+
+
+        //if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
+        //    return;
+
+        ///Consider unsetting all slots before setting them to avoid the GhostPrint of unavailable squads
+
+        //foreach (var item in squadSlots)
+        //{
+        //    item.UnSetMe();
+        //}
+
+        int count = 0;
+        foreach (var item in PartyMaster.Instance.squads)
+        {
+            if (!item.isAvailable)
+                continue;
+
+            squadSlots[count].SetMe(item);
+            count++;
+        }
+
+       
+        
+
+    }
+    public void Refresh(Transform centerOfData)
+    {
+        //int i = 0;
+        Vector2 newPos = (Vector2)centerOfData.position + offset;
+
+        if(centerOfData.position.x > Screen.width/2)
+        {
+            newPos.x = centerOfData.position.x - offset.x;
+        }
+        else
+        {
+            newPos.x = centerOfData.position.x + offset.x;
+        }
+
+        if (centerOfData.position.y > Screen.height / 2)
+        {
+            newPos.y = centerOfData.position.y - offset.y;
+        }
+        else
+        {
+            newPos.y = centerOfData.position.y + offset.y;
         }
 
         newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 4);
