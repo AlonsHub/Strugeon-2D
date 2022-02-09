@@ -18,6 +18,14 @@ public class EffectAddonDataType
     public WeaponEffect damageElement;
 
     public int currentUses;
+    public int maxUses;
 
     public GameObject effectGFXPrefab;
+
+    public void SetMe(EffectAddonDataType otherData)
+    {
+        bonusDamage = otherData.bonusDamage;
+        currentUses = maxUses = otherData.maxUses;
+        damageElement = otherData.damageElement;
+    }
 }

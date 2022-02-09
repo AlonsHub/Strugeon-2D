@@ -42,12 +42,12 @@ public class WeaponAddonItem : ActionItem
         pawn.AddEffectIcon(censer.effectIcon, "fireBuff");
     }
 
-    void AddFireEffectIcon()
-    {
-        attachedWeapon.AddEffect(censer.effectAddon);
-        attachedWeapon.effectColour = RefMaster.Instance.censer.effectColour; // Get this from setting the effect please and not like an asshole, thank you <3
-        pawn.AddEffectIcon(censer.effectIcon, "fireBuff");
-    }
+    //void AddFireEffectIcon()
+    //{
+    //    attachedWeapon.AddEffect(censer.effectAddon);
+    //    attachedWeapon.effectColour = RefMaster.Instance.censer.effectColour; // Get this from setting the effect please and not like an asshole, thank you <3
+    //    pawn.AddEffectIcon(censer.effectIcon, "fireBuff");
+    //}
 
     public override void CalculateVariations()
     {

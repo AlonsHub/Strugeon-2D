@@ -201,8 +201,12 @@ public class WeaponItem : ActionItem
     public void AddEffect(WeaponEffectAddon effectAddon)
     {
         hasEffect = true;
-        effectData = effectAddon.data;
-
+        if(effectData == null)
+        {
+            effectData = new EffectAddonDataType();
+        }
+        effectData.SetMe(effectAddon.data);
+        
         pawn.TurnDone = true;
     }
     public override void CalculateVariations()
