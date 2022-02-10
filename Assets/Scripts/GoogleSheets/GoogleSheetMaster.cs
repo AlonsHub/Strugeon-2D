@@ -173,6 +173,9 @@ public class GoogleSheetMaster : MonoBehaviour
         int start = 2;
         int end = start + rowsPerIterration;
         bool keepGoing = true;
+
+        int runningtotal= 0;
+
         while (keepGoing)
         {
             List<string> s = GetRows("A" + start + ":A" + end);
@@ -192,11 +195,12 @@ public class GoogleSheetMaster : MonoBehaviour
                     keepGoing = false; //redundant
                     break;
                 }
+                runningtotal += s.Count;
                 //if(s[s.Count-1] == "")
-                if(s.Count() < rowsPerIterration)
+                if (s.Count() < rowsPerIterration)
                 {
                     keepGoing = false; //redundant
-                    currentRangeName = "A"+(s.Count()+2).ToString();
+                    currentRangeName = "A"+(runningtotal+s.Count()+1).ToString();
                     return false;
                 }
             }

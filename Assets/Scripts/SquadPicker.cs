@@ -115,7 +115,7 @@ public class SquadPicker : MonoBehaviour
             newPos.y = centerOfData.position.y + offset.y;
         }
 
-        newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 4);
+        newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 5);
 
         transform.position = newPos;
 
