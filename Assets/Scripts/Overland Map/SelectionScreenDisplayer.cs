@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SelectionScreenDisplayer : MonoBehaviour
 {
-    
+    // KILL THIS SCRIPT?
 
     //[SerializeField]
     //Level level; //getting deprecated
@@ -128,12 +128,15 @@ public class SelectionScreenDisplayer : MonoBehaviour
         }
         dwellerNames.text = dwellerNames.text.Remove(dwellerNames.text.Length - 2); //kill the last two chars ", "
         lootText.text = "";
-        foreach (Object loot in levelData.rewards)
-        {
-            lootText.text += loot.name + ", ";
-        }
-        if (lootText.text.Length > 0)
-            lootText.text = lootText.text.Remove(lootText.text.Length - 2); //kill the last two chars ", "
+        //foreach (Object loot in levelData.magicItems)
+        //{
+        //    lootText.text += loot.name + ", ";
+        //}
+
+        lootText.text += levelData.magicItem.magicItemName;
+
+        //if (lootText.text.Length > 0)
+        //    lootText.text = lootText.text.Remove(lootText.text.Length - 2); //kill the last two chars ", "
 
         goldText.text = levelData.goldReward.ToString();
 

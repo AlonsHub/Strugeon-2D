@@ -10,9 +10,9 @@ public class DifficultyTranslator : MonoBehaviour
     public List<Pawn> mediumSet;
     public List<Pawn> hardSet;
 
-    public List<Object> easyRewardSet;
-    public List<Object> mediumRewardSet;
-    public List<Object> hardRewardSet;
+    public List<MagicItemSO> easyRewardSet;
+    public List<MagicItemSO> mediumRewardSet;
+    public List<MagicItemSO> hardRewardSet;
 
     public int[] goldRewards; //0,1,2 index - easy, medium, hard
 
@@ -55,7 +55,8 @@ public class DifficultyTranslator : MonoBehaviour
                 //break;
         }
     }
-    public List<Object> DifficultyToRewardPreset(LairDifficulty difficulty)
+
+    public List<MagicItemSO> DifficultyToRewardPreset(LairDifficulty difficulty)
     {
         //return presets[(int)difficulty];
         switch (difficulty)
@@ -69,6 +70,27 @@ public class DifficultyTranslator : MonoBehaviour
                 //break;
             case LairDifficulty.Hard:
                 return hardRewardSet;
+
+                //break;
+            default:
+                return null;
+                //break;
+        }
+    }
+    public MagicItem DifficultyToSingleReward(LairDifficulty difficulty)
+    {
+        //return presets[(int)difficulty];
+        switch (difficulty)
+        {
+            case LairDifficulty.Easy:
+                return easyRewardSet[Random.Range(0, easyRewardSet.Count)].magicItem;
+                //break;
+            case LairDifficulty.Medium:
+                return mediumRewardSet[Random.Range(0, mediumRewardSet.Count)].magicItem;
+
+                //break;
+            case LairDifficulty.Hard:
+                return hardRewardSet[Random.Range(0, hardRewardSet.Count)].magicItem;
 
                 //break;
             default:

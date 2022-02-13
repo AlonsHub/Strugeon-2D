@@ -195,7 +195,6 @@ public class GoogleSheetMaster : MonoBehaviour
                     keepGoing = false; //redundant
                     break;
                 }
-                runningtotal += s.Count;
                 //if(s[s.Count-1] == "")
                 if (s.Count() < rowsPerIterration)
                 {
@@ -207,6 +206,7 @@ public class GoogleSheetMaster : MonoBehaviour
                 }
             }
 
+            runningtotal += s.Count;
             start = end + 1;
             end = start + rowsPerIterration;
 

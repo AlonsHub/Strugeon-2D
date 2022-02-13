@@ -167,7 +167,7 @@ public class TurnMaster : MonoBehaviour
             Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
             //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER! 
             //gold should either be directly linked to between inventory and currentPlayerData - or have an OnValueChanged() for the displayer and player data to subscribe to
-            PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold;
+            PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold; //WHAT ?!>!??!?!
             //PLUMBING
 
             victoryWindow.gameObject.SetActive(true);
@@ -195,21 +195,25 @@ public class TurnMaster : MonoBehaviour
 
 
 
-            //Commented out since these mercs should not be available at all
+            #region Divided Exp Reward
+            ////Total and Shared Exp:
+            ////this way a total sum of exp is divided by surviving mercs
 
-            //foreach (var item in theDead)
+            //int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
+
+            //foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             //{
-            //    PlayerDataMaster.Instance.currentPlayerData.availableMercs.Remove(item);
-            //    Pawn toRemove = PartyMaster.Instance.availableMercs.Where(x => x.mercName == item).FirstOrDefault(); //TEST IF THIS IS EVER NOT DEFAULT!
-            //        //PAWNS ARE LIKELY REMOVED ELSEWHERE
-            //    PartyMaster.Instance.availableMercs.Remove(toRemove); // is this ever useful?
-            //    //PlayerDataMaster.Instance.currentPlayerData.deadMercs++; // set in Victory Window instead, since cowards are dealt there
-
+            //    item.GetMercSheet.AddExp(expPerMerc);
             //}
+            #endregion
+
+            #region Set Exp Reward
             foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             {
                 item.GetMercSheet.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
             }
+            #endregion
+
             //put squad back in their room
             PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
         }

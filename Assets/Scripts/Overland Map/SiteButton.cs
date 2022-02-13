@@ -46,7 +46,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public Squad readiedSquad;
     public bool isReady = false;
-    public bool isSet = false; //set means all level data has been set and hadn't been "used" yet. 
+    public bool isSet { get => levelSO.levelData.isSet; set => levelSO.levelData.isSet = value; } //set means all level data has been set and hadn't been "used" yet. 
                                //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
 
 
@@ -114,10 +114,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     }
 
-    public void GetProperties() //for filling displayers?
-    {
-
-    }
+   
     public void OnClick()
     {
         if (isCooldown || isWaitingForSquad)
@@ -146,6 +143,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         PlayerDataMaster.Instance.AddSiteCooldown(levelSO.name, DateTime.Now.Add(levelSO.levelData.waitTime));
         PartyMaster.Instance.currentSquad = readiedSquad;
 
+        levelSO.levelData.isSet = false;
         SceneManager.LoadScene("ArenaSceneGeneric");
     }
 
@@ -192,15 +190,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     }
 
-    //private void OnDisable()
-    //{
-    //    if (timerSpan < maxCooldown)
-    //    {
-    //        PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = timer; //have a seperate method for AddCooldown that null checks and everything
-    //    }
-
-
-    //}
+    
 
     public void UnSetMe() //for cancelExpedition cases
     {
@@ -246,13 +236,13 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         /// Check first if site is initiated
         /// if not, randomize
         ///
-        if (!isSet)
+        if (!isSet) //this isSet => levelDataSO.levelData.isSet
         {
             int rndDifficulty = UnityEngine.Random.Range(0, 3);
 
             levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 
-            isSet = true;
+            isSet = true; //this isSet => levelDataSO.levelData.isSet
         }
 
 
