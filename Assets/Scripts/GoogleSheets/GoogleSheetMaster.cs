@@ -191,7 +191,7 @@ public class GoogleSheetMaster : MonoBehaviour
                 {
                     int i = s.IndexOf(PlayerDataMaster.Instance.currentPlayerData.playerName);
 
-                    currentRangeName = "A" + (i + 2); //names start at line 2, i starts at 0
+                    currentRangeName = "A" + (runningtotal+ i + 2); //names start at line 2, i starts at 0
                     keepGoing = false; //redundant
                     break;
                 }
@@ -199,9 +199,11 @@ public class GoogleSheetMaster : MonoBehaviour
                 //if(s[s.Count-1] == "")
                 if (s.Count() < rowsPerIterration)
                 {
-                    keepGoing = false; //redundant
-                    currentRangeName = "A"+(runningtotal+s.Count()+1).ToString();
+                    //keepGoing = false; //redundant
+                    currentRangeName = null;
                     return false;
+                    //currentRangeName = "A"+(runningtotal+1).ToString();
+                    //return false;
                 }
             }
 
