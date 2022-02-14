@@ -15,4 +15,15 @@ public class MagicItem
 
     public Sprite itemSprite; // consider keeping an enum to link with a dictionary
 
+    public bool FecthSprite()
+    {
+        if(itemSprite)
+        {
+            return true;
+        }
+
+        itemSprite = Resources.Load<Sprite>($"ItemSprites/{magicItemName}");
+        return itemSprite; //if null, is false like in the if statement above
+    }
+
 }

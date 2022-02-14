@@ -195,7 +195,7 @@ public class TurnMaster : MonoBehaviour
 
 
 
-            #region Divided Exp Reward
+            #region 1) Divided Exp Reward
             ////Total and Shared Exp:
             ////this way a total sum of exp is divided by surviving mercs
 
@@ -207,13 +207,19 @@ public class TurnMaster : MonoBehaviour
             //}
             #endregion
 
-            #region Set Exp Reward
+            #region 2) Constant Value Exp Reward
+
             foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             {
                 item.GetMercSheet.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
             }
             #endregion
 
+            #region Single MagicItem Reward
+
+            Inventory.Instance.AddMagicItem(LevelRef.Instance.currentLevel.levelData.magicItem);
+
+            #endregion
             //put squad back in their room
             PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
         }

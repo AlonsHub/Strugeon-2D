@@ -75,12 +75,10 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 isCooldown = false;
                 timerSpan = TimeSpan.Zero;
                 PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name);
-                //timer = SiteCooldowns[levelSO.name] = maxCooldown;
-
+                
             }
             else
             {
-                //timer = SiteCooldowns[levelSO.name] = PlayerDataMaster.Instance.SavedCooldowns[levelSO.name];
                 timerSpan = PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].Value - DateTime.Now;
                 isCooldown = true;
                 
@@ -93,21 +91,19 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             timerSpan = TimeSpan.Zero;
             PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name);//also adds it to the dict if it doesnt exist
         }
-        //else
-        //{
-        //        isCooldown = false; ///NOT ALWAYS
-        //        SiteCooldowns.Add(levelSO.name, maxCooldown);/// NOT ALWAYS
-
-        //    ////////////////////////////// PROBLEMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-        //}
+        
 
         Invoke("LateStart", .2f); //give data displayers time to find themselves with their own starts/awakes - this sucks
     }
 
     void LateStart()
     {
+        if (!isSet) //this isSet => levelDataSO.levelData.isSet
+            RandomSetSelf();
+
         if (myDataDisplay)
             myDataDisplay.SetActive(false);
+
 
         if (isCooldown)
             StartCooldownCaller();
@@ -236,18 +232,24 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         /// Check first if site is initiated
         /// if not, randomize
         ///
+
+        //TBD this should move to an Awake or start
         if (!isSet) //this isSet => levelDataSO.levelData.isSet
-        {
-            int rndDifficulty = UnityEngine.Random.Range(0, 3);
-
-            levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
-
-            isSet = true; //this isSet => levelDataSO.levelData.isSet
-        }
+            RandomSetSelf();
 
 
 
         displayer.SetMe(this);
 
+    }
+
+    void RandomSetSelf() 
+    {
+        
+            int rndDifficulty = UnityEngine.Random.Range(0, 3);
+
+            levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
+
+            isSet = true; //this isSet => levelDataSO.levelData.isSet
     }
 }

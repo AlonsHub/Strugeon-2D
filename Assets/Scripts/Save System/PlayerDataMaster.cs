@@ -13,12 +13,11 @@ public class PlayerDataMaster : MonoBehaviour
 
     public PlayerData currentPlayerData;
 
-    public GameObject loadedSavePrefab;
 
-    //string saveFolderPath = Application.dataPath + "Saves/";
-    string saveFolderPath;
-    //string saveFileSuffix = "savedgame_"; 
-    string saveFilePrefix; // + currentPlayerData.playerName. add this after load.
+    
+    //string saveFolderPath = ;
+    string saveFolderPath; // VALUE SET ON AWAKE to: Application.dataPath + "/Resources/Saves/"
+    string saveFilePrefix = "savedgame_"; // + currentPlayerData.playerName. add this after load.
 
     List<string> saveNameList;
     [SerializeField]
@@ -39,9 +38,6 @@ public class PlayerDataMaster : MonoBehaviour
         Instance = this;
 
         saveFolderPath = Application.dataPath + "/Resources/Saves/";
-        saveFilePrefix = "savedgame_";
-
-        //SavedCooldowns = new Dictionary<string, float>();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -58,30 +54,11 @@ public class PlayerDataMaster : MonoBehaviour
         {
             File.Create(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt").Close(); //create file if none exists.
         }
-        //else
-        //{
-        //    if (SaveExistsCheck(currentPlayerData.playerName) != null)
-        //    {
-        //        File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", );
-        //    }
-        //}
-
-        //assume: a new file was created at "saveFolderPath + saveFileSuffix" 
-        //dont assume - player has set a name yet. this should work even if they somehow manage/are-allowed not to set their own profile
-
-        //currentPlayerData.siteCooldowns = currentPlayerData.SiteCooldownTimes.Values.ToList();
-        //currentPlayerData.siteNames = currentPlayerData.SiteCooldownTimes.Keys.ToList();
+        
         currentPlayerData.SaveCooldownsToLists();
-
-
-       
-
 
         string pdJsonString = JsonUtility.ToJson(currentPlayerData);
 
-        //kill any 0 that follows a 0
-
-        //currentPlayerData.squadsAsMercNameList.
 
         File.WriteAllText(saveFolderPath + saveFilePrefix + currentPlayerData.playerName + ".txt", pdJsonString);
 

@@ -362,6 +362,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public void AddEffectIcon(Sprite newEffectIcon, string ID)
     {
+        if(effectIcons.Where(x => x.name == ID).Count() > 0)
+        {
+            return;
+        }
+
         GameObject go = Instantiate(effectIconPrefab, effectIconParent);
         go.GetComponentInChildren<SpriteRenderer>().sprite = newEffectIcon;
         go.name = ID;
@@ -371,25 +376,42 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public void RemoveIconByColor(string colorName)
     {
-        if (effectIcons.Count > 0)
+        List<GameObject> relevantList = effectIcons.Where(x => x.name == colorName).ToList();
+
+
+
+        if (relevantList.Count > 0)
         {
-            GameObject toRemove = effectIcons.Where(x => x.name == colorName).SingleOrDefault();
-            effectIcons.Remove(toRemove);
-            Destroy(toRemove);
-            //GameObject toRemove;// = new GameObject(); //shouldn't and dont need to
-            //foreach (GameObject icon in effectIcons)
-            //{
-            //    if (icon.name == colorName)
-            //    {
-            //        toRemove = icon;
-            //    }
-            //}
-            //if (toRemove != null)
-            //{
-            //    effectIcons.Remove(toRemove);
-            //    Destroy(toRemove);
-            //}
+            foreach (var item in relevantList)
+            {
+                effectIcons.Remove(item);
+                Destroy(item);
+            }
         }
+        else
+        {
+            Debug.LogError($"No icon by this name: {colorName} was found");
+        }
+
+        //    if (relevantList.Count > 0)
+        //{
+        //    GameObject toRemove = effectIcons.Where(x => x.name == colorName).SingleOrDefault();
+        //    effectIcons.Remove(toRemove);
+        //    Destroy(toRemove);
+        //    //GameObject toRemove;// = new GameObject(); //shouldn't and dont need to
+        //    //foreach (GameObject icon in effectIcons)
+        //    //{
+        //    //    if (icon.name == colorName)
+        //    //    {
+        //    //        toRemove = icon;
+        //    //    }
+        //    //}
+        //    //if (toRemove != null)
+        //    //{
+        //    //    effectIcons.Remove(toRemove);
+        //    //    Destroy(toRemove);
+        //    //}
+        //}
         worldSpaceHorizontalGroup.UpdateGroup();
 
         //Destroy(effectIcons.Where(x => x.name == colorName).FirstOrDefault());

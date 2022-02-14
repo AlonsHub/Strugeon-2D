@@ -31,7 +31,7 @@ public class IdleLog : MonoBehaviour
     {
         GameObject go = Instantiate(messagePrefab, logParent);
 
-        BasicMessage basicMessage = go.GetComponent<BasicMessage>();
+        BasicDisplayer basicMessage = go.GetComponent<BasicDisplayer>();
         //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
 
         if(basicMessage.textBoxes.Count != texts.Count)
@@ -100,7 +100,7 @@ public class IdleLog : MonoBehaviour
     {
         GameObject go = Instantiate(basicEntryPrefab, logParent);
         go.GetComponentInChildren<Button>().onClick.AddListener(() => siteRef.OnClick());
-        BasicMessage basicMessage = go.GetComponent<BasicMessage>();
+        BasicDisplayer basicMessage = go.GetComponent<BasicDisplayer>();
         //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
 
         if (basicMessage.textBoxes.Count != texts.Count || basicMessage.images.Count != sprites.Count)

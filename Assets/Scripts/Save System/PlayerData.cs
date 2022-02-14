@@ -56,6 +56,8 @@ public class PlayerData
     public int numOfavailableMercs { get => PlayerDataMaster.Instance.GetAmountOfMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room }); } //ACCESS LIST BY METHOD!!!!
     public int totalMercLevel { get => PlayerDataMaster.Instance.GetTotalMercLevel(); }
 
+    public List<MagicItem> magicItems;
+
     void CreateAddMerc(MercName newName, MercAssignment assignment) 
     {
         MercSheet newSheet;

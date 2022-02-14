@@ -42,11 +42,18 @@ public class Charmed : MonoBehaviour
     {
         weaponItem.pawn.AddEffectIcon(iconToAddOn, "charmed"); //the string here should be a varibale and ALL these STATUS classes, should inherit 99% of just one neat base class
 
+            //yield return new WaitUntil(() => !weaponItem.pawn.TurnDone);            //Waits for the first time of it being the charmed-pawn's turn, then lowers lifetime after each turnDone, also checking right after
+
         while (lifetime > 0)
         {
-            yield return new WaitUntil(() => weaponItem.pawn.TurnDone);
-            lifetime--;
+            //yield return new WaitUntil(() => weaponItem.pawn.TurnDone);
+            //lifetime--;
             yield return new WaitUntil(() => !weaponItem.pawn.TurnDone);
+            lifetime--;
+            yield return new WaitUntil(() => weaponItem.pawn.TurnDone);
+            
+
+
         }
         weaponItem.pawn.RemoveIconByColor("charmed");
 
