@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
-  m_Name: Crown
+  m_Name: Friendship
   m_EditorClassIdentifier: 
   magicItem:
-    magicItemName: Crown
-    goldValue: 35
-    NF_Value: 3
+    magicItemName: Friendship made along the way
+    goldValue: 0
+    NF_Value: 2
     rarity: 2
-    itemSprite: {fileID: 3332671309235019512, guid: 31155a4835afb294f8a618b0cb75f337,
-      type: 3}
+    dropRateWeight: 2
+    itemSprite: {fileID: 21300000, guid: 8dbc625aeaa2c644eb6edd7cf2f44d9a, type: 2}
+    spriteName: Friendship

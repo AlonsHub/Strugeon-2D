@@ -79,25 +79,47 @@ public class DifficultyTranslator : MonoBehaviour
     }
     public MagicItem DifficultyToSingleReward(LairDifficulty difficulty)
     {
-        //return presets[(int)difficulty];
         switch (difficulty)
         {
             case LairDifficulty.Easy:
-                return easyRewardSet[Random.Range(0, easyRewardSet.Count)].magicItem;
+                //return easyRewardSet[Random.Range(0, easyRewardSet.Count)].magicItem;
+                return WeightedRollOnItemSet(easyRewardSet);
                 //break;
             case LairDifficulty.Medium:
-                return mediumRewardSet[Random.Range(0, mediumRewardSet.Count)].magicItem;
-
-                //break;
+                return WeightedRollOnItemSet(mediumRewardSet);
+            //break;
             case LairDifficulty.Hard:
-                return hardRewardSet[Random.Range(0, hardRewardSet.Count)].magicItem;
-
-                //break;
+                return WeightedRollOnItemSet(hardRewardSet);
+            //break;
             default:
                 return null;
                 //break;
         }
     }
+
+    MagicItem WeightedRollOnItemSet(List<MagicItemSO> itemSet)
+    {
+        int[] weights = new int[itemSet.Count];
+        int total = 0;
+        for (int i = 0; i < itemSet.Count; i++)
+        {
+            total += itemSet[i].magicItem.dropRateWeight;
+            weights[i] = total;
+        }
+
+        int rand = Random.Range(0, total);
+
+        for (int i = 0; i < weights.Length; i++)
+        {
+            if(rand <= weights[i])
+            {
+                return itemSet[i].magicItem;
+            }
+        }
+
+        return null;
+    }
+
     public int DifficultyToGoldReward(LairDifficulty difficulty)
     {
         //return presets[(int)difficulty];

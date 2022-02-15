@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
-  m_Name: Stick
+  m_Name: RedGemWand
   m_EditorClassIdentifier: 
   magicItem:
-    magicItemName: Stick
-    goldValue: 2
-    NF_Value: 0
-    rarity: 0
-    itemSprite: {fileID: -6312372248548970523, guid: 31155a4835afb294f8a618b0cb75f337,
-      type: 3}
+    magicItemName: Red Gem Wand
+    goldValue: 80
+    NF_Value: 3
+    rarity: 2
+    dropRateWeight: 1
+    itemSprite: {fileID: 0}
+    spriteName: RedGemWand

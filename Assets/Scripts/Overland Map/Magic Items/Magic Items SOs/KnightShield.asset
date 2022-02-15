@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
-  m_Name: Ring
+  m_Name: KnightShield
   m_EditorClassIdentifier: 
   magicItem:
-    magicItemName: Ring
+    magicItemName: Knight Shield
     goldValue: 10
     NF_Value: 1
     rarity: 1
-    itemSprite: {fileID: -8753393225063967389, guid: 31155a4835afb294f8a618b0cb75f337,
-      type: 3}
+    dropRateWeight: 1
+    itemSprite: {fileID: 21300000, guid: 866eb49c6f94d394786d5d2d6e73f2b8, type: 2}
+    spriteName: KnightShield
