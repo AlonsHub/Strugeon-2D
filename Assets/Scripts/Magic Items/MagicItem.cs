@@ -9,7 +9,8 @@ public class MagicItem
 {
     public string magicItemName; //BAD IDEA, go for enums and dictionaries? something even better perhaps
     public int goldValue;
-    public int NF_Value; // TBD
+    //public int NF_Value; // TBD
+    public MagicSpectrumProfile spectrumProfile;
 
     public Rarity rarity;
     public int dropRateWeight; //higher -> more likely

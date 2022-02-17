@@ -24,7 +24,8 @@ public class DifficultyTranslator : MonoBehaviour
 
     //presets
     //public List<Pawn>[] presets;
-
+    [SerializeField]
+    ItemSet easyItemSet;
     private void Awake()
     {
         if(Instance != null && Instance != this)

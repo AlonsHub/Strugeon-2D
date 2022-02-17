@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
-  m_Name: RedGemWand
+  m_Name: Yellow Gem Wand
   m_EditorClassIdentifier: 
   magicItem:
-    magicItemName: Red Gem Wand
-    goldValue: 80
-    NF_Value: 3
-    rarity: 2
+    magicItemName: Yellow Gem Wand
+    goldValue: 175
+    spectrumProfile:
+      red: 0
+      blue: 0
+      yellow: 0
+      purple: 0
+    rarity: 3
     dropRateWeight: 1
     itemSprite: {fileID: 0}
-    spriteName: RedGemWand
+    spriteName: YellowGemWand
