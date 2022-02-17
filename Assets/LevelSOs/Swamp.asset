@@ -14,25 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     enemies:
-    - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-    - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-    - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
+    - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+    - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
     - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
     magicItem:
-      magicItemName: Ring
-      goldValue: 10
-      NF_Value: 1
-      rarity: 1
-      itemSprite: {fileID: -8753393225063967389, guid: 31155a4835afb294f8a618b0cb75f337,
+      magicItemName: Stick
+      goldValue: 2
+      spectrumProfile:
+        red: 0
+        blue: 0
+        yellow: 0
+        purple: 0
+      rarity: 0
+      dropRateWeight: 5
+      itemSprite: {fileID: -6312372248548970523, guid: 31155a4835afb294f8a618b0cb75f337,
         type: 3}
-    expReward: 115
+      spriteName: Stick
+    expReward: 35
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 23
-    difficulty: 2
+    goldReward: 8
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 6
     waitTimeSeconds: 20
-    isSet: 0
+    isSet: 1

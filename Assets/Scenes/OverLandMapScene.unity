@@ -163,12 +163,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01bf00de48f05948b88abcc8a0f1564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyEnemySet: {fileID: 11400000, guid: 4d6a49b768cad9240949310b8474277a, type: 2}
-  mediumEnemySet: {fileID: 11400000, guid: 0ec45cd920543d84d92278416dae1ee7, type: 2}
-  hardEnemySet: {fileID: 11400000, guid: 28e08d00a38d61148a9b1d4f3d367c51, type: 2}
-  easyItemSetSO: {fileID: 11400000, guid: 7677bef62ea75b84c87eba45261d1b9e, type: 2}
-  mediumItemSetSO: {fileID: 11400000, guid: 264486e80ec9e1c4fabd96518519fdc0, type: 2}
-  hardItemSetSO: {fileID: 11400000, guid: 0d621cd5cfd3bc1409929a25cb1a9a3b, type: 2}
+  easyEnemySets:
+  - {fileID: 11400000, guid: 4d6a49b768cad9240949310b8474277a, type: 2}
+  - {fileID: 11400000, guid: 5d183c0a346094f41aaef7dc499623ef, type: 2}
+  mediumEnemySets:
+  - {fileID: 11400000, guid: 0ec45cd920543d84d92278416dae1ee7, type: 2}
+  - {fileID: 11400000, guid: f2840922df0258f499abd96f644de86b, type: 2}
+  hardEnemySets:
+  - {fileID: 11400000, guid: 28e08d00a38d61148a9b1d4f3d367c51, type: 2}
+  - {fileID: 11400000, guid: fde664543d635654fae4dbcae9a5f5ae, type: 2}
+  easyItemSetSOs:
+  - {fileID: 11400000, guid: 7677bef62ea75b84c87eba45261d1b9e, type: 2}
+  - {fileID: 11400000, guid: 7e32b16d987ebf744a440a60b77fee16, type: 2}
+  mediumItemSetSOs:
+  - {fileID: 11400000, guid: 264486e80ec9e1c4fabd96518519fdc0, type: 2}
+  - {fileID: 11400000, guid: 0f7360892d55eb440b2c35dcbf61b158, type: 2}
+  hardItemSetSOs:
+  - {fileID: 11400000, guid: 0d621cd5cfd3bc1409929a25cb1a9a3b, type: 2}
+  - {fileID: 11400000, guid: 8840c687e3a01a846bd9570b56008f24, type: 2}
   goldRewards: 050000000a00000014000000
   expRewards: 230000003700000073000000
 --- !u!4 &118060472
