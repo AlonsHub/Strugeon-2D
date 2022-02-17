@@ -19,7 +19,7 @@ public class InventoryDisplayManager : MonoBehaviour
         //Draw items
         for (int i = 0; i < displayers.Count; i++)
         {
-            displayers[i].SetItem(Inventory.Instance.magicItems[i]);
+            displayers[i].SetItem(Inventory.Instance.inventoryItems[i]);
         }
     }
 

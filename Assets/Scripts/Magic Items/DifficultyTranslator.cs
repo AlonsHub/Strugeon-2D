@@ -6,26 +6,23 @@ public class DifficultyTranslator : MonoBehaviour
 {
     public static DifficultyTranslator Instance;
     //public Dictionary<LairDifficulty,Pawn> 
-    public List<Pawn> easySet;
-    public List<Pawn> mediumSet;
-    public List<Pawn> hardSet;
+    //public List<Pawn> easyEnemySet;
+    //public List<Pawn> mediumEnemySet;
+    //public List<Pawn> hardEnemySet;
 
-    public List<MagicItemSO> easyRewardSet;
-    public List<MagicItemSO> mediumRewardSet;
-    public List<MagicItemSO> hardRewardSet;
+    public EnemySetSO easyEnemySet;
+    public EnemySetSO mediumEnemySet;
+    public EnemySetSO hardEnemySet;
+
+    public ItemSetSO easyItemSetSO;
+    public ItemSetSO mediumItemSetSO;
+    public ItemSetSO hardItemSetSO;
 
     public int[] goldRewards; //0,1,2 index - easy, medium, hard
 
     public int[] expRewards;//0,1,2 index - easy, medium, hard
 
-    //public GameObject easyPrefab;
-    //public GameObject mediumPrefab;
-    //public GameObject hardPrefab;
-
-    //presets
-    //public List<Pawn>[] presets;
-    [SerializeField]
-    ItemSet easyItemSet;
+    
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -41,15 +38,14 @@ public class DifficultyTranslator : MonoBehaviour
         switch (difficulty)
         {
             case LairDifficulty.Easy:
-                return easySet;
+                return easyEnemySet.enemySet.enemyPrefabs;
                 //break;
             case LairDifficulty.Medium:
-                return mediumSet;
+                return mediumEnemySet.enemySet.enemyPrefabs; 
 
                 //break;
             case LairDifficulty.Hard:
-                return hardSet;
-
+                return hardEnemySet.enemySet.enemyPrefabs;
                 //break;
             default:
                 return null;
@@ -57,40 +53,20 @@ public class DifficultyTranslator : MonoBehaviour
         }
     }
 
-    public List<MagicItemSO> DifficultyToRewardPreset(LairDifficulty difficulty)
-    {
-        //return presets[(int)difficulty];
-        switch (difficulty)
-        {
-            case LairDifficulty.Easy:
-                return easyRewardSet;
-                //break;
-            case LairDifficulty.Medium:
-                return mediumRewardSet;
-
-                //break;
-            case LairDifficulty.Hard:
-                return hardRewardSet;
-
-                //break;
-            default:
-                return null;
-                //break;
-        }
-    }
+    
     public MagicItem DifficultyToSingleReward(LairDifficulty difficulty)
     {
         switch (difficulty)
         {
             case LairDifficulty.Easy:
                 //return easyRewardSet[Random.Range(0, easyRewardSet.Count)].magicItem;
-                return WeightedRollOnItemSet(easyRewardSet);
+                return WeightedRollOnItemSetSO(easyItemSetSO);
                 //break;
             case LairDifficulty.Medium:
-                return WeightedRollOnItemSet(mediumRewardSet);
+                return WeightedRollOnItemSetSO(mediumItemSetSO);
             //break;
             case LairDifficulty.Hard:
-                return WeightedRollOnItemSet(hardRewardSet);
+                return WeightedRollOnItemSetSO(hardItemSetSO);
             //break;
             default:
                 return null;
@@ -98,23 +74,25 @@ public class DifficultyTranslator : MonoBehaviour
         }
     }
 
-    MagicItem WeightedRollOnItemSet(List<MagicItemSO> itemSet)
+    
+    MagicItem WeightedRollOnItemSetSO(ItemSetSO itemSetSO)
     {
-        int[] weights = new int[itemSet.Count];
+        int[] weights = new int[itemSetSO.itemSet.itemSOs.Count];
         int total = 0;
-        for (int i = 0; i < itemSet.Count; i++)
+        for (int i = 0; i < weights.Length; i++)
         {
-            total += itemSet[i].magicItem.dropRateWeight;
+            total += itemSetSO.itemSet.perItemWeight[i];
             weights[i] = total;
         }
 
         int rand = Random.Range(0, total);
-
+        Debug.Log($"Random: {rand}/{total}");
         for (int i = 0; i < weights.Length; i++)
         {
-            if(rand <= weights[i])
+            if (rand <= weights[i])
             {
-                return itemSet[i].magicItem;
+                Debug.Log($"Item: {itemSetSO.itemSet.itemSOs[i].magicItem.magicItemName}");
+                return itemSetSO.itemSet.itemSOs[i].magicItem;
             }
         }
 

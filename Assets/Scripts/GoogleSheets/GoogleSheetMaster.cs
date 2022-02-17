@@ -76,7 +76,7 @@ public class GoogleSheetMaster : MonoBehaviour
     {
         var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
 
-        var response = request.Execute();
+        var response = request.Execute(); //could not async?
         var values = response.Values;
 
         if (values != null && values.Count >= 0)
@@ -171,7 +171,7 @@ public class GoogleSheetMaster : MonoBehaviour
     bool FindRangeForName(string nameToSearch) //sets currentRangeName
     {
         int start = 2;
-        int end = start + rowsPerIterration;
+        int end = start + rowsPerIterration - 1; //for a total of A2:A11(2+10-1) which is 10
         bool keepGoing = true;
 
         int runningtotal= 0;
@@ -179,7 +179,7 @@ public class GoogleSheetMaster : MonoBehaviour
         while (keepGoing)
         {
             List<string> s = GetRows("A" + start + ":A" + end);
-            if (s == null)
+            if (s == null) //string.NullOrEmpty()
             {
                 currentRangeName = null;
                 return false; //couldn't find name
@@ -208,7 +208,7 @@ public class GoogleSheetMaster : MonoBehaviour
 
             runningtotal += s.Count;
             start = end + 1;
-            end = start + rowsPerIterration;
+            end = start + rowsPerIterration -1; //for a total of A12:A21(12+10-1) which is 10
 
         }
         return true;

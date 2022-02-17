@@ -16,8 +16,8 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     GoldUpdater goldUpdater;
 
-    public List<MagicItem> magicItems { get => PlayerDataMaster.Instance.currentPlayerData.magicItems; private set => PlayerDataMaster.Instance.currentPlayerData.magicItems = value; }
-    public int magicItemCount => magicItems.Count;
+    public List<MagicItem> inventoryItems { get => PlayerDataMaster.Instance.currentPlayerData.magicItems; private set => PlayerDataMaster.Instance.currentPlayerData.magicItems = value; }
+    public int magicItemCount => inventoryItems.Count;
     public System.Action OnInventoryChange;
     void Awake()
     {
@@ -33,17 +33,17 @@ public class Inventory : MonoBehaviour
 
         OnInventoryChange += TEST_OnInventoryChange;
 
-        //If magicItems (aka PlayerDataMaster.Instance.currentPlayerData.magicItems) is null, it means there was nothing there when it was saved - or that it is a new save
-        if (magicItems == null)
-        magicItems = new List<MagicItem>();
+        //If magicItems(changed name)-> inventoryItems (aka PlayerDataMaster.Instance.currentPlayerData.magicItems) is null, it means there was nothing there when it was saved - or that it is a new save
+        if (inventoryItems == null)
+        inventoryItems = new List<MagicItem>();
 
-        foreach (var item in magicItems)
-        {
-            if(!item.FecthSprite())
-            {
-                Debug.LogError($"item {item.magicItemName} could not find a sprite");
-            }
-        }
+        //foreach (var item in inventoryItems)
+        //{
+        //    if(!item.FecthSprite())
+        //    {
+        //        Debug.LogError($"item {item.magicItemName} could not find a sprite");
+        //    }
+        //}
     }
     void OnSceneLoaded(Scene s, LoadSceneMode mode)
     {
@@ -61,6 +61,14 @@ public class Inventory : MonoBehaviour
         if (!goldUpdater)
         {
             Debug.LogError("no gold updater");
+        }
+
+        foreach (var item in inventoryItems)
+        {
+            if (!item.FecthSprite())
+            {
+                Debug.LogError($"item {item.magicItemName} could not find a sprite");
+            }
         }
     }
 
@@ -85,7 +93,7 @@ public class Inventory : MonoBehaviour
     public void AddMagicItem(MagicItem magicItem)
     {
         Debug.Log($"Item: {magicItem.magicItemName} was added!");
-        magicItems.Add(magicItem);
+        inventoryItems.Add(magicItem);
 
         //displayer update? 
         //call an event that it maybe registered to, if it is enabled? sounds CORRECT TBD
@@ -93,7 +101,7 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveMagicItem(MagicItem magicItem)
     {
-        if(magicItems.Remove(magicItem))
+        if(inventoryItems.Remove(magicItem))
             Debug.Log($"Item: {magicItem.magicItemName} was removed!");
         else
             Debug.Log($"Item: {magicItem.magicItemName} was not found, so it could not be removed!"); //still invoke OnInventoryChange?
