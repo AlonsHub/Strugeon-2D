@@ -13,10 +13,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [SerializeField]
     private string pawnName; //character name (not GameObject name)!
 
+    public bool isEnemy;
+
     public MercName mercName;
     [SerializeField]
     //MercSheet _characterSheet;
-    public MercSheet _mercSheet;
+    MercSheet _mercSheet;
     public MercSheet GetMercSheet { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
                                                                                                   //in any other case they are loaded as data and not constructed at all
     bool isSheetInit = false;
@@ -32,10 +34,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public SA_Item[] saItems;
 
     public ActionItem forDisplayPurposesOnly;
-    
-    //public int _currentCooldown;
-    
-    //public int saCooldown;
 
     public List<Pawn> targets;
 
@@ -63,7 +61,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public List<ActionVariation> actionPool;
     List<int> actionWeightList;
 
-    public bool isEnemy = false;
 
 
     public AudioSource audioSource;
@@ -124,6 +121,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public string SA_Description;
 
     // end TEMP AF
+    public int enemyLevel = -1; //should stay that way if not enemy
 
     public override void Init()
     {
@@ -143,6 +141,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         {
             targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
+            EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>();
+
+
         }
         else
         {
@@ -158,7 +159,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             }
 
 
-            GetComponent<WeaponItem>().ApplySheet(_mercSheet); //SHOULD crash and burn if fails, because this should never fail!
+            GetComponent<WeaponItem>().ApplySheet(_mercSheet._minDamageBonus, _mercSheet._maxDamageBonus); //SHOULD crash and burn if fails, because this should never fail!
 
             //max hp bonus
             maxHP = currentHP += _mercSheet._maxHpBonus;

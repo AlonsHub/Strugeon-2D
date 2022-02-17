@@ -270,6 +270,13 @@ public class WeaponItem : ActionItem
         minDamage += ms._minDamageBonus;
         maxDamage += ms._maxDamageBonus;
     }
+    public void ApplySheet(int addMin, int addMax)
+    {
+        //takes the whole MercSheet just in case we want to get more info later
+
+        minDamage += addMin;
+        maxDamage += addMax;
+    }
 
     void OnAttack() //just something to have in the attackAction. Currently holds nothing
     {

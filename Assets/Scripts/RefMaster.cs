@@ -7,6 +7,8 @@ public class RefMaster : MonoBehaviour
     public static RefMaster Instance;
 
     public List<Pawn> enemies;
+    public List<int> enemyLevels;
+
     public List<Pawn> mercs;
 
 

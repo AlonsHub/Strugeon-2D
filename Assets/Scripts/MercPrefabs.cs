@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public enum MercName {None, Smadi, Shuki, Yeho, Cheeto, Ezra};
 
+//make one of these for enemies
 public class MercPrefabs : MonoBehaviour
 {
     public static MercPrefabs Instance;
