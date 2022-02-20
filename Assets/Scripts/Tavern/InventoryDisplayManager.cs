@@ -12,7 +12,17 @@ public class InventoryDisplayManager : MonoBehaviour
     GameObject itemDisplayerPrefab;
     [SerializeField] //just to see them
     List<MagicItemDIsplayer> displayers = new List<MagicItemDIsplayer>();
+
+    bool sellModeIsOn;
     private void OnEnable()
+    {
+        SetSellMode(false);
+        RefreshInventory();
+
+        Inventory.Instance.OnInventoryChange += RefreshInventory;
+    }
+
+    public void RefreshInventory()
     {
         EnsureOneDisplayerPerMagicItem();
 
@@ -48,9 +58,22 @@ public class InventoryDisplayManager : MonoBehaviour
         }
     }
 
+    public void SetSellMode(bool onOrOff) //on is true, set in inspector
+    {
+        sellModeIsOn = onOrOff;
+        foreach (var item in displayers)
+        {
+            item.sellGroup.SetActive(onOrOff);
+        }
+    }
+    public void ToggleSellMode() //set in inspector
+    {
+        SetSellMode(!sellModeIsOn);
+    }
+
     private void OnDisable()
     {
-
+        Inventory.Instance.OnInventoryChange -= RefreshInventory;
     }
 
 

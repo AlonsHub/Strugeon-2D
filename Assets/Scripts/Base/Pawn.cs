@@ -251,10 +251,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Spawn damage text (numbers)
         GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
 
-        if(DamageModifier != 0)
+        if(DoModifyDamage)
         {
             damage =(int)(damage * damageModifier);
             DamageModifier = 0;
+            DoModifyDamage = false;
             RemoveIconByColor("yellowDeBuff");
         }
 

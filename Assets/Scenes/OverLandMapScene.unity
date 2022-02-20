@@ -4934,7 +4934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3215f891e78828a42985a68f84aa6660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemyInstances: []
+  enemyLevels: 
   mercs: []
   selectionScreenDisplayer: {fileID: 857471290}
   censer: {fileID: 0}
@@ -9265,7 +9266,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5218895868494374831}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2045366866}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9718,7 +9719,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6699335833202670628}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2045366866}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -11220,7 +11221,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1444934243694758230}
   toggleTransition: 1
   graphic: {fileID: 0}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 2045366866}
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []

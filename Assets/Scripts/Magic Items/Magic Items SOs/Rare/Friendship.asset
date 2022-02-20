@@ -14,8 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magicItem:
     magicItemName: Friendship made along the way
-    goldValue: 0
-    NF_Value: 2
+    goldValue: -50
+    spectrumProfile:
+      red: 0
+      blue: 0
+      yellow: 0
+      purple: 0
     rarity: 2
     dropRateWeight: 2
     itemSprite: {fileID: 21300000, guid: 8dbc625aeaa2c644eb6edd7cf2f44d9a, type: 2}

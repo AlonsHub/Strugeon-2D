@@ -12,7 +12,7 @@ public class RefMaster : MonoBehaviour
     public List<Pawn> mercs;
 
 
-    //just added 20/06
+    //just added 20/06 //probably dont need this
     public SelectionScreenDisplayer selectionScreenDisplayer;
 
      public Censer censer; //maybe a list?
@@ -36,20 +36,6 @@ public class RefMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    //public void SetEnemyCharacters()
-    //{
-    //    //enemies = newEnemies;
-    //    for (int i = 0; i < enemyInstances.Count; i++)
-    //    {
-    //        SetEnemyLevel(enemyInstances[i], enemyLevels[i]);
-    //    }
-
-    //    foreach(Pawn p in enemyInstances)
-    //    {
-    //        p.Init();
-    //    }
-    //}
     public void SetEnemyCharacters(List<Pawn> enemList,List<int> levelList)
     {
         enemyInstances = enemList;
@@ -61,8 +47,6 @@ public class RefMaster : MonoBehaviour
 
             enemyInstances[i].Init();
         }
-
-        
     }
     public void SetMercPawns()
     {
@@ -77,19 +61,12 @@ public class RefMaster : MonoBehaviour
         p.maxHP += level * GameStats.maxHpBonusPerLevel;
         p.gameObject.GetComponent<WeaponItem>().ApplySheet(level * GameStats.minDmgPerLevel, level * GameStats.maxDmgPerLevel);
     }
-    //public void SetMercPawns(List<Pawn> newMercs)
+    
+    //[ContextMenu("Hope")] //this is sweet, but what the fuck is this even?!
+    //public void DoShit()
     //{
-    //    mercs = newMercs;
-    //    foreach (Pawn p in mercs)
-    //    {
-    //        p.Init();
-    //    }
+    //    Debug.Log(Instance.name);
     //}
-    [ContextMenu("Hope")]
-    public void DoShit()
-    {
-        Debug.Log(Instance.name);
-    }
 
     public void SetNewMercList(List<Pawn> newMercs)
     {
@@ -99,21 +76,4 @@ public class RefMaster : MonoBehaviour
             mercs.Add(merc);
         }
     }
-
-    //public void SetNewPawns(List<Pawn> newPawns, bool isEnemy)
-    //{
-    //    if (isEnemy)
-    //    {
-    //        enemies = newPawns;
-    //    }
-    //    else
-    //    {
-    //        mercs = newPawns;
-    //    }
-    //    foreach (Pawn p in newPawns)
-    //    {
-    //        p.Init();
-    //        p.isEnemy = isEnemy;
-    //    }
-    //}
 }

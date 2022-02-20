@@ -99,16 +99,24 @@ public class Inventory : MonoBehaviour
         //call an event that it maybe registered to, if it is enabled? sounds CORRECT TBD
         OnInventoryChange.Invoke();
     }
-    public void RemoveMagicItem(MagicItem magicItem)
+    public bool RemoveMagicItem(MagicItem magicItem)
     {
         if(inventoryItems.Remove(magicItem))
+        {
+
             Debug.Log($"Item: {magicItem.magicItemName} was removed!");
+            OnInventoryChange.Invoke();
+            return true;
+        }
         else
+        {
+
             Debug.Log($"Item: {magicItem.magicItemName} was not found, so it could not be removed!"); //still invoke OnInventoryChange?
+            return false;
+        }
 
         //displayer update? 
         //call an event that it maybe registered to, if it is enabled? sounds CORRECT TBD
-        OnInventoryChange.Invoke();
     }
 
     void TEST_OnInventoryChange()
