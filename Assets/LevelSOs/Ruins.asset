@@ -13,27 +13,24 @@ MonoBehaviour:
   m_Name: Ruins
   m_EditorClassIdentifier: 
   levelData:
-    enemies:
-    - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-    - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-    - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
     magicItem:
-      magicItemName: Knight Shield
-      goldValue: 10
+      magicItemName: Ring
+      goldValue: 35
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
       rarity: 1
-      dropRateWeight: 1
-      itemSprite: {fileID: 21300000, guid: 866eb49c6f94d394786d5d2d6e73f2b8, type: 2}
-      spriteName: KnightShield
-    expReward: 35
+      dropRateWeight: 3
+      itemSprite: {fileID: -8753393225063967389, guid: 31155a4835afb294f8a618b0cb75f337,
+        type: 3}
+      spriteName: Ring
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 7
-    difficulty: 0
+    goldReward: 13
+    difficulty: 1
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
