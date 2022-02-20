@@ -55,7 +55,6 @@ public class RefMaster : MonoBehaviour
         enemyInstances = enemList;
         enemyLevels = levelList;
 
-        //enemies = newEnemies;
         for (int i = 0; i < enemyInstances.Count; i++)
         {
             SetEnemyLevel(enemyInstances[i], enemyLevels[i]);
