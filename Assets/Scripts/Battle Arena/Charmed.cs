@@ -58,7 +58,7 @@ public class Charmed : MonoBehaviour
         weaponItem.pawn.RemoveIconByColor("charmed");
 
         // change pawn back
-        weaponItem.targets = RefMaster.Instance.enemies;
+        weaponItem.targets = RefMaster.Instance.enemyInstances;
         Destroy(this); //just this Charmed component! 
     }
 

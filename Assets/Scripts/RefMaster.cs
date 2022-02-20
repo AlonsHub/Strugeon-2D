@@ -6,7 +6,7 @@ public class RefMaster : MonoBehaviour
 {
     public static RefMaster Instance;
 
-    public List<Pawn> enemies;
+    public List<Pawn> enemyInstances;
     public List<int> enemyLevels;
 
     public List<Pawn> mercs;
@@ -16,13 +16,7 @@ public class RefMaster : MonoBehaviour
     public SelectionScreenDisplayer selectionScreenDisplayer;
 
      public Censer censer; //maybe a list?
-    //void Awake()
-    //{
-    //    if (Instance != null && Instance != this)
-    //        Destroy(gameObject);
-    //    //WAIT A GOD DAMNED MINUTE! THIS IS TERRIBLE!!!!!!!!!
-    //    Instance = this;   
-    //}
+   
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -35,20 +29,41 @@ public class RefMaster : MonoBehaviour
 
         if(mercs == null)
         mercs = new List<Pawn>();
-        if(enemies == null)
-        enemies = new List<Pawn>();
+
+        if(enemyInstances == null)
+        enemyInstances = new List<Pawn>();
 
         DontDestroyOnLoad(gameObject);
     }
 
 
-    public void SetEnemyCharacters()
+    //public void SetEnemyCharacters()
+    //{
+    //    //enemies = newEnemies;
+    //    for (int i = 0; i < enemyInstances.Count; i++)
+    //    {
+    //        SetEnemyLevel(enemyInstances[i], enemyLevels[i]);
+    //    }
+
+    //    foreach(Pawn p in enemyInstances)
+    //    {
+    //        p.Init();
+    //    }
+    //}
+    public void SetEnemyCharacters(List<Pawn> enemList,List<int> levelList)
     {
+        enemyInstances = enemList;
+        enemyLevels = levelList;
+
         //enemies = newEnemies;
-        foreach(Pawn p in enemies)
+        for (int i = 0; i < enemyInstances.Count; i++)
         {
-            p.Init();
+            SetEnemyLevel(enemyInstances[i], enemyLevels[i]);
+
+            enemyInstances[i].Init();
         }
+
+        
     }
     public void SetMercPawns()
     {
@@ -56,6 +71,12 @@ public class RefMaster : MonoBehaviour
         {
             p.Init();
         }
+    }
+
+    void SetEnemyLevel(Pawn p, int level)
+    {
+        p.maxHP += level * GameStats.maxHpBonusPerLevel;
+        p.gameObject.GetComponent<WeaponItem>().ApplySheet(level * GameStats.minDmgPerLevel, level * GameStats.maxDmgPerLevel);
     }
     //public void SetMercPawns(List<Pawn> newMercs)
     //{

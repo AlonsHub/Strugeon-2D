@@ -164,7 +164,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             //max hp bonus
             maxHP = currentHP += _mercSheet._maxHpBonus;
 
-            targets = RefMaster.Instance.enemies;
+            targets = RefMaster.Instance.enemyInstances;
             
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
 
@@ -340,7 +340,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         else
         {
             //RefMaster.Instance.enemies.Remove(RefMaster.Instance.enemies.Where(x => x.name == name).SingleOrDefault()); //not ideal
-            RefMaster.Instance.enemies.Remove(this); //not ideal
+            RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
 
         TurnMaster.Instance.RemoveTurnTaker(this);

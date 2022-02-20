@@ -62,7 +62,7 @@ public class TurnMaster : MonoBehaviour
     {
         turnTakers = new List<Pawn>();
         // after RefMaster is set
-        turnTakers.AddRange(RefMaster.Instance.enemies);
+        turnTakers.AddRange(RefMaster.Instance.enemyInstances);
         turnTakers.AddRange(RefMaster.Instance.mercs);
 
         //roll initiative and Sort
@@ -264,7 +264,7 @@ public class TurnMaster : MonoBehaviour
     {
         while (isGameRunning)
         {
-            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemies.Count == 0)
+            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemyInstances.Count == 0)
             {
                 isGameRunning = false;
                 Debug.Log("Game over!");
@@ -498,7 +498,7 @@ public class TurnMaster : MonoBehaviour
         while (isGameRunning)
         {
             yield return new WaitForSeconds(endGameCheckRate);
-            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemies.Count == 0)
+            if (RefMaster.Instance.mercs.Count == 0 || RefMaster.Instance.enemyInstances.Count == 0)
             {
                 isGameRunning = false;
                 Debug.Log("Game over!");

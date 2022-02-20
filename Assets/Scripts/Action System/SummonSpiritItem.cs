@@ -36,7 +36,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
         }
         else
         {
-            pawn.targets = RefMaster.Instance.enemies;
+            pawn.targets = RefMaster.Instance.enemyInstances;
         }
 
         foreach (var merc in pawn.targets)
@@ -63,7 +63,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
 
-        RefMaster.Instance.enemies.Add(newSpirit);
+        RefMaster.Instance.enemyInstances.Add(newSpirit);
         TurnMaster.Instance.AddNewTurnTaker(newSpirit);
         cooldown = maxCooldown;
         pawn.anim.SetTrigger("Summon");
@@ -89,7 +89,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
             }
             else //doesn't ever happen as of now, but who knows?
             {
-                if (RefMaster.Instance.enemies.Count > 1)
+                if (RefMaster.Instance.enemyInstances.Count > 1)
                 {
                     weight *= 10;
                 }

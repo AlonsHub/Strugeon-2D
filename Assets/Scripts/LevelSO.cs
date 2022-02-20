@@ -14,7 +14,10 @@ public class LevelSO : ScriptableObject
 [System.Serializable]
 public struct LevelData
 {
-    public List<Pawn> enemies; //Ref and if we want random placement or easier picking from a range
+    public List<Pawn> enemies => enemySet.enemyPrefabs; //Ref and if we want random placement or easier picking from a range
+    public List<int> enemyLevels => enemySet.enemyLevels;
+
+    EnemySet enemySet;
     //public List<MagicItemSO> magicItems; 
     public MagicItem magicItem; 
     public int expReward;
@@ -39,7 +42,8 @@ public struct LevelData
         difficulty = newDifficulty;
 
          //this just needs to be one method... 
-        enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty);
+        //enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty); // here!!!!!
+        enemySet = DifficultyTranslator.Instance.DifficultyToEnemySet(newDifficulty); // here!!!!!
         magicItem = DifficultyTranslator.Instance.DifficultyToSingleReward(newDifficulty);
         goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty);
         expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty);

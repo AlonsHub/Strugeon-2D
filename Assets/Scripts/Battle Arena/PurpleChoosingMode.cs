@@ -49,7 +49,7 @@ public class PurpleChoosingMode : MonoBehaviour
             ren.material.SetFloat("_Thickness", 0f); // the selection for psion powers in general
         }
 
-        foreach (Pawn p in RefMaster.Instance.enemies)
+        foreach (Pawn p in RefMaster.Instance.enemyInstances)
         {
             ren = p.GetComponentInChildren<Renderer>();
             ren.material.SetColor("_Tint", newColor);
@@ -81,7 +81,7 @@ public class PurpleChoosingMode : MonoBehaviour
         //Very similar to "ToggleTint()" but this is on Setup and we're looping through them anyways
 
         Renderer ren;
-        foreach (Pawn p in RefMaster.Instance.enemies)
+        foreach (Pawn p in RefMaster.Instance.enemyInstances)
         {
             ren = p.GetComponentInChildren<Renderer>();
             ren.material.SetColor("_Tint", colorOn);

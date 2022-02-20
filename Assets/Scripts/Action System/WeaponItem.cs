@@ -65,7 +65,7 @@ public class WeaponItem : ActionItem
         if (pawn.isEnemy)
             targets = RefMaster.Instance.mercs;
         else
-            targets = RefMaster.Instance.enemies;
+            targets = RefMaster.Instance.enemyInstances;
 
         // arrowSpawn = pawn.arrow
         la = GetComponentInChildren<LookAtter>();

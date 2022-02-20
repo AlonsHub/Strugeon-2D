@@ -55,6 +55,29 @@ public class DifficultyTranslator : MonoBehaviour
                 //break;
         }
     }
+     public EnemySet DifficultyToEnemySet(LairDifficulty difficulty)
+    {
+        int rand;
+        //return presets[(int)difficulty];
+        switch (difficulty)
+        {
+            case LairDifficulty.Easy:
+                rand = Random.Range(0, easyEnemySets.Count);
+                return easyEnemySets[rand].enemySet;
+                //break;
+            case LairDifficulty.Medium:
+                rand = Random.Range(0, mediumEnemySets.Count);
+                return mediumEnemySets[rand].enemySet;
+            //break;
+            case LairDifficulty.Hard:
+                rand = Random.Range(0, hardEnemySets.Count);
+                return hardEnemySets[rand].enemySet;
+            //break;
+            default:
+                return null;
+                //break;
+        }
+    }
 
     
     public MagicItem DifficultyToSingleReward(LairDifficulty difficulty)

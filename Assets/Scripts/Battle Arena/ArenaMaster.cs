@@ -65,8 +65,9 @@ public class ArenaMaster : MonoBehaviour
                 enemySpawnTiles.RemoveAt(rnd);
                 //go.name.("(Clone)");
             }
-            RefMaster.Instance.enemies = newEnemies; //sends enemies to refmaster to be kept there as the common ref for all components to use (AND NOT CACHED HERE)
-            RefMaster.Instance.SetEnemyCharacters(); //inits enemies
+            //RefMaster.Instance.enemyInstances = newEnemies; //sends enemies to refmaster to be kept there as the common ref for all components to use (AND NOT CACHED HERE)
+            //RefMaster.Instance.enemyLevels = new List<int>(levelData.enemyLevels); //sends enemy levels to ref master (just making sure the list is not a ref to the level data list - since that may re-roll at some point, and we don't want any changes to carry over from the site to the arena after this moment anyways
+            RefMaster.Instance.SetEnemyCharacters(newEnemies, new List<int>(levelData.enemyLevels)); //inits enemies
         }
 
             //Spawn mercs:
