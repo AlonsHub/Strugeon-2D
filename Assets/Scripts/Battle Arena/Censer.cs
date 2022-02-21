@@ -33,19 +33,26 @@ public class Censer : MonoBehaviour, GridPoser, PurpleTarget
         return name;
     }
 
-    public void SetGridPos(Vector2Int newPos)
+    public void SetGridPos(Vector2Int newPos) //assumes the tile is empty to begin with!
     {
+        
+
         gridPos = newPos;
         currentNode = FloorGrid.Instance.GetTileByIndex(gridPos);
-        currentNode.isEmpty = false;
-        currentNode.myOccupant = gameObject;
+
+        if (!currentNode.isEmpty)
+            Debug.LogError($"Overriding an existing tile({currentNode.gridIndex}) that is not empty. It has {currentNode.myOccupant}, and is trying to recieve {name}");
+        currentNode.AcceptOccupant(gameObject);
+        //currentNode.isEmpty = false;
+        //currentNode.myOccupant = gameObject;
     }
     private void Start()
     {
         RefMaster.Instance.censer = this;
-        currentNode = FloorGrid.Instance.GetTileByIndex(gridPos);
+        //currentNode = FloorGrid.Instance.GetTileByIndex(gridPos);
 
-        currentNode.isEmpty = false;
-        currentNode.myOccupant = gameObject;
+        //currentNode.AcceptOccupant(gameObject);
+        //currentNode.isEmpty = false;
+        //currentNode.myOccupant = gameObject;
     }
 }

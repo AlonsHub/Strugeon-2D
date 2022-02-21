@@ -40,10 +40,10 @@ public class BigHandsItem : ActionItem, SA_Item
 
         //tgt is the tile on which the obstacle is sitting
         FloorTile ft = tgt.GetComponent<FloorTile>();
-        ft.isEmpty = true;
-        Destroy(ft.myOccupant);
-        ft.myOccupant = null;
 
+        //Destroy(ft.myOccupant);
+        ft.RemoveOccupant(true);
+        
         toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
         //LookAtter la = GetComponentInChildren<LookAtter>();
         if (toHit && la)
@@ -62,7 +62,7 @@ public class BigHandsItem : ActionItem, SA_Item
 
             //if(!ft.isEmpty && ft.myOccupant.GetComponent<ObstacleRock>()) //if it is an obstacle rock, we dont really need to cache it -
             //just to check that it is... maybe test by tag instead?
-            if (!ft.isEmpty && ft.myOccupant)
+            if (!ft.isEmpty && ft.myOccupant) //linq Where would make this really easy TBF
             {
                 if (ft.myOccupant.CompareTag("Rock"))
                 {

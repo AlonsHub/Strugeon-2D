@@ -90,6 +90,8 @@ public class ArenaMaster : MonoBehaviour
             RefMaster.Instance.mercs = newMercs; //sends newMercs to refmaster to be kept there as the common ref for all components to use (AND NOT CACHED HERE)
             RefMaster.Instance.SetMercPawns(); //inits all mercs
 
+            FloorGrid.Instance.SpawnObjectOnGrid(FloorGrid.Instance.censerPrefab, FloorGrid.Instance.censerGridPos); //move that data here please TBF
+
             FloorGrid.Instance.SpawnObstacles();
 
             StartCoroutine("DelayedStart");

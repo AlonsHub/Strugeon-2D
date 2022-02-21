@@ -19,5 +19,8 @@ public class ObstacleRock : MonoBehaviour, GridPoser
     public void SetGridPos(Vector2Int newPos)
     {
         _gridPos = newPos;
+        FloorTile ft = FloorGrid.Instance.GetTileByIndex(newPos);
+
+        ft.AcceptOccupant(gameObject);
     }
 }

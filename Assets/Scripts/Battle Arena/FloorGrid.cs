@@ -74,7 +74,7 @@ public class FloorGrid : MonoBehaviour
         }
 
         //FIND BETTER PLACE FOR THE CENSER POSITIONING and SPAWN 
-        SpawnObjectOnGrid(censerPrefab, censerGridPos);
+        //SpawnObjectOnGrid(censerPrefab, censerGridPos);
        
         //List<FloorTile> availableTiles = GetAvailableTiles();
 
@@ -134,6 +134,30 @@ public class FloorGrid : MonoBehaviour
         return toReturn;
     }
 
+    public List<T> GetNeighbourOccupantsByType<T>(Vector2Int pos)
+    {
+        List<T> toReturn = new List<T>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
+
+                int checkX = x + pos.x;
+                int checkY = y + pos.y;
+                if (checkX >= 0 && checkX < floorSize.x && checkY >= 0 && checkY < floorSize.y)
+                {
+                    if (floorTiles[checkX, checkY].isEmpty)
+                        continue;
+                    T thing = floorTiles[checkX, checkY].myOccupant.GetComponent<T>();
+                    if (thing != null)
+                    toReturn.Add(thing);
+                }
+            }
+        }
+        return toReturn;
+    }
+
     public List<FloorTile> path;
 
     public FloorTile GetTileByIndex(Vector2Int index)
@@ -147,9 +171,9 @@ public class FloorGrid : MonoBehaviour
         //go.GetComponent<GridPoser>().SetGridPos(new Vector2Int(gridPos.x, gridPos.y)); //grid poser might be best for snapping and positioning
         //go.GetComponent<Censer>().SetGridPos(gridPos);
         go.GetComponent<GridPoser>().SetGridPos(gridPos);
-
-        floorTiles[gridPos.x, gridPos.y].isEmpty = false; 
-        floorTiles[gridPos.x, gridPos.y].myOccupant = go;
+        floorTiles[gridPos.x, gridPos.y].AcceptOccupant(go);
+        //floorTiles[gridPos.x, gridPos.y].isEmpty = false; 
+        //floorTiles[gridPos.x, gridPos.y].myOccupant = go;
 
         return go;
     }
@@ -158,8 +182,9 @@ public class FloorGrid : MonoBehaviour
     {
         toPlace.transform.position = floorTiles[gridPos.x, gridPos.y].transform.position;
 
-        floorTiles[gridPos.x, gridPos.y].isEmpty = false;
-        floorTiles[gridPos.x, gridPos.y].myOccupant = toPlace;
+        floorTiles[gridPos.x, gridPos.y].AcceptOccupant(toPlace);
+        //floorTiles[gridPos.x, gridPos.y].isEmpty = false;
+        //floorTiles[gridPos.x, gridPos.y].myOccupant = toPlace;
     }
 
     [SerializeField]
@@ -181,9 +206,9 @@ public class FloorGrid : MonoBehaviour
     public void SetTileToStaticObstacle(Vector2Int pos, GameObject obstacle)
     {
         // check if pos is in-range for the grid...
-
-        floorTiles[pos.x, pos.y].myOccupant = obstacle;
-        floorTiles[pos.x, pos.y].isEmpty = false;
+        floorTiles[pos.x, pos.y].AcceptOccupant(obstacle);
+        //floorTiles[pos.x, pos.y].myOccupant = obstacle;
+        //floorTiles[pos.x, pos.y].isEmpty = false;
     }
 
     public FloorTile GetRandomFreeTile()

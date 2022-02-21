@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HolyStrikeItem : MonoBehaviour
+public class HolyStrikeComponent : MonoBehaviour //NOT AN ACTION ITEM!!!
 {
     [SerializeField]
     WeaponItem weaponItem;
@@ -18,12 +18,19 @@ public class HolyStrikeItem : MonoBehaviour
 
     [SerializeField]
     GameObject addonPrefab;
-    private void Start()
+    private void Awake()
     {
         weaponItem = GetComponent<WeaponItem>();
-        weaponItem.attackAction += OnAttack;
     }
-    public void OnAttack()
+    private void OnEnable()
+    {
+        weaponItem.attackAction += RollToProcOnAttack;
+    }
+    private void OnDisable()
+    {
+        weaponItem.attackAction -= RollToProcOnAttack;
+    }
+    public void RollToProcOnAttack()
     {
         //roll chance (15% as GDD)
         int roll = Random.Range(1, 101);
@@ -37,14 +44,14 @@ public class HolyStrikeItem : MonoBehaviour
             weaponItem.ExtraDamageTarget(minDmg, maxDmg);
 
             List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
-            foreach (var neighbour in neigbourTiles)
+            foreach (var neighbour in neigbourTiles) //linq Where would simplify this TBF
             {
-                if(neighbour.isEmpty || !neighbour.myOccupant)
-                {
-                    neighbour.isEmpty = true;
-                    neighbour.myOccupant = null; //makes sure that IF ONE then ALSO THE OTHER 
-                    continue;
-                }
+                //if(neighbour.isEmpty || !neighbour.myOccupant) //should never have happened here
+                //{
+                //    neighbour.isEmpty = true;
+                //    neighbour.myOccupant = null; //makes sure that IF ONE then ALSO THE OTHER 
+                //    continue;
+                //}
                 Pawn check = neighbour.myOccupant.GetComponent<Pawn>();
                 if (check == null)
                 {

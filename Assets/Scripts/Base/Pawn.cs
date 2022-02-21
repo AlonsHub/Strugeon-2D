@@ -187,7 +187,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         CalculateActionList();
         if (actionWeightList.Count == 0)
         {
-            //TurnOrder.Instance.NextTurn(); //just be done
             TurnDone = true;
             return; //!!!!!!!!!!
         }
@@ -212,12 +211,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         actionPool = new List<ActionVariation>();
         actionWeightList = new List<int>();
 
+        //Call action "before calcActionList"
+
         foreach (ActionItem ai in actionItems)
         {
             ai.CalculateVariations(); //Maybe not always, could "if" that out in some cases - SADLY NOT TRUE
 
             actionPool.AddRange(ai.actionVariations);
-
         }
 
         if(hasPurple && purpleTgt != null)
@@ -240,6 +240,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             runningTotal += av.weight;
             actionWeightList.Add(runningTotal);
         }
+
+        //Call action "after calcActionList"
     }
 
     public override void TakeDamage(int damage) //ADD DamageType and derrive text colour from that
@@ -313,6 +315,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         TurnMaster.Instance.theCowardly.Add(mercName);
         TurnMaster.Instance.RemoveTurnTaker(this);
 
+        tileWalker.currentNode.RemoveOccupant(false) ;
+
         //TurnMaster.Instance.turnTakers.Remove(this);
         //TurnMaster.Instance.turnPlates.Remove(myTurnPlate); //replace with clear method
         //Destroy(myTurnPlate.gameObject);
@@ -328,7 +332,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         //simplify Death, YOU IDIOT!
 
-        yield return new WaitForSeconds(.1f);
+        //yield return new WaitForSeconds(.1f);
+        yield return new WaitForEndOfFrame();
         BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         if (!isEnemy)
         {
@@ -343,15 +348,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             //RefMaster.Instance.enemies.Remove(RefMaster.Instance.enemies.Where(x => x.name == name).SingleOrDefault()); //not ideal
             RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
-
         TurnMaster.Instance.RemoveTurnTaker(this);
-        Destroy(gameObject);
+        tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
+        //Destroy(gameObject);
     }
 
-    public Vector2Int GetGridPos()
-    {
-        return tileWalker.gridPos;
-    }
+    
 
     public void SetupPurpleBuff(GameObject tgt)
     {
@@ -419,7 +421,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Destroy(effectIcons.Where(x => x.name == colorName).FirstOrDefault());
         //effectIcons.Remove(effectIcons.Where(x => x.name == colorName).FirstOrDefault());
     }
-
+    public Vector2Int GetGridPos()
+    {
+        return tileWalker.gridPos;
+    }
     public void SetGridPos(Vector2Int newPos)
     {
         Debug.LogWarning("something is trying to change + " + name + "'s gridpos");

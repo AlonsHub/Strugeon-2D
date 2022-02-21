@@ -206,7 +206,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //nothing should have happened, but could be that site-info was open - and then squad arrived... should maybe close site data displayer?
         if (isCooldown || isWaitingForSquad || isReady)
         {
-            Debug.LogError("the site is not available to disable display info for");
+            //Debug.LogWa("the site is not available to disable display info for");
             return;
         }
 

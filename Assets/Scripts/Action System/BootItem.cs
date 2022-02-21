@@ -25,7 +25,7 @@ public class BootItem : ActionItem
     public override void Action(GameObject tgt)
     {
         pawn.tileWalker.Step(tgt.GetComponent<FloorTile>());
-        StartCoroutine("CharacterStep");
+        StartCoroutine(nameof(CharacterStep));
 
     }
     IEnumerator CharacterStep()

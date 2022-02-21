@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5092255476189858162}
   - component: {fileID: -3395797105699778925}
   - component: {fileID: 1105644228005410149}
+  - component: {fileID: 6785167951736512150}
   m_Layer: 11
   m_Name: Yeho
   m_TagString: Merc
@@ -139,6 +140,7 @@ MonoBehaviour:
     bonusDamage: 0
     damageElement: 0
     currentUses: 0
+    maxUses: 0
     effectGFXPrefab: {fileID: 0}
   damageType: 2
   targets: []
@@ -159,6 +161,7 @@ MonoBehaviour:
   currentHP: 100
   maxHP: 100
   pawnName: Yeho
+  isEnemy: 0
   mercName: 3
   _mercSheet:
     characterName: 0
@@ -180,7 +183,6 @@ MonoBehaviour:
     type: 3}
   myTurnPlate: {fileID: 0}
   actionPool: []
-  isEnemy: 0
   audioSource: {fileID: 0}
   hitSounds: []
   attackSounds: []
@@ -192,6 +194,7 @@ MonoBehaviour:
   myPrefab: {fileID: 0}
   SA_Title: Quick Step
   SA_Description: 
+  enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &5092255476189858162
 MonoBehaviour:
@@ -249,6 +252,20 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
+--- !u!114 &6785167951736512150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864d9da3ac4a15b4f88544801d728af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamage: 3
+  maxDamage: 8
 --- !u!1 &1667078419819343595
 GameObject:
   m_ObjectHideFlags: 0

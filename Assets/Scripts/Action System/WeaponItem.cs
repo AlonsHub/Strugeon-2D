@@ -43,7 +43,7 @@ public class WeaponItem : ActionItem
 
     LookAtter la;
 
-    public System.Action attackAction; //not sure if this is even used
+    public System.Action attackAction; //not sure if this is even used //holy shit is it ever boiii! thank you! <3... this is weird coming from myself
 
 
 
@@ -133,16 +133,16 @@ public class WeaponItem : ActionItem
     }
     public void DamageTarget()
     {
-        //float rolledDamage = damage + Random.Range(-5, 6);
-        float rolledDamage = Random.Range(minDamage, maxDamage);
-        if (toHit == null || toHit.currentHP <= 0)
-        {
-            BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
+        
+        float rolledDamage = Random.Range(minDamage, maxDamage+1); //+1 to max, since it is still rolling ints not floats - so its exclusive
+        //if (toHit == null || toHit.currentHP <= 0)
+        //{
+        //    BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
 
-            la.tgt = null;
-            pawn.TurnDone = true;
-            return;
-        }
+        //    la.tgt = null;
+        //    pawn.TurnDone = true;
+        //    return;
+        //}
 
         if (hasEffect)
         {

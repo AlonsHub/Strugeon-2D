@@ -53,4 +53,18 @@ public class FloorTile : MonoBehaviour
             return 14 * deltaX + 10 * (deltaY - deltaX);
         }
     }
+
+    public void AcceptOccupant(GameObject newOccupant)
+    {
+        isEmpty = false;
+        myOccupant = newOccupant;
+    }
+    public void RemoveOccupant(bool doAlsoDestroy)
+    {
+        isEmpty = true;
+
+        if (doAlsoDestroy)
+            Destroy(myOccupant);
+        myOccupant = null;
+    }
 }

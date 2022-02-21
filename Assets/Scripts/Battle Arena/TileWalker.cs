@@ -102,8 +102,8 @@ public class TileWalker : MonoBehaviour
     {
         FindOwnGridPos();
 
-        currentNode.isEmpty = true;
-
+        //currentNode.isEmpty = true;
+        currentNode.RemoveOccupant(false);
         
         int stepsToTake = path.Count - range;
        
@@ -134,8 +134,9 @@ public class TileWalker : MonoBehaviour
             yield return new WaitForSeconds(stepTime);
         }
         FindOwnGridPos();
-        currentNode.isEmpty = false;
-        currentNode.myOccupant = gameObject;
+        currentNode.AcceptOccupant(gameObject);
+        //currentNode.isEmpty = false;
+        //currentNode.myOccupant = gameObject;
         lookAtter.tgt = null; //stops rotating
 
         hasPath = false; //Finished!
@@ -145,13 +146,15 @@ public class TileWalker : MonoBehaviour
 
     public void Step(FloorTile stepDest) //takes one(?) step in a direction on the Array of the map.
     {
-        currentNode.isEmpty = true;
-        currentNode.myOccupant = null;
+        currentNode.RemoveOccupant(false);
+        //currentNode.isEmpty = true;
+        //currentNode.myOccupant = null;
         //NavMeshAgent agent = GetComponent<NavMeshAgent>();
         //agent.Warp(stepDest.transform.position + offsetFromGrid);
         transform.position = stepDest.transform.position;
 
-        FindOwnGridPos();
+        FindOwnGridPos(); //accepting occpants twice, just in case
+        stepDest.AcceptOccupant(gameObject);
         //currentNode = stepDest;
         //currentNode.isEmpty = false;
     }
@@ -168,8 +171,9 @@ public class TileWalker : MonoBehaviour
             gridPos.x = Mathf.RoundToInt(x);
             gridPos.y = Mathf.RoundToInt(y);
             currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
-            currentNode.isEmpty = false;
-            currentNode.myOccupant = gameObject;
+            currentNode.AcceptOccupant(gameObject);
+            //currentNode.isEmpty = false;
+            //currentNode.myOccupant = gameObject;
             transform.position = currentNode.transform.position + offsetFromGrid;
         }
 
