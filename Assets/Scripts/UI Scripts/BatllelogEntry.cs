@@ -49,10 +49,34 @@ public class BatllelogEntry : Hoverable
     //    passivePawnNameDisplayer.color = colour;
     //    numberDisplayer.gameObject.SetActive(false);
     //}
-    public void Init(string actingName, Sprite actionSprite)
+    public void Init(string actingName, Sprite actionSprite, ActionSymbol actionSymbol) //unique to Escape!
     {
         actingPawnNameDisplayer.text = actingName;
         actionImage.sprite = actionSprite;
+        switch (actionSymbol) //consider using this for all cases! instead of all these overloads TBF
+        {
+            case ActionSymbol.Attack:
+                break;
+            case ActionSymbol.Heal:
+                break;
+            case ActionSymbol.Walk:
+                break;
+            case ActionSymbol.Censer:
+                break;
+            case ActionSymbol.Rock:
+                break;
+            case ActionSymbol.Death:
+                break;
+            case ActionSymbol.Escape:
+        passivePawnNameDisplayer.text = "Escaped!";
+                break;
+            case ActionSymbol.Summon:
+                break;
+            case ActionSymbol.Charm:
+                break;
+            default:
+                break;
+        }
         //actionImage.SetNativeSize();
         //passivePawnNameDisplayer.text = passiveName;
 

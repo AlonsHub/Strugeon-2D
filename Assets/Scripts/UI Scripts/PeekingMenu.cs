@@ -9,12 +9,12 @@ public class PeekingMenu : MonoBehaviour
 
     public Image sr;
 
-    public bool menuOpen = false;
+    public bool menuOpen;
 
-    [SerializeField]
-    Button peekButton;
-    [SerializeField]
-    Button hideButton;
+    //[SerializeField]
+    //Button peekButton;
+    //[SerializeField]
+    //Button hideButton;
 
 
     public Animator anim; //temp set in instpector
@@ -36,7 +36,7 @@ public class PeekingMenu : MonoBehaviour
         menuOpen = true;
     }
 
-    public void ToggleMenu()
+    public void ToggleMenu() //idle log uses this in inspector
     {
         //if(menuOpen)
         //{

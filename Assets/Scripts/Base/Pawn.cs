@@ -425,9 +425,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         return tileWalker.gridPos;
     }
-    public void SetGridPos(Vector2Int newPos)
+    public void SetGridPos(Vector2Int newPos) //ignores these values (just in pawn's/tilewalker's case)
     {
-        Debug.LogWarning("something is trying to change + " + name + "'s gridpos");
+        //Debug.LogWarning("something is trying to change + " + name + "'s gridpos");
+        tileWalker.Init();
+        //tileWalker.FindOwnGridPos();
     }
 
     public string GetName()

@@ -43,15 +43,13 @@ public class HolyStrikeComponent : MonoBehaviour //NOT AN ACTION ITEM!!!
             //add extra damage (perhaps with its own dmg txt)
             weaponItem.ExtraDamageTarget(minDmg, maxDmg);
 
-            List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
+            //List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
+            List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(weaponItem.toHit.GetGridPos());
             foreach (var neighbour in neigbourTiles) //linq Where would simplify this TBF
             {
-                //if(neighbour.isEmpty || !neighbour.myOccupant) //should never have happened here
-                //{
-                //    neighbour.isEmpty = true;
-                //    neighbour.myOccupant = null; //makes sure that IF ONE then ALSO THE OTHER 
-                //    continue;
-                //}
+                if (neighbour.isEmpty || !neighbour.myOccupant)
+                    continue;
+                    
                 Pawn check = neighbour.myOccupant.GetComponent<Pawn>();
                 if (check == null)
                 {

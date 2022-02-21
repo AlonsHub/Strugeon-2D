@@ -19,13 +19,15 @@ public class MagicItemDIsplayer : BasicDisplayer
 
     public void SellMe() //button refs this in inspector
     {
+        int goldValue = magicItem.goldValue;
         //remove from inventory 
-        if(Inventory.Instance.RemoveMagicItem(magicItem))
+        if (!Inventory.Instance.RemoveMagicItem(magicItem))
         {
-            Inventory.Instance.AddGold(magicItem.goldValue);
+            Debug.LogError($"couldn't remove {magicItem.magicItemName}");
+            return;
         }
-        //else doesn't really matter
+        //else
 
-        //
+        Inventory.Instance.AddGold(goldValue);
     }
 }

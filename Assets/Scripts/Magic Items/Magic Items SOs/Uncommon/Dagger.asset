@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
-  m_Name: GoodConversation
+  m_Name: Dagger
   m_EditorClassIdentifier: 
   magicItem:
-    magicItemName: Good Conversation
-    goldValue: 0
-    NF_Value: 1
+    magicItemName: Dagger
+    goldValue: 15
+    spectrumProfile:
+      red: 0
+      blue: 0
+      yellow: 0
+      purple: 0
     rarity: 1
     dropRateWeight: 3
     itemSprite: {fileID: 0}
-    spriteName: GoodConversation
+    spriteName: Dagger

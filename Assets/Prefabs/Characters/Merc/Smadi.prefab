@@ -97,6 +97,7 @@ MonoBehaviour:
   currentHP: 150
   maxHP: 150
   pawnName: Smadi
+  isEnemy: 0
   mercName: 1
   _mercSheet:
     characterName: 0
@@ -118,7 +119,6 @@ MonoBehaviour:
     type: 3}
   myTurnPlate: {fileID: 0}
   actionPool: []
-  isEnemy: 0
   audioSource: {fileID: 0}
   hitSounds: []
   attackSounds: []
@@ -131,6 +131,7 @@ MonoBehaviour:
   SA_Title: Heal Ally
   SA_Description: 'Heal will allow Smadi to restore a certain amount of HP to a hero.
     Smadi can heal herself or any hero located in a tile adjacent to her. '
+  enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &6641408886101910626
 MonoBehaviour:
@@ -188,6 +189,7 @@ MonoBehaviour:
     bonusDamage: 0
     damageElement: 0
     currentUses: 0
+    maxUses: 0
     effectGFXPrefab: {fileID: 0}
   damageType: 0
   targets: []
@@ -243,7 +245,7 @@ MonoBehaviour:
   targets: []
   _currentCooldown: 0
   saCooldown: 3
-  healSprite: {fileID: 21300000, guid: 19e69438c697cb149b4d1a02a1936fdc, type: 3}
+  healSprite: {fileID: 21300000, guid: dfd0b3f6b95bfa64198185185f058cfc, type: 3}
 --- !u!114 &7726652073189359543
 MonoBehaviour:
   m_ObjectHideFlags: 0

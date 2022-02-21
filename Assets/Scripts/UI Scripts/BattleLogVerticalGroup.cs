@@ -106,7 +106,8 @@ public class BattleLogVerticalGroup : MonoBehaviour
 
         BatllelogEntry be = go.GetComponent<BatllelogEntry>();
 
-        be.Init(actingPawn, actionIconToSprite[actionIcon]);
+        be.Init(actingPawn, actionIconToSprite[actionIcon], actionIcon);
+        //be.SetMyData = actionIcon.ToString(); //escaped only, I think
         be.SetMyData = actionIcon.ToString(); //escaped only, I think
         children.Add(go.transform);
 
