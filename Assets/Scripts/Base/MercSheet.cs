@@ -20,6 +20,8 @@ public class MercSheet
     public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
     public int _maxHpBonus => GameStats.maxHpBonusPerLevel * (_level - 1);
 
+    public System.Action LevelUpAction;
+
     public MercSheet()
     {
         characterName = MercName.None;
@@ -78,12 +80,21 @@ public class MercSheet
 
         if (_experience >= threshhold)
         {
-            //levelup!
-            _level++;
+            LevelUp();
             return true;
         }
         return false;
     }
+    //[ContextMenu("levelUp")]
+    public void LevelUp()
+    {
+        _level++;
+        //call OnLevelUp!
+        IdleLogOrder newOrder = new IdleLogOrder(PrefabArchive.Instance.GetPrefabByDisplayerType(DisplayerType.LevelUp), new List<string> { characterName.ToString() + " advanced!", $"from {_level - 1} to {_level}"}, MyPawnPrefabRef<Pawn>().PortraitSprite);
+        IdleLog.AddToBackLog(newOrder);
+        LevelUpAction?.Invoke();
+    }
+
 
     public void SetToState(MercAssignment assignment, int relevantNum)
     {

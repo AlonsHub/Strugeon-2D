@@ -14,17 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     magicItem:
-      magicItemName: Dagger
-      goldValue: 15
+      magicItemName: Stick
+      goldValue: 2
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 1
-      dropRateWeight: 3
-      itemSprite: {fileID: 0}
-      spriteName: Dagger
+      rarity: 0
+      dropRateWeight: 5
+      itemSprite: {fileID: -6312372248548970523, guid: 31155a4835afb294f8a618b0cb75f337,
+        type: 3}
+      spriteName: Stick
     expReward: 35
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
@@ -35,4 +36,4 @@ MonoBehaviour:
     waitTimeHours: 0
     waitTimeMinutes: 7
     waitTimeSeconds: 10
-    isSet: 0
+    isSet: 1

@@ -73,6 +73,7 @@ MonoBehaviour:
   currentHP: 200
   maxHP: 200
   pawnName: Shuki
+  isEnemy: 0
   mercName: 2
   _mercSheet:
     characterName: 0
@@ -94,7 +95,6 @@ MonoBehaviour:
     type: 3}
   myTurnPlate: {fileID: 0}
   actionPool: []
-  isEnemy: 0
   audioSource: {fileID: 0}
   hitSounds: []
   attackSounds: []
@@ -110,6 +110,7 @@ MonoBehaviour:
     When
     Shuki''s HP is below 10%, Shuki enters a ferocious rage, increasing his damage
     by 20% and raising his aggerssion.'
+  enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &5182301774868751694
 MonoBehaviour:
@@ -190,6 +191,7 @@ MonoBehaviour:
     bonusDamage: 0
     damageElement: 0
     currentUses: 0
+    maxUses: 0
     effectGFXPrefab: {fileID: 0}
   damageType: 0
   targets: []
@@ -511,6 +513,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2633907388270866008}
     m_Modifications:
+    - target: {fileID: 4645110662768626605, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662768626605, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662768626605, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4645110662768626606, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -538,18 +555,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.39
+      value: -0.202
       objectReference: {fileID: 0}
     - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.09
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
         type: 3}

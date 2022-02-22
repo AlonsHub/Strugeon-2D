@@ -74,6 +74,7 @@ MonoBehaviour:
   currentHP: 180
   maxHP: 180
   pawnName: Ezra
+  isEnemy: 0
   mercName: 5
   _mercSheet:
     characterName: 0
@@ -95,7 +96,6 @@ MonoBehaviour:
     type: 3}
   myTurnPlate: {fileID: 0}
   actionPool: []
-  isEnemy: 0
   audioSource: {fileID: 0}
   hitSounds: []
   attackSounds: []
@@ -109,6 +109,7 @@ MonoBehaviour:
   SA_Description: "When the Gods \"feel like it\", they may choose to divinely empower
     Ezra's attacks. Ezra\u2019s empowered attack will do more extra Dmg and spread
     in an area of effect around the attacked foe, damaging all adjacent foes as well. "
+  enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &6869497759092309598
 MonoBehaviour:
@@ -165,6 +166,7 @@ MonoBehaviour:
     bonusDamage: 0
     damageElement: 0
     currentUses: 0
+    maxUses: 0
     effectGFXPrefab: {fileID: 0}
   damageType: 2
   targets: []
@@ -312,7 +314,7 @@ Transform:
   m_Children:
   - {fileID: 8602757325649611589}
   m_Father: {fileID: 8146529111578356016}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!212 &2884051203076025265
 SpriteRenderer:
@@ -436,6 +438,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2000671481639187602}
   - {fileID: 2633907388270866008}
   - {fileID: 8974017539643852102}
   - {fileID: 5106556079651504801}
@@ -484,7 +487,7 @@ Transform:
   m_Children:
   - {fileID: 1701941312780363250}
   m_Father: {fileID: 8146529111578356016}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8819340343346858908
 GameObject:
@@ -515,7 +518,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8146529111578356016}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!212 &3789798131302717110
 SpriteRenderer:
@@ -567,6 +570,91 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &6608310717031835430
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8146529111578356016}
+    m_Modifications:
+    - target: {fileID: 4645110662845780913, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_Name
+      value: AttackEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780913, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780915, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: stopAction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5474302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b9e2f525e8336e4884e359bcf3fdf1e, type: 3}
+--- !u!4 &2000671481639187602 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4645110662845780916, guid: 8b9e2f525e8336e4884e359bcf3fdf1e,
+    type: 3}
+  m_PrefabInstance: {fileID: 6608310717031835430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6846332277511553490
 PrefabInstance:
   m_ObjectHideFlags: 0

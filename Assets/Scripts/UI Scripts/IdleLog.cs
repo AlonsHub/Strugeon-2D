@@ -9,6 +9,20 @@ public class IdleLog : MonoBehaviour
 {
     public static IdleLog Instance;
 
+    public static List<IdleLogOrder> backLog;
+
+
+    public static void AddToBackLog(IdleLogOrder idleLogOrder)
+    {
+        if(backLog == null)
+        {
+            Debug.LogError("IdleLog's backlog is null!");
+            return;
+        }
+
+        backLog.Add(idleLogOrder);
+    }
+
     [SerializeField]
     GameObject basicEntryPrefab; //relevant only for the OverlandMap Version of the idle log
 
@@ -19,6 +33,10 @@ public class IdleLog : MonoBehaviour
 
     private void Awake()
     {
+        if(backLog == null)
+        {
+            backLog = new List<IdleLogOrder>();
+        }
         if(Instance !=null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,7 +44,27 @@ public class IdleLog : MonoBehaviour
         }
         Instance = this;
         peekingMenu = GetComponent<PeekingMenu>();
+
+        if(backLog.Count>0)
+        {
+            foreach (var order in backLog)
+            {
+                RecieveGenericMessage(order.specificDisplayerPrefab, order.strings, order.sprites);
+            }
+            if (!peekingMenu.menuOpen)
+            {
+                peekingMenu.ShowMenu();
+            }
+        }
+        backLog.Clear();
     }
+    public void RecieveGenericMessage(GameObject prefabMessage, List<string> _strings, List<Sprite> _sprites)
+    {
+        BasicDisplayer bd = Instantiate(prefabMessage, logParent).GetComponent<BasicDisplayer>();
+
+        bd.SetMe(_strings, _sprites);
+    }
+
     public void RecieveNewMessage(GameObject messagePrefab, List<string> texts) //THIS SHOULD BE IN THE GENERIC METHOD
     {
         GameObject go = Instantiate(messagePrefab, logParent);

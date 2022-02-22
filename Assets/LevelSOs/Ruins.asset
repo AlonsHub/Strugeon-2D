@@ -14,23 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     magicItem:
-      magicItemName: Ring
-      goldValue: 35
+      magicItemName: Red Gem Wand
+      goldValue: 150
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 1
-      dropRateWeight: 3
-      itemSprite: {fileID: -8753393225063967389, guid: 31155a4835afb294f8a618b0cb75f337,
-        type: 3}
-      spriteName: Ring
-    expReward: 55
+      rarity: 3
+      dropRateWeight: 1
+      itemSprite: {fileID: 0}
+      spriteName: RedGemWand
+    expReward: 115
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 13
-    difficulty: 1
+    goldReward: 21
+    difficulty: 2
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

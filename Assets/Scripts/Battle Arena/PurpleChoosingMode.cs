@@ -9,6 +9,9 @@ public class PurpleChoosingMode : MonoBehaviour
 
     public Pawn actor;
 
+    [SerializeField]
+    GameObject chosenByPurpleVFX; //prefab
+
     public List<GridPoser> purpleTargets;
     private bool doUpdate;
     public bool IsOn { get => doUpdate; }
@@ -126,6 +129,10 @@ public class PurpleChoosingMode : MonoBehaviour
                 PurpleTarget justAnInterface = hit.collider.GetComponentInParent<PurpleTarget>(); //could be Pawn or Censer at the moment 07/02/22 
                 
                 actor.SetupPurpleBuff(justAnInterface.asPurpleTgtGameObject); //pass on as the gameobject on which there is an empty interface of PurpleTarget, tagging only by Pawn and Censer 
+
+                //Play Chosen-By-Purple Effect
+                GameObject vfx = Instantiate(chosenByPurpleVFX, justAnInterface.asPurpleTgtGameObject.transform);
+
                 doUpdate = false;
                 //actor.TurnDone = true;
                 BattleLogVerticalGroup.Instance.AddPsionEntry(actor.Name, PsionActionSymbol.Purple, Color.magenta);
