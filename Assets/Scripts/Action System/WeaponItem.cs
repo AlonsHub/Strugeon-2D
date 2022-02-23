@@ -221,9 +221,10 @@ public class WeaponItem : ActionItem
         if(feetItem)
         feetItem.currentRangeInTiles = range; // maybe do this at Start()?
 
-        int weight = baseCost;
-        foreach(Pawn p in targets)
+        foreach (Pawn p in targets)
         {
+            int weight = baseCost;
+
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
 
             if (p.currentHP <= 0)
@@ -231,23 +232,23 @@ public class WeaponItem : ActionItem
             //if(p.currentHP > 0)
             //{
             //    weight *= 5;
-                
+
             //}
 
-            if (currentDistance <= range *14)
+            if (currentDistance <= range * 14) //melee=14 ranged is more
             {
-                weight = baseCost;
                 if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
-                    //according to GDD this should multiply by 10 and shouldn't "continue" (meaning the loop should not break)
+                    //according to GDD this should multiply by 10 
                     continue;
                 }
-                weight *= 2; // changed from 20
+                //melee attacker only have 1 range, so this means adjacent
+                weight *= 20; // changed from 20 to 2 //changed back to 20
 
-                if (p.currentHP <= p.maxHP / 2.5f) //40%
-                {
-                    weight *= 10;
-                }
+            }
+            if (p.currentHP <= p.maxHP / 2.5f) //40%
+            {
+                weight *= 10;
             }
 
             if (weight != 0)

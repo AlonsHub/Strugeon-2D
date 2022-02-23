@@ -64,7 +64,7 @@ public class WeaponAddonItem : ActionItem
         {
             weight *= 5;// changed from 10 - 08/02/22
         }
-
+        //else //add 23/02/22 - this separates the two *5
         if (pawn.targets.Count > 0)
         {
             bool areEnemiesCloser = false;
@@ -79,7 +79,7 @@ public class WeaponAddonItem : ActionItem
 
             if (!areEnemiesCloser)
             {
-                weight *= 5;
+                weight *= 5; //changed from 5
             }
         }
 

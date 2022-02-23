@@ -96,7 +96,7 @@ public class MouseBehaviour : MonoBehaviour
             //I dont think im using this
             float distanceFromButtonCircle;
             //Vector3 circlePos = cam.WorldToScreenPoint(hitTarget.transform.position);
-            distanceFromButtonCircle = Vector3.Distance(Input.mousePosition, heroButtonRect.position);
+            distanceFromButtonCircle = heroButtonRect.gameObject.activeInHierarchy ? Vector3.Distance(Input.mousePosition, heroButtonRect.position) : Vector3.Distance(Input.mousePosition, enemyButtonRect.position);
            
             //overCircle = distanceFromButtonCircle <= buttonCircleRadius && distanceFromButtonCircle >= buttonInnerCircleRadius;
             //I dont think im using this[end]
