@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     magicItem:
-      magicItemName: Crown
-      goldValue: 50
+      magicItemName: Dagger
+      goldValue: 15
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 2
-      dropRateWeight: 1
-      itemSprite: {fileID: 21300000, guid: cae6c3b9bbb18364aace108a3609ddbb, type: 2}
-      spriteName: Crown
-    expReward: 55
+      rarity: 1
+      dropRateWeight: 3
+      itemSprite: {fileID: 0}
+      spriteName: Dagger
+    expReward: 35
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 13
-    difficulty: 1
+    goldReward: 10
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 7
     waitTimeSeconds: 10
-    isSet: 1
+    isSet: 0

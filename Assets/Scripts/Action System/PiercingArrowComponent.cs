@@ -65,7 +65,8 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
 
         int random = Random.Range(0, relevantTargets.Count - 1);
         secondArrow.tgt = relevantTargets[random].transform;
-        relevantTargets[random].TakeDamage(Random.Range(minDamage, maxDamage+1)); //+1 to max, cause its exclusive
-        BattleLogVerticalGroup.Instance.AddEntry(weaponItem.pawn.Name, ActionSymbol.Attack, relevantTargets[random].Name);
+        int dmg = Random.Range(minDamage, maxDamage + 1);
+        relevantTargets[random].TakeDamage(dmg); //+1 to max, cause its exclusive
+        BattleLogVerticalGroup.Instance.AddEntry(weaponItem.pawn.Name, ActionSymbol.Attack, relevantTargets[random].Name, dmg, Color.red);
     }
 }

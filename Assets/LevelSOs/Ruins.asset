@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     magicItem:
-      magicItemName: Knight Shield
-      goldValue: 10
+      magicItemName: Crown
+      goldValue: 50
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 1
+      rarity: 2
       dropRateWeight: 1
-      itemSprite: {fileID: 21300000, guid: 866eb49c6f94d394786d5d2d6e73f2b8, type: 2}
-      spriteName: KnightShield
-    expReward: 35
+      itemSprite: {fileID: 21300000, guid: cae6c3b9bbb18364aace108a3609ddbb, type: 2}
+      spriteName: Crown
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 5
-    difficulty: 0
+    goldReward: 15
+    difficulty: 1
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 8
     waitTimeSeconds: 54
-    isSet: 0
+    isSet: 1
