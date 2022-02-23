@@ -12,14 +12,14 @@ public class IdleLog : MonoBehaviour
     public static List<IdleLogOrder> backLog;
 
 
-    public static void AddToBackLog(IdleLogOrder idleLogOrder)
+    public static void AddToBackLog(IdleLogOrder idleLogOrder, bool isPersistent)
     {
         if(backLog == null)
         {
             Debug.LogError("IdleLog's backlog is null!");
             return;
         }
-
+        idleLogOrder.isPersistent = isPersistent;
         backLog.Add(idleLogOrder);
     }
 
@@ -45,18 +45,36 @@ public class IdleLog : MonoBehaviour
         Instance = this;
         peekingMenu = GetComponent<PeekingMenu>();
 
+
         if(backLog.Count>0)
         {
+            List<IdleLogOrder> nonPersistentOrders = new List<IdleLogOrder>();
             foreach (var order in backLog)
             {
-                RecieveGenericMessage(order.specificDisplayerPrefab, order.strings, order.sprites);
+                RecieveLogOrder(order);
+                //RecieveGenericMessage(order.specificDisplayerPrefab, order.strings, order.sprites);
+                if(!order.isPersistent)
+                {
+                    nonPersistentOrders.Add(order);
+                }
             }
             if (!peekingMenu.menuOpen)
             {
                 peekingMenu.ShowMenu();
             }
+            foreach (var item in nonPersistentOrders)
+            {
+                backLog.Remove(item);
+            }
         }
-        backLog.Clear();
+    }
+
+    public void RecieveLogOrder(IdleLogOrder order)
+    {
+        IdleLogMessage bd = Instantiate(order.specificDisplayerPrefab, logParent).GetComponent<IdleLogMessage>();
+
+        bd.SetMe(order.strings, order.sprites);
+        bd.myOrder = order;
     }
     public void RecieveGenericMessage(GameObject prefabMessage, List<string> _strings, List<Sprite> _sprites)
     {
@@ -162,4 +180,11 @@ public class IdleLog : MonoBehaviour
         }
     }
 
+    public void CloseIfEmptyCheck(int amountAboutToBeDestoryed)
+    {
+        if (logParent.childCount > amountAboutToBeDestoryed)
+            return;
+
+        peekingMenu.HideMenu();
+    }
 }

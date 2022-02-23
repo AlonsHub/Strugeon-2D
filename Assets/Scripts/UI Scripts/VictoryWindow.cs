@@ -20,9 +20,14 @@ public class VictoryWindow : MonoBehaviour
     [SerializeField]
     Transform mercPortraitGridParent;
 
+    [SerializeField]
+    Image itemImageDisplayer;
+
     public void SetMe(LevelSO levelSO)
     {
         goldDisplayer.text = levelSO.levelData.goldReward.ToString();
+        itemImageDisplayer.sprite = levelSO.levelData.magicItem.itemSprite;
+        siteImageDisplayer.sprite = levelSO.levelData.siteIcon;
 
         //Debug.LogError(levelSO.levelData.enemies.Count);
 
@@ -55,8 +60,7 @@ public class VictoryWindow : MonoBehaviour
             Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName); //need enum to portrait in stead (dict)
             go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, false, true);
         }
-
-        siteImageDisplayer.sprite = levelSO.levelData.siteIcon;
+        
     }
 
     public void LoadTavern()

@@ -32,6 +32,6 @@ public class PrefabArchive : MonoBehaviour
     public void TEST()
     {
         IdleLogOrder newOrder = new IdleLogOrder(GetPrefabByDisplayerType(DisplayerType.LevelUp), new List<string> { "something advanced!", $"from" }, bullshit);
-        IdleLog.AddToBackLog(newOrder);
+        IdleLog.AddToBackLog(newOrder, true) ;
     }
 }

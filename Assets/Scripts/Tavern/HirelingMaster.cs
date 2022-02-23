@@ -91,7 +91,7 @@ public class HirelingMaster : MonoBehaviour
     public void CloseMe()
     {
         //anim.SetTrigger("Close");
-        idleLogParent.GetComponentInParent<PeekingMenu>().HideMenu();
+        idleLogParent.GetComponentInParent<PeekingMenu>().HideMenu(); //cache this! TBF
     }
 
     bool CheckForArrivals() //returns true if new mercs can arrive

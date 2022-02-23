@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7999169572911847342}
   - component: {fileID: 7541107070864469420}
   - component: {fileID: 4994097696706378766}
-  - component: {fileID: 1456155638916670946}
+  - component: {fileID: 7041316528849861082}
   m_Layer: 5
   m_Name: MercLevelUpMessage
   m_TagString: Untagged
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1456155638916670946
+--- !u!114 &7041316528849861082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4558644258490806366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef45969157fb05a4b8725bf0a5f24c57, type: 3}
+  m_Script: {fileID: 11500000, guid: 80c01a60ae2e84f4d8e0c196c1f54927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textBoxes:
@@ -290,8 +290,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4558644258490806366}
-        m_MethodName: SetActive
+      - m_Target: {fileID: 7041316528849861082}
+        m_MethodName: BasicDisplayersButton
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -299,7 +299,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &5829927799580645179
 GameObject:

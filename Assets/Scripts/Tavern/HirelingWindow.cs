@@ -45,10 +45,11 @@ public class HirelingWindow : MonoBehaviour
         PlayerDataMaster.Instance.HireMerc(mercName);
         Tavern.Instance.squadBuilder.Refresh();
 
-        if (transform.parent.childCount <= 1) // other hireling windows
-        {
-            HirelingMaster.Instance.CloseMe();
-        }
+        IdleLog.Instance.CloseIfEmptyCheck(1); //only 1 message is to be destroyed and will still count against logParent.ChildCount
+        //if (transform.parent.childCount <= 1) // other hireling windows (1 being this hireling window, to be destroyed in a few lines)
+        //{
+        //    HirelingMaster.Instance.CloseMe(); //special case since this message deletes itself - otherwise IdleLog has a CloseIfEmptyCheck
+        //}
 
         Destroy(gameObject);
 

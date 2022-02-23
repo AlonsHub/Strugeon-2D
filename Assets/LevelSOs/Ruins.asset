@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData:
     magicItem:
-      magicItemName: Red Gem Wand
-      goldValue: 150
+      magicItemName: Knight Shield
+      goldValue: 10
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 3
+      rarity: 1
       dropRateWeight: 1
-      itemSprite: {fileID: 0}
-      spriteName: RedGemWand
-    expReward: 115
+      itemSprite: {fileID: 21300000, guid: 866eb49c6f94d394786d5d2d6e73f2b8, type: 2}
+      spriteName: KnightShield
+    expReward: 35
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 21
-    difficulty: 2
+    goldReward: 5
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 8
     waitTimeSeconds: 54
-    isSet: 1
+    isSet: 0

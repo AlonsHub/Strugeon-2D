@@ -8,12 +8,9 @@ public class IdleLogOrder
     public List<string> strings;
     public List<Sprite> sprites;
 
-    /// <summary>
-    /// Single Inputs
-    /// </summary>
-    /// <param name="prefab"></param>
-    /// <param name="_string">will be made into list</param>
-    /// <param name="_sprite">will be made into list</param>
+    public bool isPersistent = false; //this is set in the static AddToBackLog method, since it's mostly false and doesnt warrent a spot in a constructor
+
+    
     //Single Inputs
     public IdleLogOrder(GameObject prefab, string _string) 
     {

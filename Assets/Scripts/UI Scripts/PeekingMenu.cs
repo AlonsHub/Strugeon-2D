@@ -38,14 +38,7 @@ public class PeekingMenu : MonoBehaviour
 
     public void ToggleMenu() //idle log uses this in inspector
     {
-        //if(menuOpen)
-        //{
-        //    StartCoroutine(MenuSlideClose());
-        //}
-        //else
-        //{
-        //    StartCoroutine(MenuSlideOpen());
-        //}
+        
         if (menuOpen)
             anim.SetTrigger("Close");
         else
