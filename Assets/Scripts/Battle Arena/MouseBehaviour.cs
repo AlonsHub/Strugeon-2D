@@ -95,14 +95,15 @@ public class MouseBehaviour : MonoBehaviour
 
             //I dont think im using this
             float distanceFromButtonCircle;
-            Vector3 circlePos = cam.WorldToScreenPoint(hitTarget.transform.position);
-            distanceFromButtonCircle = Vector3.Distance(Input.mousePosition, circlePos);
+            //Vector3 circlePos = cam.WorldToScreenPoint(hitTarget.transform.position);
+            distanceFromButtonCircle = Vector3.Distance(Input.mousePosition, heroButtonRect.position);
            
-            overCircle = distanceFromButtonCircle <= buttonCircleRadius && distanceFromButtonCircle >= buttonInnerCircleRadius;
+            //overCircle = distanceFromButtonCircle <= buttonCircleRadius && distanceFromButtonCircle >= buttonInnerCircleRadius;
             //I dont think im using this[end]
 
             
-            if(!PurpleChoosingMode.Instance.IsOn &&( Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)))
+            //if(!PurpleChoosingMode.Instance.IsOn &&( Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape)))
+            if(!PurpleChoosingMode.Instance.IsOn && Input.GetMouseButtonDown(0) && distanceFromButtonCircle >= buttonCircleRadius)
             {
                 Renderer rend = hitTarget.GetComponentInChildren<Renderer>();
                 //Color emissionOff = rend.material.GetColor("_EmissionColor");
@@ -139,6 +140,7 @@ public class MouseBehaviour : MonoBehaviour
                     enemyButtonRect.position = cam.WorldToScreenPoint(hitTarget.transform.position) + new Vector3(-offset.x, offset.y);
                     areButtonsOpen = true;
                 }
+                
 
                 if(areButtonsOpen)
                 {
