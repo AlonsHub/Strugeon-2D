@@ -44,7 +44,7 @@ public class WeaponItem : ActionItem
     LookAtter la;
 
     public System.Action attackAction; //not sure if this is even used //holy shit is it ever boiii! thank you! <3... this is weird coming from myself
-
+    public System.Action hitAction;
 
 
     public override void Awake()
@@ -55,7 +55,7 @@ public class WeaponItem : ActionItem
         hasRedBuff = false;
         feetItem = GetComponent<FeetItem>();
 
-        attackAction += OnAttack;
+        //attackAction += OnAttack;
 
         base.Awake();
     }
@@ -127,22 +127,16 @@ public class WeaponItem : ActionItem
 
     IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
     {
-        yield return new WaitUntil(() => (arrow == null));
+        yield return new WaitUntil(() => (arrow == null)); //maybe check if arrow ==null || toHit ==null in case the target dies somehow TBF
         Debug.Log("Arrow hit");
-        DamageTarget();
+        DamageTarget(); 
     }
     public void DamageTarget()
     {
         
         float rolledDamage = Random.Range(minDamage, maxDamage+1); //+1 to max, since it is still rolling ints not floats - so its exclusive
-        //if (toHit == null || toHit.currentHP <= 0)
-        //{
-        //    BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
-
-        //    la.tgt = null;
-        //    pawn.TurnDone = true;
-        //    return;
-        //}
+        
+        //TBF - has effect should add to variable that resets here: //int bonusElementalDamage.
 
         if (hasEffect)
         {
@@ -150,7 +144,7 @@ public class WeaponItem : ActionItem
             // Instantiate(effectData.effectGFXPrefab, go.transform.GetChild(0).GetChild(0));
 
             effectData.currentUses--;
-            toHit.TakeElementalDamage(bonusDamage, effectColour); // Should be toHit.TakeElementalDamage
+            toHit.TakeElementalDamage(bonusDamage, effectColour); // Should be toHit.TakeElementalDamage //should really just add to the rolled damamge and report both separatly
             if (effectData.currentUses <= 0)
             {
                 hasEffect = false;
@@ -179,6 +173,9 @@ public class WeaponItem : ActionItem
             rolledDamage = 0;
 
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+
+        hitAction?.Invoke();
+
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
 
         la.tgt = null;

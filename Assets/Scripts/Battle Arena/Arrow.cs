@@ -7,9 +7,11 @@ public class Arrow : MonoBehaviour
     public Transform tgt;
     public Vector3 tgtPos;
     [SerializeField]
-    float arrowSpeed;
+    public float arrowSpeed;
     [SerializeField]
     float ttl;
+
+    float initialSpeed;
 
     public GameObject hitEffect; //hit GFX
     //public Arrow(Transform newTgt)
@@ -31,6 +33,8 @@ public class Arrow : MonoBehaviour
             Debug.LogError("Rock spawns but no set target");
             //Destroy
         }
+        initialSpeed = arrowSpeed;
+        Destroy(gameObject, ttl);
     }
     private void Update()
     {
@@ -40,9 +44,10 @@ public class Arrow : MonoBehaviour
 
             transform.Translate(Vector3.forward * arrowSpeed * Time.deltaTime);
 
-            arrowSpeed -= arrowSpeed / 2f * Time.deltaTime;
+        arrowSpeed -= arrowSpeed * Time.deltaTime;
+        //arrowSpeed -= initialSpeed / * Time.deltaTime; //original speed a second
 
-            if (Vector3.Distance(transform.position, tgtPos) <= 1f)
+            if (Vector3.Distance(transform.position, tgtPos) <= .1f)
             {
                 //Instantiate(hitEffect, tgtPos + hitEffect.transform.position, hitEffect.transform.rotation);
                 Instantiate(hitEffect, tgtPos, hitEffect.transform.rotation);

@@ -125,7 +125,7 @@ MonoBehaviour:
   range: 5
   minDamage: 10
   maxDamage: 13
-  arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
+  arrowGfx: {fileID: 4948670397089572388, guid: f939928989446114e83788149f1282a0,
     type: 3}
   isRanged: 1
   arrowSpawn: {fileID: 8602757325649611589}
@@ -140,6 +140,7 @@ MonoBehaviour:
     bonusDamage: 0
     damageElement: 0
     currentUses: 0
+    maxUses: 0
     effectGFXPrefab: {fileID: 0}
   damageType: 2
   targets: []
@@ -160,6 +161,7 @@ MonoBehaviour:
   currentHP: 100
   maxHP: 100
   pawnName: Cheeto
+  isEnemy: 0
   mercName: 4
   _mercSheet:
     characterName: 0
@@ -181,7 +183,6 @@ MonoBehaviour:
     type: 3}
   myTurnPlate: {fileID: 0}
   actionPool: []
-  isEnemy: 0
   audioSource: {fileID: 0}
   hitSounds: []
   attackSounds: []
@@ -195,6 +196,7 @@ MonoBehaviour:
   SA_Description: "Cheeto has a few special darts up her sleeve. Blinding Dart will
     empower Cheeto\u2019s attack to blind a foe. A blinded foe will deal no Dmg when
     attacking. "
+  enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &5092255476189858162
 MonoBehaviour:

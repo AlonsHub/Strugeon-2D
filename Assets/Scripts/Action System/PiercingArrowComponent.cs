@@ -19,11 +19,11 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
 
     private void OnEnable()
     {
-        weaponItem.attackAction += HitRandomRelevantTarget;
+        weaponItem.hitAction += HitRandomRelevantTarget;
     }
     private void OnDisable()// isnt really relevant at the moment, but good to have
     {
-        weaponItem.attackAction -= HitRandomRelevantTarget;
+        weaponItem.hitAction -= HitRandomRelevantTarget;
     }
 
 
@@ -57,6 +57,15 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
             Debug.LogError("no relevant targets and somehow still got this far");
             return;
         }
-        relevantTargets[Random.Range(0, relevantTargets.Count - 1)].TakeDamage(Random.Range(minDamage, maxDamage+1)); //+1 to max, cause its exclusive
+
+        //Delay this somehow to happen after the main damage
+        Arrow secondArrow = Instantiate(weaponItem.arrowGfx, weaponItem.toHit.transform.position, Quaternion.identity).GetComponent<Arrow>();
+        secondArrow.transform.localScale = secondArrow.transform.localScale / .6f;
+        secondArrow.arrowSpeed /= 2; //current value is 10, so sets to 5 [23/02/22]
+
+        int random = Random.Range(0, relevantTargets.Count - 1);
+        secondArrow.tgt = relevantTargets[random].transform;
+        relevantTargets[random].TakeDamage(Random.Range(minDamage, maxDamage+1)); //+1 to max, cause its exclusive
+        BattleLogVerticalGroup.Instance.AddEntry(weaponItem.pawn.Name, ActionSymbol.Attack, relevantTargets[random].Name);
     }
 }

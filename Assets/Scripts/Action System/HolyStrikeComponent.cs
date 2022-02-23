@@ -24,11 +24,11 @@ public class HolyStrikeComponent : MonoBehaviour //NOT AN ACTION ITEM!!!
     }
     private void OnEnable()
     {
-        weaponItem.attackAction += RollToProcOnAttack;
+        weaponItem.hitAction += RollToProcOnAttack;
     }
     private void OnDisable()
     {
-        weaponItem.attackAction -= RollToProcOnAttack;
+        weaponItem.hitAction -= RollToProcOnAttack;
     }
     public void RollToProcOnAttack()
     {
