@@ -234,7 +234,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         ///
 
         //TBD this should move to an Awake or start
-        if (!isSet) //this isSet => levelDataSO.levelData.isSet
+        if (!isSet || levelSO.levelData.enemies == null ) //this isSet => levelDataSO.levelData.isSet
             RandomSetSelf();
 
 
