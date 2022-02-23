@@ -17,7 +17,7 @@ public class MagicItem
 
     public Sprite itemSprite; // consider keeping an enum to link with a dictionary
     public string spriteName;
-    public bool FecthSprite()
+    public bool FetchSprite()
     {
         if(itemSprite)
         {

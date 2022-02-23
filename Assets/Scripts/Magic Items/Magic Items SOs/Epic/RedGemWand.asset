@@ -15,8 +15,12 @@ MonoBehaviour:
   magicItem:
     magicItemName: Red Gem Wand
     goldValue: 150
-    NF_Value: 3
+    spectrumProfile:
+      red: 0
+      blue: 0
+      yellow: 0
+      purple: 0
     rarity: 3
     dropRateWeight: 1
-    itemSprite: {fileID: 0}
+    itemSprite: {fileID: 21300000, guid: 82c7e4947c5c882428854a1910ae2d4d, type: 2}
     spriteName: RedGemWand

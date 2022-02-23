@@ -65,7 +65,7 @@ public class Inventory : MonoBehaviour
 
         foreach (var item in inventoryItems)
         {
-            if (!item.FecthSprite())
+            if (!item.FetchSprite())
             {
                 Debug.LogError($"item {item.magicItemName} could not find a sprite");
             }

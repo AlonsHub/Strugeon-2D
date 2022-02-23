@@ -115,7 +115,7 @@ public class MouseBehaviour : MonoBehaviour
             }
         }
         //else if(Input.GetMouseButtonDown(1)) //changed from right to left button
-        else if (Input.GetMouseButtonDown(0))
+        else if (!PurpleChoosingMode.Instance.IsOn && Input.GetMouseButtonDown(0))
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
