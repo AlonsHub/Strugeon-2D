@@ -53,7 +53,7 @@ public class Squad : IEquatable<Squad>
 
         foreach (var item in pawns)
         {
-            item.GetMercSheet.SetToState(MercAssignment.Room, roomNum);
+            item.mercSheetInPlayerData.SetToState(MercAssignment.Room, roomNum);
         }
 
         roomNumber = roomNum;
@@ -107,5 +107,33 @@ public class Squad : IEquatable<Squad>
         }
 
         return toReturn;
+    } //depricated?
+
+    public void SetMercsToAssignment(MercAssignment newAssignment, int relevantNum)
+    {
+        switch (newAssignment)
+        {
+            case MercAssignment.Null:
+                break;
+            case MercAssignment.AwaySquad:
+                PartyMaster.Instance.squads.Remove(this); //should be managed by the squad itself in SetMercToAssignment? //HERE IT IS!
+                isAvailable = false;
+                break;
+            case MercAssignment.Room:
+                isAvailable = true;
+                break;
+            case MercAssignment.Available:
+                break;
+            case MercAssignment.Hireable:
+                break;
+            case MercAssignment.NotAvailable:
+                break;
+            default:
+                break;
+        }
+        foreach (var item in pawns)
+        {
+            item.mercSheetInPlayerData.SetToState(newAssignment, relevantNum);
+        }
     }
 }

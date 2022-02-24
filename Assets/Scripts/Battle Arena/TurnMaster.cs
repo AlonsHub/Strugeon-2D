@@ -211,7 +211,7 @@ public class TurnMaster : MonoBehaviour
 
             foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             {
-                item.GetMercSheet.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
+                item.mercSheetInPlayerData.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
             }
             #endregion
 

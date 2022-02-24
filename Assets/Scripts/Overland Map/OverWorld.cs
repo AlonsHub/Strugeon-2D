@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+//this might be trash that needs to be deleted TBF
 public class OverWorld : MonoBehaviour
 {
     //public List<Expedition> expeditions;
@@ -35,7 +37,7 @@ public class OverWorld : MonoBehaviour
 
         MapWalker mw = Instantiate(expeditionPrefab, spawTrans.position, Quaternion.identity).GetComponent<MapWalker>();
         mw.transform.SetParent(GetComponentInParent<Canvas>().transform);
-        mw.Init(spawTrans, _selectedSite, .1f, _selectedSite.ETA, _party);
+        //mw.(spawTrans, _selectedSite, .1f, _selectedSite.ETA, _party);
 
 
         RefMaster.Instance.SetNewMercList(_party);

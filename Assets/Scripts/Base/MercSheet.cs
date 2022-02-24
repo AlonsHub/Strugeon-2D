@@ -98,23 +98,23 @@ public class MercSheet
 
     public void SetToState(MercAssignment assignment, int relevantNum)
     {
-        //switch (assignment)
-        //{
-        //    case MercAssignment.Null:
-        //        Debug.LogWarning("Merc assignment shouldn't be turned into null as far as I know, but for some reason - we're here now");
-        //        //could be useful for resetting?
-        //        break;
-        //    case MercAssignment.AwaySquad:
-        //        ro
-        //        break;
-        //    case MercAssignment.Room:
-        //        break;
-        //    case MercAssignment.Available:
-        //        break;
-        //    default:
-        //        break;
-        //}
+        switch (assignment)
+        {
+            case MercAssignment.Null:
+                Debug.LogWarning("Merc assignment shouldn't be turned into null as far as I know, but for some reason - we're here now");
+                //could be useful for resetting?
+                break;
+            case MercAssignment.AwaySquad:
+                //to which site? I guess
+                break;
+            case MercAssignment.Room:
+                roomOrSquadNumber = relevantNum;
+                break;
+            case MercAssignment.Available:
+                break;
+            default:
+                break;
+        }
         currentAssignment = assignment;
-        roomOrSquadNumber = relevantNum;
     }
 }

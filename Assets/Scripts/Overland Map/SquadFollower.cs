@@ -68,7 +68,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
         pathFollower.pathCreator = path;
 
-        squad.isAvailable = false; // turn back on when/if they return
+        //squad.isAvailable = false; // turn back on when/if they return //set by Squad.SetAssigment
 
         leaderPortrait.sprite = squad.pawns[0].PortraitSprite; //the first merc is the leader - consider making Leader a Squad property
         StartCoroutine("RunTimer");

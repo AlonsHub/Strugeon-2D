@@ -184,11 +184,15 @@ public class SquadPicker : MonoBehaviour
         //    return;
         //}
 
+
+
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
-        PartyMaster.Instance.squads.Remove(squadSlots[index].squad);
+        //PartyMaster.Instance.squads.Remove(squadSlots[index].squad); //should be managed by the squad itself in SetMercToAssignment? //MOVED!
 
-        
+        squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, 0); //just 0 for now - meaningless, but could later be the site index?
+
+
     }
 
     public void SetSite(SiteButton sb)

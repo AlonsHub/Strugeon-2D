@@ -19,7 +19,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [SerializeField]
     //MercSheet _characterSheet;
     MercSheet _mercSheet;
-    public MercSheet GetMercSheet { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
+    public MercSheet mercSheetInPlayerData { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
                                                                                                   //in any other case they are loaded as data and not constructed at all
     bool isSheetInit = false;
     int initiative;
@@ -147,7 +147,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-            if ((_mercSheet = GetMercSheet) == null)
+            if ((_mercSheet = mercSheetInPlayerData) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
             }
