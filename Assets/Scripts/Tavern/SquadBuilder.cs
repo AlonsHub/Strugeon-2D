@@ -28,14 +28,17 @@ public class SquadBuilder : MonoBehaviour
 
     [SerializeField]
     List<Pawn> uneditedSquadPawns;
-    //private void Awake()
-    //{
-    //    //gameObject.SetActive
-    //}
+
+    [SerializeField]
+    GameObject confirmWindow;
+
+    bool? confirmWindowAnswer;
+    
     private void OnEnable()
     {
         Tavern.Instance.DisableWindowTier1(name);
-
+        confirmWindowAnswer = null;
+        //isConfirmed = false; //no?
         tempSquad = new Squad();
         mercDataDisplayer.gameObject.SetActive(true);
 
@@ -70,25 +73,27 @@ public class SquadBuilder : MonoBehaviour
         myButton.Toggle(true);
 
     }
-    public void OnDisable()
+    public void SetConfirmDecision(bool decision)
     {
-
-        //if(isEdit)
-        //{
-        //    isEdit = false;
-        //    if (partySlots.Any(x => x.isOccupied))
-        //    {
-        //        Confirm();
-        //    }
-        //    else
-        //    {
-        //        toRoom.SetStatusText("Vacant");
-        //    }
-        //}
-        //if (partySlots.Any(x => x.isOccupied)) //maybe try something more wholistic like checking the tempSquad
-        if (!isConfirmed)
+        confirmWindowAnswer = decision;
+    }
+    public void CloseMe()
+    {
+        confirmWindow.gameObject.SetActive(true);
+        //check confirm
+        StartCoroutine(nameof(WaitForConfirmDecision));
+    }
+    IEnumerator WaitForConfirmDecision()
+    {
+        yield return new WaitUntil(() => confirmWindowAnswer != null || !confirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
+        if(confirmWindowAnswer == true)
         {
-
+            //confirm
+            Confirm();
+        }
+        else
+        {
+            //even if null, don't confirm changes
             if (isEdit)
             {
                 //isEdit = false;//confirm cancels edit!
@@ -106,11 +111,11 @@ public class SquadBuilder : MonoBehaviour
                 //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
                 tempSquad.pawns = uneditedSquadPawns;
 
-                Confirm();
+                Confirm(); 
             }
-            else 
+            else
             {
-            toRoom.roomButton.SetStatusText("Vacant");
+                toRoom.roomButton.SetStatusText("Vacant");
                 if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
                 {
                     foreach (var item in tempSquad.pawns)
@@ -120,26 +125,13 @@ public class SquadBuilder : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            if(isEdit)
-            {
 
-            }
-            isConfirmed = false;
-        }
-        
-                //tempSquad = null;
-        //    else 
-        //{
-        //    foreach (var p in tempSquad.pawns)
-        //    {
-        //        PartyMaster.Instance.availableMercs.Add(p);
-        //    }
-        //}
-            
-        
+        //close squad builder
+    }
 
+    public void OnDisable()
+    {
+        confirmWindow.SetActive(false);
         mercDataDisplayer.gameObject.SetActive(false);
         foreach (var item in partySlots)
         {
@@ -160,7 +152,7 @@ public class SquadBuilder : MonoBehaviour
         }
     }
 
-    public void Confirm()
+    public void Confirm() //also called in inspector by the Assemble Squad buttons
     {
         //isEdit = false; //just making sure that we won't double confirm
         isConfirmed = true;
@@ -180,10 +172,11 @@ public class SquadBuilder : MonoBehaviour
             item.ClearSlot();
         }
 
+
+
         Tavern.Instance.RefreshRooms();
-
-
-        gameObject.SetActive(false);
+        //confirmWindow.SetActive(false); //moved to OnDisable
+        gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
     }
     public void SetMercDisplayer(Pawn merc)
