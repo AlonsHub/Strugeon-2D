@@ -26,6 +26,10 @@ public class SiteDisplayer : MonoBehaviour
 
     [SerializeField] //readolny
      bool isSiteSet;
+
+    [SerializeField]
+    SiteButton siteButton;
+
     private void Awake()
     {
         if(Instances == null)
@@ -38,6 +42,7 @@ public class SiteDisplayer : MonoBehaviour
     }
     public void SetMe(SiteButton sb)
     {
+        siteButton = sb;
         levelData = sb.levelSO.levelData;
 
         for (int i = 0; i < levelData.enemies.Count; i++)
@@ -72,12 +77,14 @@ public class SiteDisplayer : MonoBehaviour
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
     }
 
-    //public void UnSetMe()
-    //{
-    //    levelData = new LevelData(); //empty
-    //    dwellerPortraitGroupRoot.ch
-    //}
-    public static void SetActiveToAllInstances(bool isActive)
+    private void OnDisable()
+    {
+        if (siteButton)
+            siteButton.SetHoverColor(false);
+    }
+
+   
+    public static void SetActiveToAllInstances(bool isActive) //may be depricated soon [24/02/22] TBF
     {
         foreach (var item in Instances)
         {

@@ -16,7 +16,7 @@ public struct LevelData
 {
     public List<Pawn> enemies => enemySet.enemyPrefabs; //Ref and if we want random placement or easier picking from a range
     public List<int> enemyLevels => enemySet.enemyLevels;
-
+    [SerializeField]
     EnemySet enemySet;
     //public List<MagicItemSO> magicItems; 
     public MagicItem magicItem; 

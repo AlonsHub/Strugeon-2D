@@ -117,7 +117,7 @@ public class PurpleChoosingMode : MonoBehaviour
 
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if(doUpdate && Input.GetMouseButtonDown(0))
         {

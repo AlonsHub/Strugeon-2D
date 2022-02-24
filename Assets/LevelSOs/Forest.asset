@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   levelData:
+    enemySet:
+      enemyPrefabs: []
+      enemyLevels: 
     magicItem:
       magicItemName: Ring
       goldValue: 35
@@ -35,4 +38,4 @@ MonoBehaviour:
     waitTimeHours: 0
     waitTimeMinutes: 7
     waitTimeSeconds: 10
-    isSet: 0
+    isSet: 1
