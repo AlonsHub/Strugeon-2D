@@ -65,7 +65,6 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
         pathFollower.speed = path.path.cumulativeLengthAtEachVertex[path.path.cumulativeLengthAtEachVertex.Length - 1]/ remainingTime; //remainning time is "total time" in this context
 
-        transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
 
 
         remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
@@ -107,7 +106,6 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
         pathFollower.SetDistanceTravelled(departTime, sb.ETA);
 
-        transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
 
 
         pathFollower.pathCreator = path;
@@ -125,6 +123,10 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
     IEnumerator RunTimer()
     {
+        yield return new WaitForSeconds(.5f);
+        transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
+
+
         while (remainingTime >= 0)
         {
 

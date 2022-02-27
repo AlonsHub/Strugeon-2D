@@ -379,7 +379,7 @@ public class PlayerDataMaster : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-
+        GrabAndSaveData();
     }
 
     public void HireMerc(MercName mn)
