@@ -27,16 +27,22 @@ public class SquadPicker : MonoBehaviour
     Transform canvasTrans;
     [SerializeField]
     SiteButton tgtSite;
+
+    [SerializeField]
+    GameObject clickOffMeButton; //this button needs to activate with the squad picker, but it is not a good fit to be it's child
+                                 //so it comes on and off whenever this Enables/Disables
+                                
     private void Start()
     {
         gameObject.SetActive(false);
         //availavleSquads = PartyMaster.Instance.squads;
 
     }
-    //private void OnEnable()
-    //{
-    //    Refresh();
-    //}
+    private void OnEnable()
+    {
+        //Refresh();
+        clickOffMeButton.SetActive(true);
+    }
     public void Refresh()
     {
         //int i = 0;
@@ -150,16 +156,8 @@ public class SquadPicker : MonoBehaviour
 
     private void OnDisable()
     {
-        //foreach(Transform t in rowParents)
-        //{
-        //    if(t.childCount !=0)
-        //    {
-        //        for (int i = t.childCount-1; i >= 0; i--)
-        //        {
-        //            Destroy(t.GetChild(i).gameObject);
-        //        }
-        //    }
-        //}
+        clickOffMeButton.SetActive(false);
+
         foreach (var item in squadSlots)
         {
             item.UnSetMe();
@@ -167,7 +165,7 @@ public class SquadPicker : MonoBehaviour
         SiteDisplayer.SetActiveToAllInstances(false);
     }
 
-    public void SendSquad()
+    public void SendSquad() //called by button in inspector
     {
         //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
         int index = squadToggler.SelectedIndex();
@@ -190,9 +188,8 @@ public class SquadPicker : MonoBehaviour
         go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
         //PartyMaster.Instance.squads.Remove(squadSlots[index].squad); //should be managed by the squad itself in SetMercToAssignment? //MOVED!
 
-        squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, 0); //just 0 for now - meaningless, but could later be the site index?
-
-
+        squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, squadSlots[index].squad.roomNumber); 
+        PlayerDataMaster.Instance.LogSquadDeparture(squadSlots[index].squad.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
     }
 
     public void SetSite(SiteButton sb)

@@ -15,6 +15,7 @@ public class PartyMaster : MonoBehaviour
     public List<Pawn> availableMercPrefabs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
+    public List<Squad> awaySquads; //both available and OtW
     
     //public List<MercName> AllMercs() //including hireables // KILL THIS WITH FIREEEE
     //{
@@ -68,6 +69,7 @@ public class PartyMaster : MonoBehaviour
 
         Instance = this;
         squads = new List<Squad>();
+        awaySquads = new List<Squad>();
         DontDestroyOnLoad(this);
     }
 
@@ -91,7 +93,9 @@ public class PartyMaster : MonoBehaviour
         }
 
 
-        squads = ParseSquads();
+        //squads = ParseSquads();
+        ParseSquads();
+
         if (squads == null)
             squads = new List<Squad>();
 
@@ -101,6 +105,8 @@ public class PartyMaster : MonoBehaviour
         {
             squads.Remove(s);
         }
+
+
 
         //check that all mercSheet mercs exist in available and 
 
@@ -131,14 +137,15 @@ public class PartyMaster : MonoBehaviour
 
     //}
 
-    List<Squad> ParseSquads()
+    void ParseSquads()
     {
-        List<Squad> toReturn = new List<Squad>();
+        List<Squad> toSquads = new List<Squad>();
+        List<Squad> toAwaySquads = new List<Squad>();
         if (PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList == null)
-            return null;
+            return;
 
         if (PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Count == 0)
-            return null;
+            return;
 
         int c = PlayerDataMaster.Instance.currentPlayerData.squadsAsMercNameList.Where(y => y == MercName.None).Count();
         int x = -1;
@@ -159,17 +166,45 @@ public class PartyMaster : MonoBehaviour
             
             if(mercNames.Count> 0) //???? //these question marks are actually on-to something. An empty room will regiester as two following zeros 
             {
+                List<Pawn> tempPawns = PawnsFromNames(mercNames);
+                Squad s = null;
+                switch (tempPawns[0].mercSheetInPlayerData.currentAssignment) //checks the relevant mercSheet and the empty merc sheet on prefab
+                {
+                    //case MercAssignment.Null:
+                    //    break;
+                    case MercAssignment.AwaySquad:
+                        s = new Squad(tempPawns, SquadState.OnRoute, ind);
+                        toAwaySquads.Add(s); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+                        break;
+                    case MercAssignment.Room:
+                        s = new Squad(tempPawns, SquadState.InRoom, ind);
+                        toSquads.Add(s); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+                        break;
+                    case MercAssignment.Available:
+                        break;
+                    //case MercAssignment.Hireable:
+                    //    break;
+                    //case MercAssignment.NotAvailable:
+                    //    break;
+                    default:
+                        break;
+                }
 
-                Squad s = new Squad(PawnsFromNames(mercNames), ind);
-                    toReturn.Add(s); //for some reason im adding them with the roomCount, but that overload doesnt use it...
 
+                //Squad s = new Squad(tempPawns, ind);
+                //    toSquads.Add(s); //for some reason im adding them with the roomCount, but that overload doesnt use it...
+                if (s != null)
                 PlayerDataMaster.Instance.currentPlayerData.rooms[ind].squad = s;
             }
             
             // ADD s
             ind++;
         }
-        return toReturn;
+        //return toSquads;
+        squads = toSquads;
+        awaySquads = toAwaySquads;
+
+
     }
 
     List<Pawn> PawnsFromNames(List<MercName> names) /// CHANGE TBD OVER HERE - these refs to pawn prefabs should be mercsheets (that CAN get refs to their prefabs, via paramaters/method that calls MercPerfabs

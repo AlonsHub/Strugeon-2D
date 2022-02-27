@@ -17,7 +17,9 @@ public class PlayerData
     //squads
     //public List<List<MercName>> squadsAsMercNames;
     public List<MercName> squadsAsMercNameList; // comma seperated
-    
+
+    public List<SquadSiteAndTimeOfDeparture> squadSitesAndTimesRemainning = new List<SquadSiteAndTimeOfDeparture>(); 
+
     /// <summary>
     /// Merc Sheets will simply hold all owned and hrieable mercs (all "existing" mercs). 
     /// Missing mercs will be generated organically, and then be added to hireables (which this list includes).

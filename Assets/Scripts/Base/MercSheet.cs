@@ -10,6 +10,7 @@ public class MercSheet
     public MercName characterName; //will this be enough to ref the merc-prefab
     public MercAssignment currentAssignment;
     public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
+    //public int siteNumber = -1;
 
     public int _experience = 0;
     public int _level = 1;
@@ -105,12 +106,15 @@ public class MercSheet
                 //could be useful for resetting?
                 break;
             case MercAssignment.AwaySquad:
+                if (roomOrSquadNumber < 0)
+                    roomOrSquadNumber = relevantNum;
                 //to which site? I guess
                 break;
             case MercAssignment.Room:
                 roomOrSquadNumber = relevantNum;
                 break;
             case MercAssignment.Available:
+                roomOrSquadNumber = relevantNum;
                 break;
             default:
                 break;

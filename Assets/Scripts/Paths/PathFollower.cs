@@ -38,6 +38,12 @@ public class PathFollower : MonoBehaviour
             //transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z)); //Avishy
         }
     }
+    public void SetDistanceTravelled(System.DateTime deptTime, float totalTravelTime)
+    {
+        float deltaSeconds = (float)(System.DateTime.Now - deptTime).TotalSeconds;
+        distanceTravelled = deltaSeconds * speed;
+    }
+
 
     // If the path changes during the game, update the distance travelled so that the follower's position on the new path
     // is as close as possible to its position on the old path

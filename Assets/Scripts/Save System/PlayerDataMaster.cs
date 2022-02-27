@@ -136,7 +136,10 @@ public class PlayerDataMaster : MonoBehaviour
                 AddSiteCooldown(currentPlayerData.siteNames[i], DateTime.Parse(currentPlayerData.siteCooldowns[i]));
         }
 
+        //if(currentPlayerData.squadSitesAndTimesRemainning.Count > 0)
+        //{
 
+        //}
         //PARTY REF?
 
         //REFMASTER
@@ -269,7 +272,7 @@ public class PlayerDataMaster : MonoBehaviour
 
         SaveDataToDisk();
     }
-
+    [ContextMenu("Grab and save data")]
     public void GrabAndSaveData()
     {
         List<MercName> newNames = new List<MercName>();
@@ -435,6 +438,23 @@ public class PlayerDataMaster : MonoBehaviour
         {
             SiteCooldowns[levelSOName] = null;
         }
+    }
+
+    public void LogSquadDeparture(int squadIndex, LevelEnum level, DateTime tOfDeparture)
+    {
+        currentPlayerData.squadSitesAndTimesRemainning.Add(new SquadSiteAndTimeOfDeparture(squadIndex, level, tOfDeparture));
+    }
+
+    public void RemoveLoggedSquad(int squadIndex)
+    {
+        tempSquadIndex = squadIndex;
+       Invoke(nameof(RemoveLoggedSquadDelay), .1f);
+    }
+    int tempSquadIndex =-1;
+    void RemoveLoggedSquadDelay()
+    {
+        currentPlayerData.squadSitesAndTimesRemainning.Remove(currentPlayerData.squadSitesAndTimesRemainning.Where(x => x.squadIndex == tempSquadIndex).FirstOrDefault());
+        tempSquadIndex = -1;
     }
 
     public List<System.Object> GetLog

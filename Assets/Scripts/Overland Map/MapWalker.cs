@@ -24,52 +24,52 @@ public class MapWalker : MonoBehaviour
     //Ref to THIS expeditions part?
 
     //[must haves: origin, destination,]
-    public void Init(Transform og, SiteButton dest, float _stepDelay, float duration, List<Pawn> pawns)
-    {
-        origin = og;
-        destination = dest;
+    //public void Init(Transform og, SiteButton dest, float _stepDelay, float duration, List<Pawn> pawns)
+    //{
+    //    origin = og;
+    //    destination = dest;
 
-        transform.position = origin.position;
+    //    transform.position = origin.position;
 
-        stepDelay = _stepDelay;
-        travelDuration = duration;
+    //    stepDelay = _stepDelay;
+    //    travelDuration = duration;
 
-        party = new List<Pawn>();
-        party.AddRange(pawns);
+    //    party = new List<Pawn>();
+    //    party.AddRange(pawns);
 
-        CallWalk(); //temp
-    }
+    //    CallWalk(); //temp
+    //}
 
-    public void CallWalk()
-    {
-        StartCoroutine("WalkCorou");
-    }
+    //public void CallWalk()
+    //{
+    //    StartCoroutine("WalkCorou");
+    //}
 
-    IEnumerator WalkCorou()
-    {
-        currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
-        currentTime = 0;
+    //IEnumerator WalkCorou()
+    //{
+    //    currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
+    //    currentTime = 0;
 
-        while (currentTime < travelDuration)
-        {
-            transform.position = Vector3.Lerp(origin.position, destination.transform.position, currentTime / travelDuration);
+    //    while (currentTime < travelDuration)
+    //    {
+    //        transform.position = Vector3.Lerp(origin.position, destination.transform.position, currentTime / travelDuration);
 
-            yield return new WaitForSeconds(stepDelay);
-            currentTime += stepDelay;
-            currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
-        }
+    //        yield return new WaitForSeconds(stepDelay);
+    //        currentTime += stepDelay;
+    //        currentDistanceToTarget = Vector3.Distance(origin.position, destination.transform.position);
+    //    }
 
-        //List<Sprite> sprites = new List<Sprite>();
-        //foreach (Pawn pawn in party)
-        //{
-        //    sprites.Add(pawn.PortraitSprite);
-        //}
+    //    //List<Sprite> sprites = new List<Sprite>();
+    //    //foreach (Pawn pawn in party)
+    //    //{
+    //    //    sprites.Add(pawn.PortraitSprite);
+    //    //}
 
-        destination.arrivedMissionPanel.SetMe(party);
-        Debug.LogWarning("Arrived!");
+    //    destination.arrivedMissionPanel.SetMe(party);
+    //    Debug.LogWarning("Arrived!");
 
-        // ArrivedMethod();
-    }
+    //    // ArrivedMethod();
+    //}
 
     //public float DistanceToTarget()
     //{

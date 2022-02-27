@@ -23,10 +23,11 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     Image leaderPortrait; //leader is the first merc
 
-    private void Start()
-    {
-        pathFollower = GetComponent<PathFollower>();
-    }
+    //private void Start()
+    //{
+    //    pathFollower = GetComponent<PathFollower>();
+    //    //transform.GetChild(0).gameObject.SetActive(false); //kills GFX until set
+    //}
 
     //public void SetMe(Squad s, float t, PathCreator p)
     //{
@@ -64,6 +65,9 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
         pathFollower.speed = path.path.cumulativeLengthAtEachVertex[path.path.cumulativeLengthAtEachVertex.Length - 1]/ remainingTime; //remainning time is "total time" in this context
 
+        transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
+
+
         remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
 
         pathFollower.pathCreator = path;
@@ -71,10 +75,49 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         //squad.isAvailable = false; // turn back on when/if they return //set by Squad.SetAssigment
 
         leaderPortrait.sprite = squad.pawns[0].PortraitSprite; //the first merc is the leader - consider making Leader a Squad property
-        StartCoroutine("RunTimer");
+        StartCoroutine(nameof(RunTimer));
 
     }
+    public void SetMe(Squad s, SiteButton sb, DateTime departTime)
+    {
 
+        siteButton = sb;
+
+        squad = s;
+
+
+        remainingTime = sb.ETA - (float)(DateTime.Now - departTime).TotalSeconds; //set remainning to full time
+
+        if(remainingTime >0)
+        {
+            //spwan at site already
+
+        }
+        path = sb.pathCreator;
+
+        siteButton.isWaitingForSquad = true; //should be a handled by SiteButton itself
+
+        pathFollower = GetComponent<PathFollower>();
+
+        //transform.position = p.path.GetPointAtTime(0);
+
+        //pathFollower.speed = path.path.cumulativeLengthAtEachVertex[path.path.cumulativeLengthAtEachVertex.Length - 1] / remainingTime; //remainning time is "total time" in this context
+        pathFollower.speed = path.path.cumulativeLengthAtEachVertex[path.path.cumulativeLengthAtEachVertex.Length - 1] / sb.ETA; //eta is "total time" in this context
+
+        remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
+        pathFollower.SetDistanceTravelled(departTime, sb.ETA);
+
+        transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
+
+
+        pathFollower.pathCreator = path;
+
+        //squad.isAvailable = false; // turn back on when/if they return //set by Squad.SetAssigment
+
+        leaderPortrait.sprite = squad.pawns[0].PortraitSprite; //the first merc is the leader - consider making Leader a Squad property
+        StartCoroutine(nameof(RunTimer));
+
+    }
     public void Go()
     {
 
@@ -85,7 +128,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         while (remainingTime >= 0)
         {
 
-            TimeSpan ts = new TimeSpan(0, (int)remainingTime/60, (int)remainingTime); //WRONG
+            TimeSpan ts = new TimeSpan(0, 0, (int)remainingTime); //WRONG
             timeText.text = string.Format("{0:D2}:{1:D2}", ts.Minutes, ts.Seconds);
             yield return new WaitForSeconds(timerRate);
             remainingTime -= timerRate;
@@ -97,6 +140,8 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         //siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
         //siteButton.readiedSquad = squad;
         siteButton.SetArrivedSquad(squad);
+
+        //PlayerDataMaster.Instance.RemoveLoggedSquad(squad.roomNumber); //only after being sent to site!!!
 
         IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite}, siteButton);
 

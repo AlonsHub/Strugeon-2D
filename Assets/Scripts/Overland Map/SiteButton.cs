@@ -17,13 +17,16 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     //public Level level; 
     public LevelSO levelSO;
+
+    public SiteData siteData;
+
     [Tooltip("Estiamted traveling duration in seconds")]
     public float ETA; //estiamted duration in minutes
     //public PathCreator pathCreator;
     //public PathCreator pathCreatorReturn;
 
-    public ArrivalPanel arrivedMissionPanel;
-    public GameObject arrivedMissionIcon;
+    //public ArrivalPanel arrivedMissionPanel;
+    //public GameObject arrivedMissionIcon;
     [SerializeField]
     private Vector3 arrivedPanelOffset;
 
@@ -33,8 +36,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public GameObject buttons;
 
-    public float maxCooldown;
-    private int clockDelay = 1; //time between clock ticks
+    
+    private readonly int clockDelay = 1; //time between clock ticks //seeing how this works, it could honestly just be a string...
 
     public GameObject clockAndTimerParent;
     public TMPro.TMP_Text timeText;
@@ -46,7 +49,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public Squad readiedSquad;
     public bool isReady = false;
-    public bool isSet { get => levelSO.levelData.isSet; set => levelSO.levelData.isSet = value; } //set means all level data has been set and hadn't been "used" yet. 
+    public bool isLevelDataSet { get => levelSO.levelData.isSet; set => levelSO.levelData.isSet = value; } //set means all level data has been set and hadn't been "used" yet. 
                                //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
 
 
@@ -100,7 +103,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void LateStart()
     {
-        if (!isSet) //this isSet => levelDataSO.levelData.isSet
+        if (!isLevelDataSet) //this isSet => levelDataSO.levelData.isSet
             RandomSetSelf();
 
         if (myDataDisplay)
@@ -115,9 +118,9 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
    
     public void OnClick()
     {
-        if (isCooldown || isWaitingForSquad)
+        if (isCooldown || isWaitingForSquad || squadPickerObject.activeInHierarchy)
         {
-            Debug.LogError("isCooldown or isWaitingForSquad");
+            Debug.LogWarning("isCooldown or isWaitingForSquad or squadpicker is active");
             return;
         }
 
@@ -133,6 +136,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void SendToArena()
     {
+        PlayerDataMaster.Instance.RemoveLoggedSquad(readiedSquad.roomNumber);
+
         OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
         LevelRef.Instance.SetCurrentLevel(levelSO);
@@ -243,7 +248,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         ///
 
         //TBD this should move to an Awake or start
-        if (!isSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
+        if (!isLevelDataSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
             RandomSetSelf();
 
         //Do something to the sprite now - edit sprite later
@@ -268,6 +273,6 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
             levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty);
 
-            isSet = true; //this isSet => levelDataSO.levelData.isSet
+            isLevelDataSet = true; //this isSet => levelDataSO.levelData.isSet
     }
 }

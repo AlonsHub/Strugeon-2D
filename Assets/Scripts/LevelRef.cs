@@ -13,6 +13,9 @@ public class LevelRef : MonoBehaviour
     public LevelSO currentLevel;
     public List<LevelSO> levelSOs;
 
+    List<SiteButton> sites; //NOT PUBLIC!
+
+
     //public SiteButton siteToCooldown;
     public string visitedSiteName; //WORK AROUND! ----- Fix it by adding cooldown time to SiteButton.SiteCooldowns
 
@@ -26,6 +29,8 @@ public class LevelRef : MonoBehaviour
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        
     }
 
     public void SetCurrentLevel(int levelIndex)
