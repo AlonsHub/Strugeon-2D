@@ -145,6 +145,8 @@ public class TurnMaster : MonoBehaviour
         if (gameHasBeenReset)
             return; //don't want to stop twice
 
+        //Time.timeScale = 1; //just in case
+        
         StopCoroutine("TurnSequence"); //will need to rearrange lists after. Turn order will be lost
         isGameRunning = false;
         gameHasBeenReset = true;

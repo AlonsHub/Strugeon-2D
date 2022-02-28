@@ -42,13 +42,6 @@ public class TimeChanger : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //if (isPause)
-            //    Time.timeScale = 1;
-            //else
-            //    Time.timeScale = 0;
-
-            //isPause = !isPause;
-            //pauseButton.sprite = pauseButtonImgs[(int)Time.timeScale];
             ToggleTimePause();
         }
     }
@@ -105,46 +98,8 @@ public class TimeChanger : MonoBehaviour
         }
     }
 
-    //void _SetTimeSpeed(TimeSpeed timeSpeed) //INTERNAL method to set the time and it's buttons - used by all types of outside methods
-    //{
-    //    //pauseButton.sprite = pauseButtonImgs[(timeSpeed == 0) ? 0 : 1]; // BEAUTIFUL!!!
-
-    //     //consider checking if the current and new speeds are not the same - in which case, saving-over the oldSpeed might make a "freak double-pause" become a "premanent pause"
-    //    oldSpeed = currentTimeSpeed;
-    //    isPause = (timeSpeed == 0);
-
-    //    switch (timeSpeed)
-    //    {
-    //        case TimeSpeed.Pause:
-    //            pauseButton.sprite = pauseButtonImgs[0];
-    //            Time.timeScale = 0;
-    //            break;
-
-    //        case TimeSpeed.Play:
-    //            pauseButton.sprite = pauseButtonImgs[1];
-    //            Time.timeScale = speeds[(int)oldSpeed];
-    //            break;
-
-    //        case TimeSpeed.Fast:
-    //            break;
-    //        default:
-    //            break;
-    //    }
-
-    //    currentTimeSpeed = timeSpeed;
-    //}
-
-    //public void ChangeTimeScale()
-    //{
-    //    currentTimeScaleIndex++;
-
-    //    if (currentTimeScaleIndex >= timeScales.Length)
-    //    {
-    //        currentTimeScaleIndex = 0;
-    //    }
-
-    //    Time.timeScale = timeScales[currentTimeScaleIndex];
-
-    //    timeToggleButton.image.sprite = buttonImgs[currentTimeScaleIndex];
-    //}
+    private void OnDisable()
+    {
+        Time.timeScale = 1; //resets time scale once this is irrelevant
+    }
 }

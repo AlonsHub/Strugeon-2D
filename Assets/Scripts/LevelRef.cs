@@ -71,32 +71,11 @@ public class LevelRef : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        switch (scene.buildIndex)
+        switch (scene.buildIndex) //more things to be added?
         {
             case 2:
                 Instantiate(currentLevel.levelData.levelPrefab);
                 break;
-
-            //case 1:
-            //    if(visitedSiteName == null || visitedSiteName == "")
-            //    {
-            //        break;
-            //    }
-
-
-            //    SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
-
-            //    foreach(KeyValuePair<string,float> v in SiteButton.SiteCooldowns)
-            //    {
-            //        if(SiteButton.SiteCooldowns.ContainsKey(v.Key))
-            //        {
-            //            //if(SiteButton.SiteCooldowns[v.Key]
-            //        }
-            //    }
-
-            //    SiteButton sb = siteButtons.Where(x => x.name == visitedSiteName).FirstOrDefault(); //TERRRRRBILE! TBD
-            //    sb.StartCooldownCaller();
-                //break;
 
             default:
                 break;

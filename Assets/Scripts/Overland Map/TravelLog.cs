@@ -30,7 +30,7 @@ public class TravelLog : MonoBehaviour
         //if(sites == null || sites.Count==0)
         //sites = FindObjectsOfType<SiteButton>().ToList(); //TBF AF NOW
 
-        Invoke(nameof(LateStart), 1f);
+        Invoke(nameof(LateStart), .2f);
     }
 
     void LateStart()

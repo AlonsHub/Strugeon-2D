@@ -123,7 +123,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
     IEnumerator RunTimer()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         transform.GetChild(0).gameObject.SetActive(true); //unkills GFX until set
 
 

@@ -86,6 +86,7 @@ public class SquadBuilder : MonoBehaviour
     IEnumerator WaitForConfirmDecision()
     {
         yield return new WaitUntil(() => confirmWindowAnswer != null || !confirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
+
         if(confirmWindowAnswer == true)
         {
             //confirm
@@ -123,6 +124,8 @@ public class SquadBuilder : MonoBehaviour
                         PartyMaster.Instance.availableMercPrefabs.Add(item);
                     }
                 }
+                //close squad menu
+                gameObject.SetActive(false);
             }
         }
 
@@ -131,8 +134,12 @@ public class SquadBuilder : MonoBehaviour
 
     public void OnDisable()
     {
+        confirmWindowAnswer = null;
         confirmWindow.SetActive(false);
         mercDataDisplayer.gameObject.SetActive(false);
+
+        Tavern.Instance.RefreshRooms();
+
         foreach (var item in partySlots)
         {
             item.gameObject.SetActive(true); //turns all party slots (those will be closed on SetToRoom() before the Create/EditSquad mode is activated)
@@ -174,7 +181,7 @@ public class SquadBuilder : MonoBehaviour
 
 
 
-        Tavern.Instance.RefreshRooms();
+        //Tavern.Instance.RefreshRooms();
         //confirmWindow.SetActive(false); //moved to OnDisable
         gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
