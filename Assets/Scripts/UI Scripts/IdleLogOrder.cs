@@ -10,7 +10,7 @@ public class IdleLogOrder
 
     public bool isPersistent = false; //this is set in the static AddToBackLog method, since it's mostly false and doesnt warrent a spot in a constructor
 
-    public int id;
+    public int orderID; //helps remove squad arrivals that 
     
     //Single Inputs
     public IdleLogOrder(GameObject prefab, string _string) 

@@ -183,7 +183,9 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theCowardly)
             {
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
-                PlayerDataMaster.Instance.RemoveMercSheet(item);
+                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Add(item);
+                MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+                //PlayerDataMaster.Instance.RemoveMercSheet(item); //sheet remains!
             }
 
             if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
@@ -224,6 +226,9 @@ public class TurnMaster : MonoBehaviour
             #endregion
             //put squad back in their room
             PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
+
+
+
         }
         else
         {
@@ -232,7 +237,9 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theCowardly)
             {
                 //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
-                PlayerDataMaster.Instance.RemoveMercSheet(item);
+                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Add(item);
+                MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+                //PlayerDataMaster.Instance.RemoveMercSheet(item);
             }
             foreach (var item in theDead)
             {

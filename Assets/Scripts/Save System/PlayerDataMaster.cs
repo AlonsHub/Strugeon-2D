@@ -389,7 +389,7 @@ public class PlayerDataMaster : MonoBehaviour
         //currentPlayerData.availableMercs.Add(mn);
         //currentPlayerData.CreateAddMercs(new List<MercName>{mn}, MercAssignment.Available);
         PartyMaster.Instance.availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mn)); //consider unifying with ChangeMercAssignment - perhaps switch(newAssignment)
-        currentPlayerData.ChangeMercAssignment(mn, MercAssignment.Available);
+        currentPlayerData.ChangeMercAssignment(mn, MercAssignment.Available, -1);
 
         //GoogleSheetMaster.Instance.LogPlayer(); //saves these changes
     }

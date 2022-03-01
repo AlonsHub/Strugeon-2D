@@ -106,9 +106,11 @@ public class PlayerData
             // SHOULD I NOT JUST ADD THeSe MERCs TO THE LOG HERE?
         }
     }
-    public void ChangeMercAssignment(MercName mercName, MercAssignment mercAssignment)
+    public void ChangeMercAssignment(MercName mercName, MercAssignment mercAssignment, int relevantNum)
     {
-        mercSheets.Where(x => x.characterName == mercName).SingleOrDefault().currentAssignment = mercAssignment;
+        //should switch on the assignment and re-enlist in the correct lists i.e. hireable, available etc...
+
+        mercSheets.Where(x => x.characterName == mercName).SingleOrDefault().SetToState(mercAssignment, relevantNum);
     }
 
     public void RemoveMercSheet(MercName mn)
