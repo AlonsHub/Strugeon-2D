@@ -45,15 +45,20 @@ public class IdleLog : MonoBehaviour
         Instance = this;
         peekingMenu = GetComponent<PeekingMenu>();
 
+        CheckAndPerformBackLogOrders();
 
-        if(backLog.Count>0)
+    }
+
+    public void CheckAndPerformBackLogOrders()
+    {
+        if (backLog.Count > 0)
         {
             List<IdleLogOrder> nonPersistentOrders = new List<IdleLogOrder>();
             foreach (var order in backLog)
             {
                 RecieveLogOrder(order);
                 //RecieveGenericMessage(order.specificDisplayerPrefab, order.strings, order.sprites);
-                if(!order.isPersistent)
+                if (!order.isPersistent)
                 {
                     nonPersistentOrders.Add(order);
                 }

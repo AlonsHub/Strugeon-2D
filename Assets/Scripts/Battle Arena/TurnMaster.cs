@@ -201,20 +201,20 @@ public class TurnMaster : MonoBehaviour
             ////Total and Shared Exp:
             ////this way a total sum of exp is divided by surviving mercs
 
-            //int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
+            int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
 
-            //foreach (var item in PartyMaster.Instance.currentSquad.pawns)
-            //{
-            //    item.GetMercSheet.AddExp(expPerMerc);
-            //}
+            foreach (var item in PartyMaster.Instance.currentSquad.pawns)
+            {
+                item.mercSheetInPlayerData.AddExp(expPerMerc);
+            }
             #endregion
 
             #region 2) Constant Value Exp Reward
 
-            foreach (var item in PartyMaster.Instance.currentSquad.pawns)
-            {
-                item.mercSheetInPlayerData.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
-            }
+            //foreach (var item in PartyMaster.Instance.currentSquad.pawns)
+            //{
+            //    item.mercSheetInPlayerData.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
+            //}
             #endregion
 
             #region Single MagicItem Reward

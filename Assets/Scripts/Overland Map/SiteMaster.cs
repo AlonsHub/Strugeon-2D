@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable] 
 public class SiteMaster : MonoBehaviour
 {
+    public static SiteMaster Instance;
     //this can be easily saved and loaded as all site's data
 
     ///it will hold: 
@@ -15,6 +16,16 @@ public class SiteMaster : MonoBehaviour
 
     //temp - will just know of SiteButtons and ongoing expedition, should fix soon though TBF
     public SiteButton[] siteButtons; //for now, site buttons are the easiest way to get to site data
+
+    private void Awake()
+    {
+        if(Instance != null && Instance !=this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void OnEnable()
     {
@@ -29,22 +40,32 @@ public class SiteMaster : MonoBehaviour
         }
         MakeSureSitesAreDiverese();
     }
+
+
     [ContextMenu("DiverseCheckOnSites")]
     public void MakeSureSitesAreDiverese()
     {
-        int[] countsPerDifficulty = new int[] {0,0,0};
+        int numberOfDifficulties = System.Enum.GetValues(typeof(LairDifficulty)).Length;
+        int[] countsPerDifficulty = new int[numberOfDifficulties];
+
+        for (int i = 0; i < numberOfDifficulties; i++)
+        {
+            countsPerDifficulty[i] = 0;
+        }
+
         foreach (var item in siteButtons)
         {
             countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
         }
-        for (int i = 0; i < countsPerDifficulty.Length; i++)
+
+        for (int i = 0; i < numberOfDifficulties; i++)
         {
-            if(countsPerDifficulty[i] >= System.Enum.GetValues(typeof(LairDifficulty)).Length)
+            if(countsPerDifficulty[i] >= numberOfDifficulties)
             {
                 //need to reset one!
                 //choose randomly, but set to a different difficulty - that is NOT i
                 i++;
-                if(i>= countsPerDifficulty.Length)
+                if(i>= numberOfDifficulties)
                 {
                     i = 0;
                 }

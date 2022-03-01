@@ -28,10 +28,10 @@ public class PrefabArchive : MonoBehaviour
     {
         return displayerPrefabs[(int)dt];
     }
-    [ContextMenu("test")]
-    public void TEST()
-    {
-        IdleLogOrder newOrder = new IdleLogOrder(GetPrefabByDisplayerType(DisplayerType.LevelUp), new List<string> { "something advanced!", $"from" }, bullshit);
-        IdleLog.AddToBackLog(newOrder, true) ;
-    }
+    //[ContextMenu("test")]
+    //public void TEST()
+    //{
+    //    IdleLogOrder newOrder = new IdleLogOrder(GetPrefabByDisplayerType(DisplayerType.LevelUp), new List<string> { "something advanced!", $"from" }, bullshit);
+    //    IdleLog.AddToBackLog(newOrder, true) ;
+    //}
 }

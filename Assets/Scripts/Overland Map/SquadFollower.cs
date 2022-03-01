@@ -162,7 +162,9 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         squad.isAvailable = true;
         //siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
         //siteButton.readiedSquad = null; //?
-        siteButton.UnSetMe();
+        siteButton.UnSetArrivingSquad();
+
+
 
         StopAllCoroutines();
         Destroy(gameObject);
