@@ -15,27 +15,27 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
       - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 030000000100000003000000
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      enemyLevels: 0200000002000000
+    enemySetPack: {fileID: 11400000, guid: a8facd8ddceefc0459f0783958c8d14d, type: 2}
     magicItem:
-      magicItemName: Ring
-      goldValue: 35
+      magicItemName: Knight Shield
+      goldValue: 10
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
       rarity: 1
-      dropRateWeight: 3
-      itemSprite: {fileID: 21300000, guid: a2e0b7480b3635140b77128934071ba2, type: 2}
-      spriteName: Ring
-    expReward: 55
+      dropRateWeight: 1
+      itemSprite: {fileID: 21300000, guid: 866eb49c6f94d394786d5d2d6e73f2b8, type: 2}
+      spriteName: KnightShield
+    expReward: 35
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 12
-    difficulty: 1
+    goldReward: 5
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

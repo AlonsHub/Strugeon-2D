@@ -15,31 +15,30 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 02000000020000000200000002000000
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      enemyLevels: 0300000003000000
+    enemySetPack: {fileID: 11400000, guid: 046a48308753b9540a8ca188f891b291, type: 2}
     magicItem:
-      magicItemName: Ring
-      goldValue: 35
+      magicItemName: Crown
+      goldValue: 50
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 1
-      dropRateWeight: 3
-      itemSprite: {fileID: 21300000, guid: a2e0b7480b3635140b77128934071ba2, type: 2}
-      spriteName: Ring
-    expReward: 35
+      rarity: 2
+      dropRateWeight: 1
+      itemSprite: {fileID: 21300000, guid: cae6c3b9bbb18364aace108a3609ddbb, type: 2}
+      spriteName: Crown
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 9
-    difficulty: 0
+    goldReward: 13
+    difficulty: 1
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 7
     waitTimeSeconds: 10
-    isSet: 0
+    isSet: 1

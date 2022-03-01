@@ -18,6 +18,9 @@ public struct LevelData
     public List<int> enemyLevels => enemySet.enemyLevels;
     [SerializeField]
     EnemySet enemySet;
+    [SerializeField]
+    EnemySetPack enemySetPack;
+
     //public List<MagicItemSO> magicItems; 
     public MagicItem magicItem; 
     public int expReward;
@@ -41,12 +44,16 @@ public struct LevelData
         //rewards.Clear();
         difficulty = newDifficulty;
 
-         //this just needs to be one method... 
+        //this just needs to be one method... 
         //enemies = DifficultyTranslator.Instance.DifficultyToEnemyPreset(newDifficulty); // here!!!!!
-        enemySet = DifficultyTranslator.Instance.DifficultyToEnemySet(newDifficulty); // here!!!!!
-        magicItem = DifficultyTranslator.Instance.DifficultyToSingleReward(newDifficulty);
-        goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty);
-        expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty);
+        //enemySet = DifficultyTranslator.Instance.DifficultyToEnemySet(newDifficulty); // here!!!!!
+
+        //enemySet = enemySetPack.Random;
+        enemySet = enemySetPack.GetRandomEnemySetOfDificulty(newDifficulty);
+        
+        magicItem = DifficultyTranslator.Instance.DifficultyToSingleReward(newDifficulty); //TBF add reward packs to enemySetPack
+        goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty); //TBF?
+        expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty); //TBR TBF
         //this just needs to be one method... [end]
 
         waitTime = new TimeSpan(waitTimeHours, waitTimeMinutes, waitTimeSeconds);
