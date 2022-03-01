@@ -73,7 +73,7 @@ public class Tavern : MonoBehaviour
     {
         foreach (var item in windowTier1)
         {
-            if (!item.name.Equals(dontDisable))
+            if (item.activeInHierarchy && !item.name.Equals(dontDisable))
             {
                 if (item.name.Equals(squadBuilder.name))
                 {
