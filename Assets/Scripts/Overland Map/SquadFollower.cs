@@ -23,6 +23,8 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     Image leaderPortrait; //leader is the first merc
 
+
+    BasicDisplayer idleLogMessage;
     //private void Start()
     //{
     //    pathFollower = GetComponent<PathFollower>();
@@ -145,7 +147,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
         //PlayerDataMaster.Instance.RemoveLoggedSquad(squad.roomNumber); //only after being sent to site!!!
 
-        IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite}, siteButton);
+        idleLogMessage = IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.pawns[0].Name + " Squad", siteButton.levelSO.name}, new List<Sprite> {squad.pawns[0].PortraitSprite}, siteButton);
 
         //indicate somehow - also, connect the relevant squad to the site itself? 
         //AVOID a system that would have problems locating the squad to load-in
@@ -163,7 +165,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         //siteButton.isWaitingForSquad = false; //should be a handled by SiteButton itself
         //siteButton.readiedSquad = null; //?
         siteButton.UnSetArrivingSquad();
-
+        Destroy(idleLogMessage.gameObject);
 
 
         StopAllCoroutines();

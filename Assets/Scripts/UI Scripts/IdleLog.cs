@@ -28,6 +28,9 @@ public class IdleLog : MonoBehaviour
 
     [SerializeField]
     Transform logParent;
+   
+    public BasicDisplayer[] GetLogParentBasicDisplayers() => logParent.GetComponentsInChildren<BasicDisplayer>();
+    public GameObject GetLogParentChild(int childIndex) => logParent.GetChild(childIndex).gameObject;
 
     PeekingMenu peekingMenu;
 
@@ -157,7 +160,8 @@ public class IdleLog : MonoBehaviour
     //        peekingMenu.ShowMenu();
     //    }
     //}
-    public void RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, SiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
+    //public void RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, SiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
+    public BasicDisplayer RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, SiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
     {
         GameObject go = Instantiate(basicEntryPrefab, logParent);
         go.GetComponentInChildren<Button>().onClick.AddListener(() => siteRef.OnClick());
@@ -167,7 +171,7 @@ public class IdleLog : MonoBehaviour
         if (basicMessage.textBoxes.Count != texts.Count || basicMessage.images.Count != sprites.Count)
         {
             Debug.LogError("Bugged out. \"texts and boxes\" or \"images and sprites\" count not alligned");
-            return;
+            return null;
         }
 
         for (int i = 0; i < texts.Count; i++)
@@ -183,6 +187,7 @@ public class IdleLog : MonoBehaviour
         {
             peekingMenu.ShowMenu();
         }
+        return basicMessage;
     }
 
     public void CloseIfEmptyCheck(int amountAboutToBeDestoryed)

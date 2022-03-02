@@ -200,6 +200,10 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         isReady = false;
         isWaitingForSquad = false;
         readiedSquad = null;
+
+        //BasicDisplayer[] displayers = IdleLog.Instance.GetLogParentBasicDisplayers();
+
+        
     }
     public void SetArrivedSquad(Squad s) //for cancelExpedition cases
     {
