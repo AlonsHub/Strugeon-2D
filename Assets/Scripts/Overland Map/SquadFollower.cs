@@ -166,6 +166,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         //siteButton.readiedSquad = null; //?
         siteButton.UnSetArrivingSquad();
         Destroy(idleLogMessage.gameObject);
+        IdleLog.Instance.CloseIfEmptyCheck(1);
 
 
         StopAllCoroutines();
