@@ -311,7 +311,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         //Add to the list of the Cowardly (TurnMaster)
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
-        PartyMaster.Instance.availableMercPrefabs.Remove(this);
+        //PartyMaster.Instance.availableMercPrefabs.Remove(this);
         TurnMaster.Instance.theCowardly.Add(mercName);
         TurnMaster.Instance.RemoveTurnTaker(this);
 

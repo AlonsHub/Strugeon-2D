@@ -45,19 +45,27 @@ public class SquadBuilder : MonoBehaviour
         //set/instantiate empty party-slots by Room_level
 
         //print all availables:
-        for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
+        //for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
+        //for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.availableMercs.Count; i++)
+        //{
+        //    //availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
+        //    availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
+        //}
+
+        List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+
+        for (int i = 0; i < names.Count; i++)
         {
-            availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
+            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
         }
+
         if(availableSlots[0].isOccupied)
         {
             mercDataDisplayer.SetMe(availableSlots[0].pawn);
         }
-        else
-        {
-            Debug.LogError("You have no mercs... or at least, you don't have a FIRST merc to show... which is just weird");
-        }
-        for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
+       
+        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
+        for (int i = names.Count; i < availableSlots.Length; i++)
         {
             availableSlots[i].SetMe(); //empty
         }
@@ -192,13 +200,39 @@ public class SquadBuilder : MonoBehaviour
     }
     public void Refresh()
     {
-        for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
+        //for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
+        //{
+        //    availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]);
+        //}
+        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
+        //{
+        //    availableSlots[i].ClearSlot();
+        //}
+
+        //for (int i = 0; i < tempSquad.pawns.Count; i++)
+        //{
+        //    partySlots[i].SetMe(tempSquad.pawns[i]);
+        //}
+        //for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
+        //{
+        //    partySlots[i].ClearSlot();
+        //}
+        List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+
+        for (int i = 0; i < names.Count; i++)
         {
-            availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]);
+            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
         }
-        for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
+
+        if (availableSlots[0].isOccupied)
         {
-            availableSlots[i].ClearSlot();
+            mercDataDisplayer.SetMe(availableSlots[0].pawn);
+        }
+
+        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
+        for (int i = names.Count; i < availableSlots.Length; i++)
+        {
+            availableSlots[i].SetMe(); //empty
         }
 
         for (int i = 0; i < tempSquad.pawns.Count; i++)
@@ -207,7 +241,7 @@ public class SquadBuilder : MonoBehaviour
         }
         for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
         {
-            partySlots[i].ClearSlot();
+            partySlots[i].ClearSlot(); //empty
         }
     }
     public void EditSquadMode(List<Pawn> oldSquad, Room room)
