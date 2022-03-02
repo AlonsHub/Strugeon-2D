@@ -60,9 +60,10 @@ public class HealItem : ActionItem, SA_Item
             StartCoroutine(WalkThenHeal(tgtPawn));
             return;
         }
+        //if dist <= 1 - just do the following below:
 
-        //if dist <= 1 - just do this:
 
+        //HEAL ANIMATION????
         
         int healRoll = Random.Range(minHeal, maxHeal);
 
@@ -88,16 +89,16 @@ public class HealItem : ActionItem, SA_Item
         p.Heal(healRoll);
 
         GameObject go = Instantiate(healEffect, tgt.transform);
-        Destroy(go, 2);
+        Destroy(go, 2); //effects should selfdestruct TBF
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, p.Name, healRoll, Color.green);
 
-        Invoke("CharacterHeal", healDelay);
+        Invoke(nameof(CharacterHeal), healDelay); //TBF!!!
     }
 
     void CharacterHeal()
     {
-        pawn.TurnDone = true;
+        pawn.TurnDone = true;//TBF!!!
     }
 
     public override void CalculateVariations()

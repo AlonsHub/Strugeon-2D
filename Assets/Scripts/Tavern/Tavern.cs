@@ -71,20 +71,31 @@ public class Tavern : MonoBehaviour
 
     public void DisableWindowTier1(string dontDisable)
     {
+        if(squadBuilder.gameObject.activeInHierarchy && dontDisable != squadBuilder.name)
+        {
+            squadBuilder.CloseMe();
+            return;
+        }
+
         foreach (var item in windowTier1)
         {
-            if (item.activeInHierarchy && !item.name.Equals(dontDisable))
+            //    {
+            //        if (item.name.Equals(squadBuilder.name))
+            //        {
+            //            squadBuilder.CloseMe();
+            //        }
+            //        else
+            //        {
+            if (!item.name.Equals(dontDisable))
+                item.SetActive(false);
+            else
             {
-                if (item.name.Equals(squadBuilder.name))
-                {
-                    squadBuilder.CloseMe();
-                }
-                else
-                {
-                    item.SetActive(false);
-                }
+                if(item.activeInHierarchy)
+                item.SetActive(true);
             }
         }
+        //    }
+        //}
     }
 
     public void RefreshRooms()

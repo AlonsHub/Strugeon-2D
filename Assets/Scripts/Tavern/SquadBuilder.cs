@@ -116,7 +116,10 @@ public class SquadBuilder : MonoBehaviour
                 List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
 
                 PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
-
+                foreach (var item in backToAvailable)
+                {
+                    tempSquad.RemoveMerc(item); //to reset merc assignments
+                }
                 //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
                 tempSquad.pawns = uneditedSquadPawns;
 
@@ -124,12 +127,14 @@ public class SquadBuilder : MonoBehaviour
             }
             else
             {
-                toRoom.roomButton.SetStatusText("Vacant");
+                toRoom.ClearRoom();
+                //toRoom.roomButton.SetStatusText("Vacant");
                 if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
                 {
                     foreach (var item in tempSquad.pawns)
                     {
                         PartyMaster.Instance.availableMercPrefabs.Add(item);
+                        item.mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
                     }
                 }
                 //close squad menu

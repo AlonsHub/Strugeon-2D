@@ -124,8 +124,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             {
                 isOneClicked = true;
 
-                if (!squadBuilder.gameObject.activeInHierarchy)
-                    squadBuilder.gameObject.SetActive(true);
+                if (!squadBuilder.mercDataDisplayer.gameObject.activeInHierarchy)
+                    squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
                 squadBuilder.SetMercDisplayer(pawn);
                 squadBuilder.TurnAllFramesOff();
                 FrameToggle(true);

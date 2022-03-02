@@ -42,5 +42,6 @@ public class Room
     {
         isOccupied = false;
         squad = null;
+        SetStatusText("Vacant");
     }
 }
