@@ -18,12 +18,12 @@ public class YellowButtonHostile : SkillButton
         //targetPawn.ApplySpecialEffect(effectIcon, "Yellow");
         //StartCoroutine("EndWhen");
         targetPawn = MouseBehaviour.hitTarget;
-        if (targetPawn.DoModifyDamage)
+        if (targetPawn.DoYellowDebuff)
         {
             return;
         }
         targetPawn.DamageModifier = dmgMultiplier;
-        targetPawn.DoModifyDamage = true;
+        targetPawn.DoYellowDebuff = true;
        
         targetPawn.AddEffectIcon(effectIcon, "yellowDeBuff");
 

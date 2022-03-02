@@ -6,15 +6,30 @@ public class ToughenSpiritItem : ActionItem, SA_Item
 {
     [SerializeField]
     Sprite toughenSpiritSprite;
+    [SerializeField]
+    string toughenSpiritSpriteName;
+
+    [SerializeField]
+    float damageModifier; //this sets them all
 
     int _currentCooldown;
     [SerializeField]
     int saCooldown;
 
+    public List<Pawn> targets; 
+
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
     private void Start()
     {
         //_currentCooldown = 0; //starts IN cooldown ON! as in gdd
         StartCooldown(); //starts IN cooldown ON! as in gdd
+
+        targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
+
 
     }
 
@@ -22,7 +37,11 @@ public class ToughenSpiritItem : ActionItem, SA_Item
     {
 
         StartCooldown();
-
+        foreach (var item in targets)
+        {
+            ToughenSpirit ts = item.gameObject.AddComponent<ToughenSpirit>();
+            ts.SetFullEffect(item, toughenSpiritSpriteName, damageModifier);
+        }
 
         
         ///effects should be added to all mercs (as buff effects that kill themselves like bling/charm)
@@ -33,7 +52,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgtPawn.Name, healRoll, Color.green);
 
         //after the effect ->
-       //pawn.TurnDone = true;
+       pawn.TurnDone = true;
     }
 
     public bool SA_Available()
@@ -60,5 +79,11 @@ public class ToughenSpiritItem : ActionItem, SA_Item
     public void StartCooldown()
     {
         _currentCooldown = saCooldown;
+    }
+
+    public override void CalculateVariations()
+    {
+        //base.CalculateVariations();
+        actionVariations.Clear();
     }
 }

@@ -41,10 +41,12 @@ public class HealItem : ActionItem, SA_Item
     {
         _currentCooldown = 0;
 
-        if (!pawn.isEnemy)
-            targets = RefMaster.Instance.mercs;
-        else
-            targets = RefMaster.Instance.enemyInstances;
+        targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
+
+        //if (!pawn.isEnemy)
+        //    targets = RefMaster.Instance.mercs;
+        //else
+        //    targets = RefMaster.Instance.enemyInstances;
     }
 
     public override void Action(GameObject tgt)

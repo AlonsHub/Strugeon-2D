@@ -11,7 +11,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     //public PawnStats _stats;
     //public CharacterSheet characterSheet; //either enemy or merc
     [SerializeField]
-    private string pawnName; //character name (not GameObject name)!
+    private string pawnName; //character name (not GameObject name)! //chagne the only use of this to print the enums name (mercName)
 
     public bool isEnemy;
 
@@ -76,8 +76,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     #region Scion Powers
     private bool doDoubleTurn = false;
     private bool doSkipTurn = false;
-    private bool doModifyDamage = false;
+    private bool doYellowDebuff = false;
     private float damageModifier = 1;
+    private List<float> damageModifiers;
     private bool hasPurple = false;
     public GameObject purpleTgt;
     #endregion
@@ -93,8 +94,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
     public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
-    public bool DoModifyDamage { get => doModifyDamage; set => doModifyDamage = value; }
+    public bool DoYellowDebuff { get => doYellowDebuff; set => doYellowDebuff = value; } //TBF - modify damage chain!
+    public bool DoModifyDamage => DamageModifiers.Count>0; //new approach that will mod damage only if there are mods to add - mods will remove themselves?
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
+    public List<float> DamageModifiers { get => damageModifiers; set => damageModifiers = value; }
 
     //public bool MovementDone { get => movementDone; set => movementDone = value; } // OPTIONAL - to have walk and attack actions
     
@@ -111,6 +114,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     //GameObject PurpleTarget.gameObject { get => gameObject;}
 
     public static int totalPawns = 0;
+
+
+    public System.Action OnTakeDamage;
 
 
     //TEMP AF
@@ -133,6 +139,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         audioSource = GetComponent<AudioSource>();
         worldSpaceHorizontalGroup = GetComponentInChildren<WorldSpaceHorizontalGroup>();
         saItems = GetComponents<SA_Item>();
+
+        damageModifiers = new List<float>();
 
         hasSAs = (saItems.Length != 0);
         
@@ -246,6 +254,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public override void TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
+
         //Sound prompt
         //audioSource.clip = hitSounds[Random.Range(0, hitSounds.Length - 1)];
         //audioSource.Play();
@@ -253,15 +262,36 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Spawn damage text (numbers)
         GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
 
-        if(DoModifyDamage)
+
+        if (damage != 0)
         {
-            damage =(int)(damage * damageModifier);
-            DamageModifier = 0;
-            DoModifyDamage = false;
-            RemoveIconByColor("yellowDeBuff");
+            OnTakeDamage?.Invoke(); //relevant only if actual damage happens
+
+            float finalDmgMod = 1;
+            if (DoModifyDamage) //damageModifiers isn't empty!
+            {
+                foreach (var item in damageModifiers) //does all dmg mods that are now yellowDebuff (which will be upgrarded soon)
+                {
+                    finalDmgMod *= item;
+                }
+                damageModifiers.Clear(); //only relevant buffs will remain - buffs that reduce lifetime on hit/attack - need to listen-to or be grabbed-by something to reduce thier ttl accordingly
+            }
+
+            if (DoYellowDebuff)
+            {
+                damage = (int)(damage * damageModifier);
+                DamageModifier = 1;
+                DoYellowDebuff = false;
+                RemoveIconByColor("yellowDeBuff"); //TBF!!
+            }
         }
 
+
         go.GetComponent<DamageText>().SetDamageText(damage);
+
+        //DAMAGE SHOULD NOT BE REPORTED BY THE ATTACKER, BUT BY THE VICTIM!
+        //Attack should be reported (numberless) to the log by the attacker, and the damaged should add the damage to previous log entry using appropriate methods
+        //ADD TO PREVIOUS 
 
         currentHP -= damage;
         if (currentHP <= 0)

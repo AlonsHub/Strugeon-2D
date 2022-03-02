@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 7974199490736343132}
   - component: {fileID: 5092255476189858162}
-  - component: {fileID: 2111372755113017349}
   - component: {fileID: 7726652073189359543}
+  - component: {fileID: 6741276129138395191}
   m_Layer: 11
   m_Name: Hadas
   m_TagString: Merc
@@ -107,7 +107,7 @@ MonoBehaviour:
     _level: 1
   initiativeBonus: 0
   hasSAs: 0
-  forDisplayPurposesOnly: {fileID: 2111372755113017349}
+  forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -214,39 +214,6 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 0
   targetAllies: 0
---- !u!114 &2111372755113017349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ad648be5941c64cba567372b7656da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
-  actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
-  range: 1
-  minHeal: 25
-  maxHeal: 35
-  healAmount: 0
-  healDelay: 0
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  tileWalker: {fileID: 0}
-  healEffect: {fileID: 6136953690358548763, guid: 1257efbdaad63b343af597321a45a5c9,
-    type: 3}
-  targets: []
-  _currentCooldown: 0
-  saCooldown: 3
-  healSprite: {fileID: 21300000, guid: dfd0b3f6b95bfa64198185185f058cfc, type: 3}
 --- !u!114 &7726652073189359543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +234,29 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
+--- !u!114 &6741276129138395191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545c5f3c4224a6149a60463f9315f1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 1
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  targetAllies: 0
+  toughenSpiritSprite: {fileID: 0}
+  toughenSpiritSpriteName: Toughen
+  damageModifier: 0.5
+  saCooldown: 1
+  targets: []
 --- !u!1 &1390594824389518320
 GameObject:
   m_ObjectHideFlags: 0
