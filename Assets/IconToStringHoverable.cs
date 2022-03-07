@@ -8,7 +8,7 @@ public class IconToStringHoverable : Hoverable
     Image img;
     private void Start()
     {
-        img = GetComponent<Image>();
+        if((img = GetComponent<Image>()) && img.sprite != null)
         SetMyData = img.sprite.name;
     }
     //public override string GetMyData => img.sprite.name;

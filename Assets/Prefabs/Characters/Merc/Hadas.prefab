@@ -128,6 +128,7 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  HasShield: 0
   SA_Title: Toughen Spirit
   SA_Description: "Toughen Spirit will grant all of Hadas\u2019s teammates a buff
     reducing incoming Dmg. Toughen Spirit has no cast range and is casted as an aoe
@@ -175,8 +176,7 @@ MonoBehaviour:
   range: 1
   minDamage: 15
   maxDamage: 19
-  arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
-    type: 3}
+  arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}
   effectSpawn: {fileID: 0}
@@ -247,15 +247,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 1
+  baseCost: 50
   currentModifier: 1
   actionVariations: []
   isWeapon: 0
-  targetAllies: 0
+  targetAllies: 1
   toughenSpiritSprite: {fileID: 0}
   toughenSpiritSpriteName: Toughen
-  damageModifier: 0.5
-  saCooldown: 1
+  shieldAmount: 60
+  fullCooldown: 1
   targets: []
 --- !u!1 &1390594824389518320
 GameObject:

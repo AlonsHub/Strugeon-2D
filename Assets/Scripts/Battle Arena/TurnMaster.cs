@@ -296,7 +296,7 @@ public class TurnMaster : MonoBehaviour
             }
             else
             {
-                ((Pawn)currentTurnTaker).RemoveIconByColor("redDeBuff");
+                ((Pawn)currentTurnTaker).RemoveIconByName("redDeBuff");
                 currentTurnTaker.DoSkipTurn = false;
                 currentTurnTaker.TurnDone = true;
             }
@@ -328,7 +328,7 @@ public class TurnMaster : MonoBehaviour
             else
             {
                 currentTurnTaker.DoDoubleTurn = false;
-                ((Pawn)currentTurnTaker).RemoveIconByColor("blueBuff");
+                ((Pawn)currentTurnTaker).RemoveIconByName("blueBuff");
             }
 
 

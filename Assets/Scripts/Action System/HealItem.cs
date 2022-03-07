@@ -41,12 +41,10 @@ public class HealItem : ActionItem, SA_Item
     {
         _currentCooldown = 0;
 
-        targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
+        //targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs; //target acquistion should be generic as-well, by including bool targetAllies
+        targets = (pawn.isEnemy == targetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
 
-        //if (!pawn.isEnemy)
-        //    targets = RefMaster.Instance.mercs;
-        //else
-        //    targets = RefMaster.Instance.enemyInstances;
+        //base.Start();
     }
 
     public override void Action(GameObject tgt)

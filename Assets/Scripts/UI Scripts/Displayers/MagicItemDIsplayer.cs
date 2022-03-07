@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicItemDIsplayer : BasicDisplayer
+public class MagicItemDisplayer : BasicDisplayer
 {
     public MagicItem magicItem;
     

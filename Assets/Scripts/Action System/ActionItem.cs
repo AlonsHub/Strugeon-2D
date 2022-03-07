@@ -25,7 +25,7 @@ public class ActionItem : MonoBehaviour
     List<BehaveVariable> behaveVariables;
     public virtual void Awake()
     {
-        //actionVariations = new List<ActionVariation>();
+        //actionVariations = new List<ActionVariation>(); //Why is this commented out? TBF look at all overrides of this
         pawn = GetComponent<Pawn>();
         behaveVariables = new List<BehaveVariable>();
     }

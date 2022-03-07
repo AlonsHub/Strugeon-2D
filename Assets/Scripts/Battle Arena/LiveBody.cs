@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class LiveBody : MonoBehaviour
+public abstract class LiveBody : MonoBehaviour, I_Attackable
 {
     public int currentHP;
     public int maxHP;

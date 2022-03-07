@@ -99,8 +99,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
     public List<float> DamageModifiers { get => damageModifiers; set => damageModifiers = value; }
 
+    public bool HasShield;
+
     //public bool MovementDone { get => movementDone; set => movementDone = value; } // OPTIONAL - to have walk and attack actions
-    
+
     public string Name { get => pawnName; } 
     public Sprite PortraitSprite { get => portraitSprite; set => portraitSprite = value; }
     public Sprite FullPortraitSprite { get => fullPortraitSprite; set => fullPortraitSprite = value; }
@@ -251,7 +253,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         //Call action "after calcActionList"
     }
-
+    ShieldAttacher cachedShield = null; //TEMP TBF
     public override void TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
 
@@ -265,25 +267,36 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         if (damage != 0)
         {
-            OnTakeDamage?.Invoke(); //relevant only if actual damage happens
+            OnTakeDamage?.Invoke(); //relevant only if actual damage happens //should also be the way to override taking damage when pawn has shield
 
-            float finalDmgMod = 1;
-            if (DoModifyDamage) //damageModifiers isn't empty!
-            {
-                foreach (var item in damageModifiers) //does all dmg mods that are now yellowDebuff (which will be upgrarded soon)
-                {
-                    finalDmgMod *= item;
-                }
-                damageModifiers.Clear(); //only relevant buffs will remain - buffs that reduce lifetime on hit/attack - need to listen-to or be grabbed-by something to reduce thier ttl accordingly
-            }
-
+            
+            //EXTRACT METHOD: DamageCalculation() TBF
             if (DoYellowDebuff)
             {
                 damage = (int)(damage * damageModifier);
-                DamageModifier = 1;
+
+                DamageModifier = 1; // also TBF as buffs should all be components that set and unset things on their own 
+                                    //these add-on components can only subscribe to relevant pawn Actions if needed, Pawn should neither check for them not un/set them TBF
                 DoYellowDebuff = false;
-                RemoveIconByColor("yellowDeBuff"); //TBF!!
+                RemoveIconByName("yellowDeBuff"); //TBF!!
             }
+
+            if (HasShield) //TEMP TBF
+            {
+                if (!cachedShield && !(cachedShield = GetComponent<ShieldAttacher>()))
+                    Debug.LogError("Has shield is true but no ShieldAttacher found on gameObject");
+                else
+                {
+                    int carryOver = cachedShield.ReduceTtlBy(damage); //this 
+                    if(carryOver < 0)
+                    {
+                        damage = carryOver;
+                    }
+                    damage = carryOver >= 0 ? 0 : carryOver;
+                }
+            }
+            //END EXTRACT METHOD: DamageCalculation() TBF
+
         }
 
 
@@ -291,7 +304,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         //DAMAGE SHOULD NOT BE REPORTED BY THE ATTACKER, BUT BY THE VICTIM!
         //Attack should be reported (numberless) to the log by the attacker, and the damaged should add the damage to previous log entry using appropriate methods
-        //ADD TO PREVIOUS 
+        //ADD TO PREVIOUS TBF
 
         currentHP -= damage;
         if (currentHP <= 0)
@@ -299,6 +312,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             Die();
         }
     }
+
+    //TBF! this needs to be implemented into just normal TakeDamage (and god help me use the TakeDamage method)
     public void TakeElementalDamage(int damage, Color colour) //ADD DamageType and derrive text colour from that
     {
         //add effect sound
@@ -312,6 +327,22 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         t.color = colour;
 
         //Consider vaulnerabillities and weaknesses and such
+        //call DAMAGE CALC! TBF
+        if (HasShield) //TEMP TBF
+        {
+            if (!cachedShield && !(cachedShield = GetComponent<ShieldAttacher>()))
+                Debug.LogError("Has shield is true but no ShieldAttacher found on gameObject");
+            else
+            {
+                int carryOver = cachedShield.ReduceTtlBy(damage); //this 
+                if (carryOver < 0)
+                {
+                    damage = carryOver;
+                }
+                damage = carryOver >= 0 ? 0 : carryOver;
+            }
+        }
+
 
         currentHP -= damage;
         if (currentHP <= 0)
@@ -383,8 +414,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Destroy(gameObject);
     }
 
-    
-
     public void SetupPurpleBuff(GameObject tgt)
     {
         hasPurple = true;
@@ -394,25 +423,23 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     List<GameObject> effectIcons = new List<GameObject>();
     public int purpleMultiplier;
 
-    public void AddEffectIcon(Sprite newEffectIcon, string ID)
+    public void AddEffectIcon(Sprite newEffectIcon, string ID) //TBF - this needs to return a GameObject so effects could easily erase their icons without fucking googling them first
     {
         if(effectIcons.Where(x => x.name == ID).Count() > 0)
         {
             return;
         }
 
-        GameObject go = Instantiate(effectIconPrefab, effectIconParent);
-        go.GetComponentInChildren<SpriteRenderer>().sprite = newEffectIcon;
+        GameObject go = Instantiate(effectIconPrefab, effectIconParent); //return this!
+        go.GetComponentInChildren<SpriteRenderer>().sprite = newEffectIcon; //have a better setter! TBF!
         go.name = ID;
         effectIcons.Add(go);
         worldSpaceHorizontalGroup.UpdateGroup();
     }
 
-    public void RemoveIconByColor(string colorName)
+    public void RemoveIconByName(string iconName)
     {
-        List<GameObject> relevantList = effectIcons.Where(x => x.name == colorName).ToList();
-
-
+        List<GameObject> relevantList = effectIcons.Where(x => x.name == iconName).ToList(); //tbf - all icons should be addon-based componenets like blinded and charmed!
 
         if (relevantList.Count > 0)
         {
@@ -424,32 +451,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-            Debug.LogError($"No icon by this name: {colorName} was found");
+            Debug.LogError($"No icon by this name: {iconName} was found");
         }
-
-        //    if (relevantList.Count > 0)
-        //{
-        //    GameObject toRemove = effectIcons.Where(x => x.name == colorName).SingleOrDefault();
-        //    effectIcons.Remove(toRemove);
-        //    Destroy(toRemove);
-        //    //GameObject toRemove;// = new GameObject(); //shouldn't and dont need to
-        //    //foreach (GameObject icon in effectIcons)
-        //    //{
-        //    //    if (icon.name == colorName)
-        //    //    {
-        //    //        toRemove = icon;
-        //    //    }
-        //    //}
-        //    //if (toRemove != null)
-        //    //{
-        //    //    effectIcons.Remove(toRemove);
-        //    //    Destroy(toRemove);
-        //    //}
-        //}
+       
         worldSpaceHorizontalGroup.UpdateGroup();
-
-        //Destroy(effectIcons.Where(x => x.name == colorName).FirstOrDefault());
-        //effectIcons.Remove(effectIcons.Where(x => x.name == colorName).FirstOrDefault());
     }
     public Vector2Int GetGridPos()
     {
@@ -457,9 +462,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     }
     public void SetGridPos(Vector2Int newPos) //ignores these values (just in pawn's/tilewalker's case)
     {
-        //Debug.LogWarning("something is trying to change + " + name + "'s gridpos");
         tileWalker.Init();
-        //tileWalker.FindOwnGridPos();
     }
 
     public string GetName()

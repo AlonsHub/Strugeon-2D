@@ -149,7 +149,7 @@ public class WeaponItem : ActionItem
             {
                 hasEffect = false;
                 effectData = null;
-                pawn.RemoveIconByColor("fireBuff");
+                pawn.RemoveIconByName("fireBuff");
                 effectColour = Color.black;
             }
 
@@ -166,7 +166,7 @@ public class WeaponItem : ActionItem
         {
             rolledDamage *= 1.5f;
             hasRedBuff = false;
-            pawn.RemoveIconByColor("redBuff");
+            pawn.RemoveIconByName("redBuff");
         }
 
         if (rolledDamage < 0)

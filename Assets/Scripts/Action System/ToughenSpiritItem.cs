@@ -10,17 +10,20 @@ public class ToughenSpiritItem : ActionItem, SA_Item
     string toughenSpiritSpriteName;
 
     [SerializeField]
-    float damageModifier; //this sets them all
+    int shieldAmount; //this sets them all
 
     int _currentCooldown;
+
     [SerializeField]
-    int saCooldown;
+    int fullCooldown;
 
     public List<Pawn> targets; 
 
 
     public override void Awake()
     {
+        actionVariations = new List<ActionVariation>();
+        targetAllies = true;
         base.Awake();
     }
     private void Start()
@@ -28,7 +31,8 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         //_currentCooldown = 0; //starts IN cooldown ON! as in gdd
         StartCooldown(); //starts IN cooldown ON! as in gdd
 
-        targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
+        //targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
+        targets = (pawn.isEnemy == targetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
 
 
     }
@@ -39,8 +43,10 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         StartCooldown();
         foreach (var item in targets)
         {
-            ToughenSpirit ts = item.gameObject.AddComponent<ToughenSpirit>();
-            ts.SetFullEffect(item, toughenSpiritSpriteName, damageModifier);
+            //ToughenSpirit ts = item.gameObject.AddComponent<ToughenSpirit>();
+            ShieldAttacher sa = item.gameObject.AddComponent<ShieldAttacher>();
+            sa.SetMe(item, toughenSpiritSpriteName, shieldAmount);
+            //ts.SetFullEffect(item, toughenSpiritSpriteName, damageModifier);D
         }
 
         
@@ -78,12 +84,23 @@ public class ToughenSpiritItem : ActionItem, SA_Item
 
     public void StartCooldown()
     {
-        _currentCooldown = saCooldown;
+        _currentCooldown = fullCooldown;
     }
 
     public override void CalculateVariations()
     {
         //base.CalculateVariations();
         actionVariations.Clear();
+
+        if (targets.Count <= 0 || _currentCooldown > 0)
+        {
+            _currentCooldown--;
+            Debug.Log($"Targets to shield:{targets.Count}. Cooldown is:{_currentCooldown}.");
+            return;
+        }
+
+        actionVariations.Add(new ActionVariation(this, null, baseCost)); //base cost should be high since it affects all allies.
+                                                                         //Consider multiplying by the number of allies(targets) 
+
     }
 }

@@ -121,7 +121,7 @@ public class TileWalker : MonoBehaviour
         if(doLimitSteps)
         {
             stepsToTake = stepLimit;
-            pawn.RemoveIconByColor("blueDeBuff");
+            pawn.RemoveIconByName("blueDeBuff");
 
             stepLimit = 0; //resets 
             doLimitSteps = false;

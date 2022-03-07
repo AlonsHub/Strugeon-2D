@@ -51,7 +51,7 @@ public class Blinded : MonoBehaviour
             lifetime--;
             yield return new WaitUntil(() => !weaponItem.pawn.TurnDone);
         }
-        weaponItem.pawn.RemoveIconByColor("blinded");
+        weaponItem.pawn.RemoveIconByName("blinded");
         // change pawn back
         //weaponItem.targets = RefMaster.Instance.enemies;
         weaponItem.minDamage = oldDamage.x;

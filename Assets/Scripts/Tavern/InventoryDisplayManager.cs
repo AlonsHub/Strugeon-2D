@@ -11,7 +11,7 @@ public class InventoryDisplayManager : MonoBehaviour
     [SerializeField]
     GameObject itemDisplayerPrefab;
     [SerializeField] //just to see them
-    List<MagicItemDIsplayer> displayers = new List<MagicItemDIsplayer>();
+    List<MagicItemDisplayer> displayers = new List<MagicItemDisplayer>();
 
     bool sellModeIsOn;
     private void OnEnable()
@@ -45,7 +45,7 @@ public class InventoryDisplayManager : MonoBehaviour
             for (int i = 0; i < diff * -1; i++) //*-1 since diff is < 0, but is still the difference
             {
                 GameObject displayerObject = Instantiate(itemDisplayerPrefab, inventoryParent);
-                displayers.Add(displayerObject.GetComponent<MagicItemDIsplayer>());
+                displayers.Add(displayerObject.GetComponent<MagicItemDisplayer>());
             }
         }
         else
