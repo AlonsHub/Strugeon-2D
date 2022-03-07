@@ -48,7 +48,7 @@ public class MercDataDisplayer : MonoBehaviour
             //all is good, merc has weapon
             dmgRangeText.text = (wi.minDamage + ms._minDamageBonus).ToString() + "-" + (wi.maxDamage + ms._maxDamageBonus).ToString(); //MUST CHANGE ACCESS TO DAMAGE
         }
-        SA_Item sA_Item = merc.forDisplayPurposesOnly as SA_Item;
+        //SA_Item sA_Item = merc.forDisplayPurposesOnly as SA_Item;
         //TEMP AF
         specialAbilityTitle.text = merc.SA_Title;
         specialAbilityDescription.text = merc.SA_Description;

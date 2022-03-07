@@ -107,13 +107,13 @@ MonoBehaviour:
     _level: 1
   initiativeBonus: 0
   hasSAs: 0
-  forDisplayPurposesOnly: {fileID: 0}
+  forDisplayPurposesOnly: {fileID: 6641408886101910626}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: f88dd9aac45ff8a48916c6181111b77d, type: 3}
   fullPortraitSprite: {fileID: 21300000, guid: 3f3efb8faedf0df439168991bd08f0b5, type: 3}
-  saSprite: {fileID: 21300000, guid: 1ac0ed9cb20016e4582cf8e546f9b67d, type: 3}
+  saSprite: {fileID: 21300000, guid: 99826aace52de184d8177362c0f58fe1, type: 2}
   effectIconParent: {fileID: 7506862877453468004}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
@@ -252,7 +252,8 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 0
   targetAllies: 1
-  toughenSpiritSprite: {fileID: 0}
+  toughenSpiritSprite: {fileID: 21300000, guid: 99826aace52de184d8177362c0f58fe1,
+    type: 2}
   toughenSpiritSpriteName: Toughen
   shieldAmount: 60
   fullCooldown: 1

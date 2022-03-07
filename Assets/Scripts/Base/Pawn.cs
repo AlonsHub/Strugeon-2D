@@ -33,7 +33,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public bool hasSAs;
     public SA_Item[] saItems;
 
-    public ActionItem forDisplayPurposesOnly;
+    //public ActionItem forDisplayPurposesOnly;
 
     public List<Pawn> targets;
 

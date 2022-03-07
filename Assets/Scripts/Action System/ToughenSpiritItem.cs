@@ -49,9 +49,9 @@ public class ToughenSpiritItem : ActionItem, SA_Item
             //ts.SetFullEffect(item, toughenSpiritSpriteName, damageModifier);D
         }
 
-        
-        ///effects should be added to all mercs (as buff effects that kill themselves like bling/charm)
 
+        ///effects should be added to all mercs (as buff effects that kill themselves like bling/charm)
+        pawn.anim.SetTrigger("CastShield");
         //GameObject go = Instantiate(healEffect, tgt.transform); 
         //Destroy(go, 2);
 
