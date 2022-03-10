@@ -15,6 +15,15 @@ public class Bar : MonoBehaviour
     private void Start()
     {
         img = GetComponent<Image>();
+
+        TurnMaster.Instance.OnTurnOrderRestart += Regen; 
+    }
+    //private void OnEnable()
+    //{
+    //}
+    private void OnDisable()
+    {
+        TurnMaster.Instance.OnTurnOrderRestart -= Regen;    
     }
     public void SetMaxValue(float value)
     {

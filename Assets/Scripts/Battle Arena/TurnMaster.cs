@@ -45,6 +45,8 @@ public class TurnMaster : MonoBehaviour
     [SerializeField]
     DefeatWindow defeatWindow;
 
+
+    public System.Action OnTurnOrderRestart;
     private void Awake()
     {
         Instance = this;
@@ -281,7 +283,7 @@ public class TurnMaster : MonoBehaviour
             }
             yield return new WaitForSeconds(turnStartDelay);
 
-            if (currentTurn >= turnTakers.Count)
+            if (currentTurn >= turnTakers.Count) //I don't think this ever happens
             {
                 currentTurn = 0;
             }
@@ -312,14 +314,17 @@ public class TurnMaster : MonoBehaviour
                 if (currentTurn >= turnTakers.Count)
                 {
                     currentTurn = 0;
-                    if (bars.Count > 0)
-                    {
-                        foreach (Bar b in bars)
-                        {
-                            //b.AddValue(rechargeAmount);
-                            b.Regen();
-                        }
-                    }
+
+                    OnTurnOrderRestart?.Invoke();
+
+                    //if (bars.Count > 0)
+                    //{
+                    //    foreach (Bar b in bars)
+                    //    {
+                    //        //b.AddValue(rechargeAmount);
+                    //        b.Regen();
+                    //    }
+                    //}
                 }
 
                 //TurnOrderUpdate(1);

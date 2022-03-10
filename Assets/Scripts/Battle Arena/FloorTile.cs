@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum TileColors {enemy, hero, blank };
+public enum TileElement {None, Fire, Water, Poison};
 [System.Serializable]
 public class FloorTile : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class FloorTile : MonoBehaviour
 
     public bool isEmpty;
     public GameObject myOccupant; //all direct access to myOccupant is absolute bullshit that needs fixing
+
+    public TileElement tileElement = TileElement.None; // may need to be more robust
+    
 
     public int gCost;
     public int hCost;
@@ -22,7 +26,7 @@ public class FloorTile : MonoBehaviour
     [SerializeField]
     private LayerMask pawnLayer;
 
-
+    public System.Action OnOccupantEnter;
 
     private void Start()
     {
@@ -58,6 +62,7 @@ public class FloorTile : MonoBehaviour
     {
         isEmpty = false;
         myOccupant = newOccupant;
+        OnOccupantEnter?.Invoke();
     }
     public void RemoveOccupant(bool doAlsoDestroy)
     {

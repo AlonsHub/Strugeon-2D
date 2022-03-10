@@ -69,7 +69,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //read if any site cooldown times exist
         _squadPicker = squadPickerObject.GetComponent<SquadPicker>();
         thisButton = GetComponent<Button>();
-        oldColor = thisButton.targetGraphic.color;
+        //oldColor = thisButton.targetGraphic.color;
 
         //if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
         if (PlayerDataMaster.Instance.SiteCooldowns.ContainsKey(levelSO.name) && PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].HasValue)
@@ -218,7 +218,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (squadPickerObject.activeInHierarchy)
             return;
 
-        SetHoverColor(false); //this makes it so only on hover over site the site will be coloured, (as opposed to: as long as it's displayer is up
+        //SetHoverColor(false); //this makes it so only on hover over site the site will be coloured, (as opposed to: as long as it's displayer is up
         myDataDisplay.gameObject.SetActive(false);
 
         //nothing should have happened, but could be that site-info was open - and then squad arrived... should maybe close site data displayer?
@@ -258,17 +258,17 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //Do something to the sprite now - edit sprite later
         //oldColor = thisButton.targetGraphic.color;
         //thisButton.targetGraphic.color = Color.red;
-        SetHoverColor(true);
+        //SetHoverColor(true);
 
         displayer.SetMe(this);
 
     }
-    Color oldColor; //temp until new highlighted sprites are added
+    //Color oldColor; //temp until new highlighted sprites are added
 
-    public void SetHoverColor(bool setOn)
-    {
-        thisButton.targetGraphic.color = setOn ? Color.red : oldColor;
-    }
+    //public void SetHoverColor(bool setOn)
+    //{
+    //    thisButton.targetGraphic.color = setOn ? Color.red : oldColor;
+    //}
 
     void RandomSetSelf()
     {

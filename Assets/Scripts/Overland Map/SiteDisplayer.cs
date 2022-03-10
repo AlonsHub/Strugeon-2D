@@ -77,11 +77,11 @@ public class SiteDisplayer : MonoBehaviour
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
     }
 
-    private void OnDisable()
-    {
-        if (siteButton)
-            siteButton.SetHoverColor(false);
-    }
+    //private void OnDisable()
+    //{
+    //    if (siteButton)
+    //        siteButton.SetHoverColor(false);
+    //}
 
    
     public static void SetActiveToAllInstances(bool isActive) //may be depricated soon [24/02/22] TBF

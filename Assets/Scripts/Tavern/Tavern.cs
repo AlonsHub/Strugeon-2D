@@ -90,7 +90,7 @@ public class Tavern : MonoBehaviour
                 item.SetActive(false);
             else
             {
-                if(item.activeInHierarchy)
+                if(!item.activeInHierarchy)
                 item.SetActive(true);
             }
         }
