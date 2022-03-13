@@ -13,13 +13,19 @@ public class TileEffect : MonoBehaviour
     [SerializeField]
     int effectDuration; //total duration in turns/uses/both? //GDD says 2 turns
 
-    int _currentDuration;
+    [Tooltip("display only! don't touch!")]
+    [SerializeField]
+    int _remainingDuration;
 
-    FloorTile floorTile;
-    public void SetMe(FloorTile tile)
+    public FloorTile floorTile;
+    public void SetBase(FloorTile tile)
     {
-        _currentDuration = 0;
+        _remainingDuration = effectDuration;
         floorTile = tile;
+
+        transform.position = floorTile.transform.position;
+        transform.position += Vector3.up * .3f;
+
         if (effectElement != TileElement.None) //currently None doesnt undo an existing effect on a tile
         {
             if (floorTile.tileElement != TileElement.None)
@@ -29,13 +35,17 @@ public class TileEffect : MonoBehaviour
             floorTile.tileElement = effectElement;
         }
 
-        floorTile.OnOccupantEnter += ApplyEffectToOccupant;
+        floorTile.OnOccupantEnter += TryApplyEffectToOccupant;
         TurnMaster.Instance.OnTurnOrderRestart += ReduceDurationByOne;
     }
-    public void SetMe(Vector2Int gridpos)
+    public void SetBase(Vector2Int gridpos)
     {
-        _currentDuration = 0;
+        _remainingDuration = effectDuration;
         floorTile = FloorGrid.Instance.GetTileByIndex(gridpos);
+
+        transform.position = floorTile.transform.position;
+        transform.position += Vector3.up * .3f;
+
         if (effectElement != TileElement.None) //currently None doesnt undo an existing effect on a tile
         {
             if(floorTile.tileElement != TileElement.None)
@@ -44,25 +54,25 @@ public class TileEffect : MonoBehaviour
             }
             floorTile.tileElement = effectElement;
         }
-        floorTile.OnOccupantEnter += ApplyEffectToOccupant;
+        floorTile.OnOccupantEnter += TryApplyEffectToOccupant;
         TurnMaster.Instance.OnTurnOrderRestart += ReduceDurationByOne;
     }
-    private void OnDisable()
+    protected void OnDisable()
     {
         TurnMaster.Instance.OnTurnOrderRestart -= ReduceDurationByOne;
-        floorTile.OnOccupantEnter -= ApplyEffectToOccupant;
+        floorTile.OnOccupantEnter -= TryApplyEffectToOccupant;
 
     }
 
-    public virtual void ApplyEffectToOccupant()
+    public virtual void TryApplyEffectToOccupant()
     {
 
     }
 
-    void ReduceDurationByOne()
+    protected void ReduceDurationByOne()
     {
-        _currentDuration--;
-        if(_currentDuration<=0)
+        _remainingDuration--;
+        if(_remainingDuration<=0)
         {
             EndEffect();
         }

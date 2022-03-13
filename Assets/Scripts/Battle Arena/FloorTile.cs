@@ -13,8 +13,9 @@ public class FloorTile : MonoBehaviour
     public bool isEmpty;
     public GameObject myOccupant; //all direct access to myOccupant is absolute bullshit that needs fixing
 
-    public TileElement tileElement = TileElement.None; // may need to be more robust
-    
+    public TileElement tileElement = TileElement.None; // may need to be more robust - current access is only through ChangeElement (should be tryChangeElement)
+
+
 
     public int gCost;
     public int hCost;
@@ -72,4 +73,24 @@ public class FloorTile : MonoBehaviour
             Destroy(myOccupant);
         myOccupant = null;
     }
+    ///// <summary>
+    ///// Returns true if the element changed successfully. 
+    ///// </summary>
+    ///// <param name="newElement"></param>
+    ///// <param name="doOverwrite">True if element should overwrite the existing element on that tile</param>
+    ///// <returns></returns>
+    //public bool TryChangeElement(TileElement newElement, bool doOverwrite) 
+    //{
+    //    if (doOverwrite || tileElement == TileElement.None)
+    //    {
+    //        tileElement = newElement;
+    //        return true;
+    //    }
+    //    return false;
+    //}
+
+    //public void AddElementalEffect()
+    //{
+
+    //}
 }
