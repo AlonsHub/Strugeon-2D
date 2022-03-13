@@ -13,7 +13,7 @@ public class FireStarter : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
         {
             Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

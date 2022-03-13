@@ -98,7 +98,8 @@ public class BigHandsItem : ActionItem, SA_Item
         {
             Debug.LogError("No to hit for some fucking reason for: " + name);
         }
-        arr.tgt = toHit.transform;
+        //arr.tgt = toHit.transform;
+        arr.SetTarget(toHit.transform);
 
         LookAtter la = GetComponentInChildren<LookAtter>();
         if (la)

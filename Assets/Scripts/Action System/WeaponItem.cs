@@ -46,6 +46,8 @@ public class WeaponItem : ActionItem
     public System.Action attackAction; //not sure if this is even used //holy shit is it ever boiii! thank you! <3... this is weird coming from myself
     public System.Action hitAction;
 
+    
+     public GameObject cachedProjectile; //public for addcomponent only!
 
     public override void Awake()
     {
@@ -70,7 +72,19 @@ public class WeaponItem : ActionItem
         // arrowSpawn = pawn.arrow
         la = GetComponentInChildren<LookAtter>();
 
+        if(range > 1 && arrowGfx)
+        {
+            LoadAndCacheProjectile();
+        }
+
     }
+
+    private void LoadAndCacheProjectile()
+    {
+        cachedProjectile = Instantiate(arrowGfx, arrowSpawn.position, arrowSpawn.rotation);
+        cachedProjectile.SetActive(false);
+    }
+
     public override void Action(GameObject tgt)
     {
         toHit = tgt.GetComponent<Pawn>();
@@ -118,18 +132,27 @@ public class WeaponItem : ActionItem
     }
 
     
-    public void ShootProjectile()
+    public void ShootProjectile() //called by animation event
     {
-        GameObject effectGo = Instantiate(arrowGfx, arrowSpawn.position, arrowSpawn.rotation);
-        effectGo.GetComponent<Arrow>().tgt = toHit.transform;
-        StartCoroutine(WaitForArrowToHit(effectGo));
+
+        //cachedProjectile = Instantiate(arrowGfx, arrowSpawn.position, arrowSpawn.rotation);
+        cachedProjectile.transform.position = arrowSpawn.position;
+        cachedProjectile.transform.rotation = arrowSpawn.rotation;
+        //cachedProjectile.GetComponent<Arrow>().tgt = toHit.transform;
+        cachedProjectile.GetComponent<Arrow>().SetTarget(toHit.transform);
+
+        cachedProjectile.SetActive(true);
+
+        StartCoroutine(WaitForArrowToHit(cachedProjectile));
     }// called by animation events exclusively (11/11/2021)
 
     IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
     {
         yield return new WaitUntil(() => (arrow == null)); //maybe check if arrow ==null || toHit ==null in case the target dies somehow TBF
-        Debug.Log("Arrow hit");
+        //Debug.Log("Arrow hit");
+        //cachedProjectile = null;
         DamageTarget(); 
+        LoadAndCacheProjectile();
     }
     public void DamageTarget()
     {
@@ -206,6 +229,10 @@ public class WeaponItem : ActionItem
         
         pawn.TurnDone = true;
     }
+    //public void AddHitEffectToChachedProjectile() //TBF this is for better access to the projectiles stats
+    //{
+
+    //}
     public override void CalculateVariations()
     {
         //actionVariations = new List<ActionVariation>();

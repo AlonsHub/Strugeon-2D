@@ -64,7 +64,8 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
         secondArrow.arrowSpeed /= 2; //current value is 10, so sets to 5 [23/02/22]
 
         int random = Random.Range(0, relevantTargets.Count - 1);
-        secondArrow.tgt = relevantTargets[random].transform;
+        //secondArrow.tgt = relevantTargets[random].transform;
+        secondArrow.SetTarget(relevantTargets[random].transform);
         int dmg = Random.Range(minDamage, maxDamage + 1);
         relevantTargets[random].TakeDamage(dmg); //+1 to max, cause its exclusive
         BattleLogVerticalGroup.Instance.AddEntry(weaponItem.pawn.Name, ActionSymbol.Attack, relevantTargets[random].Name, dmg, Color.red);

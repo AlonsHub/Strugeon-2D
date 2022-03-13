@@ -164,6 +164,12 @@ public class FloorGrid : MonoBehaviour
     {
         return floorTiles[index.x, index.y];
     }
+     public FloorTile GetTileByPosition(Vector3 pos)
+    {
+        int x = Mathf.RoundToInt((pos.x - startingPoint.position.x) / (gapSize.x + tileSize.x));
+        int y = Mathf.RoundToInt((pos.z - startingPoint.position.z) / (gapSize.y + tileSize.y));
+        return floorTiles[x, y];
+    }
 
     public GameObject SpawnObjectOnGrid(GameObject toSpawn, Vector2Int gridPos)
     {

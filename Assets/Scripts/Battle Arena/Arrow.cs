@@ -18,43 +18,52 @@ public class Arrow : MonoBehaviour
     //{
     //    tgt = newTgt;
     //}
-    private void Start()
-    {
-        //Debug.LogError("arrow shot");
-      //  tgt = Pathfinder.Instance.target.transform;
-        //Destroy(gameObject, ttl);
-        //tgtPos = tgt.position;// + new Vector3(0, tgt.lossyScale.y/2, 0);
-        if(tgt)
-        {
-            tgtPos = tgt.position;
-        }
-        else
-        {
-            Debug.LogError("Rock spawns but no set target");
-            //Destroy
-        }
-        initialSpeed = arrowSpeed;
-        Destroy(gameObject, ttl);
-    }
+    //private void Start()
+    //{
+    //    //Debug.LogError("arrow shot");
+    //  //  tgt = Pathfinder.Instance.target.transform;
+    //    //Destroy(gameObject, ttl);
+    //    //tgtPos = tgt.position;// + new Vector3(0, tgt.lossyScale.y/2, 0);
+    //    if(tgt)
+    //    {
+    //        tgtPos = tgt.position;
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Rock spawns but no set target");
+    //        //Destroy
+    //    }
+    //    initialSpeed = arrowSpeed;
+    //    Destroy(gameObject, ttl);
+    //}
     private void Update()
     {
         //if (tgt)
         //{
-            transform.LookAt(tgtPos);
+        if (!tgt)
+            return;
 
-            transform.Translate(Vector3.forward * arrowSpeed * Time.deltaTime);
+        transform.LookAt(tgtPos);
+
+        transform.Translate(Vector3.forward * arrowSpeed * Time.deltaTime);
 
         arrowSpeed -= arrowSpeed * Time.deltaTime;
         //arrowSpeed -= initialSpeed / * Time.deltaTime; //original speed a second
 
-            if (Vector3.Distance(transform.position, tgtPos) <= .1f)
-            {
-                //Instantiate(hitEffect, tgtPos + hitEffect.transform.position, hitEffect.transform.rotation);
-                Instantiate(hitEffect, tgtPos, hitEffect.transform.rotation);
-                // Stop projectile from moving, and play hit animation... also do the DamageGlow (red)
-                Destroy(gameObject);
-                // Destroy(this);
-            }
+        if (Vector3.Distance(transform.position, tgtPos) <= .1f)
+        {
+            //Instantiate(hitEffect, tgtPos + hitEffect.transform.position, hitEffect.transform.rotation);
+            Instantiate(hitEffect, tgtPos, hitEffect.transform.rotation);
+            // Stop projectile from moving, and play hit animation... also do the DamageGlow (red)
+            Destroy(gameObject);
+            // Destroy(this);
         }
+    }
+
+    public void SetTarget(Transform target)
+    {
+        tgt = target;
+        tgtPos = target.position;
+    }    
     //}
 }

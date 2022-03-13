@@ -16,10 +16,10 @@ GameObject:
   - component: {fileID: 853967901895232535}
   - component: {fileID: 5092255476189858162}
   - component: {fileID: 1105644228005410149}
-  - component: {fileID: 6496638347147669397}
   - component: {fileID: -4737283758176797648}
+  - component: {fileID: 762771382397619685}
   m_Layer: 11
-  m_Name: Cheeto
+  m_Name: Tikva
   m_TagString: Merc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ Animator:
   m_GameObject: {fileID: 567321096945766744}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ed3f2a4d4233167498287fc5e954069b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4936f7c1490f2b6449f87904f1836f6c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
   targetAllies: 0
   feetItem: {fileID: 0}
   range: 5
-  minDamage: 8
-  maxDamage: 12
+  minDamage: 10
+  maxDamage: 13
   arrowGfx: {fileID: 4948670397089572388, guid: f939928989446114e83788149f1282a0,
     type: 3}
   isRanged: 1
@@ -161,9 +161,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 100
   maxHP: 100
-  pawnName: Cheeto
+  pawnName: Tikva
   isEnemy: 0
-  mercName: 4
+  mercName: 7
   _mercSheet:
     characterName: 0
     currentAssignment: 0
@@ -175,9 +175,9 @@ MonoBehaviour:
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
-  portraitSprite: {fileID: 21300000, guid: 2ebf8081b4e97d44e8c86e882b69ed2b, type: 3}
-  fullPortraitSprite: {fileID: 21300000, guid: b2ad6e4de2723aa4b90126a53f180652, type: 3}
-  saSprite: {fileID: 21300000, guid: 34808fc6aae2f214ca241b80014dabe3, type: 3}
+  portraitSprite: {fileID: 21300000, guid: 2839758feb9ecea4a811b2b9c961690b, type: 3}
+  fullPortraitSprite: {fileID: 21300000, guid: 7d25ddfd95a6a15449c7d25b60896a79, type: 3}
+  saSprite: {fileID: 21300000, guid: cc1271eaaf828de4c968c54374c9c586, type: 3}
   effectIconParent: {fileID: 7891262091630222569}
   effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
     type: 3}
@@ -193,10 +193,9 @@ MonoBehaviour:
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
   HasShield: 0
-  SA_Title: Blind Dart
-  SA_Description: "Cheeto has a few special darts up her sleeve. Blinding Dart will
-    empower Cheeto\u2019s attack to blind a foe. A blinded foe will deal no Dmg when
-    attacking. "
+  SA_Title: Burning Ground
+  SA_Description: When Tikvas missiles are LIT with fire, they burst on impact -
+    burning all tiles around the target
   enemyLevel: -1
   purpleMultiplier: 50
 --- !u!114 &5092255476189858162
@@ -237,32 +236,6 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
---- !u!114 &6496638347147669397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af972aa773fcada46bc70a8bc79cc21a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 0
-  currentModifier: 1
-  actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
-  duration: 2
-  targets: []
-  chanceToProc: 15
-  addonPrefab: {fileID: 4991725304625527649, guid: 6698d3c8f68b43a49855c7b82c100a41,
-    type: 3}
-  maxCooldown: 0
-  saCooldown: 0
-  blindSprite: {fileID: 21300000, guid: f84ddc7ec03edd444804f38700b1ddbb, type: 3}
 --- !u!114 &-4737283758176797648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +254,30 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 0
   targetAllies: 0
+--- !u!114 &762771382397619685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162d28b5be266fb42872e2fbf82065d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 1
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  targetAllies: 0
+  percentChance: 30
+  burnningAmmoSprite: {fileID: 21300000, guid: 3c1fcd945fa785a478aad6654b2bd2a6, type: 2}
+  burningGroundPrefab: {fileID: 2167518645375476243, guid: dddb71a725b74b14daad4544a3424087,
+    type: 3}
+  minDamage: 5
+  maxDamage: 7
 --- !u!1 &1667078419819343595
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,13 +380,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -5439021506284566961, guid: a2ee8c292ba5e614689821d26f390826,
+  m_Sprite: {fileID: 2025776799643234500, guid: 513e586137645a64895f305da8ccc3d7,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21052866, g: 0.7830189, b: 0.2921131, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.57, y: 3.87}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
