@@ -10,7 +10,7 @@ public class VenomBiteItem : ActionItem, SA_Item
     string venomBiteSpriteName;
 
     [SerializeField]
-    int minDamage, maxDamage; //this sets them all
+    int minDamage, maxDamage, minPoisonDamage, maxPoisonDamage; //this sets them all
 
     int _currentCooldown;
 
@@ -21,6 +21,11 @@ public class VenomBiteItem : ActionItem, SA_Item
     int posionDuration;
 
     List<Pawn> targets;
+
+    Pawn toHit;
+
+    System.Action attackAction;
+    LookAtter la;
     public bool SA_Available()
     {
         return !(_currentCooldown > 0);
@@ -45,21 +50,81 @@ public class VenomBiteItem : ActionItem, SA_Item
     {
         _currentCooldown = fullCooldown;
     }
-
+    public override void Awake()
+    {
+        actionVariations = new List<ActionVariation>();
+        la = GetComponent<LookAtter>();
+        base.Awake();
+    }
     // Start is called before the first frame update
     void Start()
     {
         _currentCooldown = 0;
+
+        if (pawn.isEnemy)
+            targets = RefMaster.Instance.mercs;
+        else
+            targets = RefMaster.Instance.enemyInstances;
     }
+   
+
     public override void Action(GameObject tgt)
     {
-        PoisonAttacher pa = tgt.AddComponent<PoisonAttacher>();
-        pa.SetMeFull(tgt.GetComponent<Pawn>(), "poison", posionDuration, minDamage, maxDamage);
+        StartCooldown();
+
+        toHit = tgt.GetComponent<Pawn>();
+
+        if (!toHit)
+        {
+            Debug.Log("no tgt to hit");
+            return;
+        }
+
+
+        int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+
+        if (dist > 14)
+        {
+            StartCoroutine(WalkThenAttack(toHit));
+            return;
+        }
+
+        if (tgt && la)
+            la.tgt = tgt.transform;
+
+
+
+        attackAction?.Invoke();
+        //pawn.transform.LookAt(tgt.transform);
+        //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
+        pawn.anim.SetTrigger("VenomBite"); // sets TurnDone via animation behaviour
+    }
+
+    IEnumerator WalkThenAttack(Pawn tgt)
+    {
+        pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, 1);
+
+        yield return new WaitUntil(() => !pawn.tileWalker.hasPath || pawn.TurnDone); // 
+
+        if (!pawn.TurnDone) //in case of step limiters
+        {
+            if (tgt && la)
+                la.tgt = tgt.transform;
+
+            attackAction?.Invoke();
+            pawn.anim.SetTrigger("VenomBite"); // sets TurnDone via animation behaviour
+        }
     }
 
     public override void CalculateVariations()
     {
         actionVariations.Clear();
+
+        if(_currentCooldown>0)
+        {
+            _currentCooldown--;
+            return;
+        }    
 
         if (targets.Count == 0)
         {
@@ -85,13 +150,9 @@ public class VenomBiteItem : ActionItem, SA_Item
 
             //}
 
-            if (currentDistance <= range * 14) //melee=14 ranged is more
+            if (currentDistance <= 1 * 14) //melee=14 ranged is more
             {
-                if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
-                {
-                    //according to GDD this should multiply by 10 
-                    continue;
-                }
+                
                 //melee attacker only have 1 range, so this means adjacent
                 weight *= 20; // changed from 20 to 2 //changed back to 20
 
@@ -108,4 +169,13 @@ public class VenomBiteItem : ActionItem, SA_Item
         }
 
     }
+
+    public void VenomBiteAnimEvent() //called by animation event trigger 
+    {
+        toHit.TakeDamage(Random.Range(minDamage, maxDamage + 1));
+        PoisonAttacher pa = toHit.gameObject.AddComponent<PoisonAttacher>();
+        pa.SetMeFull(toHit, "Poison", posionDuration, minPoisonDamage, maxPoisonDamage);
+    }
+
+
 }

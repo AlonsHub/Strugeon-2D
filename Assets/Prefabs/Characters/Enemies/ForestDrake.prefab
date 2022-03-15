@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 533712136826642490}
   - component: {fileID: 2064929481214812438}
   - component: {fileID: 3884682736305638404}
+  - component: {fileID: 4058428002439575057}
   m_Layer: 12
   m_Name: ForestDrake
   m_TagString: Enemy
@@ -543,6 +544,32 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
+--- !u!114 &4058428002439575057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673386756113323264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a1a3f03a7f5fa4f934d1e390c6c36a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawn: {fileID: 0}
+  baseCost: 40
+  currentModifier: 1
+  actionVariations: []
+  isWeapon: 0
+  targetAllies: 0
+  venomBiteSprite: {fileID: 21300000, guid: 267650a89161a254cbb74f867ac84ea4, type: 2}
+  venomBiteSpriteName: Poison
+  minDamage: 15
+  maxDamage: 17
+  minPoisonDamage: 2
+  maxPoisonDamage: 5
+  fullCooldown: 2
+  posionDuration: 3
 --- !u!1001 &3590360671523557965
 PrefabInstance:
   m_ObjectHideFlags: 0
