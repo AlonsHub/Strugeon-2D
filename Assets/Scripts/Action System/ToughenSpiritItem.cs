@@ -92,12 +92,16 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         //base.CalculateVariations();
         actionVariations.Clear();
 
-        if (targets.Count <= 0 || _currentCooldown > 0)
+        if (_currentCooldown > 0)
         {
             _currentCooldown--;
-            Debug.Log($"Targets to shield:{targets.Count}. Cooldown is:{_currentCooldown}.");
+            Debug.Log($"Cooldown is:{_currentCooldown}.");
             return;
         }
+        //if(targets.Count <= 0)
+        //{
+        //    Debug.Log("No targets") //never happenes, the caster is also a target and can never be irrelevant to themselves
+        //}
 
         actionVariations.Add(new ActionVariation(this, null, baseCost)); //base cost should be high since it affects all allies.
                                                                          //Consider multiplying by the number of allies(targets) 
