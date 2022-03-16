@@ -56,15 +56,12 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         {
             foreach (var saItem in myPawn.saItems)
             {
-                SetSA_IconOn(saItem);
-                //if(saItem.SA_Available())
-                //{
-                //    SetSA_IconOn(saItem);
-                //}
-                //else
-                //{
-                //    SetSA_IconOff(saItem);
-                //}
+
+                if (saItem.SA_Available())
+                    SetSA_IconOn(saItem);
+                else
+                    SetSA_IconOff(saItem);
+
 
             }
             //saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
@@ -82,21 +79,16 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             //if one does exist, and is not active -> activate.
             //if active, it shouldn't happen
 
-            if (!iconBySAItem[sai].gameObject.activeSelf)
-                //iconBySAItem[sai].gameObject.SetActive(true);
+            
                 iconBySAItem[sai].color = Color.white;
-            else
-                iconBySAItem[sai].color = Color.gray;
-            //else
-                //Debug.LogError("TurnDisplayer Already contains: " + sai.SA_Name() + " and it is active");
 
-            //either way, return
             return;
         }
         
         //if one does not exist, add one
         Image img = Instantiate(saIconPrefab, SA_Parent).GetComponent<Image>(); //maybe InChildren
         img.sprite = sai.SA_Sprite();
+        img.color = Color.white;
         sa_Icons.Add(img.transform);
         SA_IconUpdate();
         //OnAddSAIcon(img.transform);
@@ -106,7 +98,13 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
     {
         if (!iconBySAItem.ContainsKey(sai))
         {
-            Debug.LogWarning("no SA_Icon of type: " + sai.SA_Name() + " to remove");
+            Image img = Instantiate(saIconPrefab, SA_Parent).GetComponent<Image>(); //maybe InChildren
+            img.sprite = sai.SA_Sprite();
+            img.color = Color.gray;
+            sa_Icons.Add(img.transform);
+            SA_IconUpdate();
+            //OnAddSAIcon(img.transform);
+            iconBySAItem.Add(sai, img);
             return;
         }
 

@@ -55,6 +55,11 @@ public class StatusEffectComponent : MonoBehaviour
         return ttl;
     }
 
+    protected void StartCooldown()
+    {
+        ttl = maxTTL;
+    }
+
     public virtual void ReduceTtlByOne()
     {
         ttl--;

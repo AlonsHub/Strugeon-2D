@@ -10,8 +10,19 @@ public class PoisonAttacher : Attacher
     {
         minDamage = minDmg;
         maxDamage = maxDmg;
-        base.SetMe(target, buffIconName, newMaxTTL);
-        ApplyEffect(); 
+        PoisonAttacher[] existingPoisonComponents = GetComponents<PoisonAttacher>();
+
+        if (existingPoisonComponents.Length > 1)
+        {
+            existingPoisonComponents[0].StartCooldown();
+            Destroy(this);
+        }
+        else
+        {
+            base.SetMe(target, buffIconName, newMaxTTL);
+            ApplyEffect();
+        }
+
     }
 
     public override void ApplyEffect()
