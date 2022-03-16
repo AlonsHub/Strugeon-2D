@@ -77,6 +77,7 @@ public class VenomBiteItem : ActionItem, SA_Item
         if (!toHit)
         {
             Debug.Log("no tgt to hit");
+            pawn.TurnDone = true;
             return;
         }
 
@@ -94,7 +95,7 @@ public class VenomBiteItem : ActionItem, SA_Item
 
 
 
-        attackAction?.Invoke();
+        //attackAction?.Invoke();
         //pawn.transform.LookAt(tgt.transform);
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
         pawn.anim.SetTrigger("VenomBite"); // sets TurnDone via animation behaviour
@@ -172,9 +173,16 @@ public class VenomBiteItem : ActionItem, SA_Item
 
     public void VenomBiteAnimEvent() //called by animation event trigger 
     {
-        toHit.TakeDamage(Random.Range(minDamage, maxDamage + 1));
+        int dmg = Random.Range(minDamage, maxDamage + 1);
+        toHit.TakeDamage(dmg);
         PoisonAttacher pa = toHit.gameObject.AddComponent<PoisonAttacher>();
-        pa.SetMeFull(toHit, "Poison", posionDuration, minPoisonDamage, maxPoisonDamage);
+        pa.SetMeFull(toHit, venomBiteSpriteName, posionDuration, minPoisonDamage, maxPoisonDamage);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, dmg, Color.red);
+
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Poison, toHit.Name);
+
+
+        pawn.TurnDone = true;
     }
 
 

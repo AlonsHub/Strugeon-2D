@@ -106,8 +106,7 @@ MonoBehaviour:
     _experience: 0
     _level: 1
   initiativeBonus: 0
-  hasSAs: 0
-  forDisplayPurposesOnly: {fileID: 2111372755113017349}
+  hasSAs: 1
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -128,6 +127,7 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  HasShield: 0
   SA_Title: Heal Ally
   SA_Description: 'Heal will allow Smadi to restore a certain amount of HP to a hero.
     Smadi can heal herself or any hero located in a tile adjacent to her. '
@@ -195,6 +195,7 @@ MonoBehaviour:
   targets: []
   hasRedBuff: 0
   toHit: {fileID: 0}
+  cachedProjectile: {fileID: 0}
 --- !u!114 &5092255476189858162
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,9 +25,13 @@ public class PoisonAttacher : Attacher
         while (ttl > 0)
         {
             yield return new WaitUntil(() => tgtPawn.TurnDone != true);
-            
-            tgtPawn.TakeElementalDamage(Random.Range(minDamage, maxDamage), Color.green);//
+            int dmg = Random.Range(minDamage, maxDamage+1);
+            tgtPawn.TakeElementalDamage(dmg, Color.green);
+
+            BattleLogVerticalGroup.Instance.AddEntry("Venom Bite", ActionSymbol.Poison, tgtPawn.Name,dmg, Color.green);
+
             ReduceTtlByOne();
+            yield return new WaitUntil(() => tgtPawn.TurnDone == true);
         }
         RemoveEffect();
     }

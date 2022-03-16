@@ -56,14 +56,15 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         {
             foreach (var saItem in myPawn.saItems)
             {
-                if(saItem.SA_Available())
-                {
-                    AddSAIcon(saItem);
-                }
-                else
-                {
-                    RemoveSAIcon(saItem);
-                }
+                SetSA_IconOn(saItem);
+                //if(saItem.SA_Available())
+                //{
+                //    SetSA_IconOn(saItem);
+                //}
+                //else
+                //{
+                //    SetSA_IconOff(saItem);
+                //}
 
             }
             //saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
@@ -74,7 +75,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         //}
     }
 
-    void AddSAIcon(SA_Item sai)
+    void SetSA_IconOn(SA_Item sai)
     {
         if(iconBySAItem.ContainsKey(sai))
         {
@@ -84,6 +85,8 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
             if (!iconBySAItem[sai].gameObject.activeSelf)
                 //iconBySAItem[sai].gameObject.SetActive(true);
                 iconBySAItem[sai].color = Color.white;
+            else
+                iconBySAItem[sai].color = Color.gray;
             //else
                 //Debug.LogError("TurnDisplayer Already contains: " + sai.SA_Name() + " and it is active");
 
@@ -99,7 +102,7 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         //OnAddSAIcon(img.transform);
         iconBySAItem.Add(sai, img);
     }
-    public void RemoveSAIcon(SA_Item sai)
+    public void SetSA_IconOff(SA_Item sai)
     {
         if (!iconBySAItem.ContainsKey(sai))
         {

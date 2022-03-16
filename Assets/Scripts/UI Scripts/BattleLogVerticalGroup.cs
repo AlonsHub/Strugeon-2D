@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock, Death, Escape, Summon, Charm};
+public enum ActionSymbol { Attack, Heal, Walk, Censer, Rock, Death, Escape, Summon, Charm, Poison};
 public enum PsionActionSymbol {Red, Blue, Yellow, Purple };
 public class BattleLogVerticalGroup : MonoBehaviour
 {

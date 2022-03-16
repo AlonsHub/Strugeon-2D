@@ -15,14 +15,13 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
       - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-      enemyLevels: 030000000300000003000000
+      enemyLevels: 0300000003000000
     enemySetPack: {fileID: 11400000, guid: 046a48308753b9540a8ca188f891b291, type: 2}
     magicItem:
-      magicItemName: Magic Scroll
-      goldValue: 80
+      magicItemName: Helmet
+      goldValue: 25
       spectrumProfile:
         red: 0
         blue: 0
@@ -30,13 +29,13 @@ MonoBehaviour:
         purple: 0
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 3df2fcbf6e31f9f4ab18c489f57f285e, type: 2}
-      spriteName: MagicScroll
-    expReward: 150
+      itemSprite: {fileID: 21300000, guid: 82d960ab387eb2047b66c4eacb443d4f, type: 2}
+      spriteName: Helmet
+    expReward: 90
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 25
-    difficulty: 2
+    goldReward: 11
+    difficulty: 1
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

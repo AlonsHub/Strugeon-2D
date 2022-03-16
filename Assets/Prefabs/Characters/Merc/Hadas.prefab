@@ -106,8 +106,7 @@ MonoBehaviour:
     _experience: 0
     _level: 1
   initiativeBonus: 0
-  hasSAs: 0
-  forDisplayPurposesOnly: {fileID: 6641408886101910626}
+  hasSAs: 1
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -196,6 +195,7 @@ MonoBehaviour:
   targets: []
   hasRedBuff: 0
   toHit: {fileID: 0}
+  cachedProjectile: {fileID: 0}
 --- !u!114 &5092255476189858162
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -232,7 +232,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         if(hasPurple && purpleTgt != null)
         {
-            ActionVariation[] possibleActions = actionPool.Where(x => x.target.Equals(purpleTgt)).ToArray();
+            ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
             if (possibleActions != null && possibleActions.Length > 0)
             {
                 foreach (var possibleAction in possibleActions)
