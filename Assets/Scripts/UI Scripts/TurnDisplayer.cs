@@ -56,13 +56,10 @@ public class TurnDisplayer : MonoBehaviour/*, IPointerEnterHandler, IPointerExit
         {
             foreach (var saItem in myPawn.saItems)
             {
-
                 if (saItem.SA_Available())
                     SetSA_IconOn(saItem);
                 else
                     SetSA_IconOff(saItem);
-
-
             }
             //saImage.gameObject.SetActive(myPawn.saItems.SA_Available());
         }

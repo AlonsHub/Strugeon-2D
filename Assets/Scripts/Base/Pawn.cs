@@ -100,6 +100,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public List<float> DamageModifiers { get => damageModifiers; set => damageModifiers = value; }
 
     public bool HasShield;
+    public bool HasRoot;
 
     //public bool MovementDone { get => movementDone; set => movementDone = value; } // OPTIONAL - to have walk and attack actions
 
@@ -254,7 +255,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Call action "after calcActionList"
     }
     ShieldAttacher cachedShield = null; //TEMP TBF
-    public override void TakeDamage(int damage) //ADD DamageType and derrive text colour from that
+    RootDownAttacher cachedRootDownAttacher = null; //temp TBF
+    public override int TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
 
         //Sound prompt
@@ -287,8 +289,23 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                     Debug.LogError("Has shield is true but no ShieldAttacher found on gameObject");
                 else
                 {
-                    int carryOver = cachedShield.ReduceTtlBy(damage); //this 
+                    int carryOver = cachedShield.TakeDamage(damage); //this 
                     if(carryOver < 0)
+                    {
+                        damage = carryOver;
+                    }
+                    damage = carryOver >= 0 ? 0 : carryOver;
+                }
+            }
+            //END EXTRACT METHOD: DamageCalculation() TBF
+            if (HasRoot) //TEMP TBF
+            {
+                if (!cachedRootDownAttacher && !(cachedRootDownAttacher = GetComponent<RootDownAttacher>()))
+                    Debug.LogError("Has shield is true but no ShieldAttacher found on gameObject");
+                else
+                {
+                    int carryOver = cachedRootDownAttacher.TakeDamage(damage); //this 
+                    if (carryOver < 0)
                     {
                         damage = carryOver;
                     }
@@ -306,11 +323,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Attack should be reported (numberless) to the log by the attacker, and the damaged should add the damage to previous log entry using appropriate methods
         //ADD TO PREVIOUS TBF
 
-        currentHP -= damage;
-        if (currentHP <= 0)
-        {
-            Die();
-        }
+        //currentHP -= damage;
+        //if (currentHP <= 0)
+        //{
+        //    Die();
+        //}
+        return base.TakeDamage(damage);
     }
 
     //TBF! this needs to be implemented into just normal TakeDamage (and god help me use the TakeDamage method)

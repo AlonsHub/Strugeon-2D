@@ -107,7 +107,26 @@ public class TileWalker : MonoBehaviour
         
         int stepsToTake = path.Count - range;
        
+        
+
+        //int stepsToTake = path.Count;
+        if (doLimitSteps)
+        {
+            pawn.RemoveIconByName("blueDeBuff");
+
+            if (stepsToTake > stepLimit)
+            {
+                stepsToTake = stepLimit;
+                pawn.TurnDone = true;
+            }
+
+
+            //stepLimit = 0; //resets 
+            doLimitSteps = false;
+
+        }
         int difference = path.Count - stepsToTake;
+
         for (int i = 0; i < difference; i++)
         {
             path.RemoveAt(path.Count - 1); // why not trim? 
@@ -118,14 +137,16 @@ public class TileWalker : MonoBehaviour
     IEnumerator TileByTileWalk(List<FloorTile> walkPath) //this has the last "step" removed from it already (meaning we stop just before the target)
     {
         int stepsToTake = walkPath.Count;
-        if(doLimitSteps)
-        {
-            stepsToTake = stepLimit;
-            pawn.RemoveIconByName("blueDeBuff");
+        //if(doLimitSteps)
+        //{
+        //    if(stepsToTake > stepLimit)
+        //    stepsToTake = stepLimit;
 
-            stepLimit = 0; //resets 
-            doLimitSteps = false;
-        }
+        //    pawn.RemoveIconByName("blueDeBuff");
+
+        //    //stepLimit = 0; //resets 
+        //    doLimitSteps = false;
+        //}
 
         for (int i = 0; i < stepsToTake; i++)
         {
@@ -133,10 +154,13 @@ public class TileWalker : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0, 0, );
             yield return new WaitForSeconds(stepTime);
         }
+
         FindOwnGridPos();
         currentNode.AcceptOccupant(gameObject);
+
         //currentNode.isEmpty = false;
         //currentNode.myOccupant = gameObject;
+
         lookAtter.tgt = null; //stops rotating
 
         hasPath = false; //Finished!

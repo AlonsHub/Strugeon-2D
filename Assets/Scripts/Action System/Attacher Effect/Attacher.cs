@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Attacher : StatusEffectComponent, I_Attackable
 {
+    protected int attacherHP;
     //SetMe need not be overwritten, just use as is
     //public override void ApplyEffect()
     //{
@@ -15,8 +16,14 @@ public class Attacher : StatusEffectComponent, I_Attackable
     //    base.RemoveEffect();
     //    //enable pawns TakeDamage function to normal
     //}
-    public void TakeDamage(int damage)
+    public int TakeDamage(int damage)
     {
-        ReduceTtlBy(damage);
+        //ReduceTtlBy(damage);
+        attacherHP -= damage;
+        if(attacherHP<=0)
+        {
+            RemoveEffect();
+        }
+        return attacherHP;
     }
 }

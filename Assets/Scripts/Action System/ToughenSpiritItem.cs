@@ -11,6 +11,8 @@ public class ToughenSpiritItem : ActionItem, SA_Item
 
     [SerializeField]
     int shieldAmount; //this sets them all
+    [SerializeField]
+    int shieldDuration; 
 
     int _currentCooldown;
 
@@ -45,7 +47,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         {
             //ToughenSpirit ts = item.gameObject.AddComponent<ToughenSpirit>();
             ShieldAttacher sa = item.gameObject.AddComponent<ShieldAttacher>();
-            sa.SetMe(item, toughenSpiritSpriteName, shieldAmount);
+            sa.SetMeFull(item, toughenSpiritSpriteName, shieldDuration, shieldAmount);
             //ts.SetFullEffect(item, toughenSpiritSpriteName, damageModifier);D
         }
 

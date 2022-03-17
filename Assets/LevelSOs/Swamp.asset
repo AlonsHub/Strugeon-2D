@@ -16,23 +16,21 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
       - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 01000000010000000100000001000000
+      enemyLevels: 0300000003000000
     enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
     magicItem:
-      magicItemName: Magic Scroll
-      goldValue: 80
+      magicItemName: Crown
+      goldValue: 50
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 0
-      dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 3df2fcbf6e31f9f4ab18c489f57f285e, type: 2}
-      spriteName: MagicScroll
+      rarity: 2
+      dropRateWeight: 1
+      itemSprite: {fileID: 21300000, guid: cae6c3b9bbb18364aace108a3609ddbb, type: 2}
+      spriteName: Crown
     expReward: 150
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}

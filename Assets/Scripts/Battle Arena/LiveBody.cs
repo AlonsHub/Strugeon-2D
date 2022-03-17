@@ -11,13 +11,14 @@ public abstract class LiveBody : MonoBehaviour, I_Attackable
     {
         currentHP = maxHP;
     }
-    public virtual void TakeDamage(int damage)
+    public virtual int TakeDamage(int damage)
     {
         currentHP -= damage;
         if(currentHP <= 0)
         {
             Die();
         }
+        return currentHP;
     }
     public virtual void Heal(int amount)
     {
