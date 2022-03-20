@@ -21,6 +21,8 @@ public class RootDownItem : ActionItem, SA_Item
     [SerializeField]
     int rootHP;
     [SerializeField]
+    int minDamage, maxDamage, spikeDamage;
+    [SerializeField]
     int rootDuration;
 
     public bool SA_Available()
@@ -80,7 +82,7 @@ public class RootDownItem : ActionItem, SA_Item
             return;
         }
         RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
-        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootHP);
+        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootHP, minDamage, maxDamage, spikeDamage);
 
         //attach a RootDown component to that pawn
             pawn.TurnDone = true;

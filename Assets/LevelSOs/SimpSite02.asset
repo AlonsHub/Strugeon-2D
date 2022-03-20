@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b3dce29ce7699429d6d3e2766b466b, type: 3}
-  m_Name: SimpSite01
+  m_Name: SimpSite02
   m_EditorClassIdentifier: 
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
-      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
+      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
       enemyLevels: 0500000005000000
     enemySetPack: {fileID: 0}
     magicItem:
-      magicItemName: Drake Scale
-      goldValue: 60
+      magicItemName: Dried Root
+      goldValue: 25
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 2
-      dropRateWeight: 5
-      itemSprite: {fileID: 21300000, guid: 7d82955ce92b7c744a27f4d707c2f8ce, type: 2}
-      spriteName: Drake Scale
+      rarity: 1
+      dropRateWeight: 0
+      itemSprite: {fileID: 21300000, guid: 59a5b649f6b77da498107fe06412cef9, type: 2}
+      spriteName: DriedRoot
     expReward: 60
-    levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
+    levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 10
+    goldReward: 50
     difficulty: 0
-    siteIcon: {fileID: 5403132134260291811, guid: 31155a4835afb294f8a618b0cb75f337,
+    siteIcon: {fileID: -550771597486948442, guid: 31155a4835afb294f8a618b0cb75f337,
       type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
