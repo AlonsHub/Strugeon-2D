@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class TurnMaster : MonoBehaviour
 {
     public static TurnMaster Instance;
+
     public List<Pawn> turnTakers;
     public int currentTurn;
     public int currentTurnInDisplayer;
@@ -192,6 +193,7 @@ public class TurnMaster : MonoBehaviour
 
             if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
             {
+                if(!PartyMaster.Instance.squads.Contains(PartyMaster.Instance.currentSquad)) //to prevent simpleSites (which do NOT remove squads) from adding duplicates 20/03/22 TBF AF (PartyMaster needs changing)
                 PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber));
             }
             else

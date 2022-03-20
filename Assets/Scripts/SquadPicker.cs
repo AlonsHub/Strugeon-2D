@@ -27,6 +27,7 @@ public class SquadPicker : MonoBehaviour
     Transform canvasTrans;
     [SerializeField]
     SiteButton tgtSite;
+    SimpleSiteButton tgtSimpleSite;
 
     [SerializeField]
     GameObject clickOffMeButton; //this button needs to activate with the squad picker, but it is not a good fit to be it's child
@@ -173,6 +174,10 @@ public class SquadPicker : MonoBehaviour
         //check if a squad is chosen:
         if (index == -1 || !tgtSite)
         {
+            if(tgtSimpleSite)
+            {
+                tgtSimpleSite.SendToArena(squadSlots[index].squad);
+            }
             //Debug.LogError("No squad selected or target site!");
             return;
         }
@@ -192,8 +197,13 @@ public class SquadPicker : MonoBehaviour
         PlayerDataMaster.Instance.LogSquadDeparture(squadSlots[index].squad.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
     }
 
-    public void SetSite(SiteButton sb)
+    public void SetSite(SiteButton sb) //CRITICAL TBF! this is called in inspector
     {
         tgtSite = sb;
     }
+     public void SetSimpleSite(SimpleSiteButton ssb) //CRITICAL TBF! this is called in inspector
+    {
+        tgtSimpleSite = ssb;
+    }
+
 }

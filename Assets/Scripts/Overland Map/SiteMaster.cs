@@ -52,15 +52,19 @@ public class SiteMaster : MonoBehaviour
         {
             countsPerDifficulty[i] = 0;
         }
-
+        int liveSiteCount = 0;
         foreach (var item in siteButtons)
         {
-            countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
+            if (item.levelSO.levelData.isSet)
+            {
+                liveSiteCount++;
+                countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
+            }
         }
 
         for (int i = 0; i < numberOfDifficulties; i++)
         {
-            if(countsPerDifficulty[i] >= numberOfDifficulties)
+            if(countsPerDifficulty[i] >= liveSiteCount)
             {
                 //need to reset one!
                 //choose randomly, but set to a different difficulty - that is NOT i

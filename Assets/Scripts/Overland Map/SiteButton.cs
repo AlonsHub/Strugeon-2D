@@ -138,7 +138,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         PlayerDataMaster.Instance.RemoveLoggedSquad(readiedSquad.roomNumber);
 
-        OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
+        //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
         LevelRef.Instance.SetCurrentLevel(levelSO);
 
@@ -162,15 +162,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         isCooldown = true; //just making sure
         thisButton.interactable = false;
-        //timer =  PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name];
-        //if (PlayerDataMaster.Instance.currentPlayerData.SiteCooldownTimes[levelSO.name] > 0)
-        //{
-
-        //}
-        //else
-        //{
-        //    timer = 0f;
-        //}
+        
         clockAndTimerParent.SetActive(true);
         //timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
 
@@ -200,10 +192,6 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         isReady = false;
         isWaitingForSquad = false;
         readiedSquad = null;
-
-        //BasicDisplayer[] displayers = IdleLog.Instance.GetLogParentBasicDisplayers();
-
-        
     }
     public void SetArrivedSquad(Squad s) //for cancelExpedition cases
     {
