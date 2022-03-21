@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class SimpleSiteButton : MonoBehaviour
+public class SimpleSiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     //SiteData siteData; //TBF depricate this class
     [SerializeField]
@@ -10,11 +11,19 @@ public class SimpleSiteButton : MonoBehaviour
 
     [SerializeField]
     SquadPicker _squadPicker;
+    [SerializeField]
+    SiteDisplayer siteDisplayer;
 
+   
+    public LevelSO LevelSO { get => levelSO; }
     private void Start()
     {
         if (!_squadPicker)
-            _squadPicker = FindObjectOfType<SquadPicker>();
+            _squadPicker = FindObjectOfType<SquadPicker>(); //put those "gets" and "finds" in the   if (!_squadPicker && !(_squadPicker = FindObjectOfType<SquadPicker>()) )
+        if (!siteDisplayer)
+            siteDisplayer = GetComponentInChildren<SiteDisplayer>();//put those "gets" and "finds" in the   if (!_squadPicker && !(_squadPicker = FindObjectOfType<SquadPicker>()) )
+        if (LevelSO && siteDisplayer)
+            siteDisplayer.SetMe(this);
     }
     public void OnClick() //set in inspector
     {
@@ -29,5 +38,19 @@ public class SimpleSiteButton : MonoBehaviour
         PartyMaster.Instance.currentSquad = toSend;
 
         UnityEngine.SceneManagement.SceneManager.LoadScene("ArenaSceneGeneric");
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
+        siteDisplayer.gameObject.SetActive(true);
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(!_squadPicker.gameObject.activeInHierarchy)
+        siteDisplayer.gameObject.SetActive(false);
+
     }
 }
