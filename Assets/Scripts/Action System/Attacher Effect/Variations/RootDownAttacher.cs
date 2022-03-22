@@ -22,13 +22,13 @@ public class RootDownAttacher : Attacher
 
         if (tgtPawn.isEnemy)
         {
-            RefMaster.Instance.enemyInstances.Remove(tgtPawn);
+            //RefMaster.Instance.enemyInstances.Remove(tgtPawn);
             RefMaster.Instance.mercs.Add(tgtPawn);
         }
         else
         {
             RefMaster.Instance.enemyInstances.Add(tgtPawn);
-            RefMaster.Instance.mercs.Remove(tgtPawn);
+            //RefMaster.Instance.mercs.Remove(tgtPawn);
         }
         tgtPawn.HasRoot = true;
 
@@ -39,13 +39,13 @@ public class RootDownAttacher : Attacher
         base.RemoveEffect();
         if (tgtPawn.isEnemy)
         {
-            RefMaster.Instance.enemyInstances.Add(tgtPawn);
+            //RefMaster.Instance.enemyInstances.Add(tgtPawn);
             RefMaster.Instance.mercs.Remove(tgtPawn);
         }
         else
         {
             RefMaster.Instance.enemyInstances.Remove(tgtPawn);
-            RefMaster.Instance.mercs.Add(tgtPawn);
+            //RefMaster.Instance.mercs.Add(tgtPawn);
         }
         tgtPawn.HasRoot = false;
     }
@@ -56,8 +56,8 @@ public class RootDownAttacher : Attacher
         {
             yield return new WaitUntil(() => tgtPawn.TurnDone != true);
 
-            //if (attacherHP > 0)
-            //    DamageHost(Random.Range(minDamage, maxDamage + 1)); //This will work, but needs to override the "shield" component of damage calculations
+            if (attacherHP > 0)
+                DamageHost(Random.Range(minDamage, maxDamage + 1)); //This will work, but needs to override the "shield" component of damage calculations
 
             ReduceTtlByOne();
             yield return new WaitUntil(() => tgtPawn.TurnDone == true);
@@ -71,7 +71,7 @@ public class RootDownAttacher : Attacher
 
     void DamageHost(int roll) //if ttl'ed out and not by HP reduction
     {
-        tgtPawn.TakeElementalDamage(roll, Color.green);
+        tgtPawn.TakeDirectDamage(roll);
 
         BattleLogVerticalGroup.Instance.AddEntry("Root", ActionSymbol.Poison, tgtPawn.Name, roll, Color.green);
     }

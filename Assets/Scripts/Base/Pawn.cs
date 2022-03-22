@@ -331,6 +331,39 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         return base.TakeDamage(damage);
     }
 
+    public int TakeDirectDamage(int damage) //ADD DamageType and derrive text colour from that
+    {
+
+        //Sound prompt
+        //audioSource.clip = hitSounds[Random.Range(0, hitSounds.Length - 1)];
+        //audioSource.Play();
+        //anim.SetTrigger("Hit");
+        //Spawn damage text (numbers)
+        GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
+
+
+        //if (damage != 0)
+        //{
+        //    OnTakeDamage?.Invoke(); //relevant only if actual damage happens //should also be the way to override taking damage when pawn has shield
+
+
+        //}
+
+
+        go.GetComponent<DamageText>().SetDamageText(damage);
+
+        //DAMAGE SHOULD NOT BE REPORTED BY THE ATTACKER, BUT BY THE VICTIM!
+        //Attack should be reported (numberless) to the log by the attacker, and the damaged should add the damage to previous log entry using appropriate methods
+        //ADD TO PREVIOUS TBF
+
+        //currentHP -= damage;
+        //if (currentHP <= 0)
+        //{
+        //    Die();
+        //}
+        return base.TakeDamage(damage);
+    }
+
     //TBF! this needs to be implemented into just normal TakeDamage (and god help me use the TakeDamage method)
     public void TakeElementalDamage(int damage, Color colour) //ADD DamageType and derrive text colour from that
     {

@@ -84,6 +84,8 @@ public class RootDownItem : ActionItem, SA_Item
         RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
         rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootHP, minDamage, maxDamage, spikeDamage);
 
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
+
         //attach a RootDown component to that pawn
             pawn.TurnDone = true;
     }
