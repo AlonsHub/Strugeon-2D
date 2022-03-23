@@ -294,7 +294,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                     {
                         damage = carryOver;
                     }
-                    damage = carryOver >= 0 ? 0 : carryOver;
+                    damage = carryOver >= 0 ? 0 : carryOver * -1; //damage should be positive, or it heals
                 }
             }
             //END EXTRACT METHOD: DamageCalculation() TBF
@@ -309,7 +309,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                     {
                         damage = carryOver;
                     }
-                    damage = carryOver >= 0 ? 0 : carryOver;
+                    damage = carryOver >= 0 ? 0 : carryOver * -1; //damage should be positive, or it heals
                 }
             }
             //END EXTRACT METHOD: DamageCalculation() TBF
