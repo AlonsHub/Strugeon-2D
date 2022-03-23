@@ -78,9 +78,9 @@ public class TileWalker : MonoBehaviour
         //Debug.Log(name + " Targeting ->" + tgt.name);
         path = PathMaker.Instance.FindPath(this, tgt); // find path should be the method to take in Target and Seeker - they should never have been local properties
 
-        if (path.Count <= 0)
+        if (path.Count <= 0 || pawn.HasRoot) //TBD casuses caharacters to sometime skip turns
         {
-            Debug.LogError(name + " No path found, passed a null path to tilewalker.");
+            //Debug.LogError(name + " No path found, passed a null path to tilewalker.");
             lookAtter.tgt = null; //stops rotating
             pawn.TurnDone = true;
         }

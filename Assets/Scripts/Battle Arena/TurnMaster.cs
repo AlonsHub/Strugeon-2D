@@ -46,6 +46,8 @@ public class TurnMaster : MonoBehaviour
     [SerializeField]
     DefeatWindow defeatWindow;
 
+    [SerializeField]
+    Image clocker;
 
     public System.Action OnTurnOrderRestart;
     private void Awake()
@@ -140,8 +142,8 @@ public class TurnMaster : MonoBehaviour
         currentTurnInDisplayer = 0;
 
         isGameRunning = true;
-        StartCoroutine("TurnSequence");
-        StartCoroutine("EndGameChecker");
+        StartCoroutine(nameof(TurnSequence));
+        StartCoroutine(nameof(EndGameChecker));
     }
     public void StopTurning()
     {
@@ -283,12 +285,16 @@ public class TurnMaster : MonoBehaviour
                 Debug.Log("Game over!");
                 break;
             }
+            
+
             yield return new WaitForSeconds(turnStartDelay);
 
             if (currentTurn >= turnTakers.Count) //I don't think this ever happens
             {
                 currentTurn = 0;
             }
+            //clocker.fillAmount =(float)currentTurn / (float)(turnTakers.Count - 1);
+
             currentTurnTaker = turnTakers[currentTurn];
 
             TurnOrderUpdate(1); //int 1 to engage overload
@@ -449,9 +455,8 @@ public class TurnMaster : MonoBehaviour
     }
     void TurnOrderUpdate(int previousTurn) //not really needed, just keeping it as over load
     {
-        //turnPlates[0].GetComponent<TurnDisplayer>().ToggleScale(false); //shrinks back the Current Turn Portrait
-        //turnPlates[previousTurn].ToggleScale(false); //shrinks back the Current Turn Portrait
-        //turnPlates[previousTurn].gameObject.SetActive(false); //will be SetActive(true) if needed
+
+        clocker.fillAmount = (float)currentTurn / (float)(turnTakers.Count - 1);
 
 
         turnPlates[currentTurn].transform.localPosition = currenTurnPlateTrans.localPosition;

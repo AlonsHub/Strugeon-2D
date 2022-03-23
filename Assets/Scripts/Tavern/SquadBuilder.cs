@@ -205,23 +205,6 @@ public class SquadBuilder : MonoBehaviour
     }
     public void Refresh()
     {
-        //for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
-        //{
-        //    availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]);
-        //}
-        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
-        //{
-        //    availableSlots[i].ClearSlot();
-        //}
-
-        //for (int i = 0; i < tempSquad.pawns.Count; i++)
-        //{
-        //    partySlots[i].SetMe(tempSquad.pawns[i]);
-        //}
-        //for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
-        //{
-        //    partySlots[i].ClearSlot();
-        //}
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
 
         for (int i = 0; i < names.Count; i++)

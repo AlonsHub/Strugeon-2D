@@ -14,7 +14,7 @@ public class PoisonAttacher : Attacher
 
         if (existingPoisonComponents.Length > 1)
         {
-            existingPoisonComponents[0].StartCooldown();
+            existingPoisonComponents[0].SetTTLtoMax();
             Destroy(this);
         }
         else
