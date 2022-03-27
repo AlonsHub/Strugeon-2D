@@ -47,7 +47,8 @@ public class EscapeItem : ActionItem
         //CHECK IF EVEN POSSIBLE!!!!!!
 
         //IF THEY HAVE NO PATH, THEY CAN'T ESCAPEEEE!!@!!
-
+        if (pawn.HasRoot)
+            return;
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
             //check here if there is a path to escape - by either trying to get a route there, or inversely checking if hes not surrounded

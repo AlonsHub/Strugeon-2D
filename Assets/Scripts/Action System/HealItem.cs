@@ -122,6 +122,17 @@ public class HealItem : ActionItem, SA_Item
             }
             int weight = baseCost;
 
+            int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
+            if (currentDistance <= 14) // one tile
+            {
+                weight *= 4; //if adjcent
+            }
+            else if (pawn.HasRoot)
+            {
+                continue;
+            }
+
+
             if (p.currentHP < p.maxHP / 2) //if under half max
             {
                 if (p.name == name)
@@ -137,12 +148,6 @@ public class HealItem : ActionItem, SA_Item
                 {
                     weight *= 10;
                 }
-            }
-
-            int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
-            if (currentDistance <= 14) // one tile
-            {
-                weight *= 4; //if adjcent
             }
 
             actionVariations.Add(new ActionVariation(this, p.gameObject, weight));

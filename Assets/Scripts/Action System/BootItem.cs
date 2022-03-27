@@ -44,7 +44,8 @@ public class BootItem : ActionItem
     public override void CalculateVariations()
     {
         actionVariations = new List<ActionVariation>();
-
+        if (pawn.HasRoot)
+            return;
         //List<FloorTile> legitTiles = new List<FloorTile>();
         bool hasEnemyAtMelee = false;
         List<FloorTile> surroundingTiles = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);

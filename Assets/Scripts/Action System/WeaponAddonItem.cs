@@ -64,6 +64,10 @@ public class WeaponAddonItem : ActionItem
         {
             weight *= 5;// changed from 10 - 08/02/22
         }
+        else if (pawn.HasRoot)
+        {
+            return;
+        }
         //else //add 23/02/22 - this separates the two *5
         if (pawn.targets.Count > 0)
         {
