@@ -30,6 +30,16 @@ public class StatusEffectComponent : MonoBehaviour
         tgtPawn = target;
         ttl = maxTTL = newMaxTTL;
     }
+    //public virtual void SetMe(Pawn target, string buffIconName, int newMaxTTL, GameObject visualEffect)
+    //{
+    //    iconName = buffIconName;
+    //    effectIcon = Resources.Load<Sprite>($"Icons/{iconName}"); //could be loaded elsewhere/beforehand?
+    //    tgtPawn = target;
+
+    //    GameObject vfx = Instantiate(visualEffect, tgtPawn.transform,);
+
+    //    ttl = maxTTL = newMaxTTL;
+    //}
     /// <summary>
     /// Must be overridden, and must use base.ApplyEffect() to addEffectIcon to the pawns hp bar
     /// </summary>

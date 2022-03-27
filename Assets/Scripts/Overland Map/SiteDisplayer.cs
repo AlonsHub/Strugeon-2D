@@ -14,7 +14,7 @@ public class SiteDisplayer : MonoBehaviour
     [SerializeField]
     Transform dwellerPortraitGroupRoot;
     [SerializeField]
-    List<Image> dwellerPortraitImgs;
+    List<DwellerDisplayer> dwellerPortraitImgs;
 
     [SerializeField]
     Transform goldDisplayer;
@@ -34,7 +34,10 @@ public class SiteDisplayer : MonoBehaviour
 
     private void Awake()
     {
-        if(Instances == null)
+        if (dwellerPortraitImgs == null)
+            dwellerPortraitImgs = new List<DwellerDisplayer>();
+
+        if (Instances == null)
         {
             Instances = new List<SiteDisplayer>();
         }
@@ -51,17 +54,20 @@ public class SiteDisplayer : MonoBehaviour
         {
             if (i >= dwellerPortraitImgs.Count)
             {
-                Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
-                if (!img)
-                {
-                    Debug.LogError("not UI image found on dwellerPortraitPrefab");
-                }
-                img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
-                dwellerPortraitImgs.Add(img);
+                //Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
+                DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
+                //if (!img)
+                //{
+                //    Debug.LogError("not UI image found on dwellerPortraitPrefab");
+                //}
+                dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
+                //img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
+                dwellerPortraitImgs.Add(dweller); //as image
             }
             else
             {
-                dwellerPortraitImgs[i].sprite = levelData.enemies[i].FullPortraitSprite;
+                
+                dwellerPortraitImgs[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
             }
         }
         if (levelData.enemies.Count < dwellerPortraitImgs.Count) // BADDDD and easy to do otherwise
@@ -88,17 +94,20 @@ public class SiteDisplayer : MonoBehaviour
         {
             if (i >= dwellerPortraitImgs.Count)
             {
-                Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
-                if (!img)
-                {
-                    Debug.LogError("not UI image found on dwellerPortraitPrefab");
-                }
-                img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
-                dwellerPortraitImgs.Add(img);
+                //Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
+                DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
+                //if (!img)
+                //{
+                //    Debug.LogError("not UI image found on dwellerPortraitPrefab");
+                //}
+                dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
+                //img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
+                dwellerPortraitImgs.Add(dweller); //as image
             }
             else
             {
-                dwellerPortraitImgs[i].sprite = levelData.enemies[i].FullPortraitSprite;
+
+                dwellerPortraitImgs[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
             }
         }
         if (levelData.enemies.Count < dwellerPortraitImgs.Count) // BADDDD and easy to do otherwise

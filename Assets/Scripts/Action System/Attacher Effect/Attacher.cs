@@ -5,17 +5,18 @@ using UnityEngine;
 public class Attacher : StatusEffectComponent, I_Attackable
 {
     protected int attacherHP;
-    //SetMe need not be overwritten, just use as is
-    //public override void ApplyEffect()
-    //{
-    //    base.ApplyEffect();
-    //    //override pawns TakeDamage function
-    //}
-    //public override void RemoveEffect()
-    //{
-    //    base.RemoveEffect();
-    //    //enable pawns TakeDamage function to normal
-    //}
+
+    GameObject visualEffectPrefab;
+    //Sprite visualAddon;
+
+    GameObject instantiateEffect;
+
+    public void SetMeWithVFX(Pawn target, string buffIconName, int newMaxTTL, GameObject vfx)
+    {
+        base.SetMe(target, buffIconName, newMaxTTL);
+        visualEffectPrefab = vfx;
+    }
+
     public int TakeDamage(int damage)
     {
         //ReduceTtlBy(damage);
@@ -25,5 +26,19 @@ public class Attacher : StatusEffectComponent, I_Attackable
             RemoveEffect();
         }
         return attacherHP;
+    }
+
+    public override void RemoveEffect()
+    {
+        if (instantiateEffect)
+            Destroy(instantiateEffect);
+        base.RemoveEffect();
+    }
+
+    public override void ApplyEffect()
+    {
+        base.ApplyEffect();
+        if (visualEffectPrefab)
+            instantiateEffect = Instantiate(visualEffectPrefab, tgtPawn.transform);
     }
 }

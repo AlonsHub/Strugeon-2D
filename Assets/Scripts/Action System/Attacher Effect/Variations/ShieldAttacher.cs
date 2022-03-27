@@ -33,8 +33,8 @@ public class ShieldAttacher : Attacher
 
     public override void RemoveEffect()
     {
-        base.RemoveEffect();
         tgtPawn.HasShield = false;
+        base.RemoveEffect();
     }
     
     IEnumerator TTLPerTurn()

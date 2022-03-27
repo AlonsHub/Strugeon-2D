@@ -25,6 +25,9 @@ public class RootDownItem : ActionItem, SA_Item
     [SerializeField]
     int rootDuration;
 
+    [SerializeField]
+    GameObject rootVisual;
+
     public bool SA_Available()
     {
         return _currentCooldown <= 0;
@@ -82,7 +85,9 @@ public class RootDownItem : ActionItem, SA_Item
             return;
         }
         RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
-        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootHP, minDamage, maxDamage, spikeDamage);
+
+        //Scaling up root with mavka level
+        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel-1)*5 ), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
 

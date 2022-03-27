@@ -58,6 +58,7 @@ public class RefMaster : MonoBehaviour
 
     void SetEnemyLevel(Pawn p, int level)
     {
+        p.enemyLevel = level;
         p.maxHP += level * GameStats.maxHpBonusPerLevel;
         p.gameObject.GetComponent<WeaponItem>().ApplySheet(level * GameStats.minDmgPerLevel, level * GameStats.maxDmgPerLevel);
     }

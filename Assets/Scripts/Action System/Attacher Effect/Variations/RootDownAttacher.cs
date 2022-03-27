@@ -5,9 +5,9 @@ using UnityEngine;
 public class RootDownAttacher : Attacher
 {
     int minDamage, maxDamage, spikeDamage;
-    public void SetMeFull(Pawn target, string buffIconName, int newMaxTTL, int fullHP, int minD, int maxD, int spikeDmg)
+    public void SetMeFull(Pawn target, string buffIconName, int newMaxTTL, GameObject rootVisual, int fullHP, int minD, int maxD, int spikeDmg)
     {
-        base.SetMe(target, buffIconName, newMaxTTL);
+        base.SetMeWithVFX(target, buffIconName, newMaxTTL, rootVisual);
         ApplyEffect();
         minDamage = minD;
         maxDamage = maxD;
