@@ -28,6 +28,8 @@ public class RootDownItem : ActionItem, SA_Item
     [SerializeField]
     GameObject rootVisual;
 
+   
+
     public bool SA_Available()
     {
         return _currentCooldown <= 0;
@@ -56,7 +58,7 @@ public class RootDownItem : ActionItem, SA_Item
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
-        la = GetComponent<LookAtter>();
+        la = GetComponentInChildren<LookAtter>();
         base.Awake();
     }
     void Start()
@@ -84,6 +86,9 @@ public class RootDownItem : ActionItem, SA_Item
             pawn.TurnDone = true;
             return;
         }
+
+        la.LookOnce(tgt.transform);
+
         RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
 
         //Scaling up root with mavka level

@@ -10,4 +10,9 @@ public class LookAtter : MonoBehaviour
         if (tgt)
             transform.LookAt(tgt);
     }
+
+    public void LookOnce(Transform t) //is transform for rotation purposes
+    {
+        transform.LookAt(t);
+    }
 }

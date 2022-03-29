@@ -25,6 +25,7 @@ public class HealItem : ActionItem, SA_Item
     [SerializeField]
     Sprite healSprite;
 
+    LookAtter la;
 
     public override void Awake()
     {
@@ -32,6 +33,7 @@ public class HealItem : ActionItem, SA_Item
         tileWalker = GetComponent<TileWalker>();
         actionVariations = new List<ActionVariation>(); //not needed?
         feetItem = GetComponent<FeetItem>();
+        la = GetComponentInChildren<LookAtter>();
 
         targetAllies = true;
 
@@ -61,7 +63,7 @@ public class HealItem : ActionItem, SA_Item
             return;
         }
         //if dist <= 1 - just do the following below:
-
+        la.LookOnce(tgt.transform);
 
         //HEAL ANIMATION????
         

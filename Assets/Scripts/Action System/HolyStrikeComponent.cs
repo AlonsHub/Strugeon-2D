@@ -57,7 +57,7 @@ public class HolyStrikeComponent : MonoBehaviour //NOT AN ACTION ITEM!!!
                 }
                 if(check.isEnemy)
                 {
-                    check.TakeDamage(Random.Range(minDmg, maxDmg));
+                    check.TakeDamage(Random.Range(minDmg, maxDmg+1));
                 }
             }
 

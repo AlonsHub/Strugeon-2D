@@ -20,12 +20,21 @@ public class SummonSpiritItem : ActionItem, SA_Item
     [SerializeField]
     Sprite summonSprite;
 
+    LookAtter la;
+   
+    private void Start()
+    {
+        la = GetComponentInChildren<LookAtter>();
+    }
+
+        GameObject instantiatedPawn;
     [ContextMenu("Summon")]
     public override void Action(GameObject tgt)
     {
         //tgt is the spawn-tile 
-        GameObject go;
+        //GameObject go;
 
+        FloorTile floorTile;
 
 
         List<FloorTile> adjTiles = new List<FloorTile>();
@@ -41,34 +50,91 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         foreach (var merc in pawn.targets)
         {
-            //
             adjTiles.AddRange(FloorGrid.Instance.GetNeighbours(merc.tileWalker.gridPos));
         }
+
         if (adjTiles.Count == 0)
         {
-            FloorTile ft = FloorGrid.Instance.GetRandomFreeTile();
-            go =FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
+            //FloorTile ft = FloorGrid.Instance.GetRandomFreeTile();
+            floorTile = FloorGrid.Instance.GetRandomFreeTile();
+            //go = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, floorTile.gridIndex);
         }
         else
         {
             List<FloorTile> emptyAdjTiles = adjTiles.Where(x => x.isEmpty).ToList();
 
             //go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
-            FloorTile ft = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
+            //FloorTile ft = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
+            if(emptyAdjTiles.Count != 0)
+            floorTile = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
+            else
+                floorTile = FloorGrid.Instance.GetRandomFreeTile();
 
-            go = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
+
+            //go = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
         }
-        Pawn newSpirit = go.GetComponent<Pawn>();
-        GameObject go2 = Instantiate(summonVFX, go.transform);
+        instantiatedPawn = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, floorTile.gridIndex);
+        if(la && instantiatedPawn)
+        la.LookOnce(instantiatedPawn.transform);
+        //List<FloorTile> adjTiles = new List<FloorTile>();
+        ////NEW
+        //if (pawn.isEnemy)
+        //{
+        //    pawn.targets = RefMaster.Instance.mercs;
+        //}
+        //else
+        //{
+        //    pawn.targets = RefMaster.Instance.enemyInstances;
+        //}
+
+        //foreach (var merc in pawn.targets)
+        //{
+        //    //
+        //    adjTiles.AddRange(FloorGrid.Instance.GetNeighbours(merc.tileWalker.gridPos));
+        //}
+        //if (adjTiles.Count == 0)
+        //{
+        //    FloorTile ft = FloorGrid.Instance.GetRandomFreeTile();
+        //    go =FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
+        //}
+        //else
+        //{
+        //    List<FloorTile> emptyAdjTiles = adjTiles.Where(x => x.isEmpty).ToList();
+
+        //    //go.transform.position = FloorGrid.Instance.GetRandomFreeTile().transform.position;
+        //    FloorTile ft = emptyAdjTiles[Random.Range(0, emptyAdjTiles.Count)];
+
+        //    go = FloorGrid.Instance.SpawnObjectOnGrid(drownedSpiritPrefab, ft.gridIndex);
+        //}
+        //Pawn newSpirit = go.GetComponent<Pawn>();
+        //GameObject go2 = Instantiate(summonVFX, go.transform);
+
+        //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
+
+        //RefMaster.Instance.enemyInstances.Add(newSpirit);
+        //TurnMaster.Instance.AddNewTurnTaker(newSpirit);
+        //cooldown = maxCooldown;
+
+
+        pawn.anim.SetTrigger("Summon"); //plays summon animation which triggers Summon() by animation event
+
+        //endturn
+    }
+
+    public void Summon() //called by animationEvent in summon animation
+    {
+        
+        Pawn newSpirit = instantiatedPawn.GetComponent<Pawn>();
+        GameObject go2 = Instantiate(summonVFX, instantiatedPawn.transform);
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
 
         RefMaster.Instance.enemyInstances.Add(newSpirit);
         TurnMaster.Instance.AddNewTurnTaker(newSpirit);
         cooldown = maxCooldown;
-        pawn.anim.SetTrigger("Summon");
 
-        //endturn
+        //la.tgt = null; not needed after LookOnce was introduced.
+
         pawn.TurnDone = true;
     }
 

@@ -49,8 +49,47 @@ public class BigHandsItem : ActionItem, SA_Item
         if (toHit && la)
             la.tgt = toHit.transform;
         
-        pawn.anim.SetTrigger("Throw");
+        pawn.anim.SetTrigger("Throw"); // animation calls event ShootRock();
     }
+    public void ShootRock()//Called as animationevent by Throw animation
+    {
+
+        GameObject go = Instantiate(weaponGfx, weaponSpawn.position, Quaternion.identity);
+        
+        Arrow arr = go.GetComponent<Arrow>();
+        if (!toHit)
+        {
+            Debug.LogError("No to hit for some fucking reason for: " + name);
+        }
+        
+        arr.SetTarget(toHit.transform);
+
+        
+        if (la && toHit)
+            la.tgt = toHit.transform;
+
+        StartCoroutine(WaitForArrowToHit(go));
+    } 
+   
+    IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
+    {
+        yield return new WaitUntil(() => (arrow == null));
+        Debug.Log("Boulder hit");
+        DamageTargetRock();
+        yield return new WaitForSeconds(.2f);
+
+        la.tgt = null;
+
+        pawn.TurnDone = true;
+    }
+    public void DamageTargetRock()
+    {
+        int rolledDamage = Random.Range(minDamage, maxDamage+1);
+        toHit.TakeDamage(rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Rock, toHit.Name, rolledDamage, Color.red);
+    }
+    
+
     public override void CalculateVariations()
     {
         
@@ -87,45 +126,6 @@ public class BigHandsItem : ActionItem, SA_Item
             }
         }
     }
-   
-    public void ShootRock()
-    {
-
-        GameObject go = Instantiate(weaponGfx, weaponSpawn.position, Quaternion.identity);
-        //go.transform.LookAt(toHit.transform.position + Vector3.up * 2f);
-        Arrow arr = go.GetComponent<Arrow>();
-        if (!toHit)
-        {
-            Debug.LogError("No to hit for some fucking reason for: " + name);
-        }
-        //arr.tgt = toHit.transform;
-        arr.SetTarget(toHit.transform);
-
-        LookAtter la = GetComponentInChildren<LookAtter>();
-        if (la)
-            la.tgt = toHit.transform;
-
-        StartCoroutine(WaitForArrowToHit(go));
-    }
-    IEnumerator WaitForArrowToHit(GameObject arrow) //or die, currently always hits
-    {
-        yield return new WaitUntil(() => (arrow == null));
-        Debug.Log("Boulder hit");
-        DamageTargetRock();
-        yield return new WaitForSeconds(.2f);
-        EndTurn();
-    }
-    public void DamageTargetRock()
-    {
-        float rolledDamage = Random.Range(minDamage, maxDamage);
-        toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Rock, toHit.Name, (int)rolledDamage, Color.red);
-    }
-    void EndTurn() //seperated for invoke-sake
-    {
-        pawn.TurnDone = true;
-    }
-
     public bool SA_Available()
     {
         List<FloorTile> neighbours = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);

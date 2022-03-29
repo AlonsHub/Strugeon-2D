@@ -16,30 +16,28 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 030000000300000003000000
+      enemyLevels: 03000000
     enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
     magicItem:
-      magicItemName: Helmet
-      goldValue: 25
+      magicItemName: Dagger
+      goldValue: 15
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 0
-      dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 82d960ab387eb2047b66c4eacb443d4f, type: 2}
-      spriteName: Helmet
-    expReward: 90
+      rarity: 1
+      dropRateWeight: 3
+      itemSprite: {fileID: 21300000, guid: 44c765d6555e0d148820ff5244522d60, type: 2}
+      spriteName: Dagger
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 10
-    difficulty: 1
+    goldReward: 8
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 2
     waitTimeSeconds: 20
-    isSet: 0
+    isSet: 1

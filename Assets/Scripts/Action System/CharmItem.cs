@@ -24,15 +24,19 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
     [SerializeField]
     Sprite charmSprite;
 
+    LookAtter la;
+
     private void Start()
     {
         targets = RefMaster.Instance.mercs; //because they are the only ones who can be charmed... should still be more dynamic though
+        la = GetComponentInChildren<LookAtter>();
     }
 
     public override void Action(GameObject tgt)
     {
         Charmed charmed = tgt.AddComponent<Charmed>();
         charmed.SetMe(tgt.GetComponent<WeaponItem>(), charmDuration);
+        la.LookOnce(tgt.transform);
 
         pawn.anim.SetTrigger("Charm");
 

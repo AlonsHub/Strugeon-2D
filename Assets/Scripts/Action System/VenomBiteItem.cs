@@ -93,7 +93,8 @@ public class VenomBiteItem : ActionItem, SA_Item
         }
 
         if (tgt && la)
-            la.tgt = tgt.transform;
+            la.LookOnce(tgt.transform);
+            //la.tgt = tgt.transform;
 
 
 
@@ -112,7 +113,7 @@ public class VenomBiteItem : ActionItem, SA_Item
         if (!pawn.TurnDone) //in case of step limiters
         {
             if (tgt && la)
-                la.tgt = tgt.transform;
+            la.LookOnce(tgt.transform);
 
             attackAction?.Invoke();
             pawn.anim.SetTrigger("VenomBite"); // sets TurnDone via animation behaviour

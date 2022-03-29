@@ -49,6 +49,11 @@ public class TurnMaster : MonoBehaviour
     [SerializeField]
     Image clocker;
 
+
+    //temp TBF
+    int initialSquadSize;
+
+
     public System.Action OnTurnOrderRestart;
     private void Awake()
     {
@@ -69,7 +74,7 @@ public class TurnMaster : MonoBehaviour
         // after RefMaster is set
         turnTakers.AddRange(RefMaster.Instance.enemyInstances);
         turnTakers.AddRange(RefMaster.Instance.mercs);
-
+        initialSquadSize = RefMaster.Instance.mercs.Count;
         //roll initiative and Sort
         foreach (TurnTaker tt in turnTakers)
         {
@@ -209,7 +214,8 @@ public class TurnMaster : MonoBehaviour
             ////Total and Shared Exp:
             ////this way a total sum of exp is divided by surviving mercs
 
-            int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
+            //int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
+            int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / initialSquadSize;
 
             foreach (var item in PartyMaster.Instance.currentSquad.pawns)
             {

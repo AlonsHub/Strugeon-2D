@@ -105,10 +105,11 @@ public class WeaponItem : ActionItem
         }
 
         if (tgt && la)
-        la.tgt = tgt.transform;
+            la.LookOnce(tgt.transform);
 
 
-       
+
+
         attackAction?.Invoke();
         //pawn.transform.LookAt(tgt.transform);
         //pawn.transform.rotation = Quaternion.Euler(0, pawn.transform.eulerAngles.y, 0);
@@ -124,7 +125,8 @@ public class WeaponItem : ActionItem
         if (!pawn.TurnDone) //in case of step limiters
         {
             if (tgt && la)
-                la.tgt = tgt.transform;
+                la.LookOnce(tgt.transform);
+
 
             attackAction?.Invoke();
             pawn.anim.SetTrigger("Attack"); // sets TurnDone via animation behaviour
