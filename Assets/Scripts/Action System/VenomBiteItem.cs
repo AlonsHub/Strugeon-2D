@@ -53,7 +53,9 @@ public class VenomBiteItem : ActionItem, SA_Item
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
-        la = GetComponent<LookAtter>();
+        if(!la)
+        la = GetComponentInChildren<LookAtter>();
+
         base.Awake();
     }
     // Start is called before the first frame update

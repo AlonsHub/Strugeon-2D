@@ -53,7 +53,11 @@ public struct LevelData
         
         magicItem = DifficultyTranslator.Instance.DifficultyToSingleReward(newDifficulty); //TBF add reward packs to enemySetPack
         goldReward = DifficultyTranslator.Instance.DifficultyToGoldReward(newDifficulty); //TBF?
-        expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty); //TBR TBF
+        //expReward = DifficultyTranslator.Instance.DifficultyToExp(newDifficulty); //TBR TBF
+        expReward = CalculateEXP(); 
+
+        //expReward = //SUM all enemy exp rewards (depending on their corresponding levels)
+
         //this just needs to be one method... [end]
 
         waitTime = new TimeSpan(waitTimeHours, waitTimeMinutes, waitTimeSeconds);
@@ -63,6 +67,23 @@ public struct LevelData
 
     }
 
+    int CalculateEXP()
+    {
+        int sum = 0;
+        if(enemySet != null)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                EnemyInfo ei = enemies[i].gameObject.GetComponent<EnemyInfo>();
+                if (ei)
+                {
+                    int calculatedExpReward = ei._BaseExpReward + ei._ExpPerLevel * (enemyLevels[i]-1); //since we dont want to level up the prefabs just for preview's sake
+                    sum += calculatedExpReward;
+                }
+            }
+        }
+        return sum;
+    }
     //public int risk; //Experimental! might be better as enum
 
 

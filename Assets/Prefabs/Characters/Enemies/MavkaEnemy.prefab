@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 462218377637529745}
   - component: {fileID: 8061769375003922179}
   - component: {fileID: -2381371511239876949}
+  - component: {fileID: 7156568953471082635}
   m_Layer: 12
   m_Name: MavkaEnemy
   m_TagString: Enemy
@@ -295,6 +296,7 @@ MonoBehaviour:
   targets: []
   hasRedBuff: 0
   toHit: {fileID: 0}
+  cachedProjectile: {fileID: 0}
 --- !u!114 &462218377637529745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +322,6 @@ MonoBehaviour:
     _level: 1
   initiativeBonus: 0
   hasSAs: 1
-  forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5357307063160447432}
   anim: {fileID: 6343527151208602390}
@@ -341,6 +342,8 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  HasShield: 0
+  HasRoot: 0
   SA_Title: 
   SA_Description: 
   enemyLevel: -1
@@ -397,6 +400,23 @@ MonoBehaviour:
     type: 3}
   saCooldown: 4
   summonSprite: {fileID: 21300000, guid: b3f7481accf783a4987d3b7937c57bef, type: 3}
+--- !u!114 &7156568953471082635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751047712026826206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2305de8e6ba2594ea7a62b559d7c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamagePerLevel: 2
+  maxDamagePerLevel: 3
+  hpPerLevel: 5
+  baseExpReward: 35
+  expPerLevel: 10
 --- !u!1001 &647138363603030901
 PrefabInstance:
   m_ObjectHideFlags: 0

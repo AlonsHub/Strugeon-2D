@@ -365,6 +365,7 @@ GameObject:
   - component: {fileID: 2064929481214812438}
   - component: {fileID: 3884682736305638404}
   - component: {fileID: 4058428002439575057}
+  - component: {fileID: -8777444247611474814}
   m_Layer: 12
   m_Name: ForestDrake
   m_TagString: Enemy
@@ -452,6 +453,7 @@ MonoBehaviour:
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
   HasShield: 0
+  HasRoot: 0
   SA_Title: 
   SA_Description: "Venom bite will deal dmg to a hero and affect him with poison.
     Venom bite can be used only on heros located in a tile adjacent to the attacking
@@ -570,6 +572,23 @@ MonoBehaviour:
   maxPoisonDamage: 5
   fullCooldown: 2
   posionDuration: 3
+--- !u!114 &-8777444247611474814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6673386756113323264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2305de8e6ba2594ea7a62b559d7c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamagePerLevel: 3
+  maxDamagePerLevel: 3
+  hpPerLevel: 10
+  baseExpReward: 50
+  expPerLevel: 15
 --- !u!1001 &3590360671523557965
 PrefabInstance:
   m_ObjectHideFlags: 0

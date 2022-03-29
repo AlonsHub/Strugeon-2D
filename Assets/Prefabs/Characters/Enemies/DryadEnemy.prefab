@@ -187,6 +187,7 @@ GameObject:
   - component: {fileID: 7140961137990028506}
   - component: {fileID: 462218377637529745}
   - component: {fileID: 7795422781197840546}
+  - component: {fileID: 6982207126682492828}
   m_Layer: 12
   m_Name: DryadEnemy
   m_TagString: Enemy
@@ -375,6 +376,23 @@ MonoBehaviour:
   rootDuration: 2
   rootVisual: {fileID: 6361548358100164632, guid: 850fea4be4bdd4c46b7a314722a79511,
     type: 3}
+--- !u!114 &6982207126682492828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751047712026826206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2305de8e6ba2594ea7a62b559d7c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDamagePerLevel: 2
+  maxDamagePerLevel: 2
+  hpPerLevel: 5
+  baseExpReward: 40
+  expPerLevel: 10
 --- !u!1001 &647138363603030901
 PrefabInstance:
   m_ObjectHideFlags: 0
