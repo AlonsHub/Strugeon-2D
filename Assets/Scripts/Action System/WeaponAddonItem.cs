@@ -6,11 +6,14 @@ public class WeaponAddonItem : ActionItem
 {
     Censer censer;
     WeaponItem attachedWeapon;
+    LookAtter la;
+
     public override void Awake()
     {
         base.Awake();
         attachedWeapon = GetComponent<WeaponItem>();
-        if(!attachedWeapon)
+        la = GetComponentInChildren<LookAtter>();
+        if (!attachedWeapon)
         {
             Debug.LogError("Weapon add on could not find a weaponItem on it's gameObject. Name: " + name);
         }
@@ -37,6 +40,10 @@ public class WeaponAddonItem : ActionItem
     IEnumerator AddFireEffect()
     {
         yield return new WaitUntil(() => pawn.tileWalker.currentNode.GetDistanceToTarget(censer.currentNode) <= 14);
+
+        if (la && censer)
+            la.LookOnce(censer.transform);
+
         attachedWeapon.AddEffect(censer.effectAddon);
         attachedWeapon.effectColour = RefMaster.Instance.censer.effectColour; // Get this from setting the effect please and not like an asshole, thank you <3
         pawn.AddEffectIcon(censer.effectIcon, "fireBuff");
