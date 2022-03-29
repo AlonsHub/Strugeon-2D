@@ -272,7 +272,7 @@ public class WeaponItem : ActionItem
                     continue;
                 }
                 //melee attacker only have 1 range, so this means adjacent
-                weight *= 20; // changed from 20 to 2 //changed back to 20
+                weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
 
             }
             if (p.currentHP <= p.maxHP / 2.5f) //40%
