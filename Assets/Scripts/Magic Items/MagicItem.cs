@@ -5,7 +5,7 @@ using UnityEngine;
 public enum Rarity { Common, Uncommon, Rare, Epic, Legendary};
 
 [System.Serializable]
-public class MagicItem 
+public class MagicItem //change name to "ItemData" - unless it kills all the ItemSO for some reason
 {
     public string magicItemName; //BAD IDEA, go for enums and dictionaries? something even better perhaps
     public int goldValue;
