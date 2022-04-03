@@ -10,4 +10,9 @@ public interface IEquipable
 
     EquipSlotType _EquipSlotType();
 
+    bool _IsEquipped();
+    bool _InInventory(); //not sure I need this, 
+                        //but in case there's an item shop or a way to view items 
+                        //that are niether equipped nor in-inventory
+
 }

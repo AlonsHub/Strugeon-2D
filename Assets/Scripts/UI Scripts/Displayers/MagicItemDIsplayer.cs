@@ -8,6 +8,8 @@ public class MagicItemDisplayer : BasicDisplayer
     
     public GameObject sellGroup;
 
+    //Gear displayer
+
     public void SetItem(MagicItem newItem)
     {
         magicItem = newItem;
@@ -29,5 +31,10 @@ public class MagicItemDisplayer : BasicDisplayer
         //else
 
         Inventory.Instance.AddGold(goldValue);
+    }
+
+    public void TryEquipItem()
+    {
+
     }
 }
