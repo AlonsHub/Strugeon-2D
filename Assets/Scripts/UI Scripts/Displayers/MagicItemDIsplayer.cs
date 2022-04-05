@@ -9,7 +9,37 @@ public class MagicItemDisplayer : BasicDisplayer
     public GameObject sellGroup;
 
     //Gear displayer
+    [SerializeField]
+    static MercGearDisplayer mercGearDisplayer;
 
+    private void OnEnable()
+    {
+        if(!mercGearDisplayer) 
+        {
+            mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once
+        }
+    }
+    bool clickedOnce = false;
+    public void OnClick()
+    {
+        if (!clickedOnce)
+        {
+            StartCoroutine(nameof(DoubleClickCooldown));
+        }
+        else
+        {
+            if (mercGearDisplayer) 
+            {
+                mercGearDisplayer.TryEquipItem(magicItem);
+            }
+        }
+    }
+    IEnumerator DoubleClickCooldown()
+    {
+        clickedOnce = true;
+        yield return new WaitForSecondsRealtime(GeneralInputSettings.doubleClickWindow);
+        clickedOnce = false;
+    }
     public void SetItem(MagicItem newItem)
     {
         magicItem = newItem;
@@ -33,8 +63,12 @@ public class MagicItemDisplayer : BasicDisplayer
         Inventory.Instance.AddGold(goldValue);
     }
 
-    public void TryEquipItem()
+    public void TryEquipItem(IEquipable toEquip)
     {
+        if (!mercGearDisplayer)
+            return;
 
+        mercGearDisplayer.TryEquipItem(toEquip as MagicItem);
+        
     }
 }

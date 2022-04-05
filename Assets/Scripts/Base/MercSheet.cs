@@ -23,26 +23,28 @@ public class MercSheet
 
     public System.Action LevelUpAction;
 
-    public MercSheet()
-    {
-        characterName = MercName.None;
+    public Gear gear;
 
-        ResetSheet(); //exp and level set to base
-        currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
-        roomOrSquadNumber = -2; //still unclear 
-    }
-    public MercSheet(MercName mercName)
-    {
-        characterName = mercName;
+    //public MercSheet()
+    //{
+    //    characterName = MercName.None;
 
-        ResetSheet(); //exp and level set to base
-        currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
-        roomOrSquadNumber = -1; //still unclear 
-    }
+    //    ResetSheet(); //exp and level set to base
+    //    currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
+    //    roomOrSquadNumber = -2; //still unclear 
+    //}
+    //public MercSheet(MercName mercName)
+    //{
+    //    characterName = mercName;
+
+    //    ResetSheet(); //exp and level set to base
+    //    currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
+    //    roomOrSquadNumber = -1; //still unclear 
+    //}
     public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
     {
         characterName = mercName;
-
+        gear = new Gear();
         ResetSheet(); //exp and level set to base
         SetToState(assignment, relevantNum); 
     }

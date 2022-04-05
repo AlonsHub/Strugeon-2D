@@ -7,7 +7,7 @@ public interface IEquipable
     MagicItem _Item(); //returns the item, for data purposes. All equpiables are Items
     IBenefit _Benefit();
     List<IBenefit> _Benefits(); //if relevant
-
+    string _BenefitsProperNoun();
     EquipSlotType _EquipSlotType();
 
     bool _IsEquipped();

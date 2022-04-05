@@ -22,6 +22,9 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     [SerializeField]
     bool isEquipped;
+
+    IBenefit myBenefit; //just the single now
+
     public bool FetchSprite()
     {
         if(itemSprite)
@@ -35,12 +38,17 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     public IBenefit _Benefit()
     {
-        throw new System.NotImplementedException();
+        return myBenefit;
     }
 
     public List<IBenefit> _Benefits()
     {
         throw new System.NotImplementedException();
+    }
+
+    public string _BenefitsProperNoun()
+    {
+        return "of Nothing";
     }
 
     public EquipSlotType _EquipSlotType()

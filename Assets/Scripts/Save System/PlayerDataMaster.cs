@@ -309,16 +309,6 @@ public class PlayerDataMaster : MonoBehaviour
 
         return toReturn;
     }
-    public List<MercName> GetMercNamesByAssignments(List<MercAssignment> mercAssignments)
-    {
-        List<MercName> toReturn = new List<MercName>();
-        List<MercSheet> relevantMercs = currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();
-        foreach (var item in relevantMercs)
-        {
-            toReturn.Add(item.characterName);
-        }
-        return toReturn;
-    }
     public int GetTotalMercLevel()
     {
         List<MercSheet> mercSheets = GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Room });
@@ -330,6 +320,28 @@ public class PlayerDataMaster : MonoBehaviour
         }
         return toReturn;
     }
+    public List<MercName> GetMercNamesByAssignments(List<MercAssignment> mercAssignments)
+    {
+        List<MercName> toReturn = new List<MercName>();
+        List<MercSheet> relevantMercs = currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();
+        foreach (var item in relevantMercs)
+        {
+            toReturn.Add(item.characterName);
+        }
+        return toReturn;
+    }
+    public MercSheet GetMercSheetByName(MercName byName)
+    {
+        return currentPlayerData.mercSheets.Where(x => x.characterName == byName).SingleOrDefault();
+    }
+     public MercSheet GetMercSheetByIndex(int ind) //mostly useless
+    {
+        if (ind >= currentPlayerData.mercSheets.Count)
+            return null;
+
+        return currentPlayerData.mercSheets[ind];
+    }
+
     public List<MercName> GetMercNamesByAssignment(MercAssignment mercAssignments)
     {
         List<MercName> toReturn = new List<MercName>();

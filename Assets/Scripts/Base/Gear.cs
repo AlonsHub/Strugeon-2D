@@ -12,8 +12,11 @@ public enum EquipSlotType {Body, Hand, Trinket};
 [System.Serializable]
 public class Gear
 {
-    IEquipable[] equipables = new IEquipable[3]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
-
+    IEquipable[] equipables;
+    public Gear()
+    {
+        equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
+    }
     /// <summary>
     /// Just returns them, doesn NOT apply/provide benefits!!!
     /// </summary>
@@ -22,7 +25,7 @@ public class Gear
     {
         if(equipables == null)
         {
-            Debug.LogError("some equipables == null");
+            Debug.LogError("somehow equipables == null");
             return null;
         }
 
@@ -84,5 +87,10 @@ public class Gear
             return removedItem;
         }
 
+    }
+
+    public IEquipable ItemBySlot(EquipSlotType byType)
+    {
+        return equipables[(int)byType];
     }
 }
