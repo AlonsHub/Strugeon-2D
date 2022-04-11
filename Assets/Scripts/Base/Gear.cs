@@ -17,6 +17,11 @@ public class Gear
     {
         equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
     }
+
+    
+    
+
+
     /// <summary>
     /// Just returns them, doesn NOT apply/provide benefits!!!
     /// </summary>
@@ -91,6 +96,9 @@ public class Gear
 
     public IEquipable ItemBySlot(EquipSlotType byType)
     {
-        return equipables[(int)byType];
+        if (equipables == null) // || equipables[(int)slot] == null)
+            throw new System.Exception();
+
+        return equipables[(int)byType]; //null if empty
     }
 }

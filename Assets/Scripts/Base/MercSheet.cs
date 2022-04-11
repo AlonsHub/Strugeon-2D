@@ -25,22 +25,8 @@ public class MercSheet
 
     public Gear gear;
 
-    //public MercSheet()
-    //{
-    //    characterName = MercName.None;
-
-    //    ResetSheet(); //exp and level set to base
-    //    currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
-    //    roomOrSquadNumber = -2; //still unclear 
-    //}
-    //public MercSheet(MercName mercName)
-    //{
-    //    characterName = mercName;
-
-    //    ResetSheet(); //exp and level set to base
-    //    currentAssignment = MercAssignment.Null; //maybe don't do this, but keep it now so nothing accidently happens
-    //    roomOrSquadNumber = -1; //still unclear 
-    //}
+    //public IEquipable itemBySlot(EquipSlotType st) => gear.ItemBySlot(st); //interesting question: is access to items manages through mercSheet.gear or by methods of mercsheet? (option A!!!)
+    
     public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
     {
         characterName = mercName;
