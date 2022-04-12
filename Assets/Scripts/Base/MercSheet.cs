@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public class MercSheet
     public System.Action LevelUpAction;
 
     public Gear gear;
+
+    public string[] gearStrings;
 
     //public IEquipable itemBySlot(EquipSlotType st) => gear.ItemBySlot(st); //interesting question: is access to items manages through mercSheet.gear or by methods of mercsheet? (option A!!!)
     
@@ -108,5 +111,16 @@ public class MercSheet
                 break;
         }
         currentAssignment = assignment;
+    }
+
+    public void SaveGearToString()
+    {
+        gearStrings = new string[3]; //regardless of item levels ATM
+
+        for (int i = 0; i < 3; i++)
+        {
+            if(gear.GetItemBySlot((EquipSlotType)i) != null)
+            gearStrings[i] = (gear.GetItemBySlot((EquipSlotType)i) as MagicItem).magicItemName;
+        }
     }
 }

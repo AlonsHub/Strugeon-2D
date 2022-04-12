@@ -136,6 +136,10 @@ public class PlayerDataMaster : MonoBehaviour
                 AddSiteCooldown(currentPlayerData.siteNames[i], DateTime.Parse(currentPlayerData.siteCooldowns[i]));
         }
 
+        foreach (var merc in currentPlayerData.mercSheets)
+        {
+            merc.gear = new Gear(merc.gearStrings[0], merc.gearStrings[1], merc.gearStrings[2]);
+        }
         //if(currentPlayerData.squadSitesAndTimesRemainning.Count > 0)
         //{
 
@@ -281,10 +285,17 @@ public class PlayerDataMaster : MonoBehaviour
         {
             newNames.Add(merc.mercName);
         }
-        currentPlayerData.availableMercs = newNames;
+        currentPlayerData.availableMercs = newNames; //TBF to remove! only sheets are important now
 
 
-        currentPlayerData.squadsAsMercNameList = GetSquadsList(); //being phased out
+        currentPlayerData.squadsAsMercNameList = GetSquadsList(); //being phased out TBF 
+
+
+        foreach (var merc in currentPlayerData.mercSheets)
+        {
+            merc.SaveGearToString();
+        }
+        
 
         //currentPlayerData.mercSheets
 

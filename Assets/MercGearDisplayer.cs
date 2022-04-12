@@ -27,7 +27,7 @@ public class MercGearDisplayer : BasicDisplayer
         for (int i = 0; i < gearSlots.Length; i++)
         {
             IEquipable eq;
-            if ((eq = mercSheet.gear.ItemBySlot((EquipSlotType)i)) != null)
+            if ((eq = mercSheet.gear.GetItemBySlot((EquipSlotType)i)) != null)
             {
                 gearSlots[i].SetMeFull(eq as MagicItem);
             }

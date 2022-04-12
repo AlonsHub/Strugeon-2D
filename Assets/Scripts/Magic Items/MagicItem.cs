@@ -6,6 +6,7 @@ public enum Rarity { Common, Uncommon, Rare, Epic, Legendary};
 
 [System.Serializable]
 public class MagicItem : IEquipable //change name to "ItemData" - unless it kills all the ItemSO for some reason
+    //Maybe make this a struct?? TBF TBD FIX NAME ASWELL!
 {
     public string magicItemName; //BAD IDEA, go for enums and dictionaries? something even better perhaps
     public int goldValue;
