@@ -193,7 +193,7 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theCowardly)
             {
                 PartyMaster.Instance.currentSquad.RemoveMerc(item);
-                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Add(item);
+                PlayerDataMaster.Instance.currentPlayerData.availableMercNames.Add(item);
                 MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
                 //PlayerDataMaster.Instance.RemoveMercSheet(item); //sheet remains!
             }
@@ -249,7 +249,7 @@ public class TurnMaster : MonoBehaviour
             foreach (var item in theCowardly)
             {
                 //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
-                PlayerDataMaster.Instance.currentPlayerData.availableMercs.Add(item);
+                PlayerDataMaster.Instance.currentPlayerData.availableMercNames.Add(item);
                 MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
                 //PlayerDataMaster.Instance.RemoveMercSheet(item);
             }

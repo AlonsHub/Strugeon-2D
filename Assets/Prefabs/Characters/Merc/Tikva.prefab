@@ -165,11 +165,14 @@ MonoBehaviour:
   isEnemy: 0
   mercName: 7
   _mercSheet:
+    mercClass: 1
     characterName: 0
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
+    mustHoldWeapon: 0
+    gearStrings: []
   initiativeBonus: 0
   hasSAs: 1
   targets: []
@@ -193,6 +196,7 @@ MonoBehaviour:
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
   HasShield: 0
+  HasRoot: 0
   SA_Title: Burning Ground
   SA_Description: When Tikvas missiles are LIT with fire, they burst on impact -
     burning all tiles around the target

@@ -138,6 +138,8 @@ public class PlayerDataMaster : MonoBehaviour
 
         foreach (var merc in currentPlayerData.mercSheets)
         {
+            if (merc.gearStrings == null)
+                continue;
             merc.gear = new Gear(merc.gearStrings[0], merc.gearStrings[1], merc.gearStrings[2]);
         }
         //if(currentPlayerData.squadSitesAndTimesRemainning.Count > 0)
@@ -285,7 +287,7 @@ public class PlayerDataMaster : MonoBehaviour
         {
             newNames.Add(merc.mercName);
         }
-        currentPlayerData.availableMercs = newNames; //TBF to remove! only sheets are important now
+        currentPlayerData.availableMercNames = newNames; //TBF to remove! only sheets are important now
 
 
         currentPlayerData.squadsAsMercNameList = GetSquadsList(); //being phased out TBF 

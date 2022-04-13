@@ -10,7 +10,7 @@ public class PlayerData
     public string playerName;
 
     //availavle mercs
-    public List<MercName> availableMercs = new List<MercName>();
+    public List<MercName> availableMercNames = new List<MercName>();
     public List<MercSheet> availableMercSheet = new List<MercSheet>();
     public List<MercName> hireableMercs = new List<MercName>();
 
@@ -72,7 +72,7 @@ public class PlayerData
             case MercAssignment.Room:
                 break;
             case MercAssignment.Available:
-                availableMercs.Add(newName);
+                availableMercNames.Add(newName);
                 newSheet = new MercSheet(newName, MercAssignment.Available, -1);
                 mercSheets.Add(newSheet);
                 break;

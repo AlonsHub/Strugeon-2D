@@ -5,7 +5,8 @@ using UnityEngine;
 public class GearSlotDispayer : BasicDisplayer
 {
     //needs a SetMeFull that accepts some reference to the item?
-
+    [SerializeField]
+    EquipSlotType slotType;
     [SerializeField]
     Sprite emptySprite;
 
@@ -19,5 +20,11 @@ public class GearSlotDispayer : BasicDisplayer
                 return false;
 
         return base.SetMe(new List<string> {$"{item.magicItemName} {item._BenefitsProperNoun()}" , "benefit text" }, new List<Sprite> {item.itemSprite});
+    }
+
+    public void Click()
+    {
+        MercSheet merc;
+        //merc.gear.TryRemoveItemFromSlot()
     }
 }

@@ -2794,6 +2794,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1497269053923045361, guid: cb6279ce168486e4d954c1a5b02337c1,
         type: 3}
+      propertyPath: slotType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1497269053923045361, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
       propertyPath: emptySprite
       value: 
       objectReference: {fileID: 1248619470624631663, guid: 31155a4835afb294f8a618b0cb75f337,
@@ -2838,12 +2843,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -112.77958
       objectReference: {fileID: 0}
+    - target: {fileID: 3347641290995216834, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: m_Name
+      value: bg
+      objectReference: {fileID: 0}
     - target: {fileID: 3501054847338484182, guid: cb6279ce168486e4d954c1a5b02337c1,
         type: 3}
       propertyPath: emptySprite
       value: 
       objectReference: {fileID: 1599180710894039856, guid: 31155a4835afb294f8a618b0cb75f337,
         type: 3}
+    - target: {fileID: 4302443234630823636, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: slotType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4302443234630823636, guid: cb6279ce168486e4d954c1a5b02337c1,
         type: 3}
       propertyPath: emptySprite
@@ -2885,6 +2900,21 @@ PrefabInstance:
       propertyPath: gearSlots.Array.data[5]
       value: 
       objectReference: {fileID: 618178858}
+    - target: {fileID: 4828992603553445758, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: m_Name
+      value: bg
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737973511452932932, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: m_Name
+      value: bg
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738097777131252203, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: m_Name
+      value: GearSlotGroup
+      objectReference: {fileID: 0}
     - target: {fileID: 7592186449995354600, guid: cb6279ce168486e4d954c1a5b02337c1,
         type: 3}
       propertyPath: m_Name
@@ -2894,6 +2924,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861498324832020618, guid: cb6279ce168486e4d954c1a5b02337c1,
+        type: 3}
+      propertyPath: m_Name
+      value: bg
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb6279ce168486e4d954c1a5b02337c1, type: 3}

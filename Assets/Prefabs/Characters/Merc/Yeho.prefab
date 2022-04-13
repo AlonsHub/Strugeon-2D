@@ -146,6 +146,7 @@ MonoBehaviour:
   targets: []
   hasRedBuff: 0
   toHit: {fileID: 0}
+  cachedProjectile: {fileID: 0}
 --- !u!114 &853967901895232535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,14 +165,16 @@ MonoBehaviour:
   isEnemy: 0
   mercName: 3
   _mercSheet:
+    mercClass: 1
     characterName: 0
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
+    mustHoldWeapon: 0
+    gearStrings: []
   initiativeBonus: 0
   hasSAs: 0
-  forDisplayPurposesOnly: {fileID: -3395797105699778925}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -192,6 +195,8 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  HasShield: 0
+  HasRoot: 0
   SA_Title: Quick Step
   SA_Description: Yeho's longbow launches arrows with such incredible force, so that
     they may hit their mark true, and also travel forth and harm yet another miscreant!

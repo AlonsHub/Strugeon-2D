@@ -8,6 +8,8 @@ public class MercGearDisplayer : BasicDisplayer
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
     MercSheet mercSheet;
 
+    public MercSheet GetMercSheet { get => mercSheet; }
+
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
@@ -35,7 +37,6 @@ public class MercGearDisplayer : BasicDisplayer
             {
                 gearSlots[i].SetMeEmpty();
             }
-
         }
     }
 

@@ -87,7 +87,7 @@ public class PartyMaster : MonoBehaviour
     public void LoadUpAvailableMercs() //on the loaded party
     {
         availableMercPrefabs = new List<Pawn>();
-        foreach (MercName mercName in PlayerDataMaster.Instance.currentPlayerData.availableMercs)
+        foreach (MercName mercName in PlayerDataMaster.Instance.currentPlayerData.availableMercNames)
         {
             availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         }
