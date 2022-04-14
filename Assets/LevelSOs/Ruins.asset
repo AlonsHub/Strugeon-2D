@@ -16,29 +16,32 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
       - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
-      enemyLevels: 0400000004000000
+      enemyLevels: 050000000500000005000000
     enemySetPack: {fileID: 11400000, guid: a8facd8ddceefc0459f0783958c8d14d, type: 2}
     magicItem:
-      magicItemName: Ring
-      goldValue: 35
+      magicItemName: Magic Scroll
+      goldValue: 80
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 1
-      dropRateWeight: 3
-      itemSprite: {fileID: 21300000, guid: a2e0b7480b3635140b77128934071ba2, type: 2}
-      spriteName: Ring
-    expReward: 105
+      rarity: 0
+      dropRateWeight: 0
+      itemSprite: {fileID: 21300000, guid: 3df2fcbf6e31f9f4ab18c489f57f285e, type: 2}
+      spriteName: MagicScroll
+      fittingSlotType: 2
+      isEquipped: 0
+    expReward: 160
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 15
-    difficulty: 1
+    goldReward: 25
+    difficulty: 2
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
     waitTimeMinutes: 0
     waitTimeSeconds: 54
-    isSet: 0
+    isSet: 1

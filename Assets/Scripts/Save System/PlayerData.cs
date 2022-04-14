@@ -10,15 +10,15 @@ public class PlayerData
     public string playerName;
 
     //availavle mercs
-    public List<MercName> availableMercNames = new List<MercName>();
-    public List<MercSheet> availableMercSheet = new List<MercSheet>();
-    public List<MercName> hireableMercs = new List<MercName>();
+    public List<MercName> availableMercNames;// = new List<MercName>();
+    public List<MercSheet> availableMercSheet;// = new List<MercSheet>();
+    public List<MercName> hireableMercs;// = new List<MercName>();
 
     //squads
     //public List<List<MercName>> squadsAsMercNames;
     public List<MercName> squadsAsMercNameList; // comma seperated
 
-    public List<SquadSiteAndTimeOfDeparture> squadSitesAndTimesRemainning = new List<SquadSiteAndTimeOfDeparture>(); 
+    public List<SquadSiteAndTimeOfDeparture> squadSitesAndTimesRemainning = new List<SquadSiteAndTimeOfDeparture>();
 
     /// <summary>
     /// Merc Sheets will simply hold all owned and hrieable mercs (all "existing" mercs). 
@@ -28,7 +28,7 @@ public class PlayerData
     /// Meaning this needs to be done AFTER rooms are initiated!
     /// this could be done by calling to start a coroutine on start, or even on awake, which will in-turn begin with a yeild return new WaitUntil(RoomsInitiated)
     /// </summary>
-    public List<MercSheet> mercSheets = new List<MercSheet>(); //should they be saved as squads or just have a field of RoomNumber - and if that is set to -1, that means they are available mercs. Otherwise they go the a room, which means squad? how about "away sqauds"?
+    public List<MercSheet> mercSheets;// = new List<MercSheet>(); //should they be saved as squads or just have a field of RoomNumber - and if that is set to -1, that means they are available mercs. Otherwise they go the a room, which means squad? how about "away sqauds"?
                                         //POSSIBLE SOLUTION!!! - add a field of "position" - which can be a room, away-squad-number, or just available merc
 
     //public List<Squad> availableSquads; //holds mercs that are already gourped-up, 
@@ -42,8 +42,8 @@ public class PlayerData
 
     public int mercPrice = 20;
 
-    public Dictionary<string, float> SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
-    public Dictionary<string, DateTime?> _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
+    public Dictionary<string, float> SiteCooldownTimes;// = new Dictionary<string, float>(); //in seconds
+    public Dictionary<string, DateTime?> _siteCooldowns;// = new Dictionary<string, DateTime?>(); //in date?
 
     public List<string> siteNames = new List<string>(); //sitenames
     public List<string> siteCooldowns = new List<string>(); //cooldowns to string
@@ -59,6 +59,18 @@ public class PlayerData
     public int totalMercLevel { get => PlayerDataMaster.Instance.GetTotalMercLevel(); }
 
     public List<MagicItem> magicItems;
+
+    public PlayerData()
+    {
+        mercSheets = new List<MercSheet>();
+
+        availableMercNames = new List<MercName>();
+        availableMercSheet = new List<MercSheet>();
+        hireableMercs = new List<MercName>();
+
+        SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
+        _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
+    }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 
     {

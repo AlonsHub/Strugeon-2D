@@ -71,22 +71,6 @@ public class PlayerDataMaster : MonoBehaviour
 
         //save successful messege
     }
-
-    //void KillFollowingZeros(ref List<int> nums)
-    //{
-    //    for (int i = 0; i < nums.Count; i++)
-    //    {
-    //        if(nums[i]==0 && nums[i+1] == 0)
-    //        {
-    //            int k = 1;
-    //            while(nums[i+k]==0)
-    //            {
-    //                k++;
-    //            }
-    //        }
-    //    }
-    //}
-
     public void LoadDataFromDisk(string saveName)
     {
         //check folder and file
