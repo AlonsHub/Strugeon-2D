@@ -152,7 +152,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         {
             targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
-            EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>();
+            EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>(); //why not just add this to the prefab? TBF
 
 
         }

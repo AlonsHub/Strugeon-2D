@@ -299,8 +299,6 @@ public class WeaponItem : ActionItem
     }
     public void ApplySheet(int addMin, int addMax)
     {
-        //takes the whole MercSheet just in case we want to get more info later
-
         minDamage += addMin;
         maxDamage += addMax;
     }

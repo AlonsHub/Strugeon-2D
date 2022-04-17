@@ -11,6 +11,9 @@ public class MercSheet
 {
     public MercClass mercClass;
     public MercName characterName; //will this be enough to ref the merc-prefab
+
+    public StatBlock statBlock;
+
     public MercAssignment currentAssignment;
     public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
     //public int siteNumber = -1;
