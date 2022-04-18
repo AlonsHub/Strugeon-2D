@@ -21,6 +21,21 @@ public class StatBlock
     public int range; //in tiles //can even improve???
     //public int accuracy; //?
 
-    
-    
+    [Header("Advancement Scheme:"), Space(5f)]
+    public int maxHPPerLevel;
+    public int maxDamagePerLevel;
+    public int minDamagePerLevel;
+
+    public int MinDamage(int level)
+    {
+        return minDamage + (minDamagePerLevel * (level - 1));
+    }
+    public int MaxDamage(int level)
+    {
+        return maxDamage + (maxDamagePerLevel * (level - 1));
+    }
+    public int MaxHP(int level)
+    {
+        return maxHp + (maxHPPerLevel * (level - 1));
+    }
 }

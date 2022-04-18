@@ -134,7 +134,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public override void Init()
     {
-        base.Init(); // HP init
+        //base.Init(); // HP init
         anim = GetComponent<Animator>();
         tileWalker = GetComponent<TileWalker>();
         tileWalker.Init();
@@ -158,38 +158,49 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-            if ((_mercSheet = mercSheetInPlayerData) == null)
+
+
+            if ((mercSheetInPlayerData) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
             }
-            //APPLY MERC SHEET
-            //minmax dmg to weapon
-            if(_mercSheet.characterName != mercName)
-            {
-                Debug.LogError("probably, no mercsheet exists for this pawn " + mercName.ToString());
-            }
 
+            //mercSheetInPlayerData.baseSheetSO = _mercSheet.baseSheetSO; //pass baseSO via prefab - why not pass the base stats aswell?
 
-            GetComponent<WeaponItem>().ApplySheet(_mercSheet._minDamageBonus, _mercSheet._maxDamageBonus); //SHOULD crash and burn if fails, because this should never fail!
-
-            //max hp bonus
-            maxHP = currentHP += _mercSheet._maxHpBonus;
-
-            targets = RefMaster.Instance.enemyInstances;
-            
-            name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
-
-            
-            //Load MercSheet on-to prefab - prefabs are always inited like this so they would always have relevant data
+            ApplyCharacterSheet();
         }
+        base.Init(); // HP init
 
         totalPawns++; //static counter
         //grab art?
     }
 
-    public void SetCharacterSheet()
+    void ApplyCharacterSheet()
     {
+        mercSheetInPlayerData.baseStatBlock = _mercSheet.baseStatBlock; //Copy the baseStatBlock straight off the prefab
+        mercSheetInPlayerData.mercClass = _mercSheet.mercClass; //also grab the merc class - or should this be added to the statblock? maybe dont?
 
+        _mercSheet = mercSheetInPlayerData; //beomce one with the sheet in data
+
+        //APPLY MERC SHEET
+        //minmax dmg to weapon
+        if (_mercSheet.characterName != mercName)
+        {
+            Debug.LogError("probably, no mercsheet exists for this pawn " + mercName.ToString());
+        }
+
+
+        //GetComponent<WeaponItem>().ApplySheet(_mercSheet._minDamageBonus, _mercSheet._maxDamageBonus); //SHOULD crash and burn if fails, because this should never fail!
+        GetComponent<WeaponItem>().SetDamage(_mercSheet._minDamage, _mercSheet._maxDamage);
+        //max hp bonus
+        maxHP = _mercSheet._maxHp;
+
+        targets = RefMaster.Instance.enemyInstances;
+
+        name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
+
+
+        //Load MercSheet on-to prefab - prefabs are always inited like this so they would always have relevant data
     }
 
     public void TakeTurn()

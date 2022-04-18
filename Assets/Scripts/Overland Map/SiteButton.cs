@@ -131,6 +131,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
         _squadPicker.Refresh(dataDisplayCenterTrans); //chache this earlier! //cached as _squadPicker :)
+        _squadPicker.SetSite(this);
     }
 
 

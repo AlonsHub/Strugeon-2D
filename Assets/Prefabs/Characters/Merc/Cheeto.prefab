@@ -166,12 +166,21 @@ MonoBehaviour:
   mercName: 4
   _mercSheet:
     mercClass: 1
-    characterName: 0
+    characterName: 4
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 100
+      maxDamage: 12
+      minDamage: 8
+      range: 5
+      maxHPPerLevel: 10
+      maxDamagePerLevel: 4
+      minDamagePerLevel: 4
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
-    mustHoldWeapon: 0
+    mustHoldWeapon: 1
     gearStrings: []
   initiativeBonus: 0
   hasSAs: 1

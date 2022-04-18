@@ -76,14 +76,25 @@ MonoBehaviour:
   isEnemy: 0
   mercName: 2
   _mercSheet:
-    characterName: 0
+    mercClass: 0
+    characterName: 2
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 200
+      maxDamage: 25
+      minDamage: 20
+      range: 1
+      maxHPPerLevel: 10
+      maxDamagePerLevel: 2
+      minDamagePerLevel: 2
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
+    mustHoldWeapon: 1
+    gearStrings: []
   initiativeBonus: 0
   hasSAs: 0
-  forDisplayPurposesOnly: {fileID: 0}
   targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
@@ -104,6 +115,8 @@ MonoBehaviour:
   worldSpaceHorizontalGroup: {fileID: 0}
   purpleTgt: {fileID: 0}
   myPrefab: {fileID: 0}
+  HasShield: 0
+  HasRoot: 0
   SA_Title: Ferocity
   SA_Description: '"You''re getting me wounded... You won''t like me when I''m wounded."
 
@@ -197,6 +210,7 @@ MonoBehaviour:
   targets: []
   hasRedBuff: 0
   toHit: {fileID: 0}
+  cachedProjectile: {fileID: 0}
 --- !u!114 &5092255476189858162
 MonoBehaviour:
   m_ObjectHideFlags: 0

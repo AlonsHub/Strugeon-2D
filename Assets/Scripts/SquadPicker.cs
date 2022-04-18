@@ -197,11 +197,11 @@ public class SquadPicker : MonoBehaviour
         PlayerDataMaster.Instance.LogSquadDeparture(squadSlots[index].squad.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
     }
 
-    public void SetSite(SiteButton sb) //CRITICAL TBF! this is called in inspector
+    public void SetSite(SiteButton sb) //CRITICAL TBF! this is called in inspector //FIXED!
     {
         tgtSite = sb;
     }
-     public void SetSimpleSite(SimpleSiteButton ssb) //CRITICAL TBF! this is called in inspector
+     public void SetSimpleSite(SimpleSiteButton ssb) //CRITICAL TBF! this is called in inspector //FIXED!
     {
         tgtSimpleSite = ssb;
     }

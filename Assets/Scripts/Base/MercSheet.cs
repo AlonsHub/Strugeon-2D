@@ -12,7 +12,8 @@ public class MercSheet
     public MercClass mercClass;
     public MercName characterName; //will this be enough to ref the merc-prefab
 
-    public StatBlock statBlock;
+    public MercSheetSO baseSheetSO;
+    public StatBlock baseStatBlock; //ref to the base stat block
 
     public MercAssignment currentAssignment;
     public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
@@ -23,9 +24,12 @@ public class MercSheet
 
     public int _expToNextLevel => GameStats.ExpThresholdByLevel(_level);
     public Vector2Int _expFromAndToNextLevel => GameStats.ExpThresholdsByLevel(_level);
-    public int _minDamageBonus => GameStats.minDmgPerLevel * (_level-1); //you only start gaining bonuses from level 2
-    public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
-    public int _maxHpBonus => GameStats.maxHpBonusPerLevel * (_level - 1);
+    //public int _minDamageBonus => GameStats.minDmgPerLevel * (_level-1); //you only start gaining bonuses from level 2
+    public int _minDamage => baseStatBlock.MinDamage(_level); //you only start gaining bonuses from level 2
+    //public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
+    public int _maxDamage => baseStatBlock.MaxDamage(_level);
+    //public int _maxHpBonus => GameStats.maxHpBonusPerLevel * (_level - 1);
+    public int _maxHp => baseStatBlock.MaxHP(_level);
 
     public System.Action LevelUpAction;
 
@@ -43,6 +47,9 @@ public class MercSheet
     {
         characterName = mercName;
         gear = new Gear();
+
+        baseStatBlock = baseSheetSO.mercSheet.baseStatBlock;
+
         ResetSheet(); //exp and level set to base
         SetToState(assignment, relevantNum); 
     }
