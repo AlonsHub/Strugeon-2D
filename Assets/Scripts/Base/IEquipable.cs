@@ -8,6 +8,7 @@ public interface IEquipable
     IBenefit _Benefit();
     List<IBenefit> _Benefits(); //if relevant
     string _BenefitsProperNoun();
+    string _BenefitsStat();
     EquipSlotType _EquipSlotType();
 
     bool _IsEquipped();

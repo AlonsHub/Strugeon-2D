@@ -31,6 +31,28 @@ public class StatBenefit : IBenefit
         }
     }
 
+    public string BenefitStatName()
+    {
+        switch (statToBenefit)
+        {
+            case global::StatToBenefit.MaxHP:
+                return "Maximum HP";
+                break;
+            case global::StatToBenefit.MinDamage:
+                return "Minimum Damage"; //Approved by 2 witness - also suggested "enthusiasem"
+                break;
+            case global::StatToBenefit.MaxDamage:
+                return "Maximum Damage";
+                break;
+            case global::StatToBenefit.BothDamage:
+                return "Maximum and Minimum Damage";
+                break;
+            default:
+                return "Nothing";
+                break;
+        }
+    }
+
     public StatToBenefit StatToBenefit()
     {
         return statToBenefit;

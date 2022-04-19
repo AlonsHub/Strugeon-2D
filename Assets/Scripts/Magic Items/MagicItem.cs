@@ -59,6 +59,16 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         }
     }
 
+    public string _BenefitsStat()
+    {
+        if (myBenefit.BenefitProperNoun() == null)
+            return "nada?";
+        else
+        {
+            return myBenefit.BenefitStatName();
+        }
+    }
+
     public EquipSlotType _EquipSlotType()
     {
         return fittingSlotType;

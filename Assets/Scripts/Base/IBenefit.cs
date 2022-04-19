@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IBenefit
 {
     string BenefitProperNoun();
-
+    string BenefitStatName();
 
     int Value();
 
