@@ -11,7 +11,24 @@ public class StatBenefit : IBenefit
 
     public string BenefitProperNoun()
     {
-        return $"{statToBenefit.ToString()} +{value}";
+        switch (statToBenefit)
+        {
+            case global::StatToBenefit.MaxHP:
+                return "Sturdiness";
+                break;
+            case global::StatToBenefit.MinDamage:
+                return "Courage"; //Approved by 2 witness - also suggested "enthusiasem"
+                break;
+            case global::StatToBenefit.MaxDamage:
+                return "Brutality";
+                break;
+            case global::StatToBenefit.BothDamage:
+                return "Power";
+                break;
+            default:
+                return "Nothing";
+                break;
+        }
     }
 
     public StatToBenefit StatToBenefit()

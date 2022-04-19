@@ -19,7 +19,7 @@ public class GearSlotDispayer : BasicDisplayer
         if (!item.itemSprite && !item.FetchSprite())
                 return false;
 
-        return base.SetMe(new List<string> {$"{item.magicItemName} {item._BenefitsProperNoun()}" , "benefit text" }, new List<Sprite> {item.itemSprite});
+        return base.SetMe(new List<string> {$"{item.magicItemName} of {item._BenefitsProperNoun()}" , $"Provides {item._BenefitsProperNoun()} +{item._Benefit().Value()}" }, new List<Sprite> {item.itemSprite});
     }
 
     public void Click()
