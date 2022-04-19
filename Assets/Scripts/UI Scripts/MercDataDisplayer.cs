@@ -37,7 +37,7 @@ public class MercDataDisplayer : MonoBehaviour
         nameText.text = merc.Name; //+ suffix/monicer
         mercImage.sprite = merc.FullPortraitSprite;
         MercSheet ms = merc.mercSheetInPlayerData;
-        maxHPText.text = (merc.maxHP + ms._maxHp).ToString();
+        maxHPText.text = (ms._maxHp).ToString();
         WeaponItem wi = merc.GetComponent<WeaponItem>();
         if (!wi)
         {
@@ -46,7 +46,7 @@ public class MercDataDisplayer : MonoBehaviour
         else
         {
             //all is good, merc has weapon
-            dmgRangeText.text = (wi.minDamage + ms._minDamage).ToString() + "-" + (wi.maxDamage + ms._maxDamage).ToString(); //MUST CHANGE ACCESS TO DAMAGE
+            dmgRangeText.text = (ms._minDamage).ToString() + "-" + (ms._maxDamage).ToString(); //MUST CHANGE ACCESS TO DAMAGE
         }
         //SA_Item sA_Item = merc.forDisplayPurposesOnly as SA_Item;
         //TEMP AF
