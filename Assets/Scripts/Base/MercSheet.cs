@@ -53,6 +53,8 @@ public class MercSheet
         if (prefab._mercSheet.gearStrings != null)
         {
             gear = new Gear(prefab._mercSheet.gearStrings);
+
+
         }
         else
         {
@@ -63,6 +65,11 @@ public class MercSheet
 
         ResetSheet(); //exp and level set to base
         SetToState(assignment, relevantNum); 
+    }
+
+    public void CalculateBenefits()
+    {
+
     }
 
     //public GameObject MyPawnPrefabRef() //might still prefer this for some reason if EnumToT proves to be a brat

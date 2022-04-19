@@ -86,10 +86,10 @@ public class Gear
         {
             toReturn.Add(equipable._Benefit()); //single benefit items
 
-            if(equipable._Benefits() != null && equipable._Benefits().Count != 0) //multiple benefits
-            {
-                toReturn.AddRange(equipable._Benefits());
-            }
+            //if(equipable._Benefits() != null && equipable._Benefits().Count != 0) //multiple benefits
+            //{
+            //    toReturn.AddRange(equipable._Benefits());
+            //}
         }
 
         return toReturn;

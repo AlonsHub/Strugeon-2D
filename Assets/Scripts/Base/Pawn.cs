@@ -189,11 +189,41 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             Debug.LogError("probably, no mercsheet exists for this pawn " + mercName.ToString());
         }
 
+        List<IBenefit> statBenefits = mercSheetInPlayerData.gear.GetAllBenefits();
+
+        int minDamgeBenefit = 0;
+        int maxDamgeBenefit = 0;
+        int maxHPBenefit = 0;
+        if (statBenefits != null && statBenefits.Count >0)
+        {
+            foreach (var stats in statBenefits)
+            {
+                switch (((StatBenefit)stats).statToBenefit)
+                {
+                    case StatToBenefit.MaxHP:
+                        maxHPBenefit = stats.Value();
+                        break;
+                    case StatToBenefit.MinDamage:
+                        minDamgeBenefit = stats.Value();
+                        break;
+                    case StatToBenefit.MaxDamage:
+                        maxDamgeBenefit = stats.Value();
+                        break;
+                    case StatToBenefit.BothDamage:
+                        minDamgeBenefit = stats.Value();
+                        maxDamgeBenefit = stats.Value();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
 
         //GetComponent<WeaponItem>().ApplySheet(_mercSheet._minDamageBonus, _mercSheet._maxDamageBonus); //SHOULD crash and burn if fails, because this should never fail!
-        GetComponent<WeaponItem>().SetDamage(_mercSheet._minDamage, _mercSheet._maxDamage);
+        GetComponent<WeaponItem>().SetDamage(_mercSheet._minDamage+ minDamgeBenefit, _mercSheet._maxDamage+ maxDamgeBenefit);
         //max hp bonus
-        maxHP = _mercSheet._maxHp;
+        maxHP = _mercSheet._maxHp + maxHPBenefit;
 
         targets = RefMaster.Instance.enemyInstances;
 
