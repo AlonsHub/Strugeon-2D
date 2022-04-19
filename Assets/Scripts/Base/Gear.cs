@@ -31,6 +31,13 @@ public class Gear
         LoadItemsFromString(body, hand,trinket);
 
     }
+    public Gear(string[] strings)
+    {
+        equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
+        //load one to each by ID
+        LoadItemsFromString(strings[0], strings[1], strings[2]);
+
+    }
 
     //void Equip(IEquipable equipable)
     //{
@@ -48,13 +55,13 @@ public class Gear
         equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
 
         //load one to each by ID
-        if (body != null && ItemDatabase.IDtoItemSO.ContainsKey(body))
+        if (body != null && body.Length >0 && ItemDatabase.IDtoItemSO.ContainsKey(body))
             equipables[(int)EquipSlotType.Body] = ItemDatabase.IDtoItemSO[body].magicItem;
 
-        if (hand != null && ItemDatabase.IDtoItemSO.ContainsKey(hand))
+        if (hand != null && hand.Length > 0 && ItemDatabase.IDtoItemSO.ContainsKey(hand))
             equipables[(int)EquipSlotType.Hand] = ItemDatabase.IDtoItemSO[hand].magicItem;
 
-        if (trinket != null && ItemDatabase.IDtoItemSO.ContainsKey(trinket))
+        if (trinket != null && trinket.Length > 0 && ItemDatabase.IDtoItemSO.ContainsKey(trinket))
             equipables[(int)EquipSlotType.Trinket] = ItemDatabase.IDtoItemSO[trinket].magicItem;
     }
     

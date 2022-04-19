@@ -18,7 +18,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public MercName mercName;
     [SerializeField]
     //MercSheet _characterSheet;
-    MercSheet _mercSheet;
+    public MercSheet _mercSheet; //only to access by mercSheet once!
     public MercSheet mercSheetInPlayerData { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
                                                                                                   //in any other case they are loaded as data and not constructed at all
     bool isSheetInit = false;

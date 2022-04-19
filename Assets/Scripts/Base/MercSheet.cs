@@ -37,7 +37,7 @@ public class MercSheet
 
     public Gear gear;
 
-
+    private Pawn prefab; //temp TBF
 
     public string[] gearStrings;
 
@@ -46,9 +46,20 @@ public class MercSheet
     public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
     {
         characterName = mercName;
-        gear = new Gear();
+        prefab = MyPawnPrefabRef<Pawn>();
+        baseStatBlock = prefab._mercSheet.baseStatBlock;
+        mercClass = prefab._mercSheet.mercClass; //maybe can remove this from pawn init
 
-        baseStatBlock = baseSheetSO.mercSheet.baseStatBlock;
+        if (prefab._mercSheet.gearStrings != null)
+        {
+            gear = new Gear(prefab._mercSheet.gearStrings);
+        }
+        else
+        {
+            gear = new Gear();
+        }
+
+        //baseStatBlock = baseSheetSO.mercSheet.baseStatBlock;
 
         ResetSheet(); //exp and level set to base
         SetToState(assignment, relevantNum); 

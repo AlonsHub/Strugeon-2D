@@ -17,28 +17,26 @@ MonoBehaviour:
       enemyPrefabs:
       - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
       - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 010000000100000001000000
+      enemyLevels: 0200000002000000
     enemySetPack: {fileID: 11400000, guid: 046a48308753b9540a8ca188f891b291, type: 2}
     magicItem:
-      magicItemName: Stone
-      goldValue: 1
+      magicItemName: Dagger
+      goldValue: 15
       spectrumProfile:
         red: 0
         blue: 0
         yellow: 0
         purple: 0
-      rarity: 0
-      dropRateWeight: 5
-      itemSprite: {fileID: -5205662494574892940, guid: 31155a4835afb294f8a618b0cb75f337,
-        type: 3}
-      spriteName: Stone
-      fittingSlotType: 2
+      rarity: 1
+      dropRateWeight: 3
+      itemSprite: {fileID: 21300000, guid: 44c765d6555e0d148820ff5244522d60, type: 2}
+      spriteName: Dagger
+      fittingSlotType: 1
       isEquipped: 0
-    expReward: 105
+    expReward: 130
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 10
+    goldReward: 7
     difficulty: 0
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
