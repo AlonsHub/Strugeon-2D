@@ -10,6 +10,8 @@ public class MercGearDisplayer : BasicDisplayer
 
     public MercSheet GetMercSheet { get => mercSheet; }
 
+    public System.Action OnMercChange;
+
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
@@ -21,6 +23,7 @@ public class MercGearDisplayer : BasicDisplayer
         mercSheet = ms;
         base.SetMe(new List<string> {ms.characterName.ToString(), ms._level.ToString()}, new List<Sprite> {ms.MyPawnPrefabRef<Pawn>().FullPortraitSprite });
         DisplayGear();
+        OnMercChange();
         //foreach of that Mercs items - display them in their relevant slots
     }
 

@@ -28,6 +28,8 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     IBenefit myBenefit => statBenefitSO.statBenefit; //just the single now
 
+    public List<MercClass> relevantClasses;
+
     public bool FetchSprite()
     {
         if(itemSprite)
