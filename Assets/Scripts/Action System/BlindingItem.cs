@@ -15,6 +15,11 @@ public class BlindingItem : ActionItem, SA_Item //, SA_Item
     [Tooltip("As % chance to occur")]
     [SerializeField]
     int chanceToProc; //out of a hundred
+    [SerializeField]
+    int chanceToProcPerLevel;
+    //int chanceToProcPerLevels;
+    //[SerializeField]
+    //int levelsPerProc;
 
     [SerializeField]
     GameObject addonPrefab;
@@ -81,6 +86,11 @@ public class BlindingItem : ActionItem, SA_Item //, SA_Item
     public string SA_Description()
     {
         return "Cheeto flings a Blinding Dart at an enemy, dealing regular damage and Blinding that enemy for 2 turns. Blinded enemie's attacks deal 0 damage."; //we'll see...
+    }
+
+    public void SetToLevel(int level)
+    {
+        chanceToProc += chanceToProcPerLevel* (level-1);
     }
 
     //private void Start()

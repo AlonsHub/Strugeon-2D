@@ -23,6 +23,9 @@ public class RootDownItem : ActionItem, SA_Item
     [SerializeField]
     int minDamage, maxDamage, spikeDamage;
     [SerializeField]
+    int minDamagePerLevel, maxDamagePerLevel, spikeDamagePerLevel;
+
+    [SerializeField]
     int rootDuration;
 
     [SerializeField]
@@ -119,5 +122,12 @@ public class RootDownItem : ActionItem, SA_Item
             actionVariations.Add(new ActionVariation(this, p.gameObject, baseCost)); //base cost should be high since it affects all allies.
 
         }
+    }
+
+    public void SetToLevel(int level)
+    {
+        minDamage += minDamagePerLevel * (level - 1);
+        maxDamage += maxDamagePerLevel * (level - 1);
+        spikeDamage += spikeDamagePerLevel * (level - 1);
     }
 }

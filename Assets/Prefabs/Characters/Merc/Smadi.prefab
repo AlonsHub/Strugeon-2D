@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 853967901895232535}
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 7974199490736343132}
-  - component: {fileID: 5092255476189858162}
   - component: {fileID: 2111372755113017349}
   - component: {fileID: 7726652073189359543}
   m_Layer: 11
@@ -212,24 +211,6 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
---- !u!114 &5092255476189858162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785d9d601b6f16040bc93aaccfe86e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
-  actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
 --- !u!114 &2111372755113017349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +232,8 @@ MonoBehaviour:
   range: 1
   minHeal: 25
   maxHeal: 35
-  healAmount: 0
+  minHealPerLevel: 5
+  maxHealPerLevel: 5
   healDelay: 0
   targetMask:
     serializedVersion: 2
@@ -283,6 +265,8 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
+  healthEffectsWegiht: 0
+  maxAddedWeight: 0
 --- !u!1 &1390594824389518320
 GameObject:
   m_ObjectHideFlags: 0

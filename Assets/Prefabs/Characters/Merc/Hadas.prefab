@@ -250,6 +250,8 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
+  healthEffectsWegiht: 0
+  maxAddedWeight: 0
 --- !u!114 &6741276129138395191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +274,7 @@ MonoBehaviour:
     type: 2}
   toughenSpiritSpriteName: Toughen
   shieldAmount: 60
+  shieldAmountPerLevel: 10
   shieldDuration: 2
   fullCooldown: 3
   targets: []

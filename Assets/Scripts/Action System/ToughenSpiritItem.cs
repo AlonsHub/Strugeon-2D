@@ -12,6 +12,9 @@ public class ToughenSpiritItem : ActionItem, SA_Item
     [SerializeField]
     int shieldAmount; //this sets them all
     [SerializeField]
+    int shieldAmountPerLevel; //this sets them all
+
+    [SerializeField]
     int shieldDuration; 
 
     int _currentCooldown;
@@ -108,5 +111,10 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         actionVariations.Add(new ActionVariation(this, null, baseCost)); //base cost should be high since it affects all allies.
                                                                          //Consider multiplying by the number of allies(targets) 
 
+    }
+
+    public void SetToLevel(int level)
+    {
+        shieldAmount += shieldAmountPerLevel * (level - 1);
     }
 }

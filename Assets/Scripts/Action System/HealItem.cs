@@ -7,7 +7,9 @@ public class HealItem : ActionItem, SA_Item
     public int range;
     public int minHeal;
     public int maxHeal;
-    public int healAmount;
+    public int minHealPerLevel;
+    public int maxHealPerLevel;
+    
     public float healDelay;
     [SerializeField]
     private LayerMask targetMask;
@@ -185,5 +187,11 @@ public class HealItem : ActionItem, SA_Item
     public string SA_Description()
     {
         return "Smadi heals an ally or herself because she is an amazing person and we should all aspire to be more like her.";
+    }
+
+    public void SetToLevel(int level)
+    {
+        minHeal += minHealPerLevel * (level - 1);
+        maxHeal += maxHealPerLevel * (level - 1);
     }
 }

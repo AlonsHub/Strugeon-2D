@@ -8,6 +8,9 @@ public class BurningAmmoItem : ActionItem, SA_Item
     [SerializeField]
     int percentChance;
     [SerializeField]
+    int percentChancePerLevel;
+
+    [SerializeField]
     Sprite burnningAmmoSprite;
 
     [SerializeField]
@@ -62,5 +65,10 @@ public class BurningAmmoItem : ActionItem, SA_Item
     public override void CalculateVariations()
     {
         return;
+    }
+
+    public void SetToLevel(int level)
+    {
+        percentChance += percentChancePerLevel * (level - 1);
     }
 }

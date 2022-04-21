@@ -314,11 +314,23 @@ MonoBehaviour:
   isEnemy: 1
   mercName: 0
   _mercSheet:
+    mercClass: 0
     characterName: 0
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 0
+      maxDamage: 0
+      minDamage: 0
+      range: 0
+      maxHPPerLevel: 0
+      maxDamagePerLevel: 0
+      minDamagePerLevel: 0
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
+    mustHoldWeapon: 0
+    gearStrings: []
   initiativeBonus: 0
   hasSAs: 1
   targets: []
@@ -373,6 +385,9 @@ MonoBehaviour:
   minDamage: 5
   maxDamage: 8
   spikeDamage: 15
+  minDamagePerLevel: 2
+  maxDamagePerLevel: 2
+  spikeDamagePerLevel: 5
   rootDuration: 2
   rootVisual: {fileID: 6361548358100164632, guid: 850fea4be4bdd4c46b7a314722a79511,
     type: 3}

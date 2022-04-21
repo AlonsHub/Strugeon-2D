@@ -7,6 +7,8 @@ public class SummonSpiritItem : ActionItem, SA_Item
 {
     [SerializeField]
     GameObject drownedSpiritPrefab;
+    //[SerializeField]
+    int drownedSpiritLevel => (int)Mathf.Clamp(((float)pawn.enemyLevel / 3f), 1f, pawn.enemyLevel); //LEVEL UP ADVANCEMENT!
 
     [SerializeField]
     int cooldown; //start full
@@ -125,6 +127,10 @@ public class SummonSpiritItem : ActionItem, SA_Item
     {
         
         Pawn newSpirit = instantiatedPawn.GetComponent<Pawn>();
+
+        //LEVEL ADVANCEMENT
+        newSpirit.GetComponent<EnemyInfo>().SetEnemyLevel(drownedSpiritLevel);
+
         GameObject go2 = Instantiate(summonVFX, instantiatedPawn.transform);
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
@@ -202,4 +208,8 @@ public class SummonSpiritItem : ActionItem, SA_Item
         return "is this ever relevant?"; //we'll see...
     }
 
+    public void SetToLevel(int level)
+    {
+        //do nothing! drownedSpiritLevel is calculated by mavka level/3
+    }
 }

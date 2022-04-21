@@ -9,5 +9,7 @@ public interface SA_Item
     void StartCooldown();
     Sprite SA_Sprite();
 
+    void SetToLevel(int level);
+
     string SA_Description(); //probably useless
 }

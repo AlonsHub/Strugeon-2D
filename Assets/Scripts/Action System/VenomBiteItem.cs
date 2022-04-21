@@ -11,6 +11,8 @@ public class VenomBiteItem : ActionItem, SA_Item
 
     [SerializeField]
     int minDamage, maxDamage, minPoisonDamage, maxPoisonDamage; //this sets them all
+    [SerializeField]
+    int minDamagePerLevel, maxDamagePerLevel, minPoisonDamagePerLevel, maxPoisonDamagePerLevel; //this sets them all
 
     int _currentCooldown;
 
@@ -188,5 +190,11 @@ public class VenomBiteItem : ActionItem, SA_Item
         pawn.TurnDone = true;
     }
 
-
+    public void SetToLevel(int level)
+    {
+        minDamage += minDamagePerLevel * (level - 1);
+        maxDamage += maxDamagePerLevel * (level - 1);
+        minPoisonDamage += minPoisonDamage * (level - 1);
+        maxPoisonDamage += maxPoisonDamagePerLevel * (level - 1);
+    }
 }

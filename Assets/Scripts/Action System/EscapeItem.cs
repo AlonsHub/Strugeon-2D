@@ -8,7 +8,10 @@ public class EscapeItem : ActionItem
     float escapeThreshold;
     [SerializeField]
     int escapeWeight;
-    
+    [SerializeField]
+    bool healthEffectsWegiht;
+    [SerializeField, Tooltip("The full weight added (theoretically) if HP is at 0. Only relevant if healthEffectWeight is true.")]
+    int maxAddedWeight;
     void Start()
     {
         actionVariations = new List<ActionVariation>();
@@ -51,6 +54,9 @@ public class EscapeItem : ActionItem
             return;
         if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
         {
+            if(healthEffectsWegiht)
+            actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight + (int)((1f-((float)pawn.currentHP/ (float)pawn.maxHP))* maxAddedWeight))); //* consider formulating escapeWeight
+                else
             //check here if there is a path to escape - by either trying to get a route there, or inversely checking if hes not surrounded
             actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight
         }

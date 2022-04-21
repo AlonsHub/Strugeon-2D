@@ -7,6 +7,12 @@ public class BigHandsItem : ActionItem, SA_Item
     //private Character ownerCharacter;
     public int minDamage;
     public int maxDamage;
+
+    public int minDamagePerLevel;
+    public int maxDamagePerLevel;
+
+
+
     public GameObject weaponGfx;
     public Transform weaponSpawn;
 
@@ -167,5 +173,11 @@ public class BigHandsItem : ActionItem, SA_Item
     public string SA_Description()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void SetToLevel(int level)
+    {
+        minDamage += minDamagePerLevel * (level - 1);
+        maxDamage += maxDamagePerLevel * (level - 1);
     }
 }

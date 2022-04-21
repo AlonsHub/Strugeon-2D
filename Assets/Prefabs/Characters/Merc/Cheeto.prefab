@@ -253,6 +253,8 @@ MonoBehaviour:
   targetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
+  healthEffectsWegiht: 0
+  maxAddedWeight: 0
 --- !u!114 &6496638347147669397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +276,7 @@ MonoBehaviour:
   duration: 2
   targets: []
   chanceToProc: 15
+  chanceToProcPerLevel: 1
   addonPrefab: {fileID: 4991725304625527649, guid: 6698d3c8f68b43a49855c7b82c100a41,
     type: 3}
   maxCooldown: 0

@@ -12,7 +12,7 @@ public class InventoryDisplayManager : MonoBehaviour
     [SerializeField]
     GameObject itemDisplayerPrefab;
     [SerializeField] //just to see them
-    List<MagicItemDisplayer> displayers = new List<MagicItemDisplayer>();
+    List<ItemDisplayer> displayers = new List<ItemDisplayer>();
 
     [SerializeField]
     MercGearDisplayer mercGearDisplayer;
@@ -20,6 +20,15 @@ public class InventoryDisplayManager : MonoBehaviour
     List<MagicItem> relevantItems;
 
     bool sellModeIsOn;
+    private void Awake()
+    {
+        if (!mercGearDisplayer)
+        {
+            Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
+            return;
+        }
+        //EnsureOneDisplayerPerMagicItem();
+    }
     private void OnEnable()
     {
         SetSellMode(false);
@@ -29,7 +38,7 @@ public class InventoryDisplayManager : MonoBehaviour
             Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
             return;
         }
-        
+
         RefreshInventory();
 
         Inventory.Instance.OnInventoryChange += RefreshInventory;
@@ -48,6 +57,9 @@ public class InventoryDisplayManager : MonoBehaviour
         //Draw items
         for (int i = 0; i < relevantItems.Count; i++)
         {
+            if (!relevantItems[i].FetchSprite())
+                continue;
+
             displayers[i].SetItem(relevantItems[i]);
         }
     }
@@ -66,7 +78,7 @@ public class InventoryDisplayManager : MonoBehaviour
             for (int i = 0; i < diff * -1; i++) //*-1 since diff is < 0, but is still the difference
             {
                 GameObject displayerObject = Instantiate(itemDisplayerPrefab, inventoryParent);
-                displayers.Add(displayerObject.GetComponent<MagicItemDisplayer>());
+                displayers.Add(displayerObject.GetComponent<ItemDisplayer>());
             }
         }
         else

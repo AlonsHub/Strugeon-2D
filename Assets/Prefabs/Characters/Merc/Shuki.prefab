@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5182301774868751694}
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 7974199490736343132}
-  - component: {fileID: 5092255476189858162}
   - component: {fileID: -1024576177371926576}
   - component: {fileID: 2021261266725811000}
   m_Layer: 11
@@ -127,7 +126,7 @@ MonoBehaviour:
     Shuki''s HP is below 10%, Shuki enters a ferocious rage, increasing his damage
     by 20% and raising his aggerssion.'
   enemyLevel: -1
-  purpleMultiplier: 50
+  purpleMultiplier: 80
 --- !u!114 &5182301774868751694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,24 +213,6 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
---- !u!114 &5092255476189858162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 785d9d601b6f16040bc93aaccfe86e4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
-  actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
 --- !u!114 &-1024576177371926576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +246,8 @@ MonoBehaviour:
   actionVariations: []
   isWeapon: 0
   targetAllies: 0
-  escapeThreshold: 2
-  escapeWeight: 50
+  escapeThreshold: 3
+  escapeWeight: 20
 --- !u!1 &3911396959775424208
 GameObject:
   m_ObjectHideFlags: 0

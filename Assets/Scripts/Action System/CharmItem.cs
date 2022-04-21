@@ -122,4 +122,9 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
     {
         return "is this ever relevant?"; //we'll see...
     }
+
+    public void SetToLevel(int level)
+    {
+        //do nothing
+    }
 }

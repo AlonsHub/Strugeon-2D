@@ -146,10 +146,18 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         damageModifiers = new List<float>();
 
         hasSAs = (saItems.Length != 0);
-        
+
+
 
         if (isEnemy)
         {
+            if (hasSAs) //Non SA_Item sas may be a problem?
+            {
+                foreach (var item in saItems)
+                {
+                    item.SetToLevel(enemyLevel);
+                }
+            }
             targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
             EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>(); //why not just add this to the prefab? TBF
@@ -159,7 +167,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         else
         {
 
-
             if ((mercSheetInPlayerData) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
@@ -168,6 +175,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             //mercSheetInPlayerData.baseSheetSO = _mercSheet.baseSheetSO; //pass baseSO via prefab - why not pass the base stats aswell?
 
             ApplyCharacterSheet();
+            if (hasSAs) //Non SA_Item sas may be a problem?
+            {
+                foreach (var item in saItems)
+                {
+                    item.SetToLevel(_mercSheet._level);
+                }
+            }
         }
         base.Init(); // HP init
 
