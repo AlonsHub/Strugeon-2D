@@ -146,18 +146,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         damageModifiers = new List<float>();
 
         hasSAs = (saItems.Length != 0);
-
-
+        
 
         if (isEnemy)
         {
-            if (hasSAs) //Non SA_Item sas may be a problem?
-            {
-                foreach (var item in saItems)
-                {
-                    item.SetToLevel(enemyLevel);
-                }
-            }
             targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
             EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>(); //why not just add this to the prefab? TBF
@@ -166,7 +158,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-
             if ((mercSheetInPlayerData) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
@@ -175,13 +166,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             //mercSheetInPlayerData.baseSheetSO = _mercSheet.baseSheetSO; //pass baseSO via prefab - why not pass the base stats aswell?
 
             ApplyCharacterSheet();
-            if (hasSAs) //Non SA_Item sas may be a problem?
-            {
-                foreach (var item in saItems)
-                {
-                    item.SetToLevel(_mercSheet._level);
-                }
-            }
         }
         base.Init(); // HP init
 
@@ -233,8 +217,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             }
         }
 
+        int finalMinDamage = _mercSheet._minDamage + minDamgeBenefit;
+        int finalMaxDamage = _mercSheet._maxDamage + maxDamgeBenefit;
+        finalMinDamage = Mathf.Clamp(finalMinDamage, 0, finalMaxDamage);
 
-        //GetComponent<WeaponItem>().ApplySheet(_mercSheet._minDamageBonus, _mercSheet._maxDamageBonus); //SHOULD crash and burn if fails, because this should never fail!
+
         GetComponent<WeaponItem>().SetDamage(_mercSheet._minDamage+ minDamgeBenefit, _mercSheet._maxDamage+ maxDamgeBenefit);
         //max hp bonus
         maxHP = _mercSheet._maxHp + maxHPBenefit;
