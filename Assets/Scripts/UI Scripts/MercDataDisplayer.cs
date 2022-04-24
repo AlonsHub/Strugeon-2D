@@ -34,20 +34,47 @@ public class MercDataDisplayer : MonoBehaviour
 
     public void SetMe(Pawn merc)
     {
+        int maxHP_benefit, maxDamage_benefit, minDamage_benefit;
+        maxHP_benefit = maxDamage_benefit = minDamage_benefit = 0;
+
+        foreach (var benefit in merc.mercSheetInPlayerData.gear.GetAllBenefits())
+        {
+            switch ((benefit as StatBenefit).statToBenefit)
+            {
+                case StatToBenefit.MaxHP:
+                    maxHP_benefit += benefit.Value();
+                    break;
+                case StatToBenefit.MinDamage:
+                    minDamage_benefit += benefit.Value();
+                    break;
+                case StatToBenefit.MaxDamage:
+                    maxDamage_benefit += benefit.Value();
+                    break;
+                case StatToBenefit.BothDamage:
+                    maxDamage_benefit += benefit.Value();
+                    minDamage_benefit += benefit.Value();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         nameText.text = merc.Name; //+ suffix/monicer
         mercImage.sprite = merc.FullPortraitSprite;
         MercSheet ms = merc.mercSheetInPlayerData;
-        maxHPText.text = (ms._maxHp).ToString();
+        maxHPText.text = (ms._maxHp + maxHP_benefit).ToString();
         WeaponItem wi = merc.GetComponent<WeaponItem>();
-        if (!wi)
-        {
-            Debug.LogError("Merc with no WEAPON!!!");
-        }
-        else
-        {
+        //if (!wi)
+        //{
+        //    Debug.LogError("Merc with no WEAPON!!!");
+        //}
+        //else
+        //{
             //all is good, merc has weapon
-            dmgRangeText.text = (ms._minDamage).ToString() + "-" + (ms._maxDamage).ToString(); //MUST CHANGE ACCESS TO DAMAGE
-        }
+            dmgRangeText.text = (ms._minDamage+ minDamage_benefit).ToString() + "-" + (ms._maxDamage+ maxDamage_benefit).ToString(); //MUST CHANGE ACCESS TO DAMAGE
+        //}
+
+
         //SA_Item sA_Item = merc.forDisplayPurposesOnly as SA_Item;
         //TEMP AF
         specialAbilityTitle.text = merc.SA_Title;
