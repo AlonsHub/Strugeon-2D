@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum MercAssignment {Null,AwaySquad,Room,Available, Hireable, NotAvailable};
-public enum MercClass {Fighter, Ranger, Mage};
+public enum MercClass {Fighter, Rogue, Mage, Priest};
 
 [System.Serializable]
 public class MercSheet

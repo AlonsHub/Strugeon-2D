@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 906445240154049506}
   - component: {fileID: 6177665693654622096}
+  - component: {fileID: 853967901895232535}
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 5182301774868751694}
   - component: {fileID: 7974199490736343132}
-  - component: {fileID: 853967901895232535}
   - component: {fileID: 5092255476189858162}
   - component: {fileID: -3395797105699778925}
   - component: {fileID: 1105644228005410149}
@@ -60,6 +60,74 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &853967901895232535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 100
+  maxHP: 100
+  pawnName: Yeho
+  isEnemy: 0
+  mercName: 3
+  _mercSheet:
+    mercClass: 1
+    characterName: 0
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 100
+      maxDamage: 15
+      minDamage: 10
+      range: 4
+      maxHPPerLevel: 10
+      maxDamagePerLevel: 4
+      minDamagePerLevel: 4
+    currentAssignment: 0
+    roomOrSquadNumber: -2
+    _experience: 0
+    _level: 1
+    mustHoldWeapon: 1
+    gearStrings:
+    - BasicArmor
+    - Bow
+    - Letter
+  initiativeBonus: 0
+  hasSAs: 0
+  targets: []
+  tileWalker: {fileID: 5182301774868751694}
+  anim: {fileID: 6177665693654622096}
+  portraitSprite: {fileID: 21300000, guid: e0c46dbcd3fdfd14db7cabe0617b0f9c, type: 3}
+  fullPortraitSprite: {fileID: 21300000, guid: e5c31f2a59600f747988675004dd8943, type: 3}
+  saSprite: {fileID: 0}
+  effectIconParent: {fileID: 7891262091630222569}
+  effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
+    type: 3}
+  myTurnPlate: {fileID: 0}
+  actionPool: []
+  audioSource: {fileID: 0}
+  hitSounds: []
+  attackSounds: []
+  damagePrefab: {fileID: 4498991334046813967, guid: 73dd70f22bf1858409a9c9b25889a473,
+    type: 3}
+  rotation: {x: 0, y: 0, z: 0}
+  worldSpaceHorizontalGroup: {fileID: 0}
+  purpleTgt: {fileID: 0}
+  myPrefab: {fileID: 0}
+  HasShield: 0
+  HasRoot: 0
+  SA_Title: Quick Step
+  SA_Description: Yeho's longbow launches arrows with such incredible force, so that
+    they may hit their mark true, and also travel forth and harm yet another miscreant!
+    (provided they are adjacent to the original target)
+  enemyLevel: -1
+  purpleMultiplier: 50
 --- !u!114 &6641408886101910626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,74 +215,6 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
---- !u!114 &853967901895232535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHP: 100
-  maxHP: 100
-  pawnName: Yeho
-  isEnemy: 0
-  mercName: 3
-  _mercSheet:
-    mercClass: 1
-    characterName: 0
-    baseSheetSO: {fileID: 0}
-    baseStatBlock:
-      maxHp: 100
-      maxDamage: 15
-      minDamage: 10
-      range: 4
-      maxHPPerLevel: 10
-      maxDamagePerLevel: 4
-      minDamagePerLevel: 4
-    currentAssignment: 0
-    roomOrSquadNumber: -2
-    _experience: 0
-    _level: 1
-    mustHoldWeapon: 1
-    gearStrings:
-    - BasicArmor
-    - Bow
-    - Letter
-  initiativeBonus: 0
-  hasSAs: 0
-  targets: []
-  tileWalker: {fileID: 5182301774868751694}
-  anim: {fileID: 6177665693654622096}
-  portraitSprite: {fileID: 21300000, guid: e0c46dbcd3fdfd14db7cabe0617b0f9c, type: 3}
-  fullPortraitSprite: {fileID: 21300000, guid: e5c31f2a59600f747988675004dd8943, type: 3}
-  saSprite: {fileID: 0}
-  effectIconParent: {fileID: 7891262091630222569}
-  effectIconPrefab: {fileID: 7656758636966542956, guid: c7a156b21b667444e9dd1ecf13a9dac2,
-    type: 3}
-  myTurnPlate: {fileID: 0}
-  actionPool: []
-  audioSource: {fileID: 0}
-  hitSounds: []
-  attackSounds: []
-  damagePrefab: {fileID: 4498991334046813967, guid: 73dd70f22bf1858409a9c9b25889a473,
-    type: 3}
-  rotation: {x: 0, y: 0, z: 0}
-  worldSpaceHorizontalGroup: {fileID: 0}
-  purpleTgt: {fileID: 0}
-  myPrefab: {fileID: 0}
-  HasShield: 0
-  HasRoot: 0
-  SA_Title: Quick Step
-  SA_Description: Yeho's longbow launches arrows with such incredible force, so that
-    they may hit their mark true, and also travel forth and harm yet another miscreant!
-    (provided they are adjacent to the original target)
-  enemyLevel: -1
-  purpleMultiplier: 50
 --- !u!114 &5092255476189858162
 MonoBehaviour:
   m_ObjectHideFlags: 0
