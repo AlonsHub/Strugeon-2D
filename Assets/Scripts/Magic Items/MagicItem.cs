@@ -36,6 +36,10 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         //{
         //    return true;
         //}
+        if (itemSprite.name == spriteName)
+        {
+            return true;
+        }
 
         itemSprite = Resources.Load<Sprite>($"ItemSprites/{spriteName}");
         return itemSprite; //if null, is false like in the if statement above

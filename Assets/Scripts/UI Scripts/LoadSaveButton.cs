@@ -7,13 +7,16 @@ public class LoadSaveButton : MonoBehaviour
 {
     public PlayerData playerDataToLoad;
     //public string saveDir;
-
+    public GameObject saveMenuToClose;
+    Button button;
     private void Start()
     {
-        GetComponent<Button>().onClick.AddListener(LoadMe);
+        button = GetComponent<Button>();
+        button.onClick.AddListener(LoadMe);
+        button.onClick.AddListener(() => saveMenuToClose.gameObject.SetActive(false));
         //GetComponent<Button>().onClick +=;
     }
-
+    
     public void LoadMe()
     {
         PlayerDataMaster.Instance.LoadDataFromDisk(playerDataToLoad.playerName);
