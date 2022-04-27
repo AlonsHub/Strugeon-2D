@@ -330,11 +330,23 @@ MonoBehaviour:
   isEnemy: 1
   mercName: 0
   _mercSheet:
+    mercClass: 0
     characterName: 0
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 0
+      maxDamage: 0
+      minDamage: 0
+      range: 0
+      maxHPPerLevel: 0
+      maxDamagePerLevel: 0
+      minDamagePerLevel: 0
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
     _level: 1
+    mustHoldWeapon: 0
+    gearStrings: []
   initiativeBonus: 0
   hasSAs: 0
   targets: []
@@ -461,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2305de8e6ba2594ea7a62b559d7c825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pawn: {fileID: 5808167037023471695}
   minDamagePerLevel: 1
   maxDamagePerLevel: 2
   hpPerLevel: 5

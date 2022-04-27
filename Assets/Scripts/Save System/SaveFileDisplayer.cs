@@ -12,7 +12,7 @@ public class SaveFileDisplayer : MonoBehaviour
 
 
     LoadSaveButton loadSaveButton;
-    public void Init(PlayerData pd)
+    public void Init(PlayerData pd, GameObject parent)
     {
         //playerName = 
         playerData = pd;
@@ -20,5 +20,6 @@ public class SaveFileDisplayer : MonoBehaviour
         playerName.text = playerData.playerName;
         loadSaveButton = GetComponentInChildren<LoadSaveButton>();
         loadSaveButton.playerDataToLoad = playerData;
+        loadSaveButton.saveMenuToClose = parent;
     }
 }

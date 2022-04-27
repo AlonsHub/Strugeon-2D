@@ -34,11 +34,11 @@ public class SaveMenu : MonoBehaviour
                 if(i>= saveFileDisplayers.Count)
                 {
                     SaveFileDisplayer sfd = Instantiate(prefab, parent).GetComponent<SaveFileDisplayer>();
-                    sfd.Init(loadedData[i]);
+                    sfd.Init(loadedData[i], gameObject);
                 }
                 else
                 {
-                    saveFileDisplayers[i].Init(loadedData[i]);
+                    saveFileDisplayers[i].Init(loadedData[i], gameObject);
                 }
             }
 

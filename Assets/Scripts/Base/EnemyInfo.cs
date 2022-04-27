@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour
 {
+    [SerializeField]
     Pawn pawn;
     WeaponItem weaponItem;
     int level;
