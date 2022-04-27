@@ -40,7 +40,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         //{
         //    return true;
         //}
-        if (itemSprite.name == spriteName)
+        if (itemSprite && itemSprite.name == spriteName)
         {
             return true;
         }

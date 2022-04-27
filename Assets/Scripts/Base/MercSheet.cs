@@ -49,17 +49,17 @@ public class MercSheet
         prefab = MyPawnPrefabRef<Pawn>();
         baseStatBlock = prefab._mercSheet.baseStatBlock;
         mercClass = prefab._mercSheet.mercClass; //maybe can remove this from pawn init
-
-        if (prefab._mercSheet.gearStrings != null)
-        {
+         
+        //if (prefab._mercSheet.gearStrings != null)
+        //{
             gear = new Gear(prefab._mercSheet.gearStrings);
 
 
-        }
-        else
-        {
-            gear = new Gear();
-        }
+        //}
+        //else
+        //{
+        //    gear = new Gear();
+        //}
 
         //baseStatBlock = baseSheetSO.mercSheet.baseStatBlock;
 

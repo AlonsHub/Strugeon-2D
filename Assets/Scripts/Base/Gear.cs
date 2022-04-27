@@ -84,6 +84,7 @@ public class Gear
 
         foreach (var equipable in equipables)
         {
+            if(equipable != null)
             toReturn.Add(equipable._Benefit()); //single benefit items
 
             //if(equipable._Benefits() != null && equipable._Benefits().Count != 0) //multiple benefits

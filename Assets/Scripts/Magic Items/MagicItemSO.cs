@@ -5,4 +5,10 @@ using UnityEngine;
 public class MagicItemSO : ScriptableObject
 {
     public MagicItem magicItem;
+
+
+    [ContextMenu("call fetch")]public void CallFetch()
+    {
+        magicItem.FetchSprite();
+    }
 }
