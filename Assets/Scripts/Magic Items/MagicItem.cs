@@ -26,7 +26,11 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     [SerializeField]
     StatBenefitSO statBenefitSO;
 
-    IBenefit myBenefit => statBenefitSO.statBenefit; //just the single now
+    [SerializeField]
+    StatBenefit statBenefit;
+
+    //IBenefit myBenefit => statBenefitSO.statBenefit; //just the single now
+    IBenefit myBenefit => statBenefit; //just the single now
 
     public List<MercClass> relevantClasses;
 

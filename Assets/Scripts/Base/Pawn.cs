@@ -201,13 +201,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                     case StatToBenefit.MaxHP:
                         maxHPBenefit = stats.Value();
                         break;
-                    case StatToBenefit.MinDamage:
-                        minDamgeBenefit = stats.Value();
-                        break;
-                    case StatToBenefit.MaxDamage:
-                        maxDamgeBenefit = stats.Value();
-                        break;
-                    case StatToBenefit.BothDamage:
+                    case StatToBenefit.FlatDamage:
                         minDamgeBenefit = stats.Value();
                         maxDamgeBenefit = stats.Value();
                         break;

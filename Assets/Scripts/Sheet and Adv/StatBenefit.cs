@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StatToBenefit { MaxHP, MinDamage, MaxDamage, BothDamage };
+public enum StatToBenefit { MaxHP, FlatDamage };
 [System.Serializable]
 public class StatBenefit : IBenefit
 {
@@ -16,13 +16,7 @@ public class StatBenefit : IBenefit
             case global::StatToBenefit.MaxHP:
                 return "Sturdiness";
                 break;
-            case global::StatToBenefit.MinDamage:
-                return "Courage"; //Approved by 2 witness - also suggested "enthusiasem"
-                break;
-            case global::StatToBenefit.MaxDamage:
-                return "Brutality";
-                break;
-            case global::StatToBenefit.BothDamage:
+            case global::StatToBenefit.FlatDamage:
                 return "Power";
                 break;
             default:
@@ -38,13 +32,7 @@ public class StatBenefit : IBenefit
             case global::StatToBenefit.MaxHP:
                 return "Maximum HP";
                 break;
-            case global::StatToBenefit.MinDamage:
-                return "Minimum Damage"; //Approved by 2 witness - also suggested "enthusiasem"
-                break;
-            case global::StatToBenefit.MaxDamage:
-                return "Maximum Damage";
-                break;
-            case global::StatToBenefit.BothDamage:
+            case global::StatToBenefit.FlatDamage:
                 return "Maximum and Minimum Damage";
                 break;
             default:

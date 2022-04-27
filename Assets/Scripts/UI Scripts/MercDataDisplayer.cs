@@ -44,13 +44,7 @@ public class MercDataDisplayer : MonoBehaviour
                 case StatToBenefit.MaxHP:
                     maxHP_benefit += benefit.Value();
                     break;
-                case StatToBenefit.MinDamage:
-                    minDamage_benefit += benefit.Value();
-                    break;
-                case StatToBenefit.MaxDamage:
-                    maxDamage_benefit += benefit.Value();
-                    break;
-                case StatToBenefit.BothDamage:
+                case StatToBenefit.FlatDamage:
                     maxDamage_benefit += benefit.Value();
                     minDamage_benefit += benefit.Value();
                     break;
