@@ -150,7 +150,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         if (cooldown <= 0)
         {
-            int weight = baseCost;
+            int weight = baseweight;
 
             if (pawn.isEnemy) //honestly should also check what happens if Mavka is ever charmed and then summons a spirit... Almost ironically, charms should work just fine when she's charmed
             {

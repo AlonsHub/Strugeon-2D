@@ -103,7 +103,7 @@ public class BigHandsItem : ActionItem, SA_Item
         List<FloorTile> neighbours = FloorGrid.Instance.GetNeighbours(pawn.tileWalker.currentNode);
         foreach(FloorTile ft in neighbours)
         {
-            int weight = baseCost; //4
+            int weight = baseweight; //4
 
             //if(!ft.isEmpty && ft.myOccupant.GetComponent<ObstacleRock>()) //if it is an obstacle rock, we dont really need to cache it -
             //just to check that it is... maybe test by tag instead?

@@ -15,6 +15,8 @@ public class MercSheet
     public MercSheetSO baseSheetSO;
     public StatBlock baseStatBlock; //ref to the base stat block
 
+    public BasicPrefs basicPrefs;
+
     public MercAssignment currentAssignment;
     public int roomOrSquadNumber =-1; //defualt -1 means merc doesn't belong to any squad, wheter in-room or away
     //public int siteNumber = -1;

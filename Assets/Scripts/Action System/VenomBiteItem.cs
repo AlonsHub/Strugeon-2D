@@ -144,7 +144,7 @@ public class VenomBiteItem : ActionItem, SA_Item
 
         foreach (Pawn p in targets)
         {
-            int weight = baseCost;
+            int weight = baseweight;
 
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
 

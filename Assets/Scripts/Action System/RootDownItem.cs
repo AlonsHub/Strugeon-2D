@@ -119,7 +119,7 @@ public class RootDownItem : ActionItem, SA_Item
             if (p.HasRoot)
                 continue;
 
-            actionVariations.Add(new ActionVariation(this, p.gameObject, baseCost)); //base cost should be high since it affects all allies.
+            actionVariations.Add(new ActionVariation(this, p.gameObject, baseweight)); //base cost should be high since it affects all allies.
 
         }
     }

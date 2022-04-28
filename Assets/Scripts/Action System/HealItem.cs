@@ -37,7 +37,7 @@ public class HealItem : ActionItem, SA_Item
         feetItem = GetComponent<FeetItem>();
         la = GetComponentInChildren<LookAtter>();
 
-        targetAllies = true;
+        doTargetAllies = true;
 
         base.Awake();
     }
@@ -46,7 +46,7 @@ public class HealItem : ActionItem, SA_Item
         _currentCooldown = 0;
 
         //targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs; //target acquistion should be generic as-well, by including bool targetAllies
-        targets = (pawn.isEnemy == targetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
+        targets = (pawn.isEnemy == doTargetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
 
         //base.Start();
     }
@@ -124,7 +124,7 @@ public class HealItem : ActionItem, SA_Item
             {
                 continue;
             }
-            int weight = baseCost;
+            int weight = baseweight;
 
             int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
             if (currentDistance <= 14) // one tile

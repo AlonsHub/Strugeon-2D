@@ -54,7 +54,7 @@ public class BootItem : ActionItem
         {
             if (ft.isEmpty)
             {
-                actionVariations.Add(new ActionVariation(this, ft.gameObject, baseCost));
+                actionVariations.Add(new ActionVariation(this, ft.gameObject, baseweight));
             }
             else if (ft.myOccupant != null && ft.myOccupant.CompareTag("Enemy"))
             {

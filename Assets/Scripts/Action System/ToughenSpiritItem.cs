@@ -28,7 +28,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
-        targetAllies = true;
+        doTargetAllies = true;
         base.Awake();
     }
     private void Start()
@@ -37,7 +37,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         StartCooldown(); //starts IN cooldown ON! as in gdd
 
         //targets = pawn.isEnemy ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;
-        targets = (pawn.isEnemy == targetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
+        targets = (pawn.isEnemy == doTargetAllies) ? RefMaster.Instance.enemyInstances : RefMaster.Instance.mercs;//should be lowered as-is to base start
 
 
     }
@@ -108,7 +108,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         //    Debug.Log("No targets") //never happenes, the caster is also a target and can never be irrelevant to themselves
         //}
 
-        actionVariations.Add(new ActionVariation(this, null, baseCost)); //base cost should be high since it affects all allies.
+        actionVariations.Add(new ActionVariation(this, null, baseweight)); //base cost should be high since it affects all allies.
                                                                          //Consider multiplying by the number of allies(targets) 
 
     }

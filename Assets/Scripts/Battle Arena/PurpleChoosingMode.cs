@@ -58,7 +58,7 @@ public class PurpleChoosingMode : MonoBehaviour
             ren.material.SetColor("_Tint", newColor);
         }
 
-        if (actor.ActionItems.Any(x => x.targetAllies))
+        if (actor.ActionItems.Any(x => x.doTargetAllies))
         {
             foreach (Pawn p in RefMaster.Instance.mercs)
             {
@@ -92,7 +92,7 @@ public class PurpleChoosingMode : MonoBehaviour
             purpleTargets.Add(p);
 
         }
-        if (actor.ActionItems.Any(x => x.targetAllies))
+        if (actor.ActionItems.Any(x => x.doTargetAllies))
         {
             foreach (Pawn p in RefMaster.Instance.mercs)
             {

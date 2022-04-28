@@ -8,6 +8,9 @@ public enum DamageType {Slashing, Bludgening, Piercing, Pure}; // Pure? True?
 
 public class WeaponItem : ActionItem
 {
+    //WeaponPrefs weaponPrefs; //is it better to cache once from character sheet, or access directly to sheet?
+    WeaponPrefs weaponPrefs => pawn._mercSheet.basicPrefs.weaponPrefs; //is it better to cache once from character sheet, or access directly to sheet?
+
     public FeetItem feetItem; //does the walking as an actionvariation added by weaponitem, but holding the feetItem in the List entry of actionsvariations 
 
     //added params:Range, Damage, ?
@@ -52,12 +55,11 @@ public class WeaponItem : ActionItem
     public override void Awake()
     {
         actionVariations = new List<ActionVariation>();
-        isWeapon = true;
         hasEffect = false;
         hasRedBuff = false;
         feetItem = GetComponent<FeetItem>();
-
-        //attackAction += OnAttack;
+        //weaponPrefs = pawn._mercSheet.basicPrefs.weaponPrefs; //weaponPrefs is NOT a struct, so this REF does NOT duplicate memory, 
+        //but currently this approach is abandoned
 
         base.Awake();
     }
@@ -69,6 +71,8 @@ public class WeaponItem : ActionItem
         else
             targets = RefMaster.Instance.enemyInstances;
 
+        if (feetItem || (feetItem = GetComponent<FeetItem>()))
+            feetItem.currentRangeInTiles = range; // maybe do this at Start()? // Yup... if at all
         // arrowSpawn = pawn.arrow
         la = GetComponentInChildren<LookAtter>();
 
@@ -252,19 +256,66 @@ public class WeaponItem : ActionItem
 
         foreach (Pawn p in targets)
         {
-            int weight = baseCost;
+            if (p.currentHP <= 0) //just in-case a dead enemy is still in the list somehow
+                continue;
+
+            int weight = baseweight;
 
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
 
-            if (p.currentHP <= 0)
+
+            if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
+            {
+                if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
+                {
+                    //according to GDD this should multiply by 10 
+                    continue;
+                }
+                //melee attacker only have 1 range, so this means adjacent
+                weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
+
+            }
+            if (p.currentHP <= p.maxHP / 2.5f) //40%
+            {
+                weight *= 10;
+            }
+
+            if (weight != 0)
+            {
+                actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
+            }
+        }
+
+        CallBehaveVariables();
+
+    }
+    public void CalculateVariations2()
+    {
+        //actionVariations = new List<ActionVariation>();
+        actionVariations.Clear();
+
+        if (targets.Count == 0)
+        {
+            Debug.Log(name + " Found no enemies, no weapon action variations added");
+            return;// end match
+        }
+
+        foreach (Pawn p in targets)
+        {
+            if (p.currentHP <= 0) //just in-case a dead enemy is still in the list somehow
                 continue;
-            //if(p.currentHP > 0)
-            //{
-            //    weight *= 5;
 
-            //}
+            int weight = weaponPrefs.baseAttackValue;
 
-            if (currentDistance <= range * 14) //melee=14 ranged is more
+            int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+
+           if(currentDistance >= 10 && currentDistance <= 14) // range is 1 tile exactly!
+            {
+                //weight *= 
+            }
+
+
+            if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
             {
                 if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
                 {
