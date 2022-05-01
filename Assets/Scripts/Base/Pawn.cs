@@ -177,7 +177,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         mercSheetInPlayerData.baseStatBlock = _mercSheet.baseStatBlock; //Copy the baseStatBlock straight off the prefab
         mercSheetInPlayerData.mercClass = _mercSheet.mercClass; //also grab the merc class - or should this be added to the statblock? maybe dont?
-
+        mercSheetInPlayerData.basicPrefs = _mercSheet.basicPrefs;
         _mercSheet = mercSheetInPlayerData; //beomce one with the sheet in data
 
         //APPLY MERC SHEET
@@ -250,7 +250,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 break;
             }
         }
-        
+        if(actionIndex == -1)
+        {
+            //skip rope
+            Debug.LogError($"{Name} SKIPPED rope");
+            TurnDone = true;
+            return;
+        }
         actionPool[actionIndex].PerformActionOnTarget();
     }
 

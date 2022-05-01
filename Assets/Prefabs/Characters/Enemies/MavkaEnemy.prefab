@@ -266,12 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0044bd87c3944454d8b38737a703a366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  pawn: {fileID: 462218377637529745}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 1
-  targetAllies: 0
+  doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 10
   minDamage: 5
@@ -326,6 +324,19 @@ MonoBehaviour:
       maxHPPerLevel: 0
       maxDamagePerLevel: 0
       minDamagePerLevel: 0
+    basicPrefs:
+      weaponPrefs:
+        baseAttackValue: 4
+        attackFoesAtRange0_modifier: 4
+        attackFoesAtRange1_modifier: 4
+        attackFoesWithinAttackRange_modifier: 4
+        approachFoesOutOfAttackRange_modifier: 4
+      targetHealthPrefs:
+        percentModParis:
+        - percentOfHealth: 60
+          modifier: 2
+        - percentOfHealth: 30
+          modifier: 5
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
@@ -373,11 +384,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  baseweight: 50
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   charmDuration: 2
   initialWeight: 20
   targets: []
@@ -399,11 +408,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  baseweight: 50
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   drownedSpiritPrefab: {fileID: 6673386756113323264, guid: 6a60b5f153d0064479958102762bcfc0,
     type: 3}
   cooldown: 0

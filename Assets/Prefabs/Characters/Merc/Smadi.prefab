@@ -110,6 +110,17 @@ MonoBehaviour:
       maxHPPerLevel: 15
       maxDamagePerLevel: 3
       minDamagePerLevel: 2
+    basicPrefs:
+      weaponPrefs:
+        baseAttackValue: 1
+        attackFoesAtRange0_modifier: 10
+        attackFoesAtRange1_modifier: 5
+        attackFoesWithinAttackRange_modifier: 2
+        approachFoesOutOfAttackRange_modifier: 1
+      targetHealthPrefs:
+        percentModParis:
+        - percentOfHealth: 40
+          modifier: 10
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
@@ -160,12 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b417810940ca24c817784abb818db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 1
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   currentRangeInTiles: 1
 --- !u!114 &7974199490736343132
 MonoBehaviour:
@@ -179,12 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0044bd87c3944454d8b38737a703a366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 1
-  targetAllies: 0
+  doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 1
   minDamage: 13
@@ -223,12 +230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ad648be5941c64cba567372b7656da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 10
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   range: 1
   minHeal: 25
   maxHeal: 35
@@ -257,12 +262,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b92dd58d59dcb4caf6107572f008fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 3
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
   healthEffectsWegiht: 0

@@ -131,7 +131,7 @@ public class HealItem : ActionItem, SA_Item
             {
                 weight *= 4; //if adjcent
             }
-            else if (pawn.HasRoot)
+            else if (pawn.HasRoot) //general step limit should be re-introduced
             {
                 continue;
             }

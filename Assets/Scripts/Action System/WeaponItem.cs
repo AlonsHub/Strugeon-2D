@@ -52,6 +52,7 @@ public class WeaponItem : ActionItem
 
     
      public GameObject cachedProjectile; //public for addcomponent only!
+   
 
     public override void Awake()
     {
@@ -240,57 +241,57 @@ public class WeaponItem : ActionItem
     //{
 
     //}
+    //public override void CalculateVariations()
+    //{
+    //    //actionVariations = new List<ActionVariation>();
+    //    actionVariations.Clear();
+
+    //    if (targets.Count == 0)
+    //    {
+    //        Debug.Log(name + " Found no enemies, no weapon action variations added");
+    //        return;// end match
+    //    }
+
+
+    //    if(feetItem)
+    //    feetItem.currentRangeInTiles = range; // maybe do this at Start()?
+
+    //    foreach (Pawn p in targets)
+    //    {
+    //        if (p.currentHP <= 0) //just in-case a dead enemy is still in the list somehow
+    //            continue;
+
+    //        int weight = baseweight;
+
+    //        int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+
+
+    //        if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
+    //        {
+    //            if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
+    //            {
+    //                //according to GDD this should multiply by 10 
+    //                continue;
+    //            }
+    //            //melee attacker only have 1 range, so this means adjacent
+    //            weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
+
+    //        }
+    //        if (p.currentHP <= p.maxHP / 2.5f) //40%
+    //        {
+    //            weight *= 10;
+    //        }
+
+    //        if (weight != 0)
+    //        {
+    //            actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
+    //        }
+    //    }
+
+    //    CallBehaveVariables();
+
+    //}
     public override void CalculateVariations()
-    {
-        //actionVariations = new List<ActionVariation>();
-        actionVariations.Clear();
-
-        if (targets.Count == 0)
-        {
-            Debug.Log(name + " Found no enemies, no weapon action variations added");
-            return;// end match
-        }
-
-
-        if(feetItem)
-        feetItem.currentRangeInTiles = range; // maybe do this at Start()?
-
-        foreach (Pawn p in targets)
-        {
-            if (p.currentHP <= 0) //just in-case a dead enemy is still in the list somehow
-                continue;
-
-            int weight = baseweight;
-
-            int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
-
-
-            if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
-            {
-                if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
-                {
-                    //according to GDD this should multiply by 10 
-                    continue;
-                }
-                //melee attacker only have 1 range, so this means adjacent
-                weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
-
-            }
-            if (p.currentHP <= p.maxHP / 2.5f) //40%
-            {
-                weight *= 10;
-            }
-
-            if (weight != 0)
-            {
-                actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-            }
-        }
-
-        CallBehaveVariables();
-
-    }
-    public void CalculateVariations2()
     {
         //actionVariations = new List<ActionVariation>();
         actionVariations.Clear();
@@ -337,6 +338,7 @@ public class WeaponItem : ActionItem
             if (weight == 0) //don't calculate if it's going to be end up as 0 anyways
                 continue;
 
+            #region Method 1: Stacking. 
             // method 1: Stacking. 
             // simply checks if the condition applies - and modifies if so ("stacking")
             foreach (var pair in targetHealthPrefs.percentModParis)
@@ -346,31 +348,35 @@ public class WeaponItem : ActionItem
                     weight *= pair.modifier;
                 }
             }
+            #endregion
+
+            #region Method 2: Threshold
             // method 2: Threshold. 
             // only applies the mod for the "greatest" relevant threshold met 
-            for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
-            {
-                if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
-                {
-                    if (i < targetHealthPrefs.percentModParis.Length - 1) //not last
-                    {
-                        //apply this (i) mod!
-                        weight *= targetHealthPrefs.percentModParis[i].modifier;
-                    }
-                    else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
-                    {
-                        continue; //
-                    }
-                    else
-                    {
-                        weight *= targetHealthPrefs.percentModParis[i].modifier;
-                        //apply this (i) mod, and break
-                        break;
-                    }
-                }
-            }
-            
-            
+            //for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
+            //{
+            //    if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
+            //    {
+            //        if (i < targetHealthPrefs.percentModParis.Length - 1) //not last
+            //        {
+            //            //apply this (i) mod!
+            //            weight *= targetHealthPrefs.percentModParis[i].modifier;
+            //        }
+            //        else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
+            //        {
+            //            continue; //
+            //        }
+            //        else
+            //        {
+            //            weight *= targetHealthPrefs.percentModParis[i].modifier;
+            //            //apply this (i) mod, and break
+            //            break;
+            //        }
+            //    }
+            //}
+
+            //END METHOD 2
+            #endregion
 
             if (weight != 0)
             {

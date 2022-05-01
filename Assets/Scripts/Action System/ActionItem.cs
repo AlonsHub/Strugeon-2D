@@ -22,10 +22,12 @@ public class ActionItem : MonoBehaviour
     //but we should have all possible targets somere
 
     List<BehaveVariable> behaveVariables;
+
     public virtual void Awake()
     {
         //actionVariations = new List<ActionVariation>(); //Why is this commented out? TBF look at all overrides of this
-        pawn = GetComponent<Pawn>();
+        //if(!pawn) MUST HAPPEN! the ref is the prefab to begin with
+        pawn = GetComponent<Pawn>(); //MUST
         behaveVariables = new List<BehaveVariable>();
     }
     public virtual void CalculateVariations()
@@ -50,4 +52,11 @@ public class ActionItem : MonoBehaviour
         }
     }
 
+
+    //for inspector use!
+    [ContextMenu("get pawn")]
+    public void GetPawn()
+    {
+        pawn = GetComponent<Pawn>();
+    }
 }

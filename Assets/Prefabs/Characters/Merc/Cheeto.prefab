@@ -89,6 +89,17 @@ MonoBehaviour:
       maxHPPerLevel: 10
       maxDamagePerLevel: 4
       minDamagePerLevel: 4
+    basicPrefs:
+      weaponPrefs:
+        baseAttackValue: 1
+        attackFoesAtRange0_modifier: 5
+        attackFoesAtRange1_modifier: 0
+        attackFoesWithinAttackRange_modifier: 5
+        approachFoesOutOfAttackRange_modifier: 4
+      targetHealthPrefs:
+        percentModParis:
+        - percentOfHealth: 40
+          modifier: 10
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
@@ -140,12 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94b417810940ca24c817784abb818db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 1
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 1
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   currentRangeInTiles: 1
 --- !u!114 &5182301774868751694
 MonoBehaviour:
@@ -183,12 +192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0044bd87c3944454d8b38737a703a366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 1
-  targetAllies: 0
+  doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 5
   minDamage: 8
@@ -228,11 +235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  baseweight: 4
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
 --- !u!114 &1105644228005410149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,12 +250,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50b92dd58d59dcb4caf6107572f008fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 3
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   escapeThreshold: 2
   escapeWeight: 50
   healthEffectsWegiht: 0
@@ -267,12 +270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af972aa773fcada46bc70a8bc79cc21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawn: {fileID: 0}
-  baseCost: 0
-  currentModifier: 1
+  pawn: {fileID: 853967901895232535}
+  baseweight: 0
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
   duration: 2
   targets: []
   chanceToProc: 15
@@ -295,11 +296,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  baseCost: 4
-  currentModifier: 1
+  baseweight: 0
   actionVariations: []
-  isWeapon: 0
-  targetAllies: 0
+  doTargetAllies: 0
 --- !u!1 &1667078419819343595
 GameObject:
   m_ObjectHideFlags: 0
