@@ -10,6 +10,7 @@ public class WeaponItem : ActionItem
 {
     //WeaponPrefs weaponPrefs; //is it better to cache once from character sheet, or access directly to sheet?
     WeaponPrefs weaponPrefs => pawn._mercSheet.basicPrefs.weaponPrefs; //is it better to cache once from character sheet, or access directly to sheet?
+    TargetHealthPrefs targetHealthPrefs => pawn._mercSheet.basicPrefs.targetHealthPrefs; //is it better to cache once from character sheet, or access directly to sheet?
 
     public FeetItem feetItem; //does the walking as an actionvariation added by weaponitem, but holding the feetItem in the List entry of actionsvariations 
 
@@ -309,27 +310,67 @@ public class WeaponItem : ActionItem
 
             int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
 
-           if(currentDistance >= 10 && currentDistance <= 14) // range is 1 tile exactly!
+
+            switch (currentDistance)
             {
-                //weight *= 
+                case 0:
+                    weight *= weaponPrefs.attackFoesAtRange0_modifier; // generally high, since it's ON YOU
+                    break;
+                case 10:
+                    weight *= weaponPrefs.attackFoesAtRange1_modifier; // 0 for ranged-attackers currently, until we have positioning  
+                    break;
+                case 14:
+                    weight *= weaponPrefs.attackFoesAtRange1_modifier; // 0 for ranged-attackers currently, until we have positioning  
+                    break;
+                default: // distance of 2 or more
+                    if(currentDistance <= range)
+                    {
+                        weight *= weaponPrefs.attackFoesWithinAttackRange_modifier;
+                    }
+                    else
+                    {
+                        weight *= weaponPrefs.approachFoesOutOfAttackRange_modifier; ///i.e. walk to attack
+                    }
+                    break;
             }
 
+            if (weight == 0) //don't calculate if it's going to be end up as 0 anyways
+                continue;
 
-            if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
+            // method 1: Stacking. 
+            // simply checks if the condition applies - and modifies if so ("stacking")
+            foreach (var pair in targetHealthPrefs.percentModParis)
             {
-                if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
+                if(p.currentHP <= (p.maxHP / 100 * pair.percentOfHealth))
                 {
-                    //according to GDD this should multiply by 10 
-                    continue;
+                    weight *= pair.modifier;
                 }
-                //melee attacker only have 1 range, so this means adjacent
-                weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
-
             }
-            if (p.currentHP <= p.maxHP / 2.5f) //40%
+            // method 2: Threshold. 
+            // only applies the mod for the "greatest" relevant threshold met 
+            for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
             {
-                weight *= 10;
+                if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
+                {
+                    if (i < targetHealthPrefs.percentModParis.Length - 1) //not last
+                    {
+                        //apply this (i) mod!
+                        weight *= targetHealthPrefs.percentModParis[i].modifier;
+                    }
+                    else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
+                    {
+                        continue; //
+                    }
+                    else
+                    {
+                        weight *= targetHealthPrefs.percentModParis[i].modifier;
+                        //apply this (i) mod, and break
+                        break;
+                    }
+                }
             }
+            
+            
 
             if (weight != 0)
             {

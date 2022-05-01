@@ -9,6 +9,7 @@ public class BasicPrefs
     [Header("Combat:")]
     public WeaponPrefs weaponPrefs;
     public WeaponAddOnPrefs weaponAddOnPrefs;
+    public TargetHealthPrefs targetHealthPrefs;
 
     [Header("Composure:")]
     public FleePrefs fleePrefs;

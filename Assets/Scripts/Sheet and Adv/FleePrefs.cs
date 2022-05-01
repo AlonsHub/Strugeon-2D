@@ -1,18 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[System.Serializable]
 
-public class FleePrefs : MonoBehaviour
+public class FleePrefs 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   //should have a "kill switch" for "0% fleeing" to ensure no escapeItem is present on the Instantiated merc!
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
