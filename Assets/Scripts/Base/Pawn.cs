@@ -18,9 +18,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public MercName mercName;
     [SerializeField]
     //MercSheet _characterSheet;
-    public MercSheet _mercSheet; //only to access by mercSheet once!
-    public MercSheet mercSheetInPlayerData { get => PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
+    public MercSheet _mercSheet; //only to access by mercSheet once! - TBF! find a better place to hold the base stats than in THIS field of the prefab
+    public MercSheet mercSheetInPlayerData { get =>  PlayerDataMaster.Instance.SheetByName(mercName);} //these are created and constructed as level 1 with 0 exp when they are created.
                                                                                                   //in any other case they are loaded as data and not constructed at all
+                                                                                                  //TBF! caching a refernece once might be problematic, since it starts with a value
+                                                                                                  //may use this getter once, since pawns dont really need to provide this kind of request to anyone
     //bool isSheetInit = false;
     int initiative;
     [SerializeField]
@@ -104,7 +106,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     //public bool MovementDone { get => movementDone; set => movementDone = value; } // OPTIONAL - to have walk and attack actions
 
-    public string Name { get => pawnName; } 
+    public string Name { get => pawnName; } //TBF!!! this name might be a problem later. Should we always .ToString() the enum when needed? or find better solution?
     public Sprite PortraitSprite { get => portraitSprite; set => portraitSprite = value; }
     public Sprite FullPortraitSprite { get => fullPortraitSprite; set => fullPortraitSprite = value; }
     public Sprite SASprite { get => saSprite; set => saSprite = value; }
