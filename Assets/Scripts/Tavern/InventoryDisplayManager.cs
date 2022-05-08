@@ -20,6 +20,7 @@ public class InventoryDisplayManager : MonoBehaviour
     List<MagicItem> relevantItems;
 
     bool sellModeIsOn;
+    EquipSlotType relevantSlot;
     private void Awake()
     {
         if (!mercGearDisplayer)
@@ -44,11 +45,16 @@ public class InventoryDisplayManager : MonoBehaviour
         Inventory.Instance.OnInventoryChange += RefreshInventory;
         mercGearDisplayer.OnMercChange += RefreshInventory;
     }
-
+    public void FilterBySlot(EquipSlotType slotType)
+    {
+        relevantSlot = slotType;
+        RefreshInventory();
+    }
     public void RefreshInventory()
     {
-        if (mercGearDisplayer.GetMercSheet != null)
-            relevantItems = Inventory.Instance.inventoryItems.Where(x => x.relevantClasses.Contains(mercGearDisplayer.GetMercSheet.mercClass)).ToList();
+        MercSheet ms;
+        if ((ms = mercGearDisplayer.GetMercSheet) != null)
+            relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(ms.mercClass)).ToList();
         else
             return;
         //    relevantItems = Inventory.Instance.inventoryItems;

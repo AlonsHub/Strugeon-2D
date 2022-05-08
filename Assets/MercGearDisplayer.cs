@@ -12,7 +12,6 @@ public class MercGearDisplayer : BasicDisplayer
     public MercSheet GetMercSheet { get => mercSheet; }
 
     public System.Action OnMercChange;
-
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
@@ -59,5 +58,11 @@ public class MercGearDisplayer : BasicDisplayer
         }
 
         DisplayGear(); //refreshes
+    }
+
+    public void OpenItemMenu()
+    {
+        //opens or refereshes the item-menu to display the relevant items for the choosen slot and currently selected mercs
+
     }
 }
