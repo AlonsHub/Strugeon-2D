@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Currently the only prefab relevant for this is the SimpleGearSlot - GearSlot1 is deprecated
 public class MercGearDisplayer : BasicDisplayer
 {
     [SerializeField]
@@ -15,15 +16,16 @@ public class MercGearDisplayer : BasicDisplayer
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
-        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(0));
+        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(0)); // should actually look for the first AVAILABLE merc! TBF
     }
 
     public void SetMeFully(MercSheet ms)
     {
         mercSheet = ms;
-        base.SetMe(new List<string> {ms.characterName.ToString(), ms._level.ToString()}, new List<Sprite> {ms.MyPawnPrefabRef<Pawn>().FullPortraitSprite });
+        Pawn p = ms.MyPawnPrefabRef<Pawn>(); 
+        base.SetMe(new List<string> {ms.characterName.ToString(),ms._maxHp.ToString(),$"{ms._minDamage} - {ms._maxDamage}", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
         DisplayGear();
-        OnMercChange();
+        OnMercChange?.Invoke();
         //foreach of that Mercs items - display them in their relevant slots
     }
 

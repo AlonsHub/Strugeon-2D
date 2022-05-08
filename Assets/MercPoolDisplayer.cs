@@ -54,13 +54,16 @@ public class MercPoolDisplayer : MonoBehaviour
 
         for (int i = 0; i < displayers.Count; i++)
         {
-            EquipMercRosterSlot slot = displayers[i].GetComponent<BasicDisplayer>() as EquipMercRosterSlot;
-            slot.SetMe(new List<string> { }, new List<Sprite> { relevant[i].MyPawnPrefabRef<Pawn>().PortraitSprite });
+            LobbyMercDisplayer lobbyMercDisplayer = displayers[i].GetComponent<LobbyMercDisplayer>();
+            lobbyMercDisplayer.SetMeFull(relevant[i], this);
 
-            slot.index = i;
-            slot.mercPoolDisplayer = this;
-            //displayers[i].GetComponent<Button>().onClick.AddListener(() => OpenGearDisplayerByMercIndex(i));
 
+
+
+            //EquipMercRosterSlot slot = displayers[i].GetComponent<BasicDisplayer>() as EquipMercRosterSlot;
+            //slot.index = i;
+            //slot.mercPoolDisplayer = this;
+            //displayers[i].GetComponent<Button>().onClick.AddListener(() => OpenGearDisplayerByMercIndex(i)); 
         }
        
     }
@@ -70,10 +73,9 @@ public class MercPoolDisplayer : MonoBehaviour
         //mercGearDisplayer.SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(i));
         mercGearDisplayer.SetMeFully(relevant[i]);
     }
-
-    private void OnDisable()
+    public void ShowMercOnGearDisplayer(MercSheet mercSheet)
     {
-        
+        mercGearDisplayer.SetMeFully(mercSheet);
     }
 
 }

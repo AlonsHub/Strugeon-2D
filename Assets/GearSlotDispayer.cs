@@ -19,12 +19,10 @@ public class GearSlotDispayer : BasicDisplayer
         if (!item.itemSprite && !item.FetchSprite())
                 return false;
 
+        //Now sets the data to a HIDDEN(i.e. disabled gameobject called "HoverBox - TEMP"
         return base.SetMe(new List<string> {$"{item.magicItemName} of {item._BenefitsProperNoun()}" , $"{item._BenefitsStat()} +{item._Benefit().Value()}" }, new List<Sprite> {item.itemSprite});
     }
 
-    public void Click()
-    {
-        MercSheet merc;
-        //merc.gear.TryRemoveItemFromSlot()
-    }
+    //add an OnHover mechanic to enable HoverBox temporarily
+
 }
