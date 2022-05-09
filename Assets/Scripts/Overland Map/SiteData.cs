@@ -4,7 +4,12 @@ using UnityEngine;
 [System.Serializable]
 public class SiteData
 {
+    //transfer cooldown and ALL other SiteData related properites from SiteButton to SiteData - SiteButton is tricky though!
+    //TBF 09/05/22
+
     public LevelEnum siteName; //level/site decide!!!
+
+    public float logicalDistance; //for rings
     //cooldown
     //timeToArrive
 

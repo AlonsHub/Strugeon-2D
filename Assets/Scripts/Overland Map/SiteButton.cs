@@ -66,8 +66,15 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     Button thisButton;
     private void Start()
     {
-        //read if any site cooldown times exist
-        _squadPicker = squadPickerObject.GetComponent<SquadPicker>();
+        //Reveal ring check
+        if (!RevealRing.Instance.IsSiteInRing(siteData))
+        { 
+            gameObject.SetActive(false);
+            return;
+        }
+
+            //read if any site cooldown times exist
+            _squadPicker = squadPickerObject.GetComponent<SquadPicker>(); //TBF! terribly stupid! squad picker shouldn't be a gameobject, it should just be squad picker!
         thisButton = GetComponent<Button>();
         //oldColor = thisButton.targetGraphic.color;
 
@@ -129,6 +136,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             SendToArena();
             return;
         }
+
+
         squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
         _squadPicker.Refresh(dataDisplayCenterTrans); //chache this earlier! //cached as _squadPicker :)
         _squadPicker.SetSite(this);
@@ -227,29 +236,16 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
         }
         SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
-        myDataDisplay.SetActive(true);
+        myDataDisplay.SetActive(true); //should this really be seperate from displayer? TBF
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
-        //LevelRef.Instance.siteToCooldown = this;
-        //LevelRef.Instance.visitedSiteName = name;
-
-        ///
-        /// Check first if site is initiated
-        /// if not, randomize
-        ///
 
         //TBD this should move to an Awake or start
         if (!isLevelDataSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
             RandomSetSelf();
 
-        //Do something to the sprite now - edit sprite later
-        //oldColor = thisButton.targetGraphic.color;
-        //thisButton.targetGraphic.color = Color.red;
-        //SetHoverColor(true);
 
-        displayer.SetMe(this);
+        displayer.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
 
     }
     //Color oldColor; //temp until new highlighted sprites are added
@@ -261,7 +257,6 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void RandomSetSelf()
     {
-
         int rndDifficulty = UnityEngine.Random.Range(0, 3);
 
         levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty); //this "sets" level data

@@ -60,6 +60,12 @@ public class PlayerData
 
     public List<MagicItem> magicItems;
 
+    
+    /// Reveal ranges
+    public float siteRevealIntensity;
+    public float idRevealIntensity;
+    public float levelRevealIntensity;
+
     public PlayerData()
     {
         mercSheets = new List<MercSheet>();
@@ -70,6 +76,10 @@ public class PlayerData
 
         SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
         _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
+
+        siteRevealIntensity = 2;
+        idRevealIntensity = 1;
+        levelRevealIntensity = 0;
     }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 

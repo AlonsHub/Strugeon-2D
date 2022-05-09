@@ -14,7 +14,7 @@ public class SiteDisplayer : MonoBehaviour
     [SerializeField]
     Transform dwellerPortraitGroupRoot;
     [SerializeField]
-    List<DwellerDisplayer> dwellerPortraitImgs;
+    List<DwellerDisplayer> dwellerDisplayers;
 
     [SerializeField]
     Transform goldDisplayer;
@@ -34,8 +34,8 @@ public class SiteDisplayer : MonoBehaviour
 
     private void Awake()
     {
-        if (dwellerPortraitImgs == null)
-            dwellerPortraitImgs = new List<DwellerDisplayer>();
+        if (dwellerDisplayers == null)
+            dwellerDisplayers = new List<DwellerDisplayer>();
 
         if (Instances == null)
         {
@@ -45,38 +45,94 @@ public class SiteDisplayer : MonoBehaviour
 
         Instances.Add(this);
     }
-    public void SetMe(SiteButton sb)
+    public void SetMe(SiteButton sb) //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss
     {
         siteButton = sb;
         levelData = sb.levelSO.levelData;
 
         for (int i = 0; i < levelData.enemies.Count; i++)
         {
-            if (i >= dwellerPortraitImgs.Count)
+            if (i >= dwellerDisplayers.Count)
             {
-                //Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
+                
                 DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
-                //if (!img)
-                //{
-                //    Debug.LogError("not UI image found on dwellerPortraitPrefab");
-                //}
-                dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
-                //img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
-                dwellerPortraitImgs.Add(dweller); //as image
+
+                dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+
+                
+                dwellerDisplayers.Add(dweller); //as image
             }
             else
             {
                 
-                dwellerPortraitImgs[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
+                dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
             }
         }
-        if (levelData.enemies.Count < dwellerPortraitImgs.Count) // BADDDD and easy to do otherwise
+        if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
         {
-            int delta = dwellerPortraitImgs.Count - levelData.enemies.Count;
+            int delta = dwellerDisplayers.Count - levelData.enemies.Count;
             for (int i = 1; i <= delta; i++)
             {
-                DwellerDisplayer dd = dwellerPortraitImgs[dwellerPortraitImgs.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
-                dwellerPortraitImgs.RemoveAt(dwellerPortraitImgs.Count - 1);
+                DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
+                dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
+                dd.KillMe();
+            }
+        } // BADDDD and easy to do otherwise
+
+        difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+        goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
+    }
+    //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss
+    public void SetMe(SiteButton sb, bool idReveal, bool levelReveal) //In this version - ID reveal ALWAYS precedes LevelReveal, so idReveal == false, assumes levelReveal is also false
+    {
+        siteButton = sb;
+        levelData = sb.levelSO.levelData;
+
+        for (int i = 0; i < levelData.enemies.Count; i++)
+        {
+            if (i >= dwellerDisplayers.Count)
+            {
+                
+                DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
+
+                if (idReveal)
+                {
+                    if (levelReveal)
+                        dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+                    else
+                        dweller.SetMe(levelData.enemies[i]);
+                }
+                else
+                {
+                    dweller.SetMe();
+                }
+
+                
+                dwellerDisplayers.Add(dweller); 
+            }
+            else
+            {
+                if (idReveal)
+                {
+                    if (levelReveal)
+                        dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+                    else
+                        dwellerDisplayers[i].SetMe(levelData.enemies[i]);
+                }
+                else
+                {
+                    dwellerDisplayers[i].SetMe();
+                }
+            }
+        }
+
+        if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
+        {
+            int delta = dwellerDisplayers.Count - levelData.enemies.Count;
+            for (int i = 1; i <= delta; i++)
+            {
+                DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
+                dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
                 dd.KillMe();
             }
         } // BADDDD and easy to do otherwise
@@ -92,7 +148,7 @@ public class SiteDisplayer : MonoBehaviour
 
         for (int i = 0; i < levelData.enemies.Count; i++)
         {
-            if (i >= dwellerPortraitImgs.Count)
+            if (i >= dwellerDisplayers.Count)
             {
                 //Image img = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>().portrait;
                 DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
@@ -102,21 +158,21 @@ public class SiteDisplayer : MonoBehaviour
                 //}
                 dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
                 //img.sprite = levelData.enemies[i].FullPortraitSprite; //consider keeping them somewhere
-                dwellerPortraitImgs.Add(dweller); //as image
+                dwellerDisplayers.Add(dweller); //as image
             }
             else
             {
 
-                dwellerPortraitImgs[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
+                dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]);
             }
         }
-        if (levelData.enemies.Count < dwellerPortraitImgs.Count) // BADDDD and easy to do otherwise
+        if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
         {
-            int delta = dwellerPortraitImgs.Count - levelData.enemies.Count;
+            int delta = dwellerDisplayers.Count - levelData.enemies.Count;
             for (int i = 1; i <= delta; i++)
             {
-                DwellerDisplayer dd = dwellerPortraitImgs[dwellerPortraitImgs.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
-                dwellerPortraitImgs.RemoveAt(dwellerPortraitImgs.Count - 1);
+                DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
+                dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
                 dd.KillMe();
             }
         } // BADDDD and easy to do otherwise
