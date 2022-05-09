@@ -5,9 +5,14 @@ using UnityEngine;
 //Currently the only prefab relevant for this is the SimpleGearSlot - GearSlot1 is deprecated
 public class MercGearDisplayer : BasicDisplayer
 {
+    MercSheet mercSheet;
+
+
     [SerializeField]
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
-    MercSheet mercSheet;
+
+    [SerializeField]
+    ExpBarDisplayer expBarDisplayer;
 
     public MercSheet GetMercSheet { get => mercSheet; }
 
@@ -21,6 +26,7 @@ public class MercGearDisplayer : BasicDisplayer
     public void SetMeFully(MercSheet ms)
     {
         mercSheet = ms;
+        expBarDisplayer.SetBar(ms);
         Pawn p = ms.MyPawnPrefabRef<Pawn>(); 
         base.SetMe(new List<string> {ms.characterName.ToString(),ms._maxHp.ToString(),$"{ms._minDamage} - {ms._maxDamage}", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
         DisplayGear();

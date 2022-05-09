@@ -20,7 +20,7 @@ public class ExpBarDisplayer : MonoBehaviour //EXCEPTION CLASS THAT IS NOT A BAS
     {
         Vector2 expFromTo = mercSheet._expFromAndToNextLevel;
         float fillAmount = (mercSheet._experience - expFromTo.x) / (expFromTo.y - expFromTo.x);
-        SetBar(mercSheet._level, $"{mercSheet._experience}/{mercSheet._expFromAndToNextLevel}", fillAmount);
+        SetBar(mercSheet._level, $"{mercSheet._experience}/{mercSheet._expFromAndToNextLevel.y}", fillAmount);
     }
     public void SetBar(int c, string exp, float fill) //the basic most setter - replaces the "base.SetMe(...)" part of this odd design pattern (see BasicDisplayer)
     {
