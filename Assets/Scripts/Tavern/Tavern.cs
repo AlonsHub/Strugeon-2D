@@ -90,7 +90,9 @@ public class Tavern : MonoBehaviour
                 item.SetActive(false);
             else
             {
-                if(!item.activeInHierarchy)
+                
+                if(!item.activeInHierarchy) //TBF does this ensure that a dontDisable window is still active by activating it? it's suppose to be active already...
+                    //turns out, dontDisable means Enable (in most cases), but some buttons do enable windows on their own for some stupid reason - so that needs to be fixed
                 item.SetActive(true);
             }
         }
