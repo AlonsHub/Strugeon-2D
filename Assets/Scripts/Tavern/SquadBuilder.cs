@@ -23,8 +23,8 @@ public class SquadBuilder : MonoBehaviour
     
     public MercDataDisplayer mercDataDisplayer;
 
-    [SerializeField]
-    TogglePopout myButton;
+    //[SerializeField]
+    //TogglePopout myButton;
 
     [SerializeField]
     List<Pawn> uneditedSquadPawns;
@@ -78,7 +78,7 @@ public class SquadBuilder : MonoBehaviour
         {
             partySlots[i].ClearSlot(); //empty
         }
-        myButton.Toggle(true);
+        //myButton.Toggle(true);
 
     }
     public void SetConfirmDecision(bool decision)
@@ -158,8 +158,8 @@ public class SquadBuilder : MonoBehaviour
             item.gameObject.SetActive(true); //turns all party slots (those will be closed on SetToRoom() before the Create/EditSquad mode is activated)
             item.ClearSlot();
         }
-        if(myButton)
-        myButton.Toggle(false);
+        //if(myButton)
+        //myButton.Toggle(false);
     }
     public void SetToRoom(Room r) /// this is the problem, fix the room setting issue
     {

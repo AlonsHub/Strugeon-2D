@@ -13,30 +13,30 @@ public class TogglePopout : MonoBehaviour
     [SerializeField]
     float moveUpAmount;
 
-    [SerializeField]
-    Sprite openSprite;
-    [SerializeField]
-    Sprite closedSprite;
+    //[SerializeField]
+    //Sprite openSprite;
+    //[SerializeField]
+    //Sprite closedSprite;
 
-    public Image sr;
+    //public Image sr;
 
     bool isOpen = false;
 
-   public void Toggle()
-    {
-        isOpen = !isOpen;
+   //public void Toggle()
+   // {
+   //     isOpen = !isOpen;
 
-        if(isOpen)
-        {
-            //openning
-            StartCoroutine(Open());
-        }
-        else
-        {
-            //closing
-            StartCoroutine(Close());
-        }
-    }
+   //     if(isOpen)
+   //     {
+   //         //openning
+   //         StartCoroutine(Open());
+   //     }
+   //     else
+   //     {
+   //         //closing
+   //         StartCoroutine(Close());
+   //     }
+   // }
     public void Toggle(bool isOn)
     {
         isOpen = isOn;

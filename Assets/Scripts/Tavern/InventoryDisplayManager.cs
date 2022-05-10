@@ -11,8 +11,12 @@ public class InventoryDisplayManager : MonoBehaviour
     //prefab with bsicdisplayer
     [SerializeField]
     GameObject itemDisplayerPrefab;
+     [SerializeField]
+    GameObject emptyDisplayerPrefab;
+     
     [SerializeField] //just to see them
     List<ItemDisplayer> displayers = new List<ItemDisplayer>();
+    List<GameObject> empties = new List<GameObject>();
 
     [SerializeField]
     MercGearDisplayer mercGearDisplayer;
@@ -21,6 +25,8 @@ public class InventoryDisplayManager : MonoBehaviour
 
     bool sellModeIsOn;
     EquipSlotType relevantSlot;
+
+
     private void Awake()
     {
         if (!mercGearDisplayer)
@@ -39,7 +45,7 @@ public class InventoryDisplayManager : MonoBehaviour
             Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
             return;
         }
-
+        
         RefreshInventory();
 
         Inventory.Instance.OnInventoryChange += RefreshInventory;
@@ -68,6 +74,12 @@ public class InventoryDisplayManager : MonoBehaviour
 
             displayers[i].SetItem(relevantItems[i]);
         }
+        
+        while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
+        {
+            empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
+        }
+
     }
 
     private void EnsureOneDisplayerPerMagicItem()
@@ -113,6 +125,10 @@ public class InventoryDisplayManager : MonoBehaviour
 
     private void OnDisable()
     {
+        for (int i = empties.Count-1; i >= 0; i--)
+        {
+            Destroy(empties[i]);
+        }
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
         mercGearDisplayer.OnMercChange -= RefreshInventory;
     }
