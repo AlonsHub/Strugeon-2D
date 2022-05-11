@@ -15,7 +15,7 @@ public class PartyMaster : MonoBehaviour
     public List<Pawn> availableMercPrefabs; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
-    public List<Squad> awaySquads; //both available and OtW
+    public List<Squad> awaySquads; //OtW
     
     //public List<MercName> AllMercs() //including hireables // KILL THIS WITH FIREEEE
     //{

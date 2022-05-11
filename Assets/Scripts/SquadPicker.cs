@@ -190,10 +190,12 @@ public class SquadPicker : MonoBehaviour
 
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
-        go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
+        //go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
+        go.GetComponent<SimpleFollower>().SetNewFollower(squadSlots[index].squad, tgtSite);
         //PartyMaster.Instance.squads.Remove(squadSlots[index].squad); //should be managed by the squad itself in SetMercToAssignment? //MOVED!
 
         squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, squadSlots[index].squad.roomNumber); 
+
         PlayerDataMaster.Instance.LogSquadDeparture(squadSlots[index].squad.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
     }
 

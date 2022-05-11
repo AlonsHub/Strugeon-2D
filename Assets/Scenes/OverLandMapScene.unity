@@ -167,7 +167,7 @@ MonoBehaviour:
   - {fileID: 804710185}
   - {fileID: 1183155470}
   - {fileID: 348749201}
-  followerPrefab: {fileID: 8198774896638970308, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
+  followerPrefab: {fileID: 8198774896638970308, guid: 0266e1a2dc136284cb825fc739a389d7,
     type: 3}
   followerCanvas: {fileID: 1466373153}
 --- !u!4 &42029086
@@ -1707,7 +1707,7 @@ PrefabInstance:
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: ETA
-      value: 2
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
@@ -3531,9 +3531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19e37237094fbd47b31f23982fd2c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  siteRevealIntensity: 3
-  idRevealIntensity: 2
-  levelRevealIntensity: 1
   siteRevealSlider: {fileID: 1283878358}
   idRevealSlider: {fileID: 1034296534}
   levelRevealSlider: {fileID: 1250671457}
@@ -3662,7 +3659,7 @@ GameObject:
   - component: {fileID: 702498089}
   - component: {fileID: 702498090}
   m_Layer: 5
-  m_Name: SqaudPicker
+  m_Name: SquadPicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3719,7 +3716,7 @@ MonoBehaviour:
     type: 3}
   offset: {x: 300, y: 20}
   squadToggler: {fileID: 2045366867}
-  followerPrefab: {fileID: 8198774896638970308, guid: 3b3c5990bd5e1774aa81865d1af69c7d,
+  followerPrefab: {fileID: 8198774896638970308, guid: 0266e1a2dc136284cb825fc739a389d7,
     type: 3}
   canvasTrans: {fileID: 1466373153}
   tgtSite: {fileID: 0}
@@ -6057,7 +6054,7 @@ PrefabInstance:
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: ETA
-      value: 2
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}

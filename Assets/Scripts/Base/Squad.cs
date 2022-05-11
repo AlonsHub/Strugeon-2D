@@ -18,6 +18,8 @@ public class Squad : IEquatable<Squad>
 
     public SquadState squadState;
 
+    public Sprite SquadPortrait => (pawns[0].PortraitSprite); //or null if none?
+
     public Squad()
     {
         pawns = new List<Pawn>();

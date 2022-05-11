@@ -164,7 +164,7 @@ public class IdleLog : MonoBehaviour
     public BasicDisplayer RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, SiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
     {
         GameObject go = Instantiate(basicEntryPrefab, logParent);
-        go.GetComponentInChildren<Button>().onClick.AddListener(() => siteRef.OnClick());
+        go.GetComponentInChildren<Button>().onClick.AddListener(() => siteRef.OnClick()); //assuming the site is set to ready == true
         BasicDisplayer basicMessage = go.GetComponent<BasicDisplayer>();
         //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
 

@@ -16,12 +16,13 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
       - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
-      enemyLevels: 0400000004000000
+      enemyLevels: 050000000500000005000000
     enemySetPack: {fileID: 11400000, guid: a8facd8ddceefc0459f0783958c8d14d, type: 2}
     magicItem:
-      magicItemName: Helmet
-      goldValue: 25
+      magicItemName: Sand Crystal Rod
+      goldValue: 20
       spectrumProfile:
         red: 0
         blue: 0
@@ -29,18 +30,23 @@ MonoBehaviour:
         purple: 0
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 82d960ab387eb2047b66c4eacb443d4f, type: 2}
-      spriteName: Helmet
-      fittingSlotType: 0
+      itemSprite: {fileID: 21300000, guid: 39ca2cec25b145248961cc1855026c19, type: 2}
+      spriteName: YellowGemWand
+      fittingSlotType: 1
       isEquipped: 0
-    expReward: 105
+      statBenefitSO: {fileID: 0}
+      statBenefit:
+        statToBenefit: 1
+        value: 5
+      relevantClasses: 02000000
+    expReward: 160
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 13
-    difficulty: 1
+    goldReward: 24
+    difficulty: 2
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
-    waitTimeMinutes: 0
+    waitTimeMinutes: 3
     waitTimeSeconds: 54
     isSet: 1

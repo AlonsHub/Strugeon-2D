@@ -25,34 +25,9 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
 
     BasicDisplayer idleLogMessage;
-    //private void Start()
-    //{
-    //    pathFollower = GetComponent<PathFollower>();
-    //    //transform.GetChild(0).gameObject.SetActive(false); //kills GFX until set
-    //}
-
-    //public void SetMe(Squad s, float t, PathCreator p)
-    //{
-    //    squad = s;
-    //    remainingTime = t;
-    //    path = p;
-
-    //    pathFollower = GetComponent<PathFollower>();
-
-    //    //transform.position = p.path.GetPointAtTime(0);
-
-    //    pathFollower.speed = p.path.cumulativeLengthAtEachVertex[p.path.cumulativeLengthAtEachVertex.Length - 1]/t;
-
-    //    remainingTime += 1; //THIS IS FOR DISPLAY PURPOSES ONLY - MAKES SURE THE LAST SECOND COUNTED DOWN IS FROM 1 TO 0 AND NOT 0
-
-    //    pathFollower.pathCreator = path;
-
-    //    StartCoroutine("RunTimer");
-
-    //}
+   
     public void SetMe(Squad s, SiteButton sb)
     {
-
         siteButton = sb;
 
         squad = s;
@@ -79,6 +54,12 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         StartCoroutine(nameof(RunTimer));
 
     }
+    /// <summary>
+    /// For followers loaded from save (not new ones)
+    /// </summary>
+    /// <param name="s"></param>
+    /// <param name="sb"></param>
+    /// <param name="departTime"></param>
     public void SetMe(Squad s, SiteButton sb, DateTime departTime)
     {
 
@@ -89,11 +70,11 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
 
         remainingTime = sb.ETA - (float)(DateTime.Now - departTime).TotalSeconds; //set remainning to full time
 
-        if(remainingTime >0)
-        {
-            //spwan at site already
+        //if(remainingTime >0)
+        //{
+        //    //spwan at site already
 
-        }
+        //}
         path = sb.pathCreator;
 
         siteButton.isWaitingForSquad = true; //should be a handled by SiteButton itself
@@ -118,10 +99,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
         StartCoroutine(nameof(RunTimer));
 
     }
-    public void Go()
-    {
-
-    }
+   
 
     IEnumerator RunTimer()
     {
@@ -156,7 +134,7 @@ public class SquadFollower : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         //cancel expedition window?
-        CancelExpeditionWindow.Instance.SetMe(this);
+        //CancelExpeditionWindow.Instance.SetMe(this);
     }
 
     public void CancelMe()
