@@ -58,6 +58,7 @@ public class InventoryDisplayManager : MonoBehaviour
     }
     public void RefreshInventory()
     {
+        
         MercSheet ms;
         if ((ms = mercGearDisplayer.GetMercSheet) != null)
             relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(ms.mercClass)).ToList();
@@ -75,10 +76,10 @@ public class InventoryDisplayManager : MonoBehaviour
             displayers[i].SetItem(relevantItems[i]);
         }
         
-        while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
-        {
-            empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
-        }
+        //while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
+        //{
+        //    empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
+        //}
 
     }
 
@@ -125,11 +126,12 @@ public class InventoryDisplayManager : MonoBehaviour
 
     private void OnDisable()
     {
-        for (int i = empties.Count-1; i >= 0; i--)
-        {
-            Destroy(empties[i]);
-        }
+        //for (int i = empties.Count-1; i >= 0; i--)
+        //{
+        //    Destroy(empties[i]);
+        //}
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
+        if(mercGearDisplayer)
         mercGearDisplayer.OnMercChange -= RefreshInventory;
     }
 
