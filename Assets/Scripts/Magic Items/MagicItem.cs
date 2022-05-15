@@ -34,6 +34,13 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     public List<MercClass> relevantClasses;
 
+
+    //TBF! make a seperate "Description Database" to store all this data.
+    //temp, see above ^^^
+    [HideInInspector]
+    public string ItemDescription() => $"{magicItemName} is a {fittingSlotType} type item, which adds: {myBenefit.BenefitStatName()} +{myBenefit.Value()}"; 
+    //end temp
+
     public bool FetchSprite()
     {
         //if(itemSprite)

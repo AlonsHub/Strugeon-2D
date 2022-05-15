@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        OnInventoryChange += TEST_OnInventoryChange;
+        //OnInventoryChange += TEST_OnInventoryChange;
 
         //If magicItems(changed name)-> inventoryItems (aka PlayerDataMaster.Instance.currentPlayerData.magicItems) is null, it means there was nothing there when it was saved - or that it is a new save
         if (inventoryItems == null)
@@ -118,9 +118,15 @@ public class Inventory : MonoBehaviour
         //displayer update? 
         //call an event that it maybe registered to, if it is enabled? sounds CORRECT TBD
     }
-
-    void TEST_OnInventoryChange()
+    public void SellItem(MagicItem magicItem)
     {
-        Debug.Log("On inventory change");
+        int goldValue = magicItem.goldValue;
+        if(!RemoveMagicItem(magicItem))
+        {
+            Debug.LogError($"couldn't remove {magicItem.magicItemName}");
+            return;
+        }
+        Debug.LogError($"{magicItem.magicItemName} Sold! for {goldValue} gold");
+        AddGold(goldValue);
     }
 }

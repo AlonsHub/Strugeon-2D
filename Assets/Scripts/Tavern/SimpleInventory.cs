@@ -12,7 +12,14 @@ public class SimpleInventory : MonoBehaviour
     GameObject itemDisplayerPrefab;
 
     [SerializeField] //just to see them
-    List<BasicDisplayer> displayers = new List<BasicDisplayer>();
+    List<InventoryItemDisplayer> displayers = new List<InventoryItemDisplayer>();
+
+    MagicItem selectedItem; //currently selected item to display/sell
+    [SerializeField]
+    BasicDisplayer selectedItemDesplayer;
+    [SerializeField]
+    MagicItemSO emptyItemSO; //the data for what to show when no items are available
+    MagicItem emptyItem => emptyItemSO.magicItem; //the data for what to show when no items are available
 
     private void OnEnable()
     {
@@ -40,7 +47,7 @@ public class SimpleInventory : MonoBehaviour
             for (int i = 0; i < diff * -1; i++) //*-1 since diff is < 0, but is still the difference
             {
                 GameObject displayerObject = Instantiate(itemDisplayerPrefab, inventoryParent);
-                displayers.Add(displayerObject.GetComponent<BasicDisplayer>());
+                displayers.Add(displayerObject.GetComponent<InventoryItemDisplayer>());
             }
         }
         else
@@ -56,8 +63,6 @@ public class SimpleInventory : MonoBehaviour
 
     public void RefreshInventory()
     {
-
-       
         EnsureOneDisplayerPerMagicItem();
 
         //Draw items
@@ -66,13 +71,47 @@ public class SimpleInventory : MonoBehaviour
             if (!Inventory.Instance.inventoryItems[i].FetchSprite())
                 continue;
 
-            displayers[i].SetMe(new List<string> { }, new List<Sprite> { Inventory.Instance.inventoryItems[i].itemSprite });
+            //displayers[i].SetMe(new List<string> { }, new List<Sprite> { Inventory.Instance.inventoryItems[i].itemSprite });
+            displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i], this);
         }
 
-        //while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
-        //{
-        //    empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
-        //}
-
+        SetCurrentItem();
     }
+
+    public void SetCurrentItem(MagicItem newItem)
+    {
+        selectedItem = newItem;
+
+        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"{selectedItem.fittingSlotType} | " +
+            $"{selectedItem._Benefit().BenefitStatName()} + {selectedItem._Benefit().Value()}", 
+            selectedItem.ItemDescription(), selectedItem.goldValue.ToString()}, new List<Sprite> {selectedItem.itemSprite});
+    }
+    public void SetCurrentItem()
+    {
+        if (Inventory.Instance.inventoryItems.Count == 0)
+        {
+            selectedItem = null;
+            //Set as nothing
+            selectedItemDesplayer.SetMe(new List<string> { emptyItem.magicItemName, "" ,
+            selectedItem.ItemDescription(), selectedItem.goldValue.ToString()}, new List<Sprite> { selectedItem.itemSprite });
+        }
+        else
+        {
+            SetCurrentItem(Inventory.Instance.inventoryItems[0]);
+            displayers[0].OnMyClick();
+        }
+    }
+
+    public void SellSelectedItem()
+    {
+        if(selectedItem == null)
+        {
+            Debug.LogError("no selected item to sell");
+        }
+
+        //sell selected item
+        Inventory.Instance.SellItem(selectedItem);
+        
+    }
+        
 }
