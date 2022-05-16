@@ -14,6 +14,9 @@ public class GoogleSheetMaster : MonoBehaviour
     static string path = "/StreamingAssets/credentials.json";
     static SheetsService sheetsService;
 
+    [SerializeField]
+    bool doSheet;  
+
     public static GoogleSheetMaster Instance;
 
     List<string> strings; //all A1:A35 first lines in the 
@@ -32,6 +35,8 @@ public class GoogleSheetMaster : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SetUpCredentials();
+
+
 
         //strings = GetRows("A1:A35");
         if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
@@ -101,6 +106,9 @@ public class GoogleSheetMaster : MonoBehaviour
     }
     public void LogPlayer()
     {
+        if (!doSheet)
+            return;
+
         var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
         var objectList = new List<System.Object>(); //fill object list with things!
 

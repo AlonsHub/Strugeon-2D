@@ -20,7 +20,15 @@ public class SimpleInventory : MonoBehaviour
     [SerializeField]
     MagicItemSO emptyItemSO; //the data for what to show when no items are available
     MagicItem emptyItem => emptyItemSO.magicItem; //the data for what to show when no items are available
+    [SerializeField]
+    UnityEngine.UI.Button sellButton;
 
+    [SerializeField]
+    [ColorUsage(true)]
+    Color titleColor;
+    [SerializeField]
+    [ColorUsage(true)]
+    Color slotColor;
     private void OnEnable()
     {
         RefreshInventory();
@@ -81,10 +89,13 @@ public class SimpleInventory : MonoBehaviour
     public void SetCurrentItem(MagicItem newItem)
     {
         selectedItem = newItem;
+        sellButton.interactable = true;
+        string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
+        string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
 
-        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"{selectedItem.fittingSlotType} | " +
-            $"{selectedItem._Benefit().BenefitStatName()} + {selectedItem._Benefit().Value()}", 
-            selectedItem.ItemDescription(), selectedItem.goldValue.ToString()}, new List<Sprite> {selectedItem.itemSprite});
+        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>" +$"<color=#{titleColorHex}>" +
+            $"{selectedItem._Benefit().BenefitStatName()} + {selectedItem._Benefit().Value()} </color>", 
+            selectedItem.ItemDescription(), $"{selectedItem.goldValue} Gold"}, new List<Sprite> {selectedItem.itemSprite});
     }
     public void SetCurrentItem()
     {
@@ -93,7 +104,8 @@ public class SimpleInventory : MonoBehaviour
             selectedItem = null;
             //Set as nothing
             selectedItemDesplayer.SetMe(new List<string> { emptyItem.magicItemName, "" ,
-            selectedItem.ItemDescription(), selectedItem.goldValue.ToString()}, new List<Sprite> { selectedItem.itemSprite });
+            /*emptyItem.ItemDescription()*/ "Nothing to describe...", ""}, new List<Sprite> { emptyItem.itemSprite });
+            sellButton.interactable = false;
         }
         else
         {
@@ -111,7 +123,7 @@ public class SimpleInventory : MonoBehaviour
 
         //sell selected item
         Inventory.Instance.SellItem(selectedItem);
-        
+
     }
-        
+
 }

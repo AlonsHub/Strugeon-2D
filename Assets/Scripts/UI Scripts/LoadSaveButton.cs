@@ -20,7 +20,7 @@ public class LoadSaveButton : MonoBehaviour
     public void LoadMe()
     {
         PlayerDataMaster.Instance.LoadDataFromDisk(playerDataToLoad.playerName);
-        Invoke("SlowSceneChange", 1);
+        Invoke("SlowSceneChange", .2f);
     }
 
     void SlowSceneChange()
