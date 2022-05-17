@@ -16,12 +16,20 @@ public class ItemDisplayer : BasicDisplayer
     {
         if(!mercGearDisplayer) 
         {
-            mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once
+            mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once //TBF horrible
         }
     }
+
+
     bool clickedOnce = false;
+    [SerializeField]
+    private Sprite emptySprite;
+
     public void OnClick()
     {
+        if(magicItem ==null)
+            return; //instead of caching button
+
         if (!clickedOnce)
         {
             StartCoroutine(nameof(DoubleClickCooldown));
@@ -47,6 +55,14 @@ public class ItemDisplayer : BasicDisplayer
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
 
         SetMe(new List<string> { magicItem.magicItemName, magicItem.goldValue.ToString() }, new List<Sprite> {magicItem.itemSprite});
+    }
+    public void SetItem()
+    {
+        magicItem = null;
+
+        //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
+
+        SetMe(new List<string> { "", ""}, new List<Sprite> {emptySprite});
     }
 
     public void SellMe() //button refs this in inspector

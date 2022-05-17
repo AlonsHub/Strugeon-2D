@@ -11,7 +11,7 @@ public class GearSlotDispayer : BasicDisplayer
     Sprite emptySprite;
 
     [SerializeField]
-    InventoryDisplayManager inventoryDisplayManager;
+    EquipInventoryManager inventoryDisplayManager;
 
     public void SetMeEmpty() //check if this is needed to be able to fight. TBF + gamedesign-wise, do we even allow illegal "unequips" and let the merc be useless?
     {

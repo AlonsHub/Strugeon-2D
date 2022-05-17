@@ -15,7 +15,9 @@ public class GoogleSheetMaster : MonoBehaviour
     static SheetsService sheetsService;
 
     [SerializeField]
-    bool doSheet;  
+    bool doSheet;
+
+    public static bool DoSheet { get => Instance.doSheet; set => Instance.doSheet = value; }
 
     public static GoogleSheetMaster Instance;
 

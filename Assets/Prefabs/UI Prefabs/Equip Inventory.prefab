@@ -2856,15 +2856,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7640815535717237668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01bd6a031f4946d4da7cedc97a3fea46, type: 3}
+  m_Script: {fileID: 11500000, guid: a2f0fea6004875f40b192d2ce3e803db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryParent: {fileID: 7640815535731779938}
   itemDisplayerPrefab: {fileID: 9218403651399978950, guid: 638232849c5d7b84f832fbf36896bed3,
     type: 3}
-  emptyDisplayerPrefab: {fileID: 0}
+  emptyDisplayerPrefab: {fileID: 9218403651399978950, guid: f6e5ac8571f056441b4bd57774245e2d,
+    type: 3}
   displayers: []
-  mercGearDisplayer: {fileID: 8962460098597736303}
+  mercGearDisplayer: {fileID: 0}
 --- !u!1 &7640815535731779939
 GameObject:
   m_ObjectHideFlags: 0

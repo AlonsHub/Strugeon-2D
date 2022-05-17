@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InventoryDisplayManager : MonoBehaviour
+public class EquipInventoryManager : MonoBehaviour
 {
     //parent
     [SerializeField]
@@ -11,12 +11,12 @@ public class InventoryDisplayManager : MonoBehaviour
     //prefab with bsicdisplayer
     [SerializeField]
     GameObject itemDisplayerPrefab;
-     [SerializeField]
-    GameObject emptyDisplayerPrefab;
+    // [SerializeField]
+    //GameObject emptyDisplayerPrefab;
      
     [SerializeField] //just to see them
-    List<ItemDisplayer> displayers = new List<ItemDisplayer>();
-    List<GameObject> empties = new List<GameObject>();
+    List<ItemDisplayer> displayers = new List<ItemDisplayer>(); //assume 16 to begin with, add by 4's whenever needed!
+    //List<GameObject> empties = new List<GameObject>();
 
     [SerializeField]
     MercGearDisplayer mercGearDisplayer;
@@ -38,7 +38,7 @@ public class InventoryDisplayManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        SetSellMode(false);
+        //SetSellMode(false);
 
         if(!mercGearDisplayer)
         {
@@ -58,14 +58,46 @@ public class InventoryDisplayManager : MonoBehaviour
     }
     public void RefreshInventory()
     {
-        
+
         MercSheet ms;
         if ((ms = mercGearDisplayer.GetMercSheet) != null)
             relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(ms.mercClass)).ToList();
         else
             return;
         //    relevantItems = Inventory.Instance.inventoryItems;
-        EnsureOneDisplayerPerMagicItem();
+        //EnsureOneDisplayerPerMagicItem();
+
+        foreach (var item in displayers)
+        {
+            item.gameObject.SetActive(true);
+        }
+        if(relevantItems.Count > displayers.Count)
+        {
+            int diff = relevantItems.Count - displayers.Count;
+            diff = (diff % 4 == 0) ? diff : diff +(4-diff%4); //if it does not divide neatly by 4, add 1... could cast as float
+            //diff = round up ((float)diff/4f)
+            for (int i = 0; i < diff; i++)
+            {
+                displayers.Add(Instantiate(itemDisplayerPrefab, inventoryParent).GetComponent<ItemDisplayer>());
+            }
+        }
+        else if (displayers.Count > relevantItems.Count) //excluding the displayer.count == relevantItems.count option
+        {
+            int diff = displayers.Count - relevantItems.Count;
+            if(diff>=4)
+            {
+                int leftover = 4- relevantItems.Count % 4;
+                if(leftover == 4)
+                {
+                    leftover = 0;
+                }
+
+                for (int i = relevantItems.Count + leftover; i < displayers.Count; i++)
+                {
+                    displayers[i].gameObject.SetActive(false);
+                }
+            }
+        }
 
         //Draw items
         for (int i = 0; i < relevantItems.Count; i++)
@@ -74,6 +106,11 @@ public class InventoryDisplayManager : MonoBehaviour
                 continue;
 
             displayers[i].SetItem(relevantItems[i]);
+        }
+        for (int i = relevantItems.Count; i < displayers.Count; i++)
+        {
+         
+            displayers[i].SetItem();
         }
         
         //while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
