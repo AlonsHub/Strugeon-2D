@@ -27,8 +27,27 @@ public class MercGearDisplayer : BasicDisplayer
     {
         mercSheet = ms;
         expBarDisplayer.SetBar(ms);
-        Pawn p = ms.MyPawnPrefabRef<Pawn>(); 
-        base.SetMe(new List<string> {ms.characterName.ToString(),ms._maxHp.ToString(),$"{ms._minDamage} - {ms._maxDamage}", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
+        Pawn p = ms.MyPawnPrefabRef<Pawn>();
+
+        int maxHpBenefit = 0;
+        int damageBenefit = 0;
+
+        foreach (var benefit in ms.gear.GetAllBenefits())
+        {
+            switch ((benefit as StatBenefit).statToBenefit)
+            {
+                case StatToBenefit.MaxHP:
+                    maxHpBenefit += benefit.Value();
+                    break;
+                case StatToBenefit.FlatDamage:
+                    damageBenefit += benefit.Value();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        base.SetMe(new List<string> {ms.characterName.ToString(),$"{ms._maxHp}  \n <color=#{ColorUtility.ToHtmlStringRGBA(Color.cyan)}> + {maxHpBenefit}</color>",$"{ms._minDamage} - {ms._maxDamage} \n <color=#{ColorUtility.ToHtmlStringRGBA(Color.cyan)}> + {damageBenefit}</color>", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
         DisplayGear();
         OnMercChange?.Invoke();
         //foreach of that Mercs items - display them in their relevant slots
