@@ -13,6 +13,10 @@ public class HoverTextBoard : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
 
+    //being phased in, only relevant for BasicDisplayer SetMe overload
+    [SerializeField]
+    BasicDisplayer basicDisplayer;
+
     void Start()
     {
         if(Instance != null && Instance != this)
@@ -45,6 +49,20 @@ public class HoverTextBoard : MonoBehaviour
 
         //scale me?
     }
+    public void SetMe(List<string> strings, List<Sprite> sprites)
+    {
+        root.SetActive(true);
+
+        basicDisplayer.SetMe(strings, sprites);
+
+        //textBox.gameObject.SetActive(false);
+        //position me
+        root.transform.position = (Input.mousePosition.x > Screen.width / 2) ? Input.mousePosition + offset : Input.mousePosition - offset;
+
+
+        //scale me?
+    }
+
     public void UnSetMe()
     {
         root.SetActive(false);

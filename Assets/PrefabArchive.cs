@@ -13,6 +13,12 @@ public class PrefabArchive : MonoBehaviour
 
     public Sprite bullshit;
 
+    //TEMP AF TBF - have a good place for a sprite DB/dict 
+    public Sprite healthSprite;
+    public Sprite swordSprite;
+
+
+    //end TEMP AF TBF
     void Awake()
     {
         if(Instance != null&& Instance != this)

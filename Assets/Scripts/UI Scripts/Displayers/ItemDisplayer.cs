@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemDisplayer : BasicDisplayer
+public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitHandler
 {
     public MagicItem magicItem;
     
@@ -54,7 +55,7 @@ public class ItemDisplayer : BasicDisplayer
 
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
 
-        SetMe(new List<string> { magicItem.magicItemName, magicItem.goldValue.ToString() }, new List<Sprite> {magicItem.itemSprite});
+        SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription()}, new List<Sprite> {magicItem.itemSprite});
     }
     public void SetItem()
     {
@@ -86,5 +87,38 @@ public class ItemDisplayer : BasicDisplayer
 
         mercGearDisplayer.TryEquipItem(toEquip as MagicItem);
         
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (magicItem == null)
+            return;
+        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
+        HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}" , magicItem.ItemDescription(), magicItem.goldValue.ToString() }, 
+                                    new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit)});
+        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString()}, new List<Sprite> { switch((magicItem._Benefit() as StatBenefit).statToBenefit)});
+    }
+
+    Sprite SwitchOnBenefit(StatToBenefit statToBenefit)
+    {
+        switch (statToBenefit)
+        {
+            case StatToBenefit.MaxHP:
+                return PrefabArchive.Instance.healthSprite;
+                break;
+            case StatToBenefit.FlatDamage:
+                return PrefabArchive.Instance.swordSprite;
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (magicItem == null)
+            return;
+        HoverTextBoard.Instance.UnSetMe();
     }
 }
