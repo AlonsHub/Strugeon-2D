@@ -79,7 +79,7 @@ public class SimpleFollower : MonoBehaviour
         totalTravelTime = destinationSite.ETA - delta;
 
         //advance to new starting position
-        transform.position += (destinationSite.transform.position - transform.position)*(destinationSite.ETA- delta/destination.ETA);
+        transform.position += (destinationSite.transform.position - transform.position)*(1- (destinationSite.ETA- delta)/destination.ETA);
 
         StartCoroutine(nameof(WalkToTarget)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
     }
@@ -114,7 +114,7 @@ public class SimpleFollower : MonoBehaviour
     void Arrived()
     {
         Debug.Log("follower arrived");
-        destinationSite.SetArrivedSquad(squad);
+        destinationSite.SetArrivedSquad(squad); //also removes from away squads
         idleLogMessage = IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.squadName, destinationSite.levelSO.name }, new List<Sprite> { groupPortrait.sprite }, destinationSite);
     }
 
@@ -131,6 +131,7 @@ public class SimpleFollower : MonoBehaviour
         squad.isAvailable = true;
        
         destinationSite.UnSetArrivingSquad();
+        if(idleLogMessage)
         Destroy(idleLogMessage.gameObject);
         IdleLog.Instance.CloseIfEmptyCheck(1);
 

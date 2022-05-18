@@ -41,7 +41,9 @@ public class TravelLog : MonoBehaviour
             {
                 //SquadFollower sf = Instantiate(followerPrefab, followerCanvas).GetComponent<SquadFollower>();
                 SimpleFollower sf = Instantiate(followerPrefab, followerCanvas).GetComponent<SimpleFollower>();
-                Squad temp = PartyMaster.Instance.awaySquads.Where(x => x.roomNumber == item.squadIndex).SingleOrDefault();
+                Squad temp = PartyMaster.Instance.awaySquads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
+                //Squad temp = PartyMaster.Instance.squads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
+                if (temp != null)
                 sf.SetLoadedFollower(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
             }
         }

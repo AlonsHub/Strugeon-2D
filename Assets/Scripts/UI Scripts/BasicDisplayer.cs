@@ -27,6 +27,7 @@ public class BasicDisplayer : MonoBehaviour
 
         for (int i = 0; i < spritesPerImage.Count; i++)
         {
+            if(spritesPerImage[i]!=null)
             images[i].sprite = spritesPerImage[i];
         }
 

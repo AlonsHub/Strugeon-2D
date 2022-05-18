@@ -454,6 +454,10 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.squadSitesAndTimesRemainning.Add(new SquadSiteAndTimeOfDeparture(squadIndex, level, tOfDeparture));
     }
 
+    public void RemoveLoggedSquad()
+    { 
+    }
+
     public void RemoveLoggedSquad(int squadIndex)
     {
         tempSquadIndex = squadIndex;
@@ -462,7 +466,22 @@ public class PlayerDataMaster : MonoBehaviour
     int tempSquadIndex =-1;
     void RemoveLoggedSquadDelay()
     {
-        currentPlayerData.squadSitesAndTimesRemainning.Remove(currentPlayerData.squadSitesAndTimesRemainning.Where(x => x.squadIndex == tempSquadIndex).FirstOrDefault());
+        //currentPlayerData.squadSitesAndTimesRemainning.Remove(currentPlayerData.squadSitesAndTimesRemainning.Where(x => x.squadIndex == tempSquadIndex).FirstOrDefault());
+        SquadSiteAndTimeOfDeparture? temp = null;
+        foreach (var item in currentPlayerData.squadSitesAndTimesRemainning)
+        {
+            if(item.squadIndex == tempSquadIndex)
+            {
+                temp = item;
+                break;
+            }
+        }
+        if (temp.HasValue)
+            currentPlayerData.squadSitesAndTimesRemainning.Remove(temp.Value);
+        else
+            print("couldn't remove logged squad");
+            
+
         tempSquadIndex = -1;
     }
 

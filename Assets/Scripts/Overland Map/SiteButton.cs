@@ -208,6 +208,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         isReady = true;
         isWaitingForSquad = false;
         readiedSquad = s;
+        PartyMaster.Instance.awaySquads.Remove(s);
     }
 
     public void OnPointerExit(PointerEventData eventData)

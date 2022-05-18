@@ -94,7 +94,7 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         if (magicItem == null)
             return;
         //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
-        HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}" , magicItem.ItemDescription(), magicItem.goldValue.ToString() }, 
+        HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" }, 
                                     new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit)});
         //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString()}, new List<Sprite> { switch((magicItem._Benefit() as StatBenefit).statToBenefit)});
     }

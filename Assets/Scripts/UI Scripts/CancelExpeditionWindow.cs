@@ -117,7 +117,8 @@ public class CancelExpeditionWindow : MonoBehaviour
 
         //destroy the follower object and unset the sitebutton completely 
         //squadFollower.CancelMe();
-        PlayerDataMaster.Instance.RemoveLoggedSquad(squadFollower.squad.roomNumber);
+        //PlayerDataMaster.Instance.RemoveLoggedSquad(squadFollower.squad.roomNumber);
+        PlayerDataMaster.Instance.RemoveLoggedSquad(simpleFollower.squad.roomNumber);
         //gameObject.SetActive
         //squadFollower = null;
         simpleFollower = null;

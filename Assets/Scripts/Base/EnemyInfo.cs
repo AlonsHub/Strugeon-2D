@@ -6,6 +6,7 @@ public class EnemyInfo : MonoBehaviour
 {
     [SerializeField]
     Pawn pawn;
+    [SerializeField]
     WeaponItem weaponItem;
     int level;
 

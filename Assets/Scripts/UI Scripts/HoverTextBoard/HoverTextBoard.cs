@@ -66,8 +66,8 @@ public class HoverTextBoard : MonoBehaviour
     public void UnSetMe()
     {
         root.SetActive(false);
-
-        textBox.text = "";
+        if(textBox)
+        textBox.text = ""; //not really needed...
     }
 
 }

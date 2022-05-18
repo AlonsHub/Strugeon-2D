@@ -14,7 +14,31 @@ public class LobbyMercDisplayer : BasicDisplayer
         sheet = mercSheet;
 
         Pawn p = mercSheet.MyPawnPrefabRef<Pawn>();
-        List<string> textsPerTextBox = new List<string> { mercSheet.characterName.ToString(), mercSheet.currentAssignment.ToString(), mercSheet._maxHp.ToString(), $"{mercSheet._minDamage} - {mercSheet._maxDamage}" };// = new List<string>();
+
+        int maxHpBenefit = 0;
+        int damageBenefit = 0;
+
+        foreach (var benefit in mercSheet.gear.GetAllBenefits())
+        {
+            switch ((benefit as StatBenefit).statToBenefit)
+            {
+                case StatToBenefit.MaxHP:
+                    maxHpBenefit += benefit.Value();
+                    break;
+                case StatToBenefit.FlatDamage:
+                    damageBenefit += benefit.Value();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        List<string> textsPerTextBox = new List<string> 
+        { mercSheet.characterName.ToString(),
+            mercSheet.currentAssignment.ToString(), 
+            $"{mercSheet._maxHp}(<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{maxHpBenefit}</color>)", 
+            $"{mercSheet._minDamage} - {mercSheet._maxDamage}(<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{damageBenefit}</color>)" };
+
         List<Sprite> spritesPerImage = new List<Sprite> {p.PortraitSprite, p.SASprite};
 
 
