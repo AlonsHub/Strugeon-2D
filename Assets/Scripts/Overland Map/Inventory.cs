@@ -97,7 +97,7 @@ public class Inventory : MonoBehaviour
 
         //displayer update? 
         //call an event that it maybe registered to, if it is enabled? sounds CORRECT TBD
-        OnInventoryChange.Invoke();
+        OnInventoryChange?.Invoke();
     }
     public bool RemoveMagicItem(MagicItem magicItem)
     {
@@ -105,7 +105,7 @@ public class Inventory : MonoBehaviour
         {
 
             Debug.Log($"Item: {magicItem.magicItemName} was removed!");
-            OnInventoryChange.Invoke();
+            OnInventoryChange?.Invoke();
             return true;
         }
         else

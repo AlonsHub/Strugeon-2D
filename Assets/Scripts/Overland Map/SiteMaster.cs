@@ -17,6 +17,8 @@ public class SiteMaster : MonoBehaviour
     //temp - will just know of SiteButtons and ongoing expedition, should fix soon though TBF
     public SiteButton[] siteButtons; //for now, site buttons are the easiest way to get to site data
 
+    public UnityEngine.UI.Button tavernButton;
+
     private void Awake()
     {
         if(Instance != null && Instance !=this)
@@ -25,11 +27,13 @@ public class SiteMaster : MonoBehaviour
             return;
         }
         Instance = this;
+        siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
+
     }
 
     private void OnEnable()
     {
-        siteButtons = FindObjectsOfType<SiteButton>();
+        //siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
 
         foreach (SiteButton sb in siteButtons)
         {

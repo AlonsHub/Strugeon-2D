@@ -27,8 +27,10 @@ public class SimpleFollower : MonoBehaviour
     Image groupPortrait; //could be leader, or an icon or whatever
     [SerializeField]
     private float stoppingDistance;
+    [SerializeField]
+    BasicTimer basicTimer;
 
-
+    Vector3 tavernPos => SiteMaster.Instance.tavernButton.transform.position;
 
     /// <summary>
     /// When you Instantiate() a prefab with this component on it:
@@ -47,6 +49,8 @@ public class SimpleFollower : MonoBehaviour
         destinationSite.isWaitingForSquad = true;
 
         totalTravelTime = destinationSite.ETA;
+
+        transform.position = tavernPos;
 
 
         StartCoroutine(nameof(WalkToTarget)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
@@ -70,16 +74,17 @@ public class SimpleFollower : MonoBehaviour
         if(delta >= destinationSite.ETA)
         {
             //place at site, and call arrive
-            transform.position = destinationSite.transform.position + (transform.position - destinationSite.transform.position)*stoppingDistance;
+            //transform.position = destinationSite.transform.position + (transform.position - destinationSite.transform.position)*stoppingDistance;
+            transform.position = destinationSite.transform.position + (tavernPos - destinationSite.transform.position).normalized*stoppingDistance;
             Arrived();
             return;
         }
         //implied else (reutrn above)
-
+        
         totalTravelTime = destinationSite.ETA - delta;
 
         //advance to new starting position
-        transform.position += (destinationSite.transform.position - transform.position)*(1- (destinationSite.ETA- delta)/destination.ETA);
+        transform.position = tavernPos + (destinationSite.transform.position - tavernPos) *(1- (destinationSite.ETA- delta)/destination.ETA);
 
         StartCoroutine(nameof(WalkToTarget)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
     }
@@ -91,9 +96,10 @@ public class SimpleFollower : MonoBehaviour
     IEnumerator WalkToTarget()
     {
         //Delay before Start walking ?
+        basicTimer.SetMe(totalTravelTime);
         yield return new WaitForSeconds(delayBeforeStart);
 
-        Vector3 startPos = transform.position;
+        Vector3 startPos = transform.position; //aka tavernPos
         float t = 0;
         if(destinationSite)
         {

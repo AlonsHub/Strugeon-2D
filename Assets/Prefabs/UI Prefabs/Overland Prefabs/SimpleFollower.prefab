@@ -228,13 +228,14 @@ GameObject:
   - component: {fileID: 594059964938559802}
   - component: {fileID: 8251468034042759477}
   - component: {fileID: 607331070338774050}
+  - component: {fileID: 4916561773951296111}
   m_Layer: 20
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &594059964938559802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -351,6 +352,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4916561773951296111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5194729389731722372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8b45602fd74f646be74082e3675704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 607331070338774050}
 --- !u!1 &7361576176325090370
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +541,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deeab8bb37305bb41894783f8d0391ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBeforeStart: 2
+  squad:
+    pawns: []
+    squadName: 
+    squadState: 0
+    isAvailable: 1
+    roomNumber: -1
+  delayBeforeStart: 0.5
   button: {fileID: 6538371513630413201}
   groupPortrait: {fileID: 3489341905654630305}
+  stoppingDistance: 1
+  basicTimer: {fileID: 4916561773951296111}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74b3dce29ce7699429d6d3e2766b466b, type: 3}
-  m_Name: Swamp
+  m_Name: DarkForest
   m_EditorClassIdentifier: 
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
       - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 030000000300000003000000
-    enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
+      enemyLevels: 010000000100000001000000
+    enemySetPack: {fileID: 11400000, guid: 046a48308753b9540a8ca188f891b291, type: 2}
     magicItem:
       magicItemName: Feral Hide Vest
       goldValue: 25
@@ -39,14 +39,14 @@ MonoBehaviour:
         statToBenefit: 0
         value: 15
       relevantClasses: 0300000001000000
-    expReward: 85
-    levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
+    expReward: 105
+    levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 14
-    difficulty: 1
-    siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
+    goldReward: 5
+    difficulty: 0
+    siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
-    waitTimeMinutes: 2
-    waitTimeSeconds: 20
+    waitTimeMinutes: 1
+    waitTimeSeconds: 10
     isSet: 1
