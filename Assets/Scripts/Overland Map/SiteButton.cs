@@ -113,8 +113,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //if (!isLevelDataSet) //this isSet => levelDataSO.levelData.isSet
         //    RandomSetSelf();
 
-        if (myDataDisplay)
-            myDataDisplay.SetActive(false);
+        //if (myDataDisplay)
+        //    myDataDisplay.SetActive(false);
 
 
         if (isCooldown)
@@ -147,6 +147,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     void SendToArena()
     {
         PlayerDataMaster.Instance.RemoveLoggedSquad(readiedSquad.roomNumber);
+        PartyMaster.Instance.awaySquads.Remove(readiedSquad);
 
         //OverWorld.Instance._selectedSite = this; // not sure if this is the right way to do it
         LevelRef.Instance.visitedSiteName = name; // not sure if this is the right way to do it (pretty sure it's not)
@@ -208,7 +209,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         isReady = true;
         isWaitingForSquad = false;
         readiedSquad = s;
-        PartyMaster.Instance.awaySquads.Remove(s);
+        //PartyMaster.Instance.awaySquads.Remove(s);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -218,8 +219,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             return;
 
         //SetHoverColor(false); //this makes it so only on hover over site the site will be coloured, (as opposed to: as long as it's displayer is up
-        myDataDisplay.gameObject.SetActive(false);
-
+        //myDataDisplay.gameObject.SetActive(false);
+        SiteDisplayer.Instance.SetOnOff(false);
         //nothing should have happened, but could be that site-info was open - and then squad arrived... should maybe close site data displayer?
         //if (isCooldown || isWaitingForSquad || isReady)
         //{
@@ -236,8 +237,10 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             //Debug.LogError("isCooldown or isWaitingForSquad or ready");
             return;
         }
-        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
-        myDataDisplay.SetActive(true); //should this really be seperate from displayer? TBF
+        //SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
+        //myDataDisplay.SetActive(true); //should this really be seperate from displayer? TBF
+
+        //SiteDisplayer.Instance.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData));
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -245,8 +248,9 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         if (!isLevelDataSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
             RandomSetSelf();
 
-
-        displayer.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
+        SiteDisplayer.Instance.SetOnOff(true);
+        //displayer.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
+        SiteDisplayer.Instance.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
 
     }
     //Color oldColor; //temp until new highlighted sprites are added

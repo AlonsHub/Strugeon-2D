@@ -47,7 +47,7 @@ public class MercGearDisplayer : BasicDisplayer
             }
         }
 
-        base.SetMe(new List<string> {ms.characterName.ToString(),$"{ms._maxHp}\n<color=#{ColorUtility.ToHtmlStringRGBA(Color.cyan)}>+{maxHpBenefit}</color>",$"{ms._minDamage} - {ms._maxDamage}\n<color=#{ColorUtility.ToHtmlStringRGBA(Color.cyan)}>+{damageBenefit}</color>", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
+        base.SetMe(new List<string> {ms.characterName.ToString(),$"{ms._maxHp}\n<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{maxHpBenefit}</color>",$"{ms._minDamage} - {ms._maxDamage}\n<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{damageBenefit}</color>", p.SA_Title, p.SA_Description}, new List<Sprite> {p.FullPortraitSprite, p.SASprite});
         DisplayGear();
         OnMercChange?.Invoke();
         //foreach of that Mercs items - display them in their relevant slots
@@ -83,6 +83,7 @@ public class MercGearDisplayer : BasicDisplayer
         }
 
         DisplayGear(); //refreshes
+        SetMeFully(mercSheet);
     }
 
     public void OpenItemMenu()

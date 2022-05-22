@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public enum LevelEnum {Forest, Runis, Swamp};
+public enum LevelEnum {Forest, Runis, Swamp, DarkForest, Lake};
 public class LevelRef : MonoBehaviour
 {
     public static LevelRef Instance;

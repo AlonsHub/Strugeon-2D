@@ -64,6 +64,7 @@ public class EquipInventoryManager : MonoBehaviour
             relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(ms.mercClass)).ToList();
         else
             return;
+
         //    relevantItems = Inventory.Instance.inventoryItems;
         //EnsureOneDisplayerPerMagicItem();
 

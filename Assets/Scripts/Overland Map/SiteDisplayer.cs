@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class SiteDisplayer : MonoBehaviour
 {
-    public static List<SiteDisplayer> Instances;
+    //public static List<SiteDisplayer> Instances; //being deprecated
+    public static SiteDisplayer Instance; //single displayer with changing button
+
+    [SerializeField, Tooltip("The first and only direct child of THIS object. Used to turn GFX on and off safely, keeping SiteDisplayer component active and enabled.")]
+    GameObject gfxRoot;
+    [SerializeField]
+    TMPro.TMP_Text siteNameText;
 
     [SerializeField]
     Image difficultyImage;
@@ -24,28 +30,45 @@ public class SiteDisplayer : MonoBehaviour
     [SerializeField]
     Sprite[] difficultySprties;
 
-    [SerializeField] //readolny
-     bool isSiteSet;
+    //[SerializeField] //readolny
+    // bool isSiteSet;
 
-    [SerializeField]
+    //[SerializeField]
     SiteButton siteButton;
     //[SerializeField]
     //SimpleSiteButton simpleSiteButton;
 
     private void Awake()
     {
+        //if (Instances == null)
+        //{
+        //    Instances = new List<SiteDisplayer>();
+        //}
+        //Instances.RemoveAll(x => x == null);
+        //Instances.Add(this);
+
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         if (dwellerDisplayers == null)
             dwellerDisplayers = new List<DwellerDisplayer>();
 
-        if (Instances == null)
-        {
-            Instances = new List<SiteDisplayer>();
-        }
-        Instances.RemoveAll(x => x == null);
+        if (gfxRoot.activeSelf)
+            gfxRoot.SetActive(false);
 
-        Instances.Add(this);
     }
-    public void SetMe(SiteButton sb) //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss
+
+    public void SetOnOff(bool on)
+    {
+        gfxRoot.SetActive(on);
+    }
+
+    public void SetMe(SiteButton sb) //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss //lol im on it
     {
         siteButton = sb;
         levelData = sb.levelSO.levelData;
@@ -54,7 +77,6 @@ public class SiteDisplayer : MonoBehaviour
         {
             if (i >= dwellerDisplayers.Count)
             {
-                
                 DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
 
                 dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
@@ -83,10 +105,15 @@ public class SiteDisplayer : MonoBehaviour
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
     }
     //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss
+    [SerializeField]
+    Vector3 offset;
     public void SetMe(SiteButton sb, bool idReveal, bool levelReveal) //In this version - ID reveal ALWAYS precedes LevelReveal, so idReveal == false, assumes levelReveal is also false
     {
         siteButton = sb;
         levelData = sb.levelSO.levelData;
+        siteNameText.text = siteButton.siteData.siteName.ToString();
+
+        transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width/2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2)? -offset.y : offset.y, 0f);
 
         for (int i = 0; i < levelData.enemies.Count; i++)
         {
@@ -135,7 +162,7 @@ public class SiteDisplayer : MonoBehaviour
                 dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
                 dd.KillMe();
             }
-        } // BADDDD and easy to do otherwise
+        } // BADDDD and easy to do otherwise TBF
 
         difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
@@ -187,12 +214,12 @@ public class SiteDisplayer : MonoBehaviour
     //        siteButton.SetHoverColor(false);
     //}
 
-
-    public static void SetActiveToAllInstances(bool isActive) //may be depricated soon [24/02/22] TBF
-    {
-        foreach (var item in Instances)
-        {
-            item.gameObject.SetActive(isActive);
-        }
-    }
+ 
+    //public static void SetActiveToAllInstances(bool isActive) //may be depricated soon [24/02/22] TBF
+    //{
+    //    foreach (var item in Instances)
+    //    {
+    //        item.gameObject.SetActive(isActive);
+    //    }
+    //}
 }

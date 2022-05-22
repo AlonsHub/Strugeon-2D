@@ -42,7 +42,7 @@ public class SimpleSiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
+        //SiteDisplayer.SetActiveToAllInstances(false); //SiteDisplayers should do that on their own
         siteDisplayer.gameObject.SetActive(true);
 
     }
