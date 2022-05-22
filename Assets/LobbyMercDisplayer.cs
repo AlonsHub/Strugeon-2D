@@ -32,10 +32,32 @@ public class LobbyMercDisplayer : BasicDisplayer
                     break;
             }
         }
-
+        string assingmentText = "";
+        switch (mercSheet.currentAssignment)
+        {
+            case MercAssignment.Null:
+                break;
+            case MercAssignment.AwaySquad:
+                assingmentText = $"On route";
+                break;
+            case MercAssignment.Room:
+                assingmentText = $"in room {mercSheet.roomOrSquadNumber}";
+                break;
+            case MercAssignment.Available:
+                assingmentText = $"in room {mercSheet.roomOrSquadNumber}";
+                break;
+            //case MercAssignment.Hireable:
+            //    break;
+            //case MercAssignment.NotAvailable:
+            //    break;
+            default:
+                assingmentText = mercSheet.currentAssignment.ToString();
+                break;
+        }
         List<string> textsPerTextBox = new List<string> 
         { mercSheet.characterName.ToString(),
-            mercSheet.currentAssignment.ToString(), 
+            //mercSheet.currentAssignment.ToString(), 
+            assingmentText,
             $"{mercSheet._maxHp}(<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{maxHpBenefit}</color>)", 
             $"{mercSheet._minDamage} - {mercSheet._maxDamage}(<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}>+{damageBenefit}</color>)" };
 
@@ -50,6 +72,7 @@ public class LobbyMercDisplayer : BasicDisplayer
     public void OnMyClick()
     {
         //display merc to the MercGearDisplayer
+        if(sheet.currentAssignment != MercAssignment.AwaySquad)
         mercPoolDisplayer.ShowMercOnGearDisplayer(sheet);
     }
 }

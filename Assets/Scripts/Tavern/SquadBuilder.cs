@@ -87,7 +87,26 @@ public class SquadBuilder : MonoBehaviour
     }
     public void CloseMe()
     {
-        confirmWindow.gameObject.SetActive(true);
+        //check if need to confirm edits:
+
+        if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
+        {
+            bool same = true;
+            foreach (var item in tempSquad.pawns)
+            {
+                if (!uneditedSquadPawns.Contains(item))
+                    same = false;
+            }
+
+            if (same)
+                confirmWindowAnswer = false; //stops the wait for answer
+            else
+                confirmWindow.gameObject.SetActive(true);
+        }
+        else
+        {
+            confirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
+        }
         //check confirm
         StartCoroutine(nameof(WaitForConfirmDecision));
     }
