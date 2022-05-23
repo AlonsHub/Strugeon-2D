@@ -226,6 +226,10 @@ public class PlayerDataMaster : MonoBehaviour
         List<string> confirmedList = GetConfirmedSaveFileNames();
 
         PlayerData[] playerDatas = new PlayerData[confirmedList.Count];
+
+        if (playerDatas == null || playerDatas.Length == 0)
+            return null;
+
         for (int i = 0; i < confirmedList.Count; i++)
         {
             string s = File.ReadAllText(confirmedList[i]);

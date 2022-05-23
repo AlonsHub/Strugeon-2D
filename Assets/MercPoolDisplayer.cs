@@ -26,8 +26,8 @@ public class MercPoolDisplayer : MonoBehaviour
     private void OnEnable()
     {
         //int diff = displayers.Count - PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count;
-        //relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room });
-        relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
+        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad});//Excluding Hireable
+        //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
         int diff = displayers.Count - relevant.Count;
         if (diff<0)
         {

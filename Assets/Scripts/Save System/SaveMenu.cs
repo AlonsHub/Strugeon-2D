@@ -29,34 +29,24 @@ public class SaveMenu : MonoBehaviour
             int saveCount = 0;
             PlayerData[] loadedData = PlayerDataMaster.Instance.GetPlayerDataFromSaveList();
 
+            if (loadedData == null || loadedData.Length == 0)
+            {
+                return;
+            }
+
             for (int i = 0; i < loadedData.Length; i++)
             {
                 if(i>= saveFileDisplayers.Count)
                 {
                     SaveFileDisplayer sfd = Instantiate(prefab, parent).GetComponent<SaveFileDisplayer>();
                     sfd.Init(loadedData[i], gameObject);
+                    saveFileDisplayers.Add(sfd);
                 }
                 else
                 {
                     saveFileDisplayers[i].Init(loadedData[i], gameObject);
                 }
             }
-
-            //foreach (var item in loadedData)
-            //{
-            //    if (saveCount >= saveFileDisplayers.Count)
-            //    {
-            //        SaveFileDisplayer sfd = (Instantiate(prefab, parent).GetComponent<SaveFileDisplayer>());
-            //        saveFileDisplayers[saveCount].Init(item);
-            //    }
-            //    else
-            //    {
-            //        saveFileDisplayers[saveCount].Init(item);
-            //    }
-
-            //    saveCount++;
-
-            //}
         }
     }
 

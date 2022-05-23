@@ -39,12 +39,14 @@ public class LobbyMercDisplayer : BasicDisplayer
                 break;
             case MercAssignment.AwaySquad:
                 assingmentText = $"On route";
+
+
                 break;
             case MercAssignment.Room:
-                assingmentText = $"in room {mercSheet.roomOrSquadNumber}";
+                assingmentText = $"in room {mercSheet.roomOrSquadNumber+1}";
                 break;
             case MercAssignment.Available:
-                assingmentText = $"in room {mercSheet.roomOrSquadNumber}";
+                assingmentText = "Available";
                 break;
             //case MercAssignment.Hireable:
             //    break;
