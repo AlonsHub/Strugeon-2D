@@ -42,4 +42,9 @@ public class ActionVariation
         relevantItem.Action(target);
     }
 
+    public override string ToString()
+    {
+        return this.GetType().Name.Replace("Item", "");
+    }
+
 }

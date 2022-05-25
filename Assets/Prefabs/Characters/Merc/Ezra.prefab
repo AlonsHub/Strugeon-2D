@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 906445240154049506}
   - component: {fileID: 6177665693654622096}
   - component: {fileID: 853967901895232535}
-  - component: {fileID: 6869497759092309598}
   - component: {fileID: 7974199490736343132}
+  - component: {fileID: 6869497759092309598}
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 5182301774868751694}
   m_Layer: 11
@@ -95,6 +95,10 @@ MonoBehaviour:
         approachFoesOutOfAttackRange_modifier: 3
       targetHealthPrefs:
         percentModParis:
+        - percentOfHealth: 100
+          modifier: 15
+        - percentOfHealth: 99
+          modifier: 5
         - percentOfHealth: 40
           modifier: 10
     currentAssignment: 0
@@ -136,24 +140,6 @@ MonoBehaviour:
     in an area of effect around the attacked foe, damaging all adjacent foes as well. "
   enemyLevel: -1
   purpleMultiplier: 50
---- !u!114 &6869497759092309598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22dec61bcabafd47be62178a2e3b811, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponItem: {fileID: 0}
-  maxDmg: 35
-  minDmg: 30
-  chanceToProc: 15
-  addonPrefab: {fileID: 1334153029232444233, guid: 5a0ff21091cc44943a079c622c54dc82,
-    type: 3}
 --- !u!114 &7974199490736343132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +182,24 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
+--- !u!114 &6869497759092309598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22dec61bcabafd47be62178a2e3b811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponItem: {fileID: 0}
+  maxDmg: 35
+  minDmg: 30
+  chanceToProc: 15
+  addonPrefab: {fileID: 1334153029232444233, guid: 5a0ff21091cc44943a079c622c54dc82,
+    type: 3}
 --- !u!114 &6641408886101910626
 MonoBehaviour:
   m_ObjectHideFlags: 0

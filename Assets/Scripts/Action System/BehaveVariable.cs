@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BehaveVariable : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Tooltip("Action Item to be effected")]
     protected ActionItem affectedBehaviour;
     [SerializeField]
     protected int modifier;

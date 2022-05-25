@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class FerocityBehave : BehaveVariable
 {
-    [Tooltip("The % of hp a foe must have left to trigger this added weight")]
-    [SerializeField]
+    [SerializeField, Tooltip("The % of hp a foe must have left to trigger this added weight")]
     float hpThresholdPercent;
     public override void ConditionallyApplyMod()
     {

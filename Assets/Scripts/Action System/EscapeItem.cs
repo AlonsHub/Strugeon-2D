@@ -12,6 +12,16 @@ public class EscapeItem : ActionItem
     bool healthEffectsWegiht;
     [SerializeField, Tooltip("The full weight added (theoretically) if HP is at 0. Only relevant if healthEffectWeight is true.")]
     int maxAddedWeight;
+
+    [SerializeField, Tooltip("E.g. Smadi only escapes if she's the last merc around -> Escapes Last = true")]
+    bool escapesLast; //E.g. Smadi only escapes if she's the last merc around
+    //[SerializeField]
+    //bool modif
+    [SerializeField, Tooltip("Added weight per dead ally")]
+    int weightPerDeadAlly;
+    [SerializeField, Tooltip("Added weight per escaped ally")]
+    int weightPerEscapedAlly;
+
     void Start()
     {
         actionVariations = new List<ActionVariation>();
@@ -52,13 +62,38 @@ public class EscapeItem : ActionItem
         //IF THEY HAVE NO PATH, THEY CAN'T ESCAPEEEE!!@!!
         if (pawn.HasRoot)
             return;
-        if(pawn.currentHP <= pawn.maxHP/escapeThreshold)
+
+        if(escapesLast) //ONLY IF ESCAPELAST
         {
-            if(healthEffectsWegiht)
-            actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight + (int)((1f-((float)pawn.currentHP/ (float)pawn.maxHP))* maxAddedWeight))); //* consider formulating escapeWeight
-                else
-            //check here if there is a path to escape - by either trying to get a route there, or inversely checking if hes not surrounded
-            actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight
+            if(!(RefMaster.Instance.mercs.Count == 1 && RefMaster.Instance.mercs[0].Name == pawn.Name))
+            {
+                //if NOT the last merc, stop considering escape
+                return;
+            }
         }
+
+        if (pawn.currentHP > pawn.maxHP / escapeThreshold)
+        {
+            return;
+        }
+
+        int weight = escapeWeight;
+
+        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theDead.Count >0)
+        {
+            weight += weightPerDeadAlly * TurnMaster.Instance.theDead.Count;
+        }
+        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theCowardly.Count >0)
+        {
+            weight += weightPerDeadAlly * TurnMaster.Instance.theCowardly.Count;
+        }
+
+        if (healthEffectsWegiht)
+        {
+            weight += (int)((1f - ((float)pawn.currentHP / (float)pawn.maxHP)) * maxAddedWeight);
+        }
+
+            //actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight// 
+            actionVariations.Add(new ActionVariation(this, gameObject, weight)); //* consider formulating escapeWeight// did :)
     }
 }

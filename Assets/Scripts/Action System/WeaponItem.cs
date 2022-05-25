@@ -341,39 +341,39 @@ public class WeaponItem : ActionItem
             #region Method 1: Stacking. 
             // method 1: Stacking. 
             // simply checks if the condition applies - and modifies if so ("stacking")
-            foreach (var pair in targetHealthPrefs.percentModParis)
-            {
-                if(p.currentHP <= (p.maxHP / 100 * pair.percentOfHealth))
-                {
-                    weight *= pair.modifier;
-                }
-            }
+            //foreach (var pair in targetHealthPrefs.percentModParis)
+            //{
+            //    if(p.currentHP <= (p.maxHP / 100 * pair.percentOfHealth))
+            //    {
+            //        weight *= pair.modifier;
+            //    }
+            //}
             #endregion
 
             #region Method 2: Threshold
             // method 2: Threshold. 
             // only applies the mod for the "greatest" relevant threshold met 
-            //for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
-            //{
-            //    if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
-            //    {
-            //        if (i < targetHealthPrefs.percentModParis.Length - 1) //not last
-            //        {
-            //            //apply this (i) mod!
-            //            weight *= targetHealthPrefs.percentModParis[i].modifier;
-            //        }
-            //        else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
-            //        {
-            //            continue; //
-            //        }
-            //        else
-            //        {
-            //            weight *= targetHealthPrefs.percentModParis[i].modifier;
-            //            //apply this (i) mod, and break
-            //            break;
-            //        }
-            //    }
-            //}
+            for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
+            {
+                if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
+                {
+                    if (i == targetHealthPrefs.percentModParis.Length - 1) //if i is last index
+                    {
+                        //apply this (i) mod!
+                        weight *= targetHealthPrefs.percentModParis[i].modifier;
+                    }
+                    else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
+                    {
+                        continue; //
+                    }
+                    else
+                    {
+                        weight *= targetHealthPrefs.percentModParis[i].modifier;
+                        //apply this (i) mod, and break
+                        break;
+                    }
+                }
+            }
 
             //END METHOD 2
             #endregion

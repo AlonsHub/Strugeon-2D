@@ -121,6 +121,10 @@ MonoBehaviour:
         percentModParis:
         - percentOfHealth: 40
           modifier: 10
+        - percentOfHealth: 20
+          modifier: 15
+        - percentOfHealth: 10
+          modifier: 30
     currentAssignment: 0
     roomOrSquadNumber: -2
     _experience: 0
@@ -270,6 +274,9 @@ MonoBehaviour:
   escapeWeight: 50
   healthEffectsWegiht: 0
   maxAddedWeight: 0
+  escapesLast: 1
+  weightPerDeadAlly: 0
+  weightPerEscapedAlly: 0
 --- !u!1 &1390594824389518320
 GameObject:
   m_ObjectHideFlags: 0
