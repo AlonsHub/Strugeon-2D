@@ -129,7 +129,7 @@ public class HealItem : ActionItem, SA_Item
             int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
             if (currentDistance <= 14) // one tile
             {
-                weight *= 4; //if adjcent
+                weight *= 4; //if adjacent
             }
             else if (pawn.HasRoot) //general step limit should be re-introduced
             {

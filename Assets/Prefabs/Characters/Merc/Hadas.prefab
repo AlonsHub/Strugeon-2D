@@ -251,10 +251,13 @@ MonoBehaviour:
   baseweight: 0
   actionVariations: []
   doTargetAllies: 0
-  escapeThreshold: 2
+  escapeThreshold: 3
   escapeWeight: 50
   healthEffectsWegiht: 0
   maxAddedWeight: 0
+  escapesLast: 0
+  weightPerDeadAlly: 0
+  weightPerEscapedAlly: 0
 --- !u!114 &6741276129138395191
 MonoBehaviour:
   m_ObjectHideFlags: 0

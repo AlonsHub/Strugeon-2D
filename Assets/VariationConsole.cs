@@ -5,6 +5,8 @@ using TMPro;
 
 public class VariationConsole : MonoBehaviour
 {
+    public static VariationConsole Instance;
+
     [SerializeField]
     GameObject prefab;
     [SerializeField]
@@ -17,15 +19,30 @@ public class VariationConsole : MonoBehaviour
     List<TMP_Text> enabledDisplayers;
     List<TMP_Text> disbledDisplayers;
 
+    [SerializeField]
+    TMP_Text chosenActionText;
 
     Pawn pawn;
-    public void SetPawn(Pawn p)
+
+    private void Awake()
     {
-        pawn = p;
-        ShowLog();
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        enabledDisplayers = new List<TMP_Text>();
+        disbledDisplayers = new List<TMP_Text>();
     }
 
-    public void ShowLog()
+    public void Set(Pawn p, int index)
+    {
+        pawn = p;
+        ShowLog(index);
+    }
+
+    public void ShowLog(int index)
     {
         if (!pawn)
             return;
@@ -49,7 +66,12 @@ public class VariationConsole : MonoBehaviour
         for (int i = 0; i < enabledDisplayers.Count; i++)
         {
             enabledDisplayers[i].text = $"{pawn.actionPool[i].relevantItem} on {pawn.actionPool[i].target.name}: {pawn.actionPool[i].weight}";
+            if(i==index)
+            {
+                enabledDisplayers[i].GetComponentInParent<UnityEngine.UI.Image>().color = Color.red;
+            }
         }
+        chosenActionText.text = $"{pawn.actionPool[index].relevantItem} on {pawn.actionPool[index].target.name}: {pawn.actionPool[index].weight}";
     }
 
     TMP_Text AddSetDisplayer(string newText)

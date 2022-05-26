@@ -259,6 +259,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             TurnDone = true;
             return;
         }
+
+        VariationConsole.Instance.Set(this, actionIndex);
+
         actionPool[actionIndex].PerformActionOnTarget();
     }
 
