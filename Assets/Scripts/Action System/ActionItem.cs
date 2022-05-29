@@ -59,4 +59,9 @@ public class ActionItem : MonoBehaviour
     {
         pawn = GetComponent<Pawn>();
     }
+
+    public override string ToString()
+    {
+        return this.GetType().Name.Replace("Item", "");
+    }
 }

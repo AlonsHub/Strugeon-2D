@@ -11,13 +11,15 @@ public class VariationConsole : MonoBehaviour
     GameObject prefab;
     [SerializeField]
     Transform grid;
+    [SerializeField]
+    Transform dump;
     [SerializeField, Tooltip("")]
     GameObject gfx;
 
 
 
-    List<TMP_Text> enabledDisplayers;
-    List<TMP_Text> disbledDisplayers;
+    List<VariationSimpleDisplayer> enabledDisplayers;
+    List<VariationSimpleDisplayer> disbledDisplayers;
 
     [SerializeField]
     TMP_Text chosenActionText;
@@ -32,8 +34,13 @@ public class VariationConsole : MonoBehaviour
             return;
         }
         Instance = this;
-        enabledDisplayers = new List<TMP_Text>();
-        disbledDisplayers = new List<TMP_Text>();
+        enabledDisplayers = new List<VariationSimpleDisplayer>();
+        disbledDisplayers = new List<VariationSimpleDisplayer>();
+    }
+
+    public void ToggleGFX()
+    {
+        gfx.SetActive(!gfx.activeSelf);
     }
 
     public void Set(Pawn p, int index)
@@ -41,51 +48,59 @@ public class VariationConsole : MonoBehaviour
         pawn = p;
         ShowLog(index);
     }
-
+    //void InitDisplayer(TMP_Text dispToInit)
+    //{
+    //    dispToInit.GetComponentInParent<UnityEngine.UI.Image>().color = Color.white; //TBF
+    //}
     public void ShowLog(int index)
     {
-        if (!pawn)
+        if (!pawn || !gfx.activeSelf)
             return;
         
         if(pawn.actionPool.Count > enabledDisplayers.Count)
         {
-            for (int i = 0; i < pawn.actionPool.Count - enabledDisplayers.Count; i++)
+            int d = pawn.actionPool.Count - enabledDisplayers.Count;
+            for (int i = 0; i < d; i++)
             {
                 AddDisplayer();
             }
         }
         else if( enabledDisplayers.Count > pawn.actionPool.Count)
         {
-            for (int i = 0; i < enabledDisplayers.Count - pawn.actionPool.Count; i++)
+            int d = enabledDisplayers.Count - pawn.actionPool.Count;
+
+            for (int i = 0; i < d; i++)
             {
                 DisableDisplayer();
             }
         }
 
 
-        for (int i = 0; i < enabledDisplayers.Count; i++)
+        for (int i = 0; i < pawn.actionPool.Count; i++)
         {
-            enabledDisplayers[i].text = $"{pawn.actionPool[i].relevantItem} on {pawn.actionPool[i].target.name}: {pawn.actionPool[i].weight}";
-            if(i==index)
-            {
-                enabledDisplayers[i].GetComponentInParent<UnityEngine.UI.Image>().color = Color.red;
-            }
+            enabledDisplayers[i].SetMe(pawn.actionPool[i], (index == i)? Color.red : Color.white);
+            //if(i==index)
+            //{
+            //    enabledDisplayers[i].GetComponentInParent<UnityEngine.UI.Image>().color = Color.red;
+            //}
         }
         chosenActionText.text = $"{pawn.actionPool[index].relevantItem} on {pawn.actionPool[index].target.name}: {pawn.actionPool[index].weight}";
     }
 
-    TMP_Text AddSetDisplayer(string newText)
-    {
-        TMP_Text toReturn = Instantiate(prefab, grid).GetComponentInChildren<TMP_Text>();
-        toReturn.text = newText;
-        enabledDisplayers.Add(toReturn);
-        return toReturn;
-    }
+    //TMP_Text AddSetDisplayer(string newText)
+    //{
+    //    TMP_Text toReturn = Instantiate(prefab, grid).GetComponentInChildren<TMP_Text>();
+    //    toReturn.text = newText;
+    //    enabledDisplayers.Add(toReturn);
+    //    return toReturn;
+    //}
     void AddDisplayer()
     {
         if (disbledDisplayers.Count == 0)
         {
-            TMP_Text toReturn = Instantiate(prefab, grid).GetComponentInChildren<TMP_Text>();
+            //TMP_Text toReturn = Instantiate(prefab, grid).GetComponentInChildren<TMP_Text>();
+            VariationSimpleDisplayer toReturn = Instantiate(prefab, grid).GetComponent<VariationSimpleDisplayer>();
+            //InitDisplayer(toReturn);
             enabledDisplayers.Add(toReturn);
         }
         else
@@ -96,16 +111,21 @@ public class VariationConsole : MonoBehaviour
     }
     void DisableDisplayer()
     {
-        TMP_Text t = enabledDisplayers[enabledDisplayers.Count - 1];
+        VariationSimpleDisplayer t = enabledDisplayers[enabledDisplayers.Count - 1];
         disbledDisplayers.Add(t);
         enabledDisplayers.Remove(t);
-        t.transform.parent.gameObject.SetActive(false);
+
+        t.transform.parent = dump;
+        t.transform.gameObject.SetActive(false);
     }
     void EnableDisplayer()
     {
-        TMP_Text t = disbledDisplayers[0];
+        VariationSimpleDisplayer t = disbledDisplayers[0];
+        //InitDisplayer(t);
         enabledDisplayers.Add(t);
         disbledDisplayers.Remove(t);
-        t.transform.parent.gameObject.SetActive(false);
+
+        t.transform.parent = grid;
+        t.transform.gameObject.SetActive(true);
     }
 }

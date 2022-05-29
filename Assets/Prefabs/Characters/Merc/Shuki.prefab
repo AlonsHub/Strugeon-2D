@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 5182301774868751694}
   - component: {fileID: 6641408886101910626}
   - component: {fileID: 7974199490736343132}
-  - component: {fileID: -1024576177371926576}
   - component: {fileID: 2021261266725811000}
+  - component: {fileID: 5922632525119637159}
   m_Layer: 11
   m_Name: Shuki
   m_TagString: Merc
@@ -220,21 +220,6 @@ MonoBehaviour:
   hasRedBuff: 0
   toHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
---- !u!114 &-1024576177371926576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567321096945766744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 238a104d72631214fb319e29206adf96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedBehaviour: {fileID: 7974199490736343132}
-  modifier: 10
-  hpThresholdPercent: 20
 --- !u!114 &2021261266725811000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +243,22 @@ MonoBehaviour:
   escapesLast: 0
   weightPerDeadAlly: 0
   weightPerEscapedAlly: 0
+--- !u!114 &5922632525119637159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567321096945766744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb68525530010c43b294b7ee87be00e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpThresholdPercent: 25
+  damageModifier: 0.6
+  beefCakeSprite: {fileID: 5241480379350098711, guid: 31155a4835afb294f8a618b0cb75f337,
+    type: 3}
 --- !u!1 &3911396959775424208
 GameObject:
   m_ObjectHideFlags: 0

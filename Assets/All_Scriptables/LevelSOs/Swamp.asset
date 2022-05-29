@@ -16,13 +16,11 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 030000000300000003000000
+      enemyLevels: 03000000
     enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
     magicItem:
-      magicItemName: Feral Hide Vest
-      goldValue: 25
+      magicItemName: Linen Tunic
+      goldValue: 2
       spectrumProfile:
         red: 0
         blue: 0
@@ -30,20 +28,20 @@ MonoBehaviour:
         purple: 0
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: db038b43bfa111945a0014850db54b30, type: 2}
-      spriteName: HideVest
+      itemSprite: {fileID: 21300000, guid: 938ee090fd7b11d49ad8f344a49ed397, type: 2}
+      spriteName: LinenTunic
       fittingSlotType: 0
       isEquipped: 0
       statBenefitSO: {fileID: 0}
       statBenefit:
         statToBenefit: 0
-        value: 15
-      relevantClasses: 0300000001000000
-    expReward: 85
+        value: 5
+      relevantClasses: 00000000010000000200000003000000
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 14
-    difficulty: 1
+    goldReward: 5
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
