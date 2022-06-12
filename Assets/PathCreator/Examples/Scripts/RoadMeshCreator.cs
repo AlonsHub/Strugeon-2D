@@ -22,6 +22,9 @@ namespace PathCreation.Examples {
         MeshRenderer meshRenderer;
         Mesh mesh;
 
+        [SerializeField]
+        Transform holder;
+
         protected override void PathUpdated () {
             if (pathCreator != null) {
                 AssignMeshComponents ();
@@ -122,7 +125,10 @@ namespace PathCreation.Examples {
 
             if (meshHolder == null) {
                 meshHolder = new GameObject ("Road Mesh Holder: " + pathCreator.name);
-                meshHolder.transform.SetParent(GameObject.FindGameObjectWithTag("Road Mesh Holders Parent").transform); // Avishy
+                meshHolder.transform.SetParent(holder);
+
+                //meshHolder.transform.SetParent(GameObject.FindGameObjectWithTag("Road Mesh Holders Parent").transform); // Avishy
+
             }
 
             meshHolder.transform.rotation = Quaternion.identity;

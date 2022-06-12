@@ -46,7 +46,8 @@ public class TravelLog : MonoBehaviour
 
                 SimpleFollower sf = Instantiate(followerPrefab, followerCanvas).GetComponent<SimpleFollower>();
                 //Squad temp = PartyMaster.Instance.squads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
-                sf.SetLoadedFollower(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
+                //sf.SetLoadedFollower(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
+                sf.SetLoadedFollowerWithPath(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
             }
         }
     }
