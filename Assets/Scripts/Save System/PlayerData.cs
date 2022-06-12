@@ -66,6 +66,8 @@ public class PlayerData
     public float idRevealIntensity;
     public float levelRevealIntensity;
 
+    public PsionSpectrumProfile psionSpectrum;
+
     public PlayerData()
     {
         mercSheets = new List<MercSheet>();
@@ -83,6 +85,7 @@ public class PlayerData
         siteRevealIntensity = 5;
         idRevealIntensity = 5;
         levelRevealIntensity = 5;
+        psionSpectrum = new PsionSpectrumProfile();
     }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 

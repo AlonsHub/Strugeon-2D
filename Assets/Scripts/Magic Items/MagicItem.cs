@@ -11,7 +11,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     public string magicItemName; //BAD IDEA, go for enums and dictionaries? something even better perhaps
     public int goldValue;
     //public int NF_Value; // TBD
-    public MagicSpectrumProfile spectrumProfile;
+    public ItemSpectrumProfile spectrumProfile;
 
     public Rarity rarity;
     public int dropRateWeight; //higher -> more likely
