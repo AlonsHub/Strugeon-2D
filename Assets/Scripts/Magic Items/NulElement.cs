@@ -7,12 +7,13 @@ public struct NulElement
 {
     public float value;
     //public float maxValue;
-    public string elementType; //TBF define an Enum to correlate with psion power colours
+    //public string elementType; //TBF define an Enum to correlate with psion power colours //WIP now 13/06
+    public NulColour nulColour;
 
-    public NulElement(string t)
+    public NulElement(NulColour colour)
     {
-        elementType = t;
-        value = 0;
+        nulColour = colour;
+        value = 2;
         //maxValue = 1;
     }
 }
@@ -21,14 +22,14 @@ public struct PsionNulElement
 {
     NulElement nulElement;
     public float value => nulElement.value;
-    public string elementType => nulElement.elementType; //TBF define an Enum to correlate with psion power colours
+    public NulColour elementType => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
     
     public float maxValue;
     
-    public PsionNulElement(string t, int max)
+    public PsionNulElement(NulColour col, int max)
     {
         //elementType = t;
-        nulElement = new NulElement(t);
+        nulElement = new NulElement(col);
         maxValue = max;
     }
 }

@@ -6,11 +6,15 @@ using System.Linq;
 public class PsionSpectrumProfile 
 {
     public List<PsionNulElement> psionElements;
-    public PsionNulElement GetElementByName(string s) => psionElements.Where(x => x.elementType == s).SingleOrDefault();
-    public float GetValueByName(string s) => GetElementByName(s).value;
-    public float GetMaxValueByName(string s) => GetElementByName(s).maxValue;
+    public PsionNulElement GetElementByName(NulColour s) => psionElements.Where(x => x.elementType == s).SingleOrDefault();
+    public float GetValueByName(NulColour s) => GetElementByName(s).value;
+    public float GetMaxValueByName(NulColour s) => GetElementByName(s).maxValue;
     public PsionSpectrumProfile()
     {
-        psionElements = new List<PsionNulElement>() { new PsionNulElement("Red", 1), new PsionNulElement("Blue", 1), new PsionNulElement("Yellow",1), new PsionNulElement("Purple",1) };
+        psionElements = new List<PsionNulElement>();// { new PsionNulElement("Red", 1), new PsionNulElement("Blue", 1), new PsionNulElement("Yellow",1), new PsionNulElement("Purple",1) };
+        for (int i = 0; i < System.Enum.GetNames(typeof(NulColour)).Length; i++)
+        {
+            psionElements.Add(new PsionNulElement((NulColour)i, 1));
+        }
     }
 }

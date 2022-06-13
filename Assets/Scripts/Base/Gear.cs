@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EquipSlotType {Body, Hand, Trinket};
 /// <summary>
 /// The data-set which holds all items held my a merc.
 /// Should this be "saveable"? it should definitely be serializeable...
 /// </summary>
-public enum EquipSlotType {Body, Hand, Trinket};
 /// 
 
 [System.Serializable]

@@ -16,10 +16,21 @@ MonoBehaviour:
     magicItemName: Blacksmith's Hammer
     goldValue: 8
     spectrumProfile:
-      red: 0
-      blue: 0
-      yellow: 0
-      purple: 0
+      elements:
+      - value: 6
+        nulColour: 0
+      - value: 2
+        nulColour: 1
+      - value: 3
+        nulColour: 2
+      - value: 5
+        nulColour: 3
+      - value: 2
+        nulColour: 4
+      - value: 3
+        nulColour: 5
+      - value: 1
+        nulColour: 6
     rarity: 0
     dropRateWeight: 0
     itemSprite: {fileID: 21300000, guid: f3fc6965b4dbd12428268f23828abe6c, type: 2}
