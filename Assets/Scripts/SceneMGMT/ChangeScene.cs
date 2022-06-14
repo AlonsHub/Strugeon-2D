@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
     string sceneName;
     public void Load()
     {
-        if (disabler.activeSelf)
+        if (disabler && disabler.activeSelf)
         {
             Debug.LogError("cant exit when " + disabler.name + " the (disabler) is Active!");
             return;

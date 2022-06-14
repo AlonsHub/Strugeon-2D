@@ -51,6 +51,16 @@ public class EquipInventoryManager : MonoBehaviour
         Inventory.Instance.OnInventoryChange += RefreshInventory;
         mercGearDisplayer.OnMercChange += RefreshInventory;
     }
+    private void OnDisable()
+    {
+        //for (int i = empties.Count-1; i >= 0; i--)
+        //{
+        //    Destroy(empties[i]);
+        //}
+        Inventory.Instance.OnInventoryChange -= RefreshInventory;
+        if (mercGearDisplayer)
+            mercGearDisplayer.OnMercChange -= RefreshInventory;
+    }
     public void FilterBySlot(EquipSlotType slotType)
     {
         relevantSlot = slotType;
@@ -162,16 +172,7 @@ public class EquipInventoryManager : MonoBehaviour
         SetSellMode(!sellModeIsOn);
     }
 
-    private void OnDisable()
-    {
-        //for (int i = empties.Count-1; i >= 0; i--)
-        //{
-        //    Destroy(empties[i]);
-        //}
-        Inventory.Instance.OnInventoryChange -= RefreshInventory;
-        if(mercGearDisplayer)
-        mercGearDisplayer.OnMercChange -= RefreshInventory;
-    }
+   
 
 
 }

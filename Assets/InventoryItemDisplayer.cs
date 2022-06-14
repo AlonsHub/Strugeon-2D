@@ -9,7 +9,7 @@ public class InventoryItemDisplayer : BasicDisplayer
     MagicItem magicItem;
     bool isDisplayed = false;
 
-    SimpleInventory simpleInventory;
+    BaseInventory connectedInventory;
 
     [SerializeField]
     UnityEngine.UI.Image bgImg;
@@ -19,9 +19,9 @@ public class InventoryItemDisplayer : BasicDisplayer
     [SerializeField]
     Sprite bgOff;
 
-    public bool SetMeFull(MagicItem item, SimpleInventory si)
+    public bool SetMeFull(MagicItem item, BaseInventory si)
     {
-        simpleInventory = si;
+        connectedInventory = si;
         magicItem = item;
         return base.SetMe(new List<string> {magicItem.magicItemName, magicItem.goldValue.ToString()}, new List<Sprite> { magicItem.itemSprite });
     }
@@ -36,7 +36,12 @@ public class InventoryItemDisplayer : BasicDisplayer
             ActiveDisplayer = this;
             ActiveDisplayer.BackgroundGlow(true);
 
-            simpleInventory.SetCurrentItem(magicItem);
+            //if(connectedInventory is SimpleInventory)
+            //((SimpleInventory)connectedInventory).SetCurrentItem(magicItem);
+            //else if (connectedInventory is SanctumInventory)
+            connectedInventory.SetCurrentItem(magicItem);
+
+            // NEEDS A DISPLAYER OR BETTER SOLUTION FOR 
             //Turn on selected glow behind button 
         }
     }

@@ -11,54 +11,52 @@ public class Bar : MonoBehaviour
     public float maxValue;
     public float currentValue;
     public float regenRate;
-    public Image img;
-    private void Start()
+    [SerializeField]
+    Image img;
+    protected virtual void OnEnable()
     {
-        img = GetComponent<Image>();
-
+        if(TurnMaster.Instance)
         TurnMaster.Instance.OnTurnOrderRestart += Regen; 
     }
-    //private void OnEnable()
-    //{
-    //}
-    private void OnDisable()
+    private void Start()
+    {
+        TurnMaster.Instance.OnTurnOrderRestart += Regen; 
+        
+    }
+
+    protected virtual void OnDisable()
     {
         TurnMaster.Instance.OnTurnOrderRestart -= Regen;    
     }
-    public void SetMaxValue(float value)
-    {
-        maxValue = currentValue = value;
-        //currentValue = value;
-    }
-    public void SetValue(float value)
+    //public virtual void SetMaxValue(float value)
+    //{
+    //    maxValue = currentValue = value;
+    //    //currentValue = value;
+    //}
+    public virtual void ShowValue()
     {
         //slider.value = value;
         img.fillAmount = currentValue / maxValue;
     }
-    public void AddValue(float value)//redundant? one of them is
+    public virtual void AddValue(float value)//redundant? one of them is
     {
         currentValue += value;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         img.fillAmount = currentValue / maxValue;
 
     }
-    public void Regen()//redundant? one of them is
+    public virtual void Regen()//redundant? one of them is
     {
         currentValue += regenRate;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         img.fillAmount = currentValue / maxValue;
 
     }
-    public void ReduceValue(float value) //redundant? one of them is
+    public virtual void ReduceValue(float value) //redundant? one of them is
     {
         currentValue -= value;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         img.fillAmount = currentValue / maxValue;
-
-    }
-
-    void ClampInRange()
-    {
 
     }
 }

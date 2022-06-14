@@ -14,7 +14,7 @@ public class PsionSpectrumProfile
         psionElements = new List<PsionNulElement>();// { new PsionNulElement("Red", 1), new PsionNulElement("Blue", 1), new PsionNulElement("Yellow",1), new PsionNulElement("Purple",1) };
         for (int i = 0; i < System.Enum.GetNames(typeof(NulColour)).Length; i++)
         {
-            psionElements.Add(new PsionNulElement((NulColour)i, 1));
+            psionElements.Add(new PsionNulElement((NulColour)i, 1f, .2f));
         }
     }
 }
