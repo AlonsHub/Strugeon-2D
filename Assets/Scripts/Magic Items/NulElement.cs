@@ -22,7 +22,7 @@ public struct PsionNulElement
 {
     NulElement nulElement;
     public float value => nulElement.value;
-    public NulColour elementType => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
+    public NulColour nulColour => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
     
     public float maxValue;
     public float regenRate;

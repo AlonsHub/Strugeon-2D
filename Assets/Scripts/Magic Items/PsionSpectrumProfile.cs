@@ -6,7 +6,7 @@ using System.Linq;
 public class PsionSpectrumProfile 
 {
     public List<PsionNulElement> psionElements;
-    public PsionNulElement GetElementByName(NulColour s) => psionElements.Where(x => x.elementType == s).SingleOrDefault();
+    public PsionNulElement GetElementByName(NulColour s) => psionElements.Where(x => x.nulColour == s).SingleOrDefault();
     public float GetValueByName(NulColour s) => GetElementByName(s).value;
     public float GetMaxValueByName(NulColour s) => GetElementByName(s).maxValue;
     public PsionSpectrumProfile()

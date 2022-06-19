@@ -18,6 +18,18 @@ public class PrefabArchive : MonoBehaviour
     public Sprite swordSprite;
 
 
+    //NUL BARS:
+    //List of nul colour icons 
+    [SerializeField]
+    List<Sprite> elementIcons;
+    //List of nul colour fill-bars
+    [SerializeField]
+    List<Sprite> elementFillBars;
+
+    public Sprite ElementIcon(int i) => elementIcons[i];
+    public Sprite GetElementFillBar(int i) => elementFillBars[i];
+
+
     //end TEMP AF TBF
     void Awake()
     {
@@ -40,4 +52,5 @@ public class PrefabArchive : MonoBehaviour
     //    IdleLogOrder newOrder = new IdleLogOrder(GetPrefabByDisplayerType(DisplayerType.LevelUp), new List<string> { "something advanced!", $"from" }, bullshit);
     //    IdleLog.AddToBackLog(newOrder, true) ;
     //}
+    //public Sprite Get
 }

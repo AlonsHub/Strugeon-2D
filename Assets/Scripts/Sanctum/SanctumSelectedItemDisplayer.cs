@@ -7,12 +7,14 @@ public class SanctumSelectedItemDisplayer : BasicDisplayer
     MagicItem magicItem;
 
     [SerializeField]
-    SpectrumDisplayer spectrumDisplayer;
+    NulBarPanel nulBarPanel;
+
+
     public bool SetMeFull(List<string> textsPerTextBox, List<Sprite> spritesPerImage, MagicItem item)
     {
         magicItem = item;
 
-
+        nulBarPanel.SetMe(magicItem.spectrumProfile);
         return base.SetMe(textsPerTextBox, spritesPerImage);
     }
 }
