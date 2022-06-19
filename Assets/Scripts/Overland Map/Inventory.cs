@@ -13,8 +13,8 @@ public class Inventory : MonoBehaviour
     TMP_Text goldDisplayer;
     public int Gold { get => PlayerDataMaster.Instance.currentPlayerData.gold; 
                      private set => PlayerDataMaster.Instance.currentPlayerData.gold = value; } // not sure setter is needed
-    [SerializeField]
-    GoldUpdater goldUpdater;
+    //[SerializeField]
+    GoldUpdater goldUpdater => GoldUpdater.Instance;
 
     public List<MagicItem> inventoryItems { get => PlayerDataMaster.Instance.currentPlayerData.magicItems; private set => PlayerDataMaster.Instance.currentPlayerData.magicItems = value; }
     public int magicItemCount => inventoryItems.Count;
@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        //SceneManager.sceneLoaded += OnSceneLoaded;
 
         //OnInventoryChange += TEST_OnInventoryChange;
 
@@ -45,23 +45,21 @@ public class Inventory : MonoBehaviour
         //    }
         //}
     }
-    void OnSceneLoaded(Scene s, LoadSceneMode mode)
-    {
+    //void OnSceneLoaded(Scene s, LoadSceneMode mode)
+    //{
 
-        goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
-        if (!goldUpdater)
-        {
-            Debug.LogError("no gold updater");
-        }
-    }
+    //    //goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
+    //    //goldUpdater =
+    //    //if (!goldUpdater)
+    //    //{
+    //    //    Debug.LogError("no gold updater");
+    //    //}
+    //}
 
     private void Start()
     {
-        goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
-        if (!goldUpdater)
-        {
-            Debug.LogError("no gold updater");
-        }
+
+
 
         foreach (var item in inventoryItems)
         {
@@ -75,7 +73,8 @@ public class Inventory : MonoBehaviour
     public void AddGold(int amount)
     {
         Gold += amount;
-        goldUpdater.RefreshGold();
+        if (goldUpdater)
+            goldUpdater.RefreshGold();
     }
     public bool TryRemoveGold(int amount)
     {
@@ -86,6 +85,7 @@ public class Inventory : MonoBehaviour
         }
 
         Gold -= amount;
+        if(goldUpdater)
         goldUpdater.RefreshGold();
         return true;
     }
