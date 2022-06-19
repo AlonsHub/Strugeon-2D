@@ -25,6 +25,27 @@ public class ItemInhaler : MonoBehaviour
         SelectItem(Inventory.Instance.inventoryItems[0]); //BAD! EVEN FOR A TEST THIS SHOWS we need better access to lists. TBF
     }
 
+    private void Start()
+    {
+        GetComponent<UnityEngine.UI.Button>().onClick.AddListener(InhaleAndLogSelectedItem);
+    }
+
+    void InhaleAndLogSelectedItem()
+    {
+        if (_item != null)
+        {
+            string s = InhaleSelectedItem();
+            print(s);
+        }
+        else
+        {
+            SelectFirstInvItem();
+            string s = InhaleSelectedItem();
+            print(s);
+        }
+
+        //print(s);
+    }
     public void SelectItem(MagicItem selectedItem)
     {
         _item = selectedItem;

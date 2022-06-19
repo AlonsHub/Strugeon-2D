@@ -9,7 +9,8 @@ public class SanctumSelectedItemDisplayer : BasicDisplayer
     [SerializeField]
     NulBarPanel nulBarPanel;
 
-
+    [SerializeField]
+    ItemInhaler itemInhaler;
     public bool SetMeFull(List<string> textsPerTextBox, List<Sprite> spritesPerImage, MagicItem item)
     {
         magicItem = item;
