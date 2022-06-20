@@ -53,28 +53,34 @@ public class ItemInhaler : MonoBehaviour
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
     {
-        string s = "";
+        string s = $"{_item.magicItemName} was Inhaled.\n";
         if(_item == null)
         {
+            //become unclickable
+
             SelectFirstInvItem();
         }
         //start sequence:
         //chance to hit:
         int hits = 0;
 
-        foreach (var item in _item.spectrumProfile.elements)
+        foreach (var el in _item.spectrumProfile.elements)
         {
-            float psionPotential = _psionSpectrumProfile.GetValueByName(item.nulColour);
-            float chanceToHit = item.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
+            float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
+            float chanceToHit = el.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
 
             if(RollChance((int)chanceToHit, 100))
             {
                 //HIT!
                 hits++;
                 //Roll Amount:
-                float amount = Random.Range(1, (int)psionPotential + 1) * item.value * amountFactor;
-                s += $"hit! on {item.nulColour}. Amount received {amount} \n";
-                print($"hit! on {item.nulColour}. Amount received {amount}");
+                float amount = Random.Range(1, (int)psionPotential + 1) * el.value * amountFactor;
+                s += $"hit! on {el.nulColour}. Amount received {amount} \n";
+
+                //Add value to that nulcolours max value (psion profile)
+                PlayerDataMaster.Instance.AddToPsionNulMax(el.nulColour, amount);
+
+                Inventory.Instance.RemoveMagicItem(_item);
             }
         }
         if(hits == 0)
@@ -89,7 +95,7 @@ public class ItemInhaler : MonoBehaviour
         }
         s += $"at {attemptCount + 1} attempt/s \n";
 
-        print($"at {attemptCount+1} attempt/s");
+        //print($"at {attemptCount+1} attempt/s");
 
         attemptCount = 0;
         return s;

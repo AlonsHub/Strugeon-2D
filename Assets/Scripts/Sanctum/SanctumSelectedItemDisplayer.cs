@@ -15,6 +15,8 @@ public class SanctumSelectedItemDisplayer : BasicDisplayer
     {
         magicItem = item;
 
+        itemInhaler.SelectItem(magicItem);
+
         nulBarPanel.SetMe(magicItem.spectrumProfile);
         return base.SetMe(textsPerTextBox, spritesPerImage);
     }

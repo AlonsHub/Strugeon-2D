@@ -489,6 +489,13 @@ public class PlayerDataMaster : MonoBehaviour
         tempSquadIndex = -1;
     }
 
+
+    //Player data editing // NEW move every method here TBF this is the right way to do it
+    public void AddToPsionNulMax(NulColour col, float amount)
+    {
+        currentPlayerData.psionSpectrum.psionElements[(int)col].maxValue += amount;
+    }
+
     public List<System.Object> GetLog
     {
         get => new List<System.Object> { currentPlayerData.playerName,
