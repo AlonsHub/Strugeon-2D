@@ -18,7 +18,7 @@ public struct NulElement
     }
 }
 [System.Serializable]
-public struct PsionNulElement
+public class PsionNulElement
 {
     NulElement nulElement;
     public float value => nulElement.value;
