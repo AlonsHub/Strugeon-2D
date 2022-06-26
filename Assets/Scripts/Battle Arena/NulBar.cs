@@ -28,10 +28,12 @@ public class NulBar : Bar
 
         //set values
         maxValue = element.maxValue;
-        currentValue = element.value;
+        //currentValue = element.value;
         regenRate = element.regenRate;
 
-        ShowValue();
+        AnimatedSetValue(element.value, 1f);
+
+        //ShowValue();
     }
 
     public void SetMe(NulElement element)
@@ -50,12 +52,13 @@ public class NulBar : Bar
 
         //maxValue = element.maxValue; //What should max be defualted to? TBF TBD gdd
         maxValue = 10f;
-        currentValue = element.value;
+        //currentValue = element.value;
+        StartCoroutine(AnimatedValueChange(element.value, 1f));
         
         //max and regen values could be relevant here - but shold they be here?
         //regen should operate somewhere else
 
-        ShowValue();
+        //ShowValue();
     }
 
     public void SetColour(NulColour colour)
@@ -73,6 +76,21 @@ public class NulBar : Bar
         currentValue = newVal;
         ShowValue();
 
+    }
+    public void AnimatedSetValue(float newVal, float duration)
+    {
+        StartCoroutine(AnimatedValueChange(newVal, duration));
+    }
+    IEnumerator AnimatedValueChange(float goal, float duration)
+    {
+        float t = 0f;
+        float initialValue = currentValue;
+        while (t <= duration)
+        {
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime;
+            SetValue(Mathf.Lerp(initialValue, goal, t/duration));
+        }
     }
     //public override void AddValue(float value)
     //{

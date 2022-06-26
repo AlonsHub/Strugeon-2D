@@ -38,10 +38,18 @@ public class ItemInhaler : MonoBehaviour
     //    //else
     //        SelectItem(emptyItem);
     //}
+    [SerializeField]
+    UnityEngine.UI.Button button;
 
-    private void Start()
+    public bool inhaling;
+
+    private void Awake()
     {
-        GetComponent<UnityEngine.UI.Button>().onClick.AddListener(InhaleAndLogSelectedItem);
+        if(!button)
+        button = GetComponent<UnityEngine.UI.Button>();
+
+        button.onClick.AddListener(InhaleAndLogSelectedItem);
+        inhaling = false;
     }
 
     void InhaleAndLogSelectedItem()
@@ -65,7 +73,10 @@ public class ItemInhaler : MonoBehaviour
     }
     public void SelectItem(MagicItem selectedItem)
     {
+        if(selectedItem !=null)
         _item = selectedItem;
+
+        button.interactable = selectedItem != null;
     }
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
@@ -132,6 +143,8 @@ public class ItemInhaler : MonoBehaviour
 
     IEnumerator SuccessfulInhaleSequence(float[] s)
     {
+        inhaling = true;
+        button.interactable = false;
         for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         {
 
@@ -153,7 +166,14 @@ public class ItemInhaler : MonoBehaviour
                 //print($"failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.");
             }
             yield return new WaitForSeconds(timePerResult);
+            //yield return new WaitUntil(() => Input.anyKey);
         }
+
+        yield return new WaitUntil(() => Input.anyKey);
+
+        resultText.transform.parent.gameObject.SetActive(false);
+        inhaling = false;
+        button.interactable = true;
     }
 
     bool RollChance(int x, int outOf)

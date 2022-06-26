@@ -30,6 +30,9 @@ public class SanctumInventory : BaseInventory
     //}
     public override void SetCurrentItem(MagicItem itemToSet)
     {
+        if (itemInhaler.inhaling)
+            return;
+
         string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
         string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
 

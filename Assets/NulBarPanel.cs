@@ -50,7 +50,8 @@ public class NulBarPanel : MonoBehaviour
         for (int i = 0; i < nulBars.Count; i++)
         {
             nulBars[i].SetColour((NulColour)i);
-            nulBars[i].SetValue(values);
+            //nulBars[i].SetValue(values);
+            nulBars[i].AnimatedSetValue(values, 1f);
         }
 
         ////TBF! this will have more complex logic if not all bars are to be displayed
