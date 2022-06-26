@@ -43,6 +43,9 @@ public class ItemInhaler : MonoBehaviour
 
     public bool inhaling;
 
+    [SerializeField]
+    NulBarPanel nulBarPanel;
+
     private void Awake()
     {
         if(!button)
@@ -157,11 +160,13 @@ public class ItemInhaler : MonoBehaviour
             if (s[i] != 0f)
             {
                 resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.";
+                nulBarPanel.SetBarText(i, $"+{s[i]}");
                 //print($"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.");
             }
             else
             {
                 resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.";
+                nulBarPanel.SetBarText(i, "0 :(");
 
                 //print($"failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.");
             }

@@ -282,12 +282,12 @@ PrefabInstance:
     - target: {fileID: 3179999230406590130, guid: 0324dbdae3df8d54eb56b155e3940925,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -488.5
+      value: 671
       objectReference: {fileID: 0}
     - target: {fileID: 3179999230406590130, guid: 0324dbdae3df8d54eb56b155e3940925,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -499.04
+      value: -72
       objectReference: {fileID: 0}
     - target: {fileID: 3179999230406590130, guid: 0324dbdae3df8d54eb56b155e3940925,
         type: 3}
@@ -1114,7 +1114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -488.5, y: -94}
+  m_AnchoredPosition: {x: -99, y: -65.818}
   m_SizeDelta: {x: 293.04773, y: 131.6359}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3179999230828477893
@@ -1199,6 +1199,8 @@ MonoBehaviour:
   processingColourIndicator: {fileID: 1727480003}
   resultText: {fileID: 995363861}
   button: {fileID: 3179999230828477894}
+  inhaling: 0
+  nulBarPanel: {fileID: 1753652585}
 --- !u!222 &3179999230828477896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1377,6 +1379,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1459172923}
     m_Modifications:
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: nulBarPrefab
+      value: 
+      objectReference: {fileID: 3996118486907781417, guid: df8a70a30a162eb45a2b45de43256491,
+        type: 3}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1415,12 +1423,12 @@ PrefabInstance:
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 960
+      value: 746.4336
       objectReference: {fileID: 0}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 540
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
@@ -1460,12 +1468,12 @@ PrefabInstance:
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -480.00003
+      value: -586.79
       objectReference: {fileID: 0}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 270
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
@@ -1487,5 +1495,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: NulBar_Panel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6648834788961810397, guid: 74dcd6c3e47d6694989d22edb69fe41c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 74dcd6c3e47d6694989d22edb69fe41c, type: 3}
+--- !u!1 &6648834787041507722 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6648834788961810393, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6648834787041507721}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6648834787041507723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6648834787041507722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 65
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0

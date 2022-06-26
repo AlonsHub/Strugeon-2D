@@ -14,6 +14,9 @@ public class NulBar : Bar
     [SerializeField]
     UnityEngine.UI.Image iconImg;
 
+    [SerializeField]
+    TMPro.TMP_Text yellowText;
+
     public void SetMe(PsionNulElement element)
     {
         //nulElement = element;
@@ -91,6 +94,15 @@ public class NulBar : Bar
             t += Time.deltaTime;
             SetValue(Mathf.Lerp(initialValue, goal, t/duration));
         }
+    }
+
+    public void SetText(string t)
+    {
+        if (!yellowText)
+            return;
+
+        yellowText.text = t;
+        yellowText.gameObject.SetActive(true);
     }
     //public override void AddValue(float value)
     //{

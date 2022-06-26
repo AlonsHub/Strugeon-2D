@@ -103,4 +103,9 @@ public class NulBarPanel : MonoBehaviour
             nulBars.Add(nulBar);
         }
     }
+
+    public void SetBarText(int index, string text)
+    {
+        nulBars[index].SetText(text);
+    }
 }
