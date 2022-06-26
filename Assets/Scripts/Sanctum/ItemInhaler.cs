@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class ItemInhaler : MonoBehaviour
 {
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
@@ -10,20 +10,34 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField, Tooltip("Amount = 1d[psion value for that colour] * (item value for same colour) * amountFactor. \n Default: .01f")]
     float amountFactor= .01f;
 
+    public System.Action OnInhale;
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
 
     PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
 
     MagicItem _item;
+    //MagicItem emptyItem;
 
     //SAFETY MEASURES:
     int maxAttempts = 20;
     int attemptCount = 0;
-    [ContextMenu("test")]
-    public void SelectFirstInvItem()
-    {
-        SelectItem(Inventory.Instance.inventoryItems[0]); //BAD! EVEN FOR A TEST THIS SHOWS we need better access to lists. TBF
-    }
+
+    [SerializeField]
+    float timePerBar;
+    [SerializeField]
+    float timePerResult;
+
+    [SerializeField]
+    GameObject processingColourIndicator; //placeholder TBF - currently just activates a sprite with a default animation
+    [SerializeField]
+    TMP_Text resultText;
+    //public void SelectFirstInvItem()
+    //{
+    //    //if (Inventory.Instance.inventoryItems.Count > 0 && Inventory.Instance.inventoryItems[0] != null)
+    //    //    SelectItem(Inventory.Instance.inventoryItems[0]); //BAD! EVEN FOR A TEST THIS SHOWS we need better access to lists. TBF
+    //    //else
+    //        SelectItem(emptyItem);
+    //}
 
     private void Start()
     {
@@ -32,17 +46,20 @@ public class ItemInhaler : MonoBehaviour
 
     void InhaleAndLogSelectedItem()
     {
-        if (_item != null)
-        {
+        //if (_item != null)
+        //{
             string s = InhaleSelectedItem();
             print(s);
-        }
-        else
-        {
-            SelectFirstInvItem();
-            string s = InhaleSelectedItem();
-            print(s);
-        }
+        //}
+        //else
+        //{
+        //    //SelectFirstInvItem();
+        //    //string s = InhaleSelectedItem();
+        //    //print(s);
+        //    print("no item to in");
+        //}
+
+        //SelectFirstInvItem();
 
         //print(s);
     }
@@ -53,13 +70,21 @@ public class ItemInhaler : MonoBehaviour
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
     {
-        string s = $"{_item.magicItemName} was Inhaled.\n";
+        float[] values = new float[_psionSpectrumProfile.psionElements.Count];
+
+        //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
+        //{
+        //    values[i] = 
+        //}
+
         if(_item == null)
         {
+            print("no item to inhale");
             //become unclickable
-
-            SelectFirstInvItem();
+            return "no item!";
+            //SelectFirstInvItem();
         }
+        string s = $"{_item.magicItemName} was Inhaled.\n";
         //start sequence:
         //chance to hit:
         int hits = 0;
@@ -69,13 +94,15 @@ public class ItemInhaler : MonoBehaviour
             float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
             float chanceToHit = el.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
 
-            if(RollChance((int)chanceToHit, 100))
+            values[(int)el.nulColour] =0;
+            if (RollChance((int)chanceToHit, 100))
             {
                 //HIT!
                 hits++;
                 //Roll Amount:
                 float amount = Random.Range(1, (int)psionPotential + 1) * el.value * amountFactor;
                 s += $"hit! on {el.nulColour}. Amount received {amount} \n";
+                values[(int)el.nulColour] = amount;
 
                 //Add value to that nulcolours max value (psion profile)
                 PlayerDataMaster.Instance.AddToPsionNulMax(el.nulColour, amount);
@@ -98,7 +125,35 @@ public class ItemInhaler : MonoBehaviour
         //print($"at {attemptCount+1} attempt/s");
 
         attemptCount = 0;
+        StartCoroutine(SuccessfulInhaleSequence(values));
+        OnInhale?.Invoke();
         return s;
+    }
+
+    IEnumerator SuccessfulInhaleSequence(float[] s)
+    {
+        for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
+        {
+
+            processingColourIndicator.SetActive(true);
+            resultText.transform.parent.gameObject.SetActive(false);
+            yield return new WaitForSeconds(timePerBar);
+            processingColourIndicator.SetActive(false);
+            resultText.transform.parent.gameObject.SetActive(true);
+
+            if (s[i] != 0f)
+            {
+                resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.";
+                //print($"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.");
+            }
+            else
+            {
+                resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.";
+
+                //print($"failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.");
+            }
+            yield return new WaitForSeconds(timePerResult);
+        }
     }
 
     bool RollChance(int x, int outOf)

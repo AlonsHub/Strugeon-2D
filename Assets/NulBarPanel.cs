@@ -39,6 +39,33 @@ public class NulBarPanel : MonoBehaviour
         //turn off any bars that irrelvant
 
     }
+    public void SetMe(float values) 
+    {
+        if(nulBars == null)
+        {
+            InitBars();
+        }
+
+
+        for (int i = 0; i < nulBars.Count; i++)
+        {
+            nulBars[i].SetColour((NulColour)i);
+            nulBars[i].SetValue(values);
+        }
+
+        ////TBF! this will have more complex logic if not all bars are to be displayed
+        //foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements) 
+        //{
+        //    //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+        //    nulBars[(int)nulElement.nulColour].SetMe(nulElement);
+        //    //nulBar.SetMe(nulElement);
+        //    //nulBars.Add(nulBar);
+        //}
+
+        //turn off any bars that irrelvant
+
+    }
+
     /// <summary>
     /// Uses item stats, Max values should still matter? do we still use the player's stats for that?
     /// </summary>

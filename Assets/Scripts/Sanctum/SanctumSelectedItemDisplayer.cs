@@ -15,9 +15,16 @@ public class SanctumSelectedItemDisplayer : BasicDisplayer
     {
         magicItem = item;
 
-        itemInhaler.SelectItem(magicItem);
-
-        nulBarPanel.SetMe(magicItem.spectrumProfile);
+        //itemInhaler.SelectItem(magicItem);
+        if (magicItem != null)
+            nulBarPanel.SetMe(magicItem.spectrumProfile);
+        else
+            nulBarPanel.SetMe(0f);
         return base.SetMe(textsPerTextBox, spritesPerImage);
+    }
+
+    public void SetAllNulBarsTo(float value)
+    {
+        nulBarPanel.SetMe(value);
     }
 }

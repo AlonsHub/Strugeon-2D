@@ -68,8 +68,10 @@ public class NulBar : Bar
     /// <summary>
     /// After initial SetMe - only set value
     /// </summary>
-    public void SetValue()
+    public void SetValue(float newVal)
     {
+        currentValue = newVal;
+        ShowValue();
 
     }
     //public override void AddValue(float value)
