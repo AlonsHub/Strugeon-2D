@@ -11,6 +11,16 @@ public class NulBarPanel : MonoBehaviour
 
     List<NulBar> nulBars;
 
+    [SerializeField, Tooltip("Automatically sets to PsionSpectrumProfile on Awake()")]
+    bool setOnAwake;
+
+
+    private void Awake()
+    {
+        if (setOnAwake)
+            SetMe();
+    }
+
     //private void OnEnable()
     //{
     //    if (nulBars == null)
@@ -88,6 +98,13 @@ public class NulBarPanel : MonoBehaviour
         //turn off any bars that irrelvant
     }
     
+    public void TurnOffAllBarTexts()
+    {
+        foreach (var item in nulBars)
+        {
+            item.TextOnOff(false);
+        }
+    }
     void InitBars()
     {
         //if(nulBars!=null || nulBars.Count > 0)

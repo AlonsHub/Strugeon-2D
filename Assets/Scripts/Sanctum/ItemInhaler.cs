@@ -175,7 +175,7 @@ public class ItemInhaler : MonoBehaviour
         }
 
         yield return new WaitUntil(() => Input.anyKey);
-
+        nulBarPanel.TurnOffAllBarTexts();
         resultText.transform.parent.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;

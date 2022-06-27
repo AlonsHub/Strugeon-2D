@@ -54,14 +54,19 @@ public class NulBar : Bar
         //set values
 
         //maxValue = element.maxValue; //What should max be defualted to? TBF TBD gdd
-        maxValue = 10f;
+        SetMax(10f);
         //currentValue = element.value;
         StartCoroutine(AnimatedValueChange(element.value, 1f));
-        
+
         //max and regen values could be relevant here - but shold they be here?
         //regen should operate somewhere else
 
         //ShowValue();
+    }
+
+    private void SetMax(float max)
+    {
+        maxValue = max;
     }
 
     public void SetColour(NulColour colour)
@@ -102,7 +107,12 @@ public class NulBar : Bar
             return;
 
         yellowText.text = t;
-        yellowText.gameObject.SetActive(true);
+        TextOnOff(true);
+    }
+
+    public void TextOnOff(bool on)
+    {
+        yellowText.gameObject.SetActive(on);
     }
     //public override void AddValue(float value)
     //{

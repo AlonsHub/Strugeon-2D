@@ -49,9 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4de77059db63e43ae87f6a1cc0f56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nulBarPrefab: {fileID: 3996118486907781417, guid: 1b05e2ce33676654481d43a8fd8af4f4,
+  nulBarPrefab: {fileID: 3996118486907781417, guid: df8a70a30a162eb45a2b45de43256491,
     type: 3}
   nulBarParent: {fileID: 6648834788961810392}
+  setOnAwake: 0
 --- !u!1 &6648834788961810393
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ GameObject:
   - component: {fileID: 6648834788961810392}
   - component: {fileID: 6648834788961810394}
   - component: {fileID: 6648834788961810395}
-  - component: {fileID: 6648834788961810397}
+  - component: {fileID: 6648834787041507723}
   m_Layer: 5
   m_Name: Panel_layoutgroup
   m_TagString: Untagged
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6648834788961810397
+--- !u!114 &6648834787041507723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,15 +137,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6648834788961810393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 26
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
