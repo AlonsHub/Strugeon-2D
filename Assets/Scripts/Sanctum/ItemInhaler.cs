@@ -44,7 +44,9 @@ public class ItemInhaler : MonoBehaviour
     public bool inhaling;
 
     [SerializeField]
-    NulBarPanel nulBarPanel;
+    NulBarPanel itemNulBarPanel;
+    [SerializeField]
+    NulBarPanel psionNulBarPanel;
 
     private void Awake()
     {
@@ -159,14 +161,14 @@ public class ItemInhaler : MonoBehaviour
 
             if (s[i] != 0f)
             {
-                resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.";
-                nulBarPanel.SetBarText(i, $"+{s[i]}");
+                resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].GetNulColour} colour by {s[i]}.";
+                itemNulBarPanel.SetBarText(i, $"+{s[i]}");
                 //print($"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.");
             }
             else
             {
-                resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.";
-                nulBarPanel.SetBarText(i, "0 :(");
+                resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].GetNulColour} energy.";
+                itemNulBarPanel.SetBarText(i, "0 :(");
 
                 //print($"failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.");
             }
@@ -175,7 +177,9 @@ public class ItemInhaler : MonoBehaviour
         }
 
         yield return new WaitUntil(() => Input.anyKey);
-        nulBarPanel.TurnOffAllBarTexts();
+        itemNulBarPanel.TurnOffAllBarTexts();
+        //nulBarPanel.SetMe(); //resets to accomedate new max values
+        psionNulBarPanel.SetMe();
         resultText.transform.parent.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;

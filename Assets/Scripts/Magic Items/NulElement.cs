@@ -13,7 +13,7 @@ public struct NulElement
     public NulElement(NulColour colour)
     {
         nulColour = colour;
-        value = 2;
+        value = 0f;
         //maxValue = 1;
     }
 }
@@ -22,8 +22,11 @@ public class PsionNulElement
 {
     NulElement nulElement;
     public float value => nulElement.value;
-    public NulColour nulColour => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
-    
+    public NulColour GetNulColour => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
+
+    [SerializeField]
+    NulColour _nulColour; //this needs to get set once on creation
+
     public float maxValue;
     public float regenRate;
     
@@ -31,6 +34,8 @@ public class PsionNulElement
     {
         //elementType = t;
         nulElement = new NulElement(col);
+        nulElement.value = .5f; //TBF default starting values
+        _nulColour = col;
         maxValue = max;
         regenRate = regen;
     }

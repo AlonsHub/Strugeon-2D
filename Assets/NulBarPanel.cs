@@ -41,7 +41,7 @@ public class NulBarPanel : MonoBehaviour
         foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements) 
         {
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            nulBars[(int)nulElement.nulColour].SetMe(nulElement);
+            nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
             //nulBar.SetMe(nulElement);
             //nulBars.Add(nulBar);
         }

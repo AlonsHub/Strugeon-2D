@@ -20,9 +20,9 @@ public class NulBar : Bar
     public void SetMe(PsionNulElement element)
     {
         //nulElement = element;
-        if (!myColour.HasValue || myColour != element.nulColour)
+        if (!myColour.HasValue || myColour != element.GetNulColour)
         {
-            SetColour(element.nulColour);
+            SetColour(element.GetNulColour);
         }
         //myColour = element.nulColour;
         //set correct color and icon?
