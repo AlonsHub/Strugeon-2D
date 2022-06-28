@@ -16,10 +16,21 @@ MonoBehaviour:
     magicItemName: Feral Hide Vest
     goldValue: 25
     spectrumProfile:
-      red: 0
-      blue: 0
-      yellow: 0
-      purple: 0
+      elements:
+      - value: 2
+        nulColour: 0
+      - value: 3
+        nulColour: 1
+      - value: 4
+        nulColour: 2
+      - value: 5
+        nulColour: 3
+      - value: 1
+        nulColour: 4
+      - value: 2
+        nulColour: 5
+      - value: 1
+        nulColour: 6
     rarity: 0
     dropRateWeight: 0
     itemSprite: {fileID: 21300000, guid: db038b43bfa111945a0014850db54b30, type: 2}

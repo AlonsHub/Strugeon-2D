@@ -67,6 +67,7 @@ public class NulBar : Bar
     private void SetMax(float max)
     {
         maxValue = max;
+        ShowValue();
     }
 
     public void SetColour(NulColour colour)
@@ -98,6 +99,21 @@ public class NulBar : Bar
             yield return new WaitForEndOfFrame();
             t += Time.deltaTime;
             SetValue(Mathf.Lerp(initialValue, goal, t/duration));
+        }
+    }
+    public void AnimatedSeMaxtValue(float newMax, float duration)
+    {
+        StartCoroutine(AnimatedMaxValueChange(newMax, duration));
+    }
+    IEnumerator AnimatedMaxValueChange(float goal, float duration)
+    {
+        float t = 0f;
+        float initialValue = maxValue;
+        while (t <= duration)
+        {
+            yield return new WaitForEndOfFrame();
+            t += Time.deltaTime;
+            SetMax(Mathf.Lerp(initialValue, goal, t/duration));
         }
     }
 

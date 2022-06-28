@@ -32,19 +32,30 @@ public class NulBarPanel : MonoBehaviour
     /// </summary>
     public void SetMe() 
     {
-        if(nulBars == null)
+        if (nulBars == null)
         {
             InitBars();
+            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            {
+                //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+                nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
+                //nulBar.SetMe(nulElement);
+                //nulBars.Add(nulBar);
+            }
+        }
+        else
+        {
+            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            {
+                //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+                nulBars[(int)nulElement.GetNulColour].AnimatedSeMaxtValue(nulElement.maxValue, 1f); //TBF replace with a better duration
+                nulBars[(int)nulElement.GetNulColour].AnimatedSetValue(nulElement.value, 1f);
+                //nulBar.SetMe(nulElement);
+                //nulBars.Add(nulBar);
+            }
         }
 
         //TBF! this will have more complex logic if not all bars are to be displayed
-        foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements) 
-        {
-            //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
-            //nulBar.SetMe(nulElement);
-            //nulBars.Add(nulBar);
-        }
 
         //turn off any bars that irrelvant
 
