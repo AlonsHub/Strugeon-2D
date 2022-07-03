@@ -17,6 +17,8 @@ public class NulBar : Bar
     [SerializeField]
     TMPro.TMP_Text yellowText;
 
+    Coroutine maxCorou;
+    Coroutine valueCorou;
     public void SetMe(PsionNulElement element)
     {
         //nulElement = element;
@@ -31,6 +33,7 @@ public class NulBar : Bar
 
         //set values
         maxValue = element.maxValue;
+        target_maxValue = maxValue;
         //currentValue = element.value;
         regenRate = element.regenRate;
 
@@ -88,7 +91,15 @@ public class NulBar : Bar
     }
     public void AnimatedSetValue(float newVal, float duration)
     {
-        StartCoroutine(AnimatedValueChange(newVal, duration));
+        StopCoroutine(nameof(AnimatedSetValue));
+        
+            if (currentValue != target_currentValue)
+            {
+                currentValue = target_currentValue;
+            }
+        
+        target_currentValue = newVal;
+       StartCoroutine(AnimatedValueChange(newVal, duration));
     }
     IEnumerator AnimatedValueChange(float goal, float duration)
     {
@@ -101,8 +112,15 @@ public class NulBar : Bar
             SetValue(Mathf.Lerp(initialValue, goal, t/duration));
         }
     }
-    public void AnimatedSeMaxtValue(float newMax, float duration)
+    public void AnimatedSetMaxValue(float newMax, float duration)
     {
+        
+            if (maxValue != target_maxValue)
+            {
+                maxValue = target_maxValue;
+            }
+        
+        target_maxValue = newMax;
         StartCoroutine(AnimatedMaxValueChange(newMax, duration));
     }
     IEnumerator AnimatedMaxValueChange(float goal, float duration)

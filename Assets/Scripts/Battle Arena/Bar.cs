@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bar : MonoBehaviour //NulBar!
+public class Bar : MonoBehaviour 
 {
     public float maxValue;
+    protected float target_maxValue;
     public float currentValue;
+    protected float target_currentValue;
     public float regenRate;
     [SerializeField]
     protected Image img;
@@ -29,6 +31,7 @@ public class Bar : MonoBehaviour //NulBar!
 
 
     }
+    
 
     protected virtual void OnDisable()
     {
