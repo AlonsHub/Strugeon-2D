@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Bar : MonoBehaviour
+public class Bar : MonoBehaviour //NulBar!
 {
     public float maxValue;
     public float currentValue;
@@ -18,12 +18,16 @@ public class Bar : MonoBehaviour
     //        TurnMaster.Instance.OnTurnOrderRestart += Regen; 
 
     //}
+
+    //This is BattleBar - maybe it should inherit from nul bar?
+
+
     private void Start()
     {
         if (TurnMaster.Instance)
-            //relevant for 2 reasons. 
-            //in arena - TurnMaster may/should not be accessible before Start().
             TurnMaster.Instance.OnTurnOrderRestart += Regen;
+
+
     }
 
     protected virtual void OnDisable()

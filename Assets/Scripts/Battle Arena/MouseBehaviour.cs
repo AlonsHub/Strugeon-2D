@@ -144,7 +144,8 @@ public class MouseBehaviour : MonoBehaviour
 
                 if(areButtonsOpen)
                 {
-                    foreach(SkillButton sb in skillButtons)
+                    //FIRST InteractableCheck() for all buttons
+                    foreach (SkillButton sb in skillButtons)
                     {
                         sb.InteractableCheck();
                     }

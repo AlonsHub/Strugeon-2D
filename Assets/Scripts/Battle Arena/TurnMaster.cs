@@ -53,8 +53,11 @@ public class TurnMaster : MonoBehaviour
     //temp TBF
     int initialSquadSize;
 
+    PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+
 
     public System.Action OnTurnOrderRestart;
+    public System.Action OnTurnOver;
     private void Awake()
     {
         Instance = this;
@@ -331,11 +334,12 @@ public class TurnMaster : MonoBehaviour
             if (!currentTurnTaker.DoDoubleTurn)
             {
                 currentTurn++; //Consider this, maybe don't do it here for doucle and skip turn purposes
+                OnTurnOver?.Invoke();
 
                 if (currentTurn >= turnTakers.Count)
                 {
                     currentTurn = 0;
-
+                    psionProfile.PerformRegenAll();
                     OnTurnOrderRestart?.Invoke();
 
                     //if (bars.Count > 0)

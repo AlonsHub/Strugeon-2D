@@ -117,7 +117,7 @@ public class NulBar : Bar
         }
     }
 
-    public void SetText(string t)
+    public void SetText(string t) //consider taking floats instead
     {
         if (!yellowText)
             return;

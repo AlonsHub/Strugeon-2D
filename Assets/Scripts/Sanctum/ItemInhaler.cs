@@ -88,11 +88,6 @@ public class ItemInhaler : MonoBehaviour
     {
         float[] values = new float[_psionSpectrumProfile.psionElements.Count];
 
-        //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
-        //{
-        //    values[i] = 
-        //}
-
         if(_item == null)
         {
             print("no item to inhale");
@@ -104,6 +99,25 @@ public class ItemInhaler : MonoBehaviour
         //start sequence:
         //chance to hit:
         int hits = 0;
+
+        //One-shot roll
+        int[] toHitChances = new int[7]; //7 -number of nul colours. Arry of % chance to Hit
+        int hitChanceTotal = 0;
+        int activeBarCount = 0;
+        foreach (var el in _item.spectrumProfile.elements)
+        {
+            float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
+            float chanceToHit = el.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
+            toHitChances[(int)el.nulColour] = (int)chanceToHit;
+            hitChanceTotal += (int)chanceToHit;
+            activeBarCount++;
+        }
+        int barHits = 0;
+        //roll from 1-3 how many 
+        float chanceForSingleBarHit = hitChanceTotal/activeBarCount; //total is chance out of 700, divide by 7 for %
+
+        //One-shot roll
+
 
         foreach (var el in _item.spectrumProfile.elements)
         {
@@ -124,6 +138,7 @@ public class ItemInhaler : MonoBehaviour
                 PlayerDataMaster.Instance.AddToPsionNulMax(el.nulColour, amount);
 
                 Inventory.Instance.RemoveMagicItem(_item);
+                _item = null;
             }
         }
         if(hits == 0)
@@ -138,7 +153,6 @@ public class ItemInhaler : MonoBehaviour
         }
         s += $"at {attemptCount + 1} attempt/s \n";
 
-        //print($"at {attemptCount+1} attempt/s");
 
         attemptCount = 0;
         StartCoroutine(SuccessfulInhaleSequence(values));
@@ -152,7 +166,6 @@ public class ItemInhaler : MonoBehaviour
         button.interactable = false;
         for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         {
-
             processingColourIndicator.SetActive(true);
             resultText.transform.parent.gameObject.SetActive(false);
             yield return new WaitForSeconds(timePerBar);
@@ -163,14 +176,11 @@ public class ItemInhaler : MonoBehaviour
             {
                 resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].GetNulColour} colour by {s[i]}.";
                 itemNulBarPanel.SetBarText(i, $"+{s[i]}");
-                //print($"Inhaled {_psionSpectrumProfile.psionElements[i].nulColour} colour by {s[i]}.");
             }
             else
             {
                 resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].GetNulColour} energy.";
-                itemNulBarPanel.SetBarText(i, "0 :(");
-
-                //print($"failed to gain {_psionSpectrumProfile.psionElements[i].nulColour} energy.");
+                itemNulBarPanel.SetBarText(i, "X");
             }
             yield return new WaitForSeconds(timePerResult);
             //yield return new WaitUntil(() => Input.anyKey);

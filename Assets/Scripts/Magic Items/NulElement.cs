@@ -27,7 +27,7 @@ public class PsionNulElement
     [SerializeField]
     NulColour _nulColour; //this needs to get set once on creation
 
-    public float maxValue;
+    public float maxValue; //better organize with getters and setters! TBF
     public float regenRate;
     
     public PsionNulElement(NulColour col, float max, float regen)
@@ -38,5 +38,15 @@ public class PsionNulElement
         _nulColour = col;
         maxValue = max;
         regenRate = regen;
+    }
+
+    public void ModifyValue(float amount)
+    {
+        nulElement.value += amount;
+    }
+
+    public void Regen()
+    {
+        nulElement.value += regenRate;
     }
 }

@@ -14,6 +14,8 @@ public class NulBarPanel : MonoBehaviour
     [SerializeField, Tooltip("Automatically sets to PsionSpectrumProfile on Awake()")]
     bool setOnAwake;
 
+    [SerializeField, Tooltip("OPTIONAL! - only relevant for BattleBarPanel")]
+    bool doHookToRegen;
 
     private void Awake()
     {
@@ -21,11 +23,46 @@ public class NulBarPanel : MonoBehaviour
             SetMe();
     }
 
-    //private void OnEnable()
-    //{
-    //    if (nulBars == null)
-    //        nulBars = new List<NulBar>();
-    //}
+    private void OnEnable()
+    {
+        if (doHookToRegen)
+        {
+            if (TurnMaster.Instance)
+            {
+                //TurnMaster.Instance.OnTurnOver += SetMe;
+                TurnMaster.Instance.OnTurnOrderRestart += SetMe;
+                PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
+                
+            }
+            else
+                StartCoroutine(nameof(WaitAfterFirstOnEnable));
+
+        }
+    }
+    IEnumerator WaitAfterFirstOnEnable()
+    {
+        yield return new WaitUntil(() => (TurnMaster.Instance || Time.timeSinceLevelLoad > 2f));
+
+        if (!TurnMaster.Instance)
+            Debug.LogError("NO TURN MASTER!");
+        else
+        {
+            //TurnMaster.Instance.OnTurnOver += SetMe;
+            TurnMaster.Instance.OnTurnOrderRestart += SetMe;
+            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
+        }
+
+    }
+    private void OnDisable()
+    {
+        if (doHookToRegen && TurnMaster.Instance)
+        {
+            //TurnMaster.Instance.OnTurnOver -= SetMe;
+            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged -= SetMe;
+            TurnMaster.Instance.OnTurnOrderRestart -= SetMe;
+        }
+    }
+
 
     /// <summary>
     /// No argument -> uses the player's stats
@@ -48,8 +85,12 @@ public class NulBarPanel : MonoBehaviour
             foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
             {
                 //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-                nulBars[(int)nulElement.GetNulColour].AnimatedSeMaxtValue(nulElement.maxValue, 1f); //TBF replace with a better duration
-                nulBars[(int)nulElement.GetNulColour].AnimatedSetValue(nulElement.value, 1f);
+                NulBar temp = nulBars[(int)nulElement.GetNulColour];
+
+                //if(temp.maxValue != nulElement.maxValue)
+                temp.AnimatedSeMaxtValue(nulElement.maxValue, 1f); //TBF replace with a better duration, and set the value immediatly - only displaying the way to target (don't gradually increase value!)
+                if(temp.currentValue != nulElement.value)
+                temp.AnimatedSetValue(nulElement.value, .5f);
                 //nulBar.SetMe(nulElement);
                 //nulBars.Add(nulBar);
             }
