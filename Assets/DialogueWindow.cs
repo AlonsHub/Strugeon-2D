@@ -52,24 +52,30 @@ public class DialogueWindow : MonoBehaviour
         while (paragraphCounter < paragraphTotal)
         {
             //print paragraph
+
+            yield return new WaitForEndOfFrame();
             yield return new WaitUntil(() => Input.anyKeyDown);
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(ListenForSkip());
             _currentParagraph = allParagraphs[paragraphCounter];
             //teleType.SetAndPlayOnce(_currentParagraph);
-
+            teleType.SetAndPlayOnce(_currentParagraph);
             paragraphCounter++;
-            yield return teleType.SetAndPlayOnce(_currentParagraph);
+            yield return new WaitUntil(()=> teleType.isReady);
 
             //yield return new WaitForEndOfFrame();
 
+            StopCoroutine(ListenForSkip());
         }
 
         //On read-loop ended
         OnDialogueEnd?.Invoke();
     }
 
-    public void Skip()
+    IEnumerator ListenForSkip()
     {
-        
+        yield return new WaitUntil(()=>Input.anyKeyDown);
+        teleType.Skip();
     }
     //public bool TryNext()
     //{
