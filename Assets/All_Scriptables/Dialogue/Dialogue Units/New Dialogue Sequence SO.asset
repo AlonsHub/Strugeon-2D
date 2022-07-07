@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbacc8e372226ac45bdda18f097c1791, type: 3}
+  m_Name: New Dialogue Sequence SO
+  m_EditorClassIdentifier: 
+  dialogueUnits:
+  - dialogueType: 0
+    _text: Spoken text
+    dialogueChoices: []
+  - dialogueType: 1
+    _text: Descriptive text
+    dialogueChoices: []
+  - dialogueType: 2
+    _text: BOLD CHOICE
+    dialogueChoices:
+    - text: Kill them all!
+      flags: hostile
+    - text: Let's all be friends!
+      flags: friendly
+    - text: All things must die
+      flags: intimidate
+  - dialogueType: 1
+    _text: Things are like this and that
+    dialogueChoices: []
+  - dialogueType: 0
+    _text: Hey! these are words being said
+    dialogueChoices: []

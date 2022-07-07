@@ -2,9 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DialogueType {Spoken, Descriptive, Choice};
+
+
 [System.Serializable]
 public class DialogueUnit 
 {
-    //This data class is an attempt at a correct form/pipeline for accessing data. 
-    string _text;
+    public DialogueType dialogueType;
+
+    public string _text;
+
+    //only relevant for choice-units
+    [Tooltip("Only relevant for Choice-units")]
+    public List<DialogueChoice> dialogueChoices;
+
+
 }
+
