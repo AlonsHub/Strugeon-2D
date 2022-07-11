@@ -468,7 +468,7 @@ namespace DialogueEditor
             m_currentSelectedIndex = 0;
 
             // Set sprite
-            if (speech.Icon == null)
+            if (speech.Icon == null) //TBF ALON - here we determine character speaking ATM
             {
                 NpcIcon.sprite = BlankSprite;
             }

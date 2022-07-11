@@ -72,6 +72,8 @@ namespace DialogueEditor
 
         /// <summary> UnityEvent, to betriggered when this Node starts. </summary>
         public UnityEngine.Events.UnityEvent Event;
+
+        //TBF ALON - add CharacterSO here
     }
 
 

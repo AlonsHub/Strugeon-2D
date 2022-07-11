@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1556,12 +1556,22 @@ PrefabInstance:
     - target: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 746.4336
+      value: 574.1797
       objectReference: {fileID: 0}
     - target: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 539.99365
+      value: 415.37976
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
         type: 3}
@@ -1627,6 +1637,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player NulBar_Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015824013147, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015824013151, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015824013151, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb85149d0ebd57c4ca50b273b94c4996, type: 3}
