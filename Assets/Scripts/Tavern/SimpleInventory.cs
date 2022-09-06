@@ -30,7 +30,10 @@ public class SimpleInventory : BaseInventory
     //    Inventory.Instance.OnInventoryChange -= RefreshInventory;
 
     //}
-
+    private void Start()
+    {
+        SetCurrentItem();
+    }
     public override void SetCurrentItem(MagicItem newItem)
     {
         selectedItem = newItem;
@@ -68,7 +71,7 @@ public class SimpleInventory : BaseInventory
 
         //sell selected item
         Inventory.Instance.SellItem(selectedItem);
-
+        SetCurrentItem();
     }
 
 }

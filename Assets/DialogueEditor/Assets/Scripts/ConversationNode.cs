@@ -52,7 +52,7 @@ namespace DialogueEditor
         public override eNodeType NodeType { get { return eNodeType.Speech; } }
 
         /// <summary> The name of the NPC who is speaking. </summary>
-        public string Name;
+        public string Name; // TBF Read and display list of Scriptable objects that are characters
 
         /// <summary> Should this speech node go onto the next one automatically? </summary>
         public bool AutomaticallyAdvance;

@@ -55,12 +55,12 @@ public class NulBarPanel : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (doHookToRegen && TurnMaster.Instance)
-        {
+        //if (doHookToRegen && TurnMaster.Instance)
+        //{
             //TurnMaster.Instance.OnTurnOver -= SetMe;
             PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged -= SetMe;
             TurnMaster.Instance.OnTurnOrderRestart -= SetMe;
-        }
+        //}
     }
 
 
