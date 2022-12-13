@@ -355,14 +355,14 @@ public class WeaponItem : ActionItem
             // only applies the mod for the "greatest" relevant threshold met 
             for (int i = 0; i < targetHealthPrefs.percentModParis.Length; i++)
             {
-                if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Relevant! check next, if exists
+                if(p.currentHP <= (p.maxHP/100*targetHealthPrefs.percentModParis[i].percentOfHealth)) //Checks current pair
                 {
-                    if (i == targetHealthPrefs.percentModParis.Length - 1) //if i is last index
+                    if (i == targetHealthPrefs.percentModParis.Length - 1) //chevcks if i is last pair
                     {
                         //apply this (i) mod!
                         weight *= targetHealthPrefs.percentModParis[i].modifier;
                     }
-                    else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth))
+                    else if(p.currentHP <= (p.maxHP / 100 * targetHealthPrefs.percentModParis[i + 1].percentOfHealth)) //Checks if next pair is relevant
                     {
                         continue; //
                     }

@@ -303,35 +303,37 @@ public class TurnMaster : MonoBehaviour
             }
             
 
-            yield return new WaitForSeconds(turnStartDelay);
+            yield return new WaitForSeconds(turnStartDelay); //TBR!
 
+            //TBR! just loop to the next - stop depending on index at all! create a special collection? or a queue, in which you can appear twice, cut-in-line, or be skipped
             if (currentTurn >= turnTakers.Count) //I don't think this ever happens
             {
                 currentTurn = 0;
             }
-            //clocker.fillAmount =(float)currentTurn / (float)(turnTakers.Count - 1);
+            
 
             currentTurnTaker = turnTakers[currentTurn];
 
+            //TBR! - turn order should be its own thing.
             TurnOrderUpdate(1); //int 1 to engage overload
 
-            if (!currentTurnTaker.DoSkipTurn)
+            if (!currentTurnTaker.DoSkipTurn)//TBR!! any way turn order could be effected should be more careful AND status effects should handle themselves better...
             {
                 currentTurnTaker.TurnDone = false;
                 currentTurnTaker.TakeTurn();
             }
             else
             {
-                ((Pawn)currentTurnTaker).RemoveIconByName("redDeBuff");
+                ((Pawn)currentTurnTaker).RemoveIconByName("redDeBuff");//TBR!! this MUST be handled by the status effect.
                 currentTurnTaker.DoSkipTurn = false;
                 currentTurnTaker.TurnDone = true;
             }
             //MAYBE have an else {currentTurnTaker.TurnDone = true; }
 
+            //TBR! - this should be handled WAY better... no time-outs, but just holding-on waiting for a TurnTaker to be TurnDone is asking for trouble
+            yield return new WaitUntil(() => currentTurnTaker.TurnDone); 
 
-            yield return new WaitUntil(() => currentTurnTaker.TurnDone);
-
-            if (!currentTurnTaker.DoDoubleTurn)
+            if (!currentTurnTaker.DoDoubleTurn) //TBR! - similar to skipping a turn
             {
                 currentTurn++; //Consider this, maybe don't do it here for doucle and skip turn purposes
                 OnTurnOver?.Invoke();
@@ -339,36 +341,16 @@ public class TurnMaster : MonoBehaviour
                 if (currentTurn >= turnTakers.Count)
                 {
                     currentTurn = 0;
-                    psionProfile.PerformRegenAll();
-                    OnTurnOrderRestart?.Invoke();
-
-                    //if (bars.Count > 0)
-                    //{
-                    //    foreach (Bar b in bars)
-                    //    {
-                    //        //b.AddValue(rechargeAmount);
-                    //        b.Regen();
-                    //    }
-                    //}
+                    psionProfile.PerformRegenAll(); //TBR! also terrbile! psionProfile should hook to OnTurnRestart - that's what it's here for!!!
+                    OnTurnOrderRestart?.Invoke();                    
                 }
-
-                //TurnOrderUpdate(1);
-                //    TurnOrderUpdate();
             }
             else
             {
                 currentTurnTaker.DoDoubleTurn = false;
                 ((Pawn)currentTurnTaker).RemoveIconByName("blueBuff");
             }
-
-
         }
-
-        //PartyMaster.Instance.availableMercs.AddRange(RefMaster.Instance.mercs);
-        //PartyMaster.Instance.currentMercParty.Clear();
-
-        //Time.timeScale = 1; //just in case
-        //SceneManager.LoadScene(0);
         StopTurning();
     }
     int RollDx(int x)
