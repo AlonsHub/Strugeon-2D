@@ -175,16 +175,13 @@ public class TurnMaster : MonoBehaviour
         //if (PartyMaster.Instance.currentMercParty.Count != 0)
         {
             Win();
-
         }
         else
         {
             Lose();
         }
 
-
         PartyMaster.Instance.currentSquad = null;
-        //PartyMaster.Instance.currentMercParty.Clear();
         PlayerDataMaster.Instance.GrabAndSaveData();
 
         Time.timeScale = 1; //just in case

@@ -9,6 +9,9 @@ public class NulBarPanel : MonoBehaviour
     [SerializeField]
     Transform nulBarParent; //should some sort of Layout group?
 
+    [SerializeField]
+    List<NulColour> coloursToShow;
+
     List<NulBar> nulBars;
 
     [SerializeField, Tooltip("Automatically sets to PsionSpectrumProfile on Awake()")]
@@ -74,10 +77,14 @@ public class NulBarPanel : MonoBehaviour
             InitBars();
             foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
             {
-                //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+                if (!coloursToShow.Contains(nulElement.GetNulColour))
+                {
+                    nulBars[(int)nulElement.GetNulColour].gameObject.SetActive(false);
+                    continue;
+                }
+                
                 nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
-                //nulBar.SetMe(nulElement);
-                //nulBars.Add(nulBar);
+         
             }
         }
         else

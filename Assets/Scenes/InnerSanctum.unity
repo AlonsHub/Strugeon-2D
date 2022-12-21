@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1399,6 +1399,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1459172923}
     m_Modifications:
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[4]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6648834788777583840, guid: 74dcd6c3e47d6694989d22edb69fe41c,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[6]
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6648834788777583841, guid: 74dcd6c3e47d6694989d22edb69fe41c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1632,6 +1667,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: setOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[4]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7771178015337804899, guid: bb85149d0ebd57c4ca50b273b94c4996,
+        type: 3}
+      propertyPath: coloursToShow.Array.data[6]
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7771178015337804909, guid: bb85149d0ebd57c4ca50b273b94c4996,
         type: 3}
