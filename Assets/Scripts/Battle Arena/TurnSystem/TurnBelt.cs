@@ -9,6 +9,7 @@ using UnityEngine;
 [System.Serializable]
 public class TurnBelt
 {
+    [SerializeField]
     List<TurnInfo> turnInfos; 
                                      
 

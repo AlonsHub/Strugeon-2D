@@ -9,23 +9,27 @@ public class TurnInfo
     TurnTaker turnTaker;
     //int beltIndex; //this is problematic if they move around, and they should be able to!
 
+    public TurnTaker GetTurnTaker => turnTaker;
+   
+    public bool IsTurnDone { get => GetTurnTaker.TurnDone; set => GetTurnTaker.TurnDone = value; }
+
+
+    #region Maybe Zone
     //Data relevant to the machine for parsing
     public bool DoDoubleTurn;
     public bool DoSkipTurn;
-
-    public TurnTaker GetTurnTaker => turnTaker;
-   
-    public bool IsTurnDone => GetTurnTaker.TurnDone;
-
-
     public System.Action OnTurnBegin;
+    public System.Action OnTurnSkip; //in d
     public System.Action OnTurnEnd; //add to this cooldowns and effects that need to remove themselves
+    #endregion
+
     //Status effects?
-    
+    List<TurnInfoEffect> turnInfoEffects;
 
     public TurnInfo(TurnTaker t)
     {
         turnTaker = t;
+        turnInfoEffects = new List<TurnInfoEffect>();
     }
 
     

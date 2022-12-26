@@ -8,6 +8,7 @@ public class TurnAffectingPsionSpell : MonoBehaviour
     BeltManipulator beltManipulator;
     public void SkipTurn(TurnTaker target)
     {
+        TurnInfo ti= beltManipulator.GetTurnInfoByTaker(target);
         
     }
         

@@ -15,6 +15,8 @@ public class BeltManipulator : MonoBehaviour
 
 
     int _currentIndex;
+    [SerializeField]
+    int toSkip;
 
     /// <summary>
     /// Receives TurnTakers and creates TurnInfos for them.
@@ -65,7 +67,7 @@ public class BeltManipulator : MonoBehaviour
     {
         return turnBelt.GetTurnInfoByPredicate(x => x.GetTurnTaker == tt);
     }
-
+     
     int RollDx(int x)
     {
         return Random.Range(1, x + 1);
@@ -73,6 +75,17 @@ public class BeltManipulator : MonoBehaviour
     int SortByInitiativeScore(TurnTaker a, TurnTaker b)
     {
         return -a.Initiative.CompareTo(b.Initiative);
+    }
+
+
+    /// <summary>
+    /// AMAZING TEST THAT WORKEDDDD!
+    /// </summary>
+    [ContextMenu("Skip the index ToSkip")]
+    public void Skip()
+    {
+        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(turnBelt.GetTurnInfo(toSkip));
+        skipTurn_Effect.ApplyEffect();
     }
 }
 
