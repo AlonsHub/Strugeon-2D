@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,25 +9,29 @@ using UnityEngine;
 [System.Serializable]
 public class TurnBelt
 {
-    public List<TurnInfo> turnInfos; //This should really be a special collection
-                                     //
+    List<TurnInfo> turnInfos; 
+                                     
 
     public int infoCount => turnInfos.Count;
 
-    int _current;
 
    
-    public void Set(List<TurnInfo> infos)
+    public void InitBelt(List<TurnInfo> infos)
     {
         turnInfos = infos;
     }
-
     public void Clear()
     {
         turnInfos.Clear();
 
         //Also unsubscribe from stuff?
     }
+
+    public void InsertTurnInfo(TurnInfo ti, int index)
+    {
+        turnInfos.Insert(index, ti);
+    }
+
     /// <summary>
     /// Do you really need to use this right now? Is the current TurnTaker not cached where you are right now? and if not, why?
     /// </summary>
@@ -34,6 +39,10 @@ public class TurnBelt
     public TurnInfo GetTurnInfo(int index) //Don't really need this, as it should be cached in the TurnMachine - but it may come in handy.
     {
         return turnInfos[index]; 
+    }
+    public TurnInfo GetTurnInfoByPredicate(System.Func<TurnInfo,bool> predicate)
+    {
+        return turnInfos.Where(predicate).SingleOrDefault();
     }
 
 }

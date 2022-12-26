@@ -28,7 +28,7 @@ public class TurnMachine : MonoBehaviour
     /// </summary>
     public void SetMachine(List<TurnTaker> allTakers)
     {
-        beltManipulator.InitBelt(allTakers);
+        beltManipulator.InitManipulator(allTakers);
     }
 
     public void StartBattle()
@@ -41,24 +41,20 @@ public class TurnMachine : MonoBehaviour
     }
     IEnumerator StartTurnSequence()
     {
-        TurnInfo currentTurnInfo = null;
+        TurnInfo currentTurnInfo;
         while (isActiveBattle)
         {
-            if(currentTurnInfo != null)
-            {
-
-            }
             currentTurnInfo = beltManipulator.NextTurn();//Skipping the first processing of the Start-Pin, allowing us to differentiate events such as: "On Round Restart" and "On Begin Battle"
 
             if (currentTurnInfo.isStartPin)
             {
-                //call events for StartPin! (On Round Restart)
+                //call events for StartPin! (On Round Restart) //should call for the on start and end events for start pin? they could be useful
                 continue;
             }
 
             if (currentTurnInfo.DoSkipTurn)
             {
-                Debug.Log($"{currentTurnInfo.GetTurnTaker().Name}'s turn was skipped!");
+                Debug.Log($"{currentTurnInfo.GetTurnTaker.Name}'s turn was skipped!");
                 //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
                 // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
                 // 
@@ -72,29 +68,30 @@ public class TurnMachine : MonoBehaviour
 
             yield return new WaitUntil(() => currentTurnInfo.IsTurnDone);
 
-            //For double turn, 
+
+
         }
 
     }
-    void ProcessTurnInfo(TurnInfo ti)
-    {
-        if(ti.isStartPin)
-        {
-            //call events for StartPin
-            return;
-        }
+    //void ProcessTurnInfo(TurnInfo ti)
+    //{
+    //    if(ti.isStartPin)
+    //    {
+    //        //call events for StartPin
+    //        return;
+    //    }
 
-        if(ti.DoSkipTurn)
-        {
-            //perform skip and(?!) remove the status effect?
-        }
+    //    if(ti.DoSkipTurn)
+    //    {
+    //        //perform skip and(?!) remove the status effect?
+    //    }
 
-        //CALL OnTurnStart!
+    //    //CALL OnTurnStart!
 
-        //Perform turn
-        ti.TakeTurn();
+    //    //Perform turn
+    //    ti.TakeTurn();
 
-        //WAIT FOR TURN DONE
+    //    //WAIT FOR TURN DONE
 
-    }
+    //}
 }

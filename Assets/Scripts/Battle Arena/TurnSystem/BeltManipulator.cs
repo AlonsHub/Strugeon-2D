@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class BeltManipulator : MonoBehaviour
     /// And sets the _current counter to 0.
     /// </summary>
     /// <param name="allTakers"></param>
-    public void InitBelt(List<TurnTaker> allTakers)
+    public void InitManipulator(List<TurnTaker> allTakers)
     {
         //roll and sort
         foreach (TurnTaker tt in allTakers)
@@ -38,7 +39,7 @@ public class BeltManipulator : MonoBehaviour
             turnInfos.Add(new TurnInfo(item));
         }
 
-        turnBelt.Set(turnInfos);
+        turnBelt.InitBelt(turnInfos);
 
         _currentIndex = 0;
     }
@@ -52,6 +53,17 @@ public class BeltManipulator : MonoBehaviour
             _currentIndex = 0;
 
         return turnBelt.GetTurnInfo(_currentIndex);
+    }
+
+    //add turn info??
+    public void InsertTurnInfo(TurnInfo ti, int index)
+    {
+        turnBelt.InsertTurnInfo(ti, index);
+    }
+
+    public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
+    {
+        return turnBelt.GetTurnInfoByPredicate(x => x.GetTurnTaker == tt);
     }
 
     int RollDx(int x)

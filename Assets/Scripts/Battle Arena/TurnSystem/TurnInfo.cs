@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class TurnInfo 
 {
     public bool isStartPin;
@@ -10,11 +10,16 @@ public class TurnInfo
     //int beltIndex; //this is problematic if they move around, and they should be able to!
 
     //Data relevant to the machine for parsing
-    //public bool DoDoubleTurn;
+    public bool DoDoubleTurn;
     public bool DoSkipTurn;
 
-    public bool IsTurnDone => turnTaker.TurnDone;
+    public TurnTaker GetTurnTaker => turnTaker;
+   
+    public bool IsTurnDone => GetTurnTaker.TurnDone;
 
+
+    public System.Action OnTurnBegin;
+    public System.Action OnTurnEnd; //add to this cooldowns and effects that need to remove themselves
     //Status effects?
     
 
@@ -22,17 +27,15 @@ public class TurnInfo
     {
         turnTaker = t;
     }
-    public TurnTaker GetTurnTaker()
-    {
-        return turnTaker;
-    }
 
     
     public void TakeTurn()
     {
-        //TBA Call events and things! 
+        OnTurnBegin?.Invoke(); 
+
         turnTaker.TakeTurn();
-        
+
+        OnTurnEnd?.Invoke(); 
     }
 
     /// <summary>
@@ -46,4 +49,14 @@ public class TurnInfo
 
         return null;
     }
+
+
+    // TBD if this is really a problem?
+    ///// <summary>
+    ///// IMPORTANT! not clearing may cause all turninfos to remain in RAM if they still have listeners.?
+    ///// </summary>
+    //public void Clear()
+    //{
+    //    OnTurnBegin.
+    //}
 }
