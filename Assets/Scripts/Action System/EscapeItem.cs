@@ -57,15 +57,13 @@ public class EscapeItem : ActionItem
     {
         actionVariations.Clear();
 
-        //CHECK IF EVEN POSSIBLE!!!!!!
-
         //IF THEY HAVE NO PATH, THEY CAN'T ESCAPEEEE!!@!!
         if (pawn.HasRoot)
             return;
 
-        if(escapesLast) //ONLY IF ESCAPELAST
+        if (escapesLast) //ONLY IF ESCAPELAST
         {
-            if(!(RefMaster.Instance.mercs.Count == 1 && RefMaster.Instance.mercs[0].Name == pawn.Name))
+            if (!(RefMaster.Instance.mercs.Count == 1 && RefMaster.Instance.mercs[0].Name == pawn.Name))
             {
                 //if NOT the last merc, stop considering escape
                 return;
@@ -79,11 +77,11 @@ public class EscapeItem : ActionItem
 
         int weight = escapeWeight;
 
-        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theDead.Count >0)
+        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theDead.Count > 0)
         {
             weight += weightPerDeadAlly * TurnMaster.Instance.theDead.Count;
         }
-        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theCowardly.Count >0)
+        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theCowardly.Count > 0)
         {
             weight += weightPerDeadAlly * TurnMaster.Instance.theCowardly.Count;
         }
@@ -93,7 +91,7 @@ public class EscapeItem : ActionItem
             weight += (int)((1f - ((float)pawn.currentHP / (float)pawn.maxHP)) * maxAddedWeight);
         }
 
-            //actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight// 
-            actionVariations.Add(new ActionVariation(this, gameObject, weight)); //* consider formulating escapeWeight// did :)
+        //actionVariations.Add(new ActionVariation(this, gameObject, escapeWeight)); //* consider formulating escapeWeight// 
+        actionVariations.Add(new ActionVariation(this, gameObject, weight)); //* consider formulating escapeWeight// did :)
     }
 }

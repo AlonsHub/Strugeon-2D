@@ -307,8 +307,6 @@ public class TurnMaster : MonoBehaviour
             {
                 currentTurn = 0;
             }
-            
-
             currentTurnTaker = turnTakers[currentTurn];
 
             //TBR! - turn order should be its own thing.
@@ -359,8 +357,6 @@ public class TurnMaster : MonoBehaviour
     {
         return -a.Initiative.CompareTo(b.Initiative);
     }
-
-
     public void RemoveTurnPlate(TurnDisplayer turnPlate)
     {
         turnPlates.Remove(turnPlate);
@@ -579,9 +575,11 @@ public interface TurnTaker
     int Initiative { get; set; }
     bool TurnDone { get; set; }
     string Name { get; }
-    bool DoDoubleTurn { get; set; }
-    bool DoSkipTurn { get; set; }
+    bool DoDoubleTurn { get; set; } //TBF needs to move to TurnIfno
+    bool DoSkipTurn { get; set; }//TBF needs to move to TurnIfno
     void TakeTurn();
+
+    //TBD Thinking of adding some Special Ability access here... for turn-plate-display purposes
 
     Sprite PortraitSprite { get; set; }
 }
