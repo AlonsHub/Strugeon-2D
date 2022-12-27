@@ -10,13 +10,24 @@ using UnityEngine;
 /// </summary>
 public class BeltManipulator : MonoBehaviour
 {
+    public static BeltManipulator Instance;
+
     [SerializeField]
     TurnBelt turnBelt;
 
 
     int _currentIndex;
-    [SerializeField]
-    int toSkip;
+   
+
+    private void Awake()
+    {
+        if(Instance!=null && Instance!=this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     /// <summary>
     /// Receives TurnTakers and creates TurnInfos for them.
@@ -78,14 +89,14 @@ public class BeltManipulator : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// AMAZING TEST THAT WORKEDDDD!
-    /// </summary>
-    [ContextMenu("Skip the index ToSkip")]
-    public void Skip()
-    {
-        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(turnBelt.GetTurnInfo(toSkip));
-        skipTurn_Effect.ApplyEffect();
-    }
+    ///// <summary>
+    ///// AMAZING TEST THAT WORKEDDDD!
+    ///// </summary>
+    //[ContextMenu("Skip the index ToSkip")]
+    //public void Skip()
+    //{
+    //    SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(turnBelt.GetTurnInfo(toSkip));
+    //    skipTurn_Effect.ApplyEffect();
+    //}
 }
 

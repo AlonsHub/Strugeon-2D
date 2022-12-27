@@ -15,11 +15,24 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
     public Sprite PortraitSprite { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     //DEPRECATED
 
+    Animator anim;
     public void TakeTurn()
     {
-        Debug.Log($"{Name} took a turn!");
+        GetComponent<Animator>().SetTrigger("Action");
+    }
+    /// <summary>
+    /// call by animation event
+    /// </summary>
+     public void FinishAnimation()
+    {
+        //for now, just
         TurnDone = true;
+        //bu here we can handle double turn
     }
 
-   
+    private void OnMouseDown()
+    {
+        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
+        skipTurn_Effect.ApplyEffect();
+    }
 }
