@@ -70,9 +70,12 @@ public class TurnMachine : MonoBehaviour
                 continue;
             }
 
-            if (currentTurnInfo.DoSkipTurn)
+            DoubleTurn_Effect de;
+            if (currentTurnInfo.GetEffectOfType(out de))
             {
-                currentTurnInfo.OnTurnSkip?.Invoke();
+                //currentTurnInfo.OnTurnSkip?.Invoke();
+                currentTurnInfo.RemoveEffect(de);
+
                 Debug.Log($"{currentTurnInfo.GetTurnTaker.Name}'s turn was skipped!");
                 //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
                 // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
@@ -87,8 +90,8 @@ public class TurnMachine : MonoBehaviour
             currentTurnInfo.TakeTurn();
 
             yield return new WaitUntil(() => currentTurnInfo.IsTurnDone);
+            currentTurnInfo.OnTurnEnd?.Invoke();
         }
 
-    }
-    
+    }    
 }

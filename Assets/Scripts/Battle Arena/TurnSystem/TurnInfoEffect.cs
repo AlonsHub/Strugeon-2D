@@ -12,11 +12,9 @@ public abstract class TurnInfoEffect
     // Who do on?
     protected TurnInfo turnInfoToEffect; 
     
-
     // Counters?
 
     // End *Condition* - TBD condition class -> a general class that can, as with predicates, assert general statements.
-
 
     public TurnInfoEffect(TurnInfo ti)
     {

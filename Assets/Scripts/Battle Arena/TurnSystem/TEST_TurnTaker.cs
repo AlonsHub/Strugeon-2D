@@ -8,16 +8,19 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
     public bool TurnDone { get ; set ; }
 
     public string Name => name;
-
-    //DEPRECATED
-    public bool DoDoubleTurn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public bool DoSkipTurn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    [SerializeField]
+    bool doDoubleTurn;
+    //DEPRECATED?
+    public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
+    //DEPRECATED?
     public Sprite PortraitSprite { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     //DEPRECATED
+    public bool DoSkipTurn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     Animator anim;
     public void TakeTurn()
     {
+        Debug.Log($"{name} took turn");
         GetComponent<Animator>().SetTrigger("Action");
     }
     /// <summary>
@@ -25,14 +28,21 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
     /// </summary>
      public void FinishAnimation()
     {
-        //for now, just
-        TurnDone = true;
-        //bu here we can handle double turn
+        if (doDoubleTurn)
+        {
+            doDoubleTurn = false; //BAD BUT KEEP FOR NOW! TBD TBF
+            TakeTurn();
+        }
+        else
+        {
+            TurnDone = true;
+        }
+        
     }
 
     private void OnMouseDown()
     {
-        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
-        skipTurn_Effect.ApplyEffect();
+        DoubleTurn_Effect DoubleTurn_Effect = new DoubleTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
+        DoubleTurn_Effect.ApplyEffect();
     }
 }

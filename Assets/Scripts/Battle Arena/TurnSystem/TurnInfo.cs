@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 [System.Serializable]
 public class TurnInfo 
@@ -39,7 +40,7 @@ public class TurnInfo
 
         turnTaker.TakeTurn();
 
-        OnTurnEnd?.Invoke(); 
+        //OnTurnEnd?.Invoke(); 
     }
 
     /// <summary>
@@ -54,7 +55,43 @@ public class TurnInfo
         return null;
     }
 
+    public void AddEffect(TurnInfoEffect turnInfoEffect)
+    {
+        if (turnInfoEffects == null)
+            turnInfoEffects = new List<TurnInfoEffect>();
+        turnInfoEffects.Add(turnInfoEffect);
+        //GFX! TBA
+    }
+    public void RemoveEffect(TurnInfoEffect turnInfoEffect)
+    {
+        if (turnInfoEffects == null)
+            return;
+        turnInfoEffects.Remove(turnInfoEffect);
+        turnInfoEffect.EndEffect(); //GFX! remove here or in EndEffect? TBA
 
+    }
+
+    public bool GetEffectOfType<T>(out T export) where T: TurnInfoEffect
+    {
+        export = null;
+
+        if (turnInfoEffects.Count == 0)
+            return false;
+
+        foreach(var ti in turnInfoEffects)
+        {
+            if (ti is T)
+            {
+
+                export = ti as T;
+                return true;
+            }
+        }
+        Debug.Log($"NOT FOUND");
+        return false;
+        //return turnInfoEffects.Where(x => x.GetType().Equals(T)).SingleOrDefault();
+
+    }
     // TBD if this is really a problem?
     ///// <summary>
     ///// IMPORTANT! not clearing may cause all turninfos to remain in RAM if they still have listeners.?
