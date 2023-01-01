@@ -15,10 +15,10 @@ public class BeltManipulator : MonoBehaviour
     [SerializeField]
     TurnBelt turnBelt;
 
-
     int _currentIndex;
-   
 
+    public System.Action OnNextTurn;
+   
     private void Awake()
     {
         if(Instance!=null && Instance!=this)
@@ -47,6 +47,10 @@ public class BeltManipulator : MonoBehaviour
 
         //Generate TurnInfo for each turnTaker -> don't forget to place start-pin at the 0 position
         List<TurnInfo> turnInfos = new List<TurnInfo>();
+
+        //Adding Start-Pin before all turnTakers
+        turnInfos.Add(new TurnInfo());
+
         foreach (var item in allTakers)
         {
             turnInfos.Add(new TurnInfo(item));
@@ -65,6 +69,7 @@ public class BeltManipulator : MonoBehaviour
         if (_currentIndex >= turnBelt.infoCount)
             _currentIndex = 0;
 
+        OnNextTurn?.Invoke();
         return turnBelt.GetTurnInfo(_currentIndex);
     }
 
@@ -78,6 +83,10 @@ public class BeltManipulator : MonoBehaviour
     {
         return turnBelt.GetTurnInfoByPredicate(x => x.GetTurnTaker == tt);
     }
+     public List<TurnInfo> GetTurnInfos()
+    {
+        return turnBelt.GetAllTurnInfos();
+    }
      
     int RollDx(int x)
     {
@@ -87,7 +96,6 @@ public class BeltManipulator : MonoBehaviour
     {
         return -a.Initiative.CompareTo(b.Initiative);
     }
-
 
     ///// <summary>
     ///// AMAZING TEST THAT WORKEDDDD!

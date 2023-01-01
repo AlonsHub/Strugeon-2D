@@ -27,13 +27,26 @@ public class TurnInfo
     //Status effects?
     List<TurnInfoEffect> turnInfoEffects;
 
+    /// <summary>
+    /// Create a TurnInfo for this TurnTaker
+    /// </summary>
+    /// <param name="t"></param>
     public TurnInfo(TurnTaker t)
     {
         turnTaker = t;
         turnInfoEffects = new List<TurnInfoEffect>();
     }
+    /// <summary>
+    /// Creates a Start-Pin TurnInfo
+    /// </summary>
+    public TurnInfo()
+    {
+        isStartPin = true;
 
-    
+        turnInfoEffects = new List<TurnInfoEffect>(); //TBD this could be fun! double/skip turn on the Start-Pin
+    }
+
+
     public void TakeTurn()
     {
         OnTurnBegin?.Invoke(); 

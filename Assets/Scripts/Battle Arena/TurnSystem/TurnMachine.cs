@@ -11,30 +11,27 @@ public class TurnMachine : MonoBehaviour
     [SerializeField]
     BeltManipulator beltManipulator;
     [SerializeField]
+    DisplayBelt displayBelt;
+    [SerializeField]
     float startOfTurnDelay;
     /// <summary>
     /// Keeps the turnsequence while loop going.
     /// </summary>
     bool isActiveBattle= false;
-    //public void FeedBelt(List<TurnTaker> allTakers)
-    //{
-    //    turnBelt.InitialSet(allTakers); 
 
-    //    ProcessTurnInfo(turnBelt.NextTurn()); //starts the loop! AND skips the first processing of the StartPin
-    //}
 
-    
+    //REMOVE ALL OF THIS!
     private void Start()
     {
         List<TurnTaker> tts = new List<TurnTaker>();
-       TEST_TurnTaker[] tests  = FindObjectsOfType<TEST_TurnTaker>();
+        TEST_TurnTaker[] tests = FindObjectsOfType<TEST_TurnTaker>();
         foreach (var item in tests)
         {
             tts.Add(item as TurnTaker);
         }
         SetMachine(tts);
 
-        Invoke(nameof(StartBattle), 2f); 
+        Invoke(nameof(StartBattle), 2f);
     }
 
     public void SetMachine(List<TurnTaker> allTakers)
@@ -50,7 +47,10 @@ public class TurnMachine : MonoBehaviour
 
     public void StartBattle()
     {
-        //no need to null check things that must be here - nor do we want to getComponent if not dragged. DRAG what needs to be dragged, or ERROR
+        //TBA a priliminary sequence just before StartBattle for setup such as this
+
+        displayBelt.Init(beltManipulator); //TBF do this earlier
+
 
         //CALL OnBattleBegin!
         isActiveBattle = true;

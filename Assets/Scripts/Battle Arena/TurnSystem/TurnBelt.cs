@@ -41,6 +41,11 @@ public class TurnBelt
     {
         return turnInfos[index]; 
     }
+     public List<TurnInfo> GetAllTurnInfos()
+    {
+        return turnInfos; 
+    }
+
     public TurnInfo GetTurnInfoByPredicate(System.Func<TurnInfo,bool> predicate)
     {
         return turnInfos.Where(predicate).SingleOrDefault();
