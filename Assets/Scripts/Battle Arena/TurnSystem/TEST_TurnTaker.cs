@@ -45,7 +45,10 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
 
     private void OnMouseDown()
     {
-        DoubleTurn_Effect DoubleTurn_Effect = new DoubleTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
-        DoubleTurn_Effect.ApplyEffect();
+        //DoubleTurn_Effect DoubleTurn_Effect = new DoubleTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
+        //DoubleTurn_Effect.ApplyEffect();
+        HurryTurn_Effect hurryTurn_Effect = new HurryTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
+        hurryTurn_Effect.ApplyEffect();
+
     }
 }

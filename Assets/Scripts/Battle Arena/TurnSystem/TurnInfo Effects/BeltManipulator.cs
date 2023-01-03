@@ -20,6 +20,7 @@ public class BeltManipulator : MonoBehaviour
     [SerializeField]
     HorizontalPlateGroup horizontalPlateGroup;
 
+    public System.Action<int> OnBeltChange;
    
     private void Awake()
     {
@@ -73,7 +74,8 @@ public class BeltManipulator : MonoBehaviour
         if (_currentIndex >= turnBelt.infoCount)
             _currentIndex = 0;
 
-        horizontalPlateGroup.SetAllChildPositions(turnBelt.GetAllTurnInfos(), _currentIndex);
+        //OnBeltChange?.Invoke(_currentIndex);
+        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
         return turnBelt.GetTurnInfo(_currentIndex);
     }
 
@@ -81,6 +83,17 @@ public class BeltManipulator : MonoBehaviour
     public void InsertTurnInfo(TurnInfo ti, int index)
     {
         turnBelt.InsertTurnInfo(ti, index);
+        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+    }
+    public void MoveTurnInfoTo(TurnInfo ti, int index)
+    {
+        turnBelt.MoveTurnInfo(ti, index);
+        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+    }
+    public void MoveTurnInfoToBeNext(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
+    {
+        int next = (_currentIndex+1 == turnBelt.infoCount) ? 0 : _currentIndex + 1;
+        MoveTurnInfoTo(ti, next);
     }
 
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)

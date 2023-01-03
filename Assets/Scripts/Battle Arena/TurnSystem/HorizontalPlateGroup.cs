@@ -12,11 +12,11 @@ public class HorizontalPlateGroup : MonoBehaviour
     [SerializeField]
     float speed; //duration seems like a better choice for this?
 
+    [SerializeField]
     List<DisplayPlate> children;
 
-
-    [SerializeField]
-    List<DisplayPlate> plates;
+    List<TurnInfo> infos;
+    //List<DisplayPlate> plates;
 
     //Prefab Refs
     [SerializeField]
@@ -34,9 +34,11 @@ public class HorizontalPlateGroup : MonoBehaviour
 
     public void Init(List<TurnInfo> tis)
     {
-        plates = new List<DisplayPlate>();
+        infos = tis;
+        
+        children = new List<DisplayPlate>();
 
-        foreach (var item in tis)
+        foreach (var item in infos)
         {
             if (item.isStartPin)
                 continue; //TBA an indicator for the start-pin
@@ -44,9 +46,9 @@ public class HorizontalPlateGroup : MonoBehaviour
             DisplayPlate dp = Instantiate(displayerPlatePrefab).GetComponent<DisplayPlate>();
             dp.Init(item);
             AddChild(dp);
-            plates.Add(dp);
+            //plates.Add(dp);
         }
-        currentPlate = plates[0];
+        currentPlate = children[0];
 
         currentPlate.SetAsCurrentStatus(true);
     }
@@ -81,8 +83,12 @@ public class HorizontalPlateGroup : MonoBehaviour
             children[i].transform.localPosition = GetOffsetByIndex(i);
         }
     }
-
-    public void SetAllChildPositions(List<TurnInfo> infos, int index)
+    /// <summary>
+    /// Call every time the turnBeltChanges
+    /// </summary>
+    /// <param name="infos"></param>
+    /// <param name="index"></param>
+    public void SetAllChildPositions(int index) //infos need to be cached and then MAYBE hooked into via events
     {
         //TEST infos and belt sync
         int place = index;
@@ -94,7 +100,7 @@ public class HorizontalPlateGroup : MonoBehaviour
             if (place >= infos.Count)
                 place = 1;
 
-            plates[i - 1].Init(infos[place]);
+            children[i - 1].Init(infos[place]);
             place++;
         }
 

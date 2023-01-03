@@ -32,6 +32,18 @@ public class TurnBelt
     {
         turnInfos.Insert(index, ti);
     }
+     public void MoveTurnInfo(TurnInfo ti, int index)
+    {
+        turnInfos.Remove(ti);
+        
+        Debug.Log(index);
+        if(index ==0)
+        {
+            index++;
+        }
+            turnInfos.Insert(index, ti);
+
+    }
 
     /// <summary>
     /// Do you really need to use this right now? Is the current TurnTaker not cached where you are right now? and if not, why?
