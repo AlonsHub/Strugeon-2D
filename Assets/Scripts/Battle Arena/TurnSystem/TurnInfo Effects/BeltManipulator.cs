@@ -17,7 +17,9 @@ public class BeltManipulator : MonoBehaviour
 
     int _currentIndex;
 
-    public System.Action OnNextTurn;
+    [SerializeField]
+    HorizontalPlateGroup horizontalPlateGroup;
+
    
     private void Awake()
     {
@@ -58,6 +60,8 @@ public class BeltManipulator : MonoBehaviour
 
         turnBelt.InitBelt(turnInfos);
 
+        horizontalPlateGroup.Init(turnInfos);
+
         _currentIndex = 0;
     }
 
@@ -69,7 +73,7 @@ public class BeltManipulator : MonoBehaviour
         if (_currentIndex >= turnBelt.infoCount)
             _currentIndex = 0;
 
-        OnNextTurn?.Invoke();
+        horizontalPlateGroup.SetAllChildPositions(turnBelt.GetAllTurnInfos(), _currentIndex);
         return turnBelt.GetTurnInfo(_currentIndex);
     }
 

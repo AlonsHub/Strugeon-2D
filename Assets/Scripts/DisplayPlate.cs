@@ -21,6 +21,10 @@ public class DisplayPlate : MonoBehaviour
 
     public void Init(TurnInfo ti)
     {
+        if (ti.isStartPin)
+            return;
+
+        
         portrait.sprite = ti.GetTurnTaker.PortraitSprite;
     }
 
@@ -29,5 +33,7 @@ public class DisplayPlate : MonoBehaviour
         //temp
         transform.localScale = isCurrentTurn ? Vector3.one * 1.5f : Vector3.one;
     }
+
+    
 
 }

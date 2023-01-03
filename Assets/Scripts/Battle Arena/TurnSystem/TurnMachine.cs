@@ -10,14 +10,17 @@ public class TurnMachine : MonoBehaviour
 
     [SerializeField]
     BeltManipulator beltManipulator;
-    [SerializeField]
-    DisplayBelt displayBelt;
+    //[SerializeField]
+    //DisplayBelt displayBelt;
     [SerializeField]
     float startOfTurnDelay;
     /// <summary>
     /// Keeps the turnsequence while loop going.
     /// </summary>
     bool isActiveBattle= false;
+
+    public System.Action OnNextTurn;
+
 
 
     //REMOVE ALL OF THIS!
@@ -49,7 +52,7 @@ public class TurnMachine : MonoBehaviour
     {
         //TBA a priliminary sequence just before StartBattle for setup such as this
 
-        displayBelt.Init(beltManipulator); //TBF do this earlier
+        //displayBelt.Init(this); //TBF do this earlier
 
 
         //CALL OnBattleBegin!
@@ -69,6 +72,8 @@ public class TurnMachine : MonoBehaviour
                 //call events for StartPin! (On Round Restart) //should call for the on start and end events for start pin? they could be useful
                 continue;
             }
+
+            OnNextTurn?.Invoke();
 
             DoubleTurn_Effect de;
             if (currentTurnInfo.GetEffectOfType(out de))
@@ -94,4 +99,9 @@ public class TurnMachine : MonoBehaviour
         }
 
     }    
+
+    public List<TurnInfo> GetTurnInfos()
+    {
+        return beltManipulator.GetTurnInfos();
+    }
 }

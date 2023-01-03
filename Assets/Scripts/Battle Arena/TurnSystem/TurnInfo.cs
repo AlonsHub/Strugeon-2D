@@ -13,7 +13,7 @@ public class TurnInfo
     public TurnTaker GetTurnTaker => turnTaker;
    
     public bool IsTurnDone { get => GetTurnTaker.TurnDone; set => GetTurnTaker.TurnDone = value; }
-
+    //public Sprite GetPortraite {get => }
 
     #region Maybe Zone
     //Data relevant to the machine for parsing
@@ -44,6 +44,7 @@ public class TurnInfo
         isStartPin = true;
 
         turnInfoEffects = new List<TurnInfoEffect>(); //TBD this could be fun! double/skip turn on the Start-Pin
+        turnTaker = null;
     }
 
 
@@ -95,7 +96,6 @@ public class TurnInfo
         {
             if (ti is T)
             {
-
                 export = ti as T;
                 return true;
             }
