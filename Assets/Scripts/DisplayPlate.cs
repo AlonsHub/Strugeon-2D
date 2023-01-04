@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DisplayPlate : MonoBehaviour
 {
+    public TurnTaker turnTaker;
+
     //Prefab Refs 
 
     /// <summary>
@@ -23,8 +25,7 @@ public class DisplayPlate : MonoBehaviour
     {
         if (ti.isStartPin)
             return;
-
-        
+        turnTaker = ti.GetTurnTaker;
         portrait.sprite = ti.GetTurnTaker.PortraitSprite;
     }
 
@@ -33,7 +34,4 @@ public class DisplayPlate : MonoBehaviour
         //temp
         transform.localScale = isCurrentTurn ? Vector3.one * 1.5f : Vector3.one;
     }
-
-    
-
 }

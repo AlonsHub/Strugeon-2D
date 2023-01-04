@@ -82,7 +82,6 @@ public class TurnInfo
             return;
         turnInfoEffects.Remove(turnInfoEffect);
         turnInfoEffect.EndEffect(); //GFX! remove here or in EndEffect? TBA
-
     }
 
     public bool GetEffectOfType<T>(out T export) where T: TurnInfoEffect

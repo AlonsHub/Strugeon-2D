@@ -17,8 +17,11 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
     public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     //DEPRECATED?
     public Sprite PortraitSprite { get => sprite; set => sprite = value;}
-    //DEPRECATED
+    //DEPRECATED?
     public bool DoSkipTurn { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    //consider moving this to TurnTaker
+    public TurnInfo turnInfo;
 
     Animator anim;
     public void TakeTurn()
@@ -47,8 +50,10 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
     {
         //DoubleTurn_Effect DoubleTurn_Effect = new DoubleTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
         //DoubleTurn_Effect.ApplyEffect();
-        HurryTurn_Effect hurryTurn_Effect = new HurryTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
-        hurryTurn_Effect.ApplyEffect();
-
+        //HurryTurn_Effect hurryTurn_Effect = new HurryTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
+        //hurryTurn_Effect.ApplyEffect();
+        BeltManipulator.Instance.RemoveTurnInfo(turnInfo);
+        Destroy(gameObject);
     }
+    
 }

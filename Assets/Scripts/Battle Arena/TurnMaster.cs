@@ -581,6 +581,7 @@ public interface TurnTaker
 
     //TBD Thinking of adding some Special Ability access here... for turn-plate-display purposes
 
+    //ADD REF TO TURNINFO? TBD
     Sprite PortraitSprite { get; set; }
 }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HorizontalPlateGroup : MonoBehaviour
@@ -65,16 +66,31 @@ public class HorizontalPlateGroup : MonoBehaviour
         //manage insertion/shifting of existing members
         displayP.transform.localPosition = GetOffsetByIndex(children.Count);
     }
-    /// <summary>
-    /// MUST RE-PARENT AND REPOSITION
-    /// </summary>
-    /// <param name="displayP"></param>
-    public DisplayPlate RemoveChild(DisplayPlate displayP)
+    ///// <summary>
+    ///// MUST RE-PARENT AND REPOSITION
+    ///// </summary>
+    ///// <param name="displayP"></param>
+    //public DisplayPlate RemoveChild(DisplayPlate displayP)
+    //{
+    //    displayP.transform.parent = null;//?
+    //    children.Remove(displayP);
+    //    return displayP;
+    //}
+   
+    public void KillChild(DisplayPlate displayP)
     {
-        displayP.transform.parent = null;//?
+        //displayP.transform.parent = null;//?
         children.Remove(displayP);
-        return displayP;
+        Destroy(displayP.gameObject);
     }
+    //public void KillChild(TurnInfo ti)
+    //{
+    //    //displayP.transform.parent = null;//?
+    //    //DisplayPlate dp = children.Where(x => x.)
+    //    children.Remove(displayP);
+    //    Destroy(displayP.gameObject);
+    //}
+
 
     public void RefreshAllChildPositions()
     {

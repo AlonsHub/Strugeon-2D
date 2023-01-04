@@ -20,7 +20,10 @@ public class BeltManipulator : MonoBehaviour
     [SerializeField]
     HorizontalPlateGroup horizontalPlateGroup;
 
-    public System.Action<int> OnBeltChange;
+    //public System.Action OnBeltChange;
+
+    //public System.Action PreTurn;
+    //public System.Action PostTurn;
    
     private void Awake()
     {
@@ -56,7 +59,12 @@ public class BeltManipulator : MonoBehaviour
 
         foreach (var item in allTakers)
         {
-            turnInfos.Add(new TurnInfo(item));
+            TurnInfo ti = new TurnInfo(item);
+            turnInfos.Add(ti);
+            if(item is TEST_TurnTaker)
+            {
+                (item as TEST_TurnTaker).turnInfo = ti;
+            }
         }
 
         turnBelt.InitBelt(turnInfos);
@@ -95,7 +103,21 @@ public class BeltManipulator : MonoBehaviour
         int next = (_currentIndex+1 == turnBelt.infoCount) ? 0 : _currentIndex + 1;
         MoveTurnInfoTo(ti, next);
     }
+    /// <summary>
+    /// Call after killing the Pawn
+    /// </summary>
+    /// <param name="ti"></param>
+    public void RemoveTurnInfo(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
+    {
+        turnBelt.RemoveTurnInfo(ti);
+        //handle _currentIndex stuff -> make sure turns go over safely 
+        int index = GetIndexOfTurnInfo(ti);
 
+        if(index < _currentIndex) //in the case of a turntakers death AFTER their turn in this round - casuing indecies to be shifted down by 1 (as opposed to turntakers who die BEFORE their turn came this round)
+        {
+            _currentIndex--;
+        }   
+    }
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
     {
         return turnBelt.GetTurnInfoByPredicate(x => x.GetTurnTaker == tt);
@@ -112,6 +134,11 @@ public class BeltManipulator : MonoBehaviour
     int SortByInitiativeScore(TurnTaker a, TurnTaker b)
     {
         return -a.Initiative.CompareTo(b.Initiative);
+    }
+
+    public int GetIndexOfTurnInfo(TurnInfo ti)
+    {
+        return turnBelt.GetAllTurnInfos().IndexOf(ti);
     }
 
     ///// <summary>

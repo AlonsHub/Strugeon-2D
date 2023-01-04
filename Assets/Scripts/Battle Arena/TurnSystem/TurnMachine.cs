@@ -31,6 +31,7 @@ public class TurnMachine : MonoBehaviour
         foreach (var item in tests)
         {
             tts.Add(item as TurnTaker);
+
         }
         SetMachine(tts);
 
