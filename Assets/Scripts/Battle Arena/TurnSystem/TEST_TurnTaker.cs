@@ -52,8 +52,13 @@ public class TEST_TurnTaker : MonoBehaviour, TurnTaker
         //DoubleTurn_Effect.ApplyEffect();
         //HurryTurn_Effect hurryTurn_Effect = new HurryTurn_Effect(BeltManipulator.Instance.GetTurnInfoByTaker(this));
         //hurryTurn_Effect.ApplyEffect();
-        BeltManipulator.Instance.RemoveTurnInfo(turnInfo);
+        //BeltManipulator.Instance.RemoveTurnInfo(turnInfo);
         Destroy(gameObject);
     }
-    
+    private void OnDestroy()
+    {
+        BeltManipulator.Instance.RemoveTurnInfo(turnInfo);
+
+    }
+
 }

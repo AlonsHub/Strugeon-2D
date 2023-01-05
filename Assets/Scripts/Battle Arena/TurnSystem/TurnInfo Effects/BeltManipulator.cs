@@ -110,13 +110,17 @@ public class BeltManipulator : MonoBehaviour
     public void RemoveTurnInfo(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
     {
         turnBelt.RemoveTurnInfo(ti);
+
         //handle _currentIndex stuff -> make sure turns go over safely 
+
         int index = GetIndexOfTurnInfo(ti);
 
         if(index < _currentIndex) //in the case of a turntakers death AFTER their turn in this round - casuing indecies to be shifted down by 1 (as opposed to turntakers who die BEFORE their turn came this round)
         {
             _currentIndex--;
-        }   
+        }
+        horizontalPlateGroup.KillChild(ti);
+        //horizontalPlateGroup.SetAllChildPositions(_currentIndex);
     }
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
     {

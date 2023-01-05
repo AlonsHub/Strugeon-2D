@@ -83,6 +83,18 @@ public class HorizontalPlateGroup : MonoBehaviour
         children.Remove(displayP);
         Destroy(displayP.gameObject);
     }
+    public void KillChild(TurnInfo ti)
+    {
+        DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
+
+        if(dp == null)
+        {
+            Debug.LogError("could not find DP");
+            return;
+        }
+        KillChild(dp);
+    }
+
     //public void KillChild(TurnInfo ti)
     //{
     //    //displayP.transform.parent = null;//?
@@ -92,20 +104,31 @@ public class HorizontalPlateGroup : MonoBehaviour
     //}
 
 
-    public void RefreshAllChildPositions()
-    {
-        for (int i=0; i< children.Count;i++)
-        {
-            children[i].transform.localPosition = GetOffsetByIndex(i);
-        }
-    }
+    //public void RefreshAllChildPositions()
+    //{
+    //    for (int i=0; i< children.Count;i++)
+    //    {
+    //        children[i].transform.localPosition = GetOffsetByIndex(i);
+    //    }
+    //}
     /// <summary>
     /// Call every time the turnBeltChanges
     /// </summary>
-    /// <param name="infos"></param>
     /// <param name="index"></param>
     public void SetAllChildPositions(int index) //infos need to be cached and then MAYBE hooked into via events
     {
+        //if(infos.Count-1 != children.Count)
+        //{
+        //    if(infos.Count-1 > children.Count)
+        //    {
+
+        //    }
+        //    else
+        //    {
+
+        //    }
+        //}
+
         //TEST infos and belt sync
         int place = index;
         for (int i = 0; i < infos.Count; i++)
