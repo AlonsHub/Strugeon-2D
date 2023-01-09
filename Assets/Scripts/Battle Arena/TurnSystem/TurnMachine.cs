@@ -100,7 +100,7 @@ public class TurnMachine : MonoBehaviour
             if(RefMaster.Instance.enemyInstances.Count == 0)
             {
                 Debug.Log("WIN!");
-
+                Win();
                 //Return mercs home?
 
                 StopTurnSequence();
@@ -109,7 +109,7 @@ public class TurnMachine : MonoBehaviour
             if (RefMaster.Instance.mercs.Count == 0)
             {
                 Debug.Log("Lose!");
-
+                Lose();
                 //Clear mercs room?
 
                 StopTurnSequence();
@@ -233,5 +233,30 @@ public class TurnMachine : MonoBehaviour
         #endregion
         //put squad back in their room
         PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
+    }
+    private void Lose()
+    {
+        PlayerDataMaster.Instance.currentPlayerData.losses++;
+
+        foreach (var item in RefMaster.Instance.GetTheCowardly)
+        {
+            //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
+            PlayerDataMaster.Instance.currentPlayerData.availableMercNames.Add(item);
+            MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+            //PlayerDataMaster.Instance.RemoveMercSheet(item);
+        }
+        foreach (var item in RefMaster.Instance.GetTheDead)
+        {
+            //PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+            PlayerDataMaster.Instance.RemoveMercSheet(item);
+        }
+
+
+
+        defeatWindow.gameObject.SetActive(true);
+        defeatWindow.SetMe(LevelRef.Instance.currentLevel);
+        //empty the room:
+
+        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].ClearRoom(); //FIXED to ClearRoom() from = null
     }
 }

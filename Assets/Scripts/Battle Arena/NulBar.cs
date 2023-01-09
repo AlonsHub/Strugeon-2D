@@ -92,11 +92,12 @@ public class NulBar : Bar
     public void AnimatedSetValue(float newVal, float duration)
     {
         StopCoroutine(nameof(AnimatedSetValue));
-        
-            if (currentValue != target_currentValue)
-            {
-                currentValue = target_currentValue;
-            }
+
+        if (currentValue != target_currentValue)
+        {
+            currentValue = target_currentValue;
+            SetValue(currentValue);
+        }
         
         target_currentValue = newVal;
        StartCoroutine(AnimatedValueChange(newVal, duration));

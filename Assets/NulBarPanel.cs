@@ -100,7 +100,7 @@ public class NulBarPanel : MonoBehaviour
                     continue;
                 }
                 
-                nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
+                nulBars[(int)nulElement.GetNulColour].SetMe(nulElement); //Also sets MaxValues!
             }
         }
         else
@@ -111,9 +111,9 @@ public class NulBarPanel : MonoBehaviour
                 if (!coloursToShow.Contains(nulElement.GetNulColour))
                     continue;
                 NulBar temp = nulBars[(int)nulElement.GetNulColour];
-
+                
                 //if(temp.maxValue != nulElement.maxValue)
-                temp.AnimatedSetMaxValue(nulElement.maxValue, 1f); //TBF replace with a better duration, and set the value immediatly - only displaying the way to target (don't gradually increase value!)
+                //temp.AnimatedSetMaxValue(nulElement.maxValue, 1f); //TBF replace with a better duration, and set the value immediatly - only displaying the way to target (don't gradually increase value!)
                 if(temp.currentValue != nulElement.value)
                 temp.AnimatedSetValue(nulElement.value, .5f);
                 //nulBar.SetMe(nulElement);
