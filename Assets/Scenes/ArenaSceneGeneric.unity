@@ -165,6 +165,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1746638452024689520, guid: 59f9c4e7737c30946bd021510dc538fd,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 1064759
+      objectReference: {fileID: 0}
     - target: {fileID: 1746638452024689521, guid: 59f9c4e7737c30946bd021510dc538fd,
         type: 3}
       propertyPath: m_MatchWidthOrHeight
@@ -736,7 +741,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1064759
 --- !u!114 &532234397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1289,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8120686893709386625, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 1064759
+      objectReference: {fileID: 0}
     - target: {fileID: 8120686893709386627, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: m_Name
@@ -1406,7 +1416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &901542004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,6 +2653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeroButtons
       objectReference: {fileID: 0}
+    - target: {fileID: 7201316917568703511, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 1064759
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
 --- !u!1 &1354830472
@@ -3173,6 +3188,7 @@ MonoBehaviour:
   enemySpawnTiles: []
   escapeTile: {x: 0, y: 0}
   startDelayAmount: 1.5
+  turnMachine: {fileID: 0}
 --- !u!224 &1652175865 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7771178015337804898, guid: bb85149d0ebd57c4ca50b273b94c4996,
@@ -3737,6 +3753,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1910280772
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256754824896569875, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1549531497842662313, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_Name
+      value: TinaTurnMachina
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b9e64d9c4ef0f64419e3e6a24ae40e54, type: 3}
 --- !u!1 &1912448147
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,6 +4148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bars - WinLoseWindows - ActionPanel Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087663028899167218, guid: bee76740b0667654c9a02fdaf32e8d82,
+        type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 1064759
       objectReference: {fileID: 0}
     - target: {fileID: 2601114209981594451, guid: bee76740b0667654c9a02fdaf32e8d82,
         type: 3}
@@ -4537,7 +4627,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1064759
 --- !u!1 &4363690052193623919
 GameObject:
   m_ObjectHideFlags: 0

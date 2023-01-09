@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TurnMachine : MonoBehaviour
 {
+    public static TurnMachine Instance;
     //[SerializeField]
     //TurnBelt turnBelt;
 
@@ -22,17 +23,36 @@ public class TurnMachine : MonoBehaviour
     public System.Action OnNextTurn;
 
 
-
+    private void Awake() //this does destroy on load and should only ever be one, in the arena
+    {
+        Instance = this;
+    }
+    private void OnDisable()
+    {
+        Instance = null;
+    }
     //REMOVE ALL OF THIS!
-    private void Start()
+    //private void Start()
+    //{
+    //    List<TurnTaker> tts = new List<TurnTaker>();
+    //    TEST_TurnTaker[] tests = FindObjectsOfType<TEST_TurnTaker>();
+    //    foreach (var item in tests)
+    //    {
+    //        tts.Add(item as TurnTaker);
+
+    //    }
+    //    SetMachine(tts);
+
+    //    Invoke(nameof(StartBattle), 2f);
+    //}
+
+    public void GetReady()
     {
         List<TurnTaker> tts = new List<TurnTaker>();
-        TEST_TurnTaker[] tests = FindObjectsOfType<TEST_TurnTaker>();
-        foreach (var item in tests)
-        {
-            tts.Add(item as TurnTaker);
 
-        }
+        tts.AddRange(RefMaster.Instance.enemyInstances);
+        tts.AddRange(RefMaster.Instance.mercs);
+
         SetMachine(tts);
 
         Invoke(nameof(StartBattle), 2f);

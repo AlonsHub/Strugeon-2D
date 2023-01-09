@@ -52,7 +52,8 @@ public class NulBarPanel : MonoBehaviour
         {
             //TurnMaster.Instance.OnTurnOver += SetMe;
             TurnMaster.Instance.OnTurnOrderRestart += SetMe;
-            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
+            if (TurnMaster.Instance)
+                PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
         }
 
     }
@@ -62,6 +63,7 @@ public class NulBarPanel : MonoBehaviour
         //{
             //TurnMaster.Instance.OnTurnOver -= SetMe;
             PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged -= SetMe;
+        if(TurnMaster.Instance)
             TurnMaster.Instance.OnTurnOrderRestart -= SetMe;
         //}
     }
@@ -148,6 +150,7 @@ public class NulBarPanel : MonoBehaviour
 
         foreach (var nulElement in itemSpectrumProfile.elements)
         {
+            Debug.LogError($"{nulElement.nulColour} of {nulElement.value}");
             nulBars[(int)nulElement.nulColour].SetMe(nulElement);
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
 

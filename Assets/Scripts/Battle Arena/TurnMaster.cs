@@ -94,9 +94,6 @@ public class TurnMaster : MonoBehaviour
         //turnPlates[0].localScale *= 1.5f;
         turnTakers[0].myTurnPlate = tp;
 
-        //TurnDisplayer tp = go.GetComponent<TurnDisplayer>();
-
-
         if (tp) //just making sure
         {
             //tp.myPawn = turnTakers[0];

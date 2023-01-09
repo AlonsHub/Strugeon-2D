@@ -17,12 +17,12 @@ public class Gear
     {
         equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
     }
-     public Gear(string defaultWeaponName)
-    {
-        equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
+    // public Gear(string defaultWeaponName)
+    //{
+    //    equipables = new IEquipable[System.Enum.GetValues(typeof(EquipSlotType)).Length]; //as the number of EquipSlotType {Body=0, Hand=1, Trinket=2}; 
 
-        LoadItemsFromString(null, defaultWeaponName, null);
-    }
+    //    LoadItemsFromString(null, defaultWeaponName, null);
+    //}
 
     public Gear(string body, string hand, string trinket)
     {

@@ -28,28 +28,21 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     [SerializeField]
     StatBenefit statBenefit;
-
     //IBenefit myBenefit => statBenefitSO.statBenefit; //just the single now
     IBenefit myBenefit => statBenefit; //just the single now
-
     public List<MercClass> relevantClasses;
-
 
     //TBF! make a seperate "Description Database" to store all this data.
     //temp, see above ^^^
     [HideInInspector]
     public string ItemDescription() => $"{magicItemName} is a {fittingSlotType} type item, which adds: {ItemBenefitDescription()}"; 
     [HideInInspector]
-    public string ItemBenefitDescription() => $"{myBenefit.BenefitStatName()} +{myBenefit.Value()}"; 
+    public string ItemBenefitDescription() => $"{myBenefit.BenefitStatName()} +{myBenefit.Value()}";
 
     //end temp
 
     public bool FetchSprite()
     {
-        //if(itemSprite)
-        //{
-        //    return true;
-        //}
         if (itemSprite && itemSprite.name == spriteName)
         {
             return true;
@@ -71,7 +64,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     public string _BenefitsProperNoun()
     {
-        if(myBenefit.BenefitProperNoun() ==null)
+        if(myBenefit.BenefitProperNoun() == null)
         return "of Nothing";
         else
         {
