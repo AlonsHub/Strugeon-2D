@@ -77,13 +77,14 @@ public class EscapeItem : ActionItem
 
         int weight = escapeWeight;
 
-        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theDead.Count > 0)
+        //if (weightPerDeadAlly != 0 && TurnMaster.Instance.theDead.Count > 0)
+        if (weightPerDeadAlly != 0 && RefMaster.Instance.GetTheDead.Count > 0)
         {
-            weight += weightPerDeadAlly * TurnMaster.Instance.theDead.Count;
+            weight += weightPerDeadAlly * RefMaster.Instance.GetTheDead.Count;
         }
-        if (weightPerDeadAlly != 0 && TurnMaster.Instance.theCowardly.Count > 0)
+        if (weightPerDeadAlly != 0 && RefMaster.Instance.GetTheCowardly.Count > 0)
         {
-            weight += weightPerDeadAlly * TurnMaster.Instance.theCowardly.Count;
+            weight += weightPerDeadAlly * RefMaster.Instance.GetTheCowardly.Count;
         }
 
         if (healthEffectsWegiht)

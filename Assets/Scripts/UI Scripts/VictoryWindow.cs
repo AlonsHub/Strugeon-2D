@@ -43,7 +43,9 @@ public class VictoryWindow : MonoBehaviour
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP<=0, false);
         }
-        foreach (var pawnName in TurnMaster.Instance.theDead)
+        List<MercName> deadNames = RefMaster.Instance.GetTheDead;
+        List<MercName> cowardNames = RefMaster.Instance.GetTheCowardly;
+        foreach (var pawnName in deadNames)
         {
             //PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
 
@@ -52,7 +54,7 @@ public class VictoryWindow : MonoBehaviour
             Pawn p = MercPrefabs.Instance.EnumToPawnPrefab(pawnName);
             go.GetComponent<MercSummaryDisplayer>().SetMe(p.PortraitSprite, true, false);
         }
-        foreach (var pawnName in TurnMaster.Instance.theCowardly)
+        foreach (var pawnName in cowardNames)
         {
             //PlayerDataMaster.Instance.currentPlayerData.cowardMercs++;
 

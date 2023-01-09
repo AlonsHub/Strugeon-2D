@@ -36,7 +36,7 @@ public class TileEffect : MonoBehaviour
         }
 
         floorTile.OnOccupantEnter += TryApplyEffectToOccupant;
-        TurnMaster.Instance.OnTurnOrderRestart += ReduceDurationByOne;
+        TurnMachine.Instance.OnStartNewRound += ReduceDurationByOne;
     }
     public void SetBase(Vector2Int gridpos)
     {
@@ -55,11 +55,11 @@ public class TileEffect : MonoBehaviour
             floorTile.tileElement = effectElement;
         }
         floorTile.OnOccupantEnter += TryApplyEffectToOccupant;
-        TurnMaster.Instance.OnTurnOrderRestart += ReduceDurationByOne;
+        TurnMachine.Instance.OnStartNewRound += ReduceDurationByOne;
     }
     protected void OnDisable()
     {
-        TurnMaster.Instance.OnTurnOrderRestart -= ReduceDurationByOne;
+        TurnMachine.Instance.OnStartNewRound -= ReduceDurationByOne;
         floorTile.OnOccupantEnter -= TryApplyEffectToOccupant;
 
     }

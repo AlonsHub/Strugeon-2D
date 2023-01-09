@@ -21,6 +21,10 @@ public class TurnMachine : MonoBehaviour
     bool isActiveBattle= false;
 
     public System.Action OnNextTurn;
+    /// <summary>
+    /// Basically, what happens on the StartPin's turn
+    /// </summary>
+    public System.Action OnStartNewRound;
 
 
     private void Awake() //this does destroy on load and should only ever be one, in the arena
@@ -31,20 +35,8 @@ public class TurnMachine : MonoBehaviour
     {
         Instance = null;
     }
-    //REMOVE ALL OF THIS!
-    //private void Start()
-    //{
-    //    List<TurnTaker> tts = new List<TurnTaker>();
-    //    TEST_TurnTaker[] tests = FindObjectsOfType<TEST_TurnTaker>();
-    //    foreach (var item in tests)
-    //    {
-    //        tts.Add(item as TurnTaker);
 
-    //    }
-    //    SetMachine(tts);
-
-    //    Invoke(nameof(StartBattle), 2f);
-    //}
+    public TurnTaker GetCurrentTurnTaker => beltManipulator.GetCurrentTurnTaker();
 
     public void GetReady()
     {
@@ -78,9 +70,9 @@ public class TurnMachine : MonoBehaviour
 
         //CALL OnBattleBegin!
         isActiveBattle = true;
-        StartCoroutine(nameof(StartTurnSequence));
+        StartCoroutine(nameof(TurnSequence));
     }
-    IEnumerator StartTurnSequence()
+    IEnumerator TurnSequence()
     {
         TurnInfo currentTurnInfo;
         while (isActiveBattle)
@@ -90,6 +82,7 @@ public class TurnMachine : MonoBehaviour
             if (currentTurnInfo.isStartPin)
             {
                 Debug.Log("Round Restarted!");
+                OnStartNewRound?.Invoke();
                 //call events for StartPin! (On Round Restart) //should call for the on start and end events for start pin? they could be useful
                 continue;
             }
@@ -121,8 +114,27 @@ public class TurnMachine : MonoBehaviour
 
     }    
 
+    public void StopTurnSequence()
+    {
+        StopCoroutine(nameof(TurnSequence));
+        //Call WIN or LOSE windows
+    }
+
     public List<TurnInfo> GetTurnInfos()
     {
         return beltManipulator.GetTurnInfos();
+    }
+
+    public void InsertTurnTaker(TurnTaker tt, int index)
+    {
+        beltManipulator.InsertTurnTaker(tt, index);
+    }
+    public void InsertTurnTakerAsNext(TurnTaker tt)
+    {
+        beltManipulator.InsertTurnTakerAsNext(tt);
+    }
+    public void RemoveTurnTakerAndInfo(TurnTaker tt)
+    {
+        beltManipulator.RemoveTurnInfo(beltManipulator.GetTurnInfoByTaker(tt));
     }
 }

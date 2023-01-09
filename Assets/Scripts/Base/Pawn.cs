@@ -472,8 +472,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //Add to the list of the Cowardly (TurnMaster)
         RefMaster.Instance.mercs.Remove(this); //not ideal // *******************************************************
         //PartyMaster.Instance.availableMercPrefabs.Remove(this);
-        TurnMaster.Instance.theCowardly.Add(mercName);
-        TurnMaster.Instance.RemoveTurnTaker(this);
+        RefMaster.Instance.AddCoward(mercName);
+        //TurnMaster.Instance.RemoveTurnTaker(this);
+        TurnMachine.Instance.RemoveTurnTakerAndInfo(this);
 
         tileWalker.currentNode.RemoveOccupant(false) ;
 
@@ -494,13 +495,15 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         //yield return new WaitForSeconds(.1f);
         yield return new WaitForEndOfFrame();
-        BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
+        //BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
+        BattleLogVerticalGroup.Instance.AddEntry(TurnMachine.Instance.GetCurrentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         if (!isEnemy)
         {
             //RefMaster.Instance.mercs.Remove(RefMaster.Instance.mercs.Where(x => x.name == name).SingleOrDefault()); //not ideal
             RefMaster.Instance.mercs.Remove(this); //not ideal
             PartyMaster.Instance.availableMercPrefabs.Remove(this);
-            TurnMaster.Instance.theDead.Add(mercName);
+            //TurnMaster.Instance.theDead.Add(mercName);
+            RefMaster.Instance.AddDead(mercName);
             PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
         }
         else
@@ -508,7 +511,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             //RefMaster.Instance.enemies.Remove(RefMaster.Instance.enemies.Where(x => x.name == name).SingleOrDefault()); //not ideal
             RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
-        TurnMaster.Instance.RemoveTurnTaker(this);
+        //TurnMaster.Instance.RemoveTurnTaker(this);
+        TurnMachine.Instance.RemoveTurnTakerAndInfo(this);
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
         //Destroy(gameObject);
     }

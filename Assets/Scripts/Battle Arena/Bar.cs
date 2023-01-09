@@ -26,8 +26,8 @@ public class Bar : MonoBehaviour
 
     private void Start()
     {
-        if (TurnMaster.Instance)
-            TurnMaster.Instance.OnTurnOrderRestart += Regen;
+        if (TurnMachine.Instance)
+            TurnMachine.Instance.OnStartNewRound += Regen;
 
 
     }
@@ -35,9 +35,8 @@ public class Bar : MonoBehaviour
 
     protected virtual void OnDisable()
     {
-        if (TurnMaster.Instance)
-            //unsub, if you can
-            TurnMaster.Instance.OnTurnOrderRestart -= Regen;    
+        if (TurnMachine.Instance)
+            TurnMachine.Instance.OnStartNewRound -= Regen;
     }
   
     public virtual void ShowValue()

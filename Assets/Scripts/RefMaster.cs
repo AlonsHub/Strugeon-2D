@@ -16,7 +16,23 @@ public class RefMaster : MonoBehaviour
     public SelectionScreenDisplayer selectionScreenDisplayer;
 
      public Censer censer; //maybe a list?
-   
+
+    //logging the dead and cowardly for win/loss window 
+    List<MercName> theCowardly;
+    List<MercName> theDead;
+
+    //access to cowards and dead lists
+
+    /// <summary>
+    /// dont add to me! use AddCoward!
+    /// </summary>
+    public List<MercName> GetTheCowardly => theCowardly;
+    
+    /// <summary>
+    /// dont add to me! use AddDead!
+    /// </summary>
+    public List<MercName> GetTheDead => theDead;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,6 +48,9 @@ public class RefMaster : MonoBehaviour
 
         if(enemyInstances == null)
         enemyInstances = new List<Pawn>();
+
+        theDead = new List<MercName>();
+        theCowardly = new List<MercName>();
 
         DontDestroyOnLoad(gameObject);
     }
@@ -77,4 +96,15 @@ public class RefMaster : MonoBehaviour
             mercs.Add(merc);
         }
     }
+
+
+    public void AddCoward(MercName coward)
+    {
+        theCowardly.Add(coward);
+    }
+    public void AddDead(MercName dead)
+    {
+        theDead.Add(dead);
+    }
+
 }

@@ -136,7 +136,8 @@ public class SummonSpiritItem : ActionItem, SA_Item
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Summon, newSpirit.Name);
 
         RefMaster.Instance.enemyInstances.Add(newSpirit);
-        TurnMaster.Instance.AddNewTurnTaker(newSpirit);
+        //TurnMaster.Instance.AddNewTurnTaker(newSpirit);
+        TurnMachine.Instance.InsertTurnTakerAsNext(newSpirit);
         cooldown = maxCooldown;
 
         //la.tgt = null; not needed after LookOnce was introduced.

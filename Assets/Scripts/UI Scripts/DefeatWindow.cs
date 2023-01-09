@@ -20,7 +20,8 @@ public class DefeatWindow : MonoBehaviour
         {
             GameObject go = Instantiate(mercPortraitPrefab, mercPortraitGridParent);
             //go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, pawn.currentHP <= 0);
-            if (TurnMaster.Instance.theCowardly.Contains(pawn.mercName))
+            //if (TurnMaster.Instance.theCowardly.Contains(pawn.mercName))
+            if (RefMaster.Instance.GetTheCowardly.Contains(pawn.mercName))
                 go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, false, true);
             else
                 go.GetComponent<MercSummaryDisplayer>().SetMe(pawn.PortraitSprite, true, false);

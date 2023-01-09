@@ -87,6 +87,17 @@ public class BeltManipulator : MonoBehaviour
         return turnBelt.GetTurnInfo(_currentIndex);
     }
 
+    public void InsertTurnTaker(TurnTaker tt, int index)
+    {
+        TurnInfo ti = new TurnInfo(tt);
+        turnBelt.InsertTurnInfo(ti, index);
+    }
+    public void InsertTurnTakerAsNext(TurnTaker tt)
+    {
+        TurnInfo ti = new TurnInfo(tt);
+        turnBelt.InsertTurnInfo(ti, _currentIndex + 1);
+    }
+
     //add turn info??
     public void InsertTurnInfo(TurnInfo ti, int index)
     {
@@ -104,7 +115,7 @@ public class BeltManipulator : MonoBehaviour
         MoveTurnInfoTo(ti, next);
     }
     /// <summary>
-    /// Call after killing the Pawn
+    /// Call after killing the Pawn. Use with GetTurnInfoByTaker if you must
     /// </summary>
     /// <param name="ti"></param>
     public void RemoveTurnInfo(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
@@ -143,6 +154,11 @@ public class BeltManipulator : MonoBehaviour
     public int GetIndexOfTurnInfo(TurnInfo ti)
     {
         return turnBelt.GetAllTurnInfos().IndexOf(ti);
+    }
+
+    public TurnTaker GetCurrentTurnTaker()
+    {
+        return turnBelt.GetTurnInfo(_currentIndex).GetTurnTaker;
     }
 
     ///// <summary>

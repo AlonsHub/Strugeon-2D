@@ -26,14 +26,30 @@ public class NulBarPanel : MonoBehaviour
             SetMe();
     }
 
+    //private void OnEnable()
+    //{
+    //    if (doHookToRegen)
+    //    {
+    //        if (TurnMaster.Instance) 
+    //        {
+    //            //TurnMaster.Instance.OnTurnOver += SetMe;
+    //            TurnMaster.Instance.OnTurnOrderRestart += SetMe;
+    //            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
+                
+    //        }
+    //        else
+    //            StartCoroutine(nameof(WaitAfterFirstOnEnable));
+
+    //    }
+    //}
     private void OnEnable()
     {
         if (doHookToRegen)
         {
-            if (TurnMaster.Instance)
+            if (TurnMachine.Instance) 
             {
                 //TurnMaster.Instance.OnTurnOver += SetMe;
-                TurnMaster.Instance.OnTurnOrderRestart += SetMe;
+                TurnMachine.Instance.OnStartNewRound += SetMe;
                 PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
                 
             }
@@ -42,18 +58,18 @@ public class NulBarPanel : MonoBehaviour
 
         }
     }
+
     IEnumerator WaitAfterFirstOnEnable()
     {
-        yield return new WaitUntil(() => (TurnMaster.Instance || Time.timeSinceLevelLoad > 2f));
+        yield return new WaitUntil(() => (TurnMachine.Instance || Time.timeSinceLevelLoad > 2f));
 
-        if (!TurnMaster.Instance)
-            Debug.LogError("NO TURN MASTER!");
+        if (!TurnMachine.Instance)
+            Debug.LogError("NO TURN MACHINE!");
         else
         {
             //TurnMaster.Instance.OnTurnOver += SetMe;
-            TurnMaster.Instance.OnTurnOrderRestart += SetMe;
-            if (TurnMaster.Instance)
-                PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
+            TurnMachine.Instance.OnStartNewRound += SetMe;
+            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
         }
 
     }
@@ -61,10 +77,11 @@ public class NulBarPanel : MonoBehaviour
     {
         //if (doHookToRegen && TurnMaster.Instance)
         //{
-            //TurnMaster.Instance.OnTurnOver -= SetMe;
-            PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged -= SetMe;
-        if(TurnMaster.Instance)
-            TurnMaster.Instance.OnTurnOrderRestart -= SetMe;
+        //TurnMaster.Instance.OnTurnOver -= SetMe;
+        PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged -= SetMe;
+
+        if (TurnMachine.Instance)
+            TurnMachine.Instance.OnStartNewRound -= SetMe;
         //}
     }
 
@@ -86,7 +103,6 @@ public class NulBarPanel : MonoBehaviour
                 }
                 
                 nulBars[(int)nulElement.GetNulColour].SetMe(nulElement);
-         
             }
         }
         else

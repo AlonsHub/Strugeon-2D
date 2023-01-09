@@ -6,6 +6,7 @@ public class SkipWin : MonoBehaviour
 {
     public void Win()
     {
-        TurnMaster.Instance.StopTurning();
+        //TurnMaster.Instance.StopTurning();
+        TurnMachine.Instance.StopTurnSequence();
     }
 }
