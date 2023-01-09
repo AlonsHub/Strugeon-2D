@@ -161,14 +161,12 @@ public class BeltManipulator : MonoBehaviour
         return turnBelt.GetTurnInfo(_currentIndex).GetTurnTaker;
     }
 
-    ///// <summary>
-    ///// AMAZING TEST THAT WORKEDDDD!
-    ///// </summary>
-    //[ContextMenu("Skip the index ToSkip")]
-    //public void Skip()
+    //public int GetEnemyCount()
     //{
-    //    SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(turnBelt.GetTurnInfo(toSkip));
-    //    skipTurn_Effect.ApplyEffect();
+    //    ///THIS HERE IS HOW IT NEEDS TO BE DONE!!!
+    //    //return turnBelt.GetTurnInfoByPredicate(x=> x.)
     //}
+
+    
 }
 

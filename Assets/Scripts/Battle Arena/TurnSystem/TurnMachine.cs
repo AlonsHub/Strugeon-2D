@@ -10,6 +10,11 @@ public class TurnMachine : MonoBehaviour
     //TurnBelt turnBelt;
 
     [SerializeField]
+    VictoryWindow victoryWindow;
+    [SerializeField]
+    DefeatWindow defeatWindow;
+
+    [SerializeField]
     BeltManipulator beltManipulator;
     //[SerializeField]
     //DisplayBelt displayBelt;
@@ -25,7 +30,7 @@ public class TurnMachine : MonoBehaviour
     /// Basically, what happens on the StartPin's turn
     /// </summary>
     public System.Action OnStartNewRound;
-
+    private int initialSquadSize;
 
     private void Awake() //this does destroy on load and should only ever be one, in the arena
     {
@@ -42,6 +47,8 @@ public class TurnMachine : MonoBehaviour
     {
         List<TurnTaker> tts = new List<TurnTaker>();
 
+        initialSquadSize = RefMaster.Instance.mercs.Count;
+
         tts.AddRange(RefMaster.Instance.enemyInstances);
         tts.AddRange(RefMaster.Instance.mercs);
 
@@ -53,6 +60,7 @@ public class TurnMachine : MonoBehaviour
     public void SetMachine(List<TurnTaker> allTakers)
     {
         beltManipulator.InitManipulator(allTakers);
+
     }
     /// <summary>
     /// For now, the Machine recieves the first order of buisness. Recieving All TurnTakers, passing it on to the BeltManipulator to init the belt.
@@ -88,6 +96,25 @@ public class TurnMachine : MonoBehaviour
             }
 
             OnNextTurn?.Invoke();
+
+            if(RefMaster.Instance.enemyInstances.Count == 0)
+            {
+                Debug.Log("WIN!");
+
+                //Return mercs home?
+
+                StopTurnSequence();
+                yield break;
+            }
+            if (RefMaster.Instance.mercs.Count == 0)
+            {
+                Debug.Log("Lose!");
+
+                //Clear mercs room?
+
+                StopTurnSequence();
+                yield break;
+            }
 
             DoubleTurn_Effect de;
             if (currentTurnInfo.GetEffectOfType(out de))
@@ -136,5 +163,75 @@ public class TurnMachine : MonoBehaviour
     public void RemoveTurnTakerAndInfo(TurnTaker tt)
     {
         beltManipulator.RemoveTurnInfo(beltManipulator.GetTurnInfoByTaker(tt));
+    }
+
+    private void Win()
+    {
+        PlayerDataMaster.Instance.currentPlayerData.victories++;
+
+        //Give reward
+
+        Inventory.Instance.AddGold(LevelRef.Instance.currentLevel.levelData.goldReward);
+        //DO THIS LIKE A PROGRAMMER PLEASE AND NOT LIKE A PLUMBER! 
+        //gold should either be directly linked to between inventory and currentPlayerData - or have an OnValueChanged() for the displayer and player data to subscribe to
+        PlayerDataMaster.Instance.currentPlayerData.gold = Inventory.Instance.Gold; //WHAT ?!>!??!?!
+                                                                                    //PLUMBING
+
+        victoryWindow.gameObject.SetActive(true);
+        victoryWindow.SetMe(LevelRef.Instance.currentLevel);
+
+        foreach (var item in RefMaster.Instance.GetTheDead)
+        {
+            PartyMaster.Instance.currentSquad.RemoveMerc(item);
+            PlayerDataMaster.Instance.RemoveMercSheet(item);
+        }
+        foreach (var item in RefMaster.Instance.GetTheCowardly)
+        {
+            PartyMaster.Instance.currentSquad.RemoveMerc(item);
+            PlayerDataMaster.Instance.currentPlayerData.availableMercNames.Add(item);
+            MercPrefabs.Instance.EnumToPawnPrefab(item).mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+            //PlayerDataMaster.Instance.RemoveMercSheet(item); //sheet remains!
+        }
+
+        if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
+        {
+            if (!PartyMaster.Instance.squads.Contains(PartyMaster.Instance.currentSquad)) //to prevent simpleSites (which do NOT remove squads) from adding duplicates 20/03/22 TBF AF (PartyMaster needs changing)
+                PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber));
+        }
+        else
+        {
+            Debug.LogError("Victory,but TurnMaster can't return the squad home, because somehow they're all dead.");
+        }
+
+
+
+        #region 1) Divided Exp Reward
+        ////Total and Shared Exp:
+        ////this way a total sum of exp is divided by surviving mercs
+
+        //int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / PartyMaster.Instance.currentSquad.pawns.Count;
+        int expPerMerc = LevelRef.Instance.currentLevel.levelData.expReward / initialSquadSize;
+
+        foreach (var item in PartyMaster.Instance.currentSquad.pawns)
+        {
+            item.mercSheetInPlayerData.AddExp(expPerMerc);
+        }
+        #endregion
+
+        #region 2) Constant Value Exp Reward
+
+        //foreach (var item in PartyMaster.Instance.currentSquad.pawns)
+        //{
+        //    item.mercSheetInPlayerData.AddExp(LevelRef.Instance.currentLevel.levelData.expReward);
+        //}
+        #endregion
+
+        #region Single MagicItem Reward
+
+        Inventory.Instance.AddMagicItem(LevelRef.Instance.currentLevel.levelData.magicItem);
+
+        #endregion
+        //put squad back in their room
+        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
     }
 }

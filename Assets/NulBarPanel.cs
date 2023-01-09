@@ -51,11 +51,9 @@ public class NulBarPanel : MonoBehaviour
                 //TurnMaster.Instance.OnTurnOver += SetMe;
                 TurnMachine.Instance.OnStartNewRound += SetMe;
                 PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.OnAnyValueChanged += SetMe;
-                
             }
             else
                 StartCoroutine(nameof(WaitAfterFirstOnEnable));
-
         }
     }
 
@@ -110,6 +108,8 @@ public class NulBarPanel : MonoBehaviour
             foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
             {
                 //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+                if (!coloursToShow.Contains(nulElement.GetNulColour))
+                    continue;
                 NulBar temp = nulBars[(int)nulElement.GetNulColour];
 
                 //if(temp.maxValue != nulElement.maxValue)
