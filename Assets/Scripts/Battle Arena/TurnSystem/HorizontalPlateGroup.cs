@@ -46,6 +46,11 @@ public class HorizontalPlateGroup : MonoBehaviour
 
             DisplayPlate dp = Instantiate(displayerPlatePrefab).GetComponent<DisplayPlate>();
             dp.Init(item);
+            RectTransform rectTransform =
+            dp.GetComponent<RectTransform>();
+
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, elementSize);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, elementSize);
             AddChild(dp);
             //plates.Add(dp);
         }

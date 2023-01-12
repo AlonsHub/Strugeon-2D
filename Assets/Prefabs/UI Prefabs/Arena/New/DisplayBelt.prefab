@@ -31,10 +31,10 @@ RectTransform:
   m_Father: {fileID: 5407075081352286960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 260.77, y: 34.819977}
-  m_SizeDelta: {x: -300.03625, y: -99.63995}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -266.53, y: 0}
+  m_SizeDelta: {x: 532.979, y: 14.953857}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &5911595133248621112
 MonoBehaviour:
@@ -48,13 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aeb0c6bd9b54a345aa79cc98613d8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementSize: 128
-  gap: 64
+  elementSize: 64
+  gap: 32
   speed: 0
-  plates: []
+  children: []
   displayerPlatePrefab: {fileID: 49672166667186691, guid: 776b365e96cd00f459f061d9d6ec8537,
     type: 3}
-  currentPlate: {fileID: 0}
+  currentPlate: {fileID: 3821264000841862165, guid: 776b365e96cd00f459f061d9d6ec8537,
+    type: 3}
 --- !u!1 &6078416337230069027
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,4 +130,4 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.5
+  m_PixelsPerUnitMultiplier: 1
