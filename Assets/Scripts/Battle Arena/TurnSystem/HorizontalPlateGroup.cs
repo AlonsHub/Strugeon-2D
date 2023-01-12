@@ -60,7 +60,7 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <param name="displayP"></param>
     public void AddChild(DisplayPlate displayP)
     {
-        displayP.transform.parent = transform;
+        displayP.transform.SetParent( transform);
         children.Add(displayP);
 
         //manage insertion/shifting of existing members
@@ -117,18 +117,6 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <param name="index"></param>
     public void SetAllChildPositions(int index) //infos need to be cached and then MAYBE hooked into via events
     {
-        //if(infos.Count-1 != children.Count)
-        //{
-        //    if(infos.Count-1 > children.Count)
-        //    {
-
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
-
         //TEST infos and belt sync
         int place = index;
         for (int i = 0; i < infos.Count; i++)
@@ -141,44 +129,9 @@ public class HorizontalPlateGroup : MonoBehaviour
 
             children[i - 1].Init(infos[place]);
             place++;
-        }
-
-       
+        }  
     }
-
-
-
-    //public IEnumerator CycleBeltOnce()
-    //{
-    //    DisplayPlate trans = RemoveChild(children[0]);
-    //    float t = 0f;
-    //    AddChild(trans);
-    //    while (t*2 <= 1f)
-    //    {
-    //        for (int i = 0; i < children.Count; i++)
-    //        {
-    //            children[i].transform.localPosition = LERP(children[i].transform.localPosition, GetOffsetByIndex(i), t*2);
-    //        }
-    //        yield return new WaitForSeconds(.05f);
-    //        t += .05f;
-    //    }
-
-    //}
-
-    //Vector3 LERP(Vector2 a, Vector2 b, float t)
-    //{
-    //    if(t!=0f)
-    //    {
-    //        //now we know that a is no longer the start point, but we can get the start point - using t
-    //        Vector2 endToCurrent = a - b; //goes from b to a, so BACKWARDS!
-    //        float length = endToCurrent.magnitude + endToCurrent.magnitude * (1 - t);
-    //        a = b + endToCurrent.normalized * length;
-    //    }
-
-    //    Vector2 d = b - a;
-    //    return a + (t * d);
-    //}
-
+     
 
     /// <summary>
     /// returns the appropriate offest (under this transform) considering the groups stats (elementSize, spacing and index)
@@ -187,7 +140,7 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <returns></returns>
     Vector3 GetOffsetByIndex(int index)
     {
-        return new Vector3(index * (elementSize + gap), 0,0);
+        return new Vector3((index-1) * (elementSize + gap), 0,0);
     }
 
 }

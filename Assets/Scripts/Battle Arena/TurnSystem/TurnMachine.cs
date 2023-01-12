@@ -32,13 +32,18 @@ public class TurnMachine : MonoBehaviour
     public System.Action OnStartNewRound;
     private int initialSquadSize;
 
+    PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+
+
     private void Awake() //this does destroy on load and should only ever be one, in the arena
     {
         Instance = this;
+        OnStartNewRound += psionProfile.PerformRegenAll;
     }
     private void OnDisable()
     {
         Instance = null;
+        OnStartNewRound -= psionProfile.PerformRegenAll;
     }
 
     public TurnTaker GetCurrentTurnTaker => beltManipulator.GetCurrentTurnTaker();
