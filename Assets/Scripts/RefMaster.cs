@@ -55,6 +55,12 @@ public class RefMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void ClearDeadAndCowards()
+    {
+        theDead.Clear();
+        theCowardly.Clear();
+    }
+
     public void SetEnemyCharacters(List<Pawn> enemList,List<int> levelList)
     {
         enemyInstances = enemList;

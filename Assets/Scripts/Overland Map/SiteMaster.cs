@@ -39,6 +39,7 @@ public class SiteMaster : MonoBehaviour
         {
             if(!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null)
             {
+                Debug.Log("setting site");
                 sb.levelSO.levelData.SetLevelData((LairDifficulty)Random.Range(0, System.Enum.GetValues(typeof(LairDifficulty)).Length));
             }
         }
@@ -79,6 +80,7 @@ public class SiteMaster : MonoBehaviour
                 }
 
                 //should check if a random site is "good" reset
+                Debug.Log("resetting site");
                 siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
 
                 break;

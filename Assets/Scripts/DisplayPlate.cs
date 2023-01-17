@@ -14,6 +14,8 @@ public class DisplayPlate : MonoBehaviour
     /// </summary>
     [SerializeField]
     Image portrait;
+    [SerializeField, Tooltip("The sprite for this image is Empty by default")]
+    Image portraitOverlay;
 
     /// <summary>
     /// Collection of symbols for info such as: status-effect icons, special ability markers (and their cooldown) etc...
@@ -33,5 +35,15 @@ public class DisplayPlate : MonoBehaviour
     {
         //temp
         transform.localScale = isCurrentTurn ? Vector3.one * 1.5f : Vector3.one;
+    }
+
+    /// <summary>
+    /// Sets a colour overlay with alpha over the portrait.
+    /// E.g. for skipping turns - a black colour will be set over the portrait
+    /// </summary>
+    /// <param name="col"></param>
+    public void SetPortraitOverlayColour(Color col)
+    {
+
     }
 }

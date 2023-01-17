@@ -70,7 +70,10 @@ public class SanctumInventory : BaseInventory
         for (int i = 0; i < Inventory.Instance.magicItemCount; i++)
         {
             if (!Inventory.Instance.inventoryItems[i].FetchSprite())
+            {
+                Debug.LogError($"{Inventory.Instance.inventoryItems[i].magicItemName} failed fetch. With spritename: {Inventory.Instance.inventoryItems[i].spriteName}");
                 continue;
+            }
 
             displayers[i].BackgroundGlow(false);
         }

@@ -13,6 +13,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [SerializeField]
     private string pawnName; //character name (not GameObject name)! //chagne the only use of this to print the enums name (mercName)
 
+    
+    TurnInfo _turnInfo;
+
     public bool isEnemy;
 
     public MercName mercName;
@@ -115,6 +118,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public List<ActionItem> ActionItems { get => actionItems; }
 
     public GameObject asPurpleTgtGameObject => gameObject;
+
+    public TurnInfo TurnInfo { get => _turnInfo; set => _turnInfo = value; }
 
     //GameObject PurpleTarget.gameObject { get => gameObject;}
 
@@ -571,6 +576,28 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public string GetName()
     {
         return name;
+    }
+
+    public void FinishAnimation()
+    {
+
+        DoubleTurn_Effect dte;
+        if (TurnInfo.GetEffectOfType(out dte))
+        {
+            //currentTurnInfo.OnTurnSkip?.Invoke();
+            TurnInfo.RemoveEffect(dte);
+
+            Debug.Log($"{TurnInfo.GetTurnTaker.Name}'s turn was skipped!");
+            //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
+            // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
+            // 
+            // Call OnSkippedTurn action here
+            TakeTurn();
+        }
+        else
+        {
+            TurnDone = true;
+        }
     }
 }
 

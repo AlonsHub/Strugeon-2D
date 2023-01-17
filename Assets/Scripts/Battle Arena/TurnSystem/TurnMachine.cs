@@ -72,8 +72,6 @@ public class TurnMachine : MonoBehaviour
     /// The machine will them wait patiently till "StartBattle" is called(?)
     /// </summary>
     /// 
-
-
     public void StartBattle()
     {
         //TBA a priliminary sequence just before StartBattle for setup such as this
@@ -121,11 +119,12 @@ public class TurnMachine : MonoBehaviour
                 yield break;
             }
 
-            DoubleTurn_Effect de;
-            if (currentTurnInfo.GetEffectOfType(out de))
+            //DoubleTurn_Effect de;
+            SkipTurn_Effect se;
+            if (currentTurnInfo.GetEffectOfType(out se))
             {
                 //currentTurnInfo.OnTurnSkip?.Invoke();
-                currentTurnInfo.RemoveEffect(de);
+                currentTurnInfo.RemoveEffect(se);
 
                 Debug.Log($"{currentTurnInfo.GetTurnTaker.Name}'s turn was skipped!");
                 //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
@@ -149,7 +148,13 @@ public class TurnMachine : MonoBehaviour
     public void StopTurnSequence()
     {
         StopCoroutine(nameof(TurnSequence));
-        //Call WIN or LOSE windows
+        
+        MouseBehaviour.Instance.ShutDown();
+        PartyMaster.Instance.currentSquad = null;
+
+        RefMaster.Instance.ClearDeadAndCowards();
+
+        Time.timeScale = 1; //just in case
     }
 
     public List<TurnInfo> GetTurnInfos()
@@ -167,7 +172,8 @@ public class TurnMachine : MonoBehaviour
     }
     public void RemoveTurnTakerAndInfo(TurnTaker tt)
     {
-        beltManipulator.RemoveTurnInfo(beltManipulator.GetTurnInfoByTaker(tt));
+        //beltManipulator.RemoveTurnInfo(beltManipulator.GetTurnInfoByTaker(tt));
+        beltManipulator.RemoveTurnInfo(tt.TurnInfo);
     }
 
     private void Win()

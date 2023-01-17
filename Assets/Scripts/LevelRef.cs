@@ -26,11 +26,8 @@ public class LevelRef : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        
     }
 
     public void SetCurrentLevel(int levelIndex)
@@ -44,24 +41,6 @@ public class LevelRef : MonoBehaviour
     {
         currentLevel = lso;
     }
-
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    switch (level)
-    //    {
-    //        case 1:
-    //            Instantiate(currentLevel.levelData.levelPrefab);
-    //            break;
-    //        case 0:
-    //            SiteButton[] siteButtons = FindObjectsOfType<SiteButton>();
-    //            SiteButton sb = siteButtons.Where(x => x.name == siteName).Single();
-    //            sb.StartCooldownCaller();
-    //            break;
-
-    //        default:
-    //            break;
-    //    }
-    //}
 
     void OnEnable()
     {

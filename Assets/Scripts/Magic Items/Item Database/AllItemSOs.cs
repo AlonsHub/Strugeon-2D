@@ -2,8 +2,10 @@
 //using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+
 [CreateAssetMenu()]
-public class AllItemSOs : ScriptableObject
+public class AllItemSOs : SerializedScriptableObject
 {
     [SerializeField] List<MagicItemSO> allItemSOs;
     public List<MagicItemSO> GetAllItemSOList { get => allItemSOs; }

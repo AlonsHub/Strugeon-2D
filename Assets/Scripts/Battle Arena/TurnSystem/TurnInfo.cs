@@ -20,7 +20,7 @@ public class TurnInfo
     public bool DoDoubleTurn;
     public bool DoSkipTurn;
     public System.Action OnTurnBegin;
-    public System.Action OnTurnSkip; //in d
+    //public System.Action OnTurnSkip; //
     public System.Action OnTurnEnd; //add to this cooldowns and effects that need to remove themselves
     #endregion
 
@@ -69,6 +69,10 @@ public class TurnInfo
         return null;
     }
 
+    /// <summary>
+    /// Add effects that ARE ALREADY inited and applied
+    /// </summary>
+    /// <param name="turnInfoEffect"></param>
     public void AddEffect(TurnInfoEffect turnInfoEffect)
     {
         if (turnInfoEffects == null)
@@ -76,6 +80,10 @@ public class TurnInfo
         turnInfoEffects.Add(turnInfoEffect);
         //GFX! TBA
     }
+    /// <summary>
+    /// Removes and ENDS effects
+    /// </summary>
+    /// <param name="turnInfoEffect"></param>
     public void RemoveEffect(TurnInfoEffect turnInfoEffect)
     {
         if (turnInfoEffects == null)

@@ -19,7 +19,7 @@ public class ItemInhaler : MonoBehaviour
     //MagicItem emptyItem;
 
     //SAFETY MEASURES:
-    int maxAttempts = 20;
+    int maxAttempts = 100;
     int attemptCount = 0;
 
     [SerializeField]
@@ -78,16 +78,12 @@ public class ItemInhaler : MonoBehaviour
     }
     public void SelectItem(MagicItem selectedItem)
     {
-        if(selectedItem !=null)
         _item = selectedItem;
-
-        button.interactable = selectedItem != null;
+        button.interactable = selectedItem != null; //in case of the below error, set the button.interactable to false
     }
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
     {
-        float[] values = new float[_psionSpectrumProfile.psionElements.Count];
-
         if(_item == null)
         {
             print("no item to inhale");
@@ -95,7 +91,11 @@ public class ItemInhaler : MonoBehaviour
             return "no item!";
             //SelectFirstInvItem();
         }
+
+        float[] values = new float[_psionSpectrumProfile.psionElements.Count];
+
         string s = $"{_item.magicItemName} was Inhaled.\n";
+
         //start sequence:
         //chance to hit:
         int hits = 0;
@@ -137,8 +137,9 @@ public class ItemInhaler : MonoBehaviour
                 //Add value to that nulcolours max value (psion profile)
                 PlayerDataMaster.Instance.AddToPsionNulMax(el.nulColour, amount);
 
-                Inventory.Instance.RemoveMagicItem(_item);
-                _item = null;
+                //This was the problem I think!
+                //Inventory.Instance.RemoveMagicItem(_item);
+                //_item = null;
             }
         }
         if(hits == 0)
@@ -155,9 +156,18 @@ public class ItemInhaler : MonoBehaviour
 
 
         attemptCount = 0;
+        //SAFTY WAIT!
+        Invoke(nameof(RemoveMagicItemFromInventory), .1f);
+        //Inventory.Instance.RemoveMagicItem(_item);
+
         StartCoroutine(SuccessfulInhaleSequence(values));
         OnInhale?.Invoke();
         return s;
+    }
+    void RemoveMagicItemFromInventory()
+    {
+        Inventory.Instance.RemoveMagicItem(_item);
+        _item = null;
     }
 
     IEnumerator SuccessfulInhaleSequence(float[] s)

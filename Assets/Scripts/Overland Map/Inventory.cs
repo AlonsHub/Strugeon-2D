@@ -110,7 +110,6 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-
             Debug.Log($"Item: {magicItem.magicItemName} was not found, so it could not be removed!"); //still invoke OnInventoryChange?
             return false;
         }

@@ -210,7 +210,8 @@ public class WeaponItem : ActionItem
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
 
         la.tgt = null;
-        pawn.TurnDone = true;
+        //pawn.TurnDone = true;
+        pawn.FinishAnimation();
         //go.transform.LookAt(tgt.transform);
         //GetComponent<LookAt>().lookAtTargetPosition = tgt.transform.position;
     }
@@ -221,7 +222,9 @@ public class WeaponItem : ActionItem
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
 
-        pawn.TurnDone = true;
+        //pawn.TurnDone = true; // this may be needed if turns get stuck around Ezra
+
+
         //go.transform.LookAt(tgt.transform);
         //GetComponent<LookAt>().lookAtTargetPosition = tgt.transform.position;
         la.tgt = null;

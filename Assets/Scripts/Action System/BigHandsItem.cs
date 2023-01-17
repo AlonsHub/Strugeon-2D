@@ -86,7 +86,8 @@ public class BigHandsItem : ActionItem, SA_Item
 
         la.tgt = null;
 
-        pawn.TurnDone = true;
+        //pawn.TurnDone = true;
+        pawn.FinishAnimation();
     }
     public void DamageTargetRock()
     {

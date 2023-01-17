@@ -12,7 +12,10 @@ public class DoubleTurn_Effect : TurnInfoEffect
     public override void ApplyEffect()
     {
         //apply effect and...
-        turnInfoToEffect.GetTurnTaker.DoDoubleTurn = true;
+        turnInfoToEffect.DoDoubleTurn = true;
+        turnInfoToEffect.AddEffect(this);
+        //(turnInfoToEffect.GetTurnTaker as Pawn).AddEffectIcon(effectIcon, "blueBuff");
+
         Debug.LogError("apply double");
         //ADD Visual Elements if relevant
         // TBA
@@ -26,7 +29,8 @@ public class DoubleTurn_Effect : TurnInfoEffect
     {
         //REMOVE Visual Elements if relevant
         // TBA
-
+        (turnInfoToEffect.GetTurnTaker as Pawn).RemoveIconByName("blueBuff"); //BAD! CHANGE THIS!
+        turnInfoToEffect.DoDoubleTurn = false;
         //turnInfoToEffect.OnTurnEnd -= () => EndEffect();
 
 

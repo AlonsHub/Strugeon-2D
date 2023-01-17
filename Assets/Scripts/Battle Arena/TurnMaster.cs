@@ -580,5 +580,7 @@ public interface TurnTaker
 
     //ADD REF TO TURNINFO? TBD
     Sprite PortraitSprite { get; set; }
+
+    TurnInfo TurnInfo { get; set; }
 }
 

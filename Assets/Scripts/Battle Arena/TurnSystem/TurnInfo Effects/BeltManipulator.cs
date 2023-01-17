@@ -61,10 +61,7 @@ public class BeltManipulator : MonoBehaviour
         {
             TurnInfo ti = new TurnInfo(item);
             turnInfos.Add(ti);
-            if(item is TEST_TurnTaker)
-            {
-                (item as TEST_TurnTaker).turnInfo = ti;
-            }
+            item.TurnInfo = ti;
         }
 
         turnBelt.InitBelt(turnInfos);
@@ -131,6 +128,7 @@ public class BeltManipulator : MonoBehaviour
             _currentIndex--;
         }
         horizontalPlateGroup.KillChild(ti);
+        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
         //horizontalPlateGroup.SetAllChildPositions(_currentIndex);
     }
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
