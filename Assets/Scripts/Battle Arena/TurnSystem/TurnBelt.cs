@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class TurnBelt
 
     public int infoCount => turnInfos.Count;
 
-
+    public Action OnBeltChange;
    
     public void InitBelt(List<TurnInfo> infos)
     {
@@ -25,12 +26,20 @@ public class TurnBelt
     {
         turnInfos.Clear();
 
+        //Call OnBeltChange? does this count as change?
         //Also unsubscribe from stuff?
+
+        OnBeltChange = null;
     }
 
     public void InsertTurnInfo(TurnInfo ti, int index)
     {
         turnInfos.Insert(index, ti);
+    }
+
+    public void AddTurnInfo(TurnInfo ti)
+    {
+        turnInfos.Add(ti);
     }
      public void MoveTurnInfo(TurnInfo ti, int index)
     {

@@ -479,7 +479,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //PartyMaster.Instance.availableMercPrefabs.Remove(this);
         RefMaster.Instance.AddCoward(mercName);
         //TurnMaster.Instance.RemoveTurnTaker(this);
-        TurnMachine.Instance.RemoveTurnTakerAndInfo(this);
+        TurnMachine.Instance.RemoveTurnInfoByTaker(this);
 
         tileWalker.currentNode.RemoveOccupant(false) ;
 
@@ -517,7 +517,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
         //TurnMaster.Instance.RemoveTurnTaker(this);
-        TurnMachine.Instance.RemoveTurnTakerAndInfo(this);
+        TurnMachine.Instance.RemoveTurnInfoByTaker(this);
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
         //Destroy(gameObject);
     }
@@ -581,23 +581,23 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public void FinishAnimation()
     {
 
-        DoubleTurn_Effect dte;
-        if (TurnInfo.GetEffectOfType(out dte))
-        {
-            //currentTurnInfo.OnTurnSkip?.Invoke();
-            TurnInfo.RemoveEffect(dte);
+        //DoubleTurn_Effect dte;
+        //if (TurnInfo.GetEffectOfType(out dte))
+        //{
+        //    //currentTurnInfo.OnTurnSkip?.Invoke();
+        //    TurnInfo.RemoveEffect(dte);
 
-            Debug.Log($"{TurnInfo.GetTurnTaker.Name}'s turn was skipped!");
-            //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
-            // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
-            // 
-            // Call OnSkippedTurn action here
-            TakeTurn();
-        }
-        else
-        {
+        //    Debug.Log($"{TurnInfo.GetTurnTaker.Name}'s turn was skipped!");
+        //    //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
+        //    // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
+        //    // 
+        //    // Call OnSkippedTurn action here
+        //    TakeTurn();
+        //}
+        //else
+        //{
             TurnDone = true;
-        }
+        //}
     }
 }
 

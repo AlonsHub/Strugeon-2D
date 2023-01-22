@@ -20,6 +20,7 @@ public class BeltManipulator : MonoBehaviour
     [SerializeField]
     HorizontalPlateGroup horizontalPlateGroup;
 
+    //public HorizontalPlateGroup GetHorizontalPlateGroup { get => horizontalPlateGroup; }
     //public System.Action OnBeltChange;
 
     //public System.Action PreTurn;
@@ -80,31 +81,55 @@ public class BeltManipulator : MonoBehaviour
             _currentIndex = 0;
 
         //OnBeltChange?.Invoke(_currentIndex);
-        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
         return turnBelt.GetTurnInfo(_currentIndex);
     }
-
+    //public void InsertTurnInfo(TurnInfo ti, int index)
+    //{
+    //    turnBelt.InsertTurnInfo(ti, index);
+    //}
     public void InsertTurnTaker(TurnTaker tt, int index)
     {
         TurnInfo ti = new TurnInfo(tt);
+        if(index < _currentIndex)
+        {
+            _currentIndex++;
+        }
         turnBelt.InsertTurnInfo(ti, index);
+        horizontalPlateGroup.AddChildByTurnInfo(ti);
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
+
     }
     public void InsertTurnTakerAsNext(TurnTaker tt)
     {
-        TurnInfo ti = new TurnInfo(tt);
-        turnBelt.InsertTurnInfo(ti, _currentIndex + 1);
+        //TurnInfo ti = new TurnInfo(tt);
+        int index = (_currentIndex + 1 >= turnBelt.infoCount) ? 1 : _currentIndex+1;
+
+
+        InsertTurnTaker(tt, index);
+
+        //turnBelt.InsertTurnTaker(tt, index);
+        //horizontalPlateGroup.RefreshPortraits(_currentIndex);
+
     }
 
     //add turn info??
     public void InsertTurnInfo(TurnInfo ti, int index)
     {
+        if (index < _currentIndex)
+        {
+            _currentIndex++;
+        }
+
         turnBelt.InsertTurnInfo(ti, index);
-        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+
+        horizontalPlateGroup.AddChildByTurnInfo(ti);
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
     }
     public void MoveTurnInfoTo(TurnInfo ti, int index)
     {
         turnBelt.MoveTurnInfo(ti, index);
-        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
     }
     public void MoveTurnInfoToBeNext(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
     {
@@ -117,18 +142,18 @@ public class BeltManipulator : MonoBehaviour
     /// <param name="ti"></param>
     public void RemoveTurnInfo(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
     {
-        turnBelt.RemoveTurnInfo(ti);
 
         //handle _currentIndex stuff -> make sure turns go over safely 
 
         int index = GetIndexOfTurnInfo(ti);
 
+        turnBelt.RemoveTurnInfo(ti);
         if(index < _currentIndex) //in the case of a turntakers death AFTER their turn in this round - casuing indecies to be shifted down by 1 (as opposed to turntakers who die BEFORE their turn came this round)
         {
             _currentIndex--;
         }
         horizontalPlateGroup.KillChild(ti);
-        horizontalPlateGroup.SetAllChildPositions(_currentIndex);
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
         //horizontalPlateGroup.SetAllChildPositions(_currentIndex);
     }
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
@@ -159,6 +184,12 @@ public class BeltManipulator : MonoBehaviour
         return turnBelt.GetTurnInfo(_currentIndex).GetTurnTaker;
     }
 
+    public void SetPortraitColour(TurnInfo ti, Color col)
+    {
+        DisplayPlate dp = horizontalPlateGroup.GetChildren.Where(x => x.turnInfo == ti).FirstOrDefault();
+
+        dp.SetPortraitOverlayColour(col);
+    }
     //public int GetEnemyCount()
     //{
     //    ///THIS HERE IS HOW IT NEEDS TO BE DONE!!!

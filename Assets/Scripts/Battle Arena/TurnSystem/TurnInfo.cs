@@ -8,6 +8,8 @@ public class TurnInfo
     public bool isStartPin;
 
     TurnTaker turnTaker;
+
+    //DisplayPlate displayPlate;
     //int beltIndex; //this is problematic if they move around, and they should be able to!
 
     public TurnTaker GetTurnTaker => turnTaker;
@@ -48,7 +50,7 @@ public class TurnInfo
     }
 
 
-    public void TakeTurn()
+    public virtual void TakeTurn()
     {
         OnTurnBegin?.Invoke(); 
 

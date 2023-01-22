@@ -9,12 +9,30 @@ public class DoubleTurn_Effect : TurnInfoEffect
 
     }
 
+    //public override void ApplyEffect()
+    //{
+    //    //apply effect and...
+    //    turnInfoToEffect.DoDoubleTurn = true;
+    //    turnInfoToEffect.AddEffect(this);
+    //    //(turnInfoToEffect.GetTurnTaker as Pawn).AddEffectIcon(effectIcon, "blueBuff");
+
+    //    Debug.LogError("apply double");
+    //    //ADD Visual Elements if relevant
+    //    // TBA
+
+    //    //... subscribe to it's removal (on this characters next end-turn)
+    //    //turnInfoToEffect.OnTurnEnd += () => EndEffect();
+
+    //}
+    //ALTERNATIVE METHOD attempt 1#
     public override void ApplyEffect()
     {
-        //apply effect and...
-        turnInfoToEffect.DoDoubleTurn = true;
-        turnInfoToEffect.AddEffect(this);
-        //(turnInfoToEffect.GetTurnTaker as Pawn).AddEffectIcon(effectIcon, "blueBuff");
+        List<TurnInfo> infos = TurnMachine.Instance.GetTurnInfos();
+        int index = infos.FindIndex(x => x == turnInfoToEffect);
+
+        SelfDestructing_TurnInfo newTurnInfo = new SelfDestructing_TurnInfo(turnInfoToEffect.GetTurnTaker,1);
+        
+        TurnMachine.Instance.InsertTurnInfo(newTurnInfo, index);
 
         Debug.LogError("apply double");
         //ADD Visual Elements if relevant

@@ -127,7 +127,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
     {
         
         Pawn newSpirit = instantiatedPawn.GetComponent<Pawn>();
-
+        newSpirit.Init();
         //LEVEL ADVANCEMENT
         newSpirit.GetComponent<EnemyInfo>().SetEnemyLevel(drownedSpiritLevel);
 

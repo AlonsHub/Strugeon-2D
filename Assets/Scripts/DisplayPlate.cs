@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class DisplayPlate : MonoBehaviour
 {
-    public TurnTaker turnTaker;
+    public TurnTaker turnTaker => turnInfo.GetTurnTaker;
+    public TurnInfo turnInfo;
 
     //Prefab Refs 
 
@@ -14,7 +15,7 @@ public class DisplayPlate : MonoBehaviour
     /// </summary>
     [SerializeField]
     Image portrait;
-    [SerializeField, Tooltip("The sprite for this image is Empty by default")]
+    [SerializeField, Tooltip("This image is a default sprite at aplha 0, by default")]
     Image portraitOverlay;
 
     /// <summary>
@@ -23,18 +24,58 @@ public class DisplayPlate : MonoBehaviour
     [SerializeField]
     List<Image> symbols;
 
+    ///// <summary>
+    ///// NOT A PREFAB! this is a reference to the child displayPlate 
+    ///// </summary>
+    //GameObject _doubleDisplayPlate;
+
+    bool _isCurrent;
+
     public void Init(TurnInfo ti)
     {
         if (ti.isStartPin)
             return;
-        turnTaker = ti.GetTurnTaker;
-        portrait.sprite = ti.GetTurnTaker.PortraitSprite;
+        turnInfo = ti;
+        //turnTaker = ti.GetTurnTaker;
+        RefreshDisplay();
     }
 
     public void SetAsCurrentStatus(bool isCurrentTurn)
     {
+        if (_isCurrent)
+            return;
+
+        _isCurrent = isCurrentTurn;
         //temp
-        transform.localScale = isCurrentTurn ? Vector3.one * 1.5f : Vector3.one;
+        transform.localScale = _isCurrent ? Vector3.one * 1.5f : Vector3.one;
+    }
+
+    public void RefreshDisplay()
+    {
+        portrait.sprite = turnTaker.PortraitSprite;
+
+        //Special Ability check, if relevant
+
+        //Symbols and effects, if relevant
+        Color toSet = new Color(0, 0, 0, 0);
+
+        if (turnInfo.DoSkipTurn) // probably needs to be a switch 
+        {
+            toSet = SturgeonColours.Instance.skipGrey;
+        }
+        
+        //if(turnInfo.DoDoubleTurn)
+        //{
+        //    _doubleDisplayPlate = Instantiate(gameObject, transform);
+        //}
+        //else if(_doubleDisplayPlate != null)
+        //{
+        //    Destroy(_doubleDisplayPlate);
+        //    _doubleDisplayPlate = null;
+        //}
+        //test for other colour affecting powers?
+
+        SetPortraitOverlayColour(toSet);
     }
 
     /// <summary>
@@ -44,6 +85,7 @@ public class DisplayPlate : MonoBehaviour
     /// <param name="col"></param>
     public void SetPortraitOverlayColour(Color col)
     {
-
+        portraitOverlay.color = col;
+        //portraitOverlay.= col;
     }
 }

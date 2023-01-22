@@ -119,7 +119,6 @@ public class TurnMachine : MonoBehaviour
                 yield break;
             }
 
-            //DoubleTurn_Effect de;
             SkipTurn_Effect se;
             if (currentTurnInfo.GetEffectOfType(out se))
             {
@@ -162,6 +161,11 @@ public class TurnMachine : MonoBehaviour
         return beltManipulator.GetTurnInfos();
     }
 
+    public void InsertTurnInfo(TurnInfo ti, int index)
+    {
+        beltManipulator.InsertTurnInfo(ti, index);
+    }
+
     public void InsertTurnTaker(TurnTaker tt, int index)
     {
         beltManipulator.InsertTurnTaker(tt, index);
@@ -170,10 +174,14 @@ public class TurnMachine : MonoBehaviour
     {
         beltManipulator.InsertTurnTakerAsNext(tt);
     }
-    public void RemoveTurnTakerAndInfo(TurnTaker tt)
+    public void RemoveTurnInfoByTaker(TurnTaker tt)
     {
         //beltManipulator.RemoveTurnInfo(beltManipulator.GetTurnInfoByTaker(tt));
         beltManipulator.RemoveTurnInfo(tt.TurnInfo);
+    }
+    public void RemoveTurnInfo(TurnInfo ti)
+    {
+        beltManipulator.RemoveTurnInfo(ti);
     }
 
     private void Win()

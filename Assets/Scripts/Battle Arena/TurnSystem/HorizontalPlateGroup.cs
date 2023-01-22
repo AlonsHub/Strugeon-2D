@@ -16,6 +16,8 @@ public class HorizontalPlateGroup : MonoBehaviour
     [SerializeField]
     List<DisplayPlate> children;
 
+    public List<DisplayPlate> GetChildren { get => children; }
+
     List<TurnInfo> infos;
     //List<DisplayPlate> plates;
 
@@ -43,20 +45,25 @@ public class HorizontalPlateGroup : MonoBehaviour
         {
             if (item.isStartPin)
                 continue; //TBA an indicator for the start-pin
-
-            DisplayPlate dp = Instantiate(displayerPlatePrefab).GetComponent<DisplayPlate>();
-            dp.Init(item);
-            RectTransform rectTransform =
-            dp.GetComponent<RectTransform>();
-
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, elementSize);
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, elementSize);
+            DisplayPlate dp = MakeDisplayPlate(item);
             AddChild(dp);
             //plates.Add(dp);
         }
         currentPlate = children[0];
 
         currentPlate.SetAsCurrentStatus(true);
+    }
+
+    private DisplayPlate MakeDisplayPlate(TurnInfo item)
+    {
+        DisplayPlate dp = Instantiate(displayerPlatePrefab).GetComponent<DisplayPlate>();
+        dp.Init(item);
+        RectTransform rectTransform =
+        dp.GetComponent<RectTransform>();
+
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, elementSize);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, elementSize);
+        return dp;
     }
 
     /// <summary>
@@ -71,6 +78,16 @@ public class HorizontalPlateGroup : MonoBehaviour
         //manage insertion/shifting of existing members
         displayP.transform.localPosition = GetOffsetByIndex(children.Count);
     }
+    public void AddChildByTurnInfo(TurnInfo ti)
+    {
+        DisplayPlate displayP = MakeDisplayPlate(ti);
+        displayP.transform.SetParent(transform);
+        children.Add(displayP);
+
+        //manage insertion/shifting of existing members
+        displayP.transform.localPosition = GetOffsetByIndex(children.Count);
+    }
+
     ///// <summary>
     ///// MUST RE-PARENT AND REPOSITION
     ///// </summary>
@@ -86,13 +103,16 @@ public class HorizontalPlateGroup : MonoBehaviour
     {
         //displayP.transform.parent = null;//?
         children.Remove(displayP);
+
+        SetAllChildPositions();
+
         Destroy(displayP.gameObject);
     }
     public void KillChild(TurnInfo ti)
     {
-        DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
-
-        if(dp == null)
+        //DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
+        DisplayPlate dp = children.Where(x => x.turnInfo == ti).SingleOrDefault();
+        if (dp == null)
         {
             Debug.LogError("could not find DP");
             return;
@@ -120,7 +140,7 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// Call every time the turnBeltChanges
     /// </summary>
     /// <param name="index"></param>
-    public void SetAllChildPositions(int index) //infos need to be cached and then MAYBE hooked into via events
+    public void RefreshPortraits(int index) //infos need to be cached and then MAYBE hooked into via events
     {
         //TEST infos and belt sync
         int place = index;
@@ -135,6 +155,17 @@ public class HorizontalPlateGroup : MonoBehaviour
             children[i - 1].Init(infos[place]);
             place++;
         }  
+    }
+
+    void SetAllChildPositions()
+    {
+        currentPlate = children[0];
+        currentPlate.SetAsCurrentStatus(true);
+
+        for (int i = 0; i < children.Count; i++)
+        {
+            children[i].transform.localPosition = GetOffsetByIndex(i+1);
+        }
     }
      
 
