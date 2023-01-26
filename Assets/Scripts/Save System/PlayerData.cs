@@ -67,6 +67,7 @@ public class PlayerData
     public float levelRevealIntensity;
 
     public PsionSpectrumProfile psionSpectrum;
+    public int psionProgressionLevel => psionSpectrum.SumOfAllCapacities() - 6; // reduce by [number of bars minus 1]
 
     public PlayerData()
     {

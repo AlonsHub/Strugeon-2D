@@ -26,7 +26,10 @@ public class HirelingWindow : MonoBehaviour
 
         portrait.sprite = MercPrefabs.Instance.EnumToPawnPrefab(mercName).PortraitSprite;
         //price
-        price = PlayerDataMaster.Instance.currentPlayerData.mercPrice;
+        //price = PlayerDataMaster.Instance.currentPlayerData.mercPrice; //TBD centralize prices to Prices.cs
+
+        //price = Prices.mercBasePrice * PlayerDataMaster.Instance.currentPlayerData.psionProgressionLevel; /* times player level */
+        price = Prices.MercPrice();
         priceText.text = price.ToString();
         hirelingMaster = hm;
     }

@@ -20,6 +20,16 @@ public class PsionSpectrumProfile
         }
     }
 
+    public int SumOfAllCapacities()
+    {
+        float sum = 0;
+        foreach (var item in psionElements)
+        {
+            sum += item.maxValue;
+        }
+        return Mathf.FloorToInt(sum);
+    }
+
     public void IncreaseMaxValue(NulColour s, float amount)
     {
         psionElements[(int)s].maxValue += amount; //TBF should also be modify value
