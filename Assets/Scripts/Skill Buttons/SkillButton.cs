@@ -15,6 +15,8 @@ public class SkillButton : Hoverable
     //public Bar relevantBar; //relevant mana bar
 
     [SerializeField]
+    bool checkOnEnable;
+    [SerializeField]
     protected Sprite effectIcon;
     Button button;
 
@@ -25,13 +27,15 @@ public class SkillButton : Hoverable
     private void Awake()
     {
         button = GetComponent<Button>();
-       // InteractableCheck();
+        // InteractableCheck();
+        InteractableCheck();
     }
 
-    //private void OnEnable()
-    //{
-    //  //  InteractableCheck();
-    //}
+    private void OnEnable()
+    {
+        if (checkOnEnable)
+            InteractableCheck();
+    }
 
     public virtual void OnButtonClick()
     {
@@ -55,7 +59,9 @@ public class SkillButton : Hoverable
     public void InteractableCheck()
     {
         //button.interactable = skillCost <= relevantBar.currentValue;
+        
         button.interactable = skillCost <= psionProfile.GetValueByName(nulColour);
+        
     }
     
 }

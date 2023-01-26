@@ -142,8 +142,32 @@ public class TurnMachine : MonoBehaviour
             currentTurnInfo.OnTurnEnd?.Invoke();
         }
 
-    }    
+    }
+    /// <summary>
+    /// Checks if win or lose states apply. If either, returns TRUE, and calls Win() or Lose(), AND StopTurnSequence().
+    /// </summary>
+    /// <returns></returns>
+    bool WinLoseCheck()
+    {
+        if (RefMaster.Instance.enemyInstances.Count != 0 && RefMaster.Instance.mercs.Count != 0)
+        {
+            return false;
+        }
+        if (RefMaster.Instance.enemyInstances.Count == 0)
+        {
+            Debug.Log("WIN!");
+            Win();
+        }
+        else
+        {
+            Debug.Log("Lose!");
+            Lose();
+        }
+        //if (RefMaster.Instance.mercs.Count == 0)
 
+        StopTurnSequence();
+        return true;
+    }
     public void StopTurnSequence()
     {
         StopCoroutine(nameof(TurnSequence));
@@ -272,10 +296,25 @@ public class TurnMachine : MonoBehaviour
 
 
 
+        //Considered putting StopTurnSequence(); here and in Win, but honestly that just seems silly. They're both called in WinLoseCheck() - that should call StopTurnSequence()
+
         defeatWindow.gameObject.SetActive(true);
         defeatWindow.SetMe(LevelRef.Instance.currentLevel);
         //empty the room:
 
         PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].ClearRoom(); //FIXED to ClearRoom() from = null
+    }
+
+    public void Run() //Abandon match - used by forefit button in UI
+    {
+        foreach (var item in RefMaster.Instance.mercs)
+        {
+            //if not contanis in either coawrdly nor dead, add to cowardly
+            RefMaster.Instance.GetTheCowardly.Add(item.mercName); //check for doubles?
+
+        }
+        RefMaster.Instance.mercs.Clear();
+        //StopTurnSequence();
+        WinLoseCheck();
     }
 }

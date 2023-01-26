@@ -1345,6 +1345,7 @@ MonoBehaviour:
   buttonColor: 3
   nulColour: 5
   skillCost: 50
+  checkOnEnable: 0
   effectIcon: {fileID: 0}
   pawnTgt: {fileID: 0}
 --- !u!1 &854137788
@@ -2476,7 +2477,7 @@ PrefabInstance:
     - target: {fileID: 5737377650778110716, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: skillCost
-      value: 0.4
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 5737377650778110716, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
@@ -3206,6 +3207,7 @@ GameObject:
   - component: {fileID: 1701191817}
   - component: {fileID: 1701191816}
   - component: {fileID: 1701191815}
+  - component: {fileID: 1701191814}
   m_Layer: 5
   m_Name: ForefitButton (2)
   m_TagString: Untagged
@@ -3233,6 +3235,26 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: -29.64}
   m_SizeDelta: {x: 121.49963, y: 59.546906}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1701191814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701191812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57c6429ba9e00540bf64ca6333f6b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myData: Flee! - Immediatly causes all mercs to escape with their lives, but not
+    much else
+  buttonColor: 2
+  nulColour: 1
+  skillCost: 0.3
+  checkOnEnable: 1
+  effectIcon: {fileID: 0}
+  pawnTgt: {fileID: 0}
 --- !u!114 &1701191815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3257,7 +3279,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.11320752, g: 0.08383764, b: 0.08383764, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3276,9 +3298,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 901542004}
-        m_MethodName: Run
-        m_Mode: 1
+      - m_Target: {fileID: 8283507583672110456}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3287,9 +3309,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8283507583672110456}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1701191814}
+        m_MethodName: OnButtonClick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
