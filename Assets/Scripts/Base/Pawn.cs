@@ -15,6 +15,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     
     TurnInfo _turnInfo;
+    
+
 
     public bool isEnemy;
 
@@ -65,6 +67,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [SerializeField]
     public List<ActionVariation> actionPool;
     List<int> actionWeightList;
+
+    List<SuggestiveEffect> suggestiveEffects;
 
 
 
@@ -135,6 +139,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [TextArea]
     [SerializeField]
     public string SA_Description;
+
+    //Also temp AF
+    ShieldAttacher cachedShield = null; //TEMP TBF
+    RootDownAttacher cachedRootDownAttacher = null; //temp TBF
 
     // end TEMP AF
     public int enemyLevel = -1; //should stay that way if not enemy
@@ -284,6 +292,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             actionPool.AddRange(ai.actionVariations);
         }
 
+        //This ALSO needs to be a suggestive effect!
         if(hasPurple && purpleTgt != null)
         {
             ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
@@ -297,6 +306,15 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 purpleTgt = null;
             }
         }
+        //This ALSO needs to be a suggestive effect!
+        //Joinning the list below
+        if (suggestiveEffects != null && suggestiveEffects.Count > 0)
+        {
+            foreach (var effect in suggestiveEffects)
+            {
+                effect.Perform();
+            }
+        }
 
         int runningTotal = 0;
         foreach (ActionVariation av in actionPool)
@@ -305,10 +323,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             actionWeightList.Add(runningTotal);
         }
 
-        //Call action "after calcActionList"
+        //Call action "after calcActionList" //I love you. This really helped!
+        //handle SuggestiveEffects
     }
-    ShieldAttacher cachedShield = null; //TEMP TBF
-    RootDownAttacher cachedRootDownAttacher = null; //temp TBF
+    
     public override int TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
 
@@ -530,16 +548,19 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     List<GameObject> effectIcons = new List<GameObject>();
     public int purpleMultiplier;
-
+    Dictionary<string, GameObject> nameToIconObject = new Dictionary<string, GameObject>();
     public void AddEffectIcon(Sprite newEffectIcon, string ID) //TBF - this needs to return a GameObject so effects could easily erase their icons without fucking googling them first
     {
-        if(effectIcons.Where(x => x.name == ID).Count() > 0)
-        {
-            return;
-        }
+        //Recently removed 07/02/23
+        //if(effectIcons.Where(x => x.name == ID).Count() > 0)
+        //{
+        //    return;
+        //}
 
         GameObject go = Instantiate(effectIconPrefab, effectIconParent); //return this!
         go.GetComponentInChildren<SpriteRenderer>().sprite = newEffectIcon; //have a better setter! TBF!
+
+        nameToIconObject.Add(ID, go);
         go.name = ID;
         effectIcons.Add(go);
         worldSpaceHorizontalGroup.UpdateGroup();
@@ -547,21 +568,21 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public void RemoveIconByName(string iconName)
     {
-        List<GameObject> relevantList = effectIcons.Where(x => x.name == iconName).ToList(); //tbf - all icons should be addon-based componenets like blinded and charmed!
-
-        if (relevantList.Count > 0)
+        //List<GameObject> relevantList = effectIcons.Where(x => x.name == iconName).ToList(); //tbf - all icons should be addon-based componenets like blinded and charmed!
+        GameObject go;
+        if(nameToIconObject.TryGetValue(iconName, out go))
         {
-            foreach (var item in relevantList)
-            {
-                effectIcons.Remove(item);
-                Destroy(item);
-            }
+            effectIcons.Remove(go);
+            nameToIconObject.Remove(iconName);
+            Destroy(go);
         }
         else
         {
-            Debug.LogError($"No icon by this name: {iconName} was found");
+            Debug.LogError("Couldnt find icon of that ID");
         }
+
        
+
         worldSpaceHorizontalGroup.UpdateGroup();
     }
     public Vector2Int GetGridPos()
@@ -599,6 +620,41 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             TurnDone = true;
         //}
     }
+
+    public void AddSuggestiveEffect(SuggestiveEffect suggestiveEffect)
+    {
+        if(suggestiveEffects == null)
+        {
+            suggestiveEffects = new List<SuggestiveEffect>();
+        }
+        suggestiveEffects.Add(suggestiveEffect);
+    }
+    /// <summary>
+    /// Calls the remove with delay (holds for 2 frames)
+    /// </summary>
+    /// <param name="suggestiveEffect"></param>
+    public void RemoveSuggestiveEffect(SuggestiveEffect suggestiveEffect)
+    {
+        if (suggestiveEffects == null)
+        {
+            suggestiveEffects = new List<SuggestiveEffect>();
+            Debug.LogError("There was no suggestiveeffect list at all... created one, but otherwise did fuck all");
+            return;
+        }
+        StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), suggestiveEffect);
+    }
+
+    IEnumerator RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect)
+    {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        suggestiveEffects.Remove(suggestiveEffect);
+    }
+    //public void RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect, float delay)
+    //{
+    //    Invoke(nameof()
+    //}
+
 }
 
 

@@ -16,7 +16,10 @@ public class StatusIcon : WorldSpaceHoverable
 
     string _getMyData()
     {
-        //return sr.sprite.name.Replace("Icon", "");
-        return sr.sprite.name;
+        //return sr.sprite.name.Replace("Icon", ""); 
+        if (sr && sr.sprite)
+            return sr.sprite.name;
+        else
+            return "nothing";
     }
 }

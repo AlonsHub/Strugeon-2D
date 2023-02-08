@@ -27,7 +27,7 @@ public class GoogleSheetMaster : MonoBehaviour
     int rowsPerIterration = 10;
     void Start()
     {
-        Debug.LogError("Google Sheets Master perfoms start");
+        //Debug.LogError("Google Sheets Master perfoms start");
         if(Instance!=null && Instance!=this)
         {
             Destroy(gameObject);
@@ -41,11 +41,12 @@ public class GoogleSheetMaster : MonoBehaviour
 
 
         //strings = GetRows("A1:A35");
-        if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
-        {
-            //currentRangeName is already set to null
+        //if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
+        //{
+        //    //currentRangeName is already set to null
 
-        }
+        //}
+        if(DoSheet)
         LogPlayer(); // not sure we should
     }
     void SetUpCredentials() //this must also be done async  

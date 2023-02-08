@@ -17,7 +17,7 @@ public class RedBuff : SkillButton
             if (weapon.hasRedBuff)
                 return;
 
-            weapon.hasRedBuff = true;
+            weapon.hasRedBuff = true; //TBF FIX THIS! 
             //targetPawn.ApplySpecialEffect(effectIcon, "Red"); //NEED THIS
             targetPawn.AddEffectIcon(effectIcon, "redBuff");
             BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);

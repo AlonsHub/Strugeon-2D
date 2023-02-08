@@ -48,10 +48,7 @@ public class VariationConsole : MonoBehaviour
         pawn = p;
         ShowLog(index);
     }
-    //void InitDisplayer(TMP_Text dispToInit)
-    //{
-    //    dispToInit.GetComponentInParent<UnityEngine.UI.Image>().color = Color.white; //TBF
-    //}
+
     public void ShowLog(int index)
     {
         if (!pawn || !gfx.activeSelf)
@@ -75,7 +72,6 @@ public class VariationConsole : MonoBehaviour
             }
         }
 
-
         for (int i = 0; i < pawn.actionPool.Count; i++)
         {
             enabledDisplayers[i].SetMe(pawn.actionPool[i], (index == i)? Color.red : Color.white);
@@ -87,13 +83,6 @@ public class VariationConsole : MonoBehaviour
         chosenActionText.text = $"{pawn.actionPool[index].relevantItem} on {pawn.actionPool[index].target.name}: {pawn.actionPool[index].weight}";
     }
 
-    //TMP_Text AddSetDisplayer(string newText)
-    //{
-    //    TMP_Text toReturn = Instantiate(prefab, grid).GetComponentInChildren<TMP_Text>();
-    //    toReturn.text = newText;
-    //    enabledDisplayers.Add(toReturn);
-    //    return toReturn;
-    //}
     void AddDisplayer()
     {
         if (disbledDisplayers.Count == 0)
@@ -115,7 +104,7 @@ public class VariationConsole : MonoBehaviour
         disbledDisplayers.Add(t);
         enabledDisplayers.Remove(t);
 
-        t.transform.parent = dump;
+        t.transform.SetParent(dump);
         t.transform.gameObject.SetActive(false);
     }
     void EnableDisplayer()
@@ -125,7 +114,7 @@ public class VariationConsole : MonoBehaviour
         enabledDisplayers.Add(t);
         disbledDisplayers.Remove(t);
 
-        t.transform.parent = grid;
+        t.transform.SetParent(grid);
         t.transform.gameObject.SetActive(true);
     }
 }
