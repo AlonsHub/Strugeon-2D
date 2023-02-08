@@ -15,11 +15,14 @@ public abstract class SuggestiveEffect
     // What show?
     public Sprite iconSprite;
 
-    // Counters?
-
-    // End *Condition* - TBD condition class -> a general class that can, as with predicates, assert general statements.
     
-    /// <param name="pawn"></param>
+    public SuggestiveEffect(Pawn pawn)
+    {
+        pawnToEffect = pawn;
+        iconSprite = null;
+        //pawn.AddSuggestiveEffect(this); //may not want this for all suggestives
+    }
+    
     public SuggestiveEffect(Pawn pawn, Sprite sprite)
     {
         pawnToEffect = pawn;
