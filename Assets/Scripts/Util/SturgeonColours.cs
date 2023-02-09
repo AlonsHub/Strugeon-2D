@@ -8,6 +8,11 @@ public class SturgeonColours : MonoBehaviour
     public static SturgeonColours Instance;
 
     public Color skipGrey;
+    public Color pink;
+    public Color noolRed;
+    public Color noolBlue;
+    public Color noolYellow;
+    
 
     private void Awake()
     {
