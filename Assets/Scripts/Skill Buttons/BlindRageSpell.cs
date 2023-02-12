@@ -11,11 +11,8 @@ public class BlindRageSpell : SkillButton
     {
         targetPawn = MouseBehaviour.hitTarget;
 
-        foreach (var item in RefMaster.Instance.enemyInstances)
-        {
-            //new (item, effectIcon);
-        }
-        //new CalmEffect(targetPawn, effectIcon);
+        
+        new BlindRageEffect(targetPawn, effectIcon);
 
 
         base.OnButtonClick();
