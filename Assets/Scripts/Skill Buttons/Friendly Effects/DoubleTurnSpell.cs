@@ -10,7 +10,7 @@ public class DoubleTurnSpell : SkillButton
     {
         targetPawn = MouseBehaviour.hitTarget;
 
-        DoubleTurn_Effect doubleTurn_Effect = new DoubleTurn_Effect(targetPawn.TurnInfo);
+        DoubleTurn_Effect doubleTurn_Effect = new DoubleTurn_Effect(targetPawn.TurnInfo, effectIcon);
         doubleTurn_Effect.ApplyEffect();
 
         //targetPawn.AddEffectIcon(effectIcon, "blueBuff");

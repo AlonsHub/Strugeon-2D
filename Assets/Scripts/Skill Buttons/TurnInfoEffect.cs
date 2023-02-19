@@ -16,10 +16,15 @@ public abstract class TurnInfoEffect  : StatusEffect
 
     // End *Condition* - TBD condition class -> a general class that can, as with predicates, assert general statements.
 
+    public TurnInfoEffect(TurnInfo ti, Sprite s) : base(ti.TryGetPawn(), s)
+    {
+        turnInfoToEffect = ti;
+    }
     public TurnInfoEffect(TurnInfo ti) : base(ti.TryGetPawn())
     {
         turnInfoToEffect = ti;
     }
+
     /// <summary>
     /// MUST PERFORM THIS BASE!
     /// IF OVERRIDE THIS, CALL BASE TO ADD STATUS EFFECT TO PAWN!

@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class DoubleTurn_Effect : TurnInfoEffect
 {
-    public DoubleTurn_Effect(TurnInfo ti) : base(ti)
+    public DoubleTurn_Effect(TurnInfo ti, Sprite s) : base(ti,s)
     {
-
     }
 
     public override void ApplyEffect()
@@ -18,17 +17,7 @@ public class DoubleTurn_Effect : TurnInfoEffect
         
         TurnMachine.Instance.InsertTurnInfo(newTurnInfo, index);
 
-        Debug.LogError("apply double");
-       
-    }
-
-    public override void EndEffect()
-    {
-        //REMOVE Visual Elements if relevant
-        // TBA
-        (turnInfoToEffect.GetTurnTaker as Pawn).RemoveIconByName("blueBuff"); //BAD! CHANGE THIS!
-        turnInfoToEffect.DoDoubleTurn = false;
-        //turnInfoToEffect.OnTurnEnd -= () => EndEffect();
+        base.ApplyEffect();
     }
 
     public override void Perform()
