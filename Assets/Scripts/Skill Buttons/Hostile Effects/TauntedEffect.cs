@@ -20,17 +20,13 @@ public class TauntedEffect : SuggestiveEffect
 
     public override void ApplyEffect()
     {
+        //AddIconToPawnBar();
+
         current = 0;
 
-        pawnToEffect.AddSuggestiveEffect(this);
-        pawnToEffect.AddEffectIcon(iconSprite, "tauntedDebuff");
+        base.ApplyEffect();
     }
 
-    public override void EndEffect()
-    {
-        pawnToEffect.RemoveIconByName("tauntedDebuff");
-        pawnToEffect.RemoveSuggestiveEffect(this);
-    }
 
     public override void Perform()
     {

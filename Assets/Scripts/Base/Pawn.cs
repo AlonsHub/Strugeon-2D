@@ -68,7 +68,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public List<ActionVariation> actionPool;
     List<int> actionWeightList;
 
-    List<SuggestiveEffect> suggestiveEffects;
+    //List<SuggestiveEffect> suggestiveEffects;
+    List<StatusEffect> statusEffects;
 
 
 
@@ -308,11 +309,15 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         //This ALSO needs to be a suggestive effect!
         //Joinning the list below
-        if (suggestiveEffects != null && suggestiveEffects.Count > 0)
+        if (statusEffects != null)
         {
-            foreach (var effect in suggestiveEffects)
+            var suggestiveEffects = statusEffects.Where(x => x is SuggestiveEffect).ToList();
+            if (suggestiveEffects != null && suggestiveEffects.Count > 0)
             {
-                effect.Perform();
+                foreach (var effect in suggestiveEffects)
+                {
+                    effect.Perform();
+                }
             }
         }
 
@@ -322,9 +327,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             runningTotal += av.weight;
             actionWeightList.Add(runningTotal);
         }
-
-        //Call action "after calcActionList" //I love you. This really helped!
-        //handle SuggestiveEffects
     }
     
     public override int TakeDamage(int damage) //ADD DamageType and derrive text colour from that
@@ -621,34 +623,32 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //}
     }
 
-    public void AddSuggestiveEffect(SuggestiveEffect suggestiveEffect)
+ 
+    //this needs to become AddStatusEffect - which recieves ALL status effects
+    public void AddStatusEffect(StatusEffect statusEffect)
     {
-        if(suggestiveEffects == null)
+        if (statusEffects == null)
         {
-            suggestiveEffects = new List<SuggestiveEffect>();
+            statusEffects = new List<StatusEffect>();
         }
-        suggestiveEffects.Add(suggestiveEffect);
+        statusEffects.Add(statusEffect);
+
+        AddEffectIcon(statusEffect.iconSprite, statusEffect.GetType().ToString());
     }
-    /// <summary>
-    /// Calls the remove with delay (holds for 2 frames)
-    /// </summary>
-    /// <param name="suggestiveEffect"></param>
-    public void RemoveSuggestiveEffect(SuggestiveEffect suggestiveEffect)
+    public void RemoveStatusEffect(StatusEffect statusEffect)
     {
-        if (suggestiveEffects == null)
-        {
-            suggestiveEffects = new List<SuggestiveEffect>();
-            Debug.LogError("There was no suggestiveeffect list at all... created one, but otherwise did fuck all");
-            return;
-        }
-        StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), suggestiveEffect);
+
+        StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), statusEffect);
+        //statusEffects.Remove(statusEffect);
     }
 
-    IEnumerator RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect)
+    IEnumerator RemoveSuggestiveEffectWithDelay(StatusEffect statusEffect)
     {
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
-        suggestiveEffects.Remove(suggestiveEffect);
+        statusEffects.Remove(statusEffect);
+        RemoveIconByName(statusEffect.GetType().ToString());
+
     }
     //public void RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect, float delay)
     //{

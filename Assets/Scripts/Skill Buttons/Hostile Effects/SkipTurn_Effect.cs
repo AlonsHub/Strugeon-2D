@@ -11,18 +11,19 @@ public class SkipTurn_Effect : TurnInfoEffect
 
     public override void ApplyEffect()
     {
-        //turnInfoToEffect.DoSkipTurn = true;
-        //turnInfoToEffect.OnTurnSkip += ()=> EndEffect();
         turnInfoToEffect.AddEffect(this);
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, SturgeonColours.Instance.skipGrey);
-        //Add effect icon -> that will also be destoryed with the effect ending
+
+        base.ApplyEffect();
     }
     public override void EndEffect()
     {
-        //turnInfoToEffect.DoSkipTurn = false;
-        (turnInfoToEffect.GetTurnTaker as Pawn).RemoveIconByName("redDeBuff"); //BAD! CHANGE THIS!
-        //Remove effect icon -> that will also be destoryed with the effect ending
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, Color.white);
 
+        base.EndEffect();
+    }
+    public override void Perform()
+    {
+        throw new System.NotImplementedException();
     }
 }

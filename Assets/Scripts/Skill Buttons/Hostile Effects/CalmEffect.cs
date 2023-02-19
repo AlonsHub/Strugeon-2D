@@ -17,15 +17,14 @@ public class CalmEffect : SuggestiveEffect
     public override void ApplyEffect()
     {
         current = 0;
-        pawnToEffect.AddSuggestiveEffect(this);
-        pawnToEffect.AddEffectIcon(iconSprite, "calmDebuff");
+        //pawnToEffect.AddSuggestiveEffect(this);
+        base.ApplyEffect();
     }
 
-    public override void EndEffect()
-    {
-        pawnToEffect.RemoveSuggestiveEffect(this);
-        pawnToEffect.RemoveIconByName("calmDebuff");
-    }
+    //public override void EndEffect()
+    //{
+    //    pawnToEffect.RemoveSuggestiveEffect(this);
+    //}
 
     public override void Perform()
     {

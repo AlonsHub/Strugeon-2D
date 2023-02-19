@@ -15,8 +15,6 @@ public class EmpathySpell : SkillButton
         {
             new EmpathyEffect(item, effectIcon, targetPawn);
         }
-        //new CalmEffect(targetPawn, effectIcon);
-
 
         base.OnButtonClick();
     }

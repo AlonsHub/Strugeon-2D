@@ -17,4 +17,9 @@ public class HurryTurn_Effect : TurnInfoEffect
     {
         throw new System.NotImplementedException();
     }
+
+    public override void Perform()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -20,15 +20,9 @@ public class EmpathyEffect : SuggestiveEffect
     {
         current = 0;
 
-        pawnToEffect.AddSuggestiveEffect(this);
-        pawnToEffect.AddEffectIcon(iconSprite, "empathyDebuff");
+        base.ApplyEffect();
     }
 
-    public override void EndEffect()
-    {
-        pawnToEffect.RemoveIconByName("empathyDebuff");
-        pawnToEffect.RemoveSuggestiveEffect(this);
-    }
 
     public override void Perform()
     {

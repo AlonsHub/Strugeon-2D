@@ -9,22 +9,6 @@ public class DoubleTurn_Effect : TurnInfoEffect
 
     }
 
-    //public override void ApplyEffect()
-    //{
-    //    //apply effect and...
-    //    turnInfoToEffect.DoDoubleTurn = true;
-    //    turnInfoToEffect.AddEffect(this);
-    //    //(turnInfoToEffect.GetTurnTaker as Pawn).AddEffectIcon(effectIcon, "blueBuff");
-
-    //    Debug.LogError("apply double");
-    //    //ADD Visual Elements if relevant
-    //    // TBA
-
-    //    //... subscribe to it's removal (on this characters next end-turn)
-    //    //turnInfoToEffect.OnTurnEnd += () => EndEffect();
-
-    //}
-    //ALTERNATIVE METHOD attempt 1#
     public override void ApplyEffect()
     {
         List<TurnInfo> infos = TurnMachine.Instance.GetTurnInfos();
@@ -35,12 +19,7 @@ public class DoubleTurn_Effect : TurnInfoEffect
         TurnMachine.Instance.InsertTurnInfo(newTurnInfo, index);
 
         Debug.LogError("apply double");
-        //ADD Visual Elements if relevant
-        // TBA
-
-        //... subscribe to it's removal (on this characters next end-turn)
-        //turnInfoToEffect.OnTurnEnd += () => EndEffect();
-
+       
     }
 
     public override void EndEffect()
@@ -50,7 +29,10 @@ public class DoubleTurn_Effect : TurnInfoEffect
         (turnInfoToEffect.GetTurnTaker as Pawn).RemoveIconByName("blueBuff"); //BAD! CHANGE THIS!
         turnInfoToEffect.DoDoubleTurn = false;
         //turnInfoToEffect.OnTurnEnd -= () => EndEffect();
+    }
 
-
+    public override void Perform()
+    {
+        Debug.LogError("This shouldn't really be performed");
     }
 }

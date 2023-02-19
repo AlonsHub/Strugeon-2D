@@ -13,7 +13,6 @@ public class RedBuff : SkillButton
         WeaponItem weapon = targetPawn.GetComponent<WeaponItem>();
         if (weapon)
         {
-
             if (weapon.hasRedBuff)
                 return;
 

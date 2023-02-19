@@ -12,14 +12,12 @@ public class BlindRageEffect : SuggestiveEffect
 
     public override void ApplyEffect()
     {
-        pawnToEffect.AddSuggestiveEffect(this);
-        pawnToEffect.AddEffectIcon(iconSprite, "blindRageDebuff");
+        pawnToEffect.AddStatusEffect(this);
     }
 
     public override void EndEffect()
     {
-        pawnToEffect.RemoveIconByName("blindRageDebuff");
-        pawnToEffect.RemoveSuggestiveEffect(this);
+        pawnToEffect.RemoveStatusEffect(this);
     }
 
     public override void Perform()
@@ -50,18 +48,6 @@ public class BlindRageEffect : SuggestiveEffect
         //also! needs to add damage to this strike!
 
         EndEffect();
-
-
-        //List<ActionVariation> toRemove = (pawnToEffect.actionPool.Where(x => x.target.Equals(toAvoid.gameObject)).ToList());
-        //foreach (var item in toRemove)
-        //{
-        //    pawnToEffect.actionPool.Remove(item);
-        //}
-        //current++;
-        //if (current >= totalDuration)
-        //{
-        //    EndEffect();
-        //}
     }
 
     

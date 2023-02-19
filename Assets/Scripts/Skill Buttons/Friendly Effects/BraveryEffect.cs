@@ -17,8 +17,8 @@ public class BraveryEffect : SuggestiveEffect
     //Just after Action Weights calc
     public override void ApplyEffect()
     {
-        pawnToEffect.AddSuggestiveEffect(this);
-        pawnToEffect.AddEffectIcon(iconSprite, "braveBuff");
+        pawnToEffect.AddStatusEffect(this);
+        //AddIconToPawnBar();
 
         //add icon symbol and spawn gfx/vfx w/efx
     }
@@ -26,8 +26,8 @@ public class BraveryEffect : SuggestiveEffect
     //After action was rolled-on and decided
     public override void EndEffect()
     {
-        pawnToEffect.RemoveIconByName("braveBuff");
-        pawnToEffect.RemoveSuggestiveEffect(this);
+        //RemoveIconFromPawnBar();
+        pawnToEffect.RemoveStatusEffect(this);
 
         //remove icon symbol and whatnot
     }

@@ -142,9 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb78f2cc70850564fa3197a49ffa596a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: 
   buttonColor: 1
+  nulColour: 0
   skillCost: 5
-  relevantBar: {fileID: 0}
+  checkOnEnable: 0
   effectIcon: {fileID: 21300000, guid: 0728d6a4d5ed4d342bd8d2d110f05c15, type: 3}
   pawnTgt: {fileID: 0}
   stepLimit: 0
@@ -483,9 +485,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b396455589a181f41ad1a058dfffad25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: 
   buttonColor: 0
+  nulColour: 0
   skillCost: 6
-  relevantBar: {fileID: 0}
+  checkOnEnable: 0
   effectIcon: {fileID: 21300000, guid: 8da21634bc668a84fb99f9ba6d1cb74d, type: 3}
   pawnTgt: {fileID: 0}
 --- !u!1 &8120686893311671254
@@ -708,9 +712,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea23d5f9bf410e49a1edfbac9115e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: 
   buttonColor: 2
+  nulColour: 0
   skillCost: 4
-  relevantBar: {fileID: 0}
+  checkOnEnable: 0
   effectIcon: {fileID: 21300000, guid: 9185a153adb876d4ba1f155c3d2bc67a, type: 3}
   pawnTgt: {fileID: 0}
   dmgMultiplier: 1.5
@@ -812,4 +818,4 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1064759

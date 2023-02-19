@@ -5,7 +5,7 @@ using UnityEngine;
 /// Describes effects that have OnTurnStart/End behaviours, counters, cooldowns - any turn-based-based effect
 /// </summary>
 [System.Serializable]
-public abstract class TurnInfoEffect 
+public abstract class TurnInfoEffect  : StatusEffect
 {
     // What do?
 
@@ -16,20 +16,24 @@ public abstract class TurnInfoEffect
 
     // End *Condition* - TBD condition class -> a general class that can, as with predicates, assert general statements.
 
-    public TurnInfoEffect(TurnInfo ti)
+    public TurnInfoEffect(TurnInfo ti) : base(ti.TryGetPawn())
     {
         turnInfoToEffect = ti;
     }
-
     /// <summary>
-    /// Use this to: 
-    /// 1) Set the actual effect.
-    /// 2) Start/set counters, if any -> or engage a Destroy mechanism of any sort.
-    /// ||| Warning! EFFECTS CAN NOT BE REMOVED! EFFECTS SHOULD ONLY REMOVE THEMSELVES!
+    /// MUST PERFORM THIS BASE!
+    /// IF OVERRIDE THIS, CALL BASE TO ADD STATUS EFFECT TO PAWN!
     /// </summary>
-    public abstract void ApplyEffect();
+    public override void ApplyEffect()
+    {
+        pawnToEffect.AddStatusEffect(this);
+    }
     /// <summary>
-    /// After confirming the effect should end, this clears both the TurnInfo AND(?) the effect icon (?)
+    /// MUST PERFORM THIS BASE!
     /// </summary>
-    public abstract void EndEffect();
+    public override void EndEffect()
+    {
+        //RemoveIconFromPawnBar();
+        pawnToEffect.RemoveStatusEffect(this);
+    }
 }

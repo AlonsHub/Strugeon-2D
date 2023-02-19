@@ -5,41 +5,32 @@ using UnityEngine;
 /// Describes effects that have OnTurnStart/End behaviours, counters, cooldowns - any turn-based-based effect
 /// </summary>
 [System.Serializable]
-public abstract class SuggestiveEffect
+public class SuggestiveEffect : StatusEffect
 {
-    // What do?
+    public SuggestiveEffect(Pawn pawn) : base(pawn){}
 
-    // Who do on?
-    protected Pawn pawnToEffect;
-
-    // What show?
-    public Sprite iconSprite;
-
+    public SuggestiveEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite){}
     
-    public SuggestiveEffect(Pawn pawn)
+    /// <summary>
+    /// MUST PERFORM THIS BASE!
+    /// IF OVERRIDE THIS, CALL BASE TO ADD STATUS EFFECT TO PAWN!
+    /// </summary>
+    public override void ApplyEffect()
     {
-        pawnToEffect = pawn;
-        iconSprite = null;
-        //pawn.AddSuggestiveEffect(this); //may not want this for all suggestives
+        pawnToEffect.AddStatusEffect(this);
     }
-    
-    public SuggestiveEffect(Pawn pawn, Sprite sprite)
+    /// <summary>
+    /// MUST PERFORM THIS BASE!
+    /// </summary>
+    public override void EndEffect()
     {
-        pawnToEffect = pawn;
-        iconSprite = sprite;
-        //pawn.AddSuggestiveEffect(this); //may not want this for all suggestives
+        //RemoveIconFromPawnBar();
+        pawnToEffect.RemoveStatusEffect(this);
     }
 
-    /// <summary>
-    /// Use this to: 
-    /// 1) Set the actual effect.
-    /// 2) Start/set counters, if any -> or engage a Destroy mechanism of any sort.
-    /// ||| Warning! EFFECTS CAN NOT BE REMOVED! EFFECTS SHOULD ONLY REMOVE THEMSELVES!
-    /// </summary>
-    public abstract void ApplyEffect();
-    /// <summary>
-    /// After confirming the effect should end, this clears both the TurnInfo AND(?) the effect icon (?)
-    /// </summary>
-    public abstract void EndEffect();
-    public abstract void Perform();
+    public override void Perform()
+    {
+        
+    }
+
 }
