@@ -34,8 +34,10 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
 
     public override void Action(GameObject tgt)
     {
-        Charmed charmed = tgt.AddComponent<Charmed>();
-        charmed.SetMe(tgt.GetComponent<WeaponItem>(), charmDuration);
+        //Charmed charmed = tgt.AddComponent<Charmed>();
+        //charmed.SetMe(tgt.GetComponent<WeaponItem>(), charmDuration);
+        CharmEffect charmEffect = new CharmEffect(tgt.GetComponent<Pawn>(), charmSprite);
+
         la.LookOnce(tgt.transform);
 
         pawn.anim.SetTrigger("Charm");

@@ -611,27 +611,21 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         return name;
     }
-
+    /// <summary>
+    /// Currently the main, if not only, way to end a turn.
+    /// </summary>
     public void FinishAnimation()
     {
-
-        //DoubleTurn_Effect dte;
-        //if (TurnInfo.GetEffectOfType(out dte))
-        //{
-        //    //currentTurnInfo.OnTurnSkip?.Invoke();
-        //    TurnInfo.RemoveEffect(dte);
-
-        //    Debug.Log($"{TurnInfo.GetTurnTaker.Name}'s turn was skipped!");
-        //    //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
-        //    // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
-        //    // 
-        //    // Call OnSkippedTurn action here
-        //    TakeTurn();
-        //}
-        //else
-        //{
+        if(statusEffects != null)
+        {
+            StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is BasicStatusEffect).ToArray();
+            foreach (var item in basicStatusEffects)
+            {
+                item.Perform();
+            }
+        }
+       
             TurnDone = true;
-        //}
     }
 
  
