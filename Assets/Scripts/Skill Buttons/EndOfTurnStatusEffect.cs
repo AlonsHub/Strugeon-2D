@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndOfTurnStatusEffect : StatusEffect
+//weird now that we use the interface...
+public class EndOfTurnStatusEffect : StatusEffect, I_StatusEffect_TurnEnd
 {
     public EndOfTurnStatusEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {

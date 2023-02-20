@@ -529,6 +529,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         //simplify Death, YOU IDIOT!
 
+        if (statusEffects!=null)
+        {
+            foreach (var item in statusEffects)
+            {
+                item.EndEffect();
+            }
+        }
+
         //yield return new WaitForSeconds(.1f);
         yield return new WaitForEndOfFrame();
         //BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
@@ -550,7 +558,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //TurnMaster.Instance.RemoveTurnTaker(this);
         TurnMachine.Instance.RemoveTurnInfoByTaker(this);
 
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
 
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
         //Destroy(gameObject);
@@ -621,7 +629,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         if (statusEffects != null)
         {
-            StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is EndOfTurnStatusEffect).ToArray();
+            //StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is EndOfTurnStatusEffect).ToArray();
+            StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is I_StatusEffect_TurnEnd).ToArray();
             foreach (var item in basicStatusEffects)
             {
                 item.Perform();

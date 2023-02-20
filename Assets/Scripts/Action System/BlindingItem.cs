@@ -49,8 +49,11 @@ public class BlindingItem : ActionItem, SA_Item //, SA_Item
             //add extra VFX
             //add extra damage (perhaps with its own dmg txt)
             //weaponItem.ExtraDamageTarget(minDmg, maxDmg);
-            Blinded blinded = weaponItem.toHit.gameObject.AddComponent<Blinded>();
-            blinded.SetMe(weaponItem.toHit.GetComponent<WeaponItem>(), duration);
+            //Blinded blinded = weaponItem.toHit.gameObject.AddComponent<Blinded>();
+            //blinded.SetMe(weaponItem.toHit.GetComponent<WeaponItem>(), duration);
+
+            BlindEffect blindEffect = new BlindEffect(weaponItem.toHit, blindSprite);
+
             BattleLogVerticalGroup.Instance.AddToNextEntry(addonPrefab);
         }
         else

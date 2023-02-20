@@ -17,7 +17,7 @@ public class SelfDestructing_TurnInfo : TurnInfo
     {
         base.TakeTurn();
         currentTtl--;
-        if (currentTtl == 0)
+        if (currentTtl < 0)
             TurnMachine.Instance.RemoveTurnInfo(this);
     }
 }
