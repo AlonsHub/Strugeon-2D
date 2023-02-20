@@ -111,7 +111,7 @@ public class HorizontalPlateGroup : MonoBehaviour
     public void KillChild(TurnInfo ti)
     {
         //DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
-        DisplayPlate dp = children.Where(x => x.turnInfo == ti).SingleOrDefault();
+        DisplayPlate dp = children.Where(x => x.turnInfo == ti).FirstOrDefault();
         if (dp == null)
         {
             Debug.LogError("could not find DP");

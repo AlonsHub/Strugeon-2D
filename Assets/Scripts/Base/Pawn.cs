@@ -549,6 +549,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         //TurnMaster.Instance.RemoveTurnTaker(this);
         TurnMachine.Instance.RemoveTurnInfoByTaker(this);
+
+        yield return new WaitForEndOfFrame();
+
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
         //Destroy(gameObject);
     }
@@ -616,16 +619,16 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     /// </summary>
     public void FinishAnimation()
     {
-        if(statusEffects != null)
+        if (statusEffects != null)
         {
-            StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is BasicStatusEffect).ToArray();
+            StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is EndOfTurnStatusEffect).ToArray();
             foreach (var item in basicStatusEffects)
             {
                 item.Perform();
             }
         }
-       
-            TurnDone = true;
+
+        TurnDone = true;
     }
 
  

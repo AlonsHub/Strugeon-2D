@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharmEffect : BasicStatusEffect
+public class CharmEffect : EndOfTurnStatusEffect
 {
     WeaponItem wi;
 

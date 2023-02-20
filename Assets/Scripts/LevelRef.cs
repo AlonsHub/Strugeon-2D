@@ -46,6 +46,10 @@ public class LevelRef : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

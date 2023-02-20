@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicStatusEffect : StatusEffect
+public class EndOfTurnStatusEffect : StatusEffect
 {
-    public BasicStatusEffect(Pawn target, Sprite sprite) : base(target, sprite)
+    public EndOfTurnStatusEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {
         //Dont apply effect on all - just in case you want a clean one
     }
