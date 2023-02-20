@@ -62,7 +62,7 @@ public class BeltManipulator : MonoBehaviour
         {
             TurnInfo ti = new TurnInfo(item);
             turnInfos.Add(ti);
-            item.TurnInfo = ti;
+            item.TurnInfo = ti; //kind of annoying they know eachother TBF
         }
 
         turnBelt.InitBelt(turnInfos);
