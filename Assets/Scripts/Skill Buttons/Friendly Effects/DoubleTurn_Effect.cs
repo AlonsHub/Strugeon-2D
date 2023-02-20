@@ -6,6 +6,7 @@ public class DoubleTurn_Effect : TurnInfoEffect
 {
     public DoubleTurn_Effect(TurnInfo ti, Sprite s) : base(ti,s)
     {
+        ApplyEffect();
     }
 
     public override void ApplyEffect()

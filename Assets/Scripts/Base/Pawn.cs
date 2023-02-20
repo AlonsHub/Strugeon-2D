@@ -294,7 +294,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
 
         //This ALSO needs to be a suggestive effect!
-        if(hasPurple && purpleTgt != null)
+        if (hasPurple && purpleTgt != null)
         {
             ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
             if (possibleActions != null && possibleActions.Length > 0)
@@ -309,6 +309,24 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         //This ALSO needs to be a suggestive effect!
         //Joinning the list below
+        HandleSuggestiveStatusEffects();
+
+        int runningTotal = 0;
+        foreach (ActionVariation av in actionPool)
+        {
+            runningTotal += av.weight;
+            actionWeightList.Add(runningTotal);
+        }
+    }
+
+    /// <summary>
+    /// cycles through status effects and performs all suggestive effects.
+    /// Suggestive effects are all effects applied after all action variations are gathered, before weight distribution and rolling
+    /// It is the ideal place to change weights, preferences and avoiding/focusing VIABLE targets 
+    /// Changes to targetting would need to happen BEFORE action variations are gathered.
+    /// </summary>
+    private void HandleSuggestiveStatusEffects()
+    {
         if (statusEffects != null)
         {
             var suggestiveEffects = statusEffects.Where(x => x is SuggestiveEffect).ToList();
@@ -320,15 +338,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 }
             }
         }
-
-        int runningTotal = 0;
-        foreach (ActionVariation av in actionPool)
-        {
-            runningTotal += av.weight;
-            actionWeightList.Add(runningTotal);
-        }
     }
-    
+
     public override int TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
 

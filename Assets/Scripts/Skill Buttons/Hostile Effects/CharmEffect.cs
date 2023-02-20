@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurryTurn_Effect : TurnInfoEffect
+public class CharmEffect : StatusEffect
 {
-    public HurryTurn_Effect(TurnInfo ti) : base(ti)
+    public CharmEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {
         ApplyEffect();
     }
 
     public override void ApplyEffect()
     {
-        BeltManipulator.Instance.MoveTurnInfoToBeNext(turnInfoToEffect);
+        
     }
 
     public override void EndEffect()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Perform()

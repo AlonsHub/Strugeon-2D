@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleTurnSpell : SkillButton
+public class HurryTurnSpell : SkillButton
 {
     private Pawn targetPawn;
 
@@ -10,8 +10,8 @@ public class DoubleTurnSpell : SkillButton
     {
         targetPawn = MouseBehaviour.hitTarget;
 
-        DoubleTurn_Effect doubleTurn_Effect = new DoubleTurn_Effect(targetPawn.TurnInfo, effectIcon);
-      
+        HurryTurn_Effect hurryTurn_Effect = new HurryTurn_Effect(targetPawn.TurnInfo);
+        
 
         base.OnButtonClick();
     }
