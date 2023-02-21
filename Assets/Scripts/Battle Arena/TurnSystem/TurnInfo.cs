@@ -36,6 +36,7 @@ public class TurnInfo
     public TurnInfo(TurnTaker t)
     {
         turnTaker = t;
+        t.TurnInfo = this; //sucks tbf - but fixes drowned spirits "NO DO FOUND" problem 
         turnInfoEffects = new List<TurnInfoEffect>();
     }
     /// <summary>

@@ -13,7 +13,7 @@ public class RedButtonHostile : SkillButton
         //Lose 1 turn
         targetPawn = MouseBehaviour.hitTarget;
        
-        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(targetPawn.TurnInfo);
+        SkipTurn_Effect skipTurn_Effect = new SkipTurn_Effect(targetPawn.TurnInfo, effectIcon);
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,15 @@ public class CharmEffect : EndOfTurnStatusEffect
     int current;
     public CharmEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {
+        if (target.statusEffects != null && target.statusEffects.Count > 0)
+        {
+            StatusEffect existingEffect = target.statusEffects.Where(x => x is CharmEffect).FirstOrDefault();
+            if (existingEffect != null)
+            {
+                (existingEffect as CharmEffect).RefreshCounter();
+                return; //Delete self?
+            }
+        }
         current = 0;
         ApplyEffect();
     }
@@ -46,5 +56,10 @@ public class CharmEffect : EndOfTurnStatusEffect
         {
             EndEffect();
         }
+    }
+
+    public void RefreshCounter()
+    {
+        current = totalDuration;
     }
 }

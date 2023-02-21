@@ -99,25 +99,32 @@ public class HorizontalPlateGroup : MonoBehaviour
     //    return displayP;
     //}
    
-    public void KillChild(DisplayPlate displayP)
-    {
-        //displayP.transform.parent = null;//?
-        children.Remove(displayP);
+    //public void KillChild(DisplayPlate displayP)
+    //{
+    //    //displayP.transform.parent = null;//?
+    //    children.Remove(displayP);
 
-        SetAllChildPositions();
+    //    SetAllChildPositions();
 
-        Destroy(displayP.gameObject);
-    }
-    public void KillChild(TurnInfo ti)
+    //    Destroy(displayP.gameObject);
+    //}
+    //public void KillChild(TurnInfo ti)
+    //{
+    //    //DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
+    //    DisplayPlate dp = children.Where(x => x.turnInfo == ti).FirstOrDefault();
+    //    if (dp == null)
+    //    {
+    //        Debug.LogError("could not find DP");
+    //        return;
+    //    }
+    //    KillChild(dp);
+    //}
+    public void KillAChild()
     {
-        //DisplayPlate dp = children.Where(x => x.turnTaker == ti.GetTurnTaker).SingleOrDefault();
-        DisplayPlate dp = children.Where(x => x.turnInfo == ti).FirstOrDefault();
-        if (dp == null)
-        {
-            Debug.LogError("could not find DP");
-            return;
-        }
-        KillChild(dp);
+        Destroy(children[children.Count - 1].gameObject);
+        children.RemoveAt(children.Count-1);
+
+        //SetAllChildPositions();
     }
 
     //public void KillChild(TurnInfo ti)
@@ -151,6 +158,7 @@ public class HorizontalPlateGroup : MonoBehaviour
 
             if (place >= infos.Count)
                 place = 1;
+         
 
             children[i - 1].Init(infos[place]);
             place++;

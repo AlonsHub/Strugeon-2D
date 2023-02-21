@@ -69,7 +69,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     List<int> actionWeightList;
 
     //List<SuggestiveEffect> suggestiveEffects;
-    List<StatusEffect> statusEffects;
+    public List<StatusEffect> statusEffects;
 
 
 
@@ -539,6 +539,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //by being destroyed and then -> counded as missing from the list
         //and somehow still getting into the "Cowardly list"
         Destroy(gameObject);
+        TurnDone = true;
         //Destroy(gameObject, .5f); //just for now, nukes it
 
     }
@@ -556,7 +557,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
 
         //yield return new WaitForSeconds(.1f);
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         //BattleLogVerticalGroup.Instance.AddEntry(TurnMaster.Instance.currentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         BattleLogVerticalGroup.Instance.AddEntry(TurnMachine.Instance.GetCurrentTurnTaker.Name , ActionSymbol.Death, pawnName); //Maybe not announced by the killer, attempt 1#
         if (!isEnemy)
@@ -576,9 +577,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //TurnMaster.Instance.RemoveTurnTaker(this);
         TurnMachine.Instance.RemoveTurnInfoByTaker(this);
 
-        //yield return new WaitForEndOfFrame();
 
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
+        yield return new WaitForEndOfFrame();
         //Destroy(gameObject);
     }
 
@@ -667,7 +668,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             statusEffects = new List<StatusEffect>();
         }
         statusEffects.Add(statusEffect);
-
+        if(statusEffect.iconSprite)
         AddEffectIcon(statusEffect.iconSprite, statusEffect.GetType().ToString());
     }
     public void RemoveStatusEffect(StatusEffect statusEffect)

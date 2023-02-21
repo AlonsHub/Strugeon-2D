@@ -50,7 +50,7 @@ public class EscapeItem : ActionItem
         pawn.Escape();
         //disappear
 
-        pawn.TurnDone = true;
+        //pawn.TurnDone = true;
     }
 
     public override void CalculateVariations()
