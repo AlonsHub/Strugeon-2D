@@ -84,8 +84,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public WorldSpaceHorizontalGroup worldSpaceHorizontalGroup;
 
     #region Scion Powers
-    private bool doDoubleTurn = false;
-    private bool doSkipTurn = false;
+    //private bool doDoubleTurn = false;
+    //private bool doSkipTurn = false;
     private bool doYellowDebuff = false;
     private float damageModifier = 1;
     private List<float> damageModifiers;
@@ -102,8 +102,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public int Initiative { get => initiative; set => initiative = value + initiativeBonus; }
     //public int SA_CurrentCooldown { get => _currentCooldown; set => _currentCooldown = value; }
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
-    public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
-    public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
+    //public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
+    //public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
     public bool DoYellowDebuff { get => doYellowDebuff; set => doYellowDebuff = value; } //TBF - modify damage chain!
     public bool DoModifyDamage => DamageModifiers.Count>0; //new approach that will mod damage only if there are mods to add - mods will remove themselves?
     public float DamageModifier { get => damageModifier; set => damageModifier = value; }
@@ -248,6 +248,23 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public void TakeTurn()
     {
         TurnDone = false;
+
+        if (statusEffects != null && statusEffects.Count > 0)
+        {
+            StatusEffect[] startTurnEffects = statusEffects.Where(x => x is I_StatusEffect_TurnStart).ToArray();
+
+            if(startTurnEffects.Length >0)
+            {
+                foreach (var item in startTurnEffects)
+                {
+                    item.Perform();
+                }
+
+                if(turnDone) //if skipped or whatever
+                    return;
+            }
+        }
+
         CalculateActionList();
         if (actionWeightList.Count == 0)
         {
@@ -522,7 +539,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //by being destroyed and then -> counded as missing from the list
         //and somehow still getting into the "Cowardly list"
 
-        Destroy(gameObject, .5f); //just for now, nukes it
+        //Destroy(gameObject, .5f); //just for now, nukes it
+
     }
 
     IEnumerator DelayedDeath()

@@ -570,8 +570,8 @@ public interface TurnTaker
     int Initiative { get; set; }
     bool TurnDone { get; set; }
     string Name { get; }
-    bool DoDoubleTurn { get; set; } //TBF needs to move to TurnIfno
-    bool DoSkipTurn { get; set; }//TBF needs to move to TurnIfno
+    //bool DoDoubleTurn { get; set; } //TBF needs to move to TurnIfno
+    //bool DoSkipTurn { get; set; }//TBF needs to move to TurnIfno
     void TakeTurn();
 
     //TBD Thinking of adding some Special Ability access here... for turn-plate-display purposes
