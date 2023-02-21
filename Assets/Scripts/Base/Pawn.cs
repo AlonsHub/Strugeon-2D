@@ -534,11 +534,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //TurnMaster.Instance.turnTakers.Remove(this);
         //TurnMaster.Instance.turnPlates.Remove(myTurnPlate); //replace with clear method
         //Destroy(myTurnPlate.gameObject);
-        
+
         // THIS MIGHT BE WHERE ESCAPED mercs ARE CONSIDERED DEAD
         //by being destroyed and then -> counded as missing from the list
         //and somehow still getting into the "Cowardly list"
-
+        Destroy(gameObject);
         //Destroy(gameObject, .5f); //just for now, nukes it
 
     }
