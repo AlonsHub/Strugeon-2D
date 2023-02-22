@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 39693629b9372dd4e9e754eb2b4b8ffe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f6ae92bd38ce9c488b4a4bf3869e962, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -142,12 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c53a2550822df4f8976ed33a110b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Taunt - Make enemies more likely to attack this merc
+  myData: Taunt - enemies are more likely to attack this target
   buttonColor: 0
   nulColour: 4
   skillCost: 0.3
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: 39693629b9372dd4e9e754eb2b4b8ffe, type: 3}
+  effectIcon: {fileID: 21300000, guid: 5f6ae92bd38ce9c488b4a4bf3869e962, type: 3}
   pawnTgt: {fileID: 0}
 --- !u!1 &1172224987
 GameObject:
@@ -209,13 +209,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.52060896, g: 0.3066038, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1701f85244d8e1043ae0df9e015d29dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4422df6fc5a1bac41a262f08709cfcda, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -291,12 +291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99e15d79a3e031843aa7af73ad3e928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Pathetic - makes enemies ignore this character in combar
+  myData: Pathetic - makes enemies ignore the target in combat
   buttonColor: 3
   nulColour: 5
   skillCost: 0.3
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: 1701f85244d8e1043ae0df9e015d29dd, type: 3}
+  effectIcon: {fileID: 21300000, guid: 4422df6fc5a1bac41a262f08709cfcda, type: 3}
   pawnTgt: {fileID: 0}
 --- !u!1 &1553275158
 GameObject:
@@ -358,13 +358,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.70037127, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2df47148d1637084f87509907a32b5de, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 451e06f8fca033245b4f80a6e6541618, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -440,12 +440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395642db9e97deb408e80ee52ce1f617, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: 'Bravery - toughens resolve, preventing fleeing for 1 round '
+  myData: 'Bravery - toughens resolve, prevents fleeing for 1 round '
   buttonColor: 3
   nulColour: 5
   skillCost: 0.3
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: 9bbaf54cc0b89364a895bbc2fc34e30a, type: 3}
+  effectIcon: {fileID: 21300000, guid: 451e06f8fca033245b4f80a6e6541618, type: 3}
   pawnTgt: {fileID: 0}
 --- !u!1 &1969700674
 GameObject:
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 1969700677}
   - component: {fileID: 1969700676}
   m_Layer: 5
-  m_Name: Button - Blue Hurry
+  m_Name: Button - Blue Urgency
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -513,7 +513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a82378783ef85024c95dd0b88d0a0c67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1692264f46344ce4ea9f011ee1a3fc3a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -589,7 +589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588cbfad6393d564bb80f977551543a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Hurry! Brings the target up to act on the next to turn
+  myData: Urgency - target makes their turn next, changing their place in the turn
+    order
   buttonColor: 1
   nulColour: 3
   skillCost: 0.4
@@ -919,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4f2ffa25a64424f8301bcdd41a1274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Double turn - get two turns, once
+  myData: Haste - target gets another turns in this round
   buttonColor: 1
   nulColour: 3
   skillCost: 0.8
@@ -1068,7 +1069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8441cf0cfa66e6d4a81148b1470bad0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Heal - restores a pawns health by 30% of its maximum
+  myData: "Heal - instantly restores a portion of a Merc\u2019s health"
   buttonColor: 2
   nulColour: 1
   skillCost: 0.5
@@ -1293,7 +1294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26beb0642f569e743adf4ff84d34021d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Suggest - Influence a pawn to act as you wish
+  myData: Suggest - Influence the target's next action
   buttonColor: 3
   nulColour: 5
   skillCost: 0.9
@@ -1445,7 +1446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdd47d2451a63d4a96319376b269cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myData: Empower! Multiplies damage by x1.5
+  myData: Empower - multiplies damage by x1.5
   buttonColor: 0
   nulColour: 4
   skillCost: 0.8

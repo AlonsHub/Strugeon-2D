@@ -57,7 +57,8 @@ public class LevelRef : MonoBehaviour
         switch (scene.buildIndex) //more things to be added?
         {
             case 2:
-                Instantiate(currentLevel.levelData.levelPrefab);
+                GameObject go = Instantiate(currentLevel.levelData.levelPrefab);
+                go.transform.Translate(0, 0, -.5f);
                 break;
 
             default:

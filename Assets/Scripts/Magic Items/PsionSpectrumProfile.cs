@@ -11,6 +11,14 @@ public class PsionSpectrumProfile
     public float GetMaxValueByName(NulColour s) => GetElementByName(s).maxValue;
 
     public System.Action OnAnyValueChanged;
+    //public PsionSpectrumProfile()
+    //{
+    //    psionElements = new List<PsionNulElement>();// { new PsionNulElement("Red", 1), new PsionNulElement("Blue", 1), new PsionNulElement("Yellow",1), new PsionNulElement("Purple",1) };
+    //    for (int i = 0; i < System.Enum.GetNames(typeof(NulColour)).Length; i++)
+    //    {
+    //        psionElements.Add(new PsionNulElement((NulColour)i, 1f, .2f)); //starting values!
+    //    }
+    //}
     public PsionSpectrumProfile()
     {
         psionElements = new List<PsionNulElement>();// { new PsionNulElement("Red", 1), new PsionNulElement("Blue", 1), new PsionNulElement("Yellow",1), new PsionNulElement("Purple",1) };
@@ -18,7 +26,12 @@ public class PsionSpectrumProfile
         {
             psionElements.Add(new PsionNulElement((NulColour)i, 1f, .2f)); //starting values!
         }
+        //psionElements[(int)NulColour.Purple] = 45;
+        //psionElements[(int)NulColour.Purple] = 45;
+        //psionElements[(int)NulColour.Purple] = 45;
+        //psionElements[(int)NulColour.Purple] = 45;
     }
+
 
     public int SumOfAllCapacities()
     {

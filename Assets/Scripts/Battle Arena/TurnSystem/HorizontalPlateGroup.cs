@@ -65,6 +65,16 @@ public class HorizontalPlateGroup : MonoBehaviour
         rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, elementSize);
         return dp;
     }
+    private DisplayPlate MakeDisplayPlate()
+    {
+        DisplayPlate dp = Instantiate(displayerPlatePrefab).GetComponent<DisplayPlate>();
+        RectTransform rectTransform =
+        dp.GetComponent<RectTransform>();
+
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, elementSize);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, elementSize);
+        return dp;
+    }
 
     /// <summary>
     /// Adds a new child to the bottom of the list, and places it accordingly.
@@ -149,6 +159,25 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <param name="index"></param>
     public void RefreshPortraits(int index) //infos need to be cached and then MAYBE hooked into via events
     {
+        int delta = infos.Count - 1 - children.Count;
+        if (delta !=0)
+        {
+            if(delta>0)
+            {
+                for (int i = 0; i < delta; i++)
+                {
+                    children.Add(MakeDisplayPlate());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < delta; i++)
+                {
+                    KillAChild();
+                }
+            }
+        }
+
         //TEST infos and belt sync
         int place = index;
         for (int i = 0; i < infos.Count; i++)

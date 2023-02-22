@@ -97,8 +97,8 @@ public class BeltManipulator : MonoBehaviour
             _currentIndex++;
         }
         turnBelt.InsertTurnInfo(ti, index);
-        horizontalPlateGroup.AddChildByTurnInfo(ti);
-        horizontalPlateGroup.RefreshPortraits(_currentIndex);
+        //horizontalPlateGroup.AddChildByTurnInfo(ti);
+        //horizontalPlateGroup.RefreshPortraits(_currentIndex);
 
     }
     public void InsertTurnTakerAsNext(TurnTaker tt)
