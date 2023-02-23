@@ -27,8 +27,8 @@ public class HorizontalPlateGroup : MonoBehaviour
 
     [SerializeField]
     DisplayPlate currentPlate;
-
-
+    [SerializeField]
+    private Sprite startPinSprite;
 
     private void Awake()
     {
@@ -44,10 +44,15 @@ public class HorizontalPlateGroup : MonoBehaviour
         foreach (var item in infos)
         {
             if (item.isStartPin)
-                continue; //TBA an indicator for the start-pin
-            DisplayPlate dp = MakeDisplayPlate(item);
-            AddChild(dp);
-            //plates.Add(dp);
+            {
+                DisplayPlate dp = MakeDisplayPlate();
+                AddChild(dp);
+            }
+            else
+            {
+                DisplayPlate dp = MakeDisplayPlate(item);
+                AddChild(dp);
+            }
         }
         currentPlate = children[0];
 
@@ -159,7 +164,7 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <param name="index"></param>
     public void RefreshPortraits(int index) //infos need to be cached and then MAYBE hooked into via events
     {
-        int delta = infos.Count - 1 - children.Count;
+        int delta = infos.Count - children.Count;
         if (delta !=0)
         {
             if(delta>0)
@@ -182,18 +187,17 @@ public class HorizontalPlateGroup : MonoBehaviour
         int place = index;
         for (int i = 0; i < infos.Count; i++)
         {
-            if (infos[i].isStartPin)
-                continue;
-
-            if (place >= infos.Count)
-                place = 1;
-         
-            if(i ==0)
+            if (infos[place].isStartPin)
             {
-                i = children.Count;
+                children[i].Init(startPinSprite);
+                place++;
+                continue;
             }
 
-            children[i - 1].Init(infos[place]);
+            if (place >= infos.Count)
+                place = 0;
+
+            children[i].Init(infos[place]);
             place++;
         }  
     }

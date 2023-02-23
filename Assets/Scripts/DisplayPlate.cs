@@ -39,6 +39,13 @@ public class DisplayPlate : MonoBehaviour
         //turnTaker = ti.GetTurnTaker;
         RefreshDisplay();
     }
+    /// <summary>
+    /// START PIN
+    /// </summary>
+    public void Init(Sprite s)
+    {
+        portrait.sprite = s; 
+    }
 
     public void SetAsCurrentStatus(bool isCurrentTurn)
     {
