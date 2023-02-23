@@ -24,20 +24,20 @@ public class Bar : MonoBehaviour
     //This is BattleBar - maybe it should inherit from nul bar?
 
 
-    private void Start()
-    {
-        if (TurnMachine.Instance)
-            TurnMachine.Instance.OnStartNewRound += Regen;
+    //private void Start()
+    //{
+    //    if (TurnMachine.Instance)
+    //        TurnMachine.Instance.OnStartNewRound += Regen;
 
 
-    }
+    //}
     
 
-    protected virtual void OnDisable()
-    {
-        if (TurnMachine.Instance)
-            TurnMachine.Instance.OnStartNewRound -= Regen;
-    }
+    //protected virtual void OnDisable()
+    //{
+    //    if (TurnMachine.Instance)
+    //        TurnMachine.Instance.OnStartNewRound -= Regen;
+    //}
   
     public virtual void ShowValue()
     {
@@ -54,7 +54,7 @@ public class Bar : MonoBehaviour
     }
     public virtual void Regen()//redundant? one of them is
     {
-        currentValue += regenRate;
+        //currentValue += regenRate;
         currentValue = Mathf.Clamp(currentValue, 0, maxValue);
         
         ShowValue();

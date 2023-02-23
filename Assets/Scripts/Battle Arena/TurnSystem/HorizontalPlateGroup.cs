@@ -166,12 +166,12 @@ public class HorizontalPlateGroup : MonoBehaviour
             {
                 for (int i = 0; i < delta; i++)
                 {
-                    children.Add(MakeDisplayPlate());
+                    MakeAChild();
                 }
             }
             else
             {
-                for (int i = 0; i < delta; i++)
+                for (int i = 0; i < delta*-1; i++)
                 {
                     KillAChild();
                 }
@@ -188,10 +188,23 @@ public class HorizontalPlateGroup : MonoBehaviour
             if (place >= infos.Count)
                 place = 1;
          
+            if(i ==0)
+            {
+                i = children.Count;
+            }
 
             children[i - 1].Init(infos[place]);
             place++;
         }  
+    }
+
+    private void MakeAChild()
+    {
+        DisplayPlate dp = MakeDisplayPlate();
+        dp.transform.SetParent(transform);
+        dp.transform.localPosition = GetOffsetByIndex(children.Count);
+
+        children.Add(dp);
     }
 
     void SetAllChildPositions()

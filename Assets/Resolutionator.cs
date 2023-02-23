@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Resolutionator : MonoBehaviour
 {
-    
-    [SerializeField]
-    Toggle toggle;
     void Start()
     {
         Screen.SetResolution(1920,1080, false);

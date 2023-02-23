@@ -48,5 +48,6 @@ public class PsionNulElement
     public void Regen()
     {
         nulElement.value += regenRate;
+        nulElement.value = Mathf.Clamp(value, 0, maxValue);
     }
 }

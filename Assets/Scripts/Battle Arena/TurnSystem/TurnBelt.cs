@@ -34,7 +34,15 @@ public class TurnBelt
 
     public void InsertTurnInfo(TurnInfo ti, int index)
     {
+        if(index >= turnInfos.Count)
+        {
+            turnInfos.Add(ti);
+        }
+        else
+        {
+
         turnInfos.Insert(index, ti);
+        }
     }
 
     public void AddTurnInfo(TurnInfo ti)

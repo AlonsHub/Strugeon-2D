@@ -104,7 +104,7 @@ public class BeltManipulator : MonoBehaviour
     public void InsertTurnTakerAsNext(TurnTaker tt)
     {
         //TurnInfo ti = new TurnInfo(tt);
-        int index = (_currentIndex + 1 >= turnBelt.infoCount) ? 1 : _currentIndex+1;
+        int index = (_currentIndex + 1 >= turnBelt.infoCount) ? 0 : _currentIndex+1;
 
 
         InsertTurnTaker(tt, index);
@@ -124,7 +124,8 @@ public class BeltManipulator : MonoBehaviour
 
         turnBelt.InsertTurnInfo(ti, index);
 
-        horizontalPlateGroup.AddChildByTurnInfo(ti);
+        //horizontalPlateGroup.AddChildByTurnInfo(ti);
+        //horizontalPlateGroup.AddChild();
         horizontalPlateGroup.RefreshPortraits(_currentIndex);
     }
     public void MoveTurnInfoTo(TurnInfo ti, int index)
@@ -154,7 +155,7 @@ public class BeltManipulator : MonoBehaviour
             _currentIndex--;
         }
         //horizontalPlateGroup.KillChild(ti);
-        horizontalPlateGroup.KillAChild();
+        //horizontalPlateGroup.KillAChild();
         horizontalPlateGroup.RefreshPortraits(_currentIndex);
         //horizontalPlateGroup.SetAllChildPositions(_currentIndex);
     }
