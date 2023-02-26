@@ -43,16 +43,7 @@ public class HorizontalPlateGroup : MonoBehaviour
 
         foreach (var item in infos)
         {
-            if (item.isStartPin)
-            {
-                DisplayPlate dp = MakeDisplayPlate();
-                AddChild(dp);
-            }
-            else
-            {
-                DisplayPlate dp = MakeDisplayPlate(item);
-                AddChild(dp);
-            }
+            AddChild(MakeDisplayPlate());
         }
         currentPlate = children[0];
 

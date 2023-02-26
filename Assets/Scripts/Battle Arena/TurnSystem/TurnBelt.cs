@@ -66,6 +66,15 @@ public class TurnBelt
         turnInfos.Remove(ti);
         //handle index?
     }
+    public void RemoveALLInfoByTaker(TurnTaker tt)
+    {
+        TurnInfo[] relevant = turnInfos.Where(x => x == tt).ToArray();
+        foreach (var item in relevant)
+        {
+            turnInfos.Remove(item);
+        }
+        //handle index?
+    }
 
     /// <summary>
     /// Do you really need to use this right now? Is the current TurnTaker not cached where you are right now? and if not, why?

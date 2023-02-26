@@ -559,13 +559,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         //simplify Death, YOU IDIOT!
 
-        if (statusEffects!=null)
-        {
-            foreach (var item in statusEffects)
-            {
-                item.EndEffect();
-            }
-        }
+        //if (statusEffects!=null)
+        //{
+        //    foreach (var item in statusEffects)
+        //    {
+        //        item.EndEffect();
+        //    }
+        //}
 
         //yield return new WaitForSeconds(.1f);
         //yield return new WaitForEndOfFrame();

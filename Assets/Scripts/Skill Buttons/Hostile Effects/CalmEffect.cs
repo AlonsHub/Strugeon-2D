@@ -21,11 +21,6 @@ public class CalmEffect : SuggestiveEffect
         base.ApplyEffect();
     }
 
-    //public override void EndEffect()
-    //{
-    //    pawnToEffect.RemoveSuggestiveEffect(this);
-    //}
-
     public override void Perform()
     {
         List<ActionVariation> toRemove= (pawnToEffect.actionPool.Where(x => x.relevantItem is SA_Item).ToList());

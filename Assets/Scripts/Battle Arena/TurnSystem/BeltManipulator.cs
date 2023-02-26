@@ -155,6 +155,20 @@ public class BeltManipulator : MonoBehaviour
         
         horizontalPlateGroup.RefreshPortraits(_currentIndex);
     }
+    public void RemoveALLInfoByTaker(TurnTaker tt) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
+    {
+
+        int index = GetIndexOfTurnInfo(tt.TurnInfo);
+
+        turnBelt.RemoveALLInfoByTaker(tt);
+        if(index < _currentIndex) //in the case of a turntakers death AFTER their turn in this round - casuing indecies to be shifted down by 1 (as opposed to turntakers who die BEFORE their turn came this round)
+        {
+            _currentIndex--;
+        }
+        
+        horizontalPlateGroup.RefreshPortraits(_currentIndex);
+    }
+
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
     {
         return turnBelt.GetTurnInfoByPredicate(x => x.GetTurnTaker == tt);
