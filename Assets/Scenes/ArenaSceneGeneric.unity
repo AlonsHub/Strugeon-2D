@@ -1014,11 +1014,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
-      propertyPath: effectIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: a7ee9e9d9e61a174880a176be3286303,
-        type: 3}
     - target: {fileID: 8120686893709386624, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2954,6 +2949,7 @@ MonoBehaviour:
   skillCost: 0.4
   checkOnEnable: 1
   effectIcon: {fileID: 0}
+  closeMenu: 0
   pawnTgt: {fileID: 0}
 --- !u!114 &1701191815
 MonoBehaviour:

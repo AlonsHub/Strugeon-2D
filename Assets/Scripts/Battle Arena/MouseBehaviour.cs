@@ -114,7 +114,7 @@ public class MouseBehaviour : MonoBehaviour
                 //PurpleChoosingMode.Instance.ToggleTint(false);
             }
         }
-        //else if(Input.GetMouseButtonDown(1)) //changed from right to left button
+        
         else if (!PurpleChoosingMode.Instance.IsOn && Input.GetMouseButtonDown(0))
         {
             ray = cam.ScreenPointToRay(Input.mousePosition);

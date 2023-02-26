@@ -19,6 +19,8 @@ public class SkillButton : Hoverable
     [SerializeField]
     protected Sprite effectIcon;
     Button button;
+    [SerializeField]
+    bool closeMenu;
 
     public Pawn pawnTgt;
 
@@ -54,6 +56,16 @@ public class SkillButton : Hoverable
         //relevantBar.ReduceValue(skillCost);
         //Debug.Log(name + " Button pushed");
         InteractableCheck();
+
+        if(closeMenu)
+        {
+            MouseBehaviour.Instance.CloseMenus();
+            Renderer hitRenderer = MouseBehaviour.hitTarget.GetComponentInChildren<Renderer>();
+
+            hitRenderer.material.SetFloat("_Thickness", 0f);
+        }
+
+
     }
 
     public void InteractableCheck()
