@@ -207,9 +207,9 @@ public class TurnMachine : MonoBehaviour
     {
         beltManipulator.RemoveTurnInfo(ti);
     }
-    public void RemoveALLInfosForTaker()
+    public void RemoveALLInfosForTaker(TurnTaker tt)
     {
-
+        beltManipulator.RemoveALLInfoByTaker(tt);
     }
 
     private void Win()
