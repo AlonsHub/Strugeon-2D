@@ -12,7 +12,7 @@ public class SkipTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnStart
 
     public override void ApplyEffect()
     {
-        
+        turnInfoToEffect.colour = SturgeonColours.Instance.skipGrey;
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, SturgeonColours.Instance.skipGrey);
 
         base.ApplyEffect();
@@ -20,6 +20,7 @@ public class SkipTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnStart
     public override void EndEffect()
     {
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, Color.white);
+        turnInfoToEffect.colour = new Color(0,0,0,0);
 
         base.EndEffect();
     }

@@ -145,8 +145,6 @@ public class BeltManipulator : MonoBehaviour
     public void RemoveTurnInfo(TurnInfo ti) //REALLY specific, but it's a cleaner and it uses MoveTurnInfoTo so keep it
     {
 
-        //handle _currentIndex stuff -> make sure turns go over safely 
-
         int index = GetIndexOfTurnInfo(ti);
 
         turnBelt.RemoveTurnInfo(ti);
@@ -154,10 +152,8 @@ public class BeltManipulator : MonoBehaviour
         {
             _currentIndex--;
         }
-        //horizontalPlateGroup.KillChild(ti);
-        //horizontalPlateGroup.KillAChild();
+        
         horizontalPlateGroup.RefreshPortraits(_currentIndex);
-        //horizontalPlateGroup.SetAllChildPositions(_currentIndex);
     }
     public TurnInfo GetTurnInfoByTaker(TurnTaker tt)
     {
@@ -193,11 +189,7 @@ public class BeltManipulator : MonoBehaviour
 
         dp.SetPortraitOverlayColour(col);
     }
-    //public int GetEnemyCount()
-    //{
-    //    ///THIS HERE IS HOW IT NEEDS TO BE DONE!!!
-    //    //return turnBelt.GetTurnInfoByPredicate(x=> x.)
-    //}
+
 
     
 }

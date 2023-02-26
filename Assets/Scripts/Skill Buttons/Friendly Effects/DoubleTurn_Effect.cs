@@ -14,10 +14,19 @@ public class DoubleTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnEnd
 
     public override void ApplyEffect()
     {
+        int index;
         List<TurnInfo> infos = TurnMachine.Instance.GetTurnInfos();
-        int index = infos.FindIndex(x => x == turnInfoToEffect);
+        if (infos.Contains(turnInfoToEffect))
+        {
+            index = infos.FindIndex(x => x == turnInfoToEffect);
+        }
+        else
+        {
+            Debug.LogError("Does not contain");
+            return;
+        }
 
-        //SelfDestructing_TurnInfo newTurnInfo = new SelfDestructing_TurnInfo(turnInfoToEffect.GetTurnTaker,1);
+
         newTurnInfo = new TurnInfo(turnInfoToEffect.GetTurnTaker);
         
         TurnMachine.Instance.InsertTurnInfo(newTurnInfo, index);
@@ -35,10 +44,9 @@ public class DoubleTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnEnd
     {
         //more than double turn (x3 and up) can be done here with a duration instead
         count++;
-        if(count ==2)
+        if(count==2)
         {
             EndEffect();
         }
-
     }
 }

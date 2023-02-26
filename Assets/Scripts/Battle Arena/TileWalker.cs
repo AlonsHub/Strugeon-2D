@@ -110,21 +110,21 @@ public class TileWalker : MonoBehaviour
         
 
         //int stepsToTake = path.Count;
-        if (doLimitSteps)
-        {
-            pawn.RemoveIconByName("blueDeBuff");
+        //if (doLimitSteps)
+        //{
+        //    pawn.RemoveIconByName("blueDeBuff");
 
-            if (stepsToTake > stepLimit)
-            {
-                stepsToTake = stepLimit;
-                pawn.TurnDone = true;
-            }
+        //    if (stepsToTake > stepLimit)
+        //    {
+        //        stepsToTake = stepLimit;
+        //        pawn.TurnDone = true;
+        //    }
 
 
-            //stepLimit = 0; //resets 
-            doLimitSteps = false;
+        //    //stepLimit = 0; //resets 
+        //    doLimitSteps = false;
 
-        }
+        //}
         int difference = path.Count - stepsToTake;
 
         for (int i = 0; i < difference; i++)
@@ -171,10 +171,7 @@ public class TileWalker : MonoBehaviour
     public void Step(FloorTile stepDest) //takes one(?) step in a direction on the Array of the map.
     {
         currentNode.RemoveOccupant(false);
-        //currentNode.isEmpty = true;
-        //currentNode.myOccupant = null;
-        //NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        //agent.Warp(stepDest.transform.position + offsetFromGrid);
+        
         transform.position = stepDest.transform.position;
 
         FindOwnGridPos(); //accepting occpants twice, just in case
@@ -200,8 +197,5 @@ public class TileWalker : MonoBehaviour
             //currentNode.myOccupant = gameObject;
             transform.position = currentNode.transform.position + offsetFromGrid;
         }
-
-
     }
-        
 }

@@ -187,12 +187,12 @@ public class HorizontalPlateGroup : MonoBehaviour
         int place = index;
         for (int i = 0; i < infos.Count; i++)
         {
-            if (infos[place].isStartPin)
-            {
-                children[i].Init(startPinSprite);
-                place++;
-                continue;
-            }
+            //if (infos[i].isStartPin)
+            //{
+            //    children[i].Init(startPinSprite);
+            //    place++;
+            //    continue;
+            //}
 
             if (place >= infos.Count)
                 place = 0;

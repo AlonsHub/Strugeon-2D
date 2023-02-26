@@ -298,6 +298,16 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     void CalculateActionList()
     {
+
+        //SAFETY HEALTH CHECK
+
+        if(currentHP <= 0)
+        {
+            turnDone = true;
+            return;
+        }
+
+
         actionPool = new List<ActionVariation>();
         actionWeightList = new List<int>();
 
@@ -527,9 +537,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //PartyMaster.Instance.availableMercPrefabs.Remove(this);
         RefMaster.Instance.AddCoward(mercName);
         //TurnMaster.Instance.RemoveTurnTaker(this);
-        TurnMachine.Instance.RemoveTurnInfoByTaker(this);
+        //TurnMachine.Instance.RemoveTurnInfoByTaker(this);
+        TurnMachine.Instance.RemoveTurnInfo(TurnInfo);
 
-        tileWalker.currentNode.RemoveOccupant(false) ;
+        tileWalker.currentNode.RemoveOccupant(true);
 
         //TurnMaster.Instance.turnTakers.Remove(this);
         //TurnMaster.Instance.turnPlates.Remove(myTurnPlate); //replace with clear method
@@ -538,7 +549,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         // THIS MIGHT BE WHERE ESCAPED mercs ARE CONSIDERED DEAD
         //by being destroyed and then -> counded as missing from the list
         //and somehow still getting into the "Cowardly list"
-        Destroy(gameObject);
+        //Destroy(gameObject);
         TurnDone = true;
         //Destroy(gameObject, .5f); //just for now, nukes it
 
@@ -680,10 +691,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     IEnumerator RemoveSuggestiveEffectWithDelay(StatusEffect statusEffect)
     {
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         statusEffects.Remove(statusEffect);
         RemoveIconByName(statusEffect.GetType().ToString());
+        yield return new WaitForEndOfFrame();
 
     }
     //public void RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect, float delay)

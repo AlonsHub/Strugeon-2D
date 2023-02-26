@@ -40,7 +40,6 @@ public class TurnBelt
         }
         else
         {
-
             turnInfos.Insert(index, ti);
         }
     }

@@ -19,8 +19,6 @@ public class TurnInfo
 
     #region Maybe Zone
     //Data relevant to the machine for parsing
-    public bool DoDoubleTurn;
-    public bool DoSkipTurn;
     public System.Action OnTurnBegin;
     //public System.Action OnTurnSkip; //
     public System.Action OnTurnEnd; //add to this cooldowns and effects that need to remove themselves
@@ -29,6 +27,10 @@ public class TurnInfo
     //Status effects?
     List<TurnInfoEffect> turnInfoEffects;
 
+
+    public Color colour;
+
+
     /// <summary>
     /// Create a TurnInfo for this TurnTaker
     /// </summary>
@@ -36,8 +38,11 @@ public class TurnInfo
     public TurnInfo(TurnTaker t)
     {
         turnTaker = t;
+        if(t.TurnInfo == null)
         t.TurnInfo = this; //sucks tbf - but fixes drowned spirits "NO DO FOUND" problem 
         turnInfoEffects = new List<TurnInfoEffect>();
+
+        colour = new Color(0, 0, 0, 0);
     }
     /// <summary>
     /// Creates a Start-Pin TurnInfo

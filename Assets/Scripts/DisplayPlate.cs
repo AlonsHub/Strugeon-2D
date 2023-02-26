@@ -18,6 +18,10 @@ public class DisplayPlate : MonoBehaviour
     [SerializeField, Tooltip("This image is a default sprite at aplha 0, by default")]
     Image portraitOverlay;
 
+
+    [SerializeField]
+    private Sprite startPinSprite;
+
     /// <summary>
     /// Collection of symbols for info such as: status-effect icons, special ability markers (and their cooldown) etc...
     /// </summary>
@@ -33,8 +37,16 @@ public class DisplayPlate : MonoBehaviour
 
     public void Init(TurnInfo ti)
     {
+
         if (ti.isStartPin)
+        {
+            portrait.sprite = startPinSprite;
+            
+            //set alpha 0
+
             return;
+        }
+            //return;
         turnInfo = ti;
         //turnTaker = ti.GetTurnTaker;
         RefreshDisplay();
@@ -60,29 +72,18 @@ public class DisplayPlate : MonoBehaviour
     public void RefreshDisplay()
     {
         portrait.sprite = turnTaker.PortraitSprite;
-
+        
         //Special Ability check, if relevant
 
         //Symbols and effects, if relevant
-        Color toSet = new Color(0, 0, 0, 0);
+        //Color toSet colour
 
-        if (turnInfo.DoSkipTurn) // probably needs to be a switch 
-        {
-            toSet = SturgeonColours.Instance.skipGrey;
-        }
-        
-        //if(turnInfo.DoDoubleTurn)
+        //if (turnInfo.DoSkipTurn) // probably needs to be a switch 
         //{
-        //    _doubleDisplayPlate = Instantiate(gameObject, transform);
+        //    toSet = SturgeonColours.Instance.skipGrey;
         //}
-        //else if(_doubleDisplayPlate != null)
-        //{
-        //    Destroy(_doubleDisplayPlate);
-        //    _doubleDisplayPlate = null;
-        //}
-        //test for other colour affecting powers?
 
-        SetPortraitOverlayColour(toSet);
+        SetPortraitOverlayColour(turnInfo.colour);
     }
 
     /// <summary>
