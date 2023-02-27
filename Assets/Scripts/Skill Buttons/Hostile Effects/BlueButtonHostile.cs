@@ -7,20 +7,20 @@ public class BlueButtonHostile : SkillButton
     TileWalker targetWalker;
     [SerializeField]
     int stepLimit;
-    Pawn targetPawn;
+    //Pawn targetPawn;
     //GameObject effectObject; //in character's list
 
     public override void OnButtonClick()
     {
         //Step limiter
-        targetPawn = MouseBehaviour.hitTarget;
-        targetWalker = targetPawn.tileWalker;
+        pawnTgt = MouseBehaviour.hitTarget;
+        targetWalker = pawnTgt.tileWalker;
         if(targetWalker.doLimitSteps)
         {
             return;
         }
 
-        targetPawn.AddEffectIcon(effectIcon, "blueDeBuff");
+        pawnTgt.AddEffectIcon(effectIcon, "blueDeBuff");
         targetWalker.doLimitSteps = true;
         targetWalker.stepLimit = stepLimit;
 
@@ -30,7 +30,7 @@ public class BlueButtonHostile : SkillButton
         //targetPawn.ApplySpecialEffect(effectIcon, "Blue");
         //targetCharacter.StartCoroutine("IconDestroyer");
         //StartCoroutine("EndWhen");
-        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Blue, Color.blue);
+        BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Blue, Color.blue);
 
         base.OnButtonClick();
     }

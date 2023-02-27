@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CalmSpell : SkillButton
 {
-    Pawn targetPawn;
+    //Pawn targetPawn;
 
    
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
 
-        new CalmEffect(targetPawn, effectIcon);
+        new CalmEffect(pawnTgt, effectIcon);
        
 
         base.OnButtonClick();

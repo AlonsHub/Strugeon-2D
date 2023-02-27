@@ -9,9 +9,13 @@ public class SturgeonColours : MonoBehaviour
 
     public Color skipGrey;
     public Color pink;
+
+    //public Color[] Nools;
+
     public Color noolRed;
     public Color noolBlue;
     public Color noolYellow;
+    public Color noolPurple;
     
 
     private void Awake()

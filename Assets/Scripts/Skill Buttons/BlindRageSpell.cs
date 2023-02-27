@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BlindRageSpell : SkillButton
 {
-    Pawn targetPawn;
+    //Pawn targetPawn;
 
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
 
         
-        new BlindRageEffect(targetPawn, effectIcon);
+        new BlindRageEffect(pawnTgt, effectIcon);
 
 
         base.OnButtonClick();

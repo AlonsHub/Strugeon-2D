@@ -27,7 +27,7 @@ public class SiteMaster : MonoBehaviour
             return;
         }
         Instance = this;
-        siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
+        //siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
 
     }
 
@@ -37,6 +37,7 @@ public class SiteMaster : MonoBehaviour
 
         foreach (SiteButton sb in siteButtons)
         {
+            //Need to check if it is on cooldown?
             if(!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null)
             {
                 Debug.Log("setting site");
@@ -57,19 +58,17 @@ public class SiteMaster : MonoBehaviour
         {
             countsPerDifficulty[i] = 0;
         }
-        int liveSiteCount = 0;
-        foreach (var item in siteButtons)
+        //int liveSiteCount = 0;
+        SiteButton[] liveSites = siteButtons.Where(x => x.levelSO.levelData.isSet).ToArray();
+
+        foreach (var item in liveSites)
         {
-            if (item.levelSO.levelData.isSet)
-            {
-                liveSiteCount++;
-                countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
-            }
+            countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
         }
 
         for (int i = 0; i < numberOfDifficulties; i++)
         {
-            if(countsPerDifficulty[i] >= liveSiteCount)
+            if(countsPerDifficulty[i] >= liveSites.Length)
             {
                 //need to reset one!
                 //choose randomly, but set to a different difficulty - that is NOT i
@@ -81,7 +80,8 @@ public class SiteMaster : MonoBehaviour
 
                 //should check if a random site is "good" reset
                 Debug.Log("resetting site");
-                siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
+                //siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
+                liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
 
                 break;
             }

@@ -902,7 +902,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.111
+  orthographic size: 5.21
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -926,7 +926,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606642266}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.47, y: 8.27, z: 0.33}
+  m_LocalPosition: {x: 0.47, y: 8.27, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2947,6 +2947,7 @@ MonoBehaviour:
   buttonColor: 3
   nulColour: 5
   skillCost: 0.4
+  vfxPrefab: {fileID: 0}
   checkOnEnable: 1
   effectIcon: {fileID: 0}
   closeMenu: 0
@@ -3541,6 +3542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gap
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: maxPlates
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}

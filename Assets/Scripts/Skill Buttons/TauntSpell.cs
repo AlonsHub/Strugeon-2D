@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class TauntSpell : SkillButton
 {
-    Pawn targetPawn;
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
 
         foreach (var item in RefMaster.Instance.enemyInstances)
         {
-            new TauntedEffect(item, effectIcon, targetPawn);
+            new TauntedEffect(item, effectIcon, pawnTgt);
         }
         
         base.OnButtonClick();

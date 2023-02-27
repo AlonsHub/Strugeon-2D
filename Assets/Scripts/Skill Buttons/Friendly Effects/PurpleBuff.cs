@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PurpleBuff : SkillButton
 {
-    private Pawn targetPawn;
+    //private Pawn targetPawn;
     public float slowerTime;
     public PurpleChoosingMode purpleChoosingMode;
 
@@ -14,11 +14,11 @@ public class PurpleBuff : SkillButton
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
         purpleChoosingMode.gameObject.SetActive(true);
         //Time.timeScale = slowerTime;
         TimeChanger.Instance.ToggleTimePause(true);
-        purpleChoosingMode.Setup(targetPawn);
+        purpleChoosingMode.Setup(pawnTgt);
         mouseBehaviour.HideMenus();
 
         //targetPawn.ApplySpecialEffect(effectIcon, "Purple");

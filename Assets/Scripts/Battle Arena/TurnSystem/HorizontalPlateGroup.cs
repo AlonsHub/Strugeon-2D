@@ -7,6 +7,8 @@ public class HorizontalPlateGroup : MonoBehaviour
 {
     //Stats:
     [SerializeField]
+    int maxPlates;
+    [SerializeField]
     float elementSize;
     [SerializeField]
     float gap;
@@ -41,7 +43,8 @@ public class HorizontalPlateGroup : MonoBehaviour
         
         children = new List<DisplayPlate>();
 
-        foreach (var item in infos)
+        //foreach (var item in infos)
+        for (int i = 0; i < maxPlates; i++)
         {
             AddChild(MakeDisplayPlate());
         }
@@ -155,28 +158,28 @@ public class HorizontalPlateGroup : MonoBehaviour
     /// <param name="index"></param>
     public void RefreshPortraits(int index) //infos need to be cached and then MAYBE hooked into via events
     {
-        int delta = infos.Count - children.Count;
-        if (delta !=0)
-        {
-            if(delta>0)
-            {
-                for (int i = 0; i < delta; i++)
-                {
-                    MakeAChild();
-                }
-            }
-            else
-            {
-                for (int i = 0; i < delta*-1; i++)
-                {
-                    KillAChild();
-                }
-            }
-        }
+        //int delta = (infos.Count < maxPlates) ? infos.Count - children.Count : children.Count - maxPlates;
+        //if (delta !=0)
+        //{
+        //    if(delta>0)
+        //    {
+        //        for (int i = 0; i < delta; i++)
+        //        {
+        //            MakeAChild();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        for (int i = 0; i < delta*-1; i++)
+        //        {
+        //            KillAChild();
+        //        }
+        //    }
+        //}
 
         //TEST infos and belt sync
         int place = index;
-        for (int i = 0; i < infos.Count; i++)
+        for (int i = 0; i < children.Count; i++)
         {
             //if (infos[i].isStartPin)
             //{

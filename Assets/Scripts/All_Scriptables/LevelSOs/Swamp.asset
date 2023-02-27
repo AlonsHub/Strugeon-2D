@@ -19,24 +19,35 @@ MonoBehaviour:
       enemyLevels: 03000000
     enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
     magicItem:
-      magicItemName: Linen Tunic
-      goldValue: 2
+      magicItemName: Wooden Club
+      goldValue: 3
       spectrumProfile:
-        red: 0
-        blue: 0
-        yellow: 0
-        purple: 0
+        elements:
+        - value: 4
+          nulColour: 0
+        - value: 2
+          nulColour: 1
+        - value: 6
+          nulColour: 2
+        - value: 4
+          nulColour: 3
+        - value: 5
+          nulColour: 4
+        - value: 0
+          nulColour: 5
+        - value: 0
+          nulColour: 6
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 938ee090fd7b11d49ad8f344a49ed397, type: 2}
-      spriteName: LinenTunic
-      fittingSlotType: 0
+      itemSprite: {fileID: 21300000, guid: 202aab8348996e84a864559242b8afea, type: 2}
+      spriteName: WoodenClub
+      fittingSlotType: 1
       isEquipped: 0
       statBenefitSO: {fileID: 0}
       statBenefit:
-        statToBenefit: 0
-        value: 5
-      relevantClasses: 00000000010000000200000003000000
+        statToBenefit: 1
+        value: 2
+      relevantClasses: 00000000
     expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
@@ -47,4 +58,4 @@ MonoBehaviour:
     waitTimeHours: 0
     waitTimeMinutes: 2
     waitTimeSeconds: 20
-    isSet: 1
+    isSet: 0

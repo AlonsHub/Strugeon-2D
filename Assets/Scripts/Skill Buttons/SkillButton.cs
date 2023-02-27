@@ -12,7 +12,8 @@ public class SkillButton : Hoverable
     public float skillCost; //the cost for using this skill once //TBF make ScriptableObjects which hold skills
     //public int _currentValue; //current amount of relevant mana... not sure if needed.
 
-    //public Bar relevantBar; //relevant mana bar
+    [SerializeField]
+    GameObject vfxPrefab;
 
     [SerializeField]
     bool checkOnEnable;
@@ -51,7 +52,39 @@ public class SkillButton : Hoverable
 
         psionProfile.ModifyCurrentValue(nulColour, skillCost * -1f); //Skill cost is a postive value to reduce from current.
 
+        if(vfxPrefab)
+        {
+            GameObject go = Instantiate(vfxPrefab, pawnTgt.transform);
+            Renderer rend = go.GetComponent<Renderer>();
+            Color col = Color.white;
+            switch (nulColour)
+            {
+                case NulColour.Orange:
+                    break;
+                case NulColour.Yellow:
+                    col = SturgeonColours.Instance.noolYellow;
+                    break;
+                case NulColour.Green:
+                    break;
+                case NulColour.Blue:
+                    col = SturgeonColours.Instance.noolBlue;
+                    break;
+                case NulColour.Red:
+                    col = SturgeonColours.Instance.noolRed;
+                    break;
+                case NulColour.Purple:
+                    col = SturgeonColours.Instance.noolPurple;
+                    break;
+                case NulColour.Black:
+                    break;
+                default:
+                    break;
+            }
 
+            rend.material.SetColor("_EmissionColor", col*3f);
+
+            Destroy(go, 1f);
+        }
         //shouldnt really test for value since it should be inactive if at too low a value
         //relevantBar.ReduceValue(skillCost);
         //Debug.Log(name + " Button pushed");
@@ -60,9 +93,12 @@ public class SkillButton : Hoverable
         if(closeMenu)
         {
             MouseBehaviour.Instance.CloseMenus();
+
+            //TEMP - move to mousebehaviour?
             Renderer hitRenderer = MouseBehaviour.hitTarget.GetComponentInChildren<Renderer>();
 
             hitRenderer.material.SetFloat("_Thickness", 0f);
+            //TEMP
         }
 
 

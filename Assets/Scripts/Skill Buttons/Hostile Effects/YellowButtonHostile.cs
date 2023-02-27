@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class YellowButtonHostile : SkillButton
 {
-    Pawn targetPawn;
+    //Pawn targetPawn;
     [SerializeField]
     float dmgMultiplier;
     //ameObject effectObject;
     public override void OnButtonClick()
     {
         //x1.5 dmg
-       // targetPawn = MouseBehaviour.hitTarget;
+        // targetPawn = MouseBehaviour.hitTarget;
         //targetPawn.doTakeSkillDamage = true;
         //targetPawn.skillDamageMultiplier = dmgMultiplier;
         //effectIconIndex = targetCharacter.ApplySpecialEffect(effectIcon);
         //targetPawn.ApplySpecialEffect(effectIcon, "Yellow");
         //StartCoroutine("EndWhen");
-        targetPawn = MouseBehaviour.hitTarget;
-        if (targetPawn.DoYellowDebuff)
+        pawnTgt = MouseBehaviour.hitTarget;
+        if (pawnTgt.DoYellowDebuff)
         {
             return;
         }
-        targetPawn.DamageModifier = dmgMultiplier;
-        targetPawn.DoYellowDebuff = true;
-       
-        targetPawn.AddEffectIcon(effectIcon, "yellowDeBuff");
+        pawnTgt.DamageModifier = dmgMultiplier;
+        pawnTgt.DoYellowDebuff = true;
 
-        BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Yellow, Color.yellow);
+        pawnTgt.AddEffectIcon(effectIcon, "yellowDeBuff");
+
+        BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Yellow, Color.yellow);
 
 
         base.OnButtonClick();

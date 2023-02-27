@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class EmpathySpell : SkillButton
 {
-    Pawn targetPawn;
 
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
 
         foreach (var item in RefMaster.Instance.enemyInstances)
         {
-            new EmpathyEffect(item, effectIcon, targetPawn);
+            new EmpathyEffect(item, effectIcon, pawnTgt);
         }
 
         base.OnButtonClick();

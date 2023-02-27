@@ -26,6 +26,12 @@ public class EmpathyEffect : SuggestiveEffect
 
     public override void Perform()
     {
+        if (toAvoid == null)
+        {
+            EndEffect();
+            return;
+        }
+
         List<ActionVariation> toRemove = (pawnToEffect.actionPool.Where(x => x.target.Equals(toAvoid.gameObject)).ToList());
         foreach (var item in toRemove)
         {

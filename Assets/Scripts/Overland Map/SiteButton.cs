@@ -110,16 +110,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     void LateStart()
     {
-        //if (!isLevelDataSet) //this isSet => levelDataSO.levelData.isSet
-        //    RandomSetSelf();
-
-        //if (myDataDisplay)
-        //    myDataDisplay.SetActive(false);
-
-
         if (isCooldown)
             StartCooldownCaller();
-
     }
 
    
@@ -172,6 +164,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     IEnumerator StartCooldown()
     {
         isCooldown = true; //just making sure
+        levelSO.levelData.isSet = false;
         thisButton.interactable = false;
         
         clockAndTimerParent.SetActive(true);
@@ -192,6 +185,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] = maxCooldown; //have a seperate method for AddCooldown that null checks and everything ///06/02 omg this is charming!!!
         PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name); 
         isCooldown = false;
+        levelSO.levelData.isSet = true;
         thisButton.interactable = true;
 
     }

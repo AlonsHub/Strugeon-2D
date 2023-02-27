@@ -6,6 +6,6 @@ public class PurpleButtonHostile : SkillButton
 {
     public override void OnButtonClick()
     {
-        Debug.Log("fart... no purple debuff yet... how did you even get to press this?");
+        Debug.Log("<b>fart... no purple debuff yet... how did you even get to press this?</b>");
     }
 }

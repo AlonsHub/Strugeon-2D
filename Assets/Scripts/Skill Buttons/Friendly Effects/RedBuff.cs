@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class RedBuff : SkillButton
 {
-    private Pawn targetPawn;
     public float damageMultiplier;
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
-        WeaponItem weapon = targetPawn.GetComponent<WeaponItem>();
+        pawnTgt = MouseBehaviour.hitTarget;
+        WeaponItem weapon = pawnTgt.GetComponent<WeaponItem>();
         if (weapon)
         {
             if (weapon.hasRedBuff)
@@ -18,8 +17,8 @@ public class RedBuff : SkillButton
 
             weapon.hasRedBuff = true; //TBF FIX THIS! 
             //targetPawn.ApplySpecialEffect(effectIcon, "Red"); //NEED THIS
-            targetPawn.AddEffectIcon(effectIcon, "redBuff");
-            BattleLogVerticalGroup.Instance.AddPsionEntry(targetPawn.Name, PsionActionSymbol.Red, Color.red);
+            pawnTgt.AddEffectIcon(effectIcon, "redBuff");
+            BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Red, Color.red);
 
             base.OnButtonClick();
         }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class BraverySpell : SkillButton
 {
-    Pawn targetPawn;
+    //Pawn pawnTgt;
     
 
     public override void OnButtonClick()
     {
-        targetPawn = MouseBehaviour.hitTarget;
+        pawnTgt = MouseBehaviour.hitTarget;
 
-        new BraveryEffect(targetPawn, effectIcon);
+        new BraveryEffect(pawnTgt, effectIcon);
     
 
         base.OnButtonClick();
