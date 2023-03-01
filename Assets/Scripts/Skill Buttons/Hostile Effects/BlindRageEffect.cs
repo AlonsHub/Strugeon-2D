@@ -36,7 +36,7 @@ public class BlindRageEffect : SuggestiveEffect
         }
         if(adjPawns.Count == 0)
         {
-            Debug.LogError("no adj pawns");
+            //Debug.LogError("no adj pawns");
             return; //keeping the effect ON
         }
 

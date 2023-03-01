@@ -37,6 +37,7 @@ public class DisplayPlate : MonoBehaviour
 
     public void Init(TurnInfo ti)
     {
+        portrait.color = new Color(1, 1, 1, 1);
 
         if (ti.isStartPin)
         {
@@ -56,7 +57,7 @@ public class DisplayPlate : MonoBehaviour
     /// </summary>
     public void Init(Sprite s)
     {
-        portrait.sprite = s; 
+        portrait.sprite = s;
     }
 
     public void SetAsCurrentStatus(bool isCurrentTurn)
@@ -85,7 +86,14 @@ public class DisplayPlate : MonoBehaviour
 
         SetPortraitOverlayColour(turnInfo.colour);
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
+    public void RemoveSprite()
+    {
+        portrait.sprite = null;
+        portrait.color = new Color(0, 0, 0, 0);
+    }
     /// <summary>
     /// Sets a colour overlay with alpha over the portrait.
     /// E.g. for skipping turns - a black colour will be set over the portrait

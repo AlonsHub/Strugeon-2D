@@ -125,7 +125,7 @@ public class Inventory : MonoBehaviour
             Debug.LogError($"couldn't remove {magicItem.magicItemName}");
             return;
         }
-        Debug.LogError($"{magicItem.magicItemName} Sold! for {goldValue} gold");
+        //Debug.LogError($"{magicItem.magicItemName} Sold! for {goldValue} gold");
         AddGold(goldValue);
     }
 }

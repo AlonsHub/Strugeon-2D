@@ -46,7 +46,10 @@ public class HorizontalPlateGroup : MonoBehaviour
         //foreach (var item in infos)
         for (int i = 0; i < maxPlates; i++)
         {
-            AddChild(MakeDisplayPlate());
+            DisplayPlate dp = MakeDisplayPlate();
+            dp.RemoveSprite();
+            AddChild(dp);
+
         }
         currentPlate = children[0];
 

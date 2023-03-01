@@ -238,9 +238,9 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         //THIS WHOLE SECTION NEEDS REVISITING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        //TBD this should move to an Awake or start
-        if (!isLevelDataSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
-            RandomSetSelf();
+        ////TBD this should move to an Awake or start
+        //if (!isLevelDataSet || levelSO.levelData.enemies == null || levelSO.levelData.enemies.Count == 0) //this isSet => levelDataSO.levelData.isSet
+        //    RandomSetSelf();
 
         SiteDisplayer.Instance.SetOnOff(true);
         //displayer.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!

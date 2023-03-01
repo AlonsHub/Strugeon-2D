@@ -65,8 +65,6 @@ public class BootItem : ActionItem
         if (!hasEnemyAtMelee)
         {
             actionVariations.Clear();
-
-            Debug.LogError("No enemy in melee range");
             //Turn off the SA icon
             return;//?
         }

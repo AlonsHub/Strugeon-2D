@@ -35,7 +35,7 @@ public class LevelRef : MonoBehaviour
         if (levelSOs[levelIndex])
             currentLevel = levelSOs[levelIndex];
         else
-            Debug.LogError("now level so in " + levelIndex + " " + (LevelEnum)levelIndex);
+            Debug.Log("now level so in " + levelIndex + " " + (LevelEnum)levelIndex);
     }
     public void SetCurrentLevel(LevelSO lso)
     {

@@ -21,24 +21,34 @@ public class SiteMaster : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null && Instance !=this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if(Instance != null && Instance !=this)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         Instance = this;
         //siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
 
     }
+    //private void OnDisable()
+    //{
+    //    Instance = null;
+    //}
 
     private void OnEnable()
     {
         //siteButtons = FindObjectsOfType<SiteButton>(); //tbf AF
 
+        StartCoroutine(nameof(LateDiversify));
+    }
+
+    private IEnumerator LateDiversify()
+    {
+        yield return new WaitForEndOfFrame();
         foreach (SiteButton sb in siteButtons)
         {
             //Need to check if it is on cooldown?
-            if(!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null)
+            if (!sb.isCooldown && (!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null))
             {
                 Debug.Log("setting site");
                 sb.levelSO.levelData.SetLevelData((LairDifficulty)Random.Range(0, System.Enum.GetValues(typeof(LairDifficulty)).Length));
@@ -47,10 +57,11 @@ public class SiteMaster : MonoBehaviour
         MakeSureSitesAreDiverese();
     }
 
-
     [ContextMenu("DiverseCheckOnSites")]
     public void MakeSureSitesAreDiverese()
     {
+        Debug.Log("DIVERSE!");
+
         int numberOfDifficulties = System.Enum.GetValues(typeof(LairDifficulty)).Length;
         int[] countsPerDifficulty = new int[numberOfDifficulties];
 
@@ -63,6 +74,7 @@ public class SiteMaster : MonoBehaviour
 
         foreach (var item in liveSites)
         {
+            Debug.LogWarning($"{item.levelSO.name} isSet: {item.levelSO.levelData.isSet}");
             countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
         }
 
@@ -72,12 +84,13 @@ public class SiteMaster : MonoBehaviour
             {
                 //need to reset one!
                 //choose randomly, but set to a different difficulty - that is NOT i
+                countsPerDifficulty[i]--; //because this one is being changed, and it will not be the same difficulty
                 i++;
                 if(i>= numberOfDifficulties)
                 {
                     i = 0;
                 }
-
+                countsPerDifficulty[i]++;
                 //should check if a random site is "good" reset
                 Debug.Log("resetting site");
                 //siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
@@ -85,6 +98,11 @@ public class SiteMaster : MonoBehaviour
 
                 break;
             }
+        }
+
+        if(countsPerDifficulty[(int)LairDifficulty.Easy] <= 0)
+        {
+            liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData(LairDifficulty.Easy);
         }
     }
 
