@@ -68,7 +68,7 @@ public class TurnBelt
     }
     public void RemoveALLInfoByTaker(TurnTaker tt)
     {
-        TurnInfo[] relevant = turnInfos.Where(x => x == tt).ToArray();
+        TurnInfo[] relevant = turnInfos.Where(x => x.GetTurnTaker == tt).ToArray();
         foreach (var item in relevant)
         {
             turnInfos.Remove(item);

@@ -52,4 +52,9 @@ public abstract class StatusEffect
     {
 
     }
+    //public virtual bool StackMe()
+    //{
+
+    //}
+
 }

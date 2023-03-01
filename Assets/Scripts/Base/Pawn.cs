@@ -519,6 +519,12 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     
     public void Escape()
     {
+        StartCoroutine(DelayedEscape());
+
+    }
+
+    private IEnumerator DelayedEscape()
+    {
         //walk to the escape square - by tilePos(?)
         //Removes self from squad (permanently, for now)
         if (PartyMaster.Instance.currentSquad.pawns.Remove(this))
@@ -540,19 +546,18 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //TurnMachine.Instance.RemoveTurnInfoByTaker(this);
         TurnMachine.Instance.RemoveALLInfosForTaker(this);
 
-        tileWalker.currentNode.RemoveOccupant(true);
 
         //TurnMaster.Instance.turnTakers.Remove(this);
         //TurnMaster.Instance.turnPlates.Remove(myTurnPlate); //replace with clear method
         //Destroy(myTurnPlate.gameObject);
-
+        yield return new WaitForEndOfFrame();
         // THIS MIGHT BE WHERE ESCAPED mercs ARE CONSIDERED DEAD
         //by being destroyed and then -> counded as missing from the list
         //and somehow still getting into the "Cowardly list"
         //Destroy(gameObject);
         TurnDone = true;
+        tileWalker.currentNode.RemoveOccupant(true);
         //Destroy(gameObject, .5f); //just for now, nukes it
-
     }
 
     IEnumerator DelayedDeath()
@@ -586,7 +591,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
         //TurnMaster.Instance.RemoveTurnTaker(this);
-        TurnMachine.Instance.RemoveTurnInfoByTaker(this);
+        TurnMachine.Instance.RemoveALLInfosForTaker(this);
 
 
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
