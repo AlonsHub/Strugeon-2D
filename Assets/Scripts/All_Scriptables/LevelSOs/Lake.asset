@@ -16,44 +16,43 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      enemyLevels: 0600000006000000
+      enemyLevels: 03000000
     enemySetPack: {fileID: 11400000, guid: 181f6ca5dfb9c48419756966aed3ca28, type: 2}
     magicItem:
-      magicItemName: Ebon Breastplate
-      goldValue: 50
+      magicItemName: Hunter's Tooth-Necklace
+      goldValue: 3
       spectrumProfile:
         elements:
-        - value: 5
+        - value: 2
           nulColour: 0
         - value: 3
           nulColour: 1
-        - value: 3
+        - value: 5
           nulColour: 2
-        - value: 4
+        - value: 2
           nulColour: 3
-        - value: 2
+        - value: 4
           nulColour: 4
-        - value: 2
+        - value: 1
           nulColour: 5
-        - value: 7
+        - value: 1
           nulColour: 6
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: 7e891486ed98d584883aff3c42c83424, type: 2}
-      spriteName: EbonBreastplate
-      fittingSlotType: 0
+      itemSprite: {fileID: 21300000, guid: 509fd5c09ce8e374ca1fb8a0726be319, type: 2}
+      spriteName: ToothNecklace
+      fittingSlotType: 2
       isEquipped: 0
       statBenefitSO: {fileID: 0}
       statBenefit:
-        statToBenefit: 0
-        value: 20
-      relevantClasses: 0000000003000000
-    expReward: 170
+        statToBenefit: 1
+        value: 1
+      relevantClasses: 0000000001000000
+    expReward: 55
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 24
-    difficulty: 2
+    goldReward: 9
+    difficulty: 0
     siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

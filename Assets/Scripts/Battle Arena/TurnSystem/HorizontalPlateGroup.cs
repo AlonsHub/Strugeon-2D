@@ -182,6 +182,7 @@ public class HorizontalPlateGroup : MonoBehaviour
 
         //TEST infos and belt sync
         int place = index;
+
         for (int i = 0; i < children.Count; i++)
         {
             //if (infos[i].isStartPin)
@@ -190,6 +191,11 @@ public class HorizontalPlateGroup : MonoBehaviour
             //    place++;
             //    continue;
             //}
+            if(i>= infos.Count)
+            {
+                children[i].RemoveSprite();
+                continue;
+            }
 
             if (place >= infos.Count)
                 place = 0;

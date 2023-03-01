@@ -538,7 +538,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         RefMaster.Instance.AddCoward(mercName);
         //TurnMaster.Instance.RemoveTurnTaker(this);
         //TurnMachine.Instance.RemoveTurnInfoByTaker(this);
-        TurnMachine.Instance.RemoveTurnInfo(TurnInfo);
+        TurnMachine.Instance.RemoveALLInfosForTaker(this);
 
         tileWalker.currentNode.RemoveOccupant(true);
 

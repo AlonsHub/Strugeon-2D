@@ -7,8 +7,6 @@ using UnityEngine;
 [System.Serializable]
 public class SuggestiveEffect : StatusEffect
 {
-    public SuggestiveEffect(Pawn pawn) : base(pawn){}
-
     public SuggestiveEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite){}
     
     /// <summary>

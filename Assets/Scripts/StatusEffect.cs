@@ -44,5 +44,12 @@ public abstract class StatusEffect
     public abstract void EndEffect();
     public abstract void Perform();
 
+    /// <summary>
+    /// The logic to be called when a turntaker already has a statusEffect like this on them.
+    /// Destroy previous and make new one or topup the previous and forget about the new one
+    /// </summary>
+    public virtual void StackMe()
+    {
 
+    }
 }
