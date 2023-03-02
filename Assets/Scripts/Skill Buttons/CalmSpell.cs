@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class CalmSpell : SkillButton
 {
-    //Pawn targetPawn;
-
-   
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
@@ -15,14 +12,13 @@ public class CalmSpell : SkillButton
         {
             if (pawnTgt.statusEffects.Where(s => s is CalmEffect).Any())
             {
-                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
+                StatusEffect se = pawnTgt.statusEffects.Where(s => s is CalmEffect).SingleOrDefault();
+                se.StackMe();
                 return;
             }
         }
-
         new CalmEffect(pawnTgt, effectIcon);
        
-
         base.OnButtonClick();
     }
 }

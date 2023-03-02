@@ -25,4 +25,5 @@ public class BlindRageSpell : SkillButton
 
         base.OnButtonClick();
     }
+
 }

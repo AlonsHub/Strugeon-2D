@@ -35,5 +35,8 @@ public class CalmEffect : SuggestiveEffect
         }
     }
 
-    
+    public override void StackMe()
+    {
+        current = totalDuration;
+    }
 }
