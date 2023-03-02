@@ -120,12 +120,12 @@ public class DifficultyTranslator : MonoBehaviour
         }
 
         int rand = Random.Range(1, total+1);
-        Debug.Log($"Random: {rand}/{total}");
+        //Debug.Log($"Random: {rand}/{total}");
         for (int i = 0; i < weights.Length; i++)
         {
             if (rand <= weights[i])
             {
-                Debug.Log($"Item: {itemSetSO.itemSet.itemSOs[i].magicItem.magicItemName}");
+                //Debug.Log($"Item: {itemSetSO.itemSet.itemSOs[i].magicItem.magicItemName}");
                 return itemSetSO.itemSet.itemSOs[i].magicItem;
             }
         }

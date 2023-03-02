@@ -21,8 +21,8 @@ MonoBehaviour:
       enemyLevels: 010000000100000001000000
     enemySetPack: {fileID: 11400000, guid: 046a48308753b9540a8ca188f891b291, type: 2}
     magicItem:
-      magicItemName: Slingshot
-      goldValue: 3
+      magicItemName: Feral Hide Vest
+      goldValue: 25
       spectrumProfile:
         elements:
         - value: 2
@@ -31,29 +31,29 @@ MonoBehaviour:
           nulColour: 1
         - value: 4
           nulColour: 2
-        - value: 3
-          nulColour: 3
         - value: 5
+          nulColour: 3
+        - value: 1
           nulColour: 4
-        - value: 6
-          nulColour: 5
         - value: 2
+          nulColour: 5
+        - value: 1
           nulColour: 6
       rarity: 0
       dropRateWeight: 0
-      itemSprite: {fileID: 21300000, guid: b4269eb2be805e34c9cafeb5a77f79c8, type: 2}
-      spriteName: Slingshot
-      fittingSlotType: 1
+      itemSprite: {fileID: 21300000, guid: db038b43bfa111945a0014850db54b30, type: 2}
+      spriteName: HideVest
+      fittingSlotType: 0
       isEquipped: 0
       statBenefitSO: {fileID: 0}
       statBenefit:
-        statToBenefit: 1
-        value: 2
-      relevantClasses: 01000000
+        statToBenefit: 0
+        value: 15
+      relevantClasses: 0300000001000000
     expReward: 105
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 9
+    goldReward: 6
     difficulty: 0
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
