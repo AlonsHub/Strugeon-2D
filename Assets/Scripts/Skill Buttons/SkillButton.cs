@@ -25,6 +25,14 @@ public class SkillButton : Hoverable
 
     public Pawn pawnTgt;
 
+    //Experimental!
+    protected virtual System.Type GetStatusEffectType()
+    {
+        return null; //This is only relevant for spells which leave status effects
+    }
+
+    //Experimental!
+
     PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
 
     private void Awake()

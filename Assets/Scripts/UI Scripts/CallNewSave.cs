@@ -10,7 +10,6 @@ public class CallNewSave : MonoBehaviour
     //Temp TBF TBD
     [SerializeField]
     LevelSO[] levelSOs;
-
     //Temp
 
 

@@ -11,13 +11,14 @@ public class BraverySpell : SkillButton
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-
-        if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
-            return;
+            if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
+            {
+                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
+                return;
+            }
         }
-
         new BraveryEffect(pawnTgt, effectIcon);
     
 

@@ -19,7 +19,6 @@ public class EmpathyEffect : SuggestiveEffect
     public override void ApplyEffect()
     {
         current = 0;
-
         base.ApplyEffect();
     }
 
@@ -31,7 +30,6 @@ public class EmpathyEffect : SuggestiveEffect
             EndEffect();
             return;
         }
-
         List<ActionVariation> toRemove = (pawnToEffect.actionPool.Where(x => x.target.Equals(toAvoid.gameObject)).ToList());
         foreach (var item in toRemove)
         {

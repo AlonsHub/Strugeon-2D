@@ -11,11 +11,13 @@ public class CalmSpell : SkillButton
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-
-        if (pawnTgt.statusEffects.Where(s => s is CalmEffect).Any())
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
-            return;
+            if (pawnTgt.statusEffects.Where(s => s is CalmEffect).Any())
+            {
+                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
+                return;
+            }
         }
 
         new CalmEffect(pawnTgt, effectIcon);

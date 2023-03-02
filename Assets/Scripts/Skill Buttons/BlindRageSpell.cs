@@ -11,11 +11,13 @@ public class BlindRageSpell : SkillButton
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-
-        if(pawnTgt.statusEffects.Where(s => s is BlindRageEffect).Any())
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
-            return;
+            if (pawnTgt.statusEffects.Where(s => s is BlindRageEffect).Any())
+            {
+                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
+                return;
+            }
         }
         
         new BlindRageEffect(pawnTgt, effectIcon);
