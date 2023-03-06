@@ -203,8 +203,5 @@ public class BeltManipulator : MonoBehaviour
 
         dp.SetPortraitOverlayColour(col);
     }
-
-
-    
 }
 

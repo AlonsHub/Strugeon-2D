@@ -386,14 +386,23 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
             
             //EXTRACT METHOD: DamageCalculation() TBF
-            if (DoYellowDebuff)
-            {
-                damage = (int)(damage * damageModifier);
+            //if (DoYellowDebuff)
+            //{
+            //    damage = (int)(damage * damageModifier);
 
-                DamageModifier = 1; // also TBF as buffs should all be components that set and unset things on their own 
-                                    //these add-on components can only subscribe to relevant pawn Actions if needed, Pawn should neither check for them not un/set them TBF
-                DoYellowDebuff = false;
-                RemoveIconByName("yellowDeBuff"); //TBF!!
+            //    DamageModifier = 1; // also TBF as buffs should all be components that set and unset things on their own 
+            //                        //these add-on components can only subscribe to relevant pawn Actions if needed, Pawn should neither check for them not un/set them TBF
+            //    DoYellowDebuff = false;
+            //    RemoveIconByName("yellowDeBuff"); //TBF!!
+            //}
+
+            StatusEffect[] incomingDamageEffects = GetStatusEffectsByPredicate(x => x is I_StatusEffect_IncomingDamageMod);
+            if (incomingDamageEffects != null && incomingDamageEffects.Length != 0)
+            {
+                foreach (var item in incomingDamageEffects)
+                {
+                    damage = (int)(item as I_StatusEffect_IncomingDamageMod).OperateOnDamage(damage);
+                }
             }
 
             if (HasShield) //TEMP TBF

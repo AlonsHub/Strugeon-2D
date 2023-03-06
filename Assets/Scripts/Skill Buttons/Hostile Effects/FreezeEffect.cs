@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkipTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnStart
+public class FreezeEffect : TurnInfoEffect, I_StatusEffect_TurnStart
 {
     int count = 1;
-    public SkipTurn_Effect(TurnInfo ti, Sprite s) : base(ti,s)
+    public FreezeEffect(TurnInfo ti, Sprite s) : base(ti,s)
     {
         ApplyEffect();
     }

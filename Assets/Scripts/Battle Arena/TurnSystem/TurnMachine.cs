@@ -119,7 +119,7 @@ public class TurnMachine : MonoBehaviour
                 yield break;
             }
 
-            SkipTurn_Effect se;
+            FreezeEffect se;
             if (currentTurnInfo.GetEffectOfType(out se))
             {
                 //currentTurnInfo.OnTurnSkip?.Invoke();
