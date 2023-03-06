@@ -11,6 +11,7 @@ public class CalmEffect : SuggestiveEffect
 
     public CalmEffect(Pawn pawn, Sprite s) : base(pawn, s)
     {
+        alignment = EffectAlignment.Negative;
         ApplyEffect();
     }
 

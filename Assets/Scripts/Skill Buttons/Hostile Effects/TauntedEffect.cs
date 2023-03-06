@@ -14,6 +14,7 @@ public class TauntedEffect : SuggestiveEffect
 
     public TauntedEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid) : base(pawn, sprite)
     {
+        alignment = EffectAlignment.Negative;
         toAttack = pawnToAvoid;
         ApplyEffect();
     }

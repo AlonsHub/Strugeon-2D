@@ -8,6 +8,8 @@ public class DoubleTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnEnd
     int count;
     public DoubleTurn_Effect(TurnInfo ti, Sprite s) : base(ti,s)
     {
+        alignment = EffectAlignment.Positive;
+
         ApplyEffect();
         count = 0;
     }

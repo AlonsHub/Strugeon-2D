@@ -11,6 +11,7 @@ public class CharmEffect : EndOfTurnStatusEffect
     int current;
     public CharmEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {
+        alignment = EffectAlignment.Negative;
         if (target.statusEffects != null && target.statusEffects.Count > 0)
         {
             StatusEffect existingEffect = target.statusEffects.Where(x => x is CharmEffect).FirstOrDefault();

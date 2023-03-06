@@ -6,6 +6,8 @@ public class StrengthenEffect : DamageRelatedStatusEffect, I_StatusEffect_Outgoi
 {
     public StrengthenEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
+        alignment = EffectAlignment.Positive;
+
         dm.currentDuration = dm.totalDuration;
         ApplyEffect();
     }

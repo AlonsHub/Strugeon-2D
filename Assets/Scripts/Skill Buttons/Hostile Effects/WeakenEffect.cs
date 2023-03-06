@@ -6,6 +6,7 @@ public class WeakenEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDa
 {
     public WeakenEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
+        alignment = EffectAlignment.Negative;
         dm.currentDuration = dm.totalDuration;
         ApplyEffect();
     }

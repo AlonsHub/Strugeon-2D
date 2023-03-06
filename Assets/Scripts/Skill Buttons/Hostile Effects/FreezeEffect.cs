@@ -7,6 +7,7 @@ public class FreezeEffect : TurnInfoEffect, I_StatusEffect_TurnStart
     int count = 1;
     public FreezeEffect(TurnInfo ti, Sprite s) : base(ti,s)
     {
+        alignment = EffectAlignment.Negative;
         ApplyEffect();
     }
 

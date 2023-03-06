@@ -305,6 +305,11 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: d5c74a23e8581724bab6553edff4f7c7, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
+  damageModifier:
+    mod: 0
+    mathOperator: 0
+    totalDuration: 0
+    currentDuration: 0
 --- !u!1 &8120686892577182092
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +537,11 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: 0728d6a4d5ed4d342bd8d2d110f05c15, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
+  damageModifier:
+    mod: 0.75
+    mathOperator: 2
+    totalDuration: 1
+    currentDuration: 1
 --- !u!1 &8120686893311671254
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +772,11 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: 9185a153adb876d4ba1f155c3d2bc67a, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
-  dmgMultiplier: 1.5
+  damageModifier:
+    mod: 1.5
+    mathOperator: 2
+    totalDuration: 1
+    currentDuration: 1
 --- !u!1 &8120686893709386627
 GameObject:
   m_ObjectHideFlags: 0

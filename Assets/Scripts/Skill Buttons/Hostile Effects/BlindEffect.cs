@@ -12,6 +12,7 @@ public class BlindEffect : EndOfTurnStatusEffect
     Vector2Int damage;
     public BlindEffect(Pawn target, Sprite sprite) : base(target, sprite)
     {
+        alignment = EffectAlignment.Negative;
         current = 0;
         ApplyEffect();
     }

@@ -7,6 +7,7 @@ public class BlindRageEffect : SuggestiveEffect
 {
     public BlindRageEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite)
     {
+        alignment = EffectAlignment.Negative;
         ApplyEffect();
     }
 

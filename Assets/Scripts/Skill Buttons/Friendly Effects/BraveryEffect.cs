@@ -11,6 +11,7 @@ public class BraveryEffect : SuggestiveEffect
     /// <param name="pawn"></param>
     public BraveryEffect(Pawn pawn, Sprite s) : base(pawn, s)
     {
+        alignment = EffectAlignment.Positive;
         ApplyEffect();
     }
 

@@ -12,6 +12,7 @@ public class EmpathyEffect : SuggestiveEffect
 
     public EmpathyEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid) : base(pawn, sprite)
     {
+        alignment = EffectAlignment.Negative;
         toAvoid = pawnToAvoid;
         ApplyEffect();
     }

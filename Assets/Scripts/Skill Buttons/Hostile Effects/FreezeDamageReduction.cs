@@ -12,6 +12,8 @@ public class FreezeDamageReduction : DamageRelatedStatusEffect, I_StatusEffect_T
     /// <param name="dm"></param>
     public FreezeDamageReduction(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
+        alignment = EffectAlignment.Negative; //See comments on "Buff Bundles" in BlindRageEffect 
+
         dm.currentDuration = dm.totalDuration;
         ApplyEffect();
     }
