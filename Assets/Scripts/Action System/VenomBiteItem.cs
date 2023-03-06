@@ -180,11 +180,13 @@ public class VenomBiteItem : ActionItem, SA_Item
     {
         int dmg = Random.Range(minDamage, maxDamage + 1);
         toHit.TakeDamage(dmg);
-        PoisonAttacher pa = toHit.gameObject.AddComponent<PoisonAttacher>();
-        pa.SetMeFull(toHit, venomBiteSpriteName, posionDuration, minPoisonDamage, maxPoisonDamage);
+        //PoisonAttacher pa = toHit.gameObject.AddComponent<PoisonAttacher>();
+        //pa.SetMeFull(toHit, venomBiteSpriteName, posionDuration, minPoisonDamage, maxPoisonDamage);
+
+        new VenomEffect(toHit, venomBiteSprite,pawn, minPoisonDamage, maxPoisonDamage);
+
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, dmg, Color.red);
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Poison, toHit.Name);
 
 
         pawn.TurnDone = true;

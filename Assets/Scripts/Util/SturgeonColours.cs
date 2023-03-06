@@ -9,6 +9,7 @@ public class SturgeonColours : MonoBehaviour
 
     public Color skipGrey;
     public Color pink;
+    public Color posionGreen;
 
     //public Color[] Nools;
 

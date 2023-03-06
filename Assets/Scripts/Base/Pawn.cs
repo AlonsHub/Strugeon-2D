@@ -494,7 +494,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //audioSource.Play();
 
         //Spawn damage dmgtext with in a different color, with offset
-        GameObject go = Instantiate(damagePrefab, transform.position + Vector3.right*damagePrefab.transform.lossyScale.x, damagePrefab.transform.rotation);
+        GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
+
+        //GameObject go = Instantiate(damagePrefab, transform.position + Vector3.right*damagePrefab.transform.lossyScale.x, damagePrefab.transform.rotation);
         TMP_Text t = go.GetComponentInChildren<TMP_Text>();
         t.text = damage.ToString();
         t.color = colour;
