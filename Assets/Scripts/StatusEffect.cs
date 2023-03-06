@@ -11,6 +11,13 @@ public abstract class StatusEffect
     public Sprite iconSprite;
     public EffectAlignment alignment;
 
+    //Temp - change this when "casting spells" replaces the SkillButton method. So ALL effect castings
+    //will be "smarter" events with knowledge of source as well as target
+    /// <summary>
+    /// Null if psion
+    /// </summary>
+    public Pawn caster; 
+
 
     public StatusEffect(Pawn target)
     {

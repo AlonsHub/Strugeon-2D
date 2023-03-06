@@ -34,9 +34,7 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
 
     public override void Action(GameObject tgt)
     {
-        //Charmed charmed = tgt.AddComponent<Charmed>();
-        //charmed.SetMe(tgt.GetComponent<WeaponItem>(), charmDuration);
-        CharmEffect charmEffect = new CharmEffect(tgt.GetComponent<Pawn>(), charmSprite);
+        CharmEffect charmEffect = new CharmEffect(tgt.GetComponent<Pawn>(), charmSprite, pawn); //passing off "pawn" being the mavka, as sourceCaster
 
         la.LookOnce(tgt.transform);
 

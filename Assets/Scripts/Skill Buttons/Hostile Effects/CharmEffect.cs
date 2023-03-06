@@ -3,25 +3,30 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharmEffect : EndOfTurnStatusEffect
+public class CharmEffect : MonsterStatusEffect, I_StatusEffect_TurnEnd
 {
     WeaponItem wi;
 
     int totalDuration = 2;
     int current;
-    public CharmEffect(Pawn target, Sprite sprite) : base(target, sprite)
+    public CharmEffect(Pawn target, Sprite sprite, Pawn src) : base(target, sprite, src)
     {
         alignment = EffectAlignment.Negative;
+
+        //This happens here since the spell is cast by Mavka and not a SkillButton/PsionSpell as usual.
+        // Spell casting should be a thing in-and-of-itself so that their targeting could be reflected for example...
+        //but also to centeralized these checks
+
         if (target.statusEffects != null && target.statusEffects.Count > 0)
         {
             StatusEffect existingEffect = target.statusEffects.Where(x => x is CharmEffect).FirstOrDefault();
             if (existingEffect != null)
             {
-                (existingEffect as CharmEffect).RefreshCounter();
+                (existingEffect as CharmEffect).RefreshCounter(); //THIS SHOULD BE STACKME()!
                 return; //Delete self?
             }
         }
-        current = 0;
+        current = totalDuration;
         ApplyEffect();
     }
 
@@ -38,7 +43,7 @@ public class CharmEffect : EndOfTurnStatusEffect
         else
             wi.targets = RefMaster.Instance.mercs;
 
-        base.ApplyEffect();
+        pawnToEffect.AddStatusEffect(this);
     }
 
     public override void EndEffect()
@@ -47,19 +52,20 @@ public class CharmEffect : EndOfTurnStatusEffect
             wi.targets = RefMaster.Instance.mercs;
         else
             wi.targets = RefMaster.Instance.enemyInstances;
-        base.EndEffect();
+
+        pawnToEffect.RemoveStatusEffect(this);
     }
 
     public override void Perform()
     {
-        current++;
-        if (current >= totalDuration)
+        current--;
+        if (current <= 0)
         {
             EndEffect();
         }
     }
 
-    public void RefreshCounter()
+    public void RefreshCounter() //Stack me? TBD TBF
     {
         current = totalDuration;
     }
