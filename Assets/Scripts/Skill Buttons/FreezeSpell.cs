@@ -28,7 +28,7 @@ public class FreezeSpell : SkillButton
 
         FreezeEffect skipTurn_Effect = new FreezeEffect(pawnTgt.TurnInfo, effectIcon);
         //DamageModifier damageModifier = new DamageModifier();
-        FreezeDamageReduction freezeDamageReducation = new FreezeDamageReduction(pawnTgt, effectIcon, damageModifier);
+        FreezeDamageReduction freezeDamageReducation = new FreezeDamageReduction(pawnTgt, null, damageModifier);
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Red, Color.red);
 

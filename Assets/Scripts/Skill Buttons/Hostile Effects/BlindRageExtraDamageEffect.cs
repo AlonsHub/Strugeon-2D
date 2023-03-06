@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeDamageReduction : DamageRelatedStatusEffect, I_StatusEffect_TurnStart, I_StatusEffect_IncomingDamageMod
+public class BlindRageExtraDamageEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnEnd, I_StatusEffect_OutgoingDamageMod
 {
-    /// <summary>
-    /// The sprite is left empty since this is an add-on effect to freeze which already has an icon
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="sprite"></param>
-    /// <param name="dm"></param>
-    public FreezeDamageReduction(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
+    public BlindRageExtraDamageEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, null, dm) //pass null instead of sprite just to ensure it won't add a status icon by accident
     {
         dm.currentDuration = dm.totalDuration;
         ApplyEffect();
@@ -24,4 +18,6 @@ public class FreezeDamageReduction : DamageRelatedStatusEffect, I_StatusEffect_T
                                                  //hence the I_StatusEffect_TurnEnd, and why Perform() reduced duration
             EndEffect();
     }
+
+
 }

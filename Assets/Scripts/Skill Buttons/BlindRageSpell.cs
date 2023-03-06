@@ -6,7 +6,8 @@ using UnityEngine;
 public class BlindRageSpell : SkillButton
 {
     //Pawn targetPawn;
-
+    [SerializeField]
+    DamageModifier damageModifier;
 
     public override void OnButtonClick()
     {
@@ -22,6 +23,7 @@ public class BlindRageSpell : SkillButton
         
         new BlindRageEffect(pawnTgt, effectIcon);
 
+        //new DamageRelatedStatusEffect();
 
         base.OnButtonClick();
     }

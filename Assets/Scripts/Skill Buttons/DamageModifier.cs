@@ -39,34 +39,37 @@ public class DamageModifier
     /// <returns></returns>
     public float Operate(float inValue)
     {
+        float outValue;
+
         switch (mathOperator)
         {
             case MathOperator.Add:
-                return inValue + mod;
+                outValue = inValue + mod;
                 break;
             case MathOperator.Subtract:
-                return inValue - mod;
+                outValue = inValue - mod;
                 break;
             case MathOperator.Multiply:
-                return inValue * mod;
+                outValue = inValue * mod;
                 break;
             case MathOperator.Divide:
-                return inValue / mod;
+                outValue = inValue / mod;
                 break;
             case MathOperator.Power:
-                return Mathf.Pow(inValue,mod);
+                outValue = Mathf.Pow(inValue,mod);
                 break;
             case MathOperator.Root:
-                float outValue = inValue;
+                outValue = inValue;
                 for (int i = 0; i < mod; i++)
                 {
                     outValue = Mathf.Sqrt(outValue);
                 }
-                return outValue;
                 break;
             default:
-                return -1;
+                outValue = -1;
                 break;
         }
+        Debug.LogError($"Original damage: {inValue} Changed to: {outValue}");
+        return outValue;
     }
 }

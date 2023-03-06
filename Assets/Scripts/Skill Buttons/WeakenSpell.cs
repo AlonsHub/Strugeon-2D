@@ -1,13 +1,12 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YellowButtonHostile : SkillButton
+public class WeakenSpell : SkillButton
 {
-    //Pawn targetPawn;
     [SerializeField]
-    float dmgMultiplier;
-    //ameObject effectObject;
+    DamageModifier damageModifier;
     public override void OnButtonClick()
     {
         //x1.5 dmg
@@ -18,14 +17,18 @@ public class YellowButtonHostile : SkillButton
         //targetPawn.ApplySpecialEffect(effectIcon, "Yellow");
         //StartCoroutine("EndWhen");
         pawnTgt = MouseBehaviour.hitTarget;
-        if (pawnTgt.DoYellowDebuff)
+       
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            return;
+            if (pawnTgt.statusEffects.Where(s => s is WeakenEffect).Any())
+            {
+                StatusEffect se = pawnTgt.statusEffects.Where(s => s is WeakenEffect).SingleOrDefault();
+                se.StackMe(); //This may be more relevant if freeze can be improved to have more duration
+                return;
+            }
         }
-        pawnTgt.DamageModifier = dmgMultiplier;
-        pawnTgt.DoYellowDebuff = true;
 
-        pawnTgt.AddEffectIcon(effectIcon, "yellowDeBuff");
+        WeakenEffect weakenEffect = new WeakenEffect(pawnTgt, effectIcon, damageModifier);
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Yellow, Color.yellow);
 
