@@ -193,16 +193,25 @@ public class WeaponItem : ActionItem
                 return;
             }
         }
-        if (hasRedBuff)
-        {
-            rolledDamage *= 1.5f;
-            hasRedBuff = false;
-            pawn.RemoveIconByName("redBuff");
-        }
+        //if (hasRedBuff)
+        //{
+        //    rolledDamage *= 1.5f;
+        //    hasRedBuff = false;
+        //    pawn.RemoveIconByName("redBuff");
+        //}
 
         if (rolledDamage < 0)
             rolledDamage = 0;
 
+        //status effect run
+        StatusEffect[] outgoingDamageEffects = pawn.GetStatusEffectsByPredicate(x => x is I_StatusEffect_OutgoingDamageMod);
+        if(outgoingDamageEffects != null && outgoingDamageEffects.Length !=0 )
+        {
+            foreach (var item in outgoingDamageEffects)
+            {
+                rolledDamage = (item as I_StatusEffect_OutgoingDamageMod).OperateOnDamage(rolledDamage);
+            }
+        }
         toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
 
         hitAction?.Invoke();

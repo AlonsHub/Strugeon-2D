@@ -23,14 +23,6 @@ public abstract class StatusEffect
         iconSprite = sprite;
     }
 
-    //public void AddIconToPawnBar()
-    //{
-    //    pawnToEffect.AddEffectIcon(iconSprite, this.GetType().ToString());
-    //}
-    //public void RemoveIconFromPawnBar()
-    //{
-    //    pawnToEffect.RemoveIconByName(this.GetType().ToString());
-    //}
     /// <summary>
     /// Use this to: 
     /// 1) Set the actual effect.
@@ -52,9 +44,4 @@ public abstract class StatusEffect
     {
 
     }
-    //public virtual bool StackMe()
-    //{
-
-    //}
-
 }

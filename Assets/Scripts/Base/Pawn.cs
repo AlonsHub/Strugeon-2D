@@ -159,7 +159,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         worldSpaceHorizontalGroup = GetComponentInChildren<WorldSpaceHorizontalGroup>();
         saItems = GetComponents<SA_Item>();
 
-        damageModifiers = new List<float>();
+        statusEffects = new List<StatusEffect>();
+
+        damageModifiers = new List<float>(); //TBF to be removed also
 
         hasSAs = (saItems.Length != 0);
         
@@ -706,6 +708,31 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     //{
     //    Invoke(nameof()
     //}
+
+    public StatusEffect[] GetStatusEffectsByPredicate(System.Func<StatusEffect, bool> pred)
+    {
+        if (statusEffects != null && statusEffects.Count != 0)
+        {
+            return statusEffects.Where(pred).ToArray();
+        }
+        return null;
+    }
+    public StatusEffect GetFirstStatusEffectByPredicate(System.Func<StatusEffect, bool> pred)
+    {
+        if (statusEffects != null && statusEffects.Count != 0)
+        {
+            return statusEffects.Where(pred).FirstOrDefault();
+        }
+        return null;
+    }
+    public StatusEffect GetSingleStatusEffectByPredicate(System.Func<StatusEffect, bool> pred)
+    {
+        if (statusEffects != null && statusEffects.Count != 0)
+        {
+            return statusEffects.Where(pred).SingleOrDefault();
+        }
+        return null;
+    }
 
 }
 
