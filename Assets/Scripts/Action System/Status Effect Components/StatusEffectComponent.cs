@@ -20,8 +20,8 @@ public class StatusEffectComponent : MonoBehaviour
     /// </summary>
     Sprite effectIcon;
     protected int ttl;
-    protected int maxTTL;
-    protected Pawn tgtPawn;
+    public int maxTTL;
+    public Pawn tgtPawn;
 
     public virtual void SetMe(Pawn target, string buffIconName, int newMaxTTL)
     {

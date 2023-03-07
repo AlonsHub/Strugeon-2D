@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RootDownItem : ActionItem, SA_Item
@@ -92,10 +93,35 @@ public class RootDownItem : ActionItem, SA_Item
 
         la.LookOnce(tgt.transform);
 
+
+        //TBF! this is why we need to check reflection at a "casting event" which contains "caster, target, spell, whatever"
+        //And not in code, just before it happens... 
+        if(toRoot.HasStatusEffect(x => x is ReflectEffect))
+        {
+            tgt = pawn.gameObject;
+            toRoot = pawn;
+        }
+
+
         RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
 
-        //Scaling up root with mavka level
+
+        //Adds the StatusEffect to hook into this:
+        if (toRoot.statusEffects != null && toRoot.statusEffects.Count > 0)
+        {
+            StatusEffect existingEffect = toRoot.statusEffects.Where(x => x is RootDownEffect).FirstOrDefault();
+            if (existingEffect != null)
+            {
+                (existingEffect as RootDownEffect).StackMe(); //THIS SHOULD BE STACKME()!
+                return; //Delete self?
+            }
+        }
+
         rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel-1)*5 ), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
+        
+        RootDownEffect rde = new RootDownEffect(toRoot,rootDownSprite,rda);
+
+        //Scaling up root with mavka level
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
 

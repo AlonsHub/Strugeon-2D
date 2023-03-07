@@ -6,7 +6,7 @@ public enum EffectAlignment {Positive, Negative, Nuetral}; //nuetral could be "i
 public abstract class StatusEffect
 {
 
-    protected Pawn pawnToEffect;
+    public Pawn pawnToEffect;
 
     public Sprite iconSprite;
     public EffectAlignment alignment;

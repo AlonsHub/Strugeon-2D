@@ -744,6 +744,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         return null;
     }
+    public bool HasStatusEffect(System.Func<StatusEffect, bool> pred)
+    {
+        if (statusEffects != null && statusEffects.Count != 0)
+        {
+            return statusEffects.Where(pred).Any();
+        }
+        return false;
+    }
 
 }
 
