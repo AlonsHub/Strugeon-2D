@@ -2,23 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FerocityEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnStart ,I_StatusEffect_IncomingDamageMod
+public class FerocityEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnEnd ,I_StatusEffect_IncomingDamageMod
 {
     public FerocityEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
         alignment = EffectAlignment.Positive; //See comments on "Buff Bundles" in BlindRageEffect 
 
-        dm.currentDuration = dm.totalDuration;
         ApplyEffect();
-    }
-
-    public override void Perform()
-    {
-        damageModifier.currentDuration--;
-        if(damageModifier.currentDuration <= 0)
-        {
-            EndEffect();
-        }
     }
 
     public override float OperateOnDamage(float originalDamage)

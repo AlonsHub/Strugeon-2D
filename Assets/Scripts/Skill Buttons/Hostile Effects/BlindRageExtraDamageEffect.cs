@@ -10,18 +10,9 @@ public class BlindRageExtraDamageEffect : DamageRelatedStatusEffect, I_StatusEff
         alignment = EffectAlignment.Negative; //DEBATEABLE! since it doesn't have its own icon, it would be weird to cleanse a target of blind rage and for it to keep the damage buff... since they are one "buff bundle" that should deactivate as a whole.
 
 
-        dm.currentDuration = dm.totalDuration;
         ApplyEffect();
     }
 
-    public override void Perform()
-    {
-        damageModifier.currentDuration--;
-        if (damageModifier.currentDuration <= 0) //in this case duration should be reduced as the statuseffect duration holds
-                                                 //meaning it should have the duration of the spells effect, and reduce at the end of each turn
-                                                 //hence the I_StatusEffect_TurnEnd, and why Perform() reduced duration
-            EndEffect();
-    }
-
+    
 
 }

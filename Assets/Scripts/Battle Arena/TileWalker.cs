@@ -57,7 +57,7 @@ public class TileWalker : MonoBehaviour
         if (path.Count <= 0)
         {
             Debug.LogError(name + " No path found, passed a null path to tilewalker.");
-            pawn.TurnDone = true;
+            pawn.FinishAnimation();
         }
         else
         {
@@ -82,7 +82,7 @@ public class TileWalker : MonoBehaviour
         {
             //Debug.LogError(name + " No path found, passed a null path to tilewalker.");
             lookAtter.tgt = null; //stops rotating
-            pawn.TurnDone = true;
+            pawn.FinishAnimation();
         }
         else
         {

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class DamageRelatedStatusEffect : StatusEffect
 {
+    [SerializeField]
     protected DamageModifier damageModifier;
 
     public DamageRelatedStatusEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite)
     {
         damageModifier = dm;
+        damageModifier.currentDuration = damageModifier.totalDuration;
     }
 
     /// <summary>
@@ -29,18 +31,21 @@ public class DamageRelatedStatusEffect : StatusEffect
     }
 
     /// <summary>
-    /// Irrelevant for damage related status effects!
-    /// They use the interface (by which they are differentiated)
+    /// override this to chnage the way duration is reduced
     /// </summary>
     public override void Perform()
     {
-        //Check duration?
+        damageModifier.currentDuration--;
+        if (damageModifier.currentDuration <= 0)
+        {
+            EndEffect();
+        }
     }
 
     public virtual float OperateOnDamage(float originalDamage)
     {
         //REDUCE DURATION here
-        damageModifier.currentDuration--;
+        //damageModifier.currentDuration--;
         return damageModifier.Operate(originalDamage);
     }
 }

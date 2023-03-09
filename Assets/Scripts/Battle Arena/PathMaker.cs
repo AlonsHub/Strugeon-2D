@@ -150,7 +150,7 @@ public class PathMaker : MonoBehaviour
         }
         
         //Debug.LogWarning(seeker.name + "has failed to find path to " + target.name + ", return empty List<FloorTile>");
-        skr.pawn.TurnDone = true;
+        skr.pawn.FinishAnimation();
         return new List<FloorTile>();
     }
 

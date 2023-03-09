@@ -27,7 +27,7 @@ public class FreezeEffect : TurnInfoEffect, I_StatusEffect_TurnStart
     }
     public override void Perform()
     {
-        turnInfoToEffect.TryGetPawn().TurnDone = true; //skipping "Finish animation by directly setting to turndone to be true
+        turnInfoToEffect.TryGetPawn().FinishAnimation(); //skipping "Finish animation by directly setting to turndone to be true
         EndEffect();
     }
 }

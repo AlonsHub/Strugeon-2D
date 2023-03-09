@@ -7,18 +7,23 @@ public class WeakenEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDa
     public WeakenEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
         alignment = EffectAlignment.Negative;
-        dm.currentDuration = dm.totalDuration;
         ApplyEffect();
     }
 
-    public override void Perform()
+    public override float OperateOnDamage(float originalDamage)
     {
-        //TEMPORARILY 1 TURN BASED
 
-        damageModifier.currentDuration--;
-        if (damageModifier.currentDuration <= 0) //in this case duration should be reduced as the statuseffect duration holds
-                                                 //meaning it should have the duration of the spells effect, and reduce at the end of each turn
-                                                 //hence the I_StatusEffect_TurnEnd, and why Perform() reduced duration
-            EndEffect();
+        return base.OperateOnDamage(originalDamage);
     }
+
+    //public override void Perform()
+    //{
+    //    //TEMPORARILY 1 TURN BASED
+
+    //    damageModifier.currentDuration--;
+    //    if (damageModifier.currentDuration <= 0) //in this case duration should be reduced as the statuseffect duration holds
+    //                                             //meaning it should have the duration of the spells effect, and reduce at the end of each turn
+    //                                             //hence the I_StatusEffect_TurnEnd, and why Perform() reduced duration
+    //        EndEffect();
+    //}
 }

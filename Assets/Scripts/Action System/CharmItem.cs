@@ -46,7 +46,7 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
 
         currentCooldown = maxCooldown;
         StartCoroutine(CountDownCool());
-        pawn.TurnDone = true;
+        pawn.FinishAnimation();
     }
 
     IEnumerator CountDownCool()

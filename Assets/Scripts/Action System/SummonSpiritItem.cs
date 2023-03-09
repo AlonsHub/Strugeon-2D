@@ -142,7 +142,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         //la.tgt = null; not needed after LookOnce was introduced.
 
-        pawn.TurnDone = true;
+        pawn.FinishAnimation();
     }
 
     public override void CalculateVariations()

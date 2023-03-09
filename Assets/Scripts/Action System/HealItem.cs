@@ -102,7 +102,7 @@ public class HealItem : ActionItem, SA_Item
 
     void CharacterHeal()
     {
-        pawn.TurnDone = true;//TBF!!!
+        pawn.FinishAnimation();//TBF!!!
     }
 
     public override void CalculateVariations()

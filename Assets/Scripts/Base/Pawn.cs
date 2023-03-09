@@ -68,7 +68,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public List<ActionVariation> actionPool;
     List<int> actionWeightList;
 
-    //List<SuggestiveEffect> suggestiveEffects;
     public List<StatusEffect> statusEffects;
 
 
@@ -84,15 +83,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public WorldSpaceHorizontalGroup worldSpaceHorizontalGroup;
 
     #region Scion Powers
-    //private bool doDoubleTurn = false;
-    //private bool doSkipTurn = false;
-    private bool doYellowDebuff = false;
-    private float damageModifier = 1;
-    private List<float> damageModifiers;
-    private bool hasPurple = false;
+    //private List<float> damageModifiers; //make sure this is not used either, then remove tbf
+    private bool hasPurple = false; //tbf remove this shit please
     public GameObject purpleTgt;
     #endregion
-    // Vector2Int GetGridPos { get => tileWalker.gridPos; }
+    
 
     public Pawn myPrefab;
 
@@ -104,10 +99,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     public bool ActionDone { get => actionDone; set => actionDone = value; } //Item has performed its action and is reporting "done"
     //public bool DoDoubleTurn { get => doDoubleTurn; set => doDoubleTurn = value; }
     //public bool DoSkipTurn { get => doSkipTurn; set => doSkipTurn = value; }
-    public bool DoYellowDebuff { get => doYellowDebuff; set => doYellowDebuff = value; } //TBF - modify damage chain!
-    public bool DoModifyDamage => DamageModifiers.Count>0; //new approach that will mod damage only if there are mods to add - mods will remove themselves?
-    public float DamageModifier { get => damageModifier; set => damageModifier = value; }
-    public List<float> DamageModifiers { get => damageModifiers; set => damageModifiers = value; }
+    
+    
+  
 
     public bool HasShield;
     public bool HasRoot;
@@ -161,7 +155,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         statusEffects = new List<StatusEffect>();
 
-        damageModifiers = new List<float>(); //TBF to be removed also
+
 
         hasSAs = (saItems.Length != 0);
         
@@ -270,7 +264,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         CalculateActionList();
         if (actionWeightList.Count == 0)
         {
-            TurnDone = true;
+            FinishAnimation();
+
             return; //!!!!!!!!!!
         }
 
@@ -285,11 +280,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 break;
             }
         }
-        if(actionIndex == -1)
+        if (actionIndex == -1)
         {
             //skip rope
             Debug.LogError($"{Name} SKIPPED rope");
-            TurnDone = true;
+            FinishAnimation();
             return;
         }
 
@@ -702,8 +697,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     }
     public void RemoveStatusEffect(StatusEffect statusEffect)
     {
-
-        StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), statusEffect);
+        statusEffects.Remove(statusEffect);
+        RemoveIconByName(statusEffect.GetType().ToString());
+        //StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), statusEffect);
         //statusEffects.Remove(statusEffect);
     }
 
@@ -715,11 +711,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         yield return new WaitForEndOfFrame();
 
     }
-    //public void RemoveSuggestiveEffectWithDelay(SuggestiveEffect suggestiveEffect, float delay)
-    //{
-    //    Invoke(nameof()
-    //}
 
+    #region Predicate Getters 
     public StatusEffect[] GetStatusEffectsByPredicate(System.Func<StatusEffect, bool> pred)
     {
         if (statusEffects != null && statusEffects.Count != 0)
@@ -752,6 +745,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         return false;
     }
+    #endregion
 
 }
 

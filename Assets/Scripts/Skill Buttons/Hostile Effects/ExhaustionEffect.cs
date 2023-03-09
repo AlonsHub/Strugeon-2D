@@ -7,23 +7,17 @@ public class ExhaustionEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnEn
     public ExhaustionEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
         alignment = EffectAlignment.Negative;
-        //dm.mod = .9f; 
-        dm.currentDuration = dm.totalDuration;
+        
         ApplyEffect();
     }
 
     public override void Perform()
     {
+        Debug.LogWarning($"{pawnToEffect.Name} exahusted! {damageModifier.currentDuration}");
+
+
         damageModifier.mod *= .9f; //reduces damage mod for NEXT time
-        damageModifier.currentDuration--;
-        if (damageModifier.currentDuration <= 0)
-        {
-            EndEffect();
-        }
+        base.Perform();
     }
 
-    public override float OperateOnDamage(float originalDamage)
-    {
-        return damageModifier.Operate(originalDamage);
-    }
 }

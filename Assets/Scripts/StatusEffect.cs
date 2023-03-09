@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EffectAlignment {Positive, Negative, Nuetral}; //nuetral could be "indifferent"
+[System.Serializable]
 public abstract class StatusEffect
 {
 

@@ -82,7 +82,7 @@ public class VenomBiteItem : ActionItem, SA_Item
         if (!toHit)
         {
             Debug.Log("no tgt to hit");
-            pawn.TurnDone = true;
+            pawn.FinishAnimation();
             return;
         }
 
@@ -190,7 +190,7 @@ public class VenomBiteItem : ActionItem, SA_Item
 
 
 
-        pawn.TurnDone = true;
+        pawn.FinishAnimation();
     }
 
     public void SetToLevel(int level)

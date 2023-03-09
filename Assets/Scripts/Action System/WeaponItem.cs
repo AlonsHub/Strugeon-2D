@@ -189,7 +189,8 @@ public class WeaponItem : ActionItem
                 BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
 
                 la.tgt = null;
-                pawn.TurnDone = true;
+                //pawn.TurnDone = true;
+                pawn.FinishAnimation();
                 return;
             }
         }
@@ -247,7 +248,8 @@ public class WeaponItem : ActionItem
         }
         effectData.SetMe(effectAddon.data);
         
-        pawn.TurnDone = true;
+        //pawn.TurnDone = true;
+        pawn.FinishAnimation();
     }
     //public void AddHitEffectToChachedProjectile() //TBF this is for better access to the projectiles stats
     //{

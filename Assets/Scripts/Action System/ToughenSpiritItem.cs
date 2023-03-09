@@ -63,7 +63,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
         //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgtPawn.Name, healRoll, Color.green);
 
         //after the effect ->
-       pawn.TurnDone = true;
+       pawn.FinishAnimation();
     }
 
     public bool SA_Available()

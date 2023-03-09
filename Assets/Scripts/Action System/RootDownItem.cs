@@ -87,7 +87,7 @@ public class RootDownItem : ActionItem, SA_Item
         if (!toRoot)
         {
             Debug.LogError("no pawn to root!");
-            pawn.TurnDone = true;
+            pawn.FinishAnimation();
             return;
         }
 
@@ -126,7 +126,7 @@ public class RootDownItem : ActionItem, SA_Item
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
 
         //attach a RootDown component to that pawn
-            pawn.TurnDone = true;
+            pawn.FinishAnimation();
     }
 
     public override void CalculateVariations()
