@@ -37,7 +37,7 @@ public class DamageRelatedStatusEffect : StatusEffect
         //Check duration?
     }
 
-    public float OperateOnDamage(float originalDamage)
+    public virtual float OperateOnDamage(float originalDamage)
     {
         //REDUCE DURATION here
         damageModifier.currentDuration--;

@@ -32,12 +32,13 @@ public class Attacher : StatusEffectComponent, I_Attackable
     {
         if (instantiateEffect)
             Destroy(instantiateEffect);
-        base.RemoveEffect();
+        Destroy(this);
+        //base.RemoveEffect();
     }
 
     public override void ApplyEffect()
     {
-        base.ApplyEffect();
+        //base.ApplyEffect(); //THIS ADDS AN ICON!
         if (visualEffectPrefab)
             instantiateEffect = Instantiate(visualEffectPrefab, tgtPawn.transform);
     }

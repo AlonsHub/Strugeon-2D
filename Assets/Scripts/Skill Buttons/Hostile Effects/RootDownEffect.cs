@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RootDownEffect : StatusEffect, I_StatusEffect_TurnEnd
+public class RootDownEffect : StatusEffect, I_StatusEffect_TurnStart
 {
     float spikeDamage;
 

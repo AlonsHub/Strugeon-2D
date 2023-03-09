@@ -11,7 +11,7 @@ public enum MathOperator {Add,Subtract,Multiply,Divide,Power,Root};
 /// maybe status effects will hold the modifiers - and subscribe?
 /// </summary>
 [System.Serializable]
-public class DamageModifier
+public struct DamageModifier
 {
     /// <summary>
     /// the value with which modification will be made.

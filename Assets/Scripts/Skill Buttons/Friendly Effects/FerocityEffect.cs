@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FerocityEffect : MonoBehaviour
+public class FerocityEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnStart ,I_StatusEffect_IncomingDamageMod
 {
-    // Start is called before the first frame update
-    void Start()
+    public FerocityEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
-        
+        alignment = EffectAlignment.Positive; //See comments on "Buff Bundles" in BlindRageEffect 
+
+        dm.currentDuration = dm.totalDuration;
+        ApplyEffect();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Perform()
     {
-        
+        damageModifier.currentDuration--;
+        if(damageModifier.currentDuration <= 0)
+        {
+            EndEffect();
+        }
+    }
+
+    public override float OperateOnDamage(float originalDamage)
+    {
+        if ((pawnToEffect.currentHP - originalDamage) < 1)
+            return pawnToEffect.currentHP - 1;
+        else
+            return originalDamage;
     }
 }
