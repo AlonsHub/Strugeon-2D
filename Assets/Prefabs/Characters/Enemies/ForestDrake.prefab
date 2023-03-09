@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5778733353198604762}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!212 &3672233238955473013
 SpriteRenderer:
@@ -111,7 +111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5778733353198604762}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &94684860494416633
 MeshRenderer:
@@ -203,9 +203,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8189014768233513465}
-  - {fileID: 6693139294923583950}
   - {fileID: 989352517264580374}
   - {fileID: 8587715733164269160}
+  - {fileID: 6693139294923583950}
   - {fileID: 2287084138699863666}
   m_Father: {fileID: 6329652361188741050}
   m_RootOrder: 0
@@ -284,7 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5778733353198604762}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &1359581366947250135
 SpriteRenderer:
@@ -422,6 +422,7 @@ MonoBehaviour:
   currentHP: 200
   maxHP: 200
   pawnName: Forest Drake
+  GFX: {fileID: 6243158429807829216}
   isEnemy: 1
   mercName: 0
   _mercSheet:
@@ -608,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 5808167037023471695}
+  weaponItem: {fileID: 0}
   minDamagePerLevel: 3
   maxDamagePerLevel: 3
   hpPerLevel: 10

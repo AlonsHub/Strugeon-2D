@@ -13,7 +13,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     [SerializeField]
     private string pawnName; //character name (not GameObject name)! //chagne the only use of this to print the enums name (mercName)
 
-    
+
+    [SerializeField]
+    GameObject GFX;
+
+    [SerializeField]
     TurnInfo _turnInfo;
     
 
@@ -141,6 +145,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     // end TEMP AF
     public int enemyLevel = -1; //should stay that way if not enemy
+
+    
 
     public override void Init()
     {
@@ -746,6 +752,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         return false;
     }
     #endregion
+
+    public void SetGFXScale(Vector3 scale)
+    {
+        GFX.transform.localScale = scale;
+    }
 
 }
 
