@@ -102,7 +102,10 @@ public class WeaponItem : ActionItem
         }
 
 
-        int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+        //int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+        int dist = pawn.tileWalker.GetDistanceFromMeToYou(toHit.tileWalker);
+
+
 
         if (dist > range*14)
         {
@@ -251,60 +254,7 @@ public class WeaponItem : ActionItem
         //pawn.TurnDone = true;
         pawn.FinishAnimation();
     }
-    //public void AddHitEffectToChachedProjectile() //TBF this is for better access to the projectiles stats
-    //{
-
-    //}
-    //public override void CalculateVariations()
-    //{
-    //    //actionVariations = new List<ActionVariation>();
-    //    actionVariations.Clear();
-
-    //    if (targets.Count == 0)
-    //    {
-    //        Debug.Log(name + " Found no enemies, no weapon action variations added");
-    //        return;// end match
-    //    }
-
-
-    //    if(feetItem)
-    //    feetItem.currentRangeInTiles = range; // maybe do this at Start()?
-
-    //    foreach (Pawn p in targets)
-    //    {
-    //        if (p.currentHP <= 0) //just in-case a dead enemy is still in the list somehow
-    //            continue;
-
-    //        int weight = baseweight;
-
-    //        int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
-
-
-    //        if (currentDistance <= range * 14) // true = target is withing attack range (for melee/ranged attackers alike!)
-    //        {
-    //            if (isRanged && currentDistance <= 14) //14 is one tile - makes sure you're not in melee range with target
-    //            {
-    //                //according to GDD this should multiply by 10 
-    //                continue;
-    //            }
-    //            //melee attacker only have 1 range, so this means adjacent
-    //            weight *= 5; // changed from 20 to 2 //changed back to 20 //back to 2! 29/03/22
-
-    //        }
-    //        if (p.currentHP <= p.maxHP / 2.5f) //40%
-    //        {
-    //            weight *= 10;
-    //        }
-
-    //        if (weight != 0)
-    //        {
-    //            actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-    //        }
-    //    }
-
-    //    CallBehaveVariables();
-
-    //}
+    
     public override void CalculateVariations()
     {
         //actionVariations = new List<ActionVariation>();
@@ -323,8 +273,13 @@ public class WeaponItem : ActionItem
 
             int weight = weaponPrefs.baseAttackValue;
 
-            int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+            //int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+            int currentDistance = pawn.tileWalker.GetDistanceFromMeToYou(p.tileWalker);
 
+            if(range <= 14 && pawn.tileWalker.elevation != p.tileWalker.elevation) //melee
+            {
+                continue;
+            }
 
             switch (currentDistance)
             {
@@ -424,4 +379,6 @@ public class WeaponItem : ActionItem
     {
         Debug.Log("ON ATTACK ACTION " + name);
     }
+
+    
 }

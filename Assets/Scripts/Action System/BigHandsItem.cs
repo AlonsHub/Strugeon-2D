@@ -117,7 +117,8 @@ public class BigHandsItem : ActionItem, SA_Item
                         int counter = 0;
                         foreach (var m in RefMaster.Instance.mercs)
                         {
-                            if (pawn.tileWalker.currentNode.GetDistanceToTarget(m.tileWalker.currentNode)/14 >= 2)
+                            //if (pawn.tileWalker.currentNode.GetDistanceToTarget(m.tileWalker.currentNode)/14 >= 2)
+                            if (pawn.tileWalker.GetDistanceFromMeToYou(m.tileWalker)/14 >=2)
                             {
                                 counter++;
                             }

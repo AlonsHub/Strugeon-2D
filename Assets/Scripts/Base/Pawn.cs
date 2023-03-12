@@ -664,7 +664,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     }
     public void SetGridPos(Vector2Int newPos) //ignores these values (just in pawn's/tilewalker's case)
     {
-        tileWalker.Init();
+        //tileWalker.Init();
+        tileWalker.SetPos(newPos);
     }
 
     public string GetName()

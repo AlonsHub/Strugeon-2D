@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-
 public class TileWalker : MonoBehaviour
 {
     public FloorGrid floorGrid;
     public Vector2Int gridPos;
+    public int elevation;
     public int moveSpeed; //number of tiles per move action
     [SerializeField]
     private Vector3 offsetFromGrid;
@@ -25,13 +24,12 @@ public class TileWalker : MonoBehaviour
 
     public Pawn pawn;
 
-
-    //public ActionVariation afterWalkAction;
     LookAtter lookAtter;
 
     public void Init()
     {
         pawn = GetComponent<Pawn>();
+        elevation = 0;
 
         if (floorGrid == null)
         {
@@ -42,6 +40,16 @@ public class TileWalker : MonoBehaviour
         lookAtter = GetComponentInChildren<LookAtter>();
         doLimitSteps = false;
     }
+    public void SetPos(Vector2Int pos)
+    {
+        gridPos = pos;
+        currentNode = FloorGrid.Instance.floorTiles[gridPos.x, gridPos.y];
+        currentNode.AcceptOccupant(gameObject);
+        
+        transform.position = currentNode.transform.position + offsetFromGrid;
+    }
+
+
     public bool hasPath = false;
     //int currentPathIndex; //the index of the current node in the path list.
     public float stepTime;
@@ -102,29 +110,10 @@ public class TileWalker : MonoBehaviour
     {
         FindOwnGridPos();
 
-        //currentNode.isEmpty = true;
         currentNode.RemoveOccupant(false);
         
         int stepsToTake = path.Count - range;
        
-        
-
-        //int stepsToTake = path.Count;
-        //if (doLimitSteps)
-        //{
-        //    pawn.RemoveIconByName("blueDeBuff");
-
-        //    if (stepsToTake > stepLimit)
-        //    {
-        //        stepsToTake = stepLimit;
-        //        pawn.TurnDone = true;
-        //    }
-
-
-        //    //stepLimit = 0; //resets 
-        //    doLimitSteps = false;
-
-        //}
         int difference = path.Count - stepsToTake;
 
         for (int i = 0; i < difference; i++)
@@ -137,16 +126,7 @@ public class TileWalker : MonoBehaviour
     IEnumerator TileByTileWalk(List<FloorTile> walkPath) //this has the last "step" removed from it already (meaning we stop just before the target)
     {
         int stepsToTake = walkPath.Count;
-        //if(doLimitSteps)
-        //{
-        //    if(stepsToTake > stepLimit)
-        //    stepsToTake = stepLimit;
-
-        //    pawn.RemoveIconByName("blueDeBuff");
-
-        //    //stepLimit = 0; //resets 
-        //    doLimitSteps = false;
-        //}
+       
 
         for (int i = 0; i < stepsToTake; i++)
         {
@@ -158,14 +138,10 @@ public class TileWalker : MonoBehaviour
         FindOwnGridPos();
         currentNode.AcceptOccupant(gameObject);
 
-        //currentNode.isEmpty = false;
-        //currentNode.myOccupant = gameObject;
-
         lookAtter.tgt = null; //stops rotating
 
         hasPath = false; //Finished!
-        //pawn.TurnDone = true; //hmm
-        //END TURN
+        
     }
 
     public void Step(FloorTile stepDest) //takes one(?) step in a direction on the Array of the map.
@@ -180,6 +156,8 @@ public class TileWalker : MonoBehaviour
         //currentNode.isEmpty = false;
     }
 
+
+    //Should really not use this as much... it doens't hurt, but there is no need to refind position so often TBF
     public void FindOwnGridPos() //just in case they get lost somehow
     {
         //approximate location accuratly by dividing the x and z pos, to bet the index - then access that tile and steal its position data
@@ -189,13 +167,24 @@ public class TileWalker : MonoBehaviour
 
         if (currentNode == null || gridPos.x != x || gridPos.y != y)
         {
-            gridPos.x = Mathf.RoundToInt(x);
-            gridPos.y = Mathf.RoundToInt(y);
-            currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
-            currentNode.AcceptOccupant(gameObject);
-            //currentNode.isEmpty = false;
-            //currentNode.myOccupant = gameObject;
-            transform.position = currentNode.transform.position + offsetFromGrid;
+            //gridPos.x = Mathf.RoundToInt(x);
+            //gridPos.y = Mathf.RoundToInt(y);
+            //currentNode = floorGrid.floorTiles[gridPos.x, gridPos.y];
+            //currentNode.AcceptOccupant(gameObject);
+            ////currentNode.isEmpty = false;
+            ////currentNode.myOccupant = gameObject;
+            //transform.position = currentNode.transform.position + offsetFromGrid;
+            SetPos(new Vector2Int(x, y));
         }
+    }
+
+    public int GetDistanceFromMeToYou(TileWalker you)
+    {
+        return currentNode.GetDistanceToTarget(you.currentNode) + elevation + you.elevation;
+    }
+
+    public void SetElevation(int newElevation)
+    {
+        elevation = newElevation;
     }
 }

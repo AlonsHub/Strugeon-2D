@@ -79,7 +79,8 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
         foreach (Pawn p in targets)
         {
             int weight = initialWeight;
-            if (pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode) / 14 == 1)
+            //if (pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode) / 14 == 1)
+            if (pawn.tileWalker.GetDistanceFromMeToYou(p.tileWalker) / 14 == 1)
             {
                 weight *= 10;
                 if(pawn.maxHP/pawn.currentHP >=2) //50%

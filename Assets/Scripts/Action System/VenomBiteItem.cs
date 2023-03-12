@@ -87,7 +87,8 @@ public class VenomBiteItem : ActionItem, SA_Item
         }
 
 
-        int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+        //int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
+        int dist = pawn.tileWalker.GetDistanceFromMeToYou(toHit.tileWalker);
 
         if (dist > 14)
         {
@@ -147,7 +148,8 @@ public class VenomBiteItem : ActionItem, SA_Item
         {
             int weight = baseweight;
 
-            int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+            //int currentDistance = pawn.tileWalker.currentNode.GetDistanceToTarget(p.tileWalker.currentNode);
+            int currentDistance = pawn.tileWalker.GetDistanceFromMeToYou(p.tileWalker);
 
             if (p.currentHP <= 0)
                 continue;

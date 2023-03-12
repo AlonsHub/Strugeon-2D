@@ -58,7 +58,8 @@ public class HealItem : ActionItem, SA_Item
         StartCooldown();
 
         Pawn tgtPawn = tgt.GetComponent<Pawn>();
-        int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
+        //int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
+        int dist = tileWalker.GetDistanceFromMeToYou(tgtPawn.tileWalker);
 
         if(dist > range * 14)
         {
@@ -127,7 +128,8 @@ public class HealItem : ActionItem, SA_Item
             }
             int weight = baseweight;
 
-            int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
+            //int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
+            int currentDistance = tileWalker.GetDistanceFromMeToYou(p.tileWalker);
             if (currentDistance <= 14) // one tile
             {
                 weight *= 4; //if adjacent

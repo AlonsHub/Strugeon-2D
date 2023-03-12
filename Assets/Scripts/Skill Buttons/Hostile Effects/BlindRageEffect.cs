@@ -30,7 +30,8 @@ public class BlindRageEffect : SuggestiveEffect
 
         foreach (var item in allPawns)
         {
-            if(pawnToEffect.tileWalker.currentNode.GetDistanceToTarget(item.tileWalker.currentNode) <= 14)
+            //if(pawnToEffect.tileWalker.currentNode.GetDistanceToTarget(item.tileWalker.currentNode) <= 14)
+            if(pawnToEffect.tileWalker.GetDistanceFromMeToYou(item.tileWalker) <= 14)
             {
                 adjPawns.Add(item);
             }
