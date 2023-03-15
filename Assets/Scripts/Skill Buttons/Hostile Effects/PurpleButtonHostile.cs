@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurpleButtonHostile : SkillButton
+public class PurpleButtonHostile : SpellButton
 {
     public override void OnButtonClick()
     {

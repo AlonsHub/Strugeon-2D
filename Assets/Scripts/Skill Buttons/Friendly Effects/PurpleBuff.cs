@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurpleBuff : SkillButton
+public class PurpleBuff : SpellButton
 {
     //private Pawn targetPawn;
     public float slowerTime;

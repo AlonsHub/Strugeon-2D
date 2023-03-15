@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
     public enum ButtonColor {Red, Blue, Yellow, Purple};
-public class SkillButton : Hoverable
+public class SpellButton : Hoverable
 {
     public ButtonColor buttonColor;
     public NulColour nulColour;

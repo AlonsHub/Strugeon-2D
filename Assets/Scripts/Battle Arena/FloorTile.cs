@@ -63,6 +63,7 @@ public class FloorTile : MonoBehaviour
     {
         isEmpty = false;
         myOccupant = newOccupant;
+        myOccupant.transform.position = transform.position; // NO OFFSET?
         OnOccupantEnter?.Invoke();
     }
     public void RemoveOccupant(bool doAlsoDestroy)

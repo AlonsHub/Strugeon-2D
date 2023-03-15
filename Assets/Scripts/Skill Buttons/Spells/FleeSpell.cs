@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FleeSpell : SkillButton
+public class FleeSpell : SpellButton
 {
     
     //DONE!

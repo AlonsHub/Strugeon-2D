@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YellowBuff : SkillButton
+public class YellowBuff : SpellButton
 {
     //private Pawn targetPawn;
     public float percentHeal;

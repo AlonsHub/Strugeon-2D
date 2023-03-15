@@ -3,15 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShrinkSpell : SkillButton
+public class LevitateSpell : SpellButton
 {
-
     [SerializeField]
-    int missChance;
-    [SerializeField]
-    DamageModifier damageModifier;
-    [SerializeField]
-    DamageModifier dodgeDamageModifier;
+    int duration;
 
     public override void OnButtonClick()
     {
@@ -19,16 +14,16 @@ public class ShrinkSpell : SkillButton
 
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (pawnTgt.statusEffects.Where(s => s is ShrinkEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is LevitateEffect).Any())
             {
-                StatusEffect se = pawnTgt.statusEffects.Where(s => s is ShrinkEffect).SingleOrDefault();
+                StatusEffect se = pawnTgt.statusEffects.Where(s => s is LevitateEffect).SingleOrDefault();
                 se.StackMe(); //This may be more relevant if freeze can be improved to have more duration
                 return;
             }
         }
 
-        new ShrinkEffect(pawnTgt, effectIcon, damageModifier);
-        new DodgeEffect(pawnTgt, null, dodgeDamageModifier, missChance);
+        new LevitateEffect(pawnTgt, effectIcon, duration);
+        
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Blue, SturgeonColours.Instance.noolBlue);
 

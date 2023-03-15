@@ -45,12 +45,7 @@ public class EscapeItem : ActionItem
         //tilewalk to PlayerDataMaster.Instance.currentLevel.escapeTile
         yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
 
-        //what happenes if not?!
-
         pawn.Escape();
-        //disappear
-
-        //pawn.TurnDone = true;
     }
 
     public override void CalculateVariations()

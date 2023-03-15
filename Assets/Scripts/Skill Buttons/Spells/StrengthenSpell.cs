@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StrengthenSpell : SkillButton
+public class StrengthenSpell : SpellButton
 {
     public DamageModifier damageModifier;
 

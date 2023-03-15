@@ -131,7 +131,9 @@ public class TileWalker : MonoBehaviour
         for (int i = 0; i < stepsToTake; i++)
         {
             transform.position = walkPath[i].transform.position + offsetFromGrid;
-            //transform.rotation = Quaternion.Euler(0, 0, );
+            
+            //Apply tile effects like fire - TBA TBF
+
             yield return new WaitForSeconds(stepTime);
         }
 
@@ -156,6 +158,20 @@ public class TileWalker : MonoBehaviour
         //currentNode.isEmpty = false;
     }
 
+    public bool StepInDirection(Vector2Int dir)
+    {
+        FloorTile nextTile = floorGrid.floorTiles[currentNode.gridIndex.x + dir.x, currentNode.gridIndex.y + dir.y];
+        //check if available...
+        if(!nextTile)
+        {
+            return false;
+        }
+        currentNode.RemoveOccupant(false);
+
+        nextTile.AcceptOccupant(gameObject);
+            return true;
+    }
+
 
     //Should really not use this as much... it doens't hurt, but there is no need to refind position so often TBF
     public void FindOwnGridPos() //just in case they get lost somehow
@@ -178,9 +194,10 @@ public class TileWalker : MonoBehaviour
         }
     }
 
-    public int GetDistanceFromMeToYou(TileWalker you)
+    public int GetDistanceFromMeToYou(TileWalker you) //this may be kind of useless 
     {
-        return currentNode.GetDistanceToTarget(you.currentNode) + elevation + you.elevation;
+        //return currentNode.GetDistanceToTarget(you.currentNode) + elevation + you.elevation;
+        return currentNode.GetDistanceToTarget(you.currentNode) + Mathf.Abs(elevation - you.elevation);
     }
 
     public void SetElevation(int newElevation)

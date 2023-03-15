@@ -58,7 +58,7 @@ public class HealItem : ActionItem, SA_Item
         StartCooldown();
 
         Pawn tgtPawn = tgt.GetComponent<Pawn>();
-        //int dist = tileWalker.currentNode.GetDistanceToTarget(tgtPawn.tileWalker.currentNode);
+        
         int dist = tileWalker.GetDistanceFromMeToYou(tgtPawn.tileWalker);
 
         if(dist > range * 14)
@@ -69,8 +69,9 @@ public class HealItem : ActionItem, SA_Item
         //if dist <= 1 - just do the following below:
         la.LookOnce(tgt.transform);
 
-        //HEAL ANIMATION????
-        
+        pawn.anim.SetTrigger("Heal");
+
+
         int healRoll = Random.Range(minHeal, maxHeal);
 
         tgtPawn.Heal(healRoll);
@@ -80,7 +81,8 @@ public class HealItem : ActionItem, SA_Item
         
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgtPawn.Name, healRoll, Color.green);
 
-        Invoke("CharacterHeal", healDelay);
+        //Invoke("CharacterHeal", healDelay); //TBF NOW!
+        //pawn.FinishAnimation();
     }
 
     IEnumerator WalkThenHeal(Pawn tgt)
@@ -88,7 +90,9 @@ public class HealItem : ActionItem, SA_Item
         pawn.tileWalker.StartNewPathWithRange(tgt.tileWalker, range);
         
         yield return new WaitUntil(() => !pawn.tileWalker.hasPath);
-        
+
+        pawn.anim.SetTrigger("Heal");
+
         Pawn p = tgt.GetComponent<Pawn>();
         int healRoll = Random.Range(minHeal, maxHeal);
 
@@ -99,13 +103,14 @@ public class HealItem : ActionItem, SA_Item
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, p.Name, healRoll, Color.green);
 
-        Invoke(nameof(CharacterHeal), healDelay); //TBF!!!
+        //Invoke(nameof(CharacterHeal), healDelay); //TBF!!!
+        //pawn.FinishAnimation();
     }
 
-    void CharacterHeal()
-    {
-        pawn.FinishAnimation();//TBF!!!
-    }
+    //void CharacterHeal()
+    //{
+    //    pawn.FinishAnimation();//TBF!!!
+    //}
 
     public override void CalculateVariations()
     {
@@ -119,13 +124,14 @@ public class HealItem : ActionItem, SA_Item
             return;
         }
 
-
         foreach (Pawn p in targets)
         {
             if (p.currentHP >= p.maxHP) // instead of setting weight to 0, we just don't add this ActionVariation
-            {
                 continue;
-            }
+            
+            if (pawn.tileWalker.elevation != p.tileWalker.elevation)
+                continue;
+
             int weight = baseweight;
 
             //int currentDistance = tileWalker.currentNode.GetDistanceToTarget(FloorGrid.Instance.GetTileByIndex(p.tileWalker.gridPos));
@@ -134,11 +140,10 @@ public class HealItem : ActionItem, SA_Item
             {
                 weight *= 4; //if adjacent
             }
-            else if (pawn.HasRoot) //general step limit should be re-introduced
+            else if (pawn.HasRoot) //general step limit should be re-introduced //TBF obviously
             {
                 continue;
             }
-
 
             if (p.currentHP < p.maxHP / 2) //if under half max
             {
@@ -158,7 +163,6 @@ public class HealItem : ActionItem, SA_Item
             }
 
             actionVariations.Add(new ActionVariation(this, p.gameObject, weight));
-
         }
     }
 

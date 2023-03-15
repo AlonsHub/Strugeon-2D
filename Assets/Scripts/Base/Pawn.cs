@@ -161,18 +161,13 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         statusEffects = new List<StatusEffect>();
 
-
-
         hasSAs = (saItems.Length != 0);
-        
 
         if (isEnemy)
         {
             targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
             EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>(); //why not just add this to the prefab? TBF
-
-
         }
         else
         {
@@ -299,7 +294,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         actionPool[actionIndex].PerformActionOnTarget();
     }
 
-    void CalculateActionList()
+    public void CalculateActionList()
     {
 
         //SAFETY HEALTH CHECK
@@ -463,15 +458,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //anim.SetTrigger("Hit");
         //Spawn damage text (numbers)
         GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
-
-
-        //if (damage != 0)
-        //{
-        //    OnTakeDamage?.Invoke(); //relevant only if actual damage happens //should also be the way to override taking damage when pawn has shield
-
-
-        //}
-
 
         go.GetComponent<DamageText>().SetDamageText(damage);
 
@@ -677,6 +663,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     /// </summary>
     public void FinishAnimation()
     {
+        TurnDone = true;
         if (statusEffects != null)
         {
             //StatusEffect[] basicStatusEffects = statusEffects.Where(x => x is EndOfTurnStatusEffect).ToArray();
@@ -686,8 +673,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 item.Perform();
             }
         }
-
-        TurnDone = true;
     }
 
  
@@ -753,12 +738,41 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         return false;
     }
     #endregion
-
     public void SetGFXScale(Vector3 scale)
     {
         GFX.transform.localScale = scale;
     }
 
+    public ActionVariation GetIntention()
+    {
+        CalculateActionList();
+
+        if (actionWeightList.Count == 0)
+        {
+            FinishAnimation();
+
+            return null; //!!!!!!!!!!
+        }
+
+        int roll = UnityEngine.Random.Range(1, actionWeightList[actionWeightList.Count - 1]); //make sure this random IS the int random and we don't have a "rounded-float" situation
+        int actionIndex = -1; //just so it will fuck up the actionPoll[actionIndex] in case it doesn't work properly
+
+        for (int i = 0; i < actionWeightList.Count; i++)
+        {
+            if (roll < actionWeightList[i])
+            {
+                actionIndex = i;
+                break;
+            }
+        }
+        if (actionIndex == -1)
+        {
+            //skip rope
+            Debug.LogError($"{Name} SKIPPED rope");
+            FinishAnimation();
+            return null;
+        }
+
+        return actionPool[actionIndex];
+    }
 }
-
-

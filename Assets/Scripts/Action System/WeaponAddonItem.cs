@@ -31,10 +31,7 @@ public class WeaponAddonItem : ActionItem
             //walk to censer first
             attachedWeapon.feetItem.Action(censer.gameObject);
         }
-        //StartCoroutine("AddFireEffectIcon"); //walk AND use, or just use - may want to add another waitforseconds between them
         StartCoroutine(nameof(AddFireEffect)); //walk AND use, or just use - may want to add another waitforseconds between them
-
-
     }
 
     IEnumerator AddFireEffect()

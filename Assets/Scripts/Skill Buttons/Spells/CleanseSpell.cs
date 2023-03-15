@@ -3,24 +3,24 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BraverySpell : SkillButton
+public class CleanseSpell : SpellButton
 {
-    //Pawn pawnTgt;
-    
-
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
+
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
+            StatusEffect[] se = pawnTgt.statusEffects.Where(s => s.alignment == EffectAlignment.Negative).ToArray();
+            if (se.Length != 0)
             {
-                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
-                return;
+                foreach (var item in se)
+                {
+                    item.EndEffect();
+                }
+                
             }
         }
-        new BraveryEffect(pawnTgt, effectIcon);
-    
 
         base.OnButtonClick();
     }

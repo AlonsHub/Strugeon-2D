@@ -3,29 +3,25 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlindRageSpell : SkillButton
+public class BraverySpell : SpellButton
 {
-    //Pawn targetPawn;
-    [SerializeField]
-    DamageModifier damageModifier;
+    //Pawn pawnTgt;
+    
 
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (pawnTgt.statusEffects.Where(s => s is BlindRageEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
             {
                 Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
                 return;
             }
         }
-        
-        new BlindRageEffect(pawnTgt, effectIcon);
-
-        //new DamageRelatedStatusEffect();
+        new BraveryEffect(pawnTgt, effectIcon);
+    
 
         base.OnButtonClick();
     }
-
 }

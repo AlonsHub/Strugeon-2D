@@ -1,20 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
 
-public class TauntSpell : SkillButton
+public class DoubleTurnSpell : SpellButton
 {
+    //private Pawn targetPawn;
+
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
 
-        foreach (var item in RefMaster.Instance.enemyInstances)
-        {
-            new TauntedEffect(item, effectIcon, pawnTgt);
-        }
-        
+        DoubleTurn_Effect doubleTurn_Effect = new DoubleTurn_Effect(pawnTgt.TurnInfo, effectIcon);
+      
+
         base.OnButtonClick();
     }
 }

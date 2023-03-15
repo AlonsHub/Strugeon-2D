@@ -27,7 +27,7 @@ public class MouseBehaviour : MonoBehaviour
     //this and all values stored in "Bar"s and "UI"s and so on, should all move to a dedicated Player class.
     // - moved.
     //TEMP
-    List<SkillButton> skillButtons;
+    List<SpellButton> skillButtons;
 
     [SerializeField]
     float outlineThickness;
@@ -41,8 +41,8 @@ public class MouseBehaviour : MonoBehaviour
 
         //cam = Camera.main;
         areButtonsOpen = false;
-        skillButtons = heroButtonCircle.GetComponentsInChildren<SkillButton>().ToList();
-        skillButtons.AddRange(enemyButtonCircle.GetComponentsInChildren<SkillButton>());
+        skillButtons = heroButtonCircle.GetComponentsInChildren<SpellButton>().ToList();
+        skillButtons.AddRange(enemyButtonCircle.GetComponentsInChildren<SpellButton>());
 
         heroButtonCircle.SetActive(false);
         enemyButtonCircle.SetActive(false);
@@ -145,7 +145,7 @@ public class MouseBehaviour : MonoBehaviour
                 if(areButtonsOpen)
                 {
                     //FIRST InteractableCheck() for all buttons
-                    foreach (SkillButton sb in skillButtons)
+                    foreach (SpellButton sb in skillButtons)
                     {
                         sb.InteractableCheck();
                     }

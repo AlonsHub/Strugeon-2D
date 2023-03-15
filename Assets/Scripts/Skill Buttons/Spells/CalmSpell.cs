@@ -3,25 +3,22 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CleanseSpell : SkillButton
+public class CalmSpell : SpellButton
 {
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            StatusEffect[] se = pawnTgt.statusEffects.Where(s => s.alignment == EffectAlignment.Negative).ToArray();
-            if (se.Length != 0)
+            if (pawnTgt.statusEffects.Where(s => s is CalmEffect).Any())
             {
-                foreach (var item in se)
-                {
-                    item.EndEffect();
-                }
-                
+                StatusEffect se = pawnTgt.statusEffects.Where(s => s is CalmEffect).SingleOrDefault();
+                se.StackMe();
+                return;
             }
         }
-
+        new CalmEffect(pawnTgt, effectIcon);
+       
         base.OnButtonClick();
     }
 }

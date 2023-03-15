@@ -153,18 +153,14 @@ public class VenomBiteItem : ActionItem, SA_Item
 
             if (p.currentHP <= 0)
                 continue;
-            //if(p.currentHP > 0)
-            //{
-            //    weight *= 5;
-
-            //}
+            if (pawn.tileWalker.elevation != p.tileWalker.elevation)
+                continue;
+            
 
             if (currentDistance <= 1 * 14) //melee=14 ranged is more
             {
-                
                 //melee attacker only have 1 range, so this means adjacent
                 weight *= 20; // changed from 20 to 2 //changed back to 20
-
             }
             if (p.currentHP <= p.maxHP / 2.5f) //40%
             {

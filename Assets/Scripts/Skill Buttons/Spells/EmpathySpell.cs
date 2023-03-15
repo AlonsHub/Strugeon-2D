@@ -4,7 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmpathySpell : SkillButton
+public class EmpathySpell : SpellButton
 {
 
 

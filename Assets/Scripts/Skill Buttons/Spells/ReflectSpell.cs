@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReflectSpell : SkillButton
+public class ReflectSpell : SpellButton
 {
     public override void OnButtonClick()
     {

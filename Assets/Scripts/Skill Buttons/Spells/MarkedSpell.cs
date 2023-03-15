@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkedSpell : SkillButton
+public class MarkedSpell : SpellButton
 {
     [SerializeField, Tooltip("Only uses the duration! damage will only be mitigated if takes target below 1 hp")]
     DamageModifier damageModifier;

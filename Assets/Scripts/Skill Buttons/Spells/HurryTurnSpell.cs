@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurryTurnSpell : SkillButton
+public class HurryTurnSpell : SpellButton
 {
     //private Pawn targetPawn;
 

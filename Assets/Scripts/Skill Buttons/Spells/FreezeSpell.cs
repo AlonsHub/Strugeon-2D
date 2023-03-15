@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeSpell : SkillButton
+public class FreezeSpell : SpellButton
 {
     /// <summary>
     /// This is where the stats are pulled form -> the serialized field in the spells components
