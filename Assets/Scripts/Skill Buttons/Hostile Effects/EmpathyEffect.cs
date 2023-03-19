@@ -7,10 +7,10 @@ public class EmpathyEffect : SuggestiveEffect
 {
     Pawn toAvoid;
 
-    int totalDuration = 2;
-    int current;
+    //int totalDuration = 2;
+    //int current;
 
-    public EmpathyEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid) : base(pawn, sprite)
+    public EmpathyEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid, int duration) : base(pawn, sprite, duration)
     {
         alignment = EffectAlignment.Negative;
         toAvoid = pawnToAvoid;

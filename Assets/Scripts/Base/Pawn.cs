@@ -343,6 +343,48 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             actionWeightList.Add(runningTotal);
         }
     }
+    /// <summary>
+    /// For the Insight status effect
+    /// </summary>
+    public void SpeculateActionList()
+    {
+
+        actionPool = new List<ActionVariation>();
+        actionWeightList = new List<int>();
+
+        //Call action "before calcActionList"
+
+        foreach (ActionItem ai in actionItems)
+        {
+            ai.CalculateVariations(); //Maybe not always, could "if" that out in some cases - SADLY NOT TRUE
+
+            actionPool.AddRange(ai.actionVariations);
+        }
+
+        //This ALSO needs to be a suggestive effect!
+        if (hasPurple && purpleTgt != null)
+        {
+            ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
+            if (possibleActions != null && possibleActions.Length > 0)
+            {
+                foreach (var possibleAction in possibleActions)
+                {
+                    possibleAction.weight *= purpleMultiplier;
+                }
+                hasPurple = false;
+                purpleTgt = null;
+            }
+        }
+        //THIS EXCLUDES INSIGHT!
+        HandleSuggestiveStatusEffectsPreview();
+
+        int runningTotal = 0;
+        foreach (ActionVariation av in actionPool)
+        {
+            runningTotal += av.weight;
+            actionWeightList.Add(runningTotal);
+        }
+    }
 
     /// <summary>
     /// cycles through status effects and performs all suggestive effects.
@@ -364,6 +406,27 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             }
         }
     }
+    /// <summary>
+    /// For the Insight status effect purposes only
+    /// </summary>
+    public void HandleSuggestiveStatusEffectsPreview()
+    {
+        if (statusEffects != null)
+        {
+            var suggestiveEffects = statusEffects.Where(x => x is SuggestiveEffect).ToList();
+            if (suggestiveEffects != null && suggestiveEffects.Count > 0)
+            {
+                foreach (var effect in suggestiveEffects)
+                {
+                    if (effect is InsightEffect)
+                        continue;
+                    (effect as SuggestiveEffect).current++;
+                    effect.Perform();
+                }
+            }
+        }
+    }
+
 
     public override int TakeDamage(int damage) //ADD DamageType and derrive text colour from that
     {
@@ -743,7 +806,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public ActionVariation GetIntention()
     {
-        CalculateActionList();
+        //CalculateActionList();
+        SpeculateActionList();
 
         int roll = UnityEngine.Random.Range(1, actionWeightList[actionWeightList.Count - 1]); //make sure this random IS the int random and we don't have a "rounded-float" situation
         int actionIndex = -1; //just so it will fuck up the actionPoll[actionIndex] in case it doesn't work properly
@@ -769,6 +833,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public bool ActionPoolContainsVariation(ActionVariation av)
     {
+        
+
+
         return actionPool.Any(x => x.target == av.target && x.relevantItem == av.relevantItem);
     }
 }

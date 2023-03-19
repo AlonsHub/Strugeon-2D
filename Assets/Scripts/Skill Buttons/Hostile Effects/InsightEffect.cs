@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
 {
-    //Displayer prefab
-    //instnace of Displayer
-
-    //InsightResult, the may contain a target pawn, and/or an action
-
-    //Check if ResultStillViable
+   
     ActionVariation actionVariation;
-    Pawn tgtPawn;
+    Pawn actionsTgtPawn;
     InsightDisplay insightDisplay;
+    
 
-
-    public InsightEffect(Pawn target, Sprite sprite, InsightDisplay iDisplay) : base(target, sprite)
+    public InsightEffect(Pawn target, Sprite sprite, InsightDisplay iDisplay, int duration) : base(target, sprite, duration)
     {
         insightDisplay = iDisplay;
         alignment = EffectAlignment.Negative;
         ApplyEffect();
+        current = totalDuration;
     }
 
     public override void ApplyEffect()
     {
         actionVariation = pawnToEffect.GetIntention();
-        tgtPawn = actionVariation.target.GetComponent<Pawn>();
+        actionsTgtPawn = actionVariation.target.GetComponent<Pawn>();
         //IMPORTANT!!!
         pawnToEffect.AddStatusEffect(this);
 
@@ -62,19 +58,27 @@ public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
         }
 
         //Has not "duration" at the moment... TBD?
+        current--;
+        if(current <= 0)
         EndEffect();
     }
 
     void PrintIntention()
     {
-        if(actionVariation != null)
+        if (actionVariation != null)
         {
-            insightDisplay.SetMe(actionVariation);
+            pawnToEffect.SpeculateActionList();
+            
+            if (pawnToEffect.ActionPoolContainsVariation(actionVariation))
+            {
+                insightDisplay.SetMe(actionVariation);
+                return;
+            }
 
-            if (tgtPawn)
-            Debug.LogError($"{tgtPawn.Name} with {actionVariation.relevantItem}");
-            else
-            Debug.LogError($"{actionVariation.target} with {actionVariation.relevantItem}");
+            Debug.LogError("Re-Roll action");
+            current++;
+            actionVariation = pawnToEffect.GetIntention();
+            insightDisplay.SetMe(actionVariation);
         }
     }
 }

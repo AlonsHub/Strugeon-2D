@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class EmpathySpell : SpellButton
 {
-
+    [SerializeField]
+    int duration = 2;
 
     public override void OnButtonClick()
     {
@@ -22,7 +23,7 @@ public class EmpathySpell : SpellButton
 
         foreach (var item in RefMaster.Instance.enemyInstances)
         {
-            new EmpathyEffect(item, effectIcon, pawnTgt);
+            new EmpathyEffect(item, effectIcon, pawnTgt, duration);
         }
 
         base.OnButtonClick();

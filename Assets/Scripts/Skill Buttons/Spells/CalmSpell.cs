@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CalmSpell : SpellButton
 {
+    [SerializeField]
+    int duration = 2;
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
@@ -17,7 +19,7 @@ public class CalmSpell : SpellButton
                 return;
             }
         }
-        new CalmEffect(pawnTgt, effectIcon);
+        new CalmEffect(pawnTgt, effectIcon, duration);
        
         base.OnButtonClick();
     }

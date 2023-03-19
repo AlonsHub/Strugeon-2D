@@ -8,6 +8,9 @@ public class InsightSpell : SpellButton
     [SerializeField]
     GameObject insightDisplayPrefab;
 
+    [SerializeField]
+    int duration = 1;
+
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
@@ -22,7 +25,7 @@ public class InsightSpell : SpellButton
             }
         }
         GameObject go = Instantiate(insightDisplayPrefab, pawnTgt.transform);
-        new InsightEffect(pawnTgt, effectIcon, go.GetComponent<InsightDisplay>());
+        new InsightEffect(pawnTgt, effectIcon, go.GetComponent<InsightDisplay>(), duration);
         base.OnButtonClick();
     }
 }

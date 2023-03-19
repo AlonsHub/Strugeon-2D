@@ -9,10 +9,10 @@ public class TauntedEffect : SuggestiveEffect
 
     float multiplier = 1.65f; // max is 2f
 
-    int totalDuration = 2;
-    int current;
+    //int totalDuration = 2;
+    //int current;
 
-    public TauntedEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid) : base(pawn, sprite)
+    public TauntedEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid, int duration) : base(pawn, sprite, duration)
     {
         alignment = EffectAlignment.Negative;
         toAttack = pawnToAvoid;

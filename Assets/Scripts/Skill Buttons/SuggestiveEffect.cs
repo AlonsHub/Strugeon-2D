@@ -7,7 +7,17 @@ using UnityEngine;
 [System.Serializable]
 public class SuggestiveEffect : StatusEffect
 {
-    public SuggestiveEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite){}
+    public int totalDuration = 1;
+    public int current;
+    public SuggestiveEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite)
+    {
+        current = totalDuration;
+    }
+    public SuggestiveEffect(Pawn pawn, Sprite sprite, int duration) : base(pawn, sprite)
+    {
+        totalDuration = duration;
+        current = totalDuration;
+    }
     
     /// <summary>
     /// MUST PERFORM THIS BASE!

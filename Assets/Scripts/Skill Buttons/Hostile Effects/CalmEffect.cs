@@ -6,10 +6,10 @@ using UnityEngine;
 public class CalmEffect : SuggestiveEffect
 {
     
-    int totalDuration = 2;
-    int current;
+    //int totalDuration = 2;
+    //int current;
 
-    public CalmEffect(Pawn pawn, Sprite s) : base(pawn, s)
+    public CalmEffect(Pawn pawn, Sprite s, int duration) : base(pawn, s, duration)
     {
         alignment = EffectAlignment.Negative;
         ApplyEffect();
@@ -17,7 +17,7 @@ public class CalmEffect : SuggestiveEffect
 
     public override void ApplyEffect()
     {
-        current = 0;
+        //current = 0;
         //pawnToEffect.AddSuggestiveEffect(this);
         base.ApplyEffect();
     }
@@ -29,8 +29,8 @@ public class CalmEffect : SuggestiveEffect
         {
             pawnToEffect.actionPool.Remove(item);
         }
-        current++;
-        if(current >= totalDuration)
+        current--;
+        if(current <= 0)
         {
             EndEffect();
         }
