@@ -27,7 +27,7 @@ public class EscapeItem : ActionItem
         actionVariations = new List<ActionVariation>();
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Escape);

@@ -75,14 +75,14 @@ public class RootDownItem : ActionItem, SA_Item
             targets = RefMaster.Instance.enemyInstances;
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
         StartCooldown();
         
         //start animation
 
 
-        Pawn toRoot = tgt.GetComponent<Pawn>(); //could go by TileWalker as well
+        Pawn toRoot = av.target.GetComponent<Pawn>(); //could go by TileWalker as well
 
         if (!toRoot)
         {
@@ -91,19 +91,19 @@ public class RootDownItem : ActionItem, SA_Item
             return;
         }
 
-        la.LookOnce(tgt.transform);
+        la.LookOnce(av.target.transform);
 
 
         //TBF! this is why we need to check reflection at a "casting event" which contains "caster, target, spell, whatever"
         //And not in code, just before it happens... 
         if(toRoot.HasStatusEffect(x => x is ReflectEffect))
         {
-            tgt = pawn.gameObject;
+            av.target = pawn.gameObject;
             toRoot = pawn;
         }
 
 
-        RootDownAttacher rda = tgt.AddComponent<RootDownAttacher>();
+        RootDownAttacher rda = av.target.AddComponent<RootDownAttacher>();
 
 
         //Adds the StatusEffect to hook into this:

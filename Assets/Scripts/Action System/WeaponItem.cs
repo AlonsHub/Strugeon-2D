@@ -91,9 +91,9 @@ public class WeaponItem : ActionItem
         cachedProjectile.SetActive(false);
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
-        toHit = tgt.GetComponent<Pawn>();
+        toHit = av.target.GetComponent<Pawn>();
 
         if (!toHit)
         {
@@ -113,8 +113,8 @@ public class WeaponItem : ActionItem
             return;
         }
 
-        if (tgt && la)
-            la.LookOnce(tgt.transform);
+        if (av.target && la)
+            la.LookOnce(av.target.transform);
 
 
 

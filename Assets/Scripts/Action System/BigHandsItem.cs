@@ -37,7 +37,7 @@ public class BigHandsItem : ActionItem, SA_Item
     }
 
     
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
         //return if no hopeful targets exist for some reason
         if (RefMaster.Instance.mercs.Count == 0)
@@ -45,13 +45,14 @@ public class BigHandsItem : ActionItem, SA_Item
 
 
         //tgt is the tile on which the obstacle is sitting
-        FloorTile ft = tgt.GetComponent<FloorTile>();
+        FloorTile ft = av.secondaryTarget.GetComponent<FloorTile>();
 
         //Destroy(ft.myOccupant);
         ft.RemoveOccupant(true);
+
+        //toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
+        toHit = av.target.GetComponent<Pawn>();
         
-        toHit = RefMaster.Instance.mercs[Random.Range(0, RefMaster.Instance.mercs.Count - 1)]; //should be simplified
-        //LookAtter la = GetComponentInChildren<LookAtter>();
         if (toHit && la)
             la.tgt = toHit.transform;
         
@@ -114,22 +115,24 @@ public class BigHandsItem : ActionItem, SA_Item
                 {
                     if(pawn.isEnemy)//should just be aimed at "Targets"
                     {
-                        int counter = 0;
+                        //int counter = 0;
                         foreach (var m in RefMaster.Instance.mercs)
                         {
                             //if (pawn.tileWalker.currentNode.GetDistanceToTarget(m.tileWalker.currentNode)/14 >= 2)
-                            if (pawn.tileWalker.GetDistanceFromMeToYou(m.tileWalker)/14 >=2)
+                            if (pawn.tileWalker.GetDistanceFromMeToYou(m.tileWalker) / 14 >= 2)
                             {
-                                counter++;
+                                actionVariations.Add(new ActionVariation(this, m.gameObject,ft.gameObject, weight)); //secondary target is the rock
+                                //counter++;
                             }
                         } 
-                        if(counter>=2)
-                        {
-                            weight *= 5;
-                        }
+                        ///This should be added a condition/preference
+                        //if(counter>=2)
+                        //{
+                        //    weight *= 5;
+                        //}
                     }
 
-                    actionVariations.Add(new ActionVariation(this, ft.gameObject, weight)); //no other calculations involved yet
+                    //actionVariations.Add(new ActionVariation(this, ft.gameObject, weight)); //no other calculations involved yet
                 }
             }
         }

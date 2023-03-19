@@ -52,12 +52,12 @@ public class HealItem : ActionItem, SA_Item
         //base.Start();
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
 
         StartCooldown();
 
-        Pawn tgtPawn = tgt.GetComponent<Pawn>();
+        Pawn tgtPawn = av.target.GetComponent<Pawn>();
         
         int dist = tileWalker.GetDistanceFromMeToYou(tgtPawn.tileWalker);
 
@@ -67,7 +67,7 @@ public class HealItem : ActionItem, SA_Item
             return;
         }
         //if dist <= 1 - just do the following below:
-        la.LookOnce(tgt.transform);
+        la.LookOnce(av.target.transform);
 
         pawn.anim.SetTrigger("Heal");
 
@@ -76,7 +76,7 @@ public class HealItem : ActionItem, SA_Item
 
         tgtPawn.Heal(healRoll);
 
-        GameObject go = Instantiate(healEffect, tgt.transform);
+        GameObject go = Instantiate(healEffect, av.target.transform);
         Destroy(go, 2);
         
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Heal, tgtPawn.Name, healRoll, Color.green);

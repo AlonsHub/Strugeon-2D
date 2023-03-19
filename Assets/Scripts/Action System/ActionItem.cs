@@ -34,7 +34,7 @@ public class ActionItem : MonoBehaviour
     {
 
     }
-    public virtual void Action(GameObject tgt)
+    public virtual void Action(ActionVariation av)
     {
 
     }

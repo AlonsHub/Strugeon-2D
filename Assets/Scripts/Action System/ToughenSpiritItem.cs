@@ -42,7 +42,7 @@ public class ToughenSpiritItem : ActionItem, SA_Item
 
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
 
         StartCooldown();

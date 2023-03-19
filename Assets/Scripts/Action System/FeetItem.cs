@@ -16,12 +16,14 @@ public class FeetItem : ActionItem
         base.Awake();
     }
 
-    public override void Action(GameObject tgt) //might be depricated
+    public override void Action(ActionVariation av) //might be depricated
     {
-        targetWalker = tgt.GetComponent<TileWalker>(); //Something here is redundant
-        GridPoser gridPoser = tgt.GetComponent<GridPoser>(); //Something here is redundant
+        targetWalker = av.target.GetComponent<TileWalker>(); //Something here is redundant
+        GridPoser gridPoser = null;//may not need
+        if (!targetWalker)
+        gridPoser = av.target.GetComponent<GridPoser>(); //Something here is redundant
 
-        lookAtter.tgt = tgt.transform;
+        lookAtter.tgt = av.target.transform;
 
         if (gridPoser != null)
         {

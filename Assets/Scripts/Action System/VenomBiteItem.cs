@@ -73,11 +73,11 @@ public class VenomBiteItem : ActionItem, SA_Item
     }
    
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
         StartCooldown();
 
-        toHit = tgt.GetComponent<Pawn>();
+        toHit = av.target.GetComponent<Pawn>();
 
         if (!toHit)
         {
@@ -96,8 +96,8 @@ public class VenomBiteItem : ActionItem, SA_Item
             return;
         }
 
-        if (tgt && la)
-            la.LookOnce(tgt.transform);
+        if (av.target && la)
+            la.LookOnce(av.target.transform);
             //la.tgt = tgt.transform;
 
 

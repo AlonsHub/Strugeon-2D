@@ -152,7 +152,7 @@ public class TileWalker : MonoBehaviour
         
         transform.position = stepDest.transform.position;
 
-        FindOwnGridPos(); //accepting occpants twice, just in case
+        FindOwnGridPos(); //This REALLLLY needs to change 
         stepDest.AcceptOccupant(gameObject);
         //currentNode = stepDest;
         //currentNode.isEmpty = false;

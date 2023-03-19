@@ -32,17 +32,17 @@ public class CharmItem : ActionItem , SA_Item //,SAITEM!!!!
         la = GetComponentInChildren<LookAtter>();
     }
 
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
-        CharmEffect charmEffect = new CharmEffect(tgt.GetComponent<Pawn>(), charmSprite, pawn); //passing off "pawn" being the mavka, as sourceCaster
+        CharmEffect charmEffect = new CharmEffect(av.target.GetComponent<Pawn>(), charmSprite, pawn); //passing off "pawn" being the mavka, as sourceCaster
 
-        la.LookOnce(tgt.transform);
+        la.LookOnce(av.target.transform);
 
         pawn.anim.SetTrigger("Charm");
 
-        GameObject go = Instantiate(charmVFX, tgt.transform);
+        GameObject go = Instantiate(charmVFX, av.target.transform);
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Charm, tgt.GetComponent<Pawn>().Name);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Charm, av.target.GetComponent<Pawn>().Name);
 
         currentCooldown = maxCooldown;
         StartCoroutine(CountDownCool());

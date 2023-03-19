@@ -31,7 +31,7 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         GameObject instantiatedPawn;
     [ContextMenu("Summon")]
-    public override void Action(GameObject tgt)
+    public override void Action(ActionVariation av)
     {
         //tgt is the spawn-tile 
         //GameObject go;

@@ -18,10 +18,10 @@ public class WeaponAddonItem : ActionItem
             Debug.LogError("Weapon add on could not find a weaponItem on it's gameObject. Name: " + name);
         }
     }
-    public override void Action(GameObject tgt) //getting an add-on
+    public override void Action(ActionVariation av) //getting an add-on
     {
         //tgt is a gameobject with a <censor> like object
-         censer = tgt.GetComponent<Censer>();
+         censer = av.target.GetComponent<Censer>();
         //BatllelogVerticalGroup.Instance.AddEntry(pawn.name, ActionIcon.Censer, pawn.name);
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Censer, censer.Name);
@@ -29,7 +29,8 @@ public class WeaponAddonItem : ActionItem
         if (censer.currentNode.GetDistanceToTarget(pawn.tileWalker.currentNode) > 14)
         {
             //walk to censer first
-            attachedWeapon.feetItem.Action(censer.gameObject);
+            //attachedWeapon.feetItem.Action(censer.gameObject);
+            attachedWeapon.feetItem.Action(av);
         }
         StartCoroutine(nameof(AddFireEffect)); //walk AND use, or just use - may want to add another waitforseconds between them
     }

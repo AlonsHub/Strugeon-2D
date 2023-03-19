@@ -6,9 +6,13 @@ public class ActionVariation
 {
     public ActionItem relevantItem;
     public GameObject target;
+    /// <summary>
+    /// Not necessary
+    /// </summary>
+    public GameObject secondaryTarget;
     public int weight; //cost?
 
-    public bool doWalk = false;
+    //public bool doWalk = false;
 
     //public int specialRange;
     public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight)
@@ -16,16 +20,23 @@ public class ActionVariation
         relevantItem = rItem; //usually, the performing item will be the relevantItem
         target = tgt;
         weight = actWeight;
-
-        
     }
-    public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight, bool walk)
+     public ActionVariation(ActionItem rItem, GameObject tgt, GameObject secondaryTgt, int actWeight)
     {
         relevantItem = rItem; //usually, the performing item will be the relevantItem
         target = tgt;
+        secondaryTarget = secondaryTgt;
         weight = actWeight;
-        doWalk = walk;
     }
+
+
+    //public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight, bool walk)
+    //{
+    //    relevantItem = rItem; //usually, the performing item will be the relevantItem
+    //    target = tgt;
+    //    weight = actWeight;
+    //    doWalk = walk;
+    //}
 
     
     //public ActionVariation(ActionItem rItem, GameObject tgt, int actWeight, int newSpecialRange)
@@ -39,7 +50,8 @@ public class ActionVariation
     {
         // relevantItem.Action(target.GetComponent<Character>());
        
-        relevantItem.Action(target);
+        //relevantItem.Action(target);
+        relevantItem.Action(this);
     }
 
     public override string ToString()
