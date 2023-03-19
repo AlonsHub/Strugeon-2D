@@ -691,8 +691,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         statusEffects.Remove(statusEffect);
         RemoveIconByName(statusEffect.GetType().ToString());
-        //StartCoroutine(nameof(RemoveSuggestiveEffectWithDelay), statusEffect);
-        //statusEffects.Remove(statusEffect);
     }
 
     IEnumerator RemoveSuggestiveEffectWithDelay(StatusEffect statusEffect)
@@ -747,13 +745,6 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         CalculateActionList();
 
-        if (actionWeightList.Count == 0)
-        {
-            FinishAnimation();
-
-            return null; //!!!!!!!!!!
-        }
-
         int roll = UnityEngine.Random.Range(1, actionWeightList[actionWeightList.Count - 1]); //make sure this random IS the int random and we don't have a "rounded-float" situation
         int actionIndex = -1; //just so it will fuck up the actionPoll[actionIndex] in case it doesn't work properly
 
@@ -774,5 +765,10 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
 
         return actionPool[actionIndex];
+    }
+
+    public bool ActionPoolContainsVariation(ActionVariation av)
+    {
+        return actionPool.Any(x => x.target == av.target && x.relevantItem == av.relevantItem);
     }
 }
