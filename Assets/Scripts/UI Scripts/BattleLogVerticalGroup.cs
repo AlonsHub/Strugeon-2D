@@ -268,4 +268,10 @@ public class BattleLogVerticalGroup : MonoBehaviour
             psionActionIconToSprite.Add((PsionActionSymbol)i, psionActionSprites[i]);
         }
     }
+
+    public Sprite GetActionSymbol(ActionSymbol aS)
+    {
+        return actionIconToSprite[aS];
+    }
+
 }

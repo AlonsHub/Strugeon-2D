@@ -12,11 +12,12 @@ public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
     //Check if ResultStillViable
     ActionVariation actionVariation;
     Pawn tgtPawn;
+    InsightDisplay insightDisplay;
 
 
-
-    public InsightEffect(Pawn target, Sprite sprite) : base(target, sprite)
+    public InsightEffect(Pawn target, Sprite sprite, InsightDisplay iDisplay) : base(target, sprite)
     {
+        insightDisplay = iDisplay;
         alignment = EffectAlignment.Negative;
         ApplyEffect();
     }
@@ -29,7 +30,7 @@ public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
         pawnToEffect.AddStatusEffect(this);
 
         //Add gfx 
-
+        PrintIntention();
         //add hook to next-turn
         TurnMachine.Instance.OnNextTurn += PrintIntention;
     }
@@ -38,9 +39,10 @@ public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
     {
         Debug.LogError("supposed unsub");
         TurnMachine.Instance.OnNextTurn -= PrintIntention;
-        pawnToEffect.RemoveStatusEffect(this);
 
         //Remove gfx
+        insightDisplay.KillMe();
+        pawnToEffect.RemoveStatusEffect(this);
 
 
     }
@@ -67,11 +69,12 @@ public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
     {
         if(actionVariation != null)
         {
-            if(tgtPawn)
+            insightDisplay.SetMe(actionVariation);
+
+            if (tgtPawn)
             Debug.LogError($"{tgtPawn.Name} with {actionVariation.relevantItem}");
             else
             Debug.LogError($"{actionVariation.target} with {actionVariation.relevantItem}");
-                
         }
     }
 }

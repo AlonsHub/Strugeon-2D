@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class InsightSpell : SpellButton
 {
+    [SerializeField]
+    GameObject insightDisplayPrefab;
+
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
@@ -18,8 +21,8 @@ public class InsightSpell : SpellButton
                 return;
             }
         }
-
-        new InsightEffect(pawnTgt, effectIcon);
+        GameObject go = Instantiate(insightDisplayPrefab, pawnTgt.transform);
+        new InsightEffect(pawnTgt, effectIcon, go.GetComponent<InsightDisplay>());
         base.OnButtonClick();
     }
 }
