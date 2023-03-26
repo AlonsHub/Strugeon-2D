@@ -108,10 +108,6 @@ public class BeltManipulator : MonoBehaviour
 
 
         InsertTurnTaker(tt, index);
-
-        //turnBelt.InsertTurnTaker(tt, index);
-        //horizontalPlateGroup.RefreshPortraits(_currentIndex);
-
     }
 
     //add turn info??
@@ -199,9 +195,11 @@ public class BeltManipulator : MonoBehaviour
 
     public void SetPortraitColour(TurnInfo ti, Color col)
     {
-        DisplayPlate dp = horizontalPlateGroup.GetChildren.Where(x => x.turnInfo == ti).FirstOrDefault();
+        //DisplayPlate dp = horizontalPlateGroup.GetChildren.Where(x => x.turnInfo == ti).FirstOrDefault();
+        ////DisplayPlate dp = ti.TryGetPawn().myTurnPlate;
 
-        dp.SetPortraitOverlayColour(col);
+        //Debug.Log("Portrait color change");
+        ti.colour = col;
+        //dp.SetPortraitOverlayColour(col);
     }
 }
-

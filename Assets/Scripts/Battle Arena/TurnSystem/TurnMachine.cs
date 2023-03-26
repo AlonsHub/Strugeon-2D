@@ -119,19 +119,19 @@ public class TurnMachine : MonoBehaviour
                 yield break;
             }
 
-            FreezeEffect se;
-            if (currentTurnInfo.GetEffectOfType(out se))
-            {
-                //currentTurnInfo.OnTurnSkip?.Invoke();
-                currentTurnInfo.RemoveEffect(se);
+            //FreezeEffect se;
+            //if (currentTurnInfo.GetEffectOfType(out se))
+            //{
+            //    //currentTurnInfo.OnTurnSkip?.Invoke();
+            //    currentTurnInfo.RemoveEffect(se);
 
-                Debug.Log($"{currentTurnInfo.GetTurnTaker.Name}'s turn was skipped!");
-                //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
-                // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
-                // 
-                // Call OnSkippedTurn action here
-                continue;
-            }
+            //    Debug.Log($"{currentTurnInfo.GetTurnTaker.Name}'s turn was skipped!");
+            //    //TBD figure out if turn-skips also count against Cooldowns, but I suppose that can be done by sub/unsubbing from on turn start events? OR simply not calling them... ergh
+            //    // ^^^ Solved -> Add a method to TurnTaker, which performs a "skipped-turn's" logic... if needed, a RemoveHold/CountDurationOfEffect method will sub to an event like "OnSkippedTurn" if relevant
+            //    // 
+            //    // Call OnSkippedTurn action here
+            //    continue;
+            //}
 
             yield return new WaitForSeconds(startOfTurnDelay);
 

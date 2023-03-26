@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FreezeEffect : TurnInfoEffect, I_StatusEffect_TurnStart
+public class FreezeEffect : StatusEffect, I_StatusEffect_TurnStart
 {
     int count = 1;
-    public FreezeEffect(TurnInfo ti, Sprite s) : base(ti,s)
+
+    TurnInfo turnInfoToEffect;
+
+    public FreezeEffect(Pawn tgt, Sprite s) : base(tgt)
     {
         alignment = EffectAlignment.Negative;
+        
+
+        turnInfoToEffect = tgt.TurnInfo;
+        pawnToEffect = tgt;
+
+        iconSprite = s;
         ApplyEffect();
     }
 
@@ -16,18 +25,18 @@ public class FreezeEffect : TurnInfoEffect, I_StatusEffect_TurnStart
         turnInfoToEffect.colour = SturgeonColours.Instance.skipGrey;
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, SturgeonColours.Instance.skipGrey);
 
-        base.ApplyEffect();
+        pawnToEffect.AddStatusEffect(this);
     }
     public override void EndEffect()
     {
         BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, Color.white);
         turnInfoToEffect.colour = new Color(0,0,0,0);
 
-        base.EndEffect();
+        pawnToEffect.RemoveStatusEffect(this);
     }
     public override void Perform()
     {
-        turnInfoToEffect.TryGetPawn().FinishAnimation(); //skipping "Finish animation by directly setting to turndone to be true
+        pawnToEffect.FinishAnimation(); //skipping "Finish animation by directly setting to turndone to be true
         EndEffect();
     }
 }

@@ -26,7 +26,7 @@ public class FreezeSpell : SpellButton
             }
         }
 
-        FreezeEffect skipTurn_Effect = new FreezeEffect(pawnTgt.TurnInfo, effectIcon);
+        FreezeEffect skipTurn_Effect = new FreezeEffect(pawnTgt, effectIcon);
         //DamageModifier damageModifier = new DamageModifier();
         FreezeDamageReduction freezeDamageReducation = new FreezeDamageReduction(pawnTgt, null, damageModifier);
 
