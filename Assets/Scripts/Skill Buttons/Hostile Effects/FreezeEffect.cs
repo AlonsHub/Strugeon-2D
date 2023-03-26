@@ -8,15 +8,13 @@ public class FreezeEffect : StatusEffect, I_StatusEffect_TurnStart
 
     TurnInfo turnInfoToEffect;
 
-    public FreezeEffect(Pawn tgt, Sprite s) : base(tgt)
+    public FreezeEffect(Pawn tgt, Sprite s) : base(tgt,s)
     {
         alignment = EffectAlignment.Negative;
-        
 
         turnInfoToEffect = tgt.TurnInfo;
         pawnToEffect = tgt;
-
-        iconSprite = s;
+        
         ApplyEffect();
     }
 

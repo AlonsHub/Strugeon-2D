@@ -12,8 +12,16 @@ public class LevitateSpell : SpellButton
     {
         pawnTgt = MouseBehaviour.hitTarget;
 
+
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
+            if (pawnTgt.statusEffects.Where(s => s is RootDownEffect).Any())
+            {
+                Debug.LogError("Can't Levitate due to RootDown effect");
+                return;
+            }
+
+
             if (pawnTgt.statusEffects.Where(s => s is LevitateEffect).Any())
             {
                 StatusEffect se = pawnTgt.statusEffects.Where(s => s is LevitateEffect).SingleOrDefault();
