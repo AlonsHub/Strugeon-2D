@@ -5,7 +5,7 @@ using UnityEngine;
 /// Describes effects that have OnTurnStart/End behaviours, counters, cooldowns - any turn-based-based effect
 /// </summary>
 [System.Serializable]
-public class AfterActionWeightsEffect : StatusEffect
+public class AfterActionWeightsEffect : StatusEffect, I_StatusEffect_ActionWeightManipulator
 {
     public int totalDuration = 1;
     public int current;

@@ -32,8 +32,8 @@ public class RootDownEffect : StatusEffect, I_StatusEffect_TurnStart
 
     public override void EndEffect()
     {
-        rootDownAttacher.RemoveEffect();
         pawnToEffect.RemoveStatusEffect(this);
+        rootDownAttacher.RemoveEffect();
     }
 
     public override void Perform()

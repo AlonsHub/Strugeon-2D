@@ -14,8 +14,8 @@ public class InsightEffect : AfterActionWeightsEffect, I_StatusEffect_TurnEnd
     {
         insightDisplay = iDisplay;
         alignment = EffectAlignment.Negative;
-        ApplyEffect();
         current = totalDuration;
+        ApplyEffect();
     }
 
     public override void ApplyEffect()
@@ -33,7 +33,7 @@ public class InsightEffect : AfterActionWeightsEffect, I_StatusEffect_TurnEnd
 
     public override void EndEffect()
     {
-        Debug.LogError("supposed unsub");
+        //Debug.LogError("supposed unsub");
         TurnMachine.Instance.OnNextTurn -= PrintIntention;
 
         //Remove gfx

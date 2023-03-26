@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PurpleBuff : SpellButton
+public class SuggestSpell : SpellButton
 {
     //private Pawn targetPawn;
     public float slowerTime;
@@ -21,15 +21,6 @@ public class PurpleBuff : SpellButton
         purpleChoosingMode.Setup(pawnTgt);
         mouseBehaviour.HideMenus();
 
-        //targetPawn.ApplySpecialEffect(effectIcon, "Purple");
-        //PurpleModifier pm =(PurpleModifier)targetCharacter.gameObject.AddComponent(typeof(PurpleModifier));
-
-        //Should enable the buff?
-
-        //enable purple:
-
-
         base.OnButtonClick();
-
     }
 }

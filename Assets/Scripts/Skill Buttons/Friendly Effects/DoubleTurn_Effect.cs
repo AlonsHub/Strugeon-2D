@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnEnd
+public class DoubleTurn_Effect : StatusEffect, I_StatusEffect_TurnEnd
 {
     TurnInfo newTurnInfo;
     int count;
-    public DoubleTurn_Effect(TurnInfo ti, Sprite s) : base(ti,s)
+
+    TurnInfo turnInfoToEffect;
+
+    public DoubleTurn_Effect(Pawn tgt, Sprite s) : base(tgt, s)
     {
         alignment = EffectAlignment.Positive;
+        turnInfoToEffect = tgt.TurnInfo;
 
-        ApplyEffect();
         count = 0;
+        ApplyEffect();
     }
 
     public override void ApplyEffect()
     {
         int index;
         List<TurnInfo> infos = TurnMachine.Instance.GetTurnInfos();
+
         if (infos.Contains(turnInfoToEffect))
         {
             index = infos.FindIndex(x => x == turnInfoToEffect);
@@ -28,18 +33,17 @@ public class DoubleTurn_Effect : TurnInfoEffect, I_StatusEffect_TurnEnd
             return;
         }
 
-
         newTurnInfo = new TurnInfo(turnInfoToEffect.GetTurnTaker);
         
         TurnMachine.Instance.InsertTurnInfo(newTurnInfo, index);
-
-        base.ApplyEffect();
+        pawnToEffect.AddStatusEffect(this);
     }
     public override void EndEffect()
     {
         TurnMachine.Instance.RemoveTurnInfo(newTurnInfo);
+        pawnToEffect.RemoveStatusEffect(this);
 
-        base.EndEffect();
+        //base.EndEffect();
     }
 
     public override void Perform()

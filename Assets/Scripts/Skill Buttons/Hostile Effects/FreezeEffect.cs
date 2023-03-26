@@ -21,13 +21,13 @@ public class FreezeEffect : StatusEffect, I_StatusEffect_TurnStart
     public override void ApplyEffect()
     {
         turnInfoToEffect.colour = SturgeonColours.Instance.skipGrey;
-        BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, SturgeonColours.Instance.skipGrey);
+        //BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, SturgeonColours.Instance.skipGrey);
 
         pawnToEffect.AddStatusEffect(this);
     }
     public override void EndEffect()
     {
-        BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, Color.white);
+        //BeltManipulator.Instance.SetPortraitColour(turnInfoToEffect, Color.white);
         turnInfoToEffect.colour = new Color(0,0,0,0);
 
         pawnToEffect.RemoveStatusEffect(this);

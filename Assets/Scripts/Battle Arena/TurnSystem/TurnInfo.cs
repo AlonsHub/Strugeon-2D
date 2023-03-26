@@ -38,8 +38,11 @@ public class TurnInfo
     public TurnInfo(TurnTaker t)
     {
         turnTaker = t;
-        if(t.TurnInfo == null)
-        t.TurnInfo = this; //sucks tbf - but fixes drowned spirits "NO DO FOUND" problem 
+        if (t.TurnInfo.isStartPin)
+        {
+            t.TurnInfo = this;
+            isStartPin = false;
+        }
         turnInfoEffects = new List<TurnInfoEffect>();
 
         colour = new Color(0, 0, 0, 0);

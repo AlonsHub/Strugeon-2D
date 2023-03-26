@@ -319,19 +319,19 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
 
         //This ALSO needs to be a suggestive effect!
-        if (hasPurple && purpleTgt != null)
-        {
-            ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
-            if (possibleActions != null && possibleActions.Length > 0)
-            {
-                foreach (var possibleAction in possibleActions)
-                {
-                    possibleAction.weight *= purpleMultiplier;
-                }
-                hasPurple = false;
-                purpleTgt = null;
-            }
-        }
+        //if (hasPurple && purpleTgt != null)
+        //{
+        //    ActionVariation[] possibleActions = actionPool.Where(x => (x.target && x.target.Equals(purpleTgt))).ToArray();// tamir purple bug fixed with target null check, new action variations had no targets (shield for hadas has no "target" to pass on variation - it cannot be suggested upon, but it also jamed the purple buff)
+        //    if (possibleActions != null && possibleActions.Length > 0)
+        //    {
+        //        foreach (var possibleAction in possibleActions)
+        //        {
+        //            possibleAction.weight *= purpleMultiplier;
+        //        }
+        //        hasPurple = false;
+        //        purpleTgt = null;
+        //    }
+        //}
         //This ALSO needs to be a suggestive effect!
         //Joinning the list below
         HandleSuggestiveStatusEffects();
@@ -396,7 +396,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         if (statusEffects != null)
         {
-            var suggestiveEffects = statusEffects.Where(x => x is AfterActionWeightsEffect).ToList();
+            var suggestiveEffects = statusEffects.Where(x => x is I_StatusEffect_ActionWeightManipulator).ToList();
             if (suggestiveEffects != null && suggestiveEffects.Count > 0)
             {
                 foreach (var effect in suggestiveEffects)
@@ -700,7 +700,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-            Debug.LogError("Couldnt find icon of that ID");
+            //Debug.LogError("Couldnt find icon of that ID");
+            return; //no need to update
         }
 
        

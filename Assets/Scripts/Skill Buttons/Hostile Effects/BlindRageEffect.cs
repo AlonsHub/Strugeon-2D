@@ -11,15 +11,15 @@ public class BlindRageEffect : AfterActionWeightsEffect
         ApplyEffect();
     }
 
-    public override void ApplyEffect()
-    {
-        pawnToEffect.AddStatusEffect(this);
-    }
+    //public override void ApplyEffect()
+    //{
+    //    pawnToEffect.AddStatusEffect(this);
+    //}
 
-    public override void EndEffect()
-    {
-        pawnToEffect.RemoveStatusEffect(this);
-    }
+    //public override void EndEffect()
+    //{
+    //    pawnToEffect.RemoveStatusEffect(this);
+    //}
 
     public override void Perform()
     {

@@ -15,12 +15,12 @@ public class CalmEffect : AfterActionWeightsEffect
         ApplyEffect();
     }
 
-    public override void ApplyEffect()
-    {
-        //current = 0;
-        //pawnToEffect.AddSuggestiveEffect(this);
-        base.ApplyEffect();
-    }
+    //public override void ApplyEffect()
+    //{
+    //    //current = 0;
+    //    //pawnToEffect.AddSuggestiveEffect(this);
+    //    base.ApplyEffect();
+    //}
 
     public override void Perform()
     {
