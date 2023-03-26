@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InsightEffect : SuggestiveEffect, I_StatusEffect_TurnEnd
+public class InsightEffect : AfterActionWeightsEffect, I_StatusEffect_TurnEnd
 {
    
     ActionVariation actionVariation;

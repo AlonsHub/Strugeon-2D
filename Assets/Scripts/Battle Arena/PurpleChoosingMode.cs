@@ -12,6 +12,11 @@ public class PurpleChoosingMode : MonoBehaviour
     [SerializeField]
     GameObject chosenByPurpleVFX; //prefab
 
+    [SerializeField]
+    float modifier = 50f; //TBF set the multiplier with gamedesign formula
+    [SerializeField]
+    Sprite effectIcon;
+
     public List<GridPoser> purpleTargets;
     private bool doUpdate;
     public bool IsOn { get => doUpdate; }
@@ -127,9 +132,10 @@ public class PurpleChoosingMode : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 100, layerMask))
             {
                 PurpleTarget justAnInterface = hit.collider.GetComponentInParent<PurpleTarget>(); //could be Pawn or Censer at the moment 07/02/22 
-                
-                actor.SetupPurpleBuff(justAnInterface.asPurpleTgtGameObject); //pass on as the gameobject on which there is an empty interface of PurpleTarget, tagging only by Pawn and Censer 
 
+                //actor.SetupPurpleBuff(justAnInterface.asPurpleTgtGameObject); //pass on as the gameobject on which there is an empty interface of PurpleTarget, tagging only by Pawn and Censer 
+                //NEW STATUS EFFECT HERE!
+                new SuggestEffect(actor, justAnInterface.asPurpleTgtGameObject, effectIcon, 1, modifier);
                 //Play Chosen-By-Purple Effect
                 GameObject vfx = Instantiate(chosenByPurpleVFX, justAnInterface.asPurpleTgtGameObject.transform);
 

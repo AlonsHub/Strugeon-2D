@@ -15,7 +15,11 @@ public class GoogleSheetMaster : MonoBehaviour
     static SheetsService sheetsService;
 
     [SerializeField]
+    Sprite s;
+    [SerializeField]
     bool doSheet;
+
+
 
     public static bool DoSheet { get => Instance.doSheet; set => Instance.doSheet = value; }
 
@@ -27,7 +31,6 @@ public class GoogleSheetMaster : MonoBehaviour
     int rowsPerIterration = 10;
     void Start()
     {
-        //Debug.LogError("Google Sheets Master perfoms start");
         if(Instance!=null && Instance!=this)
         {
             Destroy(gameObject);
@@ -38,16 +41,11 @@ public class GoogleSheetMaster : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SetUpCredentials();
 
-
-
-        //strings = GetRows("A1:A35");
-        //if(!FindRangeForName(PlayerDataMaster.Instance.currentPlayerData.playerName))
-        //{
-        //    //currentRangeName is already set to null
-
-        //}
         if(DoSheet)
         LogPlayer(); // not sure we should
+
+        //TEST
+        LogNewItem();
     }
     void SetUpCredentials() //this must also be done async  
     {
@@ -73,7 +71,6 @@ public class GoogleSheetMaster : MonoBehaviour
             {
                 Debug.Log(row[0]);
             }
-
         }
         else
         {
@@ -177,6 +174,18 @@ public class GoogleSheetMaster : MonoBehaviour
         //var appendResponse = appendRequest.Execute();
         var appendResponse = appendRequest.ExecuteAsync();
 
+    }
+    public void LogNewItem()
+    {
+        var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
+        var objectList = new List<System.Object>(); //fill object list with things!
+
+        valueRange.Values = new List<IList<object>> { new List<System.Object> { "3","2","Bayub" } };
+
+        var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "Item_DataBase_Test1!A2"); 
+        appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+        
+        var appendResponse = appendRequest.ExecuteAsync();
     }
 
     bool FindRangeForName(string nameToSearch) //sets currentRangeName

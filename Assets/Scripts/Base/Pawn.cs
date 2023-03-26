@@ -396,7 +396,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         if (statusEffects != null)
         {
-            var suggestiveEffects = statusEffects.Where(x => x is SuggestiveEffect).ToList();
+            var suggestiveEffects = statusEffects.Where(x => x is AfterActionWeightsEffect).ToList();
             if (suggestiveEffects != null && suggestiveEffects.Count > 0)
             {
                 foreach (var effect in suggestiveEffects)
@@ -413,14 +413,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     {
         if (statusEffects != null)
         {
-            var suggestiveEffects = statusEffects.Where(x => x is SuggestiveEffect).ToList();
+            var suggestiveEffects = statusEffects.Where(x => x is AfterActionWeightsEffect).ToList();
             if (suggestiveEffects != null && suggestiveEffects.Count > 0)
             {
                 foreach (var effect in suggestiveEffects)
                 {
                     if (effect is InsightEffect)
                         continue;
-                    (effect as SuggestiveEffect).current++;
+                    (effect as AfterActionWeightsEffect).current++;
                     effect.Perform();
                 }
             }
@@ -833,9 +833,11 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     public bool ActionPoolContainsVariation(ActionVariation av)
     {
-        
-
-
         return actionPool.Any(x => x.target == av.target && x.relevantItem == av.relevantItem);
     }
+    public ActionVariation[] GetActionVariationsByPredicate(System.Func<ActionVariation, bool> pred)
+    {
+        return actionPool.Where(pred).ToArray();
+    }
+
 }

@@ -152,6 +152,7 @@ MonoBehaviour:
   effectIcon: {fileID: 21300000, guid: a7ee9e9d9e61a174880a176be3286303, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
+  duration: 2
 --- !u!1 &1638968356
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +377,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e3029f08be302044c90700fcdb3c9fc5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eeb7d46926023047acb641b0f98d593, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -460,7 +461,7 @@ MonoBehaviour:
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,
     type: 3}
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: e3029f08be302044c90700fcdb3c9fc5, type: 3}
+  effectIcon: {fileID: 21300000, guid: 9eeb7d46926023047acb641b0f98d593, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
   damageModifier:
@@ -534,7 +535,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 94678b896648de840be2164851ce5823, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 713df282ca21f434abf407300c373fc3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -617,7 +618,7 @@ MonoBehaviour:
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,
     type: 3}
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: 94678b896648de840be2164851ce5823, type: 3}
+  effectIcon: {fileID: 21300000, guid: 713df282ca21f434abf407300c373fc3, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
   damageModifier:
@@ -652,13 +653,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6843116103360407059}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8120686893311671255}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -33.7, y: -68.5}
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a7ee9e9d9e61a174880a176be3286303, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 616abdc926b310947ba52e04ad4fdcfa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -774,11 +775,12 @@ MonoBehaviour:
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,
     type: 3}
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: a7ee9e9d9e61a174880a176be3286303, type: 3}
+  effectIcon: {fileID: 21300000, guid: 616abdc926b310947ba52e04ad4fdcfa, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
   insightDisplayPrefab: {fileID: 45254052961026828, guid: 784520c41f2b2184fa7223ba417cebba,
     type: 3}
+  duration: 1
 --- !u!1 &8089087349993830512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0728d6a4d5ed4d342bd8d2d110f05c15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbaa7119da6c34e44bab32b8c69af5a4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1158,7 +1160,7 @@ MonoBehaviour:
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,
     type: 3}
   checkOnEnable: 0
-  effectIcon: {fileID: 21300000, guid: 0728d6a4d5ed4d342bd8d2d110f05c15, type: 3}
+  effectIcon: {fileID: 21300000, guid: dbaa7119da6c34e44bab32b8c69af5a4, type: 3}
   closeMenu: 1
   pawnTgt: {fileID: 0}
   damageModifier:

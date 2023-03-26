@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BraveryEffect : SuggestiveEffect
+public class BraveryEffect : AfterActionWeightsEffect
 {
     /// <summary>
     /// Adds itself to a list of SuggestiveEffects on the pawn - to be analyzed just after actions were calculated!

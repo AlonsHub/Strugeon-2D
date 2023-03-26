@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EmpathyEffect : SuggestiveEffect
+public class EmpathyEffect : AfterActionWeightsEffect
 {
     Pawn toAvoid;
 

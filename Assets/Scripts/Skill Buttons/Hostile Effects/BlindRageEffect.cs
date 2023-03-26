@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BlindRageEffect : SuggestiveEffect
+public class BlindRageEffect : AfterActionWeightsEffect
 {
     public BlindRageEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite)
     {
