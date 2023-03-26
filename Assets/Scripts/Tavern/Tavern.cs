@@ -183,8 +183,6 @@ public class Tavern : MonoBehaviour
         //decide which room to fill and send to newSquadMenu
     }
 
-
-
     public void EditSquadMenu(Squad s, Room room)
     {
         //disassembles a squad

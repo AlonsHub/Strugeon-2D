@@ -12,7 +12,6 @@ public class WeakenEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDa
 
     public override float OperateOnDamage(float originalDamage)
     {
-
         return base.OperateOnDamage(originalDamage);
     }
 }
