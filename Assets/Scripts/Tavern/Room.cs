@@ -19,6 +19,7 @@ public class Room
     public Room()
     {
         size = 2;
+        isOccupied = false;
     }
 
     public bool TryUpgrade()

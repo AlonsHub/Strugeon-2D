@@ -33,14 +33,30 @@ public class SquadBuilder : MonoBehaviour
     GameObject confirmWindow;
 
     bool? confirmWindowAnswer;
+
+    //temp AF TBF 
+    int _currentRoomIndex;
+    int _roomCount => Tavern.Instance.RoomCount;
+
     
     private void OnEnable()
+    {
+        Init();
+    }
+    //private void Awake()
+    //{
+    //    Init();
+    //}
+
+    private void Init()
     {
         Tavern.Instance.DisableWindowTier1(name);
         confirmWindowAnswer = null;
         //isConfirmed = false; //no?
         tempSquad = new Squad();
-        mercDataDisplayer.gameObject.SetActive(true);
+        if (toRoom == null)
+            toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
+        //mercDataDisplayer.gameObject.SetActive(true);
 
         //set/instantiate empty party-slots by Room_level
 
@@ -59,11 +75,11 @@ public class SquadBuilder : MonoBehaviour
             availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
         }
 
-        if(availableSlots[0].isOccupied)
-        {
-            mercDataDisplayer.SetMe(availableSlots[0].pawn);
-        }
-       
+        //if (availableSlots[0].isOccupied)
+        //{
+        //    mercDataDisplayer.SetMe(availableSlots[0].pawn);
+        //}
+
         //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
         for (int i = names.Count; i < availableSlots.Length; i++)
         {
@@ -78,9 +94,12 @@ public class SquadBuilder : MonoBehaviour
         {
             partySlots[i].ClearSlot(); //empty
         }
-        //myButton.Toggle(true);
 
+
+        //toRoom = new Room();
+        //myButton.Toggle(true);
     }
+
     public void SetConfirmDecision(bool decision)
     {
         confirmWindowAnswer = decision;
@@ -190,6 +209,24 @@ public class SquadBuilder : MonoBehaviour
                 partySlots[i].gameObject.SetActive(false);
         }
     }
+    public void BetterSetToRoom(Room r) /// this is the problem, fix the room setting issue
+    {
+        toRoom = r;
+        //temp af TBF
+        if (r.squad == null || r.squad.pawns.Count ==0)
+            return;
+        tempSquad = r.squad;
+        //set partySlots by toRoom.size
+        for (int i = 0; i < r.squad.pawns.Count; i++)
+        {
+            partySlots[i].SetMe(r.squad.pawns[i]);
+
+        }
+        for (int i = toRoom.size; i < partySlots.Length; i++)
+        {
+                partySlots[i].gameObject.SetActive(false);
+        }
+    }
 
     public void Confirm() //also called in inspector by the Assemble Squad buttons
     {
@@ -217,11 +254,12 @@ public class SquadBuilder : MonoBehaviour
         //confirmWindow.SetActive(false); //moved to OnDisable
         gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
         //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
+        _currentRoomIndex++;
     }
-    public void SetMercDisplayer(Pawn merc)
-    {
-        mercDataDisplayer.SetMe(merc);
-    }
+    //public void SetMercDisplayer(Pawn merc)
+    //{
+    //    mercDataDisplayer.SetMe(merc);
+    //}
     public void Refresh()
     {
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
@@ -276,5 +314,20 @@ public class SquadBuilder : MonoBehaviour
         {
             item.FrameToggle(false);
         }
+    }
+
+    public void CycleCrews(int i)
+    {
+        _currentRoomIndex += i;
+        if(_currentRoomIndex <0)
+        {
+            _currentRoomIndex = _roomCount - 1;
+        }
+        if(_currentRoomIndex >= _roomCount)
+        {
+            _currentRoomIndex = 0;
+        }
+
+        BetterSetToRoom(Tavern.Instance.GetRoomByIndex(_currentRoomIndex));
     }
 }

@@ -59,12 +59,9 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        
         //if(room.isOccupied) // 19/12/21 - trying to allow clicking on room to fill instead of just for editing squads
         Tavern.Instance.SquadRoomSetup(this);
         //edit squad if there is one
-        
-
     }
     public void EditMe()
     {

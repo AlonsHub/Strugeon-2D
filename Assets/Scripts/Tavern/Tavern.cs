@@ -26,6 +26,11 @@ public class Tavern : MonoBehaviour
     //List<GameObject> roomButtons;
     List<RoomButton> _roomButtons;
 
+    List<Room> rooms;
+    public int RoomCount => rooms.Count;
+
+    public RoomButton GetRoom(int i) => _roomButtons[i];
+
     List<RoomBuildDisplayer> roomDisplayers;
 
     [SerializeField]
@@ -51,13 +56,14 @@ public class Tavern : MonoBehaviour
 
         Instance = this;
         _roomButtons = new List<RoomButton>();
-
+        rooms = new List<Room>();
+        rooms.Add(new Room());
         //windowTier1 = new List<GameObject>();
 
-        windowTier1.Add(newSquadMenu);
-        windowTier1.Add(squadRoomDisplayer.gameObject);
+        //windowTier1.Add(newSquadMenu);
+        //windowTier1.Add(squadRoomDisplayer.gameObject);
         //windowTier1.Add(roomManager.transform.parent.gameObject); //adds the parent, which also holds the Exit button
-        windowTier1.Add(roomManager.gameObject); //adds the parent, which also holds the Exit button
+        //windowTier1.Add(roomManager.gameObject); //adds the parent, which also holds the Exit button
 
         RefreshRooms();
         squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
@@ -102,35 +108,7 @@ public class Tavern : MonoBehaviour
 
     public void RefreshRooms()
     {
-        //if(_roomButtons != null && _roomButtons.Count > 0)
-        //{
-        //    for (int i = _roomButtons.Count-1; i >= 0; i--)
-        //    {
-        //        Destroy(_roomButtons[i].gameObject);
-        //    }
-        //    //roomButtons.Clear();
-        //}
-        //_roomButtons.Clear();
-
-        //if(_roomButtons.Count != PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
-        //{
-        //    if(_roomButtons.Count > PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
-        //    {
-        //        for (int i = _roomButtons.Count-1; i > PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i--)
-        //        {
-        //            Destroy(_roomButtons[i]);
-        //            _roomButtons.RemoveAt(i);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        for (int i = _roomButtons.Count; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
-        //        {
-        //            RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
-        //            _roomButtons.Add(go);
-        //        }
-        //    }
-        //}
+     
         
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
@@ -153,7 +131,8 @@ public class Tavern : MonoBehaviour
     {
         newSquadMenu.SetActive(true);
 
-        newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r); //squadBuilder.SetToRoom(r);?
+        //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r); //squadBuilder.SetToRoom(r);?
+        newSquadMenu.GetComponent<SquadBuilder>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
     public void TryOpenNewSquadMenu()
@@ -222,7 +201,8 @@ public class Tavern : MonoBehaviour
             //    //if it IS on
             //    squadRoomDisplayer.SetMe();
             //}
-            squadRoomDisplayer.SetMe(roomButton.room);
+            //squadRoomDisplayer.SetMe(roomButton.room);
+            squadBuilder.BetterSetToRoom(roomButton.room);
             activeRoomButton = roomButton;
         }
         else
@@ -241,5 +221,10 @@ public class Tavern : MonoBehaviour
     {
         //SHOULD HAAPEN EVERY X AND AGAIN
         HirelingMaster.Instance.PromptNewHireling();
+    }
+
+    public Room GetRoomByIndex(int i)
+    {
+        return (i<rooms.Count)? rooms[i]: null;
     }
 }

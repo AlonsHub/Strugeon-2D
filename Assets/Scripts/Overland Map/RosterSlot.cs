@@ -28,7 +28,6 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     GameObject mercDisplayer;
 
-    public SquadBuilder sb;
 
     public void SetMe(Pawn p)
     {
@@ -117,16 +116,16 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
             //{
             if (isOneClicked)
             {
-                if (isPartySlot || sb.tempSquad.pawns.Count < sb.ToRoom.size)
+                if (isPartySlot || squadBuilder.tempSquad.pawns.Count < squadBuilder.ToRoom.size)
                     RemoveMerc();
             }
             else
             {
                 isOneClicked = true;
 
-                if (!squadBuilder.mercDataDisplayer.gameObject.activeInHierarchy)
-                    squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
-                squadBuilder.SetMercDisplayer(pawn);
+                //if (!squadBuilder.mercDataDisplayer.gameObject.activeInHierarchy)
+                //    squadBuilder.mercDataDisplayer.gameObject.SetActive(true);
+                //squadBuilder.SetMercDisplayer(pawn);
                 squadBuilder.TurnAllFramesOff();
                 FrameToggle(true);
 

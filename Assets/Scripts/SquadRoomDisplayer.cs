@@ -21,7 +21,8 @@ public class SquadRoomDisplayer : MonoBehaviour
     [SerializeField]
     MercDataDisplayer mercDataDisplayer;
 
-    BasicMercSlot[] squadSlots;
+    [SerializeField]
+    RosterSlot[] squadSlots;
 
     private void Awake()
     {
@@ -57,14 +58,14 @@ public class SquadRoomDisplayer : MonoBehaviour
     }
     public void SetMe(Room room)
     {
-        DestroySquadSlots();
-        squadSlots = new BasicMercSlot[room.size];
+        //DestroySquadSlots();
+        //squadSlots = new RosterSlot[room.size];
 
 
         for (int i = 0; i < room.size; i++)
         {
-            squadSlots[i] = Instantiate(squadSlotPrefab, slotParent).GetComponent<BasicMercSlot>();
-            squadSlots[i].squadRoomDisplayer = this;
+            //squadSlots[i] = Instantiate(squadSlotPrefab, slotParent).GetComponent<RosterSlot>();
+            //squadSlots[i] = this;
             if (room.squad != null) //if it is, just have to empty slot there
             {
                 if (i < room.squad.pawns.Count)
