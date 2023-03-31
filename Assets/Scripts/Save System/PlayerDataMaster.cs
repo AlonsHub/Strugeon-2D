@@ -257,6 +257,9 @@ public class PlayerDataMaster : MonoBehaviour
         newPD.gold = GameStats.startingGold; //THESE SHOULD ALL be Init()
         newPD.rooms = new List<Room>();//THESE SHOULD ALL be Init()
         newPD.rooms.Add(new Room());//THESE SHOULD ALL be Init()
+        newPD.rooms.Add(new Room());//THESE SHOULD ALL be Init()
+        newPD.rooms.Add(new Room());//THESE SHOULD ALL be Init()
+        newPD.rooms.Add(new Room());//THESE SHOULD ALL be Init()
 
 
 

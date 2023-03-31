@@ -14,7 +14,7 @@ public class Squad : IEquatable<Squad>
     //could instead have list of names and a DIFFERENT list for modifiers (if any)
 
     public List<Pawn> pawns;
-    public string squadName;
+    public string squadName => (pawns.Count >0)? pawns[0].Name + " Squad" : "Crew ";
 
     public SquadState squadState;
 
@@ -65,7 +65,7 @@ public class Squad : IEquatable<Squad>
         //}
 
         //roomNumber = roomNum;
-        squadName = pawns[0].Name + " Squad";
+        //squadName = pawns[0].Name + " Squad";
         squadState = SquadState.InRoom;
     }
     public Squad(List<Pawn> newPawns, SquadState newState, int relevantNum) //weird that I don't use this... // USING IT NOW, thanks <3
@@ -95,7 +95,7 @@ public class Squad : IEquatable<Squad>
         //}
 
         //roomNumber = roomNum;
-        squadName = pawns[0].Name + " Squad";
+        //squadName = pawns[0].Name + " Squad";
         
         squadState = newState;
     }

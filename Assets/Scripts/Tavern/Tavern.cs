@@ -29,7 +29,7 @@ public class Tavern : MonoBehaviour
     List<Room> rooms;
     public int RoomCount => rooms.Count;
 
-    public RoomButton GetRoom(int i) => _roomButtons[i];
+    public RoomButton GetRoomButton(int i) => _roomButtons[i];
 
     List<RoomBuildDisplayer> roomDisplayers;
 
@@ -56,8 +56,7 @@ public class Tavern : MonoBehaviour
 
         Instance = this;
         _roomButtons = new List<RoomButton>();
-        rooms = new List<Room>();
-        rooms.Add(new Room());
+        rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
         //windowTier1 = new List<GameObject>();
 
         //windowTier1.Add(newSquadMenu);
@@ -112,7 +111,7 @@ public class Tavern : MonoBehaviour
         
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
-            if (_roomButtons.Count - 1 < i)
+            if (i > _roomButtons.Count - 1)
             {
                 RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
                 _roomButtons.Add(go);

@@ -6,6 +6,8 @@ using System.Linq;
 public class SquadBuilder : MonoBehaviour
 {
     [SerializeField]
+    TMPro.TMP_Text crewName;
+    [SerializeField]
     RosterSlot[] availableSlots;
     [SerializeField]
     Transform partySlotsParent;
@@ -54,19 +56,12 @@ public class SquadBuilder : MonoBehaviour
         confirmWindowAnswer = null;
         //isConfirmed = false; //no?
         tempSquad = new Squad();
-        if (toRoom == null)
+
+        _currentRoomIndex = 0; //temp - If not room buttons exit - this makes sure to open the squad builder displaying the first crew
+
+        //if (toRoom == null)
             toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
-        //mercDataDisplayer.gameObject.SetActive(true);
-
-        //set/instantiate empty party-slots by Room_level
-
-        //print all availables:
-        //for (int i = 0; i < PartyMaster.Instance.availableMercPrefabs.Count; i++)
-        //for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.availableMercs.Count; i++)
-        //{
-        //    //availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
-        //    availableSlots[i].SetMe(PartyMaster.Instance.availableMercPrefabs[i]); //could also go with mercSheets.Where(x => x.assignment == MercAssignment.Available)
-        //}
+       
 
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
 
@@ -213,8 +208,8 @@ public class SquadBuilder : MonoBehaviour
     {
         toRoom = r;
         //temp af TBF
-        if (r.squad == null || r.squad.pawns.Count ==0)
-            return;
+        //if (r.squad == null || r.squad.pawns.Count ==0)
+            //return;
         tempSquad = r.squad;
         //set partySlots by toRoom.size
         for (int i = 0; i < r.squad.pawns.Count; i++)
@@ -249,20 +244,18 @@ public class SquadBuilder : MonoBehaviour
         }
 
 
-
-        //Tavern.Instance.RefreshRooms();
-        //confirmWindow.SetActive(false); //moved to OnDisable
         gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("OverlandMapScene");
-        _currentRoomIndex++;
+       
     }
-    //public void SetMercDisplayer(Pawn merc)
-    //{
-    //    mercDataDisplayer.SetMe(merc);
-    //}
+   
     public void Refresh()
     {
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+        if (Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad != null || Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.pawns.Count >0)
+            crewName.text = Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.squadName;
+        else
+            crewName.text = $"Crew {_currentRoomIndex+1}";
+
 
         for (int i = 0; i < names.Count; i++)
         {
@@ -329,5 +322,6 @@ public class SquadBuilder : MonoBehaviour
         }
 
         BetterSetToRoom(Tavern.Instance.GetRoomByIndex(_currentRoomIndex));
+        Refresh();
     }
 }
