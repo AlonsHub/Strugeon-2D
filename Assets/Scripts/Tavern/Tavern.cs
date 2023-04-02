@@ -57,13 +57,7 @@ public class Tavern : MonoBehaviour
         Instance = this;
         _roomButtons = new List<RoomButton>();
         rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
-        //windowTier1 = new List<GameObject>();
-
-        //windowTier1.Add(newSquadMenu);
-        //windowTier1.Add(squadRoomDisplayer.gameObject);
-        //windowTier1.Add(roomManager.transform.parent.gameObject); //adds the parent, which also holds the Exit button
-        //windowTier1.Add(roomManager.gameObject); //adds the parent, which also holds the Exit button
-
+       
         RefreshRooms();
         squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
 
@@ -84,13 +78,6 @@ public class Tavern : MonoBehaviour
 
         foreach (var item in windowTier1)
         {
-            //    {
-            //        if (item.name.Equals(squadBuilder.name))
-            //        {
-            //            squadBuilder.CloseMe();
-            //        }
-            //        else
-            //        {
             if (!item.name.Equals(dontDisable))
                 item.SetActive(false);
             else
@@ -101,14 +88,10 @@ public class Tavern : MonoBehaviour
                 item.SetActive(true);
             }
         }
-        //    }
-        //}
     }
 
     public void RefreshRooms()
-    {
-     
-        
+    {   
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             if (i > _roomButtons.Count - 1)
@@ -130,13 +113,11 @@ public class Tavern : MonoBehaviour
     {
         newSquadMenu.SetActive(true);
 
-        //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(r); //squadBuilder.SetToRoom(r);?
         newSquadMenu.GetComponent<SquadBuilder>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
     public void TryOpenNewSquadMenu()
-    {
-        
+    {        
         if(PartyMaster.Instance.squads.Count > PlayerDataMaster.Instance.currentPlayerData.rooms.Count)
         {
             Debug.LogError("There are more squads than there are rooms at the moment. This shouldn't happen");
@@ -189,18 +170,11 @@ public class Tavern : MonoBehaviour
     RoomButton activeRoomButton;
     public void SquadRoomSetup(RoomButton roomButton)
     {
-
-        if (roomButton.isOccupied)
+        if(roomButton.isOccupied)
         {
-
             if (!squadRoomDisplayer.gameObject.activeSelf)
                 squadRoomDisplayer.gameObject.SetActive(true);
-            //else
-            //{
-            //    //if it IS on
-            //    squadRoomDisplayer.SetMe();
-            //}
-            //squadRoomDisplayer.SetMe(roomButton.room);
+          
             squadBuilder.BetterSetToRoom(roomButton.room);
             activeRoomButton = roomButton;
         }
