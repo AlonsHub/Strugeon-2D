@@ -137,7 +137,7 @@ public class EquipInventoryManager : MonoBehaviour
          
             displayers[i].SetItem();
         }
-        
+        EnsureOneDisplayerPerMagicItem();
         //while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
         //{
         //    empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
