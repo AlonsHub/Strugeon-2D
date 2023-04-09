@@ -8,6 +8,10 @@ public class LobbyMercDisplayer : BasicDisplayer
     ExpBarDisplayer expBarDisplayer;
     MercPoolDisplayer mercPoolDisplayer;
     MercSheet sheet;
+
+    [SerializeField]
+    GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
+
     public bool SetMeFull(MercSheet mercSheet, MercPoolDisplayer poolDisplayer)
     {
         mercPoolDisplayer = poolDisplayer;
@@ -68,9 +72,27 @@ public class LobbyMercDisplayer : BasicDisplayer
 
         expBarDisplayer.SetBar(mercSheet);
 
+        DisplayGear();
+
         return base.SetMe(textsPerTextBox, spritesPerImage);
     }
 
+
+    public void DisplayGear()
+    {
+        for (int i = 0; i < gearSlots.Length; i++)
+        {
+            IEquipable eq;
+            if ((eq = sheet.gear.GetItemBySlot((EquipSlotType)i)) != null)
+            {
+                gearSlots[i].SetMeFull(eq as MagicItem, sheet,this);
+            }
+            else
+            {
+                gearSlots[i].SetMeEmpty();
+            }
+        }
+    }
     //Need this for MercGearDisplayer - currently the Merc View Winodow!
     //public void OnMyClick()
     //{

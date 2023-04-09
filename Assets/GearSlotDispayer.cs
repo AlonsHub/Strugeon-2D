@@ -11,17 +11,21 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     [SerializeField]
     Sprite emptySprite;
 
-    [SerializeField]
-    EquipInventoryManager inventoryDisplayManager;
+    //[SerializeField]
+    //EquipInventoryManager inventoryDisplayManager;
 
     MagicItem magicItem;
 
+    MercSheet mercSheet;
+    LobbyMercDisplayer lobbyMercDisplayer;
     public void SetMeEmpty() //check if this is needed to be able to fight. TBF + gamedesign-wise, do we even allow illegal "unequips" and let the merc be useless?
     {
         base.SetMe(new List<string> { "Empty", "no benefit" }, new List<Sprite> {emptySprite});
     }
-    public bool SetMeFull(MagicItem item)
+    public bool SetMeFull(MagicItem item, MercSheet ms, LobbyMercDisplayer lmd)
     {
+        lobbyMercDisplayer = lmd;
+           mercSheet = ms;
         if (!item.itemSprite && !item.FetchSprite())
                 return false;
         magicItem = item;
@@ -35,8 +39,10 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     public void OnMyClick()
     {
         //ask the gear displayer to open ItemInventory and filter items by class and slot
-        inventoryDisplayManager.gameObject.SetActive(true);
-        inventoryDisplayManager.FilterBySlot(slotType);
+        //inventoryDisplayManager.gameObject.SetActive(true);
+        //inventoryDisplayManager.FilterBySlot(slotType);
+        Tavern.Instance.equipInventoryManager.gameObject.SetActive(true);
+        Tavern.Instance.equipInventoryManager.FilterBySlot(slotType, mercSheet, lobbyMercDisplayer); //need to pass the slot/merc to equip to
 
     }
 

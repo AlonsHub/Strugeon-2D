@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EquipInventoryManager : MonoBehaviour
 {
+    public static EquipInventoryManager Instance;
     //parent
     [SerializeField]
     Transform inventoryParent;
@@ -27,30 +28,37 @@ public class EquipInventoryManager : MonoBehaviour
     EquipSlotType relevantSlot;
 
 
+    //
+    MercSheet relevantMercSheet;
+    LobbyMercDisplayer lobbyMercDisplayer;
     private void Awake()
     {
-        if (!mercGearDisplayer)
-        {
-            Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
-            return;
-        }
-        //EnsureOneDisplayerPerMagicItem();
+        Instance = this;
     }
-    private void OnEnable()
-    {
-        //SetSellMode(false);
+    //private void Awake()
+    //{
+    //    if (!mercGearDisplayer)
+    //    {
+    //        Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
+    //        return;
+    //    }
+    //    //EnsureOneDisplayerPerMagicItem();
+    //}
+    //private void OnEnable()
+    //{
+    //    //SetSellMode(false);
 
-        if(!mercGearDisplayer)
-        {
-            Debug.LogError("No gear displayer!"); //TBF need to decide if this will be used for other inventory views or not
-            return;
-        }
-        
-        RefreshInventory();
+    //    if(relevantMercSheet == null)
+    //    {
+    //        Debug.LogError("No relevantMercSheet!"); //TBF need to decide if this will be used for other inventory views or not
+    //        return;
+    //    }
 
-        Inventory.Instance.OnInventoryChange += RefreshInventory;
-        mercGearDisplayer.OnMercChange += RefreshInventory;
-    }
+    //    RefreshInventory();
+
+    //    Inventory.Instance.OnInventoryChange += RefreshInventory;
+    //    //mercGearDisplayer.OnMercChange += RefreshInventory;
+    //}
     private void OnDisable()
     {
         //for (int i = empties.Count-1; i >= 0; i--)
@@ -58,20 +66,26 @@ public class EquipInventoryManager : MonoBehaviour
         //    Destroy(empties[i]);
         //}
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
-        if (mercGearDisplayer)
-            mercGearDisplayer.OnMercChange -= RefreshInventory;
+        //if (mercGearDisplayer)
+        //    mercGearDisplayer.OnMercChange -= RefreshInventory;
     }
-    public void FilterBySlot(EquipSlotType slotType)
+    public void FilterBySlot(EquipSlotType slotType, MercSheet ms, LobbyMercDisplayer lmd)
     {
+        lobbyMercDisplayer = lmd;
+        relevantMercSheet = ms;
+        //gsd = gearSlotDispayer;
         relevantSlot = slotType;
+        
+
+        Inventory.Instance.OnInventoryChange += RefreshInventory;
         RefreshInventory();
     }
     public void RefreshInventory()
     {
 
-        MercSheet ms;
-        if ((ms = mercGearDisplayer.GetMercSheet) != null)
-            relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(ms.mercClass)).ToList();
+        
+        if (relevantMercSheet != null)
+            relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(relevantMercSheet.mercClass)).ToList();
         else
             return;
 
@@ -172,7 +186,20 @@ public class EquipInventoryManager : MonoBehaviour
         SetSellMode(!sellModeIsOn);
     }
 
-   
+   public void TryEquip(MagicItem item)
+    {
+        if (relevantMercSheet == null)
+            return;
+        Inventory.Instance.RemoveMagicItem(item);
+        IEquipable removedItem;
+        if ((removedItem = relevantMercSheet.gear.TryEquipItemToSlot(item)) != null)
+        {
+            //add to inventory
+            Inventory.Instance.AddMagicItem(removedItem as MagicItem);
+        }
+
+        lobbyMercDisplayer.DisplayGear(); //refreshes
+    }
 
 
 }

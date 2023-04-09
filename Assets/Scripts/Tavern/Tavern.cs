@@ -46,6 +46,9 @@ public class Tavern : MonoBehaviour
     [SerializeField]
     List<GameObject> windowTier1;
 
+    
+    public EquipInventoryManager equipInventoryManager;
+
     void Start()
     {
         if (Instance != null && Instance != this)

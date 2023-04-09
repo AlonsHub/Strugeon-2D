@@ -10,15 +10,16 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     public GameObject sellGroup;
 
     //Gear displayer
-    [SerializeField]
-    static MercGearDisplayer mercGearDisplayer;
+    //[SerializeField]
+    //static MercGearDisplayer mercGearDisplayer;
+   
 
     private void OnEnable()
     {
-        if(!mercGearDisplayer) 
-        {
-            mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once //TBF horrible
-        }
+        //if(!mercGearDisplayer) 
+        //{
+        //    mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once //TBF horrible
+        //}
     }
 
 
@@ -37,10 +38,12 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         }
         else
         {
-            if (mercGearDisplayer) 
-            {
-                mercGearDisplayer.TryEquipItem(magicItem);
-            }
+            EquipInventoryManager.Instance.TryEquip(magicItem);
+            //if (mercGearDisplayer) 
+            //{
+            //    mercGearDisplayer.TryEquipItem(magicItem);
+            //}
+
         }
     }
     IEnumerator DoubleClickCooldown()
@@ -80,14 +83,14 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         Inventory.Instance.AddGold(goldValue);
     }
 
-    public void TryEquipItem(IEquipable toEquip)
-    {
-        if (!mercGearDisplayer)
-            return;
+    //public void TryEquipItem(IEquipable toEquip)
+    //{
+    //    if (!mercGearDisplayer)
+    //        return;
 
-        mercGearDisplayer.TryEquipItem(toEquip as MagicItem);
+    //    mercGearDisplayer.TryEquipItem(toEquip as MagicItem);
         
-    }
+    //}
 
     public void OnPointerEnter(PointerEventData eventData)
     {

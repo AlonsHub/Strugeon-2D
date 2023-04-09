@@ -60,7 +60,7 @@ public class MercGearDisplayer : BasicDisplayer
             IEquipable eq;
             if ((eq = mercSheet.gear.GetItemBySlot((EquipSlotType)i)) != null)
             {
-                gearSlots[i].SetMeFull(eq as MagicItem);
+                gearSlots[i].SetMeFull(eq as MagicItem, mercSheet, null); //should not work
             }
             else
             {
