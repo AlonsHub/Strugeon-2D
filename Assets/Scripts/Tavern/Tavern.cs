@@ -59,7 +59,7 @@ public class Tavern : MonoBehaviour
         rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
        
         RefreshRooms();
-        squadBuilder = newSquadMenu.GetComponent<SquadBuilder2>();
+        //squadBuilder = newSquadMenu.GetComponent<SquadBuilder2>();
 
         HirelingMaster.Instance.LoadExistingHireablesToLog();
         Invoke("TryPromptNewHireling", 1);
@@ -112,8 +112,8 @@ public class Tavern : MonoBehaviour
     public void TryOpenNewSquadMenu(Room r)
     {
         newSquadMenu.SetActive(true);
-
-        newSquadMenu.GetComponent<SquadBuilder2>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
+        squadBuilder.BetterSetToRoom(r);
+        //newSquadMenu.GetComponent<SquadBuilder2>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
     public void TryOpenNewSquadMenu()

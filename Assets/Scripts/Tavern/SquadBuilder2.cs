@@ -55,7 +55,7 @@ public class SquadBuilder2 : MonoBehaviour
 
     private void Init()
     {
-        Tavern.Instance.DisableWindowTier1(name);
+        //Tavern.Instance.DisableWindowTier1(name);
         confirmWindowAnswer = null;
         confirmCycleAnswer = null;
         //isConfirmed = false; //no?

@@ -41,9 +41,13 @@ public class SimpleInventory : BaseInventory
         string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
         string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
 
-        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>",$"<color=#{titleColorHex}>" +
-            $"{selectedItem._Benefit().BenefitStatName()}", $"{selectedItem._Benefit().Value()} </color>", 
-            selectedItem.ItemDescription(), $"{selectedItem.goldValue} Gold"}, new List<Sprite> {selectedItem.itemSprite});
+        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, 
+            $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>",
+            $"<color=#{titleColorHex}> {selectedItem._Benefit().BenefitStatName()}</color>", 
+            $"<color=#{titleColorHex}>{selectedItem._Benefit().Value()} </color>", 
+            selectedItem.ItemDescription(), $"{selectedItem.goldValue} Gold"}, 
+            //now sprites:
+            new List<Sprite> {selectedItem.itemSprite});
     }
     public void SetCurrentItem()
     {
@@ -51,8 +55,16 @@ public class SimpleInventory : BaseInventory
         {
             selectedItem = null;
             //Set as nothing
-            selectedItemDesplayer.SetMe(new List<string> { emptyItem.magicItemName, "" ,
-            /*emptyItem.ItemDescription()*/ "Nothing to describe...", ""}, new List<Sprite> { emptyItem.itemSprite });
+            string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
+            string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
+
+            selectedItemDesplayer.SetMe(new List<string> { emptyItem.magicItemName,
+            $"<color=#{slotColorHex}> {emptyItem.fittingSlotType} | </color>",
+            $"<color=#{titleColorHex}> {emptyItem._Benefit().BenefitStatName()}</color>",
+            $"<color=#{titleColorHex}>{emptyItem._Benefit().Value()} </color>",
+            emptyItem.ItemDescription(), $"{emptyItem.goldValue} Gold"},
+            //now sprites:
+            new List<Sprite> { emptyItem.itemSprite });
             sellButton.interactable = false;
         }
         else
