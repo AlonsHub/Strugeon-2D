@@ -50,6 +50,19 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         damageText.text = $"Damage: {p._mercSheet._minDamage}-{p._mercSheet._maxDamage}";
         abilitySprite.sprite = p.SASprite;
     }
+    public void SetMe(MercSheet ms)
+    {
+        pawn = ms.MyPawnPrefabRef<Pawn>();
+        img.sprite = pawn.PortraitSprite;
+        img.color = new Color(1, 1, 1, 1);
+        isOccupied = true;
+
+        hpText.text = $"HP: {ms._maxHp}/{ms._maxHp}";
+        damageText.text = $"Damage: {ms._minDamage}-{ms._maxDamage}";
+        abilitySprite.sprite = pawn.SASprite;
+    }
+
+
     public void SetMe()
     {
         img.sprite = defaultPortraitSprite;

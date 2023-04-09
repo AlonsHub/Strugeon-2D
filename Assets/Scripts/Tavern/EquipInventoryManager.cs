@@ -82,15 +82,14 @@ public class EquipInventoryManager : MonoBehaviour
     }
     public void RefreshInventory()
     {
-
-        
         if (relevantMercSheet != null)
             relevantItems = Inventory.Instance.inventoryItems.Where(x => x.fittingSlotType == relevantSlot && x.relevantClasses.Contains(relevantMercSheet.mercClass)).ToList();
         else
             return;
 
-        //    relevantItems = Inventory.Instance.inventoryItems;
-        //EnsureOneDisplayerPerMagicItem();
+        
+        
+        EnsureOneDisplayerPerMagicItem();
 
         foreach (var item in displayers)
         {
@@ -137,7 +136,6 @@ public class EquipInventoryManager : MonoBehaviour
          
             displayers[i].SetItem();
         }
-        EnsureOneDisplayerPerMagicItem();
         //while (displayers.Count + empties.Count < 16 || (displayers.Count + empties.Count) % 4 != 0)
         //{
         //    empties.Add( Instantiate(emptyDisplayerPrefab, inventoryParent));
