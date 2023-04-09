@@ -13,9 +13,12 @@ public class ExpBarDisplayer : MonoBehaviour //EXCEPTION CLASS THAT IS NOT A BAS
     [SerializeField]
     TMP_Text expText; // is composed of {currentExp}/{requiredExpToNextLevel}
 
-    [SerializeField]
-    Image barFillPart;
 
+    //[SerializeField]
+    //Image barFillPart;
+
+    [SerializeField]
+    Slider slider;
     public void SetBar(MercSheet mercSheet) //makes it easier, since it mostly takes MercSheets (if not just mercSheets)
     {
         Vector2 expFromTo = mercSheet._expFromAndToNextLevel;
@@ -28,6 +31,6 @@ public class ExpBarDisplayer : MonoBehaviour //EXCEPTION CLASS THAT IS NOT A BAS
         nextLevelNumber.text = (c+1).ToString();
         expText.text = exp;
 
-        barFillPart.fillAmount = fill;
+        slider.value = fill;
     }
 }

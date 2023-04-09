@@ -20,7 +20,7 @@ public class MercPoolDisplayer : MonoBehaviour
 
     List<GameObject> displayers = new List<GameObject>();
 
-    [SerializeField] MercGearDisplayer mercGearDisplayer;
+    //[SerializeField] MercGearDisplayer mercGearDisplayer;
 
     List<MercSheet> relevant;
     private void OnEnable()
@@ -69,14 +69,14 @@ public class MercPoolDisplayer : MonoBehaviour
        
     }
 
-    public void OpenGearDisplayerByMercIndex(int i)
-    {
-        //mercGearDisplayer.SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(i));
-        mercGearDisplayer.SetMeFully(relevant[i]);
-    }
-    public void ShowMercOnGearDisplayer(MercSheet mercSheet)
-    {
-        mercGearDisplayer.SetMeFully(mercSheet);
-    }
+    //public void OpenGearDisplayerByMercIndex(int i)
+    //{
+    //    //mercGearDisplayer.SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(i));
+    //    mercGearDisplayer.SetMeFully(relevant[i]);
+    //}
+    //public void ShowMercOnGearDisplayer(MercSheet mercSheet)
+    //{
+    //    mercGearDisplayer.SetMeFully(mercSheet);
+    //}
 
 }

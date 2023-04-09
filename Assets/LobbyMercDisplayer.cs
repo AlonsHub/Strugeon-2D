@@ -71,10 +71,11 @@ public class LobbyMercDisplayer : BasicDisplayer
         return base.SetMe(textsPerTextBox, spritesPerImage);
     }
 
-    public void OnMyClick()
-    {
-        //display merc to the MercGearDisplayer
-        if(sheet.currentAssignment != MercAssignment.AwaySquad)
-        mercPoolDisplayer.ShowMercOnGearDisplayer(sheet);
-    }
+    //Need this for MercGearDisplayer - currently the Merc View Winodow!
+    //public void OnMyClick()
+    //{
+    //    //display merc to the MercGearDisplayer
+    //    if(sheet.currentAssignment != MercAssignment.AwaySquad)
+    //    mercPoolDisplayer.ShowMercOnGearDisplayer(sheet);
+    //}
 }
