@@ -30,10 +30,10 @@ public class StatBenefit : IBenefit
         switch (statToBenefit)
         {
             case global::StatToBenefit.MaxHP:
-                return "Maximum HP";
+                return "Max HP";
                 break;
             case global::StatToBenefit.FlatDamage:
-                return "Maximum and Minimum Damage";
+                return "Damage";
                 break;
             default:
                 return "Nothing";

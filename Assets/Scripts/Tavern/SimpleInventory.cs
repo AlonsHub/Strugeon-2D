@@ -41,8 +41,8 @@ public class SimpleInventory : BaseInventory
         string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
         string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
 
-        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>" +$"<color=#{titleColorHex}>" +
-            $"{selectedItem._Benefit().BenefitStatName()} + {selectedItem._Benefit().Value()} </color>", 
+        selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>",$"<color=#{titleColorHex}>" +
+            $"{selectedItem._Benefit().BenefitStatName()}", $"{selectedItem._Benefit().Value()} </color>", 
             selectedItem.ItemDescription(), $"{selectedItem.goldValue} Gold"}, new List<Sprite> {selectedItem.itemSprite});
     }
     public void SetCurrentItem()
