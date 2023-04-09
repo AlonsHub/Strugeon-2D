@@ -23,13 +23,11 @@ public class BaseInventory : MonoBehaviour
     {
         RefreshInventory();
         Inventory.Instance.OnInventoryChange += RefreshInventory;
-
     }
 
     protected virtual void OnDisable()
     {
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
-
     }
 
     public virtual void SetCurrentItem(MagicItem itemToSet)
@@ -77,7 +75,5 @@ public class BaseInventory : MonoBehaviour
             displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i], this);
         }
     }
-
-    
 
 }

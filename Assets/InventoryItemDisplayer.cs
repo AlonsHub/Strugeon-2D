@@ -33,6 +33,7 @@ public class InventoryItemDisplayer : BasicDisplayer
         {
             if(ActiveDisplayer)
             ActiveDisplayer.BackgroundGlow(false);
+
             ActiveDisplayer = this;
             ActiveDisplayer.BackgroundGlow(true);
 

@@ -14,7 +14,7 @@ public class Tavern : MonoBehaviour
     GameObject noMoreRoomsWindow;
     [SerializeField]
     GameObject newSquadMenu;
-    public SquadBuilder squadBuilder;
+    public SquadBuilder2 squadBuilder;
 
     [SerializeField]
     GameObject roomPanelPrefab;
@@ -59,7 +59,7 @@ public class Tavern : MonoBehaviour
         rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
        
         RefreshRooms();
-        squadBuilder = newSquadMenu.GetComponent<SquadBuilder>();
+        squadBuilder = newSquadMenu.GetComponent<SquadBuilder2>();
 
         HirelingMaster.Instance.LoadExistingHireablesToLog();
         Invoke("TryPromptNewHireling", 1);
@@ -113,7 +113,7 @@ public class Tavern : MonoBehaviour
     {
         newSquadMenu.SetActive(true);
 
-        newSquadMenu.GetComponent<SquadBuilder>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
+        newSquadMenu.GetComponent<SquadBuilder2>().BetterSetToRoom(r); //squadBuilder.SetToRoom(r);?
     }
 
     public void TryOpenNewSquadMenu()
@@ -135,7 +135,7 @@ public class Tavern : MonoBehaviour
             {
                 newSquadMenu.SetActive(true);
 
-                newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
+                newSquadMenu.GetComponent<SquadBuilder2>().SetToRoom(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
                 break;
             }
         }
@@ -153,7 +153,7 @@ public class Tavern : MonoBehaviour
             if(PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault()))
             {
 
-                newSquadMenu.GetComponent<SquadBuilder>().EditSquadMode(s.pawns, room);
+                newSquadMenu.GetComponent<SquadBuilder2>().EditSquadMode(s.pawns, room);
             }
             else
             {

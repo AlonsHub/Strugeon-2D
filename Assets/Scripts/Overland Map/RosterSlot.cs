@@ -16,6 +16,16 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     Sprite onBgSprite;
     [SerializeField]
     Sprite offBgSprite;
+    
+    
+    [SerializeField]
+    Image abilitySprite;
+    [SerializeField]
+    TMP_Text hpText;
+    [SerializeField]
+    TMP_Text damageText;
+    //[SerializeField]
+    //TMP_Text Text;
 
     //public TMP_Text nameText;
     public bool isOccupied = false;
@@ -24,7 +34,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     public bool isPartySlot;
 
     [SerializeField]
-    SquadBuilder squadBuilder;
+    SquadBuilder2 squadBuilder;
     [SerializeField]
     GameObject mercDisplayer;
 
@@ -35,12 +45,22 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
+
+        hpText.text = $"HP: {p._mercSheet._maxHp}/{p._mercSheet._maxHp}";
+        damageText.text = $"Damage: {p._mercSheet._minDamage}-{p._mercSheet._maxDamage}";
+        abilitySprite.sprite = p.SASprite;
     }
     public void SetMe()
     {
         img.sprite = defaultPortraitSprite;
         img.color = new Color(0,0,0,0);
         isOccupied = false;
+
+        hpText.text = $"HP: XXX/XXX";
+        damageText.text = $"Damage: XX-XX";
+
+        abilitySprite.sprite = null;
+
     }
 
     public void RemoveMerc()

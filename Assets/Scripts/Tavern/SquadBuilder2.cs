@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class SquadBuilder : MonoBehaviour
+public class SquadBuilder2 : MonoBehaviour
 {
     [SerializeField]
     TMPro.TMP_Text crewName;
@@ -100,11 +100,11 @@ public class SquadBuilder : MonoBehaviour
         //myButton.Toggle(true);
     }
 
-    public void SetConfirmDecision(bool decision)
+    public void SetConfirmDecision(bool decision)//called by buttons in inspector
     {
         confirmWindowAnswer = decision;
     }
-    public void SetCycleConfirmDecision(bool decision)
+    public void SetCycleConfirmDecision(bool decision)//called by buttons in inspector
     {
         confirmCycleAnswer = decision;
     }
@@ -191,14 +191,14 @@ public class SquadBuilder : MonoBehaviour
 
     IEnumerator CycleWaitForConfirm()
     {
-        yield return new WaitUntil(() => confirmCycleAnswer != null || !cycleConfirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
+        yield return new WaitUntil(() => confirmCycleAnswer.HasValue || !cycleConfirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
 
-        if (confirmCycleAnswer == true)
-        {
-            //confirm
-            CycleConfirm();
-        }
-        else
+        //if (confirmCycleAnswer == true)
+        //{
+        //    //confirm
+        //    CycleConfirm();
+        //}
+        if (confirmCycleAnswer == false)
         {
             //even if null, don't confirm changes
             if (isEdit)
@@ -279,6 +279,7 @@ public class SquadBuilder : MonoBehaviour
             //return;
         tempSquad = r.squad;
         isEdit = false; //Will be set true in EditSquadMode if relevant
+
         if(tempSquad != null && tempSquad.pawns.Count >0)
         {
             EditSquadMode(tempSquad.pawns, r);
@@ -301,7 +302,7 @@ public class SquadBuilder : MonoBehaviour
                 partySlots[i].gameObject.SetActive(false);
             }
         }
-      
+        Refresh();
     }
 
     public void Confirm() //also called in inspector by the Assemble Squad buttons
@@ -419,6 +420,7 @@ public class SquadBuilder : MonoBehaviour
 
     private IEnumerator CycleCrewCoroutine(int i)
     {
+        yield return null;
         Room currentRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
         if (currentRoom.squad != null && currentRoom.squad.pawns.Count > 0) //TBF, this is how we check if is occupied
         {
@@ -440,12 +442,13 @@ public class SquadBuilder : MonoBehaviour
             {
                 cycleConfirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
             }
-            yield return StartCoroutine(nameof(CycleWaitForConfirm));
 
-            if(confirmCycleAnswer.Value == true)
-            {
+            //yield return StartCoroutine(nameof(CycleWaitForConfirm));
+
+            //if(confirmCycleAnswer.HasValue && confirmCycleAnswer.Value == true)
+            //{
                 CycleConfirm();
-            }
+            //}
         }
 
         _currentRoomIndex += i;

@@ -304,12 +304,14 @@ MonoBehaviour:
     type: 3}
   offBgSprite: {fileID: 3983671566301948619, guid: 5db449eded7dfc642ab46a2f37e06b09,
     type: 3}
+  abilitySprite: {fileID: 7781238818301871200}
+  hpText: {fileID: 7781238816987244539}
+  damageText: {fileID: 7781238816409319091}
   isOccupied: 0
   pawn: {fileID: 0}
   isPartySlot: 0
   squadBuilder: {fileID: 0}
   mercDisplayer: {fileID: 0}
-  sb: {fileID: 0}
 --- !u!1 &7781238816614610348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +1978,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7028965840039802403}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7781238818301871200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 754181734763885123, guid: 6bb59df5cff0d1f488ad388f16c0f417,
+    type: 3}
+  m_PrefabInstance: {fileID: 7028965840039802403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7781238816441151457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1983,6 +1997,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7781238816807057525}
     m_Modifications:
+    - target: {fileID: 6592428071501338722, guid: 5c21b9c7fdf18614aa7732fa6e3fdd8a,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.742
+      objectReference: {fileID: 0}
     - target: {fileID: 6592428071501338723, guid: 5c21b9c7fdf18614aa7732fa6e3fdd8a,
         type: 3}
       propertyPath: m_Pivot.x
