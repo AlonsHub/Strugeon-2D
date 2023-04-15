@@ -19,6 +19,8 @@ public class MercBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             return;
         minObject.gameObject.SetActive(false);
         maxObject.gameObject.SetActive(true);
+
+        transform.localScale *= 1.5f; 
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -26,6 +28,8 @@ public class MercBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             return;
         minObject.gameObject.SetActive(true);
         maxObject.gameObject.SetActive(false);
+        transform.localScale /= 1.5f;
+
     }
 
     public void SetMe(MercSheet ms)
