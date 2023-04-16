@@ -29,7 +29,7 @@ public class CrewBlock : MonoBehaviour
         room = r; //Mostly redundant, but in-case this is ever called by any other method (that is not SetMe(Room r))
 
         crewName.text = "Empty Crew";
-        upgradePriceText.text = "??";
+        
 
         for (int i = 0; i < r.size; i++)
         {
@@ -39,7 +39,9 @@ public class CrewBlock : MonoBehaviour
     public void SetMe(Room r)
     {
         room = r;
-        if(r.squad == null || r.squad.pawns.Count ==0)
+        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
+
+        if (r.squad == null || r.squad.pawns.Count ==0)
         {
             //squad = new Squad();
             SetMeEmpty(room);
@@ -49,7 +51,6 @@ public class CrewBlock : MonoBehaviour
         squad = r.squad;
 
         crewName.text = squad.squadName;
-        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
 
         for (int i = 0; i< r.size; i++)
         {

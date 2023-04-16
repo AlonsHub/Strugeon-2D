@@ -291,10 +291,10 @@ public class SquadBuilder2 : MonoBehaviour
         //temp af TBF
         //if (r.squad == null || r.squad.pawns.Count ==0)
         //return;
-        if (r.squad != null)
-            tempSquad = r.squad;
-        else
-            tempSquad = new Squad();
+        //if (r.squad != null)
+        //    tempSquad = r.squad;
+        //else
+        //    tempSquad = new Squad();
         //isEdit = false; //Will be set true in EditSquadMode if relevant
 
         //if(tempSquad != null && tempSquad.pawns.Count >0)

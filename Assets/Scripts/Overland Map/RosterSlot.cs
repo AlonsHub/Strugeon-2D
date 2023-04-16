@@ -41,6 +41,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
     public void SetMe(Pawn p)
     {
+        gameObject.SetActive(true);
         pawn = p;
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
@@ -52,6 +53,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     }
     public void SetMe(MercSheet ms)
     {
+        gameObject.SetActive(true);
+
         pawn = ms.MyPawnPrefabRef<Pawn>();
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
@@ -65,6 +68,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
     public void SetMe()
     {
+        gameObject.SetActive(true);
+
         img.sprite = defaultPortraitSprite;
         img.color = new Color(0,0,0,0);
         isOccupied = false;
