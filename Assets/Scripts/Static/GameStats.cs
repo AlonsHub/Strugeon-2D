@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameStats
 {
     public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
-    public static int startingGold = 100;
+    public static int startingGold = 1000;
     public static int expToLevel2 = 100;
     public static int maxHpBonusPerLevel = 10;
     public static int minDmgPerLevel = 2;
@@ -14,7 +14,7 @@ public static class GameStats
     /// <summary>
     /// Tavern Stats
     /// </summary>
-    public static int maxRoomSize = 3;
+    public static int maxRoomSize = 4;
 
     public static int ExpThresholdByLevel(int level)
     {

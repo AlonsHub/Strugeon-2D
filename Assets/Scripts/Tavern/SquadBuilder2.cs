@@ -56,8 +56,8 @@ public class SquadBuilder2 : MonoBehaviour
     private void Init()
     {
         //Tavern.Instance.DisableWindowTier1(name);
-        confirmWindowAnswer = null;
-        confirmCycleAnswer = null;
+        //confirmWindowAnswer = null;
+        //confirmCycleAnswer = null;
         //isConfirmed = false; //no?
         tempSquad = new Squad();
 
@@ -255,8 +255,8 @@ public class SquadBuilder2 : MonoBehaviour
 
     public void OnDisable()
     {
-        confirmWindowAnswer = null;
-        confirmWindow.SetActive(false);
+        //confirmWindowAnswer = null;
+        //confirmWindow.SetActive(false);
         mercDataDisplayer.gameObject.SetActive(false);
 
         Tavern.Instance.RefreshRooms();
@@ -364,28 +364,33 @@ public class SquadBuilder2 : MonoBehaviour
 
     public void Refresh()
     {
-        List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
-        if (Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad != null || Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.pawns.Count >0)
-            crewName.text = Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.squadName;
-        else
-            crewName.text = $"Crew {_currentRoomIndex+1}";
 
+        Room r = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
 
-        for (int i = 0; i < names.Count; i++)
+        if (r.squad == null || r.squad.pawns.Count == 0)
         {
-            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
+            crewName.text = $"Crew {_currentRoomIndex + 1}";
+
+            LoadAvailables();
+
+            for (int i = 0; i < partySlots.Length; i++)
+            {
+                if(i<r.size)
+                {
+                    partySlots[i].ClearSlot();
+                    partySlots[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    partySlots[i].gameObject.SetActive(false);
+                }
+            }
+
+            return;
         }
 
-        if (availableSlots[0].isOccupied)
-        {
-            mercDataDisplayer.SetMe(availableSlots[0].pawn);
-        }
-
-        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
-        for (int i = names.Count; i < availableSlots.Length; i++)
-        {
-            availableSlots[i].SetMe(); //empty
-        }
+        crewName.text = Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.squadName;
+        LoadAvailables();
 
         for (int i = 0; i < tempSquad.pawns.Count; i++)
         {
@@ -396,6 +401,22 @@ public class SquadBuilder2 : MonoBehaviour
             partySlots[i].ClearSlot(); //empty
         }
     }
+
+    private void LoadAvailables()
+    {
+        List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+
+        for (int i = 0; i < names.Count; i++)
+        {
+            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
+        }
+
+        for (int i = names.Count; i < availableSlots.Length; i++)
+        {
+            availableSlots[i].SetMe(); //empty
+        }
+    }
+
     public void EditSquadMode(List<Pawn> oldSquad, Room room)
     {
         //for (int i = 0; i < oldSquad.Count; i++)

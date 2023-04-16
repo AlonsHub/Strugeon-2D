@@ -56,14 +56,7 @@ public class RoomManager : MonoBehaviour
         if (roomDisplayers == null)
             return;
         RefreshAllRooms();
-        //for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
-        //{
-        //    roomDisplayers[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);//send squad here?
-        //}
-        //for (int i = PlayerDataMaster.Instance.RoomCount; i < PlayerDataMaster.Instance.MaxRoomCount; i++)
-        //{
-        //    roomDisplayers[i].SetBuyPriceText(RoomPrice);//send squad here?
-        //}
+ 
     }
 
     public void RefreshAllRooms()

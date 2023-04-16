@@ -11,13 +11,25 @@ public class CrewsManager : MonoBehaviour
 
     List<CrewBlock> _crewBlocks;
 
+    [SerializeField]
+    GameObject notEnoughGoldText;
+    [SerializeField]
+    TMPro.TMP_Text buyRoomPrice;
+
     public void OnEnable()
     {
-        if(_crewBlocks == null)
-        _crewBlocks = new List<CrewBlock>();
+        RefreshCrews();
+    }
+
+    private void RefreshCrews()
+    {
+        if (_crewBlocks == null)
+            _crewBlocks = new List<CrewBlock>();
+
+        buyRoomPrice.text = Prices.BuyCrewPrice(PlayerDataMaster.Instance.currentPlayerData.rooms.Count).ToString();
 
         int delta = _crewBlocks.Count - PlayerDataMaster.Instance.currentPlayerData.rooms.Count;
-        if(delta < 0)
+        if (delta < 0)
         {
             for (int i = 0; i < delta * -1; i++)
             {
@@ -25,11 +37,11 @@ public class CrewsManager : MonoBehaviour
                 _crewBlocks.Add(cb);
             }
         }
-        else if(delta >0)
+        else if (delta > 0)
         {
             for (int i = 0; i < delta; i++)
             {
-                CrewBlock cb =_crewBlocks[_crewBlocks.Count - 1];
+                CrewBlock cb = _crewBlocks[_crewBlocks.Count - 1];
                 _crewBlocks.Remove(cb);
                 Destroy(cb.gameObject);
             }
@@ -39,11 +51,23 @@ public class CrewsManager : MonoBehaviour
         {
             _crewBlocks[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
         }
-        
     }
 
-    //private void OnDisable()
-    //{
+    public void TryAddCrew()
+    {
+        if (!Inventory.Instance.TryRemoveGold(Prices.BuyCrewPrice(PlayerDataMaster.Instance.currentPlayerData.rooms.Count)))
+        {
+            notEnoughGoldText.SetActive(true);
+            return;
+        }
+
         
-    //}
+        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room());
+
+        Tavern.Instance.RefreshRooms();
+
+
+        RefreshCrews();
+    }
+
 }

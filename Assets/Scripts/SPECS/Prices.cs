@@ -93,4 +93,13 @@ public static class Prices
         
         return temp * (int)Mathf.Pow(10, count);
     }
+
+    public static int UpgradeCrewPrice(int currentRoomSize)
+    {
+        return upgradeRoomBasePrice * (currentRoomSize - 1); //2 is the starting amount
+    }
+    public static int BuyCrewPrice(int currentAmountOfRooms)
+    {
+        return roomBasePrice * (currentAmountOfRooms); //1 is the starting amount
+    }
 }
