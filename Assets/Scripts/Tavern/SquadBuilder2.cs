@@ -110,140 +110,148 @@ public class SquadBuilder2 : MonoBehaviour
     }
 
 
+    ////A Special CloseMe() that WAITS FOR CONFIRMATION
+    //public void CloseMe()
+    //{
+    //    //check if need to confirm edits:
+
+    //    if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
+    //    {
+    //        bool same = true;
+    //        foreach (var item in tempSquad.pawns)
+    //        {
+    //            if (!uneditedSquadPawns.Contains(item))
+    //                same = false;
+    //        }
+
+    //        if (same)
+    //            confirmWindowAnswer = false; //stops the wait for answer
+    //        else
+    //            confirmWindow.gameObject.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        confirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
+    //    }
+    //    //check confirm
+    //    StartCoroutine(nameof(WaitForConfirmDecision));
+    //}
+    //A Special CloseMe() that WAITS FOR CONFIRMATION
     public void CloseMe()
     {
-        //check if need to confirm edits:
-
-        if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
-        {
-            bool same = true;
-            foreach (var item in tempSquad.pawns)
-            {
-                if (!uneditedSquadPawns.Contains(item))
-                    same = false;
-            }
-
-            if (same)
-                confirmWindowAnswer = false; //stops the wait for answer
-            else
-                confirmWindow.gameObject.SetActive(true);
-        }
-        else
-        {
-            confirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
-        }
-        //check confirm
-        StartCoroutine(nameof(WaitForConfirmDecision));
-    }
-    IEnumerator WaitForConfirmDecision()
-    {
-        yield return new WaitUntil(() => confirmWindowAnswer != null || !confirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
-
-        if(confirmWindowAnswer == true)
-        {
-            //confirm
-            Confirm();
-        }
-        else
-        {
-            //even if null, don't confirm changes
-            if (isEdit)
-            {
-                //isEdit = false;//confirm cancels edit!
-                //Differences between tempSquad and uneditedSquadPawns needs to be unset:
-
-                //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
-                //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
-
-                //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
-
-                List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
-
-                PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
-                foreach (var item in backToAvailable)
-                {
-                    tempSquad.RemoveMerc(item); //to reset merc assignments
-                }
-                //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
-                tempSquad.pawns = uneditedSquadPawns;
-
-                Confirm(); 
-            }
-            else
-            {
-                toRoom.ClearRoom();
-                //toRoom.roomButton.SetStatusText("Vacant");
-                if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
-                {
-                    foreach (var item in tempSquad.pawns)
-                    {
-                        PartyMaster.Instance.availableMercPrefabs.Add(item);
-                        item.mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
-                    }
-                }
-                //close squad menu
-                gameObject.SetActive(false);
-            }
-        }
-
-        //close squad builder
+        ConfirmClose();
     }
 
-    IEnumerator CycleWaitForConfirm()
-    {
-        yield return new WaitUntil(() => confirmCycleAnswer.HasValue || !cycleConfirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
 
-        //if (confirmCycleAnswer == true)
-        //{
-        //    //confirm
-        //    CycleConfirm();
-        //}
-        if (confirmCycleAnswer == false)
-        {
-            //even if null, don't confirm changes
-            if (isEdit)
-            {
-                //isEdit = false;//confirm cancels edit!
-                //Differences between tempSquad and uneditedSquadPawns needs to be unset:
+    //IEnumerator WaitForConfirmDecision()
+    //{
+    //    yield return new WaitUntil(() => confirmWindowAnswer != null || !confirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
 
-                //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
-                //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
+    //    if(confirmWindowAnswer == true)
+    //    {
+    //        //confirm
+    //        ConfirmClose();
+    //    }
+    //    else
+    //    {
+    //        //even if null, don't confirm changes
+    //        if (isEdit)
+    //        {
+    //            //isEdit = false;//confirm cancels edit!
+    //            //Differences between tempSquad and uneditedSquadPawns needs to be unset:
 
-                //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
+    //            //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
+    //            //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
 
-                List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
+    //            //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
 
-                PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
-                foreach (var item in backToAvailable)
-                {
-                    tempSquad.RemoveMerc(item); //to reset merc assignments
-                }
-                //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
-                tempSquad.pawns = uneditedSquadPawns;
+    //            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
 
-                CycleConfirm();
-            }
-            else
-            {
-                //toRoom.ClearRoom();
-                Tavern.Instance.GetRoomByIndex(_currentRoomIndex).ClearRoom();
-                //toRoom.roomButton.SetStatusText("Vacant");
-                if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
-                {
-                    foreach (var item in tempSquad.pawns)
-                    {
-                        PartyMaster.Instance.availableMercPrefabs.Add(item);
-                        item.mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
-                    }
-                }
-                //close squad menu
-                //gameObject.SetActive(false);
-                cycleConfirmWindow.SetActive(false);
-            }
-        }
+    //            PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
+    //            foreach (var item in backToAvailable)
+    //            {
+    //                tempSquad.RemoveMerc(item); //to reset merc assignments
+    //            }
+    //            //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
+    //            tempSquad.pawns = uneditedSquadPawns;
 
-        //close squad builder
-    }
+    //            ConfirmClose(); 
+    //        }
+    //        else
+    //        {
+    //            toRoom.ClearRoom();
+    //            //toRoom.roomButton.SetStatusText("Vacant");
+    //            if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
+    //            {
+    //                foreach (var item in tempSquad.pawns)
+    //                {
+    //                    PartyMaster.Instance.availableMercPrefabs.Add(item);
+    //                    item.mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+    //                }
+    //            }
+    //            //close squad menu
+    //            gameObject.SetActive(false);
+    //        }
+    //    }
+
+    //    //close squad builder
+    //}
+
+    //IEnumerator CycleWaitForConfirm()
+    //{
+    //    yield return new WaitUntil(() => confirmCycleAnswer.HasValue || !cycleConfirmWindow.activeInHierarchy);// !confirmWindow.activeInHierarchy also, if they hit something to close it accidently? idk
+
+    //    //if (confirmCycleAnswer == true)
+    //    //{
+    //    //    //confirm
+    //    //    CycleConfirm();
+    //    //}
+    //    if (confirmCycleAnswer == false)
+    //    {
+    //        //even if null, don't confirm changes
+    //        if (isEdit)
+    //        {
+    //            //isEdit = false;//confirm cancels edit!
+    //            //Differences between tempSquad and uneditedSquadPawns needs to be unset:
+
+    //            //pawns that dont exist in the uneditedSquadPawns need to be returned to AvailablePawns
+    //            //pawns that do exist in the uneditedSquadPawns, but DONT exist in tempSquad need to be returned from AvailablePawns to tempSquad
+
+    //            //to acheive this, uneditedSquadPawns will be the squad returned - and only mercs which appear in tempSquad need to be returned to available
+
+    //            List<Pawn> backToAvailable = tempSquad.pawns.Where(x => !uneditedSquadPawns.Contains(x) && !PartyMaster.Instance.availableMercPrefabs.Contains(x)).ToList();
+
+    //            PartyMaster.Instance.availableMercPrefabs.AddRange(backToAvailable);
+    //            foreach (var item in backToAvailable)
+    //            {
+    //                tempSquad.RemoveMerc(item); //to reset merc assignments
+    //            }
+    //            //PartyMaster.Instance.AddNewSquadToRoom(uneditedSquadPawns, toRoom);
+    //            tempSquad.pawns = uneditedSquadPawns;
+
+    //            CycleConfirm();
+    //        }
+    //        else
+    //        {
+    //            //toRoom.ClearRoom();
+    //            Tavern.Instance.GetRoomByIndex(_currentRoomIndex).ClearRoom();
+    //            //toRoom.roomButton.SetStatusText("Vacant");
+    //            if (tempSquad.pawns.Count != 0) //maybe try something more wholistic like checking the tempSquad
+    //            {
+    //                foreach (var item in tempSquad.pawns)
+    //                {
+    //                    PartyMaster.Instance.availableMercPrefabs.Add(item);
+    //                    item.mercSheetInPlayerData.SetToState(MercAssignment.Available, -1);
+    //                }
+    //            }
+    //            //close squad menu
+    //            //gameObject.SetActive(false);
+    //            cycleConfirmWindow.SetActive(false);
+    //        }
+    //    }
+
+    //    //close squad builder
+    //}
 
     public void OnDisable()
     {
@@ -260,6 +268,9 @@ public class SquadBuilder2 : MonoBehaviour
         }
         //if(myButton)
         //myButton.Toggle(false);
+
+        //SAVE?
+
     }
     public void SetToRoom(Room r) /// this is the problem, fix the room setting issue
     {
@@ -305,7 +316,7 @@ public class SquadBuilder2 : MonoBehaviour
         Refresh();
     }
 
-    public void Confirm() //also called in inspector by the Assemble Squad buttons
+    public void ConfirmClose() //also called in inspector by the Assemble Squad buttons
     {
         //isEdit = false; //just making sure that we won't double confirm
         isConfirmed = true;

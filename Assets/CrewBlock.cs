@@ -23,15 +23,15 @@ public class CrewBlock : MonoBehaviour
 
         crewName.text = "Empty Crew";
     }
-    public void SetMe(Squad s)
+    public void SetMe(Room r)
     {
-        squad = s;
+        squad = r.squad;
 
         crewName.text = squad.squadName;
-        for (int i = 0; i< squad.pawns.Count; i++)
+        for (int i = 0; i< r.size; i++)
         {
             //MercBlock mb = Instantiate(mercBlockPrefab, mercLayoutParent).GetComponent<MercBlock>();
-            if (squad.pawns[i] != null)
+            if (i<squad.pawns.Count && squad.pawns[i] != null)
                 _mercBlocks[i].SetMe(squad.pawns[i]._mercSheet);
             else
                 _mercBlocks[i].SetToEmpty();

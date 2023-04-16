@@ -39,7 +39,8 @@ public class MercPrefabs : MonoBehaviour
         for (int i = 0; i < prefabs.Count; i++)
         {
             enumToPrefab.Add((MercName)i+1, prefabs[i]); //basically the same as a list at this moment,
-                                                       //but this way allows us to add and remove options from/to this dict
+                                                         //but this way allows us to add and remove options from/to this dict
+            Debug.Log(((MercName)i + 1).ToString());
         }
 
     }
@@ -54,6 +55,7 @@ public class MercPrefabs : MonoBehaviour
     }
     public T EnumToT<T>(MercName mn)
     {
+        Debug.Log(mn.ToString());
         return enumToPrefab[mn].GetComponent<T>();
     }
 }

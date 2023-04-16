@@ -39,6 +39,8 @@ public class MercBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void SetToEmpty()
     {
+        gameObject.SetActive(true);
+
         mercSheet = null;
         minObject.gameObject.SetActive(false);
         maxObject.gameObject.SetActive(false);

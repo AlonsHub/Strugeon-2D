@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 1912489511607412594}
   - component: {fileID: 1912489511607412593}
   - component: {fileID: 1912489511607412592}
+  - component: {fileID: 1548034818}
   m_Layer: 5
   m_Name: Crew Screens Prefab
   m_TagString: Untagged
@@ -311,7 +312,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &1912489511607412593
 MonoBehaviour:
@@ -352,6 +353,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 1064759
+--- !u!114 &1548034818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912489511607412607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10804bf25e3464e4dba826f02d602a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crewDisplayBlock: {fileID: 4884210614198714735, guid: f0497679e10bde740803b383e624bcc7,
+    type: 3}
+  gridParent: {fileID: 1912489510635229307}
 --- !u!1001 &1912489510646452819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,6 +531,36 @@ PrefabInstance:
       propertyPath: m_text
       value: Crews
       objectReference: {fileID: 0}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1912489511607412607}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 2736255674564551090, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3435302455503898146, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
         type: 3}
       propertyPath: m_Name
@@ -629,6 +675,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869274359284311440, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 211.20972
+      objectReference: {fileID: 0}
+    - target: {fileID: 4869274359284311440, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -569.5901
       objectReference: {fileID: 0}
     - target: {fileID: 7149028349465445994, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,
         type: 3}
