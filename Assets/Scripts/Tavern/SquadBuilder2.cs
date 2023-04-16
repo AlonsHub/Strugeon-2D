@@ -40,7 +40,7 @@ public class SquadBuilder2 : MonoBehaviour
     bool? confirmCycleAnswer;
 
     //temp AF TBF 
-    int _currentRoomIndex;
+    int _currentRoomIndex = 0;
     int _roomCount => Tavern.Instance.RoomCount;
 
     
@@ -55,13 +55,13 @@ public class SquadBuilder2 : MonoBehaviour
 
     private void Init()
     {
-        //Tavern.Instance.DisableWindowTier1(name);
+        Tavern.Instance.DisableWindowTier1(name);
         //confirmWindowAnswer = null;
         //confirmCycleAnswer = null;
         //isConfirmed = false; //no?
-        tempSquad = new Squad();
+        //tempSquad = new Squad();
 
-        _currentRoomIndex = 0; //temp - If not room buttons exit - this makes sure to open the squad builder displaying the first crew
+        //_currentRoomIndex = 0; //temp - If not room buttons exit - this makes sure to open the squad builder displaying the first crew
 
         //if (toRoom == null)
             //toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
@@ -86,11 +86,11 @@ public class SquadBuilder2 : MonoBehaviour
             availableSlots[i].SetMe(); //empty
         }
 
-        for (int i = 0; i < tempSquad.pawns.Count; i++)
+        for (int i = 0; i < ToRoom.squad.pawns.Count; i++)
         {
-            partySlots[i].SetMe(tempSquad.pawns[i]);
+            partySlots[i].SetMe(ToRoom.squad.pawns[i]);
         }
-        for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
+        for (int i = ToRoom.squad.pawns.Count; i < partySlots.Length; i++)
         {
             partySlots[i].ClearSlot(); //empty
         }
@@ -100,14 +100,14 @@ public class SquadBuilder2 : MonoBehaviour
         //myButton.Toggle(true);
     }
 
-    public void SetConfirmDecision(bool decision)//called by buttons in inspector
-    {
-        confirmWindowAnswer = decision;
-    }
-    public void SetCycleConfirmDecision(bool decision)//called by buttons in inspector
-    {
-        confirmCycleAnswer = decision;
-    }
+    //public void SetConfirmDecision(bool decision)//called by buttons in inspector
+    //{
+    //    confirmWindowAnswer = decision;
+    //}
+    //public void SetCycleConfirmDecision(bool decision)//called by buttons in inspector
+    //{
+    //    confirmCycleAnswer = decision;
+    //}
 
 
     ////A Special CloseMe() that WAITS FOR CONFIRMATION
@@ -259,7 +259,7 @@ public class SquadBuilder2 : MonoBehaviour
         //confirmWindow.SetActive(false);
         mercDataDisplayer.gameObject.SetActive(false);
 
-        Tavern.Instance.RefreshRooms();
+        //Tavern.Instance.RefreshRooms();
 
         foreach (var item in partySlots)
         {
@@ -284,19 +284,29 @@ public class SquadBuilder2 : MonoBehaviour
     }
     public void BetterSetToRoom(Room r) /// this is the problem, fix the room setting issue
     {
+        gameObject.SetActive(true); //for when called by CrewBlock
         toRoom = r;
+        _currentRoomIndex = r.roomNumber;
+        //_currentRoomIndex = PlayerDataMaster.Instance.currentPlayerData.rooms.IndexOf(r);
         //temp af TBF
         //if (r.squad == null || r.squad.pawns.Count ==0)
-            //return;
-        tempSquad = r.squad;
-        isEdit = false; //Will be set true in EditSquadMode if relevant
+        //return;
+        if (r.squad != null)
+            tempSquad = r.squad;
+        else
+            tempSquad = new Squad();
+        //isEdit = false; //Will be set true in EditSquadMode if relevant
 
-        if(tempSquad != null && tempSquad.pawns.Count >0)
-        {
-            EditSquadMode(tempSquad.pawns, r);
-        }
+        //if(tempSquad != null && tempSquad.pawns.Count >0)
+        //{
+        //    EditSquadMode(tempSquad.pawns, r);
+        //}
+        //else
+        //{
+        //    tempSquad = new Squad();
+        //}
 
-        if (tempSquad != null && tempSquad.pawns.Count > 0)
+        if (r.squad != null && r.squad.pawns.Count > 0)
         {
             //set partySlots by toRoom.size
             for (int i = 0; i < r.squad.pawns.Count; i++)
@@ -313,16 +323,28 @@ public class SquadBuilder2 : MonoBehaviour
                 partySlots[i].gameObject.SetActive(false);
             }
         }
+        else
+        {
+            for (int i = 0; i < partySlots.Length; i++)
+            {
+                partySlots[i].SetMe();
+            }
+            for (int i = toRoom.size; i < partySlots.Length; i++)
+            {
+                partySlots[i].gameObject.SetActive(false);
+            }
+        }
+
         Refresh();
     }
 
     public void ConfirmClose() //also called in inspector by the Assemble Squad buttons
     {
         //isEdit = false; //just making sure that we won't double confirm
-        isConfirmed = true;
+        //isConfirmed = true;
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
-        if (tempSquad.pawns.Count > 0)
-        PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
+        //if (tempSquad.pawns.Count > 0)
+        //PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
         //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
 
         PlayerDataMaster.Instance.GrabAndSaveData();
@@ -343,8 +365,8 @@ public class SquadBuilder2 : MonoBehaviour
         //isEdit = false; //just making sure that we won't double confirm
         //isConfirmed = true;
         //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
-        if (tempSquad.pawns.Count > 0)
-        PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, Tavern.Instance.GetRoomByIndex(_currentRoomIndex)); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
+        //if (tempSquad.pawns.Count > 0)
+        //PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, Tavern.Instance.GetRoomByIndex(_currentRoomIndex)); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
         //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
 
         PlayerDataMaster.Instance.GrabAndSaveData();
@@ -357,25 +379,25 @@ public class SquadBuilder2 : MonoBehaviour
         {
             item.ClearSlot();
         }
-        cycleConfirmWindow.SetActive(false);
-        confirmCycleAnswer = null;
+        //cycleConfirmWindow.SetActive(false);
+        //confirmCycleAnswer = null;
         //gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
     }
 
     public void Refresh()
     {
 
-        Room r = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
+        //Room ToRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
 
-        if (r.squad == null || r.squad.pawns.Count == 0)
+        if (ToRoom.squad == null || ToRoom.squad.pawns.Count == 0)
         {
             crewName.text = $"Crew {_currentRoomIndex + 1}";
 
             LoadAvailables();
-
+            //tempSquad = new Squad();
             for (int i = 0; i < partySlots.Length; i++)
             {
-                if(i<r.size)
+                if(i<ToRoom.size)
                 {
                     partySlots[i].ClearSlot();
                     partySlots[i].gameObject.SetActive(true);
@@ -392,11 +414,11 @@ public class SquadBuilder2 : MonoBehaviour
         crewName.text = Tavern.Instance.GetRoomByIndex(_currentRoomIndex).squad.squadName;
         LoadAvailables();
 
-        for (int i = 0; i < tempSquad.pawns.Count; i++)
+        for (int i = 0; i < ToRoom.squad.pawns.Count; i++)
         {
-            partySlots[i].SetMe(tempSquad.pawns[i]);
+            partySlots[i].SetMe(ToRoom.squad.pawns[i]);
         }
-        for (int i = tempSquad.pawns.Count; i < partySlots.Length; i++)
+        for (int i = ToRoom.squad.pawns.Count; i < partySlots.Length; i++)
         {
             partySlots[i].ClearSlot(); //empty
         }
@@ -417,20 +439,20 @@ public class SquadBuilder2 : MonoBehaviour
         }
     }
 
-    public void EditSquadMode(List<Pawn> oldSquad, Room room)
-    {
-        //for (int i = 0; i < oldSquad.Count; i++)
-        //{
-        //    partySlots[i].SetMe(oldSquad[i]);
-        //}
-        tempSquad.pawns = oldSquad;
-        uneditedSquadPawns = new List<Pawn>(oldSquad);
-        isEdit = true;
+    //public void EditSquadMode(List<Pawn> oldSquad, Room room)
+    //{
+    //    //for (int i = 0; i < oldSquad.Count; i++)
+    //    //{
+    //    //    partySlots[i].SetMe(oldSquad[i]);
+    //    //}
+    //    tempSquad.pawns = oldSquad;
+    //    uneditedSquadPawns = new List<Pawn>(oldSquad);
+    //    //isEdit = true;
 
-        SetToRoom(room);
+    //    SetToRoom(room);
 
-        Refresh();
-    }
+    //    Refresh();
+    //}
 
     public void TurnAllFramesOff()
     {
@@ -450,38 +472,38 @@ public class SquadBuilder2 : MonoBehaviour
 
     }
 
-    private IEnumerator CycleCrewCoroutine(int i)
+    private IEnumerator CycleCrewCoroutine(int i) //TBF remove all confirm stuff and make this a method
     {
         yield return null;
-        Room currentRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
-        if (currentRoom.squad != null && currentRoom.squad.pawns.Count > 0) //TBF, this is how we check if is occupied
-        {
-            if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
-            {
-                bool same = true;
-                foreach (var item in tempSquad.pawns)
-                {
-                    if (!uneditedSquadPawns.Contains(item))
-                        same = false;
-                }
+        //Room currentRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
+        //if (currentRoom.squad != null && currentRoom.squad.pawns.Count > 0) //TBF, this is how we check if is occupied
+        //{
+        //    if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
+        //    {
+        //        bool same = true;
+        //        foreach (var item in tempSquad.pawns)
+        //        {
+        //            if (!uneditedSquadPawns.Contains(item))
+        //                same = false;
+        //        }
 
-                if (same)
-                    confirmCycleAnswer = false; //stops the wait for answer
-                else
-                    cycleConfirmWindow.gameObject.SetActive(true);
-            }
-            else
-            {
-                cycleConfirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
-            }
+        //        if (same)
+        //            confirmCycleAnswer = false; //stops the wait for answer
+        //        else
+        //            cycleConfirmWindow.gameObject.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        cycleConfirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
+        //    }
 
-            //yield return StartCoroutine(nameof(CycleWaitForConfirm));
+        //    //yield return StartCoroutine(nameof(CycleWaitForConfirm));
 
             //if(confirmCycleAnswer.HasValue && confirmCycleAnswer.Value == true)
             //{
                 CycleConfirm();
             //}
-        }
+        //}
 
         _currentRoomIndex += i;
         if (_currentRoomIndex < 0)
@@ -494,7 +516,19 @@ public class SquadBuilder2 : MonoBehaviour
         }
         Room r = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
         BetterSetToRoom(r);
-       
+
         Refresh();
     }
+
+    public void AddMercToParty(Pawn p)
+    {
+        ToRoom.squad.AddMerc(p);
+        Refresh();
+    }
+    public void RemoveMercFromParty(Pawn p)
+    {
+        ToRoom.squad.RemoveMerc(p);
+        Refresh();
+    }
+
 }

@@ -39,9 +39,9 @@ public class CrewBlock : MonoBehaviour
     public void SetMe(Room r)
     {
         room = r;
-
-        if(r.squad == null)
+        if(r.squad == null || r.squad.pawns.Count ==0)
         {
+            //squad = new Squad();
             SetMeEmpty(room);
             return;
         }
@@ -72,4 +72,8 @@ public class CrewBlock : MonoBehaviour
         SetMe(room);
     }
 
+    public void EditCrew()//calleb by CrewBlock, set in the prefabs inspector
+    {
+        Tavern.Instance.squadBuilder.BetterSetToRoom(room);
+    }
 }

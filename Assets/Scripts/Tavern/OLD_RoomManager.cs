@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RoomManager : MonoBehaviour
+/// <summary>
+/// deprecated! see CrewsManager
+/// </summary>
+public class OLD_RoomManager : MonoBehaviour
 {
     [SerializeField]
     List<RoomBuildDisplayer> roomDisplayers; //set in inspector
@@ -48,10 +50,10 @@ public class RoomManager : MonoBehaviour
         }
 
         //PlayerDataMaster.Instance.currentPlayerData.totalSquadRooms += 1;
-        Room r = new Room();
+        Room r = new Room(0);
         PlayerDataMaster.Instance.currentPlayerData.rooms.Add(r); 
 
-        Tavern.Instance.RefreshRooms();
+        //Tavern.Instance.RefreshRooms();
 
         if (roomDisplayers == null)
             return;

@@ -14,6 +14,7 @@ public class Tavern : MonoBehaviour
     GameObject noMoreRoomsWindow;
     [SerializeField]
     GameObject newSquadMenu;
+
     public SquadBuilder2 squadBuilder;
 
     [SerializeField]
@@ -22,19 +23,14 @@ public class Tavern : MonoBehaviour
     [SerializeField]
     Transform roomButtonParent;
 
-    public RoomManager roomManager;
-    //List<GameObject> roomButtons;
-    List<RoomButton> _roomButtons;
-
-    List<Room> rooms;
+    public OLD_RoomManager roomManager;
+   
+    List<Room> rooms => PlayerDataMaster.Instance.currentPlayerData.rooms;
     public int RoomCount => rooms.Count;
 
-    public RoomButton GetRoomButton(int i) => _roomButtons[i];
-
-    List<RoomBuildDisplayer> roomDisplayers;
 
     [SerializeField]
-    SquadRoomDisplayer squadRoomDisplayer;
+    OLD_SquadRoomDisplayer squadRoomDisplayer;
 
 
     /// <summary>
@@ -58,10 +54,10 @@ public class Tavern : MonoBehaviour
         }
 
         Instance = this;
-        _roomButtons = new List<RoomButton>();
-        rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
+        //_roomButtons = new List<RoomButton>();
+        //rooms = PlayerDataMaster.Instance.currentPlayerData.rooms;
        
-        RefreshRooms();
+        //RefreshRooms();
         //squadBuilder = newSquadMenu.GetComponent<SquadBuilder2>();
 
         HirelingMaster.Instance.LoadExistingHireablesToLog();
@@ -93,22 +89,7 @@ public class Tavern : MonoBehaviour
         }
     }
 
-    public void RefreshRooms()
-    {   
-        for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
-        {
-            if (i > _roomButtons.Count - 1)
-            {
-                RoomButton go = Instantiate(roomPanelPrefab, roomButtonParent).GetComponent<RoomButton>();
-                _roomButtons.Add(go);
-                go.SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
-            }
-            else
-            {
-                _roomButtons[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i], i);
-            }
-        }
-    }
+    
 
     // public void ReadSaveData()
     // Takes the available mercs from current save data
@@ -145,30 +126,30 @@ public class Tavern : MonoBehaviour
         //decide which room to fill and send to newSquadMenu
     }
 
-    public void EditSquadMenu(Squad s, Room room)
-    {
-        //disassembles a squad
-        //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
-            newSquadMenu.SetActive(true);
-            //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
-        if (s != null && s.pawns.Count > 0)
-        {
-            if(PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault()))
-            {
+    //public void EditSquadMenu(Squad s, Room room)
+    //{
+    //    //disassembles a squad
+    //    //opens and sets up the newSquadWindow with the members of that squad in the PartySlots 
+    //        newSquadMenu.SetActive(true);
+    //        //newSquadMenu.GetComponent<SquadBuilder>().SetToRoom(room);
+    //    if (s != null && s.pawns.Count > 0)
+    //    {
+    //        if(PartyMaster.Instance.squads.Remove(PartyMaster.Instance.squads.Where(x => x.Equals(s)).SingleOrDefault()))
+    //        {
 
-                newSquadMenu.GetComponent<SquadBuilder2>().EditSquadMode(s.pawns, room);
-            }
-            else
-            {
-                Debug.LogError("Failed to remove party from room");
-            }
+    //            newSquadMenu.GetComponent<SquadBuilder2>().EditSquadMode(s.pawns, room);
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Failed to remove party from room");
+    //        }
             
            
-            return;
-        }
+    //        return;
+    //    }
 
-        TryOpenNewSquadMenu(room);
-    }
+    //    TryOpenNewSquadMenu(room);
+    //}
 
     RoomButton activeRoomButton;
     public void SquadRoomSetup(RoomButton roomButton)
@@ -187,10 +168,10 @@ public class Tavern : MonoBehaviour
         }
     }
 
-    public void EditActiveSquad()
-    {
-        activeRoomButton.EditMe();
-    }
+    //public void EditActiveSquad()
+    //{
+    //    activeRoomButton.EditMe();
+    //}
 
     //SUPER TEMP
     void TryPromptNewHireling()

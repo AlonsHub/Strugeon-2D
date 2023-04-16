@@ -61,10 +61,11 @@ public class CrewsManager : MonoBehaviour
             return;
         }
 
-        
-        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(new Room());
+        Room r = new Room(PlayerDataMaster.Instance.currentPlayerData.rooms.Count);
+        //r.ini
+        PlayerDataMaster.Instance.currentPlayerData.rooms.Add(r);
 
-        Tavern.Instance.RefreshRooms();
+        //Tavern.Instance.RefreshRooms();
 
 
         RefreshCrews();

@@ -16,10 +16,14 @@ public class Room
     public string statusText;
 
     public RoomButton roomButton;
-    public Room()
+    public Room(int rNumber)
     {
         size = 2;
+        roomNumber = rNumber;
         isOccupied = false;
+        squad = new Squad();
+        SetStatusText("Vacant");
+
     }
 
     public bool TryUpgrade()

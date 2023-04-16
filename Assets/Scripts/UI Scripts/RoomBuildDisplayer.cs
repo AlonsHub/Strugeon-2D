@@ -38,7 +38,7 @@ public class RoomBuildDisplayer : MonoBehaviour
     [SerializeField]
     Room room;
     [SerializeField]
-    RoomManager roomManager;
+    OLD_RoomManager roomManager;
 
     public void SetBuyPriceText(int price)
     {

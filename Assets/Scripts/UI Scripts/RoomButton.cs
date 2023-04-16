@@ -63,17 +63,17 @@ public class RoomButton : MonoBehaviour, IPointerClickHandler
         Tavern.Instance.SquadRoomSetup(this);
         //edit squad if there is one
     }
-    public void EditMe()
-    {
-        Tavern.Instance.EditSquadMenu(room.squad, room);
+    //public void EditMe()
+    //{
+    //    Tavern.Instance.EditSquadMenu(room.squad, room);
 
-        //unset room
-        leaderIcon.sprite = defualtSprite;
-        isOccupied = room.isOccupied = false;
-        room.squad = null;
-        //room.squad.pawns.Clear();
-        //room = null;
-        //status text change
-        SetStatusText("Editing...");
-    }
+    //    //unset room
+    //    leaderIcon.sprite = defualtSprite;
+    //    isOccupied = room.isOccupied = false;
+    //    room.squad = null;
+    //    //room.squad.pawns.Clear();
+    //    //room = null;
+    //    //status text change
+    //    SetStatusText("Editing...");
+    //}
 }

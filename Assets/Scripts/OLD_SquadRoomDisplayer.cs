@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
-public class SquadRoomDisplayer : MonoBehaviour
+/// <summary>
+/// Deprecated! TBDeleted
+/// </summary>
+public class OLD_SquadRoomDisplayer : MonoBehaviour
 {
-    public static SquadRoomDisplayer Instance;
+    public static OLD_SquadRoomDisplayer Instance;
 
     [SerializeField]
     GameObject squadSlotPrefab;
@@ -98,9 +100,9 @@ public class SquadRoomDisplayer : MonoBehaviour
         mercDataDisplayer.SetMe(merc);
     }
 
-    public void EditSquad()
-    {
-        Tavern.Instance.EditActiveSquad();
-        gameObject.SetActive(false);
-    }
+    //public void EditSquad()
+    //{
+    //    Tavern.Instance.EditActiveSquad();
+    //    gameObject.SetActive(false);
+    //}
 }

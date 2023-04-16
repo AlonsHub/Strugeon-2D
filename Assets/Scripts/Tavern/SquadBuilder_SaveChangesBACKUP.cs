@@ -251,7 +251,7 @@ public class SquadBuilder_SaveChangesBACKUP : MonoBehaviour
         confirmWindow.SetActive(false);
         mercDataDisplayer.gameObject.SetActive(false);
 
-        Tavern.Instance.RefreshRooms();
+        //Tavern.Instance.RefreshRooms(); 
 
         foreach (var item in partySlots)
         {

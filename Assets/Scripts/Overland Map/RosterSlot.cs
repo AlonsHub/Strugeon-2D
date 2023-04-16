@@ -33,8 +33,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
     public bool isPartySlot;
 
-    [SerializeField]
-    SquadBuilder2 squadBuilder;
+    
+    SquadBuilder2 squadBuilder => Tavern.Instance.squadBuilder;
     [SerializeField]
     GameObject mercDisplayer;
 
@@ -81,13 +81,15 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //on click, if a merc exists, move to relevant pool:
         if (isPartySlot)
         {
-            squadBuilder.tempSquad.RemoveMerc(pawn);
+            //squadBuilder.tempSquad.RemoveMerc(pawn);
+            squadBuilder.RemoveMercFromParty(pawn);
             PartyMaster.Instance.availableMercPrefabs.Add(pawn);
 
         }
         else
         {
-            squadBuilder.tempSquad.AddMerc(pawn);
+            //squadBuilder.tempSquad.AddMerc(pawn);
+            squadBuilder.AddMercToParty(pawn);
             PartyMaster.Instance.availableMercPrefabs.Remove(pawn);
         }
         isOccupied = false;
