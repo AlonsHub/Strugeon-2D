@@ -30,6 +30,7 @@ public class MercBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void SetMe(MercSheet ms)
     {
+        gameObject.SetActive(true);
         mercSheet = ms;
         minObject.gameObject.SetActive(true);
         minObject.SetMeFull(ms);
