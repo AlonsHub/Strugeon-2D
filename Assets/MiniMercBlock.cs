@@ -10,6 +10,7 @@ public class MiniMercBlock : BasicDisplayer
     ExpBarDisplayer expSlider;
     public void SetMeFull(MercSheet ms)
     {
+        gameObject.SetActive(true);
         SetMe(new List<string> { ms.characterName.ToString(), ms.mercClass.ToString() }, new List<Sprite>() { });
         expSlider.SetBar(ms);
     }

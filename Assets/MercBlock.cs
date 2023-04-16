@@ -17,14 +17,14 @@ public class MercBlock : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (mercSheet == null)
             return;
-        minObject.gameObject.SetActive(false);
+        //minObject.gameObject.SetActive(false);
         maxObject.gameObject.SetActive(true);
     }
     public void OnPointerExit(PointerEventData eventData)
     {
         if (mercSheet == null)
             return;
-        minObject.gameObject.SetActive(true);
+        //minObject.gameObject.SetActive(true);
         maxObject.gameObject.SetActive(false);
     }
 
