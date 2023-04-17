@@ -53,7 +53,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     }
     public void SetMe(MercSheet ms)
     {
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
 
         pawn = ms.MyPawnPrefabRef<Pawn>();
         img.sprite = pawn.PortraitSprite;

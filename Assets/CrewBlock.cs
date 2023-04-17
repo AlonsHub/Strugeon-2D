@@ -19,8 +19,10 @@ public class CrewBlock : MonoBehaviour
     List<MercBlock> _mercBlocks;
     [SerializeField]
     GameObject notEnoughGoldText;
-    [SerializeField]
     TMP_Text upgradePriceText;
+
+    [SerializeField]
+    UnityEngine.UI.VerticalLayoutGroup verticalLayoutGroup;
 
     public void SetMeEmpty(Room r)
     {
@@ -35,6 +37,7 @@ public class CrewBlock : MonoBehaviour
         {
             _mercBlocks[i].SetToEmpty();
         }
+
     }
     public void SetMe(Room r)
     {
