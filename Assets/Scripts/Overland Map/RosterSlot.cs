@@ -19,14 +19,17 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     
     
     [SerializeField]
+    TMP_Text nameText;
+    [SerializeField]
     Image abilitySprite;
     [SerializeField]
     TMP_Text hpText;
     [SerializeField]
     TMP_Text damageText;
-    //[SerializeField]
-    //TMP_Text Text;
-
+    [SerializeField]
+    TMP_Text typeText;
+    [SerializeField]
+    ExpBarDisplayer expBarDisplayer;
     //public TMP_Text nameText;
     public bool isOccupied = false;
     public Pawn pawn;
@@ -42,10 +45,14 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     public void SetMe(Pawn p)
     {
         gameObject.SetActive(true);
+        nameText.text = p.mercName.ToString();
+        typeText.text = p._mercSheet.mercClass.ToString();
         pawn = p;
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
+
+        expBarDisplayer.SetBar(p._mercSheet);
 
         hpText.text = $"HP: {p._mercSheet._maxHp}/{p._mercSheet._maxHp}";
         damageText.text = $"Damage: {p._mercSheet._minDamage}-{p._mercSheet._maxDamage}";
@@ -56,6 +63,11 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         //gameObject.SetActive(true);
 
         pawn = ms.MyPawnPrefabRef<Pawn>();
+        nameText.text = pawn.mercName.ToString();
+        typeText.text = ms.mercClass.ToString();
+
+        expBarDisplayer.SetBar(ms);
+
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
@@ -69,6 +81,12 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     public void SetMe()
     {
         gameObject.SetActive(true);
+
+        nameText.text = "";
+        typeText.text = "";
+
+        expBarDisplayer.SetBar();
+
 
         img.sprite = defaultPortraitSprite;
         img.color = new Color(0,0,0,0);

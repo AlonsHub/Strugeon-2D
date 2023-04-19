@@ -190,6 +190,7 @@ MonoBehaviour:
   - {fileID: 1573324287919014072}
   notEnoughGoldText: {fileID: 8743856416883630587}
   upgradePriceText: {fileID: 8510290517700024249}
+  verticalLayoutGroup: {fileID: 0}
 --- !u!1 &4884210615391382076
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,8 +1074,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8606901448732764082, guid: 140bd2afca2bc844fa896a9752111054,
         type: 3}
+      propertyPath: m_fontSize
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606901448732764082, guid: 140bd2afca2bc844fa896a9752111054,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606901448732764082, guid: 140bd2afca2bc844fa896a9752111054,
+        type: 3}
       propertyPath: m_RaycastTarget
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8606901448732764082, guid: 140bd2afca2bc844fa896a9752111054,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8606901449839814401, guid: 140bd2afca2bc844fa896a9752111054,
         type: 3}

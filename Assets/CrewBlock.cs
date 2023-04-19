@@ -19,6 +19,7 @@ public class CrewBlock : MonoBehaviour
     List<MercBlock> _mercBlocks;
     [SerializeField]
     GameObject notEnoughGoldText;
+    [SerializeField]
     TMP_Text upgradePriceText;
 
     [SerializeField]
@@ -79,5 +80,10 @@ public class CrewBlock : MonoBehaviour
     public void EditCrew()//calleb by CrewBlock, set in the prefabs inspector
     {
         Tavern.Instance.squadBuilder.BetterSetToRoom(room);
+    }
+
+    public void RefreshLayout()
+    {
+
     }
 }

@@ -46,7 +46,7 @@ public class CrewsManager : MonoBehaviour
                 Destroy(cb.gameObject);
             }
         }
-        //foreach (var room in PlayerDataMaster.Instance.currentPlayerData.rooms)
+        
         for (int i = 0; i < PlayerDataMaster.Instance.currentPlayerData.rooms.Count; i++)
         {
             _crewBlocks[i].SetMe(PlayerDataMaster.Instance.currentPlayerData.rooms[i]);
@@ -65,10 +65,6 @@ public class CrewsManager : MonoBehaviour
         //r.ini
         PlayerDataMaster.Instance.currentPlayerData.rooms.Add(r);
 
-        //Tavern.Instance.RefreshRooms();
-
-
         RefreshCrews();
     }
-
 }

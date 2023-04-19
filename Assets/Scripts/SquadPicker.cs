@@ -33,12 +33,12 @@ public class SquadPicker : MonoBehaviour
     GameObject clickOffMeButton; //this button needs to activate with the squad picker, but it is not a good fit to be it's child
                                  //so it comes on and off whenever this Enables/Disables
                                 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-        //availavleSquads = PartyMaster.Instance.squads;
+    //private void Start()
+    //{
+    //    gameObject.SetActive(false);
+    //    //availavleSquads = PartyMaster.Instance.squads;
 
-    }
+    //}
     private void OnEnable()
     {
         //Refresh();
@@ -86,12 +86,12 @@ public class SquadPicker : MonoBehaviour
         //}
 
         int count = 0;
-        foreach (var item in PartyMaster.Instance.squads)
+        foreach (var item in PlayerDataMaster.Instance.currentPlayerData.rooms)
         {
-            if (!item.isAvailable)
+            if (!item.squad.isAvailable)
                 continue;
 
-            squadSlots[count].SetMe(item);
+            squadSlots[count].SetMe(item.squad);
             count++;
         }
 
@@ -141,12 +141,12 @@ public class SquadPicker : MonoBehaviour
         //}
 
         int count = 0;
-        foreach (var item in PartyMaster.Instance.squads)
+        foreach (var item in PlayerDataMaster.Instance.currentPlayerData.rooms)
         {
-            if (!item.isAvailable)
+            if (!item.squad.isAvailable)
                 continue;
 
-            squadSlots[count].SetMe(item);
+            squadSlots[count].SetMe(item.squad);
             count++;
         }
 
@@ -166,7 +166,6 @@ public class SquadPicker : MonoBehaviour
 
         SiteDisplayer.Instance.SetOnOff(false);
 
-        //SiteDisplayer.SetActiveToAllInstances(false);
     }
 
     public void SendSquad() //called by button in inspector
@@ -193,10 +192,9 @@ public class SquadPicker : MonoBehaviour
 
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
-        //go.GetComponent<SquadFollower>().SetMe(squadSlots[index].squad, tgtSite);
-        //go.GetComponent<SimpleFollower>().SetNewFollower(squadSlots[index].squad, tgtSite);
+        
         go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(squadSlots[index].squad, tgtSite);
-        //PartyMaster.Instance.squads.Remove(squadSlots[index].squad); //should be managed by the squad itself in SetMercToAssignment? //MOVED!
+        
 
         squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, squadSlots[index].squad.roomNumber); 
 

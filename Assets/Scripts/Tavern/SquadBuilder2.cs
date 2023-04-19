@@ -16,7 +16,7 @@ public class SquadBuilder2 : MonoBehaviour
 
     public RosterSlot[] PartySlots { get => partySlots;}
 
-    public Squad tempSquad;
+    public Squad tempSquad => ToRoom.squad;
     Room toRoom;
     public Room ToRoom { get => toRoom; }
     [SerializeField]
@@ -340,14 +340,8 @@ public class SquadBuilder2 : MonoBehaviour
 
     public void ConfirmClose() //also called in inspector by the Assemble Squad buttons
     {
-        //isEdit = false; //just making sure that we won't double confirm
-        //isConfirmed = true;
-        //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
-        //if (tempSquad.pawns.Count > 0)
-        //PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, toRoom); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
-        //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
-
-        PlayerDataMaster.Instance.GrabAndSaveData();
+       
+        //PlayerDataMaster.Instance.GrabAndSaveData();
 
         foreach (var item in partySlots)
         {
@@ -362,12 +356,7 @@ public class SquadBuilder2 : MonoBehaviour
     }
    public void CycleConfirm() //also called in inspector by the Assemble Squad buttons
     {
-        //isEdit = false; //just making sure that we won't double confirm
-        //isConfirmed = true;
-        //PartyMaster.Instance.squads.Add(new Squad(tempSquad.pawns)); //to avoid referencing the tempSquad, which will be cleared soon after this.
-        //if (tempSquad.pawns.Count > 0)
-        //PartyMaster.Instance.AddNewSquadToRoom(tempSquad.pawns, Tavern.Instance.GetRoomByIndex(_currentRoomIndex)); //this needs to change to (tempSquad.pawns, tempSquad.roomNumber)
-        //toRoom.squad = PartyMaster.Instance.squads[PartyMaster.Instance.squads.Count];
+     
 
         PlayerDataMaster.Instance.GrabAndSaveData();
 
@@ -379,9 +368,7 @@ public class SquadBuilder2 : MonoBehaviour
         {
             item.ClearSlot();
         }
-        //cycleConfirmWindow.SetActive(false);
-        //confirmCycleAnswer = null;
-        //gameObject.SetActive(false); //beacuse confirm is also called by the button, not only thorugh the "confirm?" window
+      
     }
 
     public void Refresh()

@@ -264,8 +264,10 @@ public class TurnMachine : MonoBehaviour
         Inventory.Instance.AddMagicItem(LevelRef.Instance.currentLevel.levelData.magicItem);
 
         #endregion
+
         //put squad back in their room
-        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
+        //PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].squad = new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber); //werid but it works fine
+        //DANGER! THIS IS REMOVED BUT IDK IF IT'S COOL
     }
     private void Lose()
     {

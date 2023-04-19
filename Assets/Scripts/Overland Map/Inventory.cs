@@ -14,7 +14,9 @@ public class Inventory : MonoBehaviour
     public int Gold { get => PlayerDataMaster.Instance.currentPlayerData.gold; 
                      private set => PlayerDataMaster.Instance.currentPlayerData.gold = value; } // not sure setter is needed
     //[SerializeField]
-    GoldUpdater goldUpdater => GoldUpdater.Instance;
+    //GoldUpdater goldUpdater => GoldUpdater.Instance;
+
+    public System.Action OnGoldChanged;
 
     public List<MagicItem> inventoryItems { get => PlayerDataMaster.Instance.currentPlayerData.magicItems; private set => PlayerDataMaster.Instance.currentPlayerData.magicItems = value; }
     public int magicItemCount => inventoryItems.Count;
@@ -73,8 +75,8 @@ public class Inventory : MonoBehaviour
     public void AddGold(int amount)
     {
         Gold += amount;
-        if (goldUpdater)
-            goldUpdater.RefreshGold();
+       
+        OnGoldChanged?.Invoke();
     }
     public bool TryRemoveGold(int amount)
     {
@@ -85,8 +87,8 @@ public class Inventory : MonoBehaviour
         }
 
         Gold -= amount;
-        if(goldUpdater)
-        goldUpdater.RefreshGold();
+        OnGoldChanged?.Invoke();
+
         return true;
     }
     
