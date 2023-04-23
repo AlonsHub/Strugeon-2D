@@ -32,19 +32,19 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         if(magicItem ==null)
             return; //instead of caching button
 
-        if (!clickedOnce)
-        {
-            StartCoroutine(nameof(DoubleClickCooldown));
-        }
-        else
-        {
+        //if (!clickedOnce)
+        //{
+        //    StartCoroutine(nameof(DoubleClickCooldown));
+        //}
+        //else
+        //{
             EquipInventoryManager.Instance.TryEquip(magicItem);
-            //if (mercGearDisplayer) 
-            //{
-            //    mercGearDisplayer.TryEquipItem(magicItem);
-            //}
+        //    //if (mercGearDisplayer) 
+        //    //{
+        //    //    mercGearDisplayer.TryEquipItem(magicItem);
+        //    //}
 
-        }
+        //}
     }
     IEnumerator DoubleClickCooldown()
     {

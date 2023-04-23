@@ -19,8 +19,8 @@ public class EquipInventoryManager : MonoBehaviour
     List<ItemDisplayer> displayers = new List<ItemDisplayer>(); //assume 16 to begin with, add by 4's whenever needed!
     //List<GameObject> empties = new List<GameObject>();
 
-    [SerializeField]
-    MercGearDisplayer mercGearDisplayer;
+    
+    //MercGearDisplayer mercGearDisplayer;
 
     List<MagicItem> relevantItems;
 
@@ -195,8 +195,12 @@ public class EquipInventoryManager : MonoBehaviour
             //add to inventory
             Inventory.Instance.AddMagicItem(removedItem as MagicItem);
         }
-
+        if(lobbyMercDisplayer)
         lobbyMercDisplayer.DisplayGear(); //refreshes
+        else if(MercGearDisplayer.Instance.isActiveAndEnabled)
+        {
+            MercGearDisplayer.Instance.SetMeFully(relevantMercSheet);
+        }
     }
 
 

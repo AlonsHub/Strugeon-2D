@@ -108,8 +108,6 @@ public class MercGearDisplayer : BasicDisplayer
         {
             current = PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count - 1;
         }
-
         SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
     }
-
 }
