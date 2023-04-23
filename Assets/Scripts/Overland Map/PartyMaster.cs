@@ -13,6 +13,7 @@ public class PartyMaster : MonoBehaviour
     public Squad currentSquad;
 
     public List<Pawn> availableMercPrefabs; //Mercs you HAVE 
+    List<MercSheet> availableMercSheets; //Mercs you HAVE 
 
     public List<Squad> squads; //both available and OtW
     public List<Squad> awaySquads; //OtW
@@ -86,14 +87,14 @@ public class PartyMaster : MonoBehaviour
     //START Save System FIX HERE 16/01/22
     public void LoadUpAvailableMercs() //on the loaded party
     {
-        availableMercPrefabs = new List<Pawn>();
-        foreach (MercName mercName in PlayerDataMaster.Instance.currentPlayerData.availableMercNames)
+        availableMercSheets = PlayerDataMaster.Instance.currentPlayerData.mercSheets.Where(x => x.currentAssignment == MercAssignment.Available).ToList();
+
+
+        foreach (var merc in availableMercSheets)
         {
-            availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
+            availableMercPrefabs.Add(MercPrefabs.Instance.EnumToPawnPrefab(merc.characterName));
         }
 
-
-        //squads = ParseSquads();
         ParseSquads();
 
         if (squads == null)

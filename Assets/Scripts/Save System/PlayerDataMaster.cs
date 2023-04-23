@@ -271,9 +271,9 @@ public class PlayerDataMaster : MonoBehaviour
     {
         List<MercName> newNames = new List<MercName>();
 
-        foreach (var merc in PartyMaster.Instance.availableMercPrefabs)
+        foreach (var merc in currentPlayerData.mercSheets)
         {
-            newNames.Add(merc.mercName);
+            newNames.Add(merc.MyPawnPrefabRef<Pawn>().mercName); //TBF! make mercName a MercSheet property
         }
         currentPlayerData.availableMercNames = newNames; //TBF to remove! only sheets are important now
 
