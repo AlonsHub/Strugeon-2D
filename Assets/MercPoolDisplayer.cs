@@ -58,25 +58,8 @@ public class MercPoolDisplayer : MonoBehaviour
             LobbyMercDisplayer lobbyMercDisplayer = displayers[i].GetComponent<LobbyMercDisplayer>();
             lobbyMercDisplayer.SetMeFull(relevant[i], this);
 
-
-
-
-            //EquipMercRosterSlot slot = displayers[i].GetComponent<BasicDisplayer>() as EquipMercRosterSlot;
-            //slot.index = i;
-            //slot.mercPoolDisplayer = this;
-            //displayers[i].GetComponent<Button>().onClick.AddListener(() => OpenGearDisplayerByMercIndex(i)); 
         }
        
     }
-
-    //public void OpenGearDisplayerByMercIndex(int i)
-    //{
-    //    //mercGearDisplayer.SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(i));
-    //    mercGearDisplayer.SetMeFully(relevant[i]);
-    //}
-    //public void ShowMercOnGearDisplayer(MercSheet mercSheet)
-    //{
-    //    mercGearDisplayer.SetMeFully(mercSheet);
-    //}
 
 }

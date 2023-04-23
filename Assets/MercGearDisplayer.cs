@@ -5,6 +5,8 @@ using UnityEngine;
 //Currently the only prefab relevant for this is the SimpleGearSlot - GearSlot1 is deprecated
 public class MercGearDisplayer : BasicDisplayer
 {
+    public static MercGearDisplayer Instance;
+
     MercSheet mercSheet;
 
 
@@ -17,10 +19,19 @@ public class MercGearDisplayer : BasicDisplayer
     public MercSheet GetMercSheet { get => mercSheet; }
 
     public System.Action OnMercChange;
+
+    int current = 0;
+
+    private void Awake()
+    {
+        //TBF TBD THIS IS LAZY
+        Instance = this;
+        gameObject.SetActive(false);
+    }
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
-        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(0)); // should actually look for the first AVAILABLE merc! TBF
+        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
     }
 
     public void SetMeFully(MercSheet ms)
@@ -86,9 +97,19 @@ public class MercGearDisplayer : BasicDisplayer
         SetMeFully(mercSheet);
     }
 
-    public void OpenItemMenu()
+    public void ArrowNavigation(int i)
     {
-        //opens or refereshes the item-menu to display the relevant items for the choosen slot and currently selected mercs
+        current += i;
+        if(current >= PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count)
+        {
+            current = 0;
+        }
+        if(current < 0)
+        {
+            current = PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count - 1;
+        }
 
+        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
     }
+
 }

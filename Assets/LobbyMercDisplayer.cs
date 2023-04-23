@@ -9,6 +9,10 @@ public class LobbyMercDisplayer : BasicDisplayer
     MercPoolDisplayer mercPoolDisplayer;
     MercSheet sheet;
 
+    [SerializeField, Tooltip("Not required")]
+    MercGearDisplayer mgd;
+
+
     [SerializeField]
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
 
@@ -92,6 +96,12 @@ public class LobbyMercDisplayer : BasicDisplayer
                 gearSlots[i].SetMeEmpty();
             }
         }
+    }
+
+    public void OpenMercIndividualWindow() //called by arrowbuttons in inspector
+    {
+        MercGearDisplayer.Instance.SetMeFully(sheet);
+        MercGearDisplayer.Instance.gameObject.SetActive(true);
     }
     //Need this for MercGearDisplayer - currently the Merc View Winodow!
     //public void OnMyClick()
