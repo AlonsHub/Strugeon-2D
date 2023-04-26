@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3784975315046323098}
+  - component: {fileID: 2017035037533408649}
   m_Layer: 5
   m_Name: 8th of Nool Chart
   m_TagString: Untagged
@@ -128,6 +129,22 @@ RectTransform:
   m_AnchoredPosition: {x: 1213, y: 528}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &2017035037533408649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4944411972634470517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cec6377c5ae37646ab082fbba42b234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColour: 0
+  maxValue: 0
+  currentValue: 0
+  fillImg: {fileID: 3007085335097032350}
 --- !u!1 &7240820763584663460
 GameObject:
   m_ObjectHideFlags: 0
