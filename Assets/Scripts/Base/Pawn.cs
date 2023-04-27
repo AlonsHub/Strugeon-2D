@@ -361,6 +361,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             actionPool.AddRange(ai.actionVariations);
         }
 
+        // TBF TBD
         //This ALSO needs to be a suggestive effect!
         if (hasPurple && purpleTgt != null)
         {
