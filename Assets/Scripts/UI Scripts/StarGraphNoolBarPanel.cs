@@ -10,10 +10,10 @@ public class StarGraphNoolBarPanel : MonoBehaviour
     [SerializeField, Tooltip("set in this order:Orange, Yellow, Green, Blue, Red, Purple, Black")]
     List<StarGraphSlice> nulBars;
 
-    private void Start()
-    {
-        SetToPsion();
-    }
+    //private void Start()
+    //{
+    //    SetToPsion();
+    //}
 
     public void SetToPsion()
     {
@@ -32,4 +32,23 @@ public class StarGraphNoolBarPanel : MonoBehaviour
             temp.SetMe(nulElement);
         }
     }
+    public void SetToItem(MagicItem item)
+    {
+        foreach (var nulElement in item.spectrumProfile.elements)
+        {
+            //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+            if (!coloursToShow.Contains(nulElement.nulColour))
+            {
+                //temp.gameObject.SetActive(false); 
+             continue;
+            }
+            StarGraphSlice temp = nulBars[(int)nulElement.nulColour];
+
+            temp.gameObject.SetActive(true);
+
+            temp.SetMe(nulElement.value);
+        }
+    }
+
+
 }

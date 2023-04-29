@@ -6,61 +6,42 @@ public class SanctumInventory : BaseInventory
 {
     //This class better find soem things to do soon... prehaps have it manage all sanctum systems?
     [SerializeField]
-    SanctumSelectedItemDisplayer sanctumSelectedItemDisplayer; //this MAY be redunant, but let's go with it 
+    SanctumSelectedPanel sanctumSelectedPanel; //this MAY be redunant, but let's go with it 
 
-    [SerializeField]
-    [ColorUsage(true)]
-    Color titleColor;
-    [SerializeField]
-    [ColorUsage(true)]
-    Color slotColor;
-
-    [SerializeField]
-    ItemInhaler itemInhaler;
-
-    //protected override void OnEnable()
+    
+    //public override void SetCurrentItem(MagicItem itemToSet)
     //{
-    //    base.OnEnable();
-    //    //itemInhaler.OnInhale += RefreshInventory;
+      
+
+    //    //string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
+    //    //string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
+
+
+
+    //    //sanctumSelectedPanel.SetMeFull(new List<string> { itemToSet.magicItemName, $"<color=#{slotColorHex}> {itemToSet.fittingSlotType} | </color>" +$"<color=#{titleColorHex}>" +
+    //    //    $"{itemToSet._Benefit().BenefitStatName()} + {itemToSet._Benefit().Value()} </color>",
+    //    //    itemToSet.ItemDescription(), $"{itemToSet.goldValue} Gold"}, new List<Sprite> { itemToSet.itemSprite }, itemToSet);
+    //    //sanctumSelectedPanel.SetMeFull(itemToSet);
+
+    //    //base.SetCurrentItem(itemToSet);
     //}
-    //protected override void OnDisable()
+    //public  void SetCurrentItem() //empty
     //{
-    //    base.OnDisable();
-    //    //itemInhaler.OnInhale -= RefreshInventory;
+    //    //string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
+    //    //string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
+
+       
+
+    //    //sanctumSelectedPanel.SetMeFull(new List<string> { emptyItem.magicItemName, "" ,
+    //    //    "Nothing to describe", "0 Gold"}, new List<Sprite> { emptyItem.itemSprite }, null);
+
+    //    //base.SetCurrentItem(itemToSet);
     //}
-    public override void SetCurrentItem(MagicItem itemToSet)
-    {
-        if (itemInhaler.inhaling)
-            return;
-
-        string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
-        string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
-
-        itemInhaler.SelectItem(itemToSet);
-
-        sanctumSelectedItemDisplayer.SetMeFull(new List<string> { itemToSet.magicItemName, $"<color=#{slotColorHex}> {itemToSet.fittingSlotType} | </color>" +$"<color=#{titleColorHex}>" +
-            $"{itemToSet._Benefit().BenefitStatName()} + {itemToSet._Benefit().Value()} </color>",
-            itemToSet.ItemDescription(), $"{itemToSet.goldValue} Gold"}, new List<Sprite> { itemToSet.itemSprite }, itemToSet);
-
-        //base.SetCurrentItem(itemToSet);
-    }
-    public  void SetCurrentItem() //empty
-    {
-        string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
-        string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
-
-        itemInhaler.SelectItem(null);
-
-        sanctumSelectedItemDisplayer.SetMeFull(new List<string> { emptyItem.magicItemName, "" ,
-            "Nothing to describe", "0 Gold"}, new List<Sprite> { emptyItem.itemSprite }, null);
-
-        //base.SetCurrentItem(itemToSet);
-    }
 
     public override void RefreshInventory()
     {
         //SetCurrentItem(emptyItem);
-        SetCurrentItem();
+        //SetCurrentItem();
         base.RefreshInventory();
 
         //if just ihaled?
@@ -69,11 +50,12 @@ public class SanctumInventory : BaseInventory
 
         for (int i = 0; i < Inventory.Instance.magicItemCount; i++)
         {
-            if (!Inventory.Instance.inventoryItems[i].FetchSprite())
-            {
-                Debug.LogError($"{Inventory.Instance.inventoryItems[i].magicItemName} failed fetch. With spritename: {Inventory.Instance.inventoryItems[i].spriteName}");
-                continue;
-            }
+            //if (!Inventory.Instance.inventoryItems[i].FetchSprite())
+            //{
+            //    Debug.LogError($"{Inventory.Instance.inventoryItems[i].magicItemName} failed fetch. With spritename: {Inventory.Instance.inventoryItems[i].spriteName}");
+            //    continue;
+            //}
+            //displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i]);
 
             displayers[i].BackgroundGlow(false);
         }
