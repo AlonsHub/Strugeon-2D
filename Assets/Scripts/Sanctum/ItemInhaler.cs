@@ -59,22 +59,10 @@ public class ItemInhaler : MonoBehaviour
 
     void InhaleAndLogSelectedItem()
     {
-        //if (_item != null)
-        //{
+      
             string s = InhaleSelectedItem();
             print(s);
-        //}
-        //else
-        //{
-        //    //SelectFirstInvItem();
-        //    //string s = InhaleSelectedItem();
-        //    //print(s);
-        //    print("no item to in");
-        //}
-
-        //SelectFirstInvItem();
-
-        //print(s);
+       
     }
     public void SelectItem(MagicItem selectedItem)
     {
