@@ -15,7 +15,7 @@ public class ItemInhaler : MonoBehaviour
 
     PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
 
-    MagicItem _item;
+    MagicItem _item => SanctumSelectedPanel.Instance.magicItem;
     //MagicItem emptyItem;
 
     //SAFETY MEASURES:
@@ -43,14 +43,17 @@ public class ItemInhaler : MonoBehaviour
 
     public bool inhaling;
 
-    [SerializeField]
-    NulBarPanel itemNulBarPanel;
-    [SerializeField]
-    NulBarPanel psionNulBarPanel;
+
+    //[SerializeField]
+    //NulBarPanel itemNulBarPanel;
+    //[SerializeField]
+    //NulBarPanel psionNulBarPanel;
+    
+
 
     private void Awake()
     {
-        if(!button)
+        if (!button)
         button = GetComponent<UnityEngine.UI.Button>();
 
         button.onClick.AddListener(InhaleAndLogSelectedItem);
@@ -64,11 +67,11 @@ public class ItemInhaler : MonoBehaviour
             print(s);
        
     }
-    public void SelectItem(MagicItem selectedItem)
-    {
-        _item = selectedItem;
-        button.interactable = selectedItem != null; //in case of the below error, set the button.interactable to false
-    }
+    //public void SelectItem(MagicItem selectedItem)
+    //{
+    //    //_item = selectedItem;
+    //    button.interactable = selectedItem != null; //in case of the below error, set the button.interactable to false
+    //}
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
     {
@@ -154,8 +157,17 @@ public class ItemInhaler : MonoBehaviour
     }
     void RemoveMagicItemFromInventory()
     {
-        Inventory.Instance.RemoveMagicItem(_item);
-        _item = null;
+        if (_item != null)
+        {
+
+            Inventory.Instance.RemoveMagicItem(_item);
+            SanctumSelectedPanel.Instance.magicItem = null;
+        }
+        else
+        {
+            Debug.LogError("item was already null!");
+        }
+        //_item = null;
     }
 
     IEnumerator SuccessfulInhaleSequence(float[] s)
@@ -165,30 +177,30 @@ public class ItemInhaler : MonoBehaviour
         for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         {
             processingColourIndicator.SetActive(true);
-            resultText.transform.parent.gameObject.SetActive(false);
+            //resultText.transform.parent.gameObject.SetActive(false);
             yield return new WaitForSeconds(timePerBar);
             processingColourIndicator.SetActive(false);
-            resultText.transform.parent.gameObject.SetActive(true);
+            //resultText.transform.parent.gameObject.SetActive(true);
 
             if (s[i] != 0f)
             {
                 resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].GetNulColour} colour by {s[i]}.";
-                itemNulBarPanel.SetBarText(i, $"+{s[i]}");
+                //itemNulBarPanel.SetBarText(i, $"+{s[i]}");
             }
             else
             {
                 resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].GetNulColour} energy.";
-                itemNulBarPanel.SetBarText(i, "X");
+                //itemNulBarPanel.SetBarText(i, "X");
             }
             yield return new WaitForSeconds(timePerResult);
             //yield return new WaitUntil(() => Input.anyKey);
         }
 
         yield return new WaitUntil(() => Input.anyKey);
-        itemNulBarPanel.TurnOffAllBarTexts();
+        //itemNulBarPanel.TurnOffAllBarTexts();
         //nulBarPanel.SetMe(); //resets to accomedate new max values
-        psionNulBarPanel.SetMe();
-        resultText.transform.parent.gameObject.SetActive(false);
+        //psionNulBarPanel.SetMe();
+        //resultText.transform.parent.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;
     }
