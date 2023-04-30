@@ -35,7 +35,7 @@ public class PsionNulElement
         //elementType = t;
         nulElement = new NulElement(col);
         maxValue = max;
-        nulElement.value = maxValue; //TBF default starting values
+        nulElement.value = maxValue /2f; //TBF default starting values
         _nulColour = col;
         regenRate = regen;
     }

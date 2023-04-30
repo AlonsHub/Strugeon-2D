@@ -25,6 +25,7 @@ public class PsionSpectrumProfile
         for (int i = 0; i < System.Enum.GetNames(typeof(NulColour)).Length; i++)
         {
             psionElements.Add(new PsionNulElement((NulColour)i, 1f, .2f)); //starting values!
+            //psionElements.Add(new PsionNulElement((NulColour)i, Random.Range(.2f, 8f), .2f)); //starting values!
         }
         //psionElements[(int)NulColour.Purple] = 45;
         //psionElements[(int)NulColour.Purple] = 45;
