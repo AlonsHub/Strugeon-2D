@@ -8,27 +8,27 @@ public class StarGraphSlice : MonoBehaviour
     public NulColour myColour;
 
     [SerializeField]
-    float maxValue;
+    protected float maxValue;
     [SerializeField]
-    float currentValue;
+    protected float currentValue;
     [SerializeField]
-    Image fillImg;
+    protected Image fillImg;
 
-    //relevant for when displaying a value with no obvious maximum
-    float defaultMaxNool = 10f;
+    //relevant for when displaying a value with no obvious maximum //TBD TBF
+    protected float defaultMaxNool = 10f;
 
-    public void SetMe(PsionNulElement element)
-    {
-        //set values
-        maxValue = element.maxValue;
-        currentValue = element.value;
-        ShowValue();
-    }
+    //public virtual void SetMe(PsionNulElement element)
+    //{
+    //    //set values
+    //    maxValue = element.maxValue;
+    //    currentValue = element.value;
+    //    ShowValue();
+    //}
     /// <summary>
     /// Shows a max of 10f as default
     /// </summary>
     /// <param name="value"></param>
-    public void SetMe(float value)
+    public virtual void SetMe(float value)
     {
         //set values
         maxValue = defaultMaxNool;

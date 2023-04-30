@@ -384,6 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1778120991921130618}
+  - component: {fileID: 1879381796668965530}
   m_Layer: 5
   m_Name: Nool Pill Empty
   m_TagString: Untagged
@@ -415,3 +416,21 @@ RectTransform:
   m_AnchoredPosition: {x: 256, y: 238.64}
   m_SizeDelta: {x: 105.49426, y: 215.58673}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1879381796668965530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8647560556970440186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995346a5c0c1a734aa5f3d954de3b09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColour: 0
+  maxValue: 0
+  currentValue: 0
+  fillImg: {fileID: 4149134351556703682}
+  topMax: 5
+  negativeFill: {fileID: 2693491550007524337}

@@ -10,28 +10,31 @@ public class StarGraphNoolBarPanel : MonoBehaviour
     [SerializeField, Tooltip("set in this order:Orange, Yellow, Green, Blue, Red, Purple, Black")]
     List<StarGraphSlice> nulBars;
 
+    //[SerializeField]
+    //bool isPsionNools;
     //private void Start()
     //{
+    //    if(isPsionNools) //also hook to some form of OnValueChangeded for the Nools OR!!!! refresh via ItemInhaler
     //    SetToPsion();
     //}
 
-    public void SetToPsion()
-    {
-        foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
-        {
-            //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            StarGraphSlice temp = nulBars[(int)nulElement.GetNulColour];
-            if (!coloursToShow.Contains(nulElement.GetNulColour))
-            {
-                //temp.gameObject.SetActive(false); 
-             continue;
-            }
+    //public void SetToPsion()
+    //{
+    //    foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+    //    {
+    //        //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+    //        StarGraphSlice temp = nulBars[(int)nulElement.GetNulColour];
+    //        if (!coloursToShow.Contains(nulElement.GetNulColour))
+    //        {
+    //            //temp.gameObject.SetActive(false); 
+    //         continue;
+    //        }
 
-            temp.gameObject.SetActive(true);
+    //        temp.gameObject.SetActive(true);
 
-            temp.SetMe(nulElement);
-        }
-    }
+    //        temp.SetMe(nulElement);
+    //    }
+    //}
     public void SetToItem(MagicItem item)
     {
         foreach (var nulElement in item.spectrumProfile.elements)

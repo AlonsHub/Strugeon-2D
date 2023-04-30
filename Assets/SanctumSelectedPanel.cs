@@ -21,6 +21,6 @@ public class SanctumSelectedPanel : BasicDisplayer
     {
         magicItem = item;
         starGraphNoolBarPanel.SetToItem(item);
-        base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString() }, new List<Sprite> { item.itemSprite });
+        base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item.ItemDescription(),item.goldValue.ToString()}, new List<Sprite> {item.itemSprite});
     }
 }
