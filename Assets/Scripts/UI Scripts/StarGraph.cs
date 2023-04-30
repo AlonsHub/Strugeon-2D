@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StarGraphNoolBarPanel : MonoBehaviour
+public class StarGraph : MonoBehaviour
 {
     [SerializeField]
     List<NulColour> coloursToShow;

@@ -11,7 +11,9 @@ public class SanctumSelectedPanel : BasicDisplayer
 
     public MagicItem magicItem;
     [SerializeField]
-    StarGraphNoolBarPanel starGraphNoolBarPanel;
+    MagicItem emptyItem;
+    [SerializeField]
+    StarGraph starGraphNoolBarPanel;
     private void Awake() //TBF TBD LAZY
     {
         Instance = this;
@@ -23,4 +25,11 @@ public class SanctumSelectedPanel : BasicDisplayer
         starGraphNoolBarPanel.SetToItem(item);
         base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item.ItemDescription(),item.goldValue.ToString()}, new List<Sprite> {item.itemSprite});
     }
+    public void SetMeFull()
+    {
+        magicItem = null;
+        starGraphNoolBarPanel.SetToItem(emptyItem);
+        base.SetMe(new List<string> { emptyItem.magicItemName, emptyItem._EquipSlotType().ToString(), emptyItem.ItemDescription(), emptyItem.goldValue.ToString()}, new List<Sprite> { emptyItem.itemSprite});
+    }
+
 }

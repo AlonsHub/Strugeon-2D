@@ -506,6 +506,7 @@ GameObject:
   - component: {fileID: 1672499162}
   - component: {fileID: 1672499164}
   - component: {fileID: 1672499163}
+  - component: {fileID: 1672499165}
   m_Layer: 5
   m_Name: LOADING_Image
   m_TagString: Untagged
@@ -553,10 +554,10 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 4884337891824352890, guid: 31155a4835afb294f8a618b0cb75f337,
     type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 1
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -570,6 +571,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672499161}
   m_CullTransparentMesh: 0
+--- !u!95 &1672499165
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672499161}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e16d9ebe14080146a6017f94522005e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8283218130939935974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -936,6 +956,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8283218130939936006}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Load
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272042073839006436, guid: 0db19fc1267155947959fc5895f2c70a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6589165399045653407, guid: 0db19fc1267155947959fc5895f2c70a,
         type: 3}
@@ -1893,6 +1943,36 @@ MonoBehaviour:
       statToBenefit: 0
       value: 0
     relevantClasses: 
+  emptyItem:
+    magicItemName: 
+    goldValue: 0
+    spectrumProfile:
+      elements:
+      - value: 0
+        nulColour: 0
+      - value: 0
+        nulColour: 1
+      - value: 0
+        nulColour: 2
+      - value: 0
+        nulColour: 3
+      - value: 0
+        nulColour: 4
+      - value: 0
+        nulColour: 5
+      - value: 0
+        nulColour: 6
+    rarity: 0
+    dropRateWeight: 0
+    itemSprite: {fileID: 0}
+    spriteName: 
+    fittingSlotType: 0
+    isEquipped: 0
+    statBenefitSO: {fileID: 0}
+    statBenefit:
+      statToBenefit: 0
+      value: 0
+    relevantClasses: 
   starGraphNoolBarPanel: {fileID: 8283218130939935987}
 --- !u!114 &8283218130939935986
 MonoBehaviour:
@@ -2123,10 +2203,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chanceToHitFactor: 1
-  amountFactor: 0.01
-  timePerBar: 3
+  amountFactor: 0.05
+  timePerBar: 0.6
   timePerResult: 0.2
-  processingColourIndicator: {fileID: 1672499161}
+  processingColourIndicator: {fileID: 1672499165}
   resultText: {fileID: 606337818}
   button: {fileID: 8283218130939936003}
   inhaling: 0
+  pillPanel: {fileID: 8283218130939936001}
+--- !u!1 &8283218130939936005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7316105390854033155, guid: 0db19fc1267155947959fc5895f2c70a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8283218130939935974}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8283218130939936006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8283218130939936005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0be9c7e8ac7f9054089aeeec59ea7777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disabler: {fileID: 0}
+  sceneName: TavernScene

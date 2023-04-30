@@ -28,7 +28,8 @@ public class ItemInhaler : MonoBehaviour
     float timePerResult;
 
     [SerializeField]
-    GameObject processingColourIndicator; //placeholder TBF - currently just activates a sprite with a default animation
+    //GameObject processingColourIndicator; //placeholder TBF - currently just activates a sprite with a default animation
+    Animator processingColourIndicator; //placeholder TBF - currently just activates a sprite with a default animation
     [SerializeField]
     TMP_Text resultText;
     //public void SelectFirstInvItem()
@@ -46,10 +47,10 @@ public class ItemInhaler : MonoBehaviour
 
     //[SerializeField]
     //NulBarPanel itemNulBarPanel;
-    //[SerializeField]
     //NulBarPanel psionNulBarPanel;
+    [SerializeField]
+    PillPanel pillPanel;
     
-
 
     private void Awake()
     {
@@ -151,6 +152,9 @@ public class ItemInhaler : MonoBehaviour
         Invoke(nameof(RemoveMagicItemFromInventory), .1f);
         //Inventory.Instance.RemoveMagicItem(_item);
 
+        processingColourIndicator.SetFloat("speed", 1f / timePerBar);
+
+
         StartCoroutine(SuccessfulInhaleSequence(values));
         OnInhale?.Invoke();
         return s;
@@ -174,13 +178,14 @@ public class ItemInhaler : MonoBehaviour
     {
         inhaling = true;
         button.interactable = false;
+        resultText.gameObject.SetActive(true);
         for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         {
-            processingColourIndicator.SetActive(true);
-            //resultText.transform.parent.gameObject.SetActive(false);
+            processingColourIndicator.gameObject.SetActive(true);
+            //resultText.gameObject.SetActive(false);
             yield return new WaitForSeconds(timePerBar);
-            processingColourIndicator.SetActive(false);
-            //resultText.transform.parent.gameObject.SetActive(true);
+            processingColourIndicator.gameObject.SetActive(false);
+            //resultText.gameObject.SetActive(true);
 
             if (s[i] != 0f)
             {
@@ -196,11 +201,14 @@ public class ItemInhaler : MonoBehaviour
             //yield return new WaitUntil(() => Input.anyKey);
         }
 
-        yield return new WaitUntil(() => Input.anyKey);
+        //yield return new WaitUntil(() => Input.anyKey);
         //itemNulBarPanel.TurnOffAllBarTexts();
         //nulBarPanel.SetMe(); //resets to accomedate new max values
         //psionNulBarPanel.SetMe();
-        //resultText.transform.parent.gameObject.SetActive(false);
+        pillPanel.SetToPsion();
+        SanctumSelectedPanel.Instance.SetMeFull();
+
+        resultText.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;
     }

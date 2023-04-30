@@ -13,8 +13,18 @@ public class NewSanctumInventory : MonoBehaviour
 
     private void Start()
     {
+
         Refresh();
     }
+    private void OnEnable()
+    {
+        Inventory.Instance.OnInventoryChange += Refresh;
+    }
+    private void OnDisable()
+    {
+        Inventory.Instance.OnInventoryChange -= Refresh;
+    }
+
     public void Refresh()
     {
         if (itemDisplayers == null)
@@ -33,10 +43,10 @@ public class NewSanctumInventory : MonoBehaviour
         int delta = itemDisplayers.Count - Inventory.Instance.magicItemCount;
         if (delta > 0)
         {
-            for (int i = itemDisplayers.Count - 1; i > itemDisplayers.Count - 1 - delta; i++)
+            for (int i = 0; i < delta; i++)
             {
-                //itemDisplayers[i].gameObject.SetActive(false);
-                Destroy( itemDisplayers[i].gameObject);
+                Destroy( itemDisplayers[itemDisplayers.Count-1].gameObject);
+                itemDisplayers.RemoveAt(itemDisplayers.Count - 1);
             }
         }
         else if (delta < 0)
