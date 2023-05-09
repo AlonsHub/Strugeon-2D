@@ -375,7 +375,11 @@ public class SquadBuilder2 : MonoBehaviour
     {
 
         //Room ToRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
-
+        if(ToRoom ==null)
+        {
+            Debug.LogError("ToRoom is null");
+            return;
+        }
         if (ToRoom.squad == null || ToRoom.squad.pawns.Count == 0)
         {
             crewName.text = $"Crew {_currentRoomIndex + 1}";

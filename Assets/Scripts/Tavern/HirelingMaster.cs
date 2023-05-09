@@ -9,7 +9,10 @@ public class HirelingMaster : MonoBehaviour
     public static HirelingMaster Instance;
 
     [SerializeField]
-    PeekingMenu idleLogParent;
+    PeekingMenu peekingMenu;
+
+    [SerializeField]
+    Transform layoutParent;
     [SerializeField]
     GameObject newArrivalPrefab;
 
@@ -74,7 +77,7 @@ public class HirelingMaster : MonoBehaviour
 
     void AddHireableToLog(MercName mn)
     {
-        HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent.transform).GetComponent<HirelingWindow>();
+        HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, layoutParent).GetComponent<HirelingWindow>();
         //List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
         hirelingWindow.SetMe(mn, this);
 
@@ -82,13 +85,13 @@ public class HirelingMaster : MonoBehaviour
         PlayerDataMaster.Instance.AddHireableMerc(mn); //Doesnt suck now!
 
         //anim.SetTrigger("Open");
-        idleLogParent.ShowMenu();
+        peekingMenu.ShowMenu();
     }
 
     public void CloseMe()
     {
         //anim.SetTrigger("Close");
-        idleLogParent.HideMenu(); //cache this! TBF
+        peekingMenu.HideMenu(); //cache this! TBF
     }
 
     bool CheckForArrivals() //returns true if new mercs can arrive
