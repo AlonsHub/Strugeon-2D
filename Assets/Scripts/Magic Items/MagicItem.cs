@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -101,4 +102,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     {
         return this;
     }
+
+   
+    
 }

@@ -9,9 +9,10 @@ public static class SorterFilter
     {
         return things.Where(pred).ToList();
     }
-    public static List<T> SortListBy<T>(List<T> things,IComparer<T> comparer)
+    public static List<T> SortListBy<T>(List<T> things,IComparer comparer)
     {
-        things.Sort(comparer);
+        //things.Sort((IComparer<T>)comparer);
+        //things.Sort(comparer);
         return things;
     }
 

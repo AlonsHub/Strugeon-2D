@@ -18,18 +18,7 @@ public class SimpleInventory : BaseInventory
     [SerializeField]
     [ColorUsage(true)]
     Color slotColor;
-    //private void OnEnable()
-    //{
-    //    RefreshInventory();
-    //    Inventory.Instance.OnInventoryChange += RefreshInventory;
 
-    //}
-
-    //private void OnDisable()
-    //{
-    //    Inventory.Instance.OnInventoryChange -= RefreshInventory;
-
-    //}
     private void Start()
     {
         SetCurrentItem();
@@ -84,6 +73,20 @@ public class SimpleInventory : BaseInventory
         //sell selected item
         Inventory.Instance.SellItem(selectedItem);
         SetCurrentItem();
+    }
+
+    public void SortBy(SortByMethod sortByMethod)
+    {
+        switch (sortByMethod)
+        {
+            case SortByMethod.Value:
+
+                break;
+            case SortByMethod.Type:
+                break;
+            default:
+                break;
+        }
     }
 
 }

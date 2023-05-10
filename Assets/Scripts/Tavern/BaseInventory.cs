@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,10 +18,12 @@ public class BaseInventory : MonoBehaviour
     [SerializeField]
     MagicItemSO emptyItemSO; //the data for what to show when no items are available
     public MagicItem emptyItem => emptyItemSO.magicItem; //the data for what to show when no items are available
-    
+
+    List<MagicItem> _localItems;
    
     protected virtual void OnEnable()
     {
+        _localItems = Inventory.Instance.inventoryItems;
         RefreshInventory();
         Inventory.Instance.OnInventoryChange += RefreshInventory;
     }
@@ -37,7 +40,8 @@ public class BaseInventory : MonoBehaviour
     public virtual void EnsureOneDisplayerPerMagicItem()
     {
 
-        int diff = displayers.Count - Inventory.Instance.magicItemCount;
+        int diff = displayers.Count - _localItems.Count;
+        //int diff = displayers.Count - Inventory.Instance.magicItemCount;
         //int diff = displayers.Count - Inventory.Instance.inventoryItems.Count;
 
         if (diff == 0)
@@ -58,22 +62,34 @@ public class BaseInventory : MonoBehaviour
             {
                 Destroy(displayers[i].gameObject); //just disable them dude... TBF
             }
-            displayers.RemoveRange(Inventory.Instance.magicItemCount, diff);
+            displayers.RemoveRange(_localItems.Count, diff);
         }
     }
 
+    //This should operate with a local _list that can be ordered on its own.
     public virtual void RefreshInventory()
     {
         EnsureOneDisplayerPerMagicItem();
 
         //Draw items
-        for (int i = 0; i < Inventory.Instance.magicItemCount; i++)
+        for (int i = 0; i < _localItems.Count; i++)
         {
-            if (!Inventory.Instance.inventoryItems[i].FetchSprite())
+            if (!_localItems[i].FetchSprite())
                 continue;
 
             displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i], this);
         }
+    }
+
+    public virtual void SortItemsByValue()
+    {
+
+        //_localItems = SorterFilter.SortListBy(_localItems, new ItemComparer_Value());
+        //_localItems = _localItems.Sort(Archived_ItemComparers.ItemComparer_Value());
+        //_localItems.Sort(Archived_ItemComparers.ItemComparer_Value());
+        _localItems.Sort(new ItemComparer_Value());
+
+        RefreshInventory();
     }
 
 }
