@@ -6,13 +6,17 @@ using TMPro;
 public class CallNewSave : MonoBehaviour
 {
     public TMP_InputField inputField;
-
+    [SerializeField]
+    UnityEngine.UI.Button acceptNameButton;
     //Temp TBF TBD
     [SerializeField]
     LevelSO[] levelSOs;
     //Temp
 
-
+    public void InteractiveCheck()
+    {
+        acceptNameButton.interactable = (inputField.text != "");
+    }
     public void CallSaveAndStartGame()
     {
         PlayerDataMaster.Instance.CreateNewSave(inputField.text);

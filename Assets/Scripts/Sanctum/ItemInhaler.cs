@@ -50,6 +50,8 @@ public class ItemInhaler : MonoBehaviour
     //NulBarPanel psionNulBarPanel;
     [SerializeField]
     PillPanel pillPanel;
+
+    Coroutine coro;
     
 
     private void Awake()
@@ -155,7 +157,7 @@ public class ItemInhaler : MonoBehaviour
         processingColourIndicator.SetFloat("speed", 1f / timePerBar);
 
 
-        StartCoroutine(SuccessfulInhaleSequence(values));
+        coro = StartCoroutine(SuccessfulInhaleSequence(values));
         OnInhale?.Invoke();
         return s;
     }
@@ -205,6 +207,13 @@ public class ItemInhaler : MonoBehaviour
         //itemNulBarPanel.TurnOffAllBarTexts();
         //nulBarPanel.SetMe(); //resets to accomedate new max values
         //psionNulBarPanel.SetMe();
+        FinalizeInhaleSequence();
+    }
+
+    private void FinalizeInhaleSequence()
+    {
+        processingColourIndicator.gameObject.SetActive(false);
+
         pillPanel.SetToPsion();
         SanctumSelectedPanel.Instance.SetMeFull();
 
@@ -216,5 +225,11 @@ public class ItemInhaler : MonoBehaviour
     bool RollChance(int x, int outOf)
     {
         return Random.Range(1,outOf+1) <= x;
+    }
+
+    public void SkipInhale()
+    {
+        StopCoroutine(coro);
+        FinalizeInhaleSequence();
     }
 }
