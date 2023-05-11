@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SanctumItemDisplayer : BasicDisplayer
 {
-     MagicItem magicItem;
+
+    public MagicItem magicItem;
     public void SetMeFull(MagicItem item)
     {
         magicItem = item;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PillGraphSlice : StarGraphSlice, IPointerEnterHandler, IPointerExitHandler
+public class PillGraphSlice : StarGraphSlice
 {
     [SerializeField, Tooltip("Basically, the value if the pill was as full as can show")]
     float topMax = 5f;
@@ -22,23 +22,7 @@ public class PillGraphSlice : StarGraphSlice, IPointerEnterHandler, IPointerExit
         currentValue = element.value;
 
         fillImg.fillAmount = currentValue / topMax; // the positive does not change size, hence the full 1f fillamount amounts to a full topMax (and not the current capacity)
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if(hoverBox && hoverBoxText)
-        {
-            hoverBox.gameObject.SetActive(true);
-            hoverBoxText.text = $"{currentValue} / {maxValue}";
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (hoverBox && hoverBoxText)
-        {
-            hoverBox.gameObject.SetActive(false);
-        }
+        base.SetMyDisplayer(new List<string> { $"{currentValue} / {maxValue}" }, new List<Sprite> ());
     }
 
     

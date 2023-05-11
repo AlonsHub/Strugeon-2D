@@ -42,6 +42,9 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField]
     UnityEngine.UI.Button button;
 
+    [SerializeField]
+    GameObject skipButtonObj; 
+
     public bool inhaling;
 
 
@@ -180,6 +183,7 @@ public class ItemInhaler : MonoBehaviour
     {
         inhaling = true;
         button.interactable = false;
+        skipButtonObj.SetActive(true);
         resultText.gameObject.SetActive(true);
         for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         {
@@ -220,6 +224,7 @@ public class ItemInhaler : MonoBehaviour
         resultText.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;
+        skipButtonObj.SetActive(false);
     }
 
     bool RollChance(int x, int outOf)

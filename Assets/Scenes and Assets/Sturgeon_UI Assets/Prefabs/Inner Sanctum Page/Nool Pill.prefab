@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8756927123151904409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153767243176816936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef45969157fb05a4b8725bf0a5f24c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textBoxes:
+  - {fileID: 8658515072296386503}
+  images: []
 --- !u!1 &1666719223511690047
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,12 +69,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995346a5c0c1a734aa5f3d954de3b09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicDisplayer: {fileID: 8756927123151904409}
   myColour: 0
   maxValue: 0
   currentValue: 0
   fillImg: {fileID: 6248605372067883783}
-  hoverBox: {fileID: 153767243176816936}
-  hoverBoxText: {fileID: 8658515072296386503}
   topMax: 5
   negativeFill: {fileID: 5350868463016125748}
 --- !u!1 &2231389948791964260
