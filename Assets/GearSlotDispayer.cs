@@ -10,7 +10,8 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     EquipSlotType slotType;
     [SerializeField]
     Sprite emptySprite;
-
+    [SerializeField]
+    BasicDisplayer hoverDisplayer;
     //[SerializeField]
     //EquipInventoryManager inventoryDisplayManager;
 
@@ -18,6 +19,8 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
 
     MercSheet mercSheet;
     LobbyMercDisplayer lobbyMercDisplayer;
+
+    
     public void SetMeEmpty() //check if this is needed to be able to fight. TBF + gamedesign-wise, do we even allow illegal "unequips" and let the merc be useless?
     {
         base.SetMe(new List<string> { "Empty", "no benefit" }, new List<Sprite> {emptySprite});
@@ -50,9 +53,19 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     {
         if (magicItem == null)//unlikely
             return;
+
+        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
+        Vector3 newPos = hoverDisplayer.transform.position;
+        newPos.x = transform.position.x + 350f;
+        
+
+        hoverDisplayer.transform.SetParent(All_Canvases.FrontestCanvas.transform);
+        hoverDisplayer.transform.position = newPos;
+
+        hoverDisplayer.gameObject.SetActive(true);
         //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
-        HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" },
-                                    new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit) });
+        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" },
+        //                            new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit) });
     }
     Sprite SwitchOnBenefit(StatToBenefit statToBenefit)
     {
@@ -74,6 +87,8 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     {
         if (magicItem == null) //unlikely
             return;
-        HoverTextBoard.Instance.UnSetMe();
+        //HoverTextBoard.Instance.UnSetMe();
+        hoverDisplayer.gameObject.SetActive(false);
+        hoverDisplayer.transform.SetParent(transform.parent); //Doesnt really matter
     }
 }

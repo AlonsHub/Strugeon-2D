@@ -17,7 +17,7 @@ public class SacntumItemHover : HoverableWithBox
     private void Start()
     {
         MagicItem mi = sanctumItemDisplayer.magicItem;
-        SetMyDisplayer(new List<string> { mi.magicItemName, mi.fittingSlotType.ToString(),  mi._Benefit().BenefitStatName(), mi._Benefit().Value().ToString(), mi.ItemDescription()}, new List<Sprite> { mi.itemSprite});
+        SetMyDisplayer(new List<string> { mi.magicItemName, mi.fittingSlotType.ToString(),  mi._Benefit().BenefitStatName(), mi._Benefit().Value().ToString(), mi.ItemDescription(), mi.goldValue.ToString() }, new List<Sprite> { mi.itemSprite});
         //FixLocalPos();
     }
 

@@ -19,7 +19,8 @@ public class EquipInventoryManager : MonoBehaviour
     List<ItemDisplayer> displayers = new List<ItemDisplayer>(); //assume 16 to begin with, add by 4's whenever needed!
     //List<GameObject> empties = new List<GameObject>();
 
-    
+    [SerializeField] //just to see them
+    BasicDisplayer hoverDisplayer;
     //MercGearDisplayer mercGearDisplayer;
 
     List<MagicItem> relevantItems;
@@ -129,7 +130,7 @@ public class EquipInventoryManager : MonoBehaviour
             if (!relevantItems[i].FetchSprite())
                 continue;
 
-            displayers[i].SetItem(relevantItems[i]);
+            displayers[i].SetItem(relevantItems[i]._Item(), hoverDisplayer);
         }
         for (int i = relevantItems.Count; i < displayers.Count; i++)
         {

@@ -12,7 +12,8 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     //Gear displayer
     //[SerializeField]
     //static MercGearDisplayer mercGearDisplayer;
-   
+    [SerializeField]
+    BasicDisplayer hoverDisplayer;
 
     private void OnEnable()
     {
@@ -52,10 +53,10 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         yield return new WaitForSecondsRealtime(GeneralInputSettings.doubleClickWindow);
         clickedOnce = false;
     }
-    public void SetItem(MagicItem newItem)
+    public void SetItem(MagicItem newItem, BasicDisplayer bd)
     {
         magicItem = newItem;
-
+        hoverDisplayer = bd;
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
 
         SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription()}, new List<Sprite> {magicItem.itemSprite});
@@ -63,6 +64,7 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     public void SetItem()
     {
         magicItem = null;
+        hoverDisplayer = null ; //just in case
 
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
 
@@ -94,11 +96,22 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (magicItem == null)
+        if (magicItem == null || !hoverDisplayer)
             return;
+
+
+        hoverDisplayer.gameObject.SetActive(true);
+
+        Vector3 newPos = transform.position;
+        //newPos.x = newPos.x > 400 ? newPos.x - 280f : newPos.x + 400f;
+        newPos.x -=  350f;
+        hoverDisplayer.transform.position = newPos;
+
+        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite });
+        hoverDisplayer.transform.SetParent(All_Canvases.FrontestCanvas.transform);
         //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
-        HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" }, 
-                                    new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit)});
+        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" }, 
+                                    //new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit)});
         //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString()}, new List<Sprite> { switch((magicItem._Benefit() as StatBenefit).statToBenefit)});
     }
 
@@ -122,6 +135,8 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     {
         if (magicItem == null)
             return;
-        HoverTextBoard.Instance.UnSetMe();
+        //HoverTextBoard.Instance.UnSetMe();
+        hoverDisplayer.transform.SetParent(transform);
+        hoverDisplayer.gameObject.SetActive(false);
     }
 }
