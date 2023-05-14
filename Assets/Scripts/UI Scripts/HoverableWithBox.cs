@@ -16,7 +16,7 @@ public class HoverableWithBox : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         if (basicDisplayer)
         {
@@ -24,11 +24,12 @@ public class HoverableWithBox : MonoBehaviour, IPointerEnterHandler, IPointerExi
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         if (basicDisplayer)
         {
             basicDisplayer.gameObject.SetActive(false);
+
         }
     }
 
