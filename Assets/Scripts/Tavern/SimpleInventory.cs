@@ -8,6 +8,9 @@ public class SimpleInventory : BaseInventory
     MagicItem selectedItem; //currently selected item to display/sell
     [SerializeField]
     BasicDisplayer selectedItemDesplayer;
+
+    [SerializeField]
+    StarGraph starGraph;
    
     [SerializeField]
     UnityEngine.UI.Button sellButton;
@@ -37,12 +40,17 @@ public class SimpleInventory : BaseInventory
             selectedItem.ItemDescription(), $"{selectedItem.goldValue} Gold"}, 
             //now sprites:
             new List<Sprite> {selectedItem.itemSprite});
+
+        starGraph.SetToItem(selectedItem);
     }
     public void SetCurrentItem()
     {
         if (Inventory.Instance.inventoryItems.Count == 0)
         {
             selectedItem = null;
+
+            //starGraph.SetToItem(emptyItem);
+
             //Set as nothing
             string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
             string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);

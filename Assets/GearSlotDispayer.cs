@@ -51,7 +51,7 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (magicItem == null)//unlikely
+        if (magicItem == null || !hoverDisplayer)
             return;
 
         hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
@@ -85,7 +85,7 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (magicItem == null) //unlikely
+        if (magicItem == null || !hoverDisplayer) 
             return;
         //HoverTextBoard.Instance.UnSetMe();
         hoverDisplayer.gameObject.SetActive(false);

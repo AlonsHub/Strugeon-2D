@@ -15,16 +15,7 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     [SerializeField]
     BasicDisplayer hoverDisplayer;
 
-    private void OnEnable()
-    {
-        //if(!mercGearDisplayer) 
-        //{
-        //    mercGearDisplayer = FindObjectOfType<MercGearDisplayer>(); //since it's static, it only happens once //TBF horrible
-        //}
-    }
-
-
-    bool clickedOnce = false;
+    
     [SerializeField]
     private Sprite emptySprite;
 
@@ -47,19 +38,14 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
 
         //}
     }
-    IEnumerator DoubleClickCooldown()
-    {
-        clickedOnce = true;
-        yield return new WaitForSecondsRealtime(GeneralInputSettings.doubleClickWindow);
-        clickedOnce = false;
-    }
+  
     public void SetItem(MagicItem newItem, BasicDisplayer bd)
     {
         magicItem = newItem;
         hoverDisplayer = bd;
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
-
-        SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription()}, new List<Sprite> {magicItem.itemSprite});
+        
+        SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite});
     }
     public void SetItem()
     {
@@ -136,7 +122,7 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         if (magicItem == null)
             return;
         //HoverTextBoard.Instance.UnSetMe();
-        hoverDisplayer.transform.SetParent(transform);
+        hoverDisplayer.transform.SetParent(transform.parent);
         hoverDisplayer.gameObject.SetActive(false);
     }
 }

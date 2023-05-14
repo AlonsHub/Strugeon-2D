@@ -454,7 +454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBoxes:
   - {fileID: 7678057200050928262}
-  - {fileID: 8746539419020989124}
+  - {fileID: 6108629721799487359}
+  - {fileID: 7203464505144678698}
   images:
   - {fileID: 2710478525194181569}
   magicItem:
@@ -488,6 +489,7 @@ MonoBehaviour:
       value: 0
     relevantClasses: 
   sellGroup: {fileID: 0}
+  hoverDisplayer: {fileID: 0}
   emptySprite: {fileID: 3983671566301948619, guid: 5db449eded7dfc642ab46a2f37e06b09,
     type: 3}
 --- !u!1 &7458815601211263193
@@ -750,6 +752,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2965355174520524148}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6108629721799487359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
+    type: 3}
+  m_PrefabInstance: {fileID: 2965355174520524148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3255316844923575750
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -885,3 +899,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3255316844923575750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7203464505144678698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5682115155765970156, guid: 7d67df3155ab44d48bf9d1e17d3e2fc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3255316844923575750}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
