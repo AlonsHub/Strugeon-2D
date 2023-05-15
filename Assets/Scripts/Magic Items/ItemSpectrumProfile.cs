@@ -15,5 +15,13 @@ public class ItemSpectrumProfile
             elements.Add(new NulElement((NulColour)i));
         }
     }
+
+    //public void SetAllElements(float[] valuesInOrder)
+    //{
+    //    for (int i = 0; i < valuesInOrder.Length; i++)
+    //    {
+    //        elements[i].value = valuesInOrder[i];
+    //    }
+    //}
     //The spectrumProfile holds the values of rbyp like a vector
 }

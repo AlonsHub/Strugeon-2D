@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorGrid: {fileID: 0}
   gridPos: {x: 4, y: 3}
+  elevation: 0
   moveSpeed: 0
   offsetFromGrid: {x: 0, y: 0, z: 0}
   path: []
@@ -97,11 +98,30 @@ MonoBehaviour:
   maxHP: 150
   pawnName: Smadi
   GFX: {fileID: 3911396959775424208}
+  _turnInfo:
+    isStartPin: 1
+    colour: {r: 0, g: 0, b: 0, a: 0}
   isEnemy: 0
   mercName: 1
   _mercSheet:
     mercClass: 3
     characterName: 1
+    temp_SpectrumProfile:
+      elements:
+      - value: 1
+        nulColour: 0
+      - value: 6
+        nulColour: 1
+      - value: 2
+        nulColour: 2
+      - value: 3
+        nulColour: 3
+      - value: 7
+        nulColour: 4
+      - value: 5
+        nulColour: 5
+      - value: 4
+        nulColour: 6
     baseSheetSO: {fileID: 0}
     baseStatBlock:
       maxHp: 150

@@ -14,6 +14,8 @@ public class MercGearDisplayer : BasicDisplayer
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
 
     [SerializeField]
+    StarGraph starGraph;
+    [SerializeField]
     ExpBarDisplayer expBarDisplayer;
 
     public MercSheet GetMercSheet { get => mercSheet; }
@@ -39,6 +41,7 @@ public class MercGearDisplayer : BasicDisplayer
         mercSheet = ms;
         expBarDisplayer.SetBar(ms);
         Pawn p = ms.MyPawnPrefabRef<Pawn>();
+        starGraph.SetToMerc(p._mercSheet);
 
         int maxHpBenefit = 0;
         int damageBenefit = 0;

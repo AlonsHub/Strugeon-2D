@@ -12,6 +12,8 @@ public class MercSheet
     public MercClass mercClass;
     public MercName characterName; //will this be enough to ref the merc-prefab
 
+    public ItemSpectrumProfile temp_SpectrumProfile;
+
     public MercSheetSO baseSheetSO;
     public StatBlock baseStatBlock; //ref to the base stat block
 
@@ -44,29 +46,22 @@ public class MercSheet
     public string[] gearStrings;
 
     //public IEquipable itemBySlot(EquipSlotType st) => gear.ItemBySlot(st); //interesting question: is access to items manages through mercSheet.gear or by methods of mercsheet? (option A!!!)
-    
+
     public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
     {
         characterName = mercName;
         prefab = MyPawnPrefabRef<Pawn>();
         baseStatBlock = prefab._mercSheet.baseStatBlock;
         mercClass = prefab._mercSheet.mercClass; //maybe can remove this from pawn init
-         
-        //if (prefab._mercSheet.gearStrings != null)
-        //{
-            gear = new Gear(prefab._mercSheet.gearStrings);
 
+        //temp_SpectrumProfile = new ItemSpectrumProfile();
+        
 
-        //}
-        //else
-        //{
-        //    gear = new Gear();
-        //}
+        gear = new Gear(prefab._mercSheet.gearStrings);
 
-        //baseStatBlock = baseSheetSO.mercSheet.baseStatBlock;
 
         ResetSheet(); //exp and level set to base
-        SetToState(assignment, relevantNum); 
+        SetToState(assignment, relevantNum);
     }
 
     public void CalculateBenefits()

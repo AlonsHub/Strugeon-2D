@@ -52,6 +52,21 @@ public class StarGraph : MonoBehaviour
             temp.SetMe(nulElement.value);
         }
     }
+    public void SetToMerc(MercSheet mercSheet)
+    {
+        foreach (var nulElement in mercSheet.temp_SpectrumProfile.elements)
+        {
+            //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+            if (!coloursToShow.Contains(nulElement.nulColour))
+            {continue;}
+
+            StarGraphSlice temp = nulBars[(int)nulElement.nulColour];
+
+            temp.gameObject.SetActive(true);
+
+            temp.SetMe(nulElement.value);
+        }
+    }
 
 
 }
