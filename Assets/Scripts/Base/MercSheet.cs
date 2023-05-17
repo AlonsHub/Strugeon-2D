@@ -12,7 +12,7 @@ public class MercSheet
     public MercClass mercClass;
     public MercName characterName; //will this be enough to ref the merc-prefab
 
-    public ItemSpectrumProfile temp_SpectrumProfile;
+    //public ItemSpectrumProfile temp_SpectrumProfile;
     
     public NoolProfile noolProfile; //temporarly this nool profile will be disabled, but still here. Dont use PillProfile, it'll upgrade poorly
 
