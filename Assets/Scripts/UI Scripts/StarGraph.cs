@@ -54,7 +54,7 @@ public class StarGraph : MonoBehaviour
     }
     public void SetToMerc(MercSheet mercSheet)
     {
-        foreach (var nulElement in mercSheet.noolProfile.pills)
+        foreach (var nulElement in mercSheet.pillProfile.pills)
         {
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
             if (!coloursToShow.Contains(nulElement.colour))

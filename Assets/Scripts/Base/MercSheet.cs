@@ -13,10 +13,11 @@ public class MercSheet
     public MercName characterName; //will this be enough to ref the merc-prefab
 
     //public ItemSpectrumProfile temp_SpectrumProfile;
-    
-    public NoolProfile noolProfile; //temporarly this nool profile will be disabled, but still here. Dont use PillProfile, it'll upgrade poorly
 
-    public MercSheetSO baseSheetSO;
+    //public NoolProfile noolProfile; //temporarly this nool profile will be disabled, but still here. Dont use PillProfile, it'll upgrade poorly
+    public PillProfile pillProfile;
+    [Tooltip("ref for instances of this prefabs, back to the Prefabs original clean sheet (should remain empty in prefab!)")]
+    public MercSheetSO baseSheetSO; 
     public StatBlock baseStatBlock; //ref to the base stat block
 
     public BasicPrefs basicPrefs;

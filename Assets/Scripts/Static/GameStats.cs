@@ -23,6 +23,8 @@ public static class GameStats
 
     //In order of Orange, Yellow, Green, Blue, Red, Purple, Black, White
     public static float[] startingPsionPotentail = {7,2,3,5,1,6,4,0};
+    public static float[] startingPsionCapacities = {0,10,0,28,20,45,0,0};
+    public static float startingFlatRegenRate = .2f;
 
     public static int ExpThresholdByLevel(int level)
     {

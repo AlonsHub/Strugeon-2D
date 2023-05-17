@@ -92,33 +92,59 @@ public class NulBarPanel : MonoBehaviour
         if (nulBars == null)
         {
             InitBars();
-            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools)
             {
-                if (!coloursToShow.Contains(nulElement.GetNulColour))
+                if (!coloursToShow.Contains(nulElement.colour))
                 {
-                    nulBars[(int)nulElement.GetNulColour].gameObject.SetActive(false);
+                    nulBars[(int)nulElement.colour].gameObject.SetActive(false);
                     continue;
                 }
                 
-                nulBars[(int)nulElement.GetNulColour].SetMe(nulElement); //Also sets MaxValues!
+                nulBars[(int)nulElement.colour].SetMe(nulElement); //Also sets MaxValues!
             }
+            //foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            //{
+            //    if (!coloursToShow.Contains(nulElement.GetNulColour))
+            //    {
+            //        nulBars[(int)nulElement.GetNulColour].gameObject.SetActive(false);
+            //        continue;
+            //    }
+                
+            //    nulBars[(int)nulElement.GetNulColour].SetMe(nulElement); //Also sets MaxValues!
+            //}
+
         }
         else
         {
-            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools)
             {
                 //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-                if (!coloursToShow.Contains(nulElement.GetNulColour))
+                if (!coloursToShow.Contains(nulElement.colour))
                     continue;
-                NulBar temp = nulBars[(int)nulElement.GetNulColour];
+                NulBar temp = nulBars[(int)nulElement.colour];
                 
                 //if(temp.maxValue != nulElement.maxValue)
                 //temp.AnimatedSetMaxValue(nulElement.maxValue, 1f); //TBF replace with a better duration, and set the value immediatly - only displaying the way to target (don't gradually increase value!)
-                if(temp.currentValue != nulElement.value)
-                temp.AnimatedSetValue(nulElement.value, .5f);
+                if(temp.currentValue != nulElement.currentValue)
+                temp.AnimatedSetValue(nulElement.currentValue, .5f);
                 //nulBar.SetMe(nulElement);
                 //nulBars.Add(nulBar);
             }
+            //foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+            //{
+            //    //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
+            //    if (!coloursToShow.Contains(nulElement.GetNulColour))
+            //        continue;
+            //    NulBar temp = nulBars[(int)nulElement.GetNulColour];
+                
+            //    //if(temp.maxValue != nulElement.maxValue)
+            //    //temp.AnimatedSetMaxValue(nulElement.maxValue, 1f); //TBF replace with a better duration, and set the value immediatly - only displaying the way to target (don't gradually increase value!)
+            //    if(temp.currentValue != nulElement.value)
+            //    temp.AnimatedSetValue(nulElement.value, .5f);
+            //    //nulBar.SetMe(nulElement);
+            //    //nulBars.Add(nulBar);
+            //}
+
         }
 
         //TBF! this will have more complex logic if not all bars are to be displayed

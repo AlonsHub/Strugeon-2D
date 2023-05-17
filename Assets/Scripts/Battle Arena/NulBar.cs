@@ -41,6 +41,28 @@ public class NulBar : Bar
 
         //ShowValue();
     }
+    public void SetMe(Nool element)
+    {
+        //nulElement = element;
+        if (!myColour.HasValue || myColour != element.colour)
+        {
+            SetColour(element.colour);
+        }
+        //myColour = element.nulColour;
+        //set correct color and icon?
+        //img.sprite = PrefabArchive.Instance.GetElementFillBar((int)element.nulColour);
+        //iconImg.sprite = PrefabArchive.Instance.ElementIcon((int)element.nulColour);
+
+        //set values
+        maxValue = element.capacity;
+        target_maxValue = maxValue;
+        //currentValue = element.value;
+        regenRate = element.regenRate;
+
+        AnimatedSetValue(element.currentValue, 1f);
+
+        //ShowValue();
+    }
 
     public void SetMe(NulElement element)
     {

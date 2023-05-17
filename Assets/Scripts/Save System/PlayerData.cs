@@ -69,6 +69,7 @@ public class PlayerData
     public PsionSpectrumProfile psionSpectrum;
 
     public NoolProfile noolProfile;
+    public PillProfile pillProfile;
 
     public int psionProgressionLevel => psionSpectrum.SumOfAllCapacities() - 6; // reduce by [number of bars minus 1]
 
@@ -91,7 +92,8 @@ public class PlayerData
         levelRevealIntensity = 5;
         psionSpectrum = new PsionSpectrumProfile();
         
-        noolProfile = new NoolProfile(GameStats.startingPsionPotentail);
+        pillProfile = new PillProfile(GameStats.startingPsionPotentail);
+        noolProfile = new NoolProfile( GameStats.startingPsionCapacities, pillProfile);
     }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment) 
