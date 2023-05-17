@@ -491,7 +491,7 @@ public class PlayerDataMaster : MonoBehaviour
 
 
     //Player data editing // NEW move every method here TBF this is the right way to do it
-    public void AddToPsionNulMax(NulColour col, float amount)
+    public void AddToPsionNulMax(NoolColour col, float amount)
     {
         currentPlayerData.psionSpectrum.IncreaseMaxValue(col, amount); 
     }

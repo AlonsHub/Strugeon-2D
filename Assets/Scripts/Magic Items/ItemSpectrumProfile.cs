@@ -10,18 +10,9 @@ public class ItemSpectrumProfile
     public ItemSpectrumProfile()
     {
         elements = new List<NulElement>();// {new NulElement("Red"), new NulElement("Blue"), new NulElement("Yellow"), new NulElement("Purple")};
-        for (int i = 0; i < System.Enum.GetValues(typeof(NulColour)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(NoolColour)).Length; i++)
         {
-            elements.Add(new NulElement((NulColour)i));
+            elements.Add(new NulElement((NoolColour)i));
         }
     }
-
-    //public void SetAllElements(float[] valuesInOrder)
-    //{
-    //    for (int i = 0; i < valuesInOrder.Length; i++)
-    //    {
-    //        elements[i].value = valuesInOrder[i];
-    //    }
-    //}
-    //The spectrumProfile holds the values of rbyp like a vector
 }

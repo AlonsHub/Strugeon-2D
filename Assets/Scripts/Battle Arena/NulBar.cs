@@ -9,7 +9,7 @@ public class NulBar : Bar
 
     //NulElement n;
 
-    NulColour? myColour;
+    NoolColour? myColour;
 
     [SerializeField]
     UnityEngine.UI.Image iconImg;
@@ -73,7 +73,7 @@ public class NulBar : Bar
         ShowValue();
     }
 
-    public void SetColour(NulColour colour)
+    public void SetColour(NoolColour colour)
     {
         myColour = colour;
         img.sprite = PrefabArchive.Instance.GetElementFillBar((int)colour);

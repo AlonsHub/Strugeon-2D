@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-    public enum ButtonColor {Red, Blue, Yellow, Purple};
+    //public enum ButtonColor {Red, Blue, Yellow, Purple};
 public class SpellButton : Hoverable
 {
-    public ButtonColor buttonColor;
-    public NulColour nulColour;
+    //public ButtonColor buttonColor;
+    public NoolColour nulColour;
    // public int maxValue; //full mana
     public float skillCost; //the cost for using this skill once //TBF make ScriptableObjects which hold skills
     //public int _currentValue; //current amount of relevant mana... not sure if needed.
@@ -34,6 +34,7 @@ public class SpellButton : Hoverable
     //Experimental!
 
     PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+    protected float modifier => psionProfile.GetMaxValueByName(nulColour);
 
     private void Awake()
     {
@@ -67,23 +68,23 @@ public class SpellButton : Hoverable
             Color col = Color.white;
             switch (nulColour)
             {
-                case NulColour.Orange:
+                case NoolColour.Orange:
                     break;
-                case NulColour.Yellow:
+                case NoolColour.Yellow:
                     col = SturgeonColours.Instance.noolYellow;
                     break;
-                case NulColour.Green:
+                case NoolColour.Green:
                     break;
-                case NulColour.Blue:
+                case NoolColour.Blue:
                     col = SturgeonColours.Instance.noolBlue;
                     break;
-                case NulColour.Red:
+                case NoolColour.Red:
                     col = SturgeonColours.Instance.noolRed;
                     break;
-                case NulColour.Purple:
+                case NoolColour.Purple:
                     col = SturgeonColours.Instance.noolPurple;
                     break;
-                case NulColour.Black:
+                case NoolColour.Black:
                     break;
                 default:
                     break;

@@ -7,7 +7,7 @@ public class SanctumBarPanel : MonoBehaviour
     public static SanctumBarPanel Instance;
 
     [SerializeField]
-    List<NulColour> coloursToShow;
+    List<NoolColour> coloursToShow;
 
     [SerializeField, Tooltip("Set in this order: Orange, Yellow, Green, Blue, Red, Purple, Black")]
     List<NulBar> nulBars;

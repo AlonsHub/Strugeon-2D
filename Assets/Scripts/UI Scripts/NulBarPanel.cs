@@ -10,7 +10,7 @@ public class NulBarPanel : MonoBehaviour
     Transform nulBarParent; //should some sort of Layout group?
 
     [SerializeField]
-    List<NulColour> coloursToShow;
+    List<NoolColour> coloursToShow;
 
     List<NulBar> nulBars;
 
@@ -136,7 +136,7 @@ public class NulBarPanel : MonoBehaviour
 
         for (int i = 0; i < nulBars.Count; i++)
         {
-            nulBars[i].SetColour((NulColour)i);
+            nulBars[i].SetColour((NoolColour)i);
             //nulBars[i].SetValue(values);
             nulBars[i].AnimatedSetValue(values, 1f);
         }
@@ -192,7 +192,7 @@ public class NulBarPanel : MonoBehaviour
         //}
         nulBars = new List<NulBar>();
 
-        for (int i = 0; i < System.Enum.GetValues(typeof(NulColour)).Length; i++)
+        for (int i = 0; i < System.Enum.GetValues(typeof(NoolColour)).Length; i++)
         {
             NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
             nulBars.Add(nulBar);

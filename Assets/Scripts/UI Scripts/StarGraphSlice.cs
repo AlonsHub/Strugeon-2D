@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class StarGraphSlice : HoverableWithBox
 {
-    public NulColour myColour;
+    public NoolColour myColour;
 
     [SerializeField]
     protected float maxValue;

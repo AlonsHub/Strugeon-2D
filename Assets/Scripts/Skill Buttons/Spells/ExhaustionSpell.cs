@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class ExhaustionSpell : SpellButton
 {
-    [SerializeField, Tooltip("Only uses the duration! damage will only be mitigated if takes target below 1 hp")]
+    [SerializeField]
     DamageModifier damageModifier;
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-
+        damageModifier.mod = modifier * .008f; //not sure
 
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {

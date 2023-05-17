@@ -5,7 +5,7 @@ using UnityEngine;
 public class StarGraph : MonoBehaviour
 {
     [SerializeField]
-    List<NulColour> coloursToShow;
+    List<NoolColour> coloursToShow;
 
     [SerializeField, Tooltip("set in this order:Orange, Yellow, Green, Blue, Red, Purple, Black")]
     List<StarGraphSlice> nulBars;

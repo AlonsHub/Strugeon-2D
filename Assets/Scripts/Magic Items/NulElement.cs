@@ -8,9 +8,9 @@ public struct NulElement
     public float value;
     //public float maxValue;
     //public string elementType; //TBF define an Enum to correlate with psion power colours //WIP now 13/06
-    public NulColour nulColour;
+    public NoolColour nulColour;
 
-    public NulElement(NulColour colour)
+    public NulElement(NoolColour colour)
     {
         nulColour = colour;
         value = 0f;
@@ -22,15 +22,15 @@ public class PsionNulElement
 {
     NulElement nulElement;
     public float value => nulElement.value;
-    public NulColour GetNulColour => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
+    public NoolColour GetNulColour => nulElement.nulColour; //TBF define an Enum to correlate with psion power colours
 
     [SerializeField]
-    NulColour _nulColour; //this needs to get set once on creation
+    NoolColour _nulColour; //this needs to get set once on creation
 
     public float maxValue; //better organize with getters and setters! TBF
     public float regenRate;
     
-    public PsionNulElement(NulColour col, float max, float regen)
+    public PsionNulElement(NoolColour col, float max, float regen)
     {
         //elementType = t;
         nulElement = new NulElement(col);

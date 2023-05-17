@@ -11,6 +11,8 @@ public class BlindRageSpell : SpellButton
 
     public override void OnButtonClick()
     {
+        damageModifier.mod = modifier * .01f * (14 / 100);
+
         pawnTgt = MouseBehaviour.hitTarget;
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {

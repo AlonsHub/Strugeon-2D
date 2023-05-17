@@ -49,7 +49,7 @@ public class SimpleInventory : BaseInventory
         {
             selectedItem = null;
 
-            //starGraph.SetToItem(emptyItem);
+            starGraph.SetToItem(emptyItem);
 
             //Set as nothing
             string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);

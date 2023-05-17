@@ -13,10 +13,14 @@ public class SturgeonColours : MonoBehaviour
 
     //public Color[] Nools;
 
-    public Color noolRed;
-    public Color noolBlue;
+    public Color noolOrange;
     public Color noolYellow;
+    public Color noolGreen;
+    public Color noolBlue;
+    public Color noolRed;
     public Color noolPurple;
+    public Color noolBlack;
+    public Color noolWhite;
     
 
     private void Awake()
