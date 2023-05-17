@@ -84,8 +84,25 @@ MonoBehaviour:
   _mercSheet:
     mercClass: 1
     characterName: 4
-    noolProfile:
-      nools: []
+    pillProfile:
+      pills:
+      - colour: 0
+        potential: 7
+      - colour: 1
+        potential: 3
+      - colour: 2
+        potential: 4
+      - colour: 3
+        potential: 5
+      - colour: 4
+        potential: 6
+      - colour: 5
+        potential: 2
+      - colour: 6
+        potential: 1
+      - colour: 7
+        potential: 0
+      dominant: 0
     baseSheetSO: {fileID: 0}
     baseStatBlock:
       maxHp: 100

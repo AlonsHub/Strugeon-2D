@@ -84,44 +84,25 @@ MonoBehaviour:
   _mercSheet:
     mercClass: 2
     characterName: 7
-    temp_SpectrumProfile:
-      elements:
-      - value: 6
-        nulColour: 0
-      - value: 0
-        nulColour: 1
-      - value: 5
-        nulColour: 2
-      - value: 4
-        nulColour: 3
-      - value: 7
-        nulColour: 4
-      - value: 3
-        nulColour: 5
-      - value: 2
-        nulColour: 6
-      - value: 1
-        nulColour: 7
-    noolProfile:
+    pillProfile:
       pills:
       - colour: 0
-        potential: 6
-      - colour: 1
-        potential: 0
-      - colour: 2
-        potential: 5
-      - colour: 3
-        potential: 4
-      - colour: 4
         potential: 7
-      - colour: 5
+      - colour: 1
         potential: 3
-      - colour: 6
+      - colour: 2
+        potential: 4
+      - colour: 3
+        potential: 5
+      - colour: 4
+        potential: 6
+      - colour: 5
         potential: 2
-      - colour: 7
+      - colour: 6
         potential: 1
-      dominant: 4
-      nools: []
+      - colour: 7
+        potential: 0
+      dominant: 0
     baseSheetSO: {fileID: 0}
     baseStatBlock:
       maxHp: 100
