@@ -33,8 +33,9 @@ public class SpellButton : Hoverable
 
     //Experimental!
 
-    PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
-    protected float modifier => psionProfile.GetMaxValueByName(nulColour);
+    NoolProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
+    //protected float modifier => psionProfile.GetMaxValueByName(nulColour);
+    protected float modifier => psionProfile.nools[(int)nulColour].capacity;
 
     private void Awake()
     {
@@ -117,7 +118,8 @@ public class SpellButton : Hoverable
     {
         //button.interactable = skillCost <= relevantBar.currentValue;
         
-        button.interactable = skillCost <= psionProfile.GetValueByName(nulColour);
+        //button.interactable = skillCost <= psionProfile.GetValueByName(nulColour);
+        button.interactable = skillCost <= psionProfile.nools[(int)nulColour].currentValue;
         
     }
     

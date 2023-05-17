@@ -16,11 +16,15 @@ public class PillPanel : MonoBehaviour
     }
     public void SetToPsion()
     {
-        foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.psionSpectrum.psionElements)
+        foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools)
         {
+            if(nulElement.currentValue <=0)
+            {
+                continue;
+            }
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            PillGraphSlice temp = noolPills[(int)nulElement.GetNulColour];
-            if (!coloursToShow.Contains(nulElement.GetNulColour))
+            PillGraphSlice temp = noolPills[(int)nulElement.colour];
+            if (!coloursToShow.Contains(nulElement.colour))
             {
                 //temp.gameObject.SetActive(false); 
                 continue;

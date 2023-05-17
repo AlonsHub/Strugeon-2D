@@ -29,7 +29,7 @@ public struct Nool
     {
         colour = col;
         capacity = cap;
-        currentValue = cap / Random.Range(1f,8f);
+        currentValue = cap / 2;
         regenRate = regen;
     }
 }
@@ -58,6 +58,7 @@ public class NoolProfile
 
     public Nool[] nools;
     int noolsLength = System.Enum.GetValues(typeof(NoolColour)).Length;
+    public System.Action OnAnyValueChanged;
 
     //basic setters for NewGame and such:
     public NoolProfile( float[] capacityValuesInOrder, PillProfile pp) //for New Game (Ashan)
@@ -70,6 +71,12 @@ public class NoolProfile
         }
     }
 
+
+    public void ModifyCurrentValue(NoolColour s, float amount)
+    {
+        nools[(int)s].currentValue+= amount;
+        OnAnyValueChanged?.Invoke();
+    }
     //Some setter that affects all regen values
 
     //Getters

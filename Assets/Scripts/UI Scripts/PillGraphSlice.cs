@@ -7,19 +7,31 @@ using UnityEngine.UI;
 public class PillGraphSlice : StarGraphSlice
 {
     [SerializeField, Tooltip("Basically, the value if the pill was as full as can show")]
-    float topMax = 5f;
+    float topMax;
 
     [SerializeField]
     Image negativeFill;
 
 
-    public void SetMeFull(PsionNulElement element)
+    //public void SetMeFull(PsionNulElement element)
+    //{
+    //    maxValue = element.maxValue;
+    //    negativeFill.fillAmount = 1- maxValue/topMax;
+    //    //positiveFill.fillAmount = maxValue / topMax;
+
+    //    currentValue = element.value;
+
+    //    fillImg.fillAmount = currentValue / topMax; // the positive does not change size, hence the full 1f fillamount amounts to a full topMax (and not the current capacity)
+    //    base.SetMyDisplayer(new List<string> { $"{currentValue} / {maxValue}" }, new List<Sprite> ());
+    //}
+    public void SetMeFull(Nool element)
     {
-        maxValue = element.maxValue;
+        topMax = (Mathf.Floor(element.capacity / 100) + 1)*100;
+        maxValue = element.capacity;
         negativeFill.fillAmount = 1- maxValue/topMax;
         //positiveFill.fillAmount = maxValue / topMax;
 
-        currentValue = element.value;
+        currentValue = element.currentValue;
 
         fillImg.fillAmount = currentValue / topMax; // the positive does not change size, hence the full 1f fillamount amounts to a full topMax (and not the current capacity)
         base.SetMyDisplayer(new List<string> { $"{currentValue} / {maxValue}" }, new List<Sprite> ());

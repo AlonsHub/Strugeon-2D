@@ -11,7 +11,8 @@ public class HealSpell : SpellButton
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-        int healAmount = (int) (((float)pawnTgt.maxHP / 100f) * percentHeal);
+        //int healAmount = (int) (((float)pawnTgt.maxHP / 100f) * percentHeal);
+        int healAmount = (int) (pawnTgt.maxHP/(modifier *0.1f));
         pawnTgt.Heal(healAmount);
         //targetPawn.HP = Mathf.Clamp(targetPawn.HP ,0, targetPawn.maxHP);
 
