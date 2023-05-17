@@ -4,8 +4,13 @@ using UnityEngine;
 
 public static class GameStats
 {
-    public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
+
     public static int startingGold = 1000;
+
+    /// <summary>
+    /// Merc-Related stats:
+    /// </summary>
+    public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
     public static int expToLevel2 = 100;
     public static int maxHpBonusPerLevel = 10;
     public static int minDmgPerLevel = 2;
@@ -15,6 +20,9 @@ public static class GameStats
     /// Tavern Stats
     /// </summary>
     public static int maxRoomSize = 4;
+
+    //In order of Orange, Yellow, Green, Blue, Red, Purple, Black, White
+    public static float[] startingPsionPotentail = {7,2,3,5,1,6,4,0};
 
     public static int ExpThresholdByLevel(int level)
     {
