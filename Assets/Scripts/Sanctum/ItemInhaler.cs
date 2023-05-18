@@ -15,7 +15,7 @@ public class ItemInhaler : MonoBehaviour
 
     PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
     NoolProfile noolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
-    PillProfile pillProfile => PlayerDataMaster.Instance.currentPlayerData.pillProfile;
+    PillProfile psionPillProfile => PlayerDataMaster.Instance.currentPlayerData.pillProfile;
 
     MagicItem _item => SanctumSelectedPanel.Instance.magicItem;
     //MagicItem emptyItem;
@@ -100,41 +100,41 @@ public class ItemInhaler : MonoBehaviour
         int hits = 0;
 
         //One-shot roll
-        int[] toHitChances = new int[7]; //7 -number of nul colours. Arry of % chance to Hit
+        int[] toHitChances = new int[7]; //7 -number of nool colours (sans white). Arry of % chance to Hit
         int hitChanceTotal = 0;
         int activeBarCount = 0;
-        foreach (var el in _item.spectrumProfile.elements)
+        foreach (var pill in _item.pillProfile.pills)
         {
-            float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
-            float chanceToHit = el.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
-            toHitChances[(int)el.nulColour] = (int)chanceToHit;
+            //float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
+            float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
+            float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
+            toHitChances[(int)pill.colour] = (int)chanceToHit;
             hitChanceTotal += (int)chanceToHit;
             activeBarCount++;
         }
-        int barHits = 0;
-        //roll from 1-3 how many 
+        //int barHits = 0;
+        
         float chanceForSingleBarHit = hitChanceTotal/activeBarCount; //total is chance out of 700, divide by 7 for %
 
-        //One-shot roll
-
-
-        foreach (var el in _item.spectrumProfile.elements)
+        
+        //foreach (var el in _item.spectrumProfile.elements)
+        foreach (var pill in _item.pillProfile.pills)
         {
-            float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
-            float chanceToHit = el.value * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
+            float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
+            float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
 
-            values[(int)el.nulColour] =0;
+            values[(int)pill.colour] =0;
             if (RollChance((int)chanceToHit, 100))
             {
                 //HIT!
                 hits++;
                 //Roll Amount:
-                float amount = Random.Range(1, (int)psionPotential + 1) * el.value * amountFactor;
-                s += $"hit! on {el.nulColour}. Amount received {amount} \n";
-                values[(int)el.nulColour] = amount;
+                float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
+                s += $"hit! on {pill.colour}. Amount received {amount} \n";
+                values[(int)pill.colour] = amount;
 
                 //Add value to that nulcolours max value (psion profile)
-                PlayerDataMaster.Instance.AddToPsionNulMax(el.nulColour, amount);
+                PlayerDataMaster.Instance.AddToPsionNulMax(pill.colour, amount);
 
                 //This was the problem I think!
                 //Inventory.Instance.RemoveMagicItem(_item);
@@ -187,7 +187,8 @@ public class ItemInhaler : MonoBehaviour
         button.interactable = false;
         skipButtonObj.SetActive(true);
         resultText.gameObject.SetActive(true);
-        for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
+        //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
+        for (int i = 0; i < psionPillProfile.pills.Length-1; i++)
         {
             processingColourIndicator.gameObject.SetActive(true);
             //resultText.gameObject.SetActive(false);
