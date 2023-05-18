@@ -14,6 +14,8 @@ public class ItemInhaler : MonoBehaviour
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
 
     PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+    NoolProfile noolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
+    PillProfile pillProfile => PlayerDataMaster.Instance.currentPlayerData.pillProfile;
 
     MagicItem _item => SanctumSelectedPanel.Instance.magicItem;
     //MagicItem emptyItem;
@@ -89,7 +91,7 @@ public class ItemInhaler : MonoBehaviour
             //SelectFirstInvItem();
         }
 
-        float[] values = new float[_psionSpectrumProfile.psionElements.Count];
+        float[] values = new float[noolProfile.nools.Length];
 
         string s = $"{_item.magicItemName} was Inhaled.\n";
 
