@@ -816,6 +816,9 @@ MonoBehaviour:
         nulColour: 5
       - value: 0
         nulColour: 6
+    pillProfile:
+      pills: []
+      dominant: 0
     rarity: 0
     dropRateWeight: 0
     itemSprite: {fileID: 0}
@@ -1529,6 +1532,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6914775206832191813, guid: dac50ac47029ad14ab3b44521c0a0dee,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
     - target: {fileID: 6914775207864354103, guid: dac50ac47029ad14ab3b44521c0a0dee,
         type: 3}
       propertyPath: m_Layer
@@ -1564,7 +1572,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3061366760492645059, guid: dac50ac47029ad14ab3b44521c0a0dee, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dac50ac47029ad14ab3b44521c0a0dee, type: 3}
 --- !u!1 &4702615705037047938 stripped
 GameObject:
