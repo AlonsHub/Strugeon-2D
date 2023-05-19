@@ -180,7 +180,8 @@ public class ItemInhaler : MonoBehaviour
         {
 
             Inventory.Instance.RemoveMagicItem(_item);
-            SanctumSelectedPanel.Instance.magicItem = null;
+            //SanctumSelectedPanel.Instance.magicItem = null;
+            //SanctumSelectedPanel.Instance.SetMeFull();
         }
         else
         {
@@ -222,6 +223,8 @@ public class ItemInhaler : MonoBehaviour
         //itemNulBarPanel.TurnOffAllBarTexts();
         //nulBarPanel.SetMe(); //resets to accomedate new max values
         //psionNulBarPanel.SetMe();
+        
+
         FinalizeInhaleSequence();
     }
 

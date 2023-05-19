@@ -24,7 +24,7 @@ public class SacntumItemHover : HoverableWithBox
     private void FixLocalPos()
     {
         //Debug.LogError($"Rect x: {rectTrans.rect.position.x} y:{rectTrans.rect.position.y}");
-        Debug.LogError($"Transform x: {transform.position.x} y:{transform.position.y}");
+        //Debug.LogError($"Transform x: {transform.position.x} y:{transform.position.y}");
         if (transform.position.x > 1200f)
         {
             basicDisplayer.transform.localPosition = new Vector3(leftX, basicDisplayer.transform.localPosition.y, basicDisplayer.transform.localPosition.z);
