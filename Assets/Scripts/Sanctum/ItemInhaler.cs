@@ -7,8 +7,8 @@ public class ItemInhaler : MonoBehaviour
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
     [SerializeField, Tooltip("Chance-to-hit = % (psion value for that colour) * (item value for same colour) * chanceToHitFactor. \n Default: 1f")]
     float chanceToHitFactor = 1f;
-    [SerializeField, Tooltip("Amount = 1d[psion value for that colour] * (item value for same colour) * amountFactor. \n Default: .01f")]
-    float amountFactor= .01f;
+    //[SerializeField, Tooltip("Amount = 1d[psion value for that colour] * (item value for same colour) * amountFactor. \n Default: .01f")]
+    //float amountFactor= .1f;
 
     public System.Action OnInhale;
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
@@ -105,6 +105,8 @@ public class ItemInhaler : MonoBehaviour
         int activeBarCount = 0;
         foreach (var pill in _item.pillProfile.pills)
         {
+            if (pill.potential <= 0)
+                continue;
             //float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
             float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
             float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
@@ -129,12 +131,18 @@ public class ItemInhaler : MonoBehaviour
                 //HIT!
                 hits++;
                 //Roll Amount:
+                //float amountFactor = PlayerDataMaster.Instance.currentPlayerData.psionProgressionLevel >= 5 ? .5f : (0.2f * (1 - (noolProfile.nools[(int)pill.colour].capacity - 1) / 20)); //this should probably be 700 not 20, and reconsidered now that potential is used
+                //float amountFactor = PlayerDataMaster.Instance.currentPlayerData.psionProgressionLevel >= 5 ? .5f : .2f;
+                float amountFactor = .5f;
+
                 float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
                 s += $"hit! on {pill.colour}. Amount received {amount} \n";
                 values[(int)pill.colour] = amount;
 
+                noolProfile.nools[(int)pill.colour].capacity += amount;
+
                 //Add value to that nulcolours max value (psion profile)
-                PlayerDataMaster.Instance.AddToPsionNulMax(pill.colour, amount);
+                //PlayerDataMaster.Instance.AddToPsionNulMax(pill.colour, amount);
 
                 //This was the problem I think!
                 //Inventory.Instance.RemoveMagicItem(_item);
@@ -198,12 +206,12 @@ public class ItemInhaler : MonoBehaviour
 
             if (s[i] != 0f)
             {
-                resultText.text = $"Inhaled {_psionSpectrumProfile.psionElements[i].GetNulColour} colour by {s[i]}.";
+                resultText.text = $"Inhaled {psionPillProfile.pills[i].colour} colour by {s[i]}.";
                 //itemNulBarPanel.SetBarText(i, $"+{s[i]}");
             }
             else
             {
-                resultText.text = $"Failed to gain {_psionSpectrumProfile.psionElements[i].GetNulColour} energy.";
+                resultText.text = $"Failed to gain {psionPillProfile.pills[i].colour} energy.";
                 //itemNulBarPanel.SetBarText(i, "X");
             }
             yield return new WaitForSeconds(timePerResult);
