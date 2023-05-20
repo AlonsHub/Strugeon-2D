@@ -48,16 +48,16 @@ public class SanctumInventory : BaseInventory
         //sanctumSelectedItemDisplayer.SetAllNulBarsTo(0f);
 
 
-        for (int i = 0; i < Inventory.Instance.magicItemCount; i++)
-        {
-            //if (!Inventory.Instance.inventoryItems[i].FetchSprite())
-            //{
-            //    Debug.LogError($"{Inventory.Instance.inventoryItems[i].magicItemName} failed fetch. With spritename: {Inventory.Instance.inventoryItems[i].spriteName}");
-            //    continue;
-            //}
-            //displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i]);
+        //for (int i = 0; i < Inventory.Instance.magicItemCount; i++)
+        //{
+        //    //if (!Inventory.Instance.inventoryItems[i].FetchSprite())
+        //    //{
+        //    //    Debug.LogError($"{Inventory.Instance.inventoryItems[i].magicItemName} failed fetch. With spritename: {Inventory.Instance.inventoryItems[i].spriteName}");
+        //    //    continue;
+        //    //}
+        //    //displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i]);
 
-            displayers[i].BackgroundGlow(false);
-        }
+        //    displayers[i].BackgroundGlow(false);
+        //}
     }
 }

@@ -91,6 +91,8 @@ public class ItemInhaler : MonoBehaviour
             //SelectFirstInvItem();
         }
 
+        button.interactable = false;
+
         float[] values = new float[noolProfile.nools.Length];
 
         string s = $"{_item.magicItemName} was Inhaled.\n";

@@ -101,7 +101,8 @@ public class LobbyMercDisplayer : BasicDisplayer
     public void OpenMercIndividualWindow() //called by arrowbuttons in inspector
     {
         MercGearDisplayer.Instance.SetMeFully(sheet);
-        MercGearDisplayer.Instance.gameObject.SetActive(true);
+        //MercGearDisplayer.Instance.gameObject.SetActive(true);
+        MercGearDisplayer.Instance.TurnOn();
     }
     //Need this for MercGearDisplayer - currently the Merc View Winodow!
     //public void OnMyClick()

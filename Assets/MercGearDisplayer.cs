@@ -11,6 +11,9 @@ public class MercGearDisplayer : BasicDisplayer
 
 
     [SerializeField]
+    GameObject displayObject;
+
+    [SerializeField]
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
 
     [SerializeField]
@@ -28,12 +31,22 @@ public class MercGearDisplayer : BasicDisplayer
     {
         //TBF TBD THIS IS LAZY
         Instance = this;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
     private void OnEnable()
     {
         //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByName());
-        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
+        //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
+    }
+
+    public void TurnOn()
+    {
+        //SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
+        displayObject.SetActive(true);
+    }
+    public void TurnOff()
+    {
+        displayObject.SetActive(false);
     }
 
     public void SetMeFully(MercSheet ms)

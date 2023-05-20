@@ -8,17 +8,23 @@ public class SacntumItemHover : HoverableWithBox
     [SerializeField]
     float leftX, rightX, topY, bottomY;
 
-    [SerializeField]
-    SanctumItemDisplayer sanctumItemDisplayer;
+    //[SerializeField]
+    //SanctumItemDisplayer sanctumItemDisplayer;
 
     [SerializeField]
     RectTransform rectTrans;
 
-    private void Start()
+    //private void Start()
+    //{
+    //    MagicItem mi = sanctumItemDisplayer.magicItem;
+    //    SetMyDisplayer(new List<string> { mi.magicItemName, mi.fittingSlotType.ToString(),  mi._Benefit().BenefitStatName(), mi._Benefit().Value().ToString(), mi.ItemDescription(), mi.goldValue.ToString() }, new List<Sprite> { mi.itemSprite});
+    //    //FixLocalPos();
+    //}
+
+    public void SetToItem(MagicItem newItem)
     {
-        MagicItem mi = sanctumItemDisplayer.magicItem;
-        SetMyDisplayer(new List<string> { mi.magicItemName, mi.fittingSlotType.ToString(),  mi._Benefit().BenefitStatName(), mi._Benefit().Value().ToString(), mi.ItemDescription(), mi.goldValue.ToString() }, new List<Sprite> { mi.itemSprite});
-        //FixLocalPos();
+        MagicItem mi = newItem;
+        SetMyDisplayer(new List<string> { mi.magicItemName, mi.fittingSlotType.ToString(), mi._Benefit().BenefitStatName(), mi._Benefit().Value().ToString(), mi.ItemDescription(), mi.goldValue.ToString() }, new List<Sprite> { mi.itemSprite });
     }
 
     private void FixLocalPos()

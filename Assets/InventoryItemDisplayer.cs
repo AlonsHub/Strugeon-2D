@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryItemDisplayer : BasicDisplayer
 {
-    public static InventoryItemDisplayer ActiveDisplayer;
+    public static InventoryItemDisplayer ActiveDisplayer; //also not really in use
 
     MagicItem magicItem;
     bool isDisplayed = false;
@@ -21,7 +21,7 @@ public class InventoryItemDisplayer : BasicDisplayer
 
     public bool SetMeFull(MagicItem item, BaseInventory si)
     {
-        connectedInventory = si;
+        connectedInventory = si; //sadly no longer in use? tbd
         magicItem = item;
         return base.SetMe(new List<string> {magicItem.magicItemName, magicItem.goldValue.ToString()}, new List<Sprite> { magicItem.itemSprite });
     }
@@ -31,11 +31,11 @@ public class InventoryItemDisplayer : BasicDisplayer
     {
         if(!isDisplayed)
         {
-            if(ActiveDisplayer)
-            ActiveDisplayer.BackgroundGlow(false);
+            //if(ActiveDisplayer)
+            //ActiveDisplayer.BackgroundGlow(false);
 
-            ActiveDisplayer = this;
-            ActiveDisplayer.BackgroundGlow(true);
+            //ActiveDisplayer = this;
+            //ActiveDisplayer.BackgroundGlow(true);
 
             //if(connectedInventory is SimpleInventory)
             //((SimpleInventory)connectedInventory).SetCurrentItem(magicItem);
@@ -46,8 +46,8 @@ public class InventoryItemDisplayer : BasicDisplayer
             //Turn on selected glow behind button 
         }
     }
-    public void BackgroundGlow(bool on)
-    {
-        bgImg.sprite = on ? bgOn : bgOff;
-    }
+    //public void BackgroundGlow(bool on)
+    //{
+    //    bgImg.sprite = on ? bgOn : bgOff;
+    //}
 }
