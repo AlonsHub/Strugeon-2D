@@ -27,8 +27,13 @@ public class ShrinkSpell : SpellButton
             }
         }
 
+        damageModifier.mathOperator = MathOperator.SubtractPercentage;
+        damageModifier.mod = (35 - modifier * .05f);
+        Debug.Log($"Shrink redueces damage by {damageModifier.mod} perect");
         new ShrinkEffect(pawnTgt, effectIcon, damageModifier);
-        new DodgeEffect(pawnTgt, null, dodgeDamageModifier, missChance);
+
+        missChance = (int) (modifier * .13f / 1.1f);
+        new Shrink_DodgeEffect(pawnTgt, null, dodgeDamageModifier, missChance);
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Blue, SturgeonColours.Instance.noolBlue);
 

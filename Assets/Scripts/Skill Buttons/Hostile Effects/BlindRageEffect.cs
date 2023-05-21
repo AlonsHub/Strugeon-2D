@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class BlindRageEffect : AfterActionWeightsEffect
 {
-    public BlindRageEffect(Pawn pawn, Sprite sprite) : base(pawn, sprite)
+    DamageModifier damageModifier;
+    public BlindRageEffect(Pawn pawn, Sprite sprite, DamageModifier dm) : base(pawn, sprite)
     {
         alignment = EffectAlignment.Negative;
+        damageModifier = dm;
+       
         ApplyEffect();
     }
 

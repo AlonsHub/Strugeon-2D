@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum MathOperator {Add,Subtract,Multiply,Divide,Power,Root};
+public enum MathOperator {Add,Subtract,Multiply,Divide,Power,Root, AddPercentage, SubtractPercentage};
 /// <summary>
 /// Damage modifiers are the same for incoming and outgoing damage, the difference being the lists to which they are added
 /// The "AfterDamageCalc list of modifiers will be scanned
@@ -58,12 +58,15 @@ public struct DamageModifier
             case MathOperator.Power:
                 outValue = Mathf.Pow(inValue,mod);
                 break;
-            case MathOperator.Root:
-                outValue = inValue;
-                for (int i = 0; i < mod; i++)
-                {
-                    outValue = Mathf.Sqrt(outValue);
-                }
+            //case MathOperator.Root:
+            //    
+            //    break;
+
+            case MathOperator.SubtractPercentage:
+                outValue = inValue - (mod / 100 * inValue);
+                break;
+            case MathOperator.AddPercentage:
+                outValue = inValue + (mod / 100 * inValue);
                 break;
             default:
                 outValue = -1;

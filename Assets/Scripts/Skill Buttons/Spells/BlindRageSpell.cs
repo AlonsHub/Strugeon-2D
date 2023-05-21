@@ -23,7 +23,7 @@ public class BlindRageSpell : SpellButton
             }
         }
         
-        new BlindRageEffect(pawnTgt, effectIcon);
+        new BlindRageEffect(pawnTgt, effectIcon, damageModifier);
 
         //new DamageRelatedStatusEffect();
 

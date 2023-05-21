@@ -12,6 +12,8 @@ public class HealSpell : SpellButton
     {
         pawnTgt = MouseBehaviour.hitTarget;
         //int healAmount = (int) (((float)pawnTgt.maxHP / 100f) * percentHeal);
+
+        //TEMP! TBD! TBF! need to make Heal an effect 
         int healAmount = (int) (pawnTgt.maxHP/(modifier *0.1f));
         pawnTgt.Heal(healAmount);
         //targetPawn.HP = Mathf.Clamp(targetPawn.HP ,0, targetPawn.maxHP);

@@ -10,7 +10,9 @@ public class ExhaustionSpell : SpellButton
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
-        damageModifier.mod = modifier * .008f; //not sure
+        damageModifier.mod = modifier * .008f; //not sure TBD
+
+        Debug.LogError($"Exhaustion mods damage by {damageModifier.mod}");
 
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {

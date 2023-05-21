@@ -22,6 +22,8 @@ public class MarkedSpell : SpellButton
             }
         }
 
+        damageModifier.mod = modifier * .025f;
+
         new MarkedEffect(pawnTgt, effectIcon, damageModifier);
 
         base.OnButtonClick();

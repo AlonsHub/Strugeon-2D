@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DodgeEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDamageMod, I_StatusEffect_TurnEnd
+public class Shrink_DodgeEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDamageMod, I_StatusEffect_TurnEnd
 {
     int missPercent;
-    public DodgeEffect(Pawn target, Sprite sprite, DamageModifier dm, int misschance) : base(target, sprite, dm)
+    public Shrink_DodgeEffect(Pawn target, Sprite sprite, DamageModifier dm, int misschance) : base(target, sprite, dm)
     {
         missPercent = misschance;
         alignment = EffectAlignment.Positive;

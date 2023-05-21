@@ -33,9 +33,9 @@ public class SpellButton : Hoverable
 
     //Experimental!
 
-    NoolProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
+    NoolProfile psionNoolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
     //protected float modifier => psionProfile.GetMaxValueByName(nulColour);
-    protected float modifier => psionProfile.nools[(int)nulColour].capacity;
+    protected float modifier => psionNoolProfile.nools[(int)nulColour].capacity;
 
     private void Awake()
     {
@@ -60,7 +60,7 @@ public class SpellButton : Hoverable
         //it could have been a problem to hook into the bars OnEnable since they may not be there if they haven't enabled yet...
         //but now, pulling from the PsionProfile - we should face no such issue
 
-        psionProfile.ModifyCurrentValue(nulColour, skillCost * -1f); //Skill cost is a postive value to reduce from current.
+        psionNoolProfile.ModifyCurrentValue(nulColour, skillCost * -1f); //Skill cost is a postive value to reduce from current.
 
         if(vfxPrefab)
         {
@@ -119,7 +119,7 @@ public class SpellButton : Hoverable
         //button.interactable = skillCost <= relevantBar.currentValue;
         
         //button.interactable = skillCost <= psionProfile.GetValueByName(nulColour);
-        button.interactable = skillCost <= psionProfile.nools[(int)nulColour].currentValue;
+        button.interactable = skillCost <= psionNoolProfile.nools[(int)nulColour].currentValue;
         
     }
     
