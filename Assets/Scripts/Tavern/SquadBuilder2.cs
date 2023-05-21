@@ -419,18 +419,43 @@ public class SquadBuilder2 : MonoBehaviour
             partySlots[i].ClearSlot(); //empty
         }
     }
+    //System.Func<MercSheet, bool> pred;
 
+    public void SetClassFilterOnRoster(MercClass newClassToFilter)
+    {
+        if(classFilter.HasValue && classFilter.Value == newClassToFilter)
+        {
+            //turn filter off
+            classFilter = null;
+        }
+        else
+        {
+            classFilter = newClassToFilter;
+        }
+        LoadAvailables();
+    }
+
+
+    MercClass? classFilter;
     private void LoadAvailables()
     {
-        List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+        List<MercSheet> sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment>{ MercAssignment.Available});
 
-        for (int i = 0; i < names.Count; i++)
+        if(classFilter.HasValue)
         {
-            availableSlots[i].gameObject.SetActive(true);
-            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
+            sheets = sheets.Where(x => x.mercClass == classFilter.Value).ToList();
         }
 
-        for (int i = names.Count; i < availableSlots.Count; i++)
+
+
+        for (int i = 0; i < sheets.Count; i++)
+        {
+            availableSlots[i].gameObject.SetActive(true);
+            
+            availableSlots[i].SetMe(sheets[i].MyPawnPrefabRef<Pawn>()); //prefer Pawn setter to MercSheet setter
+        }
+
+        for (int i = sheets.Count; i < availableSlots.Count; i++)
         {
             availableSlots[i].gameObject.SetActive(false);
             //availableSlots[i].SetMe(); //empty

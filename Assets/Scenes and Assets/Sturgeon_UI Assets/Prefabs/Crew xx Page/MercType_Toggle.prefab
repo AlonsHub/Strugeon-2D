@@ -219,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5771592681634170506}
   - component: {fileID: 5771592681634170507}
+  - component: {fileID: 5226392140082125572}
   m_Layer: 5
   m_Name: MercType_Toggle
   m_TagString: Untagged
@@ -292,8 +293,33 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5226392140082125572}
+        m_MethodName: LimitSquadBuilder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &5226392140082125572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771592681634170501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f41c47961a6d124e8650c79207db2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filterTo: 0
+  squadBuilder: {fileID: 0}
 --- !u!1 &5771592681702464670
 GameObject:
   m_ObjectHideFlags: 0

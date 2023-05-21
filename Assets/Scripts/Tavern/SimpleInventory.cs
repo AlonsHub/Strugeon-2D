@@ -25,6 +25,7 @@ public class SimpleInventory : BaseInventory
     private void Start()
     {
         SetCurrentItem();
+        starGraph.SetToItem(emptyItem);
     }
     public override void SetCurrentItem(MagicItem newItem)
     {

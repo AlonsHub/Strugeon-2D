@@ -127,8 +127,8 @@ public class EquipInventoryManager : MonoBehaviour
         //Draw items
         for (int i = 0; i < relevantItems.Count; i++)
         {
-            if (!relevantItems[i].FetchSprite())
-                continue;
+            //if (!relevantItems[i].FetchSprite())
+            //    continue;
 
             displayers[i].SetItem(relevantItems[i]._Item(), hoverDisplayer);
         }
@@ -172,18 +172,18 @@ public class EquipInventoryManager : MonoBehaviour
         }
     }
 
-    public void SetSellMode(bool onOrOff) //on is true, set in inspector
-    {
-        sellModeIsOn = onOrOff;
-        foreach (var item in displayers)
-        {
-            item.sellGroup.SetActive(onOrOff);
-        }
-    }
-    public void ToggleSellMode() //set in inspector
-    {
-        SetSellMode(!sellModeIsOn);
-    }
+    //public void SetSellMode(bool onOrOff) //on is true, set in inspector
+    //{
+    //    sellModeIsOn = onOrOff;
+    //    foreach (var item in displayers)
+    //    {
+    //        item.sellGroup.SetActive(onOrOff);
+    //    }
+    //}
+    //public void ToggleSellMode() //set in inspector
+    //{
+    //    SetSellMode(!sellModeIsOn);
+    //}
 
    public void TryEquip(MagicItem item)
     {
