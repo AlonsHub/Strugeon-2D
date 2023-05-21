@@ -19,28 +19,28 @@ public class NulBar : Bar
 
     Coroutine maxCorou;
     Coroutine valueCorou;
-    public void SetMe(PsionNulElement element)
-    {
-        //nulElement = element;
-        if (!myColour.HasValue || myColour != element.GetNulColour)
-        {
-            SetColour(element.GetNulColour);
-        }
-        //myColour = element.nulColour;
-        //set correct color and icon?
-        //img.sprite = PrefabArchive.Instance.GetElementFillBar((int)element.nulColour);
-        //iconImg.sprite = PrefabArchive.Instance.ElementIcon((int)element.nulColour);
+    //public void SetMe(PsionNulElement element)
+    //{
+    //    //nulElement = element;
+    //    if (!myColour.HasValue || myColour != element.GetNulColour)
+    //    {
+    //        SetColour(element.GetNulColour);
+    //    }
+    //    //myColour = element.nulColour;
+    //    //set correct color and icon?
+    //    //img.sprite = PrefabArchive.Instance.GetElementFillBar((int)element.nulColour);
+    //    //iconImg.sprite = PrefabArchive.Instance.ElementIcon((int)element.nulColour);
 
-        //set values
-        maxValue = element.maxValue;
-        target_maxValue = maxValue;
-        //currentValue = element.value;
-        regenRate = element.regenRate;
+    //    //set values
+    //    maxValue = element.maxValue;
+    //    target_maxValue = maxValue;
+    //    //currentValue = element.value;
+    //    regenRate = element.regenRate;
 
-        AnimatedSetValue(element.value, 1f);
+    //    AnimatedSetValue(element.value, 1f);
 
-        //ShowValue();
-    }
+    //    //ShowValue();
+    //}
     public void SetMe(Nool element)
     {
         //nulElement = element;
@@ -56,7 +56,7 @@ public class NulBar : Bar
         //set values
         maxValue = element.capacity;
         target_maxValue = maxValue;
-        //currentValue = element.value;
+        currentValue = element.currentValue;
         regenRate = element.regenRate;
 
         AnimatedSetValue(element.currentValue, 1f);
@@ -64,30 +64,30 @@ public class NulBar : Bar
         //ShowValue();
     }
 
-    public void SetMe(NulElement element)
-    {
-        //n = element;
+    //public void SetMe(NulElement element)
+    //{
+    //    //n = element;
 
-        if (!myColour.HasValue || myColour != element.nulColour)
-        {
-            SetColour(element.nulColour);
-        }
+    //    if (!myColour.HasValue || myColour != element.nulColour)
+    //    {
+    //        SetColour(element.nulColour);
+    //    }
 
-        //set correct color and icon?
-        //img.sprite = PrefabArchive.Instance.GetElementFillBar((int)element.nulColour);
-        //iconImg.sprite = PrefabArchive.Instance.ElementIcon((int)element.nulColour);
-        //set values
+    //    //set correct color and icon?
+    //    //img.sprite = PrefabArchive.Instance.GetElementFillBar((int)element.nulColour);
+    //    //iconImg.sprite = PrefabArchive.Instance.ElementIcon((int)element.nulColour);
+    //    //set values
 
-        //maxValue = element.maxValue; //What should max be defualted to? TBF TBD gdd
-        SetMax(10f);
-        //currentValue = element.value;
-        StartCoroutine(AnimatedValueChange(element.value, 1f));
+    //    //maxValue = element.maxValue; //What should max be defualted to? TBF TBD gdd
+    //    SetMax(10f);
+    //    //currentValue = element.value;
+    //    StartCoroutine(AnimatedValueChange(element.value, 1f));
 
-        //max and regen values could be relevant here - but shold they be here?
-        //regen should operate somewhere else
+    //    //max and regen values could be relevant here - but shold they be here?
+    //    //regen should operate somewhere else
 
-        //ShowValue();
-    }
+    //    //ShowValue();
+    //}
 
     private void SetMax(float max)
     {

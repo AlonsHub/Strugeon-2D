@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public struct Pill
+public class Pill
 {
     public static float MaxPotential = 8;
 
@@ -18,19 +18,25 @@ public struct Pill
 
 }
 [System.Serializable]
-public struct Nool
+public class Nool
 {
     public NoolColour colour;
     public float currentValue;
     public float capacity;
     public float regenRate;
-    
-    public Nool(NoolColour col, float cap,float regen) //regen should be calculated, IMO TBD
+
+    public Nool(NoolColour col, float cap, float regen) //regen should be calculated, IMO TBD
     {
         colour = col;
         capacity = cap;
         currentValue = cap / 2;
         regenRate = regen;
+    }
+
+    public void Regen()
+    {
+        currentValue += regenRate;
+        currentValue = Mathf.Clamp(currentValue, 0, capacity);
     }
 }
 
@@ -67,7 +73,8 @@ public class NoolProfile
         nools = new Nool[noolsLength];
         for (int i = 0; i < noolsLength; i++)
         {
-            nools[i] = new Nool((NoolColour)i, capacityValuesInOrder[i], GameStats.startingFlatRegenRate);
+            //nools[i] = new Nool((NoolColour)i, capacityValuesInOrder[i], GameStats.startingFlatRegenRate);
+            nools[i] = new Nool((NoolColour)i, capacityValuesInOrder[i], pillProfile.pills[i].potential*2);
         }
     }
 
@@ -75,6 +82,18 @@ public class NoolProfile
     public void ModifyCurrentValue(NoolColour s, float amount)
     {
         nools[(int)s].currentValue+= amount;
+        OnAnyValueChanged?.Invoke();
+    }
+
+    public void RegenAll()
+    {
+        Debug.LogError("regen all");
+        foreach (var item in nools)
+        {
+            if (item.colour == NoolColour.White)
+                continue;
+            item.Regen();
+        }
         OnAnyValueChanged?.Invoke();
     }
     //Some setter that affects all regen values

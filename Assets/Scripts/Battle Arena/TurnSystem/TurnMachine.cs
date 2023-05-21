@@ -32,18 +32,21 @@ public class TurnMachine : MonoBehaviour
     public System.Action OnStartNewRound;
     private int initialSquadSize;
 
-    PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+    //PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+    NoolProfile noolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
 
 
     private void Awake() //this does destroy on load and should only ever be one, in the arena
     {
         Instance = this;
-        OnStartNewRound += psionProfile.PerformRegenAll;
+        //OnStartNewRound += psionProfile.PerformRegenAll;
+        OnStartNewRound += noolProfile.RegenAll;
     }
     private void OnDisable()
     {
         Instance = null;
-        OnStartNewRound -= psionProfile.PerformRegenAll;
+        //OnStartNewRound -= psionProfile.PerformRegenAll;
+        OnStartNewRound -= noolProfile.RegenAll;
     }
 
     public TurnTaker GetCurrentTurnTaker => beltManipulator.GetCurrentTurnTaker();
@@ -127,7 +130,6 @@ public class TurnMachine : MonoBehaviour
             yield return new WaitUntil(() => currentTurnInfo.IsTurnDone);
             currentTurnInfo.OnTurnEnd?.Invoke();
         }
-
     }
     /// <summary>
     /// Checks if win or lose states apply. If either, returns TRUE, and calls Win() or Lose(), AND StopTurnSequence().
