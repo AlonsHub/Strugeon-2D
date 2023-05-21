@@ -8,7 +8,7 @@ public class SquadBuilder2 : MonoBehaviour
     [SerializeField]
     TMPro.TMP_Text crewName;
     [SerializeField]
-    RosterSlot[] availableSlots;
+    List<RosterSlot> availableSlots;
     [SerializeField]
     Transform partySlotsParent;
     [SerializeField]
@@ -72,7 +72,12 @@ public class SquadBuilder2 : MonoBehaviour
 
         for (int i = 0; i < names.Count; i++)
         {
+            availableSlots[i].gameObject.SetActive(true);
             availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
+        }
+        for (int i = names.Count; i < availableSlots.Count; i++)
+        {
+            availableSlots[i].gameObject.SetActive(false);
         }
 
         //if (availableSlots[0].isOccupied)
@@ -81,7 +86,7 @@ public class SquadBuilder2 : MonoBehaviour
         //}
 
         //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
-        for (int i = names.Count; i < availableSlots.Length; i++)
+        for (int i = names.Count; i < availableSlots.Count; i++)
         {
             availableSlots[i].SetMe(); //empty
         }
@@ -421,12 +426,14 @@ public class SquadBuilder2 : MonoBehaviour
 
         for (int i = 0; i < names.Count; i++)
         {
+            availableSlots[i].gameObject.SetActive(true);
             availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
         }
 
-        for (int i = names.Count; i < availableSlots.Length; i++)
+        for (int i = names.Count; i < availableSlots.Count; i++)
         {
-            availableSlots[i].SetMe(); //empty
+            availableSlots[i].gameObject.SetActive(false);
+            //availableSlots[i].SetMe(); //empty
         }
     }
 
