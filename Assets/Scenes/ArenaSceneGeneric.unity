@@ -2129,6 +2129,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 285206847, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 609314723, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 875879301, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172224989, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553275160, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969700676, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: skillCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3907181882497730659, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4359554762573788632, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661146186740163935, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737377650291417464, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 155
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737377650778110716, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 5737377650778110716, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: mouseBehaviour
@@ -2139,6 +2188,21 @@ PrefabInstance:
       propertyPath: purpleChoosingMode
       value: 
       objectReference: {fileID: 1427337997}
+    - target: {fileID: 5737377651408522605, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737377651527598645, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 6025478875901227695, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: skillCost
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7201316917568703498, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2756,6 +2820,9 @@ MonoBehaviour:
           nulColour: 5
         - value: 2
           nulColour: 6
+      pillProfile:
+        pills: []
+        dominant: 0
       rarity: 0
       dropRateWeight: 0
       itemSprite: {fileID: 0}
@@ -2841,7 +2908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myData: Flee! - Immediatly causes all mercs to escape with their lives, but not
     much else
-  buttonColor: 3
   nulColour: 5
   skillCost: 0.4
   vfxPrefab: {fileID: 0}
