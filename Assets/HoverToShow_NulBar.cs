@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class HoverToShow_NulBar : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler // TBF - SEE "Hoverable.cs" - I already solved this
 {
-    enum StatToShow { MaxValue, CurrentValue};
+    enum StatToShow { MaxValue, CurrentValue, CurrentAndMaxValue};
     [SerializeField]
     StatToShow statToShow;
 
@@ -24,6 +24,9 @@ public class HoverToShow_NulBar : MonoBehaviour, IPointerEnterHandler, IPointerE
                 break;
             case StatToShow.CurrentValue:
                 nulBar.SetText(nulBar.currentValue.ToString());
+                break;
+            case StatToShow.CurrentAndMaxValue:
+                nulBar.SetText($"{(int)nulBar.currentValue}/{nulBar.maxValue}");
                 break;
             default:
                 break;
