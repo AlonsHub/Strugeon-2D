@@ -2037,6 +2037,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4091248000375258547, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 79c4d12f9ad58864a902f9aacab3a56e,
+        type: 3}
     - target: {fileID: 6582302593603877360, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2087,6 +2093,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5085385144435821681}
     m_Modifications:
+    - target: {fileID: 2120393096994967656, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3406157430384847492, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_Color.b
@@ -2427,6 +2438,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5085385143886063061}
     m_Modifications:
+    - target: {fileID: 2120393096994967656, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3406157430384847492, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_Color.b
@@ -2717,6 +2733,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 135
       objectReference: {fileID: 0}
+    - target: {fileID: 4091248000375258547, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8da93d57e640e684089a408f80a97d5f,
+        type: 3}
     - target: {fileID: 6582302593603877360, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2767,6 +2789,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5085385143478139111}
     m_Modifications:
+    - target: {fileID: 2120393096994967656, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3406157430384847492, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_Color.b
@@ -2937,6 +2964,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5085385142916910710}
     m_Modifications:
+    - target: {fileID: 2120393096994967656, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3406157430384847492, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_Color.b
@@ -4585,6 +4617,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4091248000375258547, guid: f34135b12b65b22448fc75c1f7e18fdb,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e2b5305bf941f947a7d358925e6bcfa,
+        type: 3}
     - target: {fileID: 9061470857022412362, guid: f34135b12b65b22448fc75c1f7e18fdb,
         type: 3}
       propertyPath: m_Name
@@ -7114,11 +7152,11 @@ MonoBehaviour:
   resultText: {fileID: 606337818}
   button: {fileID: 8283218130939936003}
   skipButtonObj: {fileID: 5686568894668188024}
-  inhaling: 0
   pillPanel: {fileID: 8283218130939936001}
   startGraph: {fileID: 8283218130939935987}
   noolChartHider: {fileID: 7497404576221846294}
   colourInhaleOrder: 03000000040000000500000001000000020000000600000000000000
+  coloursToAvoid: 02000000000000000600000007000000
 --- !u!1 &8283218130939936005 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7316105390854033155, guid: 0db19fc1267155947959fc5895f2c70a,

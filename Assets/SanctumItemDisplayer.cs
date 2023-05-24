@@ -16,6 +16,8 @@ public class SanctumItemDisplayer : BasicDisplayer
 
     public void ClickMe()
     {
+        if (ItemInhaler.inhaling)
+            return;
         SanctumSelectedPanel.Instance.SetMeFull(magicItem);
     }
 }

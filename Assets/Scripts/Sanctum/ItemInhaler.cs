@@ -12,7 +12,8 @@ public class ItemInhaler : MonoBehaviour
     //[SerializeField, Tooltip("Amount = 1d[psion value for that colour] * (item value for same colour) * amountFactor. \n Default: .01f")]
     //float amountFactor= .1f;
 
-    public System.Action OnInhale;
+    public static System.Action OnInhaleStart;
+    public static System.Action OnInhaleEnd;
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
 
     //PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
@@ -68,6 +69,9 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField]
     NoolColour[] colourInhaleOrder;
 
+    [SerializeField]
+    List<NoolColour> coloursToAvoid;
+
     private void Awake()
     {
         if (!button)
@@ -114,25 +118,29 @@ public class ItemInhaler : MonoBehaviour
         int[] toHitChances = new int[7]; //7 -number of nool colours (sans white). Arry of % chance to Hit
         int hitChanceTotal = 0;
         int activeBarCount = 0;
-        foreach (var pill in _item.pillProfile.pills)
-        {
-            if (pill.potential <= 0)
-                continue;
-            //float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
-            float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
-            float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
-            toHitChances[(int)pill.colour] = (int)chanceToHit;
-            hitChanceTotal += (int)chanceToHit;
-            activeBarCount++;
-        }
+        //foreach (var pill in _item.pillProfile.pills)
+        //{
+        //    if (pill.potential <= 0 || coloursToAvoid.Contains(pill.colour))
+        //        continue;
+        //    //float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
+        //    float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
+        //    float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
+        //    toHitChances[(int)pill.colour] = (int)chanceToHit;
+        //    hitChanceTotal += (int)chanceToHit;
+        //    activeBarCount++;
+        //}
         //int barHits = 0;
         
-        float chanceForSingleBarHit = hitChanceTotal/activeBarCount; //total is chance out of 700, divide by 7 for %
+        //float chanceForSingleBarHit = hitChanceTotal/activeBarCount; //total is chance out of 700, divide by 7 for %
 
         
         //foreach (var el in _item.spectrumProfile.elements)
+        //foreach (var pill in _item.pillProfile.pills)
         foreach (var pill in _item.pillProfile.pills)
         {
+            if(coloursToAvoid.Contains(pill.colour))
+                continue;
+            
             float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
             float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
 
@@ -178,11 +186,11 @@ public class ItemInhaler : MonoBehaviour
         //Invoke(nameof(RemoveMagicItemFromInventory), .1f);
         //Inventory.Instance.RemoveMagicItem(_item);
         RemoveMagicItemFromInventory();
-        processingColourIndicator.SetFloat("speed", 1f / timePerBar);
+        //processingColourIndicator.SetFloat("speed", 1f / timePerBar);
 
 
+        OnInhaleStart?.Invoke();
         coro = StartCoroutine(SuccessfulInhaleSequence(values));
-        OnInhale?.Invoke();
         return s;
     }
     void RemoveMagicItemFromInventory()
@@ -211,6 +219,7 @@ public class ItemInhaler : MonoBehaviour
         inhaling = true;
         button.interactable = false;
         skipButtonObj.SetActive(true);
+        resultText.text = "";
         resultText.gameObject.SetActive(true);
 
         noolChartHider.SetAllHidersToValue(1f);
@@ -218,10 +227,14 @@ public class ItemInhaler : MonoBehaviour
         //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         for (int i = 0; i < psionPillProfile.pills.Length-1; i++)
         {
+            NoolColour currentColour = colourInhaleOrder[i];
+            if(coloursToAvoid.Contains(currentColour))
+            {
+                continue;
+            }
             //processingColourIndicator.gameObject.SetActive(true);
             //resultText.gameObject.SetActive(false);
             float _timer = timePerBar;
-            NoolColour currentColour = colourInhaleOrder[i];
             while (_timer >= 0)
             {
                 _timer -= Time.deltaTime;
@@ -229,9 +242,9 @@ public class ItemInhaler : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
 
-                //yield return new WaitForSeconds(timePerBar);
+            //yield return new WaitForSeconds(timePerBar);
             //processingColourIndicator.gameObject.SetActive(false);
-            //resultText.gameObject.SetActive(true);
+            resultText.gameObject.SetActive(true);
 
             if (s[(int)currentColour] != 0f)
             {
@@ -264,7 +277,7 @@ public class ItemInhaler : MonoBehaviour
     private void FinalizeInhaleSequence()
     {
         //processingColourIndicator.gameObject.SetActive(false);
-
+        OnInhaleEnd?.Invoke();
         noolChartHider.SetAllHidersToValue(0f);
 
         pillPanel.SetToPsion();

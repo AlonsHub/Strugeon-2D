@@ -31,11 +31,18 @@ public class StarGraphSlice : HoverableWithBox
     /// <param name="value"></param>
     public virtual void SetMe(float value)
     {
+        float tempNewTopMax = defaultMaxNool;
         //set values
-        maxValue = defaultMaxNool;
+        while (value >= tempNewTopMax)
+        {
+             tempNewTopMax += defaultMaxNool;
+
+        }
+        maxValue = tempNewTopMax;
         currentValue = value;
         ShowValue();
     }
+
 
     public virtual void ShowValue()
     {
