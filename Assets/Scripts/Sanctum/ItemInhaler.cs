@@ -79,6 +79,7 @@ public class ItemInhaler : MonoBehaviour
 
         button.onClick.AddListener(InhaleAndLogSelectedItem);
         inhaling = false;
+        button.interactable = false;
     }
 
     void InhaleAndLogSelectedItem()
@@ -96,14 +97,14 @@ public class ItemInhaler : MonoBehaviour
     [ContextMenu("InhaleSelceted")]
     public string InhaleSelectedItem()
     {
-        if(_item == null)
+        if(_item == null) //should't be possible
         {
-            print("no item to inhale");
+            print("no item to inhale - should't be possible");
             //become unclickable
             return "no item!";
             //SelectFirstInvItem();
         }
-
+        inhaling = true;
         button.interactable = false;
 
         float[] values = new float[noolProfile.nools.Length];
@@ -216,8 +217,6 @@ public class ItemInhaler : MonoBehaviour
 
         startGraph.SetToValues(s);
 
-        inhaling = true;
-        button.interactable = false;
         skipButtonObj.SetActive(true);
         resultText.text = "";
         resultText.gameObject.SetActive(true);
@@ -285,7 +284,7 @@ public class ItemInhaler : MonoBehaviour
 
         resultText.gameObject.SetActive(false);
         inhaling = false;
-        button.interactable = true;
+        //button.interactable = true;
         skipButtonObj.SetActive(false);
         startGraph.SetAllToValue(0f);
     }

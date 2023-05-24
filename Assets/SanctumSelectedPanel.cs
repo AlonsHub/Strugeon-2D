@@ -18,10 +18,23 @@ public class SanctumSelectedPanel : BasicDisplayer
     [SerializeField]
     GameObject[] objectsToToggle;
 
+    [SerializeField]
+    UnityEngine.UI.Button inhaleButton;
+
     private void Awake() //TBF TBD LAZY
     {
         Instance = this;
         SetMeFull();
+    }
+    
+    private void OnDisable()
+    {
+        Instance = null;
+    }
+    
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     public void SetMeFull(MagicItem item)
@@ -31,6 +44,7 @@ public class SanctumSelectedPanel : BasicDisplayer
             obj.SetActive(true);
         }
         magicItem = item;
+        inhaleButton.interactable = true;
         starGraphNoolBarPanel.SetToItem(item);
         base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item._Benefit().BenefitStatName(),item._Benefit().Value().ToString() ,item.goldValue.ToString(), item.ItemDescription()}, new List<Sprite> {item.itemSprite});
     }
@@ -41,6 +55,7 @@ public class SanctumSelectedPanel : BasicDisplayer
             obj.SetActive(false);
         }
         magicItem = null;
+        inhaleButton.interactable = false;
         starGraphNoolBarPanel.SetToItem(emptyItem);
         base.SetMe(new List<string> { "", "", "", "", "", ""}, new List<Sprite> { emptyItem.itemSprite});
     }

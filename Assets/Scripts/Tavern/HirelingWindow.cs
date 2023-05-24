@@ -46,6 +46,7 @@ public class HirelingWindow : MonoBehaviour
         //success
         //PartyMaster.Instance.availableMercs.Add(MercPrefabs.Instance.EnumToPawnPrefab(mercName));
         PlayerDataMaster.Instance.HireMerc(mercName);
+        if(Tavern.Instance.squadBuilder.gameObject.activeSelf)
         Tavern.Instance.squadBuilder.Refresh();
 
         IdleLog.Instance.CloseIfEmptyCheck(1); //only 1 message is to be destroyed and will still count against logParent.ChildCount

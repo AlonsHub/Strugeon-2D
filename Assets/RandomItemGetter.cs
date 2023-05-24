@@ -5,19 +5,19 @@ using UnityEngine.UI;
 
 public class RandomItemGetter : MonoBehaviour
 {
-    Button button;
-    private void Awake()
-    {
-        button = GetComponent<Button>();
-    }
-    private void OnEnable()
-    {
-        button.onClick.AddListener(OnClick);
-    }
-    private void OnDisable()
-    {
-        button.onClick.RemoveListener(OnClick);
-    }
+    //Button button;
+    //private void Awake()
+    //{
+    //    button = GetComponent<Button>();
+    //}
+    //private void OnEnable()
+    //{
+    //    button.onClick.AddListener(OnClick);
+    //}
+    //private void OnDisable()
+    //{
+    //    button.onClick.RemoveListener(OnClick);
+    //}
 
     public void OnClick()
     {
