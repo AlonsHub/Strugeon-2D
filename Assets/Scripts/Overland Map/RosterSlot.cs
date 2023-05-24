@@ -117,16 +117,29 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         }
         isOccupied = false;
         FrameToggle(false);
+        //SetMe();
+        ClearSlot();
         squadBuilder.Refresh();
     }
 
     public void ClearSlot()
     {
         pawn = null;
+        
+        nameText.text = "";
+        typeText.text = "";
+
+        expBarDisplayer.SetBar();
+
+
         img.sprite = defaultPortraitSprite;
         img.color = new Color(0, 0, 0, 0);
-        bg_img.sprite = offBgSprite;
         isOccupied = false;
+
+        hpText.text = $"HP: XXX/XXX";
+        damageText.text = $"Damage: XX-XX";
+
+        abilitySprite.sprite = null;
         //nameText.text = "";
     }
 

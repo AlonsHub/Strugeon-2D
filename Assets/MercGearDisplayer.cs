@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Currently the only prefab relevant for this is the SimpleGearSlot - GearSlot1 is deprecated
 public class MercGearDisplayer : BasicDisplayer
@@ -8,6 +9,7 @@ public class MercGearDisplayer : BasicDisplayer
     public static MercGearDisplayer Instance;
 
     MercSheet mercSheet;
+
 
 
     [SerializeField]
@@ -20,6 +22,11 @@ public class MercGearDisplayer : BasicDisplayer
     StarGraph starGraph;
     [SerializeField]
     ExpBarDisplayer expBarDisplayer;
+    
+    [SerializeField]
+    Image rightImage;
+    [SerializeField]
+    Image leftImage;
 
     public MercSheet GetMercSheet { get => mercSheet; }
 
@@ -31,6 +38,7 @@ public class MercGearDisplayer : BasicDisplayer
     {
         //TBF TBD THIS IS LAZY
         Instance = this;
+        current = 0;
         //gameObject.SetActive(false);
     }
     private void OnEnable()
@@ -55,9 +63,21 @@ public class MercGearDisplayer : BasicDisplayer
         expBarDisplayer.SetBar(ms);
         Pawn p = ms.MyPawnPrefabRef<Pawn>();
         starGraph.SetToMerc(p._mercSheet);
+        //starGraph.SetToMerc(ms); //for some reason, this is the wrong one? FIX THIS! TBF - constructed MercSheets do NOT copy the pill profile correctly/at-all
+
+        List<MercSheet> _sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room });
+
+        current = _sheets.IndexOf(ms);
+
+        int right = (current + 1 >= _sheets.Count) ? 0 : current + 1;
+        int left = (current - 1 < 0) ? _sheets.Count - 1 : current - 1;
+        //left and right image set:
+        rightImage.sprite = _sheets[right].MyPawnPrefabRef<Pawn>().PortraitSprite;
+        leftImage.sprite = _sheets[left].MyPawnPrefabRef<Pawn>().PortraitSprite;
 
         int maxHpBenefit = 0;
         int damageBenefit = 0;
+
 
         foreach (var benefit in ms.gear.GetAllBenefits())
         {
@@ -116,14 +136,17 @@ public class MercGearDisplayer : BasicDisplayer
     public void ArrowNavigation(int i)
     {
         current += i;
-        if(current >= PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count)
+        //if(current >= PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count)
+        List<MercSheet> _sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> {MercAssignment.Available, MercAssignment.Room});
+        if(current >= _sheets.Count)
         {
             current = 0;
         }
         if(current < 0)
         {
-            current = PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count - 1;
+            current = _sheets.Count - 1;
         }
-        SetMeFully(PlayerDataMaster.Instance.GetMercSheetByIndex(current)); // should actually look for the first AVAILABLE merc! TBF
+        SetMeFully(_sheets[current]); // should actually look for the first AVAILABLE merc! TBF
+
     }
 }
