@@ -3943,9 +3943,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2603600178824762769, guid: 25edc10771f000c419a7e67d18df11ba,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1018074615}
+    - target: {fileID: 2603600178824762769, guid: 25edc10771f000c419a7e67d18df11ba,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5386591922205795541}
+    - target: {fileID: 2603600178824762769, guid: 25edc10771f000c419a7e67d18df11ba,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 2893010090845581791, guid: 25edc10771f000c419a7e67d18df11ba,
         type: 3}
       propertyPath: m_fontSize

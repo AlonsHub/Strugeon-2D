@@ -12,18 +12,29 @@ public class PillGraphSlice : StarGraphSlice
     [SerializeField]
     Image negativeFill;
 
+    [SerializeField]
+    BasicDisplayer rewardDisplayer;
+    [SerializeField]
+    float timeTillFade_RewardDisplayer;
+    
+    public void SetReward(int rewardAmount) //to simplify the printed number
+    {
+        rewardDisplayer.SetMe(new List<string> { rewardAmount.ToString() }, new List<Sprite> { });
+        StartCoroutine(nameof(OnAndOffSequence));
+    }
+    IEnumerator OnAndOffSequence()
+    {
+        rewardDisplayer.gameObject.SetActive(true);
 
-    //public void SetMeFull(PsionNulElement element)
-    //{
-    //    maxValue = element.maxValue;
-    //    negativeFill.fillAmount = 1- maxValue/topMax;
-    //    //positiveFill.fillAmount = maxValue / topMax;
+        yield return new WaitUntil(() => !ItemInhaler.inhaling);
 
-    //    currentValue = element.value;
+        yield return new WaitForSeconds(timeTillFade_RewardDisplayer);
 
-    //    fillImg.fillAmount = currentValue / topMax; // the positive does not change size, hence the full 1f fillamount amounts to a full topMax (and not the current capacity)
-    //    base.SetMyDisplayer(new List<string> { $"{currentValue} / {maxValue}" }, new List<Sprite> ());
-    //}
+        //Fade Out logic here
+
+        rewardDisplayer.gameObject.SetActive(false);
+
+    }
     public void SetMeFull(Nool element)
     {
         topMax = (Mathf.Floor(element.capacity / 100) + 1)*100;

@@ -20,6 +20,8 @@ public class StrengthenSpell : SpellButton
                 return;
             }
         }
+
+        damageModifier.mod = modifier * .0014f;
         new StrengthenEffect(pawnTgt, effectIcon,damageModifier); //damageModifier comes from DamageModifyingSpell
 
         base.OnButtonClick();

@@ -42,6 +42,12 @@ public class CrewBlock : MonoBehaviour
     }
     public void SetMe(Room r)
     {
+        if(!r.isOccupied)
+        {
+            SetMeEmpty(r);
+            return;
+        }
+
         room = r;
         upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
 

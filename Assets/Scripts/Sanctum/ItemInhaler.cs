@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 public class ItemInhaler : MonoBehaviour
 {
+    //public stat 
+
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
     [SerializeField, Tooltip("Chance-to-hit = % (psion value for that colour) * (item value for same colour) * chanceToHitFactor. \n Default: 1f")]
     float chanceToHitFactor = 1f;
@@ -13,7 +15,7 @@ public class ItemInhaler : MonoBehaviour
     public System.Action OnInhale;
     //TEMP AF TBF - this needs to be somewhere where stats and numbers are more manageable for game designers TBF
 
-    PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
+    //PsionSpectrumProfile _psionSpectrumProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
     NoolProfile noolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
     PillProfile psionPillProfile => PlayerDataMaster.Instance.currentPlayerData.pillProfile;
 
@@ -47,7 +49,7 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField]
     GameObject skipButtonObj; 
 
-    public bool inhaling;
+    public static bool inhaling;
 
 
     //[SerializeField]
@@ -56,8 +58,15 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField]
     PillPanel pillPanel;
 
+    [SerializeField]
+    StarGraph startGraph;
+
+    [SerializeField]
+    NoolChartHider noolChartHider;
     Coroutine coro;
-    
+
+    [SerializeField]
+    NoolColour[] colourInhaleOrder;
 
     private void Awake()
     {
@@ -166,9 +175,9 @@ public class ItemInhaler : MonoBehaviour
 
         attemptCount = 0;
         //SAFTY WAIT!
-        Invoke(nameof(RemoveMagicItemFromInventory), .1f);
+        //Invoke(nameof(RemoveMagicItemFromInventory), .1f);
         //Inventory.Instance.RemoveMagicItem(_item);
-
+        RemoveMagicItemFromInventory();
         processingColourIndicator.SetFloat("speed", 1f / timePerBar);
 
 
@@ -194,27 +203,47 @@ public class ItemInhaler : MonoBehaviour
 
     IEnumerator SuccessfulInhaleSequence(float[] s)
     {
+        SanctumSelectedPanel.Instance.SetMeFull();
+
+
+        startGraph.SetToValues(s);
+
         inhaling = true;
         button.interactable = false;
         skipButtonObj.SetActive(true);
         resultText.gameObject.SetActive(true);
+
+        noolChartHider.SetAllHidersToValue(1f);
+
         //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
         for (int i = 0; i < psionPillProfile.pills.Length-1; i++)
         {
-            processingColourIndicator.gameObject.SetActive(true);
+            //processingColourIndicator.gameObject.SetActive(true);
             //resultText.gameObject.SetActive(false);
-            yield return new WaitForSeconds(timePerBar);
-            processingColourIndicator.gameObject.SetActive(false);
+            float _timer = timePerBar;
+            NoolColour currentColour = colourInhaleOrder[i];
+            while (_timer >= 0)
+            {
+                _timer -= Time.deltaTime;
+                noolChartHider.SetHiderToValue(i, _timer/timePerBar);
+                yield return new WaitForEndOfFrame();
+            }
+
+                //yield return new WaitForSeconds(timePerBar);
+            //processingColourIndicator.gameObject.SetActive(false);
             //resultText.gameObject.SetActive(true);
 
-            if (s[i] != 0f)
+            if (s[(int)currentColour] != 0f)
             {
-                resultText.text = $"Inhaled {psionPillProfile.pills[i].colour} colour by {s[i]}.";
+                //resultText.text = $"Inhaled {psionPillProfile.pills[i].colour} colour by {s[i]}.";
+                resultText.text = $"Inhaled {currentColour} colour by {s[(int)currentColour]}.";
+                pillPanel.PromptReward((int)currentColour, (int)s[(int)currentColour]);
                 //itemNulBarPanel.SetBarText(i, $"+{s[i]}");
             }
             else
             {
-                resultText.text = $"Failed to gain {psionPillProfile.pills[i].colour} energy.";
+                //resultText.text = $"Failed to gain {psionPillProfile.pills[i].colour} energy.";
+                resultText.text = $"Failed to gain {currentColour} energy.";
                 //itemNulBarPanel.SetBarText(i, "X");
             }
             yield return new WaitForSeconds(timePerResult);
@@ -230,17 +259,22 @@ public class ItemInhaler : MonoBehaviour
         FinalizeInhaleSequence();
     }
 
+
+
     private void FinalizeInhaleSequence()
     {
-        processingColourIndicator.gameObject.SetActive(false);
+        //processingColourIndicator.gameObject.SetActive(false);
+
+        noolChartHider.SetAllHidersToValue(0f);
 
         pillPanel.SetToPsion();
-        SanctumSelectedPanel.Instance.SetMeFull();
+        //SanctumSelectedPanel.Instance.SetMeFull();
 
         resultText.gameObject.SetActive(false);
         inhaling = false;
         button.interactable = true;
         skipButtonObj.SetActive(false);
+        startGraph.SetAllToValue(0f);
     }
 
     bool RollChance(int x, int outOf)
@@ -250,7 +284,11 @@ public class ItemInhaler : MonoBehaviour
 
     public void SkipInhale()
     {
-        StopCoroutine(coro);
+        if (coro != null)
+        {
+            StopCoroutine(coro);
+            coro = null;
+        }
         FinalizeInhaleSequence();
     }
 }

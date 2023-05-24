@@ -8,12 +8,19 @@ public class PillPanel : MonoBehaviour
     List<NoolColour> coloursToShow;
 
     [SerializeField, Tooltip("set in this order:Orange, Yellow, Green, Blue, Red, Purple, Black")]
-    List<PillGraphSlice> noolPills;
+    List<PillGraphSlice> pillGraphSlices;
 
     private void Start()
     {
         SetToPsion();
     }
+
+    public void PromptReward(int colour, int reward)
+    {
+        pillGraphSlices[colour].SetReward(reward);
+
+    }
+
     public void SetToPsion()
     {
         foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools)
@@ -23,7 +30,7 @@ public class PillPanel : MonoBehaviour
                 continue;
             }
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            PillGraphSlice temp = noolPills[(int)nulElement.colour];
+            PillGraphSlice temp = pillGraphSlices[(int)nulElement.colour];
             if (!coloursToShow.Contains(nulElement.colour))
             {
                 //temp.gameObject.SetActive(false); 

@@ -65,8 +65,10 @@ public class SquadBuilder2 : MonoBehaviour
 
         //if (toRoom == null)
             //toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
-            BetterSetToRoom( Tavern.Instance.GetRoomByIndex(_currentRoomIndex));
-       
+            //if((toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex)) != null)
+            BetterSetToRoom(toRoom);
+        BetterSetToRoom(Tavern.Instance.GetRoomByIndex(_currentRoomIndex));
+
 
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
 
@@ -446,8 +448,6 @@ public class SquadBuilder2 : MonoBehaviour
             sheets = sheets.Where(x => x.mercClass == classFilter.Value).ToList();
         }
 
-
-
         for (int i = 0; i < sheets.Count; i++)
         {
             availableSlots[i].gameObject.SetActive(true);
@@ -461,21 +461,6 @@ public class SquadBuilder2 : MonoBehaviour
             //availableSlots[i].SetMe(); //empty
         }
     }
-
-    //public void EditSquadMode(List<Pawn> oldSquad, Room room)
-    //{
-    //    //for (int i = 0; i < oldSquad.Count; i++)
-    //    //{
-    //    //    partySlots[i].SetMe(oldSquad[i]);
-    //    //}
-    //    tempSquad.pawns = oldSquad;
-    //    uneditedSquadPawns = new List<Pawn>(oldSquad);
-    //    //isEdit = true;
-
-    //    SetToRoom(room);
-
-    //    Refresh();
-    //}
 
     public void TurnAllFramesOff()
     {

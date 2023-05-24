@@ -21,7 +21,8 @@ public class Room
         size = 2;
         roomNumber = rNumber;
         isOccupied = false;
-        squad = new Squad();
+        squad = new Squad(roomNumber);
+        //squad.roomNumber = roomNumber;
         SetStatusText("Vacant");
 
     }

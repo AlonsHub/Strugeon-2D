@@ -20,9 +20,10 @@ public class Squad : IEquatable<Squad>
 
     public Sprite SquadPortrait => (pawns[0].PortraitSprite); //or null if none?
 
-    public Squad()
+    public Squad(int roomNum)
     {
         pawns = new List<Pawn>();
+        roomNumber = roomNum;
     }
 
     public List<Sprite> IconSprites()

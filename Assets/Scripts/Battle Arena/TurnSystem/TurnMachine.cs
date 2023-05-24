@@ -31,6 +31,8 @@ public class TurnMachine : MonoBehaviour
     /// </summary>
     public System.Action OnStartNewRound;
     private int initialSquadSize;
+    [SerializeField]
+    private float startBattleDelay;
 
     //PsionSpectrumProfile psionProfile => PlayerDataMaster.Instance.currentPlayerData.psionSpectrum;
     NoolProfile noolProfile => PlayerDataMaster.Instance.currentPlayerData.noolProfile;
@@ -62,7 +64,7 @@ public class TurnMachine : MonoBehaviour
 
         SetMachine(tts);
 
-        Invoke(nameof(StartBattle), 2f);
+        Invoke(nameof(StartBattle), startBattleDelay);
     }
 
     public void SetMachine(List<TurnTaker> allTakers)
@@ -295,8 +297,8 @@ public class TurnMachine : MonoBehaviour
         defeatWindow.gameObject.SetActive(true);
         defeatWindow.SetMe(LevelRef.Instance.currentLevel);
         //empty the room:
-
-        PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].ClearRoom(); //FIXED to ClearRoom() from = null
+        Tavern.Instance.GetRoomByIndex(PartyMaster.Instance.currentSquad.roomNumber).ClearRoom();
+        //PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].ClearRoom(); //FIXED to ClearRoom() from = null
     }
 
     public void Run() //Abandon match - used by forefit button in UI
