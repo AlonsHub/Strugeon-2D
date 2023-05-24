@@ -235,19 +235,19 @@ public class PartyMaster : MonoBehaviour
     //    }
     //}
 
-    public void AddNewSquadToRoom(List<Pawn> ps, Room r)
-    {
-        availableMercPrefabs.RemoveAll(x => ps.Contains(x));
-        //Squad s = new Squad(ps);
-        Squad s = new Squad(ps, r.roomNumber);
+    //public void AddNewSquadToRoom(List<Pawn> ps, Room r)
+    //{
+    //    availableMercPrefabs.RemoveAll(x => ps.Contains(x));
+    //    //Squad s = new Squad(ps);
+    //    Squad s = new Squad(ps, r.roomNumber);
 
-        //r.squad = s;
-        PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].squad = s;
-        PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].isOccupied = true;
-        squads.Add(s);
-        s.roomNumber = r.roomNumber;
+    //    //r.squad = s;
+    //    PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].squad = s;
+    //    //PlayerDataMaster.Instance.currentPlayerData.rooms[r.roomNumber].isOccupied = true;
+    //    squads.Add(s);
+    //    s.roomNumber = r.roomNumber;
         
-    }
+    //}
 
     //public void DisbandSquad(int i)
     //{

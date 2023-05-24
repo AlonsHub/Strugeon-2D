@@ -96,7 +96,7 @@ public static class Prices
 
     public static int UpgradeCrewPrice(int currentRoomSize)
     {
-        return upgradeRoomBasePrice * (currentRoomSize - 1); //2 is the starting amount
+        return upgradeRoomBasePrice * (currentRoomSize-1); //2 is the starting amount
     }
     public static int BuyCrewPrice(int currentAmountOfRooms)
     {

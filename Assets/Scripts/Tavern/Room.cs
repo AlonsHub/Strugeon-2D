@@ -11,7 +11,7 @@ public class Room
 
     public Squad squad; 
 
-    public bool isOccupied;
+    public bool isOccupied => (squad != null && squad.pawns.Count>0);
 
     public string statusText;
 
@@ -20,18 +20,17 @@ public class Room
     {
         size = 2;
         roomNumber = rNumber;
-        isOccupied = false;
+        //isOccupied = false;
         squad = new Squad(roomNumber);
         //squad.roomNumber = roomNumber;
         SetStatusText("Vacant");
-
     }
 
     public bool TryUpgrade()
     {
         //int price = size * 5;
 
-        if (Inventory.Instance.TryRemoveGold(size * Prices.UpgradeCrewPrice(size)))
+        if (size < GameStats.maxRoomSize && Inventory.Instance.TryRemoveGold(Prices.UpgradeCrewPrice(size)))
         {
             size++;
             return true;
@@ -46,7 +45,7 @@ public class Room
 
     public void ClearRoom()
     {
-        isOccupied = false;
+        //isOccupied = false;
         squad = null;
         SetStatusText("Vacant");
     }

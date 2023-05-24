@@ -35,34 +35,13 @@ public class Inventory : MonoBehaviour
 
         //OnInventoryChange += TEST_OnInventoryChange;
 
-        //If magicItems(changed name)-> inventoryItems (aka PlayerDataMaster.Instance.currentPlayerData.magicItems) is null, it means there was nothing there when it was saved - or that it is a new save
+        
         if (inventoryItems == null)
         inventoryItems = new List<MagicItem>();
-
-        //foreach (var item in inventoryItems)
-        //{
-        //    if(!item.FecthSprite())
-        //    {
-        //        Debug.LogError($"item {item.magicItemName} could not find a sprite");
-        //    }
-        //}
     }
-    //void OnSceneLoaded(Scene s, LoadSceneMode mode)
-    //{
-
-    //    //goldUpdater = GameObject.Find("Gold Displayer").GetComponent<GoldUpdater>();
-    //    //goldUpdater =
-    //    //if (!goldUpdater)
-    //    //{
-    //    //    Debug.LogError("no gold updater");
-    //    //}
-    //}
-
+   
     private void Start()
     {
-
-
-
         foreach (var item in inventoryItems)
         {
             if (!item.FetchSprite())
@@ -105,7 +84,6 @@ public class Inventory : MonoBehaviour
     {
         if(inventoryItems.Remove(magicItem))
         {
-
             Debug.Log($"Item: {magicItem.magicItemName} was removed!");
             OnInventoryChange?.Invoke();
             return true;

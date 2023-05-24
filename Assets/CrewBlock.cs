@@ -32,7 +32,12 @@ public class CrewBlock : MonoBehaviour
         room = r; //Mostly redundant, but in-case this is ever called by any other method (that is not SetMe(Room r))
 
         crewName.text = "Empty Crew";
-        
+
+        if(room.size < GameStats.maxRoomSize)
+        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
+        else
+        upgradePriceText.text = "";
+
 
         for (int i = 0; i < r.size; i++)
         {
@@ -50,13 +55,6 @@ public class CrewBlock : MonoBehaviour
 
         room = r;
         upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
-
-        if (r.squad == null || r.squad.pawns.Count ==0)
-        {
-            //squad = new Squad();
-            SetMeEmpty(room);
-            return;
-        }
 
         squad = r.squad;
 
@@ -77,8 +75,9 @@ public class CrewBlock : MonoBehaviour
         if(!room.TryUpgrade())
         {
             Debug.LogError("failed to upgrade room");
-            notEnoughGoldText.gameObject.SetActive(true);
+            //notEnoughGoldText.gameObject.SetActive(true);
         }
+        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
 
         SetMe(room);
     }

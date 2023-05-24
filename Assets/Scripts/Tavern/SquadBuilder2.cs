@@ -66,7 +66,7 @@ public class SquadBuilder2 : MonoBehaviour
         //if (toRoom == null)
             //toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
             //if((toRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex)) != null)
-            BetterSetToRoom(toRoom);
+            //BetterSetToRoom(toRoom);
         BetterSetToRoom(Tavern.Instance.GetRoomByIndex(_currentRoomIndex));
 
 
@@ -264,7 +264,7 @@ public class SquadBuilder2 : MonoBehaviour
     {
         //confirmWindowAnswer = null;
         //confirmWindow.SetActive(false);
-        mercDataDisplayer.gameObject.SetActive(false);
+        //mercDataDisplayer.gameObject.SetActive(false);
 
         //Tavern.Instance.RefreshRooms();
 
