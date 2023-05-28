@@ -9,6 +9,12 @@ public class StatBenefit : IBenefit
     [SerializeField]
      int value;
 
+    public StatBenefit(StatToBenefit stb, int v)
+    {
+        statToBenefit = stb;
+        value = v;
+    }
+
     public string BenefitProperNoun()
     {
         switch (statToBenefit)

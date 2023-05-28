@@ -30,6 +30,9 @@ public class GoogleSheetMaster : MonoBehaviour
 
     string currentRangeName;
     int rowsPerIterration = 10;
+
+    string lastCellCordinate = "Item_DataBase_Test2!G1";
+
     void Start()
     {
         if(Instance!=null && Instance!=this)
@@ -185,13 +188,73 @@ public class GoogleSheetMaster : MonoBehaviour
             LogNewItem(item.magicItem);
         }
     }
-      [ContextMenu("Log random item")]
-    public void LogRandomItems()
+
+    [ContextMenu("Read all items")]
+    public void ReadNewItems()
     {
-       
-            LogNewItem(DifficultyTranslator.Instance.DifficultyToSingleReward(LairDifficulty.Easy));
-        
+        List<string> rows = GetRows(lastCellCordinate);
+        int lastCellIndex;
+        print(rows[0]);
+        if(int.TryParse(rows[0], out lastCellIndex))
+        {
+            print($"parsed well into {lastCellIndex}");
+            rows = GetRows($"Item_DataBase_Test2!A2:D{lastCellIndex}");
+
+            MagicItem newItem = ParseItem(rows);
+            MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
+            //Dont fetch sprite yet!
+            ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
+
+            ////NOT YET TO ALL
+            //foreach (var item in rows)
+            //{
+            //    //Read as:
+            //    //magicItemName, fittingSlotType, myBenefit.BenefitStatName(), myBenefit.Value(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
+
+            //}
+        }
     }
+
+    MagicItem ParseItem(List<string> rows)
+    {
+        StatBenefit sb = new StatBenefit((StatToBenefit)int.Parse(rows[2]), int.Parse(rows[3]));
+        List<MercClass> rClasses = new List<MercClass>();
+        string[] seperated = rows[4].Split('_');
+        foreach (var item in seperated)
+        {
+            item.Replace("_", "");
+            
+            switch (item)
+            {
+                case "Fighter":
+                    rClasses.Add(MercClass.Fighter);
+                    break;
+                case "Rogue":
+                    rClasses.Add(MercClass.Rogue);
+                    break;
+                case "Mage":
+                    rClasses.Add(MercClass.Mage);
+                    break;
+                case "Priest":
+                    rClasses.Add(MercClass.Priest);
+                    break;
+            }
+        }
+        seperated = rows[5].Split('_');
+        float[] flots = new float[seperated.Length];
+        for (int i = 0; i < seperated.Length; i++)
+        {
+            seperated[i].Replace("_", "");
+            flots[i] = float.Parse(seperated[i]);
+        }
+
+
+        return new MagicItem(rows[0], (EquipSlotType)int.Parse(rows[1]), sb, rClasses, flots, int.Parse(rows[6]), rows[7]);
+    }
+    //public void LogRandomItems()
+    //{
+    //        LogNewItem(DifficultyTranslator.Instance.DifficultyToSingleReward(LairDifficulty.Easy));
+    //}
 
     public void LogNewItem(MagicItem magicItem)
     {
@@ -205,39 +268,39 @@ public class GoogleSheetMaster : MonoBehaviour
         
         var appendResponse = appendRequest.ExecuteAsync();
     }
-    public void LogAllNewItemsBatch()
-    {
+    //public void LogAllNewItemsBatch()
+    //{
        
 
-        //valueRange.Values = new List<IList<object>> { new List<System.Object> { magicItem.magicItemName,magicItem.pillProfile.AsStringData(), magicItem.goldValue, magicItem.spriteName} };
+    //    //valueRange.Values = new List<IList<object>> { new List<System.Object> { magicItem.magicItemName,magicItem.pillProfile.AsStringData(), magicItem.goldValue, magicItem.spriteName} };
 
-        var batchRequest = new BatchUpdateValuesRequest();
-        batchRequest.Data = new List<ValueRange>();
-        //var values =
-        //batchRequest.Data;
+    //    var batchRequest = new BatchUpdateValuesRequest();
+    //    batchRequest.Data = new List<ValueRange>();
+    //    //var values =
+    //    //batchRequest.Data;
 
-        foreach (var magicItem in allItemsSO.GetAllItemSOList)
-        {
-            var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
-            var objectList = new List<System.Object>(); //fill object list with things!
+    //    foreach (var magicItem in allItemsSO.GetAllItemSOList)
+    //    {
+    //        var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
+    //        var objectList = new List<System.Object>(); //fill object list with things!
 
-            var itemStrings = magicItem.magicItem.AsStringsData();
-            valueRange.Values = new List<IList<object>> { new List<System.Object> {magicItem.magicItem.AsStringsData()} };
-            valueRange.Range = "Item_DataBase_Test2!A2";
-            batchRequest.Data.Add(valueRange);
+    //        var itemStrings = magicItem.magicItem.AsStringsData();
+    //        valueRange.Values = new List<IList<object>> { new List<System.Object> {magicItem.magicItem.AsStringsData()} };
+    //        valueRange.Range = "Item_DataBase_Test2!A2";
+    //        batchRequest.Data.Add(valueRange);
 
-            //var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "Item_DataBase_Test2!A2");
-            //appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-        }
-        batchRequest.ValueInputOption = "USER_ENTERED";
-        //batchRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED.ToString();
-        var request = sheetsService.Spreadsheets.Values.BatchUpdate(batchRequest, spreadsheetID);
-        var respone = request.ExecuteAsync();
-        //var respone = request.Execute();
+    //        //var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "Item_DataBase_Test2!A2");
+    //        //appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+    //    }
+    //    batchRequest.ValueInputOption = "USER_ENTERED";
+    //    //batchRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED.ToString();
+    //    var request = sheetsService.Spreadsheets.Values.BatchUpdate(batchRequest, spreadsheetID);
+    //    var respone = request.ExecuteAsync();
+    //    //var respone = request.Execute();
 
-        print(respone.Result);
-        //var appendResponse = appendRequest.ExecuteAsync();
-    }
+    //    print(respone.Result);
+    //    //var appendResponse = appendRequest.ExecuteAsync();
+    //}
 
     bool FindRangeForName(string nameToSearch) //sets currentRangeName
     {

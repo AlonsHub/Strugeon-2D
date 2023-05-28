@@ -34,7 +34,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
 
     public Rarity rarity;
-    public int dropRateWeight; //higher -> more likely
+    
 
     public Sprite itemSprite; // consider keeping an enum to link with a dictionary
     public string spriteName;
@@ -43,9 +43,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     [SerializeField]
     bool isEquipped;
-    [SerializeField]
-    StatBenefitSO statBenefitSO;
-
+   
     [SerializeField]
     StatBenefit statBenefit;
     //IBenefit myBenefit => statBenefitSO.statBenefit; //just the single now
@@ -60,6 +58,26 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     public string ItemBenefitDescription() => $"{myBenefit.BenefitStatName()} +{myBenefit.Value()}";
 
     //end temp
+    public MagicItem(string newName, EquipSlotType equipSlotType, StatBenefit benefit, List<MercClass> mercClasses, float[] pots, int gold, string spritename)
+    {
+        magicItemName = newName;
+        fittingSlotType = equipSlotType;
+        statBenefit = benefit;
+        relevantClasses = mercClasses;
+        pillProfile = new PillProfile(pots);
+        goldValue = gold;
+        spriteName = spritename;
+    }
+    public List<string> AsStringsData()
+    {
+
+        string classes = "";
+        foreach (var item in relevantClasses)
+        {
+            classes += $"{item}_";
+        }
+        return new List<string> { magicItemName, ((int)fittingSlotType).ToString(), ((int)statBenefit.statToBenefit).ToString(), myBenefit.Value().ToString(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
+    }
 
     public bool FetchSprite()
     {
@@ -123,9 +141,6 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     }
 
    
-    public List<string> AsStringsData()
-    {
-        return new List<string> {magicItemName, pillProfile.AsStringData(), goldValue.ToString(),spriteName};
-    }
+    
     
 }
