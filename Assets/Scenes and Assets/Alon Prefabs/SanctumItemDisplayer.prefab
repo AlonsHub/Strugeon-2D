@@ -749,7 +749,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2991107059073443620}
   - component: {fileID: 5788322742413509274}
-  - component: {fileID: 5198627116787980650}
   m_Layer: 5
   m_Name: SanctumItemDisplayer
   m_TagString: Untagged
@@ -797,7 +796,7 @@ MonoBehaviour:
   - {fileID: 4562980753359051071}
   images:
   - {fileID: 8852604411449253422}
-  sacntumItemHover: {fileID: 5198627116787980650}
+  sacntumItemHover: {fileID: 0}
   magicItem:
     magicItemName: 
     goldValue: 0
@@ -831,24 +830,6 @@ MonoBehaviour:
       statToBenefit: 0
       value: 0
     relevantClasses: 
---- !u!114 &5198627116787980650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8700003699876239507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5c9177190a166645954f8da0d51cdf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basicDisplayer: {fileID: 5011737577195035315}
-  leftX: -350
-  rightX: 350
-  topY: 202
-  bottomY: 0
-  rectTrans: {fileID: 2991107059073443620}
 --- !u!1 &8843873923588304906
 GameObject:
   m_ObjectHideFlags: 0
