@@ -12,24 +12,24 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     public string magicItemName; //BAD IDEA, go for enums and dictionaries? something even better perhaps
     public int goldValue;
     //public int NF_Value; // TBD
-    public ItemSpectrumProfile spectrumProfile;
+    //public ItemSpectrumProfile spectrumProfile;
 
     public PillProfile pillProfile;
-    [ContextMenu("Fix spectrum to pills now!")]
-    public void Fix()
-    {
-        //pillProfile = new PillProfile();
-        foreach (var item in spectrumProfile.elements)
-        {
-            //pillProfile.
-            pillProfile.pills[(int)item.nulColour].potential = item.value;
-            pillProfile.pills[(int)item.nulColour].colour = item.nulColour;
-            //pillProfile.pills
-        }
-        pillProfile.pills[(int)NoolColour.White].colour = NoolColour.White;
-        pillProfile.pills[(int)NoolColour.White].potential = 0;
+    //[ContextMenu("Fix spectrum to pills now!")]
+    //public void Fix()
+    //{
+    //    //pillProfile = new PillProfile();
+    //    foreach (var item in spectrumProfile.elements)
+    //    {
+    //        //pillProfile.
+    //        pillProfile.pills[(int)item.nulColour].potential = item.value;
+    //        pillProfile.pills[(int)item.nulColour].colour = item.nulColour;
+    //        //pillProfile.pills
+    //    }
+    //    pillProfile.pills[(int)NoolColour.White].colour = NoolColour.White;
+    //    pillProfile.pills[(int)NoolColour.White].potential = 0;
 
-    }
+    //}
 
 
 
@@ -123,5 +123,9 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     }
 
    
+    public List<string> AsStringsData()
+    {
+        return new List<string> {magicItemName, pillProfile.AsStringData(), goldValue.ToString(),spriteName};
+    }
     
 }

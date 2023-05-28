@@ -12,19 +12,19 @@ public class StarGraph : MonoBehaviour
 
     public void SetToItem(MagicItem item)
     {
-        foreach (var nulElement in item.spectrumProfile.elements)
+        foreach (var pill in item.pillProfile.pills)
         {
             //NulBar nulBar = Instantiate(nulBarPrefab, nulBarParent).GetComponent<NulBar>();
-            if (!coloursToShow.Contains(nulElement.nulColour))
+            if (!coloursToShow.Contains(pill.colour))
             {
                 //temp.gameObject.SetActive(false); 
              continue;
             }
-            StarGraphSlice temp = nulBars[(int)nulElement.nulColour];
+            StarGraphSlice temp = nulBars[(int)pill.colour];
 
             temp.gameObject.SetActive(true);
 
-            temp.SetMe(nulElement.value);
+            temp.SetMe(pill.potential);
         }
     }
     public void SetToValues(float[] values)

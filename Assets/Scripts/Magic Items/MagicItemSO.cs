@@ -11,9 +11,9 @@ public class MagicItemSO : ScriptableObject
     {
         magicItem.FetchSprite();
     }
-    [ContextMenu("call fix")]public void CallFix()
-    {
-        magicItem.Fix();
-    }
+    //[ContextMenu("call fix")]public void CallFix()
+    //{
+    //    magicItem.Fix();
+    //}
 
 }

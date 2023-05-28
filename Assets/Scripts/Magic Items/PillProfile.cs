@@ -55,6 +55,26 @@ public class PillProfile
             pills[i] = new Pill((NoolColour)i, potentialValuesInOrder[i]);
         }
     }
+
+    public List<string> AsStringsData()
+    {
+        List<string> toReturn = new List<string>();
+        foreach (var item in pills)
+        {
+            toReturn.Add(item.potential.ToString());
+        }
+        return  toReturn;
+    }
+     public string AsStringData()
+    {
+        string toReturn = "";
+        foreach (var item in pills)
+        {
+            toReturn += $"{item.potential}_";
+        }
+        return toReturn;
+    }
+
 }
 
 [System.Serializable]
@@ -99,4 +119,8 @@ public class NoolProfile
     //Some setter that affects all regen values
 
     //Getters
+   
+
+    //overrides
+    
 }
