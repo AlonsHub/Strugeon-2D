@@ -828,28 +828,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169130400}
-  - component: {fileID: 169130399}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ESCMENU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &169130399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169130398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ff75cb41d4411459cd0517b55c3d6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuObject: {fileID: 9797}
-  randomItemGetter: {fileID: 7131859540827047242}
 --- !u!4 &169130400
 Transform:
   m_ObjectHideFlags: 0
@@ -8836,7 +8821,7 @@ PrefabInstance:
     - target: {fileID: 694250999867448222, guid: 6b785c69c1eadfb41a9f6421749ed28c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000033443554
+      value: -13.03762
       objectReference: {fileID: 0}
     - target: {fileID: 694251000327208901, guid: 6b785c69c1eadfb41a9f6421749ed28c,
         type: 3}
@@ -8866,7 +8851,7 @@ PrefabInstance:
     - target: {fileID: 694251001143562607, guid: 6b785c69c1eadfb41a9f6421749ed28c,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5632936
       objectReference: {fileID: 0}
     - target: {fileID: 2457921829911783108, guid: 6b785c69c1eadfb41a9f6421749ed28c,
         type: 3}
@@ -11986,7 +11971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356b2e7f1027e9a4ba1253847c24ed3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayAmount: 0.6
   gfxToToggle: {fileID: 924042709}
 --- !u!114 &3061366760408725800
 MonoBehaviour:
@@ -12584,6 +12568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3372695917156456189}
   - component: {fileID: 4324538765945717598}
+  - component: {fileID: 4522060249269115090}
   m_Layer: 5
   m_Name: Quit_
   m_TagString: Untagged
@@ -12591,6 +12576,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4522060249269115090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522060249269115089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ff75cb41d4411459cd0517b55c3d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuObject: {fileID: 9797}
+  randomItemGetter: {fileID: 7131859540827047242}
 --- !u!224 &5180100322213451710
 RectTransform:
   m_ObjectHideFlags: 0

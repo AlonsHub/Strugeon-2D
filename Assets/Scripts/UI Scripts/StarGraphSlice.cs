@@ -46,7 +46,6 @@ public class StarGraphSlice : HoverableWithBox
 
     public virtual void ShowValue()
     {
-        
         fillImg.fillAmount = currentValue / maxValue;
     }
 }
