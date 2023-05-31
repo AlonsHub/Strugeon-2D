@@ -15,6 +15,8 @@ public class ItemDatabase : MonoBehaviour
     //Items will be serialized in an organized list, in a special collection (probablly scriptableObject)
     [SerializeField]AllItemSOs allItemSOs;
 
+    public MagicItemSO insoilMystica;
+
     //the special collection will hold: 
     //a list of ItemSOs, loaded manually (TBD TBF)
     //a list of Names/Keys/IDs for those ItemSOs (TBD TBF) 

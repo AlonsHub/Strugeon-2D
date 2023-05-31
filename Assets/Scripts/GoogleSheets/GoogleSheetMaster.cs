@@ -31,7 +31,7 @@ public class GoogleSheetMaster : MonoBehaviour
     string currentRangeName;
     int rowsPerIterration = 10;
 
-    string lastCellCordinate = "Item_DataBase_Test2!G1";
+    string itemCountCellCordinate = "Item_DataBase_Test2!K1";
 
     void Start()
     {
@@ -81,7 +81,7 @@ public class GoogleSheetMaster : MonoBehaviour
             Debug.Log("No data");
         }
     }
-    public List<string> GetRows(string range)
+    public List<string> GetFirstsOfRows(string range)
     {
         var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
 
@@ -103,6 +103,51 @@ public class GoogleSheetMaster : MonoBehaviour
             return null;
         }
     }
+    public List<List<string>> GetRows(string range)
+    {
+        var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
+
+        var response = request.Execute(); //could not async?
+        var values = response.Values;
+
+        if (values != null && values.Count >= 0)
+        {
+            //return (List<string>)values;
+            List<List<string>> rows = new List<List<string>>();
+            foreach (var row in values)
+            {
+                rows.Add(row[0] as List<string>);
+            }
+            return rows;
+        }
+        else
+        {
+            return null;
+        }
+    }
+     public List<string> GetRow(string range)
+    {
+        var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
+
+        var response = request.Execute(); //could not async?
+        var values = response.Values;
+
+        if (values != null && values.Count >= 0)
+        {
+            //return (List<string>)values;
+            //List<string> rows = new List<string>();
+            //foreach (var row in values)
+            //{
+            //    rows.Add(row);
+            //}
+            return values[0] as List<string>;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
 
     private void OnApplicationQuit()
     {
@@ -187,18 +232,30 @@ public class GoogleSheetMaster : MonoBehaviour
         {
             LogNewItem(item.magicItem);
         }
+        //assuming all items are legit
+        var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
+        var objectList = new List<System.Object>(); //fill object list with things!
+
+
+        valueRange.Values = new List<IList<object>> { new List<object> { allItemsSO.GetAllItemSOList.Count } };
+        //valueRange.Values = new List<IList<object>> { objectList };
+
+        var updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, spreadsheetID, itemCountCellCordinate); //just adds under A
+        updateRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
+        //var appendResponse = appendRequest.Execute();
+        var response = updateRequest.ExecuteAsync();
     }
 
     [ContextMenu("Read all items")]
-    public void ReadNewItems()
+    public void ReadItems()
     {
-        List<string> rows = GetRows(lastCellCordinate);
-        int lastCellIndex;
+        List<string> rows = GetFirstsOfRows(itemCountCellCordinate);
+        int itemCount;
         print(rows[0]);
-        if(int.TryParse(rows[0], out lastCellIndex))
+        if(int.TryParse(rows[0], out itemCount))
         {
-            print($"parsed well into {lastCellIndex}");
-            rows = GetRows($"Item_DataBase_Test2!A2:D{lastCellIndex}");
+            print($"parsed well into {itemCount}");
+            rows = GetFirstsOfRows($"Item_DataBase_Test2!A2:D{itemCount+1}"); //+1 since the first row is header and not items
 
             MagicItem newItem = ParseItem(rows);
             MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
@@ -212,6 +269,29 @@ public class GoogleSheetMaster : MonoBehaviour
             //    //magicItemName, fittingSlotType, myBenefit.BenefitStatName(), myBenefit.Value(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
 
             //}
+        }
+    }
+    [ContextMenu("Read a new item")]
+    public void ReadANewItem()
+    {
+        List<string> rows = GetFirstsOfRows(itemCountCellCordinate);
+        List<string> item = new List<string>();
+        int itemCount;
+        print(rows[0]);
+        if(int.TryParse(rows[0], out itemCount))
+        {
+            print($"parsed well into {itemCount}");
+            item = GetRow($"Item_DataBase_Test2!A{itemCount + 2}:H{itemCount+2}"); //+1 since the first row is header and not items
+            print(item[0]);
+            print(item[1]);
+
+            MagicItem newItem = ParseItem(item);
+            MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
+            tempSO.magicItem = newItem;
+            //Dont fetch sprite yet!
+            ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
+            ItemDatabase.Instance.insoilMystica = tempSO;
+            tempSO.CallFetch();
         }
     }
 
@@ -261,12 +341,13 @@ public class GoogleSheetMaster : MonoBehaviour
         var valueRange = new Google.Apis.Sheets.v4.Data.ValueRange();
         var objectList = new List<System.Object>(); //fill object list with things!
 
-        valueRange.Values = new List<IList<object>> { new List<System.Object> { magicItem.magicItemName,magicItem.pillProfile.AsStringData(), magicItem.goldValue, magicItem.spriteName} };
+        valueRange.Values = new List<IList<object>> { magicItem.DataAsListOfObjects() };
 
         var appendRequest = sheetsService.Spreadsheets.Values.Append(valueRange, spreadsheetID, "Item_DataBase_Test2!A2"); 
         appendRequest.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
         
-        var appendResponse = appendRequest.ExecuteAsync();
+        //var appendResponse = appendRequest.ExecuteAsync();
+        var appendResponse = appendRequest.Execute();
     }
     //public void LogAllNewItemsBatch()
     //{
@@ -312,7 +393,7 @@ public class GoogleSheetMaster : MonoBehaviour
 
         while (keepGoing)
         {
-            List<string> s = GetRows("A" + start + ":A" + end);
+            List<string> s = GetFirstsOfRows("A" + start + ":A" + end);
             if (s == null) //string.NullOrEmpty()
             {
                 currentRangeName = null;

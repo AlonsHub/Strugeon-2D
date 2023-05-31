@@ -71,34 +71,25 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         Inventory.Instance.AddGold(goldValue);
     }
 
-    //public void TryEquipItem(IEquipable toEquip)
-    //{
-    //    if (!mercGearDisplayer)
-    //        return;
-
-    //    mercGearDisplayer.TryEquipItem(toEquip as MagicItem);
-        
-    //}
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (magicItem == null || !hoverDisplayer)
             return;
 
+        SetDisplayOn();
+    }
 
+    private void SetDisplayOn()
+    {
         hoverDisplayer.gameObject.SetActive(true);
 
         Vector3 newPos = transform.position;
         //newPos.x = newPos.x > 400 ? newPos.x - 280f : newPos.x + 400f;
-        newPos.x -=  350f;
+        newPos.x -= 350f;
         hoverDisplayer.transform.position = newPos;
 
         hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite });
         hoverDisplayer.transform.SetParent(All_Canvases.FrontestCanvas.transform);
-        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
-        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, $"+{magicItem._Benefit().Value()}", magicItem.ItemDescription(), $"{magicItem.goldValue} Gold" }, 
-                                    //new List<Sprite> { SwitchOnBenefit((magicItem._Benefit() as StatBenefit).statToBenefit)});
-        //HoverTextBoard.Instance.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.goldValue.ToString()}, new List<Sprite> { switch((magicItem._Benefit() as StatBenefit).statToBenefit)});
     }
 
     Sprite SwitchOnBenefit(StatToBenefit statToBenefit)
@@ -121,8 +112,8 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     {
         if (magicItem == null)
             return;
-        //HoverTextBoard.Instance.UnSetMe();
-        hoverDisplayer.transform.SetParent(transform.parent);
+
+        hoverDisplayer.transform.SetParent(transform.parent); //not sure we really need to do this
         hoverDisplayer.gameObject.SetActive(false);
     }
 }

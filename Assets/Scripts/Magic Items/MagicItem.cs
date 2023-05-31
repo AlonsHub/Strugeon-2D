@@ -68,7 +68,17 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         goldValue = gold;
         spriteName = spritename;
     }
-    public List<string> AsStringsData()
+    public List<object> DataAsListOfObjects()
+    {
+
+        string classes = "";
+        foreach (var item in relevantClasses)
+        {
+            classes += $"{item}_";
+        }
+        return new List<object> { magicItemName, ((int)fittingSlotType).ToString(), ((int)statBenefit.statToBenefit).ToString(), myBenefit.Value().ToString(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
+    }
+    public List<string> DataAsListOfStrings()
     {
 
         string classes = "";
