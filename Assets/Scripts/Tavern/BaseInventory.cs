@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseInventory : MonoBehaviour, ISearchBarable
+public class BaseInventory : MonoBehaviour, ISearchBarable, ISortableByDropdown
 {
     //parent
     [SerializeField]
@@ -81,13 +81,13 @@ public class BaseInventory : MonoBehaviour, ISearchBarable
         }
     }
 
-    public virtual void SortItemsByValue()
+    public virtual void SortItemsByValue() //Do we really use this anywhere?
     {
 
         //_localItems = SorterFilter.SortListBy(_localItems, new ItemComparer_Value());
         //_localItems = _localItems.Sort(Archived_ItemComparers.ItemComparer_Value());
         //_localItems.Sort(Archived_ItemComparers.ItemComparer_Value());
-        _localItems.Sort(new ItemComparer_Value());
+        _localItems.Sort(new ItemComparer_ValueLowToHigh());
 
         RefreshInventory();
     }
@@ -102,6 +102,38 @@ public class BaseInventory : MonoBehaviour, ISearchBarable
     public void ClearSearch()
     {
         _localItems = Inventory.Instance.inventoryItems;
+        RefreshInventory();
+    }
+
+    public void SortThisOut(int typeOfSort, bool lowToHigh)
+    {
+        switch (typeOfSort)
+        {
+            //Alphabetical
+            case 0:
+                if(lowToHigh)
+                _localItems.Sort(new ItemComparer_NameAtoZ());
+                else
+                _localItems.Sort(new ItemComparer_NameZtoA());
+                break;
+            //Gold Value
+            case 1:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_ValueLowToHigh());
+                else
+                    _localItems.Sort(new ItemComparer_ValueHighToLow());
+                break;
+            ////Date of Acquisition
+            //case 2:
+            //    break;
+
+            default:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_NameAtoZ());
+                else
+                    _localItems.Sort(new ItemComparer_NameZtoA());
+                break;
+        }
         RefreshInventory();
     }
 }
