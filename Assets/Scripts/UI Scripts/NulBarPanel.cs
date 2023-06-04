@@ -110,8 +110,7 @@ public class NulBarPanel : MonoBehaviour
 
         foreach (var nulElement in PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools)
         {
-            if (nulElement.colour == NoolColour.White)
-                continue;
+            
             if (!coloursToShow.Contains(nulElement.colour))
             {
                 nulBars[(int)nulElement.colour].gameObject.SetActive(false);

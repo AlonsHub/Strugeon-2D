@@ -25,7 +25,8 @@ public class SimpleInventory : BaseInventory
     private void Start()
     {
         SetCurrentItem();
-        starGraph.SetToItem(emptyItem);
+        //starGraph.SetToItem(emptyItem);
+        starGraph.SetAllToValue(0f);
     }
     public override void SetCurrentItem(MagicItem newItem)
     {
@@ -50,7 +51,9 @@ public class SimpleInventory : BaseInventory
         {
             selectedItem = null;
 
-            starGraph.SetToItem(emptyItem);
+            //starGraph.SetToItem(emptyItem);
+            starGraph.SetAllToValue(0f);
+
 
             //Set as nothing
             string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);

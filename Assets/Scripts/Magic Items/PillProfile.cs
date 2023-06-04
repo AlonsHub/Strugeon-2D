@@ -110,8 +110,6 @@ public class NoolProfile
         Debug.LogError("regen all");
         foreach (var item in nools)
         {
-            if (item.colour == NoolColour.White)
-                continue;
             item.Regen();
         }
         OnAnyValueChanged?.Invoke();

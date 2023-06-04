@@ -227,7 +227,7 @@ public class ItemInhaler : MonoBehaviour
         noolChartHider.SetAllHidersToValue(1f);
 
         //for (int i = 0; i < _psionSpectrumProfile.psionElements.Count; i++)
-        for (int i = 0; i < psionPillProfile.pills.Length-1; i++)
+        for (int i = 0; i < psionPillProfile.pills.Length; i++)
         {
             NoolColour currentColour = colourInhaleOrder[i];
             if(coloursToAvoid.Contains(currentColour))
