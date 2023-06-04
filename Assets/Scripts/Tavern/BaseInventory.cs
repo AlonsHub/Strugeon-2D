@@ -94,7 +94,8 @@ public class BaseInventory : MonoBehaviour, ISearchBarable
 
     public void Search(string searchWord)
     {
-        _localItems = Inventory.Instance.inventoryItems.Where(x => x.magicItemName.Contains(searchWord)).ToList();
+        _localItems = Inventory.Instance.inventoryItems.Where
+            (x => x.magicItemName.IndexOf(searchWord, 0, x.magicItemName.Length, System.StringComparison.OrdinalIgnoreCase) != -1).ToList();
         RefreshInventory();
     }
 
