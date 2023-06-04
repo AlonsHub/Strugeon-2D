@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class NewSanctumInventory : MonoBehaviour
+public class NewSanctumInventory : MonoBehaviour, ISearchBarable
 {
     [SerializeField]
     GameObject displayerPrefab;
@@ -10,9 +11,12 @@ public class NewSanctumInventory : MonoBehaviour
     Transform parent;
 
     List<SanctumItemDisplayer> itemDisplayers;
+    List<MagicItem> _localItems;
+
 
     private void Start()
     {
+        _localItems = Inventory.Instance.inventoryItems;
 
         Refresh();
     }
@@ -34,13 +38,13 @@ public class NewSanctumInventory : MonoBehaviour
 
         for (int i = 0; i < itemDisplayers.Count; i++)
         {
-            itemDisplayers[i].SetMeFull(Inventory.Instance.inventoryItems[i]);
+            itemDisplayers[i].SetMeFull(_localItems[i]);
         }
     }
 
     private void EnsureOneDisplayerPerItem()
     {
-        int delta = itemDisplayers.Count - Inventory.Instance.magicItemCount;
+        int delta = itemDisplayers.Count - _localItems.Count;
         if (delta > 0)
         {
             for (int i = 0; i < delta; i++)
@@ -57,5 +61,19 @@ public class NewSanctumInventory : MonoBehaviour
                 itemDisplayers.Add(Instantiate(displayerPrefab, parent).GetComponent<SanctumItemDisplayer>());
             }
         }
+    }
+
+    public void Search(string searchWord)
+    {
+        _localItems = Inventory.Instance.inventoryItems.Where
+            (x => x.magicItemName.IndexOf(searchWord, 0, x.magicItemName.Length, System.StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        Refresh();
+    }
+
+    public void ClearSearch()
+    {
+        _localItems = Inventory.Instance.inventoryItems;
+        Refresh();
+
     }
 }

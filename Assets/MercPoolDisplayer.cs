@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MercPoolDisplayer : MonoBehaviour
+public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
 {
     //describes a manager which generates a customizeable batch of Displayers(with or without buttons), Instantitates them
     //under an auto-self-sorting partent (layout-groups, grids, whatevers).
@@ -23,22 +24,40 @@ public class MercPoolDisplayer : MonoBehaviour
     //[SerializeField] MercGearDisplayer mercGearDisplayer;
 
     List<MercSheet> relevant;
+
+    public void ClearSearch()
+    {
+        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
+        DisplayRelevant();
+    }
+
+    public void Search(string searchWord)
+    {
+        relevant = relevant.Where(x => x.characterName.ToString().IndexOf(searchWord, 0, x.characterName.ToString().Length, System.StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        DisplayRelevant();
+    }
+
     private void OnEnable()
     {
         //int diff = displayers.Count - PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count;
-        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad});//Excluding Hireable
-        //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
+        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
+                                                                                                                                                                              //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
+        DisplayRelevant();
+    }
+
+    private void DisplayRelevant()
+    {
         int diff = displayers.Count - relevant.Count;
-        if (diff<0)
+        if (diff < 0)
         {
-            for (int i = 0; i < diff*-1; i++) //is lower than 0
+            for (int i = 0; i < diff * -1; i++) //is lower than 0
             {
                 displayers.Add(Instantiate(prefab, gridParent));
             }
         }
-        else if(diff>0)
+        else if (diff > 0)
         {
-            for (int i = displayers.Count-1; i >= displayers.Count-diff; i--)
+            for (int i = displayers.Count - 1; i >= displayers.Count - diff; i--)
             {
                 GameObject temp = displayers[i];
                 displayers.RemoveAt(i);
@@ -48,7 +67,7 @@ public class MercPoolDisplayer : MonoBehaviour
         //check that they are equal now!
         diff = displayers.Count - relevant.Count;
 
-        if(diff !=0)
+        if (diff != 0)
         {
             Debug.LogError($"diff ={diff}");
         }
@@ -59,7 +78,5 @@ public class MercPoolDisplayer : MonoBehaviour
             lobbyMercDisplayer.SetMeFull(relevant[i], this);
 
         }
-       
     }
-
 }
