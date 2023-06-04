@@ -237,7 +237,7 @@ public class ItemInhaler : MonoBehaviour
             while (_timer >= 0)
             {
                 _timer -= Time.deltaTime;
-                noolChartHider.SetHiderToValue(i, _timer/timePerBar);
+                noolChartHider.SetHiderToValue((int)currentColour, _timer/timePerBar);
                 yield return new WaitForEndOfFrame();
             }
 
