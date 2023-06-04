@@ -19,29 +19,35 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
 
     [SerializeField] Transform gridParent;
 
-    List<GameObject> displayers = new List<GameObject>();
+    List<GameObject> displayers;
 
     //[SerializeField] MercGearDisplayer mercGearDisplayer;
+    List<MercSheet> availableInRoomAndAway;
 
     List<MercSheet> relevant;
 
+
+    private void Awake()
+    {
+        displayers = new List<GameObject>();
+    }
     public void ClearSearch()
     {
-        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
+        relevant = availableInRoomAndAway;
         DisplayRelevant();
     }
 
     public void Search(string searchWord)
     {
-        relevant = relevant.Where(x => x.characterName.ToString().IndexOf(searchWord, 0, x.characterName.ToString().Length, System.StringComparison.OrdinalIgnoreCase) != -1).ToList();
+        relevant = availableInRoomAndAway.Where(x => x.characterName.ToString().IndexOf(searchWord, 0, x.characterName.ToString().Length, System.StringComparison.OrdinalIgnoreCase) != -1).ToList();
         DisplayRelevant();
     }
 
     private void OnEnable()
     {
         //int diff = displayers.Count - PlayerDataMaster.Instance.currentPlayerData.mercSheets.Count;
-        relevant = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
-                                                                                                                                                                              //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
+        availableInRoomAndAway = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
+        relevant = availableInRoomAndAway;                                                                                                                              //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
         DisplayRelevant();
     }
 
@@ -55,7 +61,7 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
                 displayers.Add(Instantiate(prefab, gridParent));
             }
         }
-        else if (diff > 0)
+        else if (diff > 0 && displayers.Count - 1 >0)
         {
             for (int i = displayers.Count - 1; i >= displayers.Count - diff; i--)
             {
@@ -76,7 +82,7 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
         {
             LobbyMercDisplayer lobbyMercDisplayer = displayers[i].GetComponent<LobbyMercDisplayer>();
             lobbyMercDisplayer.SetMeFull(relevant[i], this);
-
         }
     }
+
 }
