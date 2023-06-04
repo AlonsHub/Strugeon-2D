@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseInventory : MonoBehaviour
+public class BaseInventory : MonoBehaviour, ISearchBarable
 {
     //parent
     [SerializeField]
@@ -58,7 +58,7 @@ public class BaseInventory : MonoBehaviour
         else
         {
             //for (int i = Inventory.Instance.magicItemCount; i < displayers.Count; i++)
-            for (int i = Inventory.Instance.magicItemCount; i < displayers.Count; i++)
+            for (int i = _localItems.Count; i < displayers.Count; i++)
             {
                 Destroy(displayers[i].gameObject); //just disable them dude... TBF
             }
@@ -74,10 +74,10 @@ public class BaseInventory : MonoBehaviour
         //Draw items
         for (int i = 0; i < _localItems.Count; i++)
         {
-            if (!_localItems[i].FetchSprite())
-                continue;
+            //if (!_localItems[i].FetchSprite())
+            //    continue;
 
-            displayers[i].SetMeFull(Inventory.Instance.inventoryItems[i], this);
+            displayers[i].SetMeFull(_localItems[i], this);
         }
     }
 
@@ -92,4 +92,15 @@ public class BaseInventory : MonoBehaviour
         RefreshInventory();
     }
 
+    public void Search(string searchWord)
+    {
+        _localItems = Inventory.Instance.inventoryItems.Where(x => x.magicItemName.Contains(searchWord)).ToList();
+        RefreshInventory();
+    }
+
+    public void ClearSearch()
+    {
+        _localItems = Inventory.Instance.inventoryItems;
+        RefreshInventory();
+    }
 }
