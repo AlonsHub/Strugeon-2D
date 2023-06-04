@@ -72,6 +72,8 @@ public class ItemInhaler : MonoBehaviour
     [SerializeField]
     List<NoolColour> coloursToAvoid;
 
+    float[] _tempValues;
+
     private void Awake()
     {
         if (!button)
@@ -212,10 +214,11 @@ public class ItemInhaler : MonoBehaviour
 
     IEnumerator SuccessfulInhaleSequence(float[] s)
     {
+        _tempValues = s;
         SanctumSelectedPanel.Instance.SetMeFull();
 
 
-        startGraph.SetToValues(s);
+        startGraph.SetToValues(_tempValues);
 
         skipButtonObj.SetActive(true);
         resultText.text = "";
@@ -245,10 +248,10 @@ public class ItemInhaler : MonoBehaviour
             //processingColourIndicator.gameObject.SetActive(false);
             resultText.gameObject.SetActive(true);
 
-            if (s[(int)currentColour] != 0f)
+            if (_tempValues[(int)currentColour] != 0f)
             {
                 //resultText.text = $"Inhaled {psionPillProfile.pills[i].colour} colour by {s[i]}.";
-                resultText.text = $"Inhaled {currentColour} colour by {s[(int)currentColour]}.";
+                resultText.text = $"Inhaled {currentColour} colour by {_tempValues[(int)currentColour]}.";
                 pillPanel.PromptReward((int)currentColour, (int)s[(int)currentColour]);
                 //itemNulBarPanel.SetBarText(i, $"+{s[i]}");
             }
@@ -269,7 +272,15 @@ public class ItemInhaler : MonoBehaviour
         
 
         FinalizeInhaleSequence();
+
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        resultText.gameObject.SetActive(false);
+        pillPanel.SetToPsion();
+        startGraph.SetAllToValue(0f);
     }
+
+    //IEnumerator 
 
 
 
@@ -279,14 +290,14 @@ public class ItemInhaler : MonoBehaviour
         OnInhaleEnd?.Invoke();
         noolChartHider.SetAllHidersToValue(0f);
 
-        pillPanel.SetToPsion();
+        //pillPanel.SetToPsion();
         //SanctumSelectedPanel.Instance.SetMeFull();
 
-        resultText.gameObject.SetActive(false);
+        //resultText.gameObject.SetActive(false);
         inhaling = false;
         //button.interactable = true;
         skipButtonObj.SetActive(false);
-        startGraph.SetAllToValue(0f);
+        //startGraph.SetAllToValue(0f);
     }
 
     bool RollChance(int x, int outOf)
@@ -296,11 +307,27 @@ public class ItemInhaler : MonoBehaviour
 
     public void SkipInhale()
     {
+        StartCoroutine(nameof(SkipInhaleCoro));
+    }
+    public IEnumerator SkipInhaleCoro()
+    {
         if (coro != null)
         {
             StopCoroutine(coro);
             coro = null;
         }
+        for (int i = 0; i < _tempValues.Length; i++)
+        {
+            if (_tempValues[i] != 0)
+            {
+                pillPanel.PromptReward(i, (int)_tempValues[i]);
+            }
+        }
+
         FinalizeInhaleSequence();
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        resultText.gameObject.SetActive(false);
+        pillPanel.SetToPsion();
+        startGraph.SetAllToValue(0f);
     }
 }
