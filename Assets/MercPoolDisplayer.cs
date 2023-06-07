@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
+public class MercPoolDisplayer : MonoBehaviour, ISearchBarable, ISortableByDropdown
 {
     //describes a manager which generates a customizeable batch of Displayers(with or without buttons), Instantitates them
     //under an auto-self-sorting partent (layout-groups, grids, whatevers).
@@ -19,7 +19,8 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
 
     [SerializeField] Transform gridParent;
 
-    List<GameObject> displayers;
+    List<GameObject> onDisplayers;
+    List<GameObject> offDisplayers;
 
     //[SerializeField] MercGearDisplayer mercGearDisplayer;
     List<MercSheet> availableInRoomAndAway;
@@ -29,7 +30,8 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
 
     private void Awake()
     {
-        displayers = new List<GameObject>();
+        onDisplayers = new List<GameObject>();
+        offDisplayers = new List<GameObject>();
     }
     public void ClearSearch()
     {
@@ -53,36 +55,85 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable
 
     private void DisplayRelevant()
     {
-        int diff = displayers.Count - relevant.Count;
+        int diff = onDisplayers.Count - relevant.Count;
         if (diff < 0)
         {
             for (int i = 0; i < diff * -1; i++) //is lower than 0
             {
-                displayers.Add(Instantiate(prefab, gridParent));
+                if(offDisplayers.Count >0)
+                {
+                    offDisplayers[offDisplayers.Count - 1].SetActive(true);
+                    onDisplayers.Add(offDisplayers[offDisplayers.Count - 1]);
+                    offDisplayers.RemoveAt(offDisplayers.Count - 1);
+                }
+                else
+                onDisplayers.Add(Instantiate(prefab, gridParent));
             }
         }
-        else if (diff > 0 && displayers.Count - 1 >0)
+        else if (diff > 0)
         {
-            for (int i = displayers.Count - 1; i >= displayers.Count - diff; i--)
+            for (int i = onDisplayers.Count- diff; i < onDisplayers.Count; i++)
             {
-                GameObject temp = displayers[i];
-                displayers.RemoveAt(i);
-                Destroy(temp);
+                offDisplayers.Add(onDisplayers[i]);
+                onDisplayers[i].gameObject.SetActive(false);
+                //onDisplayers.RemoveAt(i);
+                //GameObject temp = onDisplayers[i];
+                //onDisplayers.RemoveAt(i);
+                //Destroy(temp);
             }
+            onDisplayers.RemoveRange(onDisplayers.Count - diff, diff);
         }
         //check that they are equal now!
-        diff = displayers.Count - relevant.Count;
+        diff = onDisplayers.Count - relevant.Count;
 
         if (diff != 0)
         {
             Debug.LogError($"diff ={diff}");
         }
 
-        for (int i = 0; i < displayers.Count; i++)
+        for (int i = 0; i < onDisplayers.Count; i++)
         {
-            LobbyMercDisplayer lobbyMercDisplayer = displayers[i].GetComponent<LobbyMercDisplayer>();
+            LobbyMercDisplayer lobbyMercDisplayer = onDisplayers[i].GetComponent<LobbyMercDisplayer>();
             lobbyMercDisplayer.SetMeFull(relevant[i], this);
         }
     }
+    enum MercLobbySorttingType {Alphabetical, Level, Attack, HP};
+    public void SortThisOut(int typeOfSort, bool lowToHigh)
+    {
+        switch (typeOfSort)
+        {
+            case 0:
+                if(lowToHigh)
+                relevant.Sort(new MercComparer_NameAtoZ());
+                else
+                relevant.Sort(new MercComparer_NameZtoA());
+                break;
+            case 1:
+                if (lowToHigh)
+                    relevant.Sort(new MercComparer_LevelLowToHigh());
+                else
+                    relevant.Sort(new MercComparer_LevelHighToLow());
+                break;
+            case 2:
+                if (lowToHigh)
+                    relevant.Sort(new MercComparer_DamageLowToHigh());
+                else
+                    relevant.Sort(new MercComparer_DamageHighToLow());
+                break;
+            case 3:
+                if (lowToHigh)
+                    relevant.Sort(new MercComparer_HPLowToHigh());
+                else
+                    relevant.Sort(new MercComparer_HPHighToLow());
+                break;
 
+            default:
+                if (lowToHigh)
+                    relevant.Sort(new MercComparer_NameAtoZ());
+                else
+                    relevant.Sort(new MercComparer_NameZtoA());
+                break;
+        }
+        DisplayRelevant();
+    }
 }

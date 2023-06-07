@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoryByDropdown : MonoBehaviour
+public class SortByDropdown : MonoBehaviour
 {
     [SerializeField]
     TMPro.TMP_Dropdown dropdown;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum SortByMethod {Value, Type};
 
-public class Archived_ItemComparers
+public class Archived_Comparers
 {
     //public static IComparer ItemComparer_Value()
     //{
@@ -57,5 +57,64 @@ public class ItemComparer_NameZtoA : IComparer<MagicItem>
         
         return result !=0 ? result : y.goldValue - x.goldValue;
 
+    }
+}
+
+public class MercComparer_LevelHighToLow : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        //int result = Mathf.Clamp(y._level - x._level, -1, 2);
+        return y._level - x._level;
+    }
+}
+public class MercComparer_LevelLowToHigh : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        //int result = Mathf.Clamp(y._level - x._level, -1, 2);
+        return x._level - y._level;
+    }
+}
+public class MercComparer_NameAtoZ : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return string.Compare(x.characterName.ToString(),y.characterName.ToString());
+    }
+}
+public class MercComparer_NameZtoA : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return string.Compare(y.characterName.ToString(),x.characterName.ToString());
+    }
+}
+public class MercComparer_DamageLowToHigh : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return x._maxDamage - y._maxDamage;
+    }
+}
+public class MercComparer_DamageHighToLow : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return y._maxDamage -x._maxDamage;
+    }
+}
+public class MercComparer_HPLowToHigh : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return x._maxHp - y._maxHp;
+    }
+}
+public class MercComparer_HPHighToLow : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return y._maxHp - x._maxHp;
     }
 }
