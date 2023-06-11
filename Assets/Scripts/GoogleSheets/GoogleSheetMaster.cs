@@ -103,7 +103,7 @@ public class GoogleSheetMaster : MonoBehaviour
             return null;
         }
     }
-    public List<List<string>> GetRows(string range)
+    public List<string[]> GetRows(string range)
     {
         var request = sheetsService.Spreadsheets.Values.Get(spreadsheetID, range);
 
@@ -113,10 +113,16 @@ public class GoogleSheetMaster : MonoBehaviour
         if (values != null && values.Count >= 0)
         {
             //return (List<string>)values;
-            List<List<string>> rows = new List<List<string>>();
+            List<string[]> rows = new List<string[]>();
             foreach (var row in values)
             {
-                rows.Add(row[0] as List<string>);
+                string[] ss = new string[row.Count];
+                for (int i = 0; i < row.Count; i++)
+                {
+                    ss[i] = (string)row[i];
+                }
+                rows.Add(ss);
+                //rows.Add((string[])row);
             }
             return rows;
         }
@@ -275,17 +281,17 @@ public class GoogleSheetMaster : MonoBehaviour
     public void ReadANewItem()
     {
         List<string> rows = GetFirstsOfRows(itemCountCellCordinate);
-        List<string> item = new List<string>();
+        var item = new List<string[]>();
         int itemCount;
         print(rows[0]);
         if(int.TryParse(rows[0], out itemCount))
         {
             print($"parsed well into {itemCount}");
-            item = GetRow($"Item_DataBase_Test2!A{itemCount + 2}:H{itemCount+2}"); //+1 since the first row is header and not items
-            print(item[0]);
-            print(item[1]);
+            item = GetRows($"Item_DataBase_Test2!A2:H{itemCount+2}"); //+1 since the first row is header and not items
+            //print(item[0]);
+            //print(item[1][0]);
 
-            MagicItem newItem = ParseItem(item);
+            MagicItem newItem = ParseItem(item[0]);
             MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
             tempSO.magicItem = newItem;
             //Dont fetch sprite yet!
@@ -331,6 +337,43 @@ public class GoogleSheetMaster : MonoBehaviour
 
         return new MagicItem(rows[0], (EquipSlotType)int.Parse(rows[1]), sb, rClasses, flots, int.Parse(rows[6]), rows[7]);
     }
+    MagicItem ParseItem(string[] rows)
+    {
+        StatBenefit sb = new StatBenefit((StatToBenefit)int.Parse(rows[2]), int.Parse(rows[3]));
+        List<MercClass> rClasses = new List<MercClass>();
+        string[] seperated = rows[4].Split('_');
+        foreach (var item in seperated)
+        {
+            item.Replace("_", "");
+            
+            switch (item)
+            {
+                case "Fighter":
+                    rClasses.Add(MercClass.Fighter);
+                    break;
+                case "Rogue":
+                    rClasses.Add(MercClass.Rogue);
+                    break;
+                case "Mage":
+                    rClasses.Add(MercClass.Mage);
+                    break;
+                case "Priest":
+                    rClasses.Add(MercClass.Priest);
+                    break;
+            }
+        }
+        seperated = rows[5].Split('_');
+        float[] flots = new float[seperated.Length];
+        for (int i = 0; i < seperated.Length-1; i++)
+        {
+            seperated[i].Replace("_", "");
+            flots[i] = float.Parse(seperated[i]);
+        }
+
+
+        return new MagicItem(rows[0], (EquipSlotType)int.Parse(rows[1]), sb, rClasses, flots, int.Parse(rows[6]), rows[7]);
+    }
+
     //public void LogRandomItems()
     //{
     //        LogNewItem(DifficultyTranslator.Instance.DifficultyToSingleReward(LairDifficulty.Easy));
