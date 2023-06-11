@@ -552,6 +552,7 @@ MonoBehaviour:
   slotType: 0
   emptySprite: {fileID: 7539286595509921347, guid: 31155a4835afb294f8a618b0cb75f337,
     type: 3}
+  hoverDisplayer: {fileID: 0}
 --- !u!1001 &1153314748603514549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,6 +669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stat Type n Effect
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394427138951419969, guid: 376ab3c7bdc061549b76a5bd22865a35,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6946850441227775292, guid: 376ab3c7bdc061549b76a5bd22865a35,
         type: 3}

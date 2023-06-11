@@ -638,6 +638,7 @@ MonoBehaviour:
   - {fileID: 70267051}
   images:
   - {fileID: 70267048}
+  - {fileID: 6022978041735722983}
 --- !u!114 &70267051 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8469616903603368157, guid: 4fb7da873de4b5645a174b5601f5f198,
@@ -4308,6 +4309,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -392.61676
       objectReference: {fileID: 0}
+    - target: {fileID: 6441672498970505001, guid: 25edc10771f000c419a7e67d18df11ba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6531900611454222692, guid: 25edc10771f000c419a7e67d18df11ba,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4361,7 +4367,7 @@ PrefabInstance:
     - target: {fileID: 6637699404325700642, guid: 25edc10771f000c419a7e67d18df11ba,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.24483722
+      value: 0.2445975
       objectReference: {fileID: 0}
     - target: {fileID: 6637699405333384915, guid: 25edc10771f000c419a7e67d18df11ba,
         type: 3}
@@ -16061,7 +16067,7 @@ GameObject:
   - component: {fileID: 5695156483916959757}
   - component: {fileID: 5}
   m_Layer: 5
-  m_Name: Equip Inventory Window Canvas
+  m_Name: Lobby Window Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16777,6 +16783,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3061366759527041484}
     m_Modifications:
+    - target: {fileID: 454335356331391589, guid: 376ab3c7bdc061549b76a5bd22865a35,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454335356331391589, guid: 376ab3c7bdc061549b76a5bd22865a35,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 454335356331391589, guid: 376ab3c7bdc061549b76a5bd22865a35,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 944319379903221309, guid: 376ab3c7bdc061549b76a5bd22865a35,
         type: 3}
       propertyPath: m_Layer
@@ -16950,6 +16971,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6022978041735722981}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6022978041735722983 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 454335356331391589, guid: 376ab3c7bdc061549b76a5bd22865a35,
+    type: 3}
+  m_PrefabInstance: {fileID: 6022978041735722981}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6382037931481266748
 PrefabInstance:
   m_ObjectHideFlags: 0

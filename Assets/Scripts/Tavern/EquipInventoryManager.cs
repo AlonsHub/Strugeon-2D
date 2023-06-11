@@ -91,7 +91,7 @@ public class EquipInventoryManager : MonoBehaviour
         
         
         EnsureOneDisplayerPerMagicItem();
-
+        
         foreach (var item in displayers)
         {
             item.gameObject.SetActive(true);
@@ -130,7 +130,7 @@ public class EquipInventoryManager : MonoBehaviour
             //if (!relevantItems[i].FetchSprite())
             //    continue;
 
-            displayers[i].SetItem(relevantItems[i]._Item(), hoverDisplayer);
+            displayers[i].SetItem(relevantItems[i]._Item(), relevantMercSheet, hoverDisplayer);
         }
         for (int i = relevantItems.Count; i < displayers.Count; i++)
         {

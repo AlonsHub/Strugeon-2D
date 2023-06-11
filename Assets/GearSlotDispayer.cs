@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerExitHandler
@@ -14,6 +15,12 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     BasicDisplayer hoverDisplayer;
     //[SerializeField]
     //EquipInventoryManager inventoryDisplayManager;
+    //[SerializeField]
+    //Sprite comparisonArrowUpGreen;
+    //[SerializeField]
+    //Sprite comparisonArrowDownRed;
+    // [SerializeField]
+    //Sprite comparisonArrowEquals;
 
     MagicItem magicItem;
 
@@ -53,8 +60,29 @@ public class GearSlotDispayer : BasicDisplayer, IPointerEnterHandler, IPointerEx
     {
         if (magicItem == null || !hoverDisplayer)
             return;
+        //Sprite comparisonArrow;
+        //if(mercSheet.gear.GetItemBySlot(slotType)._Benefit().BenefitStatName() == magicItem._Benefit().BenefitStatName())
+        //{
+        //    if(mercSheet.gear.GetItemBySlot(slotType)._Benefit().Value() < magicItem._Benefit().Value())
+        //    {
+        //        comparisonArrow = comparisonArrowDownRed;
+        //    }
+        //    else if(mercSheet.gear.GetItemBySlot(slotType)._Benefit().Value() != magicItem._Benefit().Value())
+        //    {
+        //        comparisonArrow = comparisonArrowUpGreen;
+        //    }
+        //    else
+        //    {
+        //        comparisonArrow = comparisonArrowEquals; 
+        //    }
+        //}
+        //else
+        //{
+        //    comparisonArrow = emptySprite;
+        //}
 
-        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.goldValue.ToString() }, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite });
+
+        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.ItemDescription(), magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.goldValue.ToString()}, new List<Sprite> { ((magicItem._Benefit() as StatBenefit).statToBenefit == StatToBenefit.MaxHP) ? PrefabArchive.Instance.healthSprite : PrefabArchive.Instance.swordSprite, emptySprite});
         Vector3 newPos = hoverDisplayer.transform.position;
         newPos.x = transform.position.x + 350f;
         

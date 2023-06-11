@@ -6,8 +6,16 @@ using UnityEngine.EventSystems;
 public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitHandler
 {
     public MagicItem magicItem;
-    
+    public MercSheet mercSheet;
     public GameObject sellGroup;
+
+
+    [SerializeField]
+    Sprite comparisonArrowUpGreen;
+    [SerializeField]
+    Sprite comparisonArrowDownRed;
+    [SerializeField]
+    Sprite comparisonArrowEquals;
 
     //Gear displayer
     //[SerializeField]
@@ -18,6 +26,10 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     
     [SerializeField]
     private Sprite emptySprite;
+
+
+    Sprite _comparisonArrow;
+
 
     public void OnClick()
     {
@@ -39,13 +51,15 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         //}
     }
   
-    public void SetItem(MagicItem newItem, BasicDisplayer bd)
+    public void SetItem(MagicItem newItem, MercSheet sheet , BasicDisplayer bd)
     {
+        mercSheet = sheet;
         magicItem = newItem;
         hoverDisplayer = bd;
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
-        
-        SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite});
+        SetComparisonArrow();
+
+        SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
     }
     public void SetItem()
     {
@@ -82,14 +96,38 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     private void SetDisplayOn()
     {
         hoverDisplayer.gameObject.SetActive(true);
+        SetComparisonArrow();
 
         Vector3 newPos = transform.position;
         //newPos.x = newPos.x > 400 ? newPos.x - 280f : newPos.x + 400f;
         newPos.x -= 350f;
         hoverDisplayer.transform.position = newPos;
 
-        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite });
+        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite, _comparisonArrow });
         hoverDisplayer.transform.SetParent(All_Canvases.FrontestCanvas.transform);
+    }
+
+    private void SetComparisonArrow()
+    {
+        if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().BenefitStatName() == magicItem._Benefit().BenefitStatName())
+        {
+            if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().Value() > magicItem._Benefit().Value())
+            {
+                _comparisonArrow = comparisonArrowDownRed;
+            }
+            else if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().Value() != magicItem._Benefit().Value())
+            {
+                _comparisonArrow = comparisonArrowUpGreen;
+            }
+            else
+            {
+                _comparisonArrow = comparisonArrowEquals;
+            }
+        }
+        else
+        {
+            _comparisonArrow = emptySprite;
+        }
     }
 
     Sprite SwitchOnBenefit(StatToBenefit statToBenefit)

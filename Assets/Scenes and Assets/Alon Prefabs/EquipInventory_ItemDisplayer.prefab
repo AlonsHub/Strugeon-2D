@@ -458,37 +458,59 @@ MonoBehaviour:
   - {fileID: 7203464505144678698}
   images:
   - {fileID: 2710478525194181569}
+  - {fileID: 4240962710754035942}
   magicItem:
     magicItemName: 
     goldValue: 0
-    spectrumProfile:
-      elements:
-      - value: 0
-        nulColour: 0
-      - value: 0
-        nulColour: 1
-      - value: 0
-        nulColour: 2
-      - value: 0
-        nulColour: 3
-      - value: 0
-        nulColour: 4
-      - value: 0
-        nulColour: 5
-      - value: 0
-        nulColour: 6
+    pillProfile:
+      pills: []
+      dominant: 0
     rarity: 0
-    dropRateWeight: 0
     itemSprite: {fileID: 0}
     spriteName: 
     fittingSlotType: 0
     isEquipped: 0
-    statBenefitSO: {fileID: 0}
     statBenefit:
       statToBenefit: 0
       value: 0
     relevantClasses: 
+  mercSheet:
+    mercClass: 0
+    characterName: 0
+    pillProfile:
+      pills: []
+      dominant: 0
+    baseSheetSO: {fileID: 0}
+    baseStatBlock:
+      maxHp: 0
+      maxDamage: 0
+      minDamage: 0
+      range: 0
+      maxHPPerLevel: 0
+      maxDamagePerLevel: 0
+      minDamagePerLevel: 0
+    basicPrefs:
+      weaponPrefs:
+        baseAttackValue: 0
+        attackFoesAtRange0_modifier: 0
+        attackFoesAtRange1_modifier: 0
+        attackFoesWithinAttackRange_modifier: 0
+        approachFoesOutOfAttackRange_modifier: 0
+      targetHealthPrefs:
+        percentModParis: []
+    currentAssignment: 0
+    roomOrSquadNumber: 0
+    _experience: 0
+    _level: 0
+    mustHoldWeapon: 0
+    gearStrings: []
   sellGroup: {fileID: 0}
+  comparisonArrowUpGreen: {fileID: 5688385721555123385, guid: 31155a4835afb294f8a618b0cb75f337,
+    type: 3}
+  comparisonArrowDownRed: {fileID: 2831401197825969033, guid: 31155a4835afb294f8a618b0cb75f337,
+    type: 3}
+  comparisonArrowEquals: {fileID: 4620036233086308783, guid: 31155a4835afb294f8a618b0cb75f337,
+    type: 3}
   hoverDisplayer: {fileID: 0}
   emptySprite: {fileID: 3983671566301948619, guid: 5db449eded7dfc642ab46a2f37e06b09,
     type: 3}
@@ -574,6 +596,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1682393982672044862}
     m_Modifications:
+    - target: {fileID: 1440557922651571602, guid: 4a67b15f69ae9b34ca3c416608b83141,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440557922651571602, guid: 4a67b15f69ae9b34ca3c416608b83141,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1440557922651571602, guid: 4a67b15f69ae9b34ca3c416608b83141,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3913739563773621748, guid: 4a67b15f69ae9b34ca3c416608b83141,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -752,6 +789,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2965355174520524148}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4240962710754035942 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1440557922651571602, guid: 4a67b15f69ae9b34ca3c416608b83141,
+    type: 3}
+  m_PrefabInstance: {fileID: 2965355174520524148}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6108629721799487359 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
