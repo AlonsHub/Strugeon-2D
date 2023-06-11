@@ -8,7 +8,7 @@ public class EquipInventoryWindow : MonoBehaviour
     TogglePopout myToggle;
     private void OnEnable()
     {
-        Tavern.Instance.DisableWindowTier1(name);
+        //Tavern.Instance.DisableWindowTier1(name);
         myToggle.Toggle(true);
     }
 

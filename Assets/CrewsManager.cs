@@ -19,6 +19,11 @@ public class CrewsManager : MonoBehaviour
     public void OnEnable()
     {
         RefreshCrews();
+        SquadBuilder2.OnAnyCrewChanges += RefreshCrews;
+    }
+    private void OnDisable()
+    {
+        SquadBuilder2.OnAnyCrewChanges -= RefreshCrews;
     }
 
     private void RefreshCrews()

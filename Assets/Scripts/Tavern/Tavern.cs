@@ -67,29 +67,39 @@ public class Tavern : MonoBehaviour
         //Maybe test here if they are still hireable or if they left the tavern for greater adventures elsewhere?
     }
 
-    public void DisableWindowTier1(string dontDisable)
-    {
-        if(squadBuilder.gameObject.activeInHierarchy && dontDisable != squadBuilder.name)
-        {
-            squadBuilder.CloseMe();
-            return;
-        }
+    //public void DisableWindowTier1(string dontDisable)
+    //{
+    //    if(squadBuilder.gameObject.activeInHierarchy && dontDisable != squadBuilder.name)
+    //    {
+    //        squadBuilder.CloseMe();
+    //        return;
+    //    }
 
+    //    foreach (var item in windowTier1)
+    //    {
+    //        if (!item.name.Equals(dontDisable))
+    //            item.SetActive(false);
+    //        else
+    //        {
+
+    //            if(!item.activeInHierarchy) //TBF does this ensure that a dontDisable window is still active by activating it? it's suppose to be active already...
+    //                //turns out, dontDisable means Enable (in most cases), but some buttons do enable windows on their own for some stupid reason - so that needs to be fixed
+    //            item.SetActive(true);
+    //        }
+    //    }
+    //}
+
+    public void DisableTier1Windows()
+    {
         foreach (var item in windowTier1)
         {
-            if (!item.name.Equals(dontDisable))
-                item.SetActive(false);
-            else
-            {
-                
-                if(!item.activeInHierarchy) //TBF does this ensure that a dontDisable window is still active by activating it? it's suppose to be active already...
-                    //turns out, dontDisable means Enable (in most cases), but some buttons do enable windows on their own for some stupid reason - so that needs to be fixed
-                item.SetActive(true);
-            }
+                if (item.activeInHierarchy) //TBF does this ensure that a dontDisable window is still active by activating it? it's suppose to be active already...
+                                             //turns out, dontDisable means Enable (in most cases), but some buttons do enable windows on their own for some stupid reason - so that needs to be fixed
+                    item.SetActive(false);
         }
     }
 
-    
+
 
     // public void ReadSaveData()
     // Takes the available mercs from current save data

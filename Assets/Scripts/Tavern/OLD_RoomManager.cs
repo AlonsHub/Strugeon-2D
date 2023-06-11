@@ -22,7 +22,7 @@ public class OLD_RoomManager : MonoBehaviour
         if (roomDisplayers == null)
             return;
 
-        Tavern.Instance.DisableWindowTier1(name);
+        //Tavern.Instance.DisableWindowTier1(name);
 
         myButton.Toggle(true);
 

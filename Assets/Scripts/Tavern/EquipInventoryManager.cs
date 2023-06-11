@@ -32,7 +32,7 @@ public class EquipInventoryManager : MonoBehaviour
     //
     MercSheet relevantMercSheet;
     LobbyMercDisplayer lobbyMercDisplayer;
-    private void Awake()
+    private void OnEnable()
     {
         Instance = this;
     }
@@ -67,6 +67,7 @@ public class EquipInventoryManager : MonoBehaviour
         //    Destroy(empties[i]);
         //}
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
+        Instance = null;
         //if (mercGearDisplayer)
         //    mercGearDisplayer.OnMercChange -= RefreshInventory;
     }

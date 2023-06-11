@@ -43,6 +43,8 @@ public class SquadBuilder2 : MonoBehaviour
     int _currentRoomIndex = 0;
     int _roomCount => Tavern.Instance.RoomCount;
 
+    public static System.Action OnAnyCrewChanges;
+
     
     private void OnEnable()
     {
@@ -55,7 +57,7 @@ public class SquadBuilder2 : MonoBehaviour
 
     private void Init()
     {
-        Tavern.Instance.DisableWindowTier1(name);
+        //Tavern.Instance.DisableWindowTier1(name);
         //confirmWindowAnswer = null;
         //confirmCycleAnswer = null;
         //isConfirmed = false; //no?
@@ -527,15 +529,17 @@ public class SquadBuilder2 : MonoBehaviour
 
         Refresh();
     }
-
+    
     public void AddMercToParty(Pawn p)
     {
         ToRoom.squad.AddMerc(p);
+        OnAnyCrewChanges?.Invoke();
         Refresh();
     }
     public void RemoveMercFromParty(Pawn p)
     {
         ToRoom.squad.RemoveMerc(p);
+        OnAnyCrewChanges?.Invoke();
         Refresh();
     }
 

@@ -11,6 +11,9 @@ public class EscMenu : MonoBehaviour
 
     void Update()
     {
+        if(EscToX.Current)
+        { return; }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Input.GetKey(KeyCode.Space))

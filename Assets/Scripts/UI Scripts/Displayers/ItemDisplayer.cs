@@ -29,8 +29,13 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
 
 
     Sprite _comparisonArrow;
+    float _currentDifference;
+    Color _col;
 
-
+    private void OnDisable()
+    {
+        hoverDisplayer.gameObject.SetActive(false);
+    }
     public void OnClick()
     {
         if(magicItem ==null)
@@ -59,7 +64,9 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
         SetComparisonArrow();
 
-        SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
+
+        //SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
+        SetMe(new List<string> { magicItem.magicItemName, $"<color=#{ColorUtility.ToHtmlStringRGBA(_col)}>{(_currentDifference>0 ? "+" : "")}{_currentDifference}</color>", magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
     }
     public void SetItem()
     {
@@ -103,7 +110,12 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         newPos.x -= 350f;
         hoverDisplayer.transform.position = newPos;
 
-        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite, _comparisonArrow });
+        //Color col = _currentDifference > 0 ? Color.green : Color.red;
+        //if (_currentDifference == 0)
+        //    col = Color.white;
+
+
+        hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), $"<color=#{ColorUtility.ToHtmlStringRGBA(_col)}>({(_currentDifference>0 ? "+" : "")}{_currentDifference})</color>", magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite, _comparisonArrow });
         hoverDisplayer.transform.SetParent(All_Canvases.FrontestCanvas.transform);
     }
 
@@ -111,11 +123,13 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     {
         if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().BenefitStatName() == magicItem._Benefit().BenefitStatName())
         {
-            if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().Value() > magicItem._Benefit().Value())
+            _currentDifference =  magicItem._Benefit().Value() - mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().Value();
+
+            if (_currentDifference < 0)
             {
                 _comparisonArrow = comparisonArrowDownRed;
             }
-            else if (mercSheet.gear.GetItemBySlot(magicItem.fittingSlotType)._Benefit().Value() != magicItem._Benefit().Value())
+            else if (_currentDifference > 0)
             {
                 _comparisonArrow = comparisonArrowUpGreen;
             }
@@ -128,6 +142,11 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         {
             _comparisonArrow = emptySprite;
         }
+
+
+        _col = _currentDifference > 0 ? Color.green : Color.red;
+        if (_currentDifference == 0)
+            _col = Color.white;
     }
 
     Sprite SwitchOnBenefit(StatToBenefit statToBenefit)
