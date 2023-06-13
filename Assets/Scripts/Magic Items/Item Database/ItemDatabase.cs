@@ -74,8 +74,12 @@ public class ItemDatabase : MonoBehaviour
     }
     public void AddItem(string s, MagicItemSO so)
     {
+        if(idToItemSO.ContainsKey(s))
+        {
+            Debug.LogError($"{s} already exists");
+            idToItemSO[s].magicItem = so.magicItem;
+            return;
+        }
         idToItemSO.Add(s, so);
     }
-
-   
 }
