@@ -44,7 +44,7 @@ public class ItemComparer_NameAtoZ : IComparer<MagicItem>
 {
     public int Compare(MagicItem x, MagicItem y)
     {
-        int result = string.Compare(x.magicItemName, y.magicItemName); ;
+        int result = string.Compare(x.magicItemName, y.magicItemName); 
 
         return result != 0 ? result : x.goldValue - y.goldValue;
     }
@@ -53,8 +53,27 @@ public class ItemComparer_NameZtoA : IComparer<MagicItem>
 {
     public int Compare(MagicItem x, MagicItem y)
     {
-        int result = string.Compare(y.magicItemName, x.magicItemName); ;
+        int result = string.Compare(y.magicItemName, x.magicItemName); 
         
+        return result !=0 ? result : y.goldValue - x.goldValue;
+
+    }
+}
+public class ItemComparer_AquisitionOrderEarlyToLate : IComparer<MagicItem>
+{
+    public int Compare(MagicItem x, MagicItem y)
+    {
+        int result = System.DateTime.Compare(x.aquisitionDate, y.aquisitionDate); 
+
+        return result != 0 ? result : x.goldValue - y.goldValue;
+    }
+}
+public class ItemComparer_AquisitionOrderLateToEarly : IComparer<MagicItem>
+{
+    public int Compare(MagicItem x, MagicItem y)
+    {
+        int result = System.DateTime.Compare(y.aquisitionDate, x.aquisitionDate);
+
         return result !=0 ? result : y.goldValue - x.goldValue;
 
     }

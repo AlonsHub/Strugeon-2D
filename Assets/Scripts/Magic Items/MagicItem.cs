@@ -15,23 +15,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     //public ItemSpectrumProfile spectrumProfile;
 
     public PillProfile pillProfile;
-    //[ContextMenu("Fix spectrum to pills now!")]
-    //public void Fix()
-    //{
-    //    //pillProfile = new PillProfile();
-    //    foreach (var item in spectrumProfile.elements)
-    //    {
-    //        //pillProfile.
-    //        pillProfile.pills[(int)item.nulColour].potential = item.value;
-    //        pillProfile.pills[(int)item.nulColour].colour = item.nulColour;
-    //        //pillProfile.pills
-    //    }
-    //    pillProfile.pills[(int)NoolColour.White].colour = NoolColour.White;
-    //    pillProfile.pills[(int)NoolColour.White].potential = 0;
-
-    //}
-
-
+    
 
     public Rarity rarity;
     
@@ -50,6 +34,8 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     IBenefit myBenefit => statBenefit; //just the single now
     public List<MercClass> relevantClasses;
 
+    public DateTime aquisitionDate;
+
     //TBF! make a seperate "Description Database" to store all this data.
     //temp, see above ^^^
     [HideInInspector]
@@ -67,6 +53,8 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         pillProfile = new PillProfile(pots);
         goldValue = gold;
         spriteName = spritename;
+
+        aquisitionDate = DateTime.Now;
     }
     public List<object> DataAsListOfObjects()
     {
@@ -91,7 +79,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     public bool FetchSprite()
     {
-        if (itemSprite && itemSprite.name == spriteName)
+        if (itemSprite && itemSprite.name == spriteName) //TBD TBF !!!! TAKE A BETTER LOOK AT THIS LATER!
         {
             return true;
         }

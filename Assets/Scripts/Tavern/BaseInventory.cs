@@ -123,9 +123,15 @@ public class BaseInventory : MonoBehaviour, ISearchBarable, ISortableByDropdown
                 else
                     _localItems.Sort(new ItemComparer_ValueHighToLow());
                 break;
+
+
             ////Date of Acquisition
-            //case 2:
-            //    break;
+            case 2:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_AquisitionOrderEarlyToLate());
+                else
+                    _localItems.Sort(new ItemComparer_AquisitionOrderLateToEarly());
+                break;
 
             default:
                 if (lowToHigh)
