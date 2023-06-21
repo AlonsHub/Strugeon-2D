@@ -66,6 +66,7 @@ public class VitalityTheftEffect : StatusEffect, I_StatusEffect_TurnStart
                 continue;
 
             item.Heal((int)damage);
+            BattleLogVerticalGroup.Instance.AddEntry("Vitality Theft", ActionSymbol.Heal, item.Name, (int)damage, Color.green);
         }
 
         _pawnsHealedThisRound.Clear();
