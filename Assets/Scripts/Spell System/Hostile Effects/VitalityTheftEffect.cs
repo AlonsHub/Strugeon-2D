@@ -11,6 +11,7 @@ public class VitalityTheftEffect : StatusEffect, I_StatusEffect_TurnStart
     //int minDamage, maxDamage;
     float damage;
     List<Pawn> _pawnsHealedThisRound => specialCollider.GetHealedThisRound;
+    List<Pawn> _inRangeTargets => specialCollider.GetInRangeTargets;
 
     SpecialCollider specialCollider;
 
@@ -55,12 +56,11 @@ public class VitalityTheftEffect : StatusEffect, I_StatusEffect_TurnStart
         //pawnToEffect.TakeElementalDamage(dmg, SturgeonColours.Instance.posionGreen);
         //BattleLogVerticalGroup.Instance.AddEntry(source.Name, ActionSymbol.Poison, pawnToEffect.Name, dmg, SturgeonColours.Instance.posionGreen);
 
-        List<Pawn> _targets = new List<Pawn>(); //GET OVERLAP TARGETS
 
         //int dmg = damage;
 
         //cycle through tarhets
-        foreach (var item in _targets)
+        foreach (var item in _inRangeTargets)
         {
             if (_pawnsHealedThisRound.Contains(item))
                 continue;

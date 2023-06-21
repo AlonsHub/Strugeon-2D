@@ -8,6 +8,7 @@ public class SpecialCollider : MonoBehaviour
     List<Pawn> _inRange;
 
     public List<Pawn> GetHealedThisRound => _healedThisRound;
+    public List<Pawn> GetInRangeTargets => _inRange;
 
     Pawn poorSoul;
 
