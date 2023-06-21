@@ -252,33 +252,9 @@ public class GoogleSheetMaster : MonoBehaviour
         var response = updateRequest.ExecuteAsync();
     }
 
-    [ContextMenu("Read all items")]
-    public void ReadItems()
-    {
-        List<string> rows = GetFirstsOfRows(itemCountCellCordinate);
-        int itemCount;
-        print(rows[0]);
-        if(int.TryParse(rows[0], out itemCount))
-        {
-            print($"parsed well into {itemCount}");
-            rows = GetFirstsOfRows($"Item_DataBase_Test2!A2:D{itemCount+1}"); //+1 since the first row is header and not items
-
-            MagicItem newItem = ParseItem(rows);
-            MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
-            //Dont fetch sprite yet!
-            ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
-
-            ////NOT YET TO ALL
-            //foreach (var item in rows)
-            //{
-            //    //Read as:
-            //    //magicItemName, fittingSlotType, myBenefit.BenefitStatName(), myBenefit.Value(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
-
-            //}
-        }
-    }
-    [ContextMenu("Read a new item")]
-    public void ReadANewItem()
+    
+    [ContextMenu("Pull all items")]
+    public void PullAllItems()
     {
         List<string> rows = GetFirstsOfRows(itemCountCellCordinate);
         var allItems = new List<string[]>();
@@ -296,17 +272,9 @@ public class GoogleSheetMaster : MonoBehaviour
                 tempSO.magicItem = newItem;
                 //Dont fetch sprite yet!
                 ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
-                ItemDatabase.Instance.insoilMystica = tempSO;
+                //ItemDatabase.Instance.insoilMystica = tempSO;
                 tempSO.CallFetch();
             }
-
-            //MagicItem newItem = ParseItem(allItems[0]);
-            //MagicItemSO tempSO = ScriptableObject.CreateInstance<MagicItemSO>();
-            //tempSO.magicItem = newItem;
-            ////Dont fetch sprite yet!
-            //ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
-            //ItemDatabase.Instance.insoilMystica = tempSO;
-            //tempSO.CallFetch();
         }
     }
 

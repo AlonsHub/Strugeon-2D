@@ -12,6 +12,11 @@ public class AllItemSOs : SerializedScriptableObject
     public int itemSOCount => allItemSOs.Count;
     public MagicItemSO itemSOByIndex(int index) => allItemSOs[index];
 
+    public void AddItemToAllItems(MagicItemSO magicItemSO)
+    {
+        allItemSOs.Add(magicItemSO);
+    }
+
     //[ContextMenu("Print for Netta")]
     //public void PrintItemsAndValueForNetta()
     //{

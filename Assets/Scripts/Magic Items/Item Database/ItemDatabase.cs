@@ -80,6 +80,12 @@ public class ItemDatabase : MonoBehaviour
             idToItemSO[s].magicItem = so.magicItem;
             return;
         }
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.CreateAsset(so, $"Assets/Scripts/All_Scriptables/Magic Item SOs/{so.magicItem.fittingSlotType}/{so.magicItem.magicItemName}.asset");
+        UnityEditor.AssetDatabase.SaveAssets();
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+        allItemSOs.AddItemToAllItems(so);
         idToItemSO.Add(s, so);
     }
 }

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fab1f2c6ca2c845b59243cda6ff031, type: 3}
+  m_Name: Jar of Toxin
+  m_EditorClassIdentifier: 
+  magicItem:
+    magicItemName: Jar of Toxin
+    goldValue: 7
+    pillProfile:
+      pills:
+      - colour: 0
+        potential: 0
+      - colour: 1
+        potential: 2
+      - colour: 2
+        potential: 5
+      - colour: 3
+        potential: 0
+      - colour: 4
+        potential: 4
+      - colour: 5
+        potential: 1
+      - colour: 6
+        potential: 1
+      dominant: 0
+    rarity: 0
+    itemSprite: {fileID: 0}
+    spriteName: Jar Of Toxin
+    fittingSlotType: 1
+    isEquipped: 0
+    statBenefit:
+      statToBenefit: 1
+      value: 3
+    relevantClasses: 0100000000000000
