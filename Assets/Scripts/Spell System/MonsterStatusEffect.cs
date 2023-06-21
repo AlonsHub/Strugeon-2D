@@ -8,6 +8,8 @@ using UnityEngine;
 public class MonsterStatusEffect : StatusEffect //No interfaces needed - it cannot be performed
 {
     public Pawn source;
+
+    //public int rolledDamage => Random.Range(min);
     public MonsterStatusEffect(Pawn target, Sprite sprite, Pawn src) : base(target, sprite)
     {
         source = src;
