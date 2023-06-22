@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class NewSanctumInventory : MonoBehaviour, ISearchBarable
+public class NewSanctumInventory : MonoBehaviour, ISearchBarable, ISortableByDropdown
 {
     [SerializeField]
     GameObject displayerPrefab;
@@ -14,7 +14,7 @@ public class NewSanctumInventory : MonoBehaviour, ISearchBarable
     List<MagicItem> _localItems;
 
 
-    private void Start()
+    private void Awake()
     {
         _localItems = Inventory.Instance.inventoryItems;
 
@@ -73,6 +73,45 @@ public class NewSanctumInventory : MonoBehaviour, ISearchBarable
     public void ClearSearch()
     {
         _localItems = Inventory.Instance.inventoryItems;
+        Refresh();
+
+    }
+
+    public void SortThisOut(int typeOfSort, bool lowToHigh)
+    {
+        switch (typeOfSort)
+        {
+            //Alphabetical
+            case 0:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_NameAtoZ());
+                else
+                    _localItems.Sort(new ItemComparer_NameZtoA());
+                break;
+            //Gold Value
+            case 1:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_ValueLowToHigh());
+                else
+                    _localItems.Sort(new ItemComparer_ValueHighToLow());
+                break;
+
+
+            ////Date of Acquisition
+            case 2:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_AquisitionOrderEarlyToLate());
+                else
+                    _localItems.Sort(new ItemComparer_AquisitionOrderLateToEarly());
+                break;
+
+            default:
+                if (lowToHigh)
+                    _localItems.Sort(new ItemComparer_NameAtoZ());
+                else
+                    _localItems.Sort(new ItemComparer_NameZtoA());
+                break;
+        }
         Refresh();
 
     }

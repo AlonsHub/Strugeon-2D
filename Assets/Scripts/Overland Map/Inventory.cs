@@ -74,7 +74,7 @@ public class Inventory : MonoBehaviour
     public void AddMagicItem(MagicItem magicItem)
     {
         Debug.Log($"Item: {magicItem.magicItemName} was added!");
-        magicItem.aquisitionDate = System.DateTime.Now;
+        magicItem.acquisitionDate = System.DateTime.Now;
         inventoryItems.Add(magicItem);
 
         //displayer update? 

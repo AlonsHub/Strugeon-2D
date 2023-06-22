@@ -34,7 +34,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     IBenefit myBenefit => statBenefit; //just the single now
     public List<MercClass> relevantClasses;
 
-    public DateTime aquisitionDate;
+    public DateTime acquisitionDate;
 
     //TBF! make a seperate "Description Database" to store all this data.
     //temp, see above ^^^
@@ -54,7 +54,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         goldValue = gold;
         spriteName = spritename;
 
-        aquisitionDate = DateTime.Now;
+        acquisitionDate = DateTime.Now;
     }
     public List<object> DataAsListOfObjects()
     {

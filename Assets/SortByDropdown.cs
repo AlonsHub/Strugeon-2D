@@ -13,9 +13,14 @@ public class SortByDropdown : MonoBehaviour
 
     ISortableByDropdown sortableByDropdown;
 
-    private void Start()
+    private void Awake()
     {
         sortableByDropdown = sortableObject.GetComponent<ISortableByDropdown>();
+    }
+
+    private void Start()
+    {
+        sortableByDropdown.SortThisOut(dropdown.value, isLowToHigh.isOn);
     }
 
     public void OnValueChanged()
