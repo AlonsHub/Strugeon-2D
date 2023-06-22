@@ -926,6 +926,11 @@ PrefabInstance:
       objectReference: {fileID: 5695156483916959756}
     - target: {fileID: 2287659683179923653, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
+      propertyPath: m_Options.m_Options.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287659683179923653, guid: e7f51120295d7fb4da94d0c55b58bef0,
+        type: 3}
       propertyPath: m_Options.m_Options.Array.data[1].m_Text
       value: Level
       objectReference: {fileID: 0}
@@ -937,7 +942,12 @@ PrefabInstance:
     - target: {fileID: 2287659683179923653, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
       propertyPath: m_Options.m_Options.Array.data[3].m_Text
-      value: HP
+      value: Health
+      objectReference: {fileID: 0}
+    - target: {fileID: 2287659683179923653, guid: e7f51120295d7fb4da94d0c55b58bef0,
+        type: 3}
+      propertyPath: m_Options.m_Options.Array.data[4].m_Text
+      value: Date of Acquistion
       objectReference: {fileID: 0}
     - target: {fileID: 2462140963929855469, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
@@ -987,7 +997,7 @@ PrefabInstance:
     - target: {fileID: 3060328173578499349, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 43.207764
+      value: 46.127808
       objectReference: {fileID: 0}
     - target: {fileID: 3060328173578499349, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
@@ -1027,12 +1037,12 @@ PrefabInstance:
     - target: {fileID: 3060328173578499349, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 271
+      value: -292.56
       objectReference: {fileID: 0}
     - target: {fileID: 3060328173578499349, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 227
+      value: 228.74
       objectReference: {fileID: 0}
     - target: {fileID: 3060328173578499349, guid: e7f51120295d7fb4da94d0c55b58bef0,
         type: 3}
@@ -15726,6 +15736,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Filter Bar 02
       objectReference: {fileID: 0}
+    - target: {fileID: 6571350268733239593, guid: 09b0bc0c02654f24889c39471dbcce5d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6739395264772575521, guid: 09b0bc0c02654f24889c39471dbcce5d,
         type: 3}
       propertyPath: m_IsActive
@@ -16400,7 +16415,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5695156483916959756}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:

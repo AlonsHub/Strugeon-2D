@@ -137,3 +137,17 @@ public class MercComparer_HPHighToLow : IComparer<MercSheet>
         return y._maxHp - x._maxHp;
     }
 }
+public class MercComparer_DateOfAcquisitionEarlyToLate : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return System.DateTime.Compare(x.dateOfAcquisition, y.dateOfAcquisition);
+    }
+}
+public class MercComparer_DateOfAcquisitionLateToEarly : IComparer<MercSheet>
+{
+    public int Compare(MercSheet x, MercSheet y)
+    {
+        return System.DateTime.Compare(y.dateOfAcquisition, x.dateOfAcquisition);
+    }
+}

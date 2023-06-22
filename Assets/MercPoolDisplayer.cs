@@ -97,7 +97,7 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable, ISortableByDropd
             lobbyMercDisplayer.SetMeFull(relevant[i], this);
         }
     }
-    enum MercLobbySorttingType {Alphabetical, Level, Attack, HP};
+    enum MercLobbySorttingType {Alphabetical, Level, Attack, HP, DateOfAcquistion};
     public void SortThisOut(int typeOfSort, bool lowToHigh)
     {
         switch (typeOfSort)
@@ -125,6 +125,12 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable, ISortableByDropd
                     relevant.Sort(new MercComparer_HPLowToHigh());
                 else
                     relevant.Sort(new MercComparer_HPHighToLow());
+                break;
+                case 4:
+                if (lowToHigh)
+                    relevant.Sort(new MercComparer_DateOfAcquisitionEarlyToLate());
+                else
+                    relevant.Sort(new MercComparer_DateOfAcquisitionLateToEarly());
                 break;
 
             default:
