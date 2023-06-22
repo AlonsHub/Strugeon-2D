@@ -33,10 +33,9 @@ public class CrewBlock : MonoBehaviour
 
         crewName.text = "Empty Crew";
 
-        if(room.size < GameStats.maxRoomSize)
-        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
-        else
-        upgradePriceText.text = "";
+        
+        upgradePriceText.text = Prices.UpgradeCrewPriceAsText(room.size);
+       
 
 
         for (int i = 0; i < r.size; i++)
@@ -54,7 +53,7 @@ public class CrewBlock : MonoBehaviour
         }
 
         room = r;
-        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
+        upgradePriceText.text = Prices.UpgradeCrewPriceAsText(room.size);
 
         squad = r.squad;
 
@@ -77,7 +76,7 @@ public class CrewBlock : MonoBehaviour
             Debug.LogError("failed to upgrade room");
             //notEnoughGoldText.gameObject.SetActive(true);
         }
-        upgradePriceText.text = Prices.UpgradeCrewPrice(room.size).ToString();
+        upgradePriceText.text = Prices.UpgradeCrewPriceAsText(room.size);
 
         SetMe(room);
     }

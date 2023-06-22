@@ -96,7 +96,7 @@ public class PlayerData
         noolProfile = new NoolProfile( GameStats.startingPsionCapacities, pillProfile);
     }
 
-    void CreateAddMerc(MercName newName, MercAssignment assignment) 
+    void CreateAddMerc(MercName newName, MercAssignment assignment)
     {
         MercSheet newSheet;
         switch (assignment) //other case are only used if this code is used to also load save
@@ -109,7 +109,13 @@ public class PlayerData
                 break;
             case MercAssignment.Available:
                 availableMercNames.Add(newName);
-                newSheet = new MercSheet(newName, MercAssignment.Available, -1);
+                //newSheet = new MercSheet(newName, MercAssignment.Available, -1);
+                if (hireableMercs.Contains(newName))
+                    newSheet = PlayerDataMaster.Instance.GetMercSheetByName(newName);
+                else
+                    newSheet = new MercSheet(newName, MercAssignment.Available, -1);
+
+                newSheet.dateOfAcquisition = System.DateTime.Now;
                 mercSheets.Add(newSheet);
                 break;
             case MercAssignment.Hireable:
@@ -125,7 +131,7 @@ public class PlayerData
         }
         //if (availableMercs == null)
         //    availableMercs = new List<MercName>(); //Shouldn't happen seeing as that only happens with the collection version CreateAddMercs at game start AND on load it should also recieve a list
-        
+
         // SHOULD I NOT JUST ADD THIS MERC TO THE LOG HERE?
     }
     public void CreateAddMercs(List<MercName> newNames, MercAssignment assignment) // only way to publicly add mercs is by collection 

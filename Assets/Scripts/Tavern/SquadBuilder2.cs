@@ -30,11 +30,13 @@ public class SquadBuilder2 : MonoBehaviour
 
     [SerializeField]
     List<Pawn> uneditedSquadPawns;
+    [SerializeField]
+    TMPro.TMP_Text upgradePriceText;
 
-    [SerializeField]
-    GameObject confirmWindow;
-    [SerializeField]
-    GameObject cycleConfirmWindow;
+    //[SerializeField]
+    //GameObject confirmWindow;
+    //[SerializeField]
+    //GameObject cycleConfirmWindow;
 
     bool? confirmWindowAnswer;
     bool? confirmCycleAnswer;
@@ -392,6 +394,7 @@ public class SquadBuilder2 : MonoBehaviour
         if (ToRoom.squad == null || ToRoom.squad.pawns.Count == 0)
         {
             crewName.text = $"Crew {_currentRoomIndex + 1}";
+            upgradePriceText.text = Prices.UpgradeCrewPriceAsText(toRoom.size);
 
             LoadAvailables();
             //tempSquad = new Squad();
@@ -527,7 +530,7 @@ public class SquadBuilder2 : MonoBehaviour
         Room r = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
         BetterSetToRoom(r);
 
-        Refresh();
+        //Refresh();
     }
     
     public void AddMercToParty(Pawn p)
@@ -541,6 +544,19 @@ public class SquadBuilder2 : MonoBehaviour
         ToRoom.squad.RemoveMerc(p);
         OnAnyCrewChanges?.Invoke();
         Refresh();
+    }
+
+    public void TryUpgradeCurrentRoom()
+    {
+        if(!toRoom.TryUpgrade())
+        {
+            Debug.LogError("Can't upgrade room!");
+            return;
+        }
+
+        BetterSetToRoom(ToRoom);
+        OnAnyCrewChanges?.Invoke();
+        //Refresh();
     }
 
 }

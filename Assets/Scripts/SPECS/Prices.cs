@@ -96,8 +96,14 @@ public static class Prices
 
     public static int UpgradeCrewPrice(int currentRoomSize)
     {
-        return upgradeRoomBasePrice * (currentRoomSize-1); //2 is the starting amount
+        return currentRoomSize < GameStats.maxRoomSize ? upgradeRoomBasePrice * (currentRoomSize-1) : -1; //2 is the starting amount
     }
+    public static string UpgradeCrewPriceAsText(int currentRoomSize)
+    {
+        int toReturn = UpgradeCrewPrice(currentRoomSize);
+        return toReturn != -1 ? toReturn.ToString() : "N/A"; //2 is the starting amount
+    }
+
     public static int BuyCrewPrice(int currentAmountOfRooms)
     {
         return roomBasePrice * (currentAmountOfRooms); //1 is the starting amount
