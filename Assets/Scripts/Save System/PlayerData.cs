@@ -111,7 +111,10 @@ public class PlayerData
                 availableMercNames.Add(newName);
                 //newSheet = new MercSheet(newName, MercAssignment.Available, -1);
                 if (hireableMercs.Contains(newName))
+                {
+                    hireableMercs.Remove(newName);
                     newSheet = PlayerDataMaster.Instance.GetMercSheetByName(newName);
+                }
                 else
                     newSheet = new MercSheet(newName, MercAssignment.Available, -1);
 

@@ -46,7 +46,7 @@ public class SanctumSelectedPanel : BasicDisplayer
         magicItem = item;
         inhaleButton.interactable = true;
         starGraphNoolBarPanel.SetToItem(item);
-        base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item._Benefit().BenefitStatName(),item._Benefit().Value().ToString() ,item.goldValue.ToString(), item.ItemDescription()}, new List<Sprite> {item.itemSprite});
+        base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item._Benefit().BenefitStatName(),item._Benefit().Value().ToString() ,item.goldValue.ToString(), item.ItemDescription(), item._Benefit().BenefitStatName()}, new List<Sprite> {item.itemSprite});
     }
     public void SetMeFull()
     {
@@ -57,7 +57,7 @@ public class SanctumSelectedPanel : BasicDisplayer
         magicItem = null;
         inhaleButton.interactable = false;
         starGraphNoolBarPanel.SetToItem(emptyItem);
-        base.SetMe(new List<string> { "", "", "", "", "", ""}, new List<Sprite> { emptyItem.itemSprite});
+        base.SetMe(new List<string> { "", "", "", "", "", "", ""}, new List<Sprite> { emptyItem.itemSprite});
     }
 
 }
