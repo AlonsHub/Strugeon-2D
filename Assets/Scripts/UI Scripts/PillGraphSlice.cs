@@ -22,6 +22,13 @@ public class PillGraphSlice : StarGraphSlice
         rewardDisplayer.SetMe(new List<string> { rewardAmount.ToString() }, new List<Sprite> { });
         StartCoroutine(nameof(OnAndOffSequence));
     }
+    public void SetRewardWaitForClick(int rewardAmount) //to simplify the printed number
+    {
+        rewardDisplayer.SetMe(new List<string> { rewardAmount.ToString() }, new List<Sprite> { });
+        StartCoroutine(nameof(OnAndOffSequenceWaitForClick));
+    }
+
+
     IEnumerator OnAndOffSequence()
     {
         rewardDisplayer.gameObject.SetActive(true);
@@ -33,8 +40,20 @@ public class PillGraphSlice : StarGraphSlice
         //Fade Out logic here
 
         rewardDisplayer.gameObject.SetActive(false);
-
     }
+    IEnumerator OnAndOffSequenceWaitForClick()
+    {
+        rewardDisplayer.gameObject.SetActive(true);
+
+        yield return new WaitUntil(() => !ItemInhaler.inhaling);
+
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
+        //Fade Out logic here
+
+        rewardDisplayer.gameObject.SetActive(false);
+    }
+
     public void SetMeFull(Nool element)
     {
         topMax = (Mathf.Floor(element.capacity / 100) + 1)*100;

@@ -36,7 +36,7 @@ public class SquadToggler : MonoBehaviour
         //OnEnable();
         foreach (var t in myToggles)
         {
-            t.onValueChanged.AddListener(delegate { SendExpedtionInteractiveCheck(); });
+            t.onValueChanged.AddListener(delegate { PickSquadInteractiveCheck(); });
         }
         RefreshSlots();
         //for (int i = 0; i < myToggles.Length; i++)
@@ -65,7 +65,7 @@ public class SquadToggler : MonoBehaviour
     {
         foreach (var t in myToggles)
         {
-            t.onValueChanged.RemoveListener(delegate { SendExpedtionInteractiveCheck(); });
+            t.onValueChanged.RemoveListener(delegate { PickSquadInteractiveCheck(); });
         }
     }
 
@@ -74,7 +74,7 @@ public class SquadToggler : MonoBehaviour
     //    //toggleGroup.SetAllTogglesOff();
     //    RefreshSlots();
     //}
-    void SendExpedtionInteractiveCheck()
+    void PickSquadInteractiveCheck()
     { 
         sendExpeditionButton.interactable = toggleGroup.AnyTogglesOn();
     }

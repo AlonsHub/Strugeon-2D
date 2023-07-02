@@ -17,7 +17,8 @@ public class PillPanel : MonoBehaviour
 
     public void PromptReward(int colour, int reward)
     {
-        pillGraphSlices[colour].SetReward(reward);
+        //pillGraphSlices[colour].SetReward(reward);
+        pillGraphSlices[colour].SetRewardWaitForClick(reward);
 
     }
 

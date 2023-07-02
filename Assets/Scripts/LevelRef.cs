@@ -54,9 +54,9 @@ public class LevelRef : MonoBehaviour
     // called second
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        switch (scene.buildIndex) //more things to be added?
+        switch (scene.name) //more things to be added?
         {
-            case 2:
+            case "ArenaSceneGeneric":
                 GameObject go = Instantiate(currentLevel.levelData.levelPrefab);
                 go.transform.Translate(0, 0, -.5f);
                 break;
@@ -64,5 +64,16 @@ public class LevelRef : MonoBehaviour
             default:
                 break;
         }
+        //switch (scene.buildIndex) //more things to be added?
+        //{
+        //    case 3:
+        //        GameObject go = Instantiate(currentLevel.levelData.levelPrefab);
+        //        go.transform.Translate(0, 0, -.5f);
+        //        break;
+
+        //    default:
+        //        break;
+        //}
+
     }
 }
