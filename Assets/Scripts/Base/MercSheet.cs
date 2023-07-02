@@ -48,7 +48,7 @@ public class MercSheet
 
     public string[] gearStrings;
 
-    public System.DateTime dateOfAcquisition;
+    public System.DateTime? dateOfAcquisition;
     //public IEquipable itemBySlot(EquipSlotType st) => gear.ItemBySlot(st); //interesting question: is access to items manages through mercSheet.gear or by methods of mercsheet? (option A!!!)
 
     public MercSheet(MercName mercName, MercAssignment assignment, int relevantNum) //-1 == number not relevant. Assignment decides if they're Available, Hireable or In a Room/AwaySquad
@@ -59,7 +59,7 @@ public class MercSheet
         mercClass = prefab._mercSheet.mercClass; //maybe can remove this from pawn init
 
         //temp_SpectrumProfile = new ItemSpectrumProfile();
-        
+        dateOfAcquisition = null;
 
         gear = new Gear(prefab._mercSheet.gearStrings);
 

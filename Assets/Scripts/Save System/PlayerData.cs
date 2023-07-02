@@ -118,6 +118,7 @@ public class PlayerData
                 else
                     newSheet = new MercSheet(newName, MercAssignment.Available, -1);
 
+                if(newSheet.dateOfAcquisition == null)
                 newSheet.dateOfAcquisition = System.DateTime.Now;
                 mercSheets.Add(newSheet);
                 break;

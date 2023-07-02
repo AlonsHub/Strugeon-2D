@@ -141,13 +141,13 @@ public class MercComparer_DateOfAcquisitionEarlyToLate : IComparer<MercSheet>
 {
     public int Compare(MercSheet x, MercSheet y)
     {
-        return System.DateTime.Compare(x.dateOfAcquisition, y.dateOfAcquisition);
+        return System.DateTime.Compare(x.dateOfAcquisition.Value, y.dateOfAcquisition.Value);
     }
 }
 public class MercComparer_DateOfAcquisitionLateToEarly : IComparer<MercSheet>
 {
     public int Compare(MercSheet x, MercSheet y)
     {
-        return System.DateTime.Compare(y.dateOfAcquisition, x.dateOfAcquisition);
+        return System.DateTime.Compare(y.dateOfAcquisition.Value, x.dateOfAcquisition.Value);
     }
 }
