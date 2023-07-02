@@ -40,12 +40,12 @@ public class EscToX : MonoBehaviour
 
         if(!Current)
         {
-            Debug.LogError("no current X button to use, why is this on?");
+            //Debug.LogError("no current X button to use, why is this on?");
             return;
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.LogError($"USED {transform.parent.name}");
+            //Debug.LogError($"USED {transform.parent.name}");
             Current.myButton.onClick.Invoke();
         }
     }
