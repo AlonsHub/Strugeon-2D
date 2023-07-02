@@ -41,6 +41,11 @@ public class SquadSlot : MonoBehaviour
 
         toggle.isOn = false;
         indicator.SetActive(false);
+
+    }
+    private void OnDisable()
+    {
+        toggle.onValueChanged.RemoveAllListeners();
     }
 
     public void SelectMe()
