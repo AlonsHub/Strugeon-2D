@@ -41,17 +41,22 @@ public class SquadSlot : MonoBehaviour
 
         toggle.isOn = false;
         indicator.SetActive(false);
-
+        isSelected = false;
+        isRelevant = false;
+        toggle.interactable = false;
     }
-    private void OnDisable()
+
+
+    private void OnDestroy()
     {
-        toggle.onValueChanged.RemoveAllListeners();
+        toggle.onValueChanged.RemoveListener(delegate { OnChange(); } );
     }
 
     public void SelectMe()
     {
         //turn on selected indicator
         indicator.SetActive(true);
+        isSelected = true;
 
         //foreach (var item in mercSlotImages_BGs)
         //{
@@ -62,7 +67,7 @@ public class SquadSlot : MonoBehaviour
     public void DeSelectMe()
     {
         indicator.SetActive(false);
-
+        isSelected = false;
         //foreach (var item in mercSlotImages_BGs)
         //{
         //    item.sprite = offFrameSprite;
@@ -107,6 +112,6 @@ public class SquadSlot : MonoBehaviour
         }
 
 
-        isSelected = !isSelected;
+        //isSelected = !isSelected;
     }
 }

@@ -11,10 +11,12 @@ public class SquadToggler : MonoBehaviour
     //all my toggles
     [SerializeField]
     Toggle[] myToggles;
-   
+
 
     [SerializeField]
     SquadSlot[] squadSlots;
+    [SerializeField]
+    Button sendExpeditionButton;
     //[SerializeField]
     //Sprite offFrame;
     //[SerializeField]
@@ -22,7 +24,7 @@ public class SquadToggler : MonoBehaviour
 
     //on value changed
 
-    private void Awake  ()
+    private void Awake()
     {
         //myToggles = GetComponentsInChildren<Toggle>();
         toggleGroup = GetComponent<ToggleGroup>();
@@ -32,6 +34,10 @@ public class SquadToggler : MonoBehaviour
             return;
         }
         //OnEnable();
+        foreach (var t in myToggles)
+        {
+            t.onValueChanged.AddListener(delegate { SendExpedtionInteractiveCheck(); });
+        }
         RefreshSlots();
         //for (int i = 0; i < myToggles.Length; i++)
         //{
@@ -50,16 +56,34 @@ public class SquadToggler : MonoBehaviour
         //    t.onValueChanged.AddListener(delegate { ValuesChanged(); });
         //}
     }
+    private void OnEnable()
+    {
+        
+        RefreshSlots();
+    }
+    private void OnDestroy()
+    {
+        foreach (var t in myToggles)
+        {
+            t.onValueChanged.RemoveListener(delegate { SendExpedtionInteractiveCheck(); });
+        }
+    }
 
     //private void OnEnable()
     //{
     //    //toggleGroup.SetAllTogglesOff();
     //    RefreshSlots();
     //}
-
+    void SendExpedtionInteractiveCheck()
+    { 
+        sendExpeditionButton.interactable = toggleGroup.AnyTogglesOn();
+    }
     public void RefreshSlots()
     {
         int count = 0;
+
+        
+
         //check available squads
         foreach (var item in squadSlots)
         {
