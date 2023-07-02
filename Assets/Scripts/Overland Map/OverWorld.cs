@@ -45,7 +45,7 @@ public class OverWorld : MonoBehaviour
        // expeditions.Add(expeditionFollower.expedition = new Expedition(sb, sb.pathCreator, _party.ToList()));
 
         PartyMaster.Instance.currentMercParty.Clear();
-        RefMaster.Instance.selectionScreenDisplayer.RefreshMercDisplay();
+        //RefMaster.Instance.selectionScreenDisplayer.RefreshMercDisplay();
 
         //init it's expedition manually RIGHT HERE!
     }

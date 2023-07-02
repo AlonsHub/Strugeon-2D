@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class SelectionScreenDisplayer : MonoBehaviour
+public class DEPRECATED_SelectionScreenDisplayer : MonoBehaviour
 {
     // KILL THIS SCRIPT?
 
@@ -40,7 +40,7 @@ public class SelectionScreenDisplayer : MonoBehaviour
             return;
         }
 
-        RefMaster.Instance.selectionScreenDisplayer = this;
+        //RefMaster.Instance.selectionScreenDisplayer = this;
         
         if(PartyMaster.Instance.currentMercParty != null)
         partyMercs = PartyMaster.Instance.currentMercParty;

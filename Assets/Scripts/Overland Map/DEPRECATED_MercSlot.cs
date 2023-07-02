@@ -65,7 +65,7 @@ public class DEPRECATED_MercSlot : MonoBehaviour
 
         }
         //ClearSlot();
-        RefMaster.Instance.selectionScreenDisplayer.RefreshMercDisplay();
+        //RefMaster.Instance.selectionScreenDisplayer.RefreshMercDisplay();
 
         // RefMaster.Instance.selectionScreenDisplayer.MercOnEnable();
     }

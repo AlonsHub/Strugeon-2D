@@ -13,7 +13,7 @@ public class RefMaster : MonoBehaviour
 
 
     //just added 20/06 //probably dont need this
-    public SelectionScreenDisplayer selectionScreenDisplayer;
+    //public DEPRECATED_SelectionScreenDisplayer selectionScreenDisplayer;
 
      public Censer censer; //maybe a list?
 

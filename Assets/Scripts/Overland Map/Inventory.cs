@@ -9,8 +9,7 @@ using UnityEngine.SceneManagement;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
-    [SerializeField]
-    TMP_Text goldDisplayer;
+
     public int Gold { get => PlayerDataMaster.Instance.currentPlayerData.gold; 
                      private set => PlayerDataMaster.Instance.currentPlayerData.gold = value; } // not sure setter is needed
     //[SerializeField]

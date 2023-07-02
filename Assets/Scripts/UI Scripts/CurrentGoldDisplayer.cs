@@ -7,16 +7,16 @@ public class CurrentGoldDisplayer : MonoBehaviour
     [SerializeField]
     TMPro.TMP_Text goldText;
 
-    private void Awake()
+    private void Start()
     {
         UpdateGold();
-    }
-
-    public void OnEnable()
-    {
         Inventory.Instance.OnGoldChanged += UpdateGold;
     }
-    public void Disable()
+
+    //public void OnEnable()
+    //{
+    //}
+    public void OnDestroy()
     {
         Inventory.Instance.OnGoldChanged -= UpdateGold;
     }
