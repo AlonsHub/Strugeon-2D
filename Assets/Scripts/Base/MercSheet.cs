@@ -34,9 +34,9 @@ public class MercSheet
     //public int _minDamageBonus => GameStats.minDmgPerLevel * (_level-1); //you only start gaining bonuses from level 2
     public int _minDamage => baseStatBlock.MinDamage(_level); //you only start gaining bonuses from level 2
     //public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
-    public int _maxDamage => baseStatBlock.MaxDamage(_level);
+    public int _maxDamage => (int)baseStatBlock.MaxDamage(_level);
     //public int _maxHpBonus => GameStats.maxHpBonusPerLevel * (_level - 1);
-    public int _maxHp => baseStatBlock.MaxHP(_level);
+    public int _maxHp => (int)baseStatBlock.MaxHP(_level);
 
     public System.Action LevelUpAction;
 

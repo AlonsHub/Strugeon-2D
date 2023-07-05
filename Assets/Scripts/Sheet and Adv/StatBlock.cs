@@ -26,16 +26,45 @@ public class StatBlock
     public int maxDamagePerLevel;
     public int minDamagePerLevel;
 
+    public float maxHPPerLevelAsPercentage;
+    public float maxDamagePerLevelAsPercentage;
+    public int minDamagePerLevelAsPercentage;
+
+
+    //public int MinDamage(int level)
+    //{
+    //    return minDamage + (minDamagePerLevel * (level - 1));
+    //}
     public int MinDamage(int level)
     {
-        return minDamage + (minDamagePerLevel * (level - 1));
+        int toReturn = minDamage;
+        for (int i = 0; i < level; i++)
+        {
+            toReturn += toReturn * (minDamagePerLevelAsPercentage / 100); 
+        }
+        return toReturn;
     }
-    public int MaxDamage(int level)
+
+    public float MaxDamage(int level)
     {
-        return maxDamage + (maxDamagePerLevel * (level - 1));
+        return MinDamage(level) * (1 + maxDamagePerLevelAsPercentage/100f);
     }
-    public int MaxHP(int level)
+    //public int MaxDamage(int level)
+    //{
+    //    return maxDamage + (maxDamagePerLevel * (level - 1));
+    //}
+    public float MaxHP(int level)
     {
-        return maxHp + (maxHPPerLevel * (level - 1));
+        float toReturn = maxHp;
+        for (int i = 0; i < level; i++)
+        {
+            toReturn += toReturn * (maxHPPerLevelAsPercentage / 100);
+        }
+        return toReturn;
     }
+    //public int MaxHP(int level)
+    //{
+    //    return maxHp + (maxHPPerLevel * (level - 1));
+    //}
+
 }
