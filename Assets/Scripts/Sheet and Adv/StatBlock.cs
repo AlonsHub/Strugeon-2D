@@ -7,19 +7,23 @@ public class StatBlock
 {
     //health
     [Header("Health:")]
-    [Space(10f)]
+    [Space(5f)]
     public int maxHp;
     //public int armor; //?
     //public int evasion; //?
 
     [Header("Weapon:")]
-    [Space(10f)]
-    
-    //weapon
-    public int maxDamage;
-    public int minDamage;
+    [Space(5f)]
     public int range; //in tiles //can even improve???
-    //public int accuracy; //?
+    public int minDamage;
+    public int maxDamage;
+
+    //ToHit
+    public int grazeChance;
+    public int grazeDamageModifier;
+    public int critChance;
+    public int critDamageModifier;
+    
 
     [Header("Advancement Scheme:"), Space(5f)]
     //public int maxHPPerLevel;

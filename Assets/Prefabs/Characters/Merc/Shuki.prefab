@@ -101,14 +101,18 @@ MonoBehaviour:
         potential: 1
       dominant: 1
     baseSheetSO: {fileID: 0}
-    baseStatBlock:
+    statBlock:
       maxHp: 200
-      maxDamage: 25
-      minDamage: 20
       range: 1
-      maxHPPerLevel: 10
-      maxDamagePerLevel: 2
-      minDamagePerLevel: 2
+      minDamage: 10
+      maxDamage: 15
+      grazeChance: 5
+      grazeDamageModifier: 80
+      critChance: 10
+      critDamageModifier: 150
+      maxHPPerLevelAsPercentage: 22
+      maxDamagePerLevelAsPercentage: 35
+      minDamagePerLevelAsPercentage: 10
     basicPrefs:
       weaponPrefs:
         baseAttackValue: 4
