@@ -16,9 +16,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
 
     public PillProfile pillProfile;
     
-
     public Rarity rarity;
-    
 
     public Sprite itemSprite; // consider keeping an enum to link with a dictionary
     public string spriteName;
@@ -54,11 +52,12 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         goldValue = gold;
         spriteName = spritename;
 
+        FetchSprite();
+
         acquisitionDate = DateTime.Now;
     }
     public List<object> DataAsListOfObjects()
     {
-
         string classes = "";
         foreach (var item in relevantClasses)
         {
@@ -103,9 +102,7 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
         if(myBenefit.BenefitProperNoun() == null)
         return "of Nothing";
         else
-        {
-            return myBenefit.BenefitProperNoun();
-        }
+        return myBenefit.BenefitProperNoun();
     }
 
     public string _BenefitsStat()
@@ -137,8 +134,4 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     {
         return this;
     }
-
-   
-    
-    
 }
