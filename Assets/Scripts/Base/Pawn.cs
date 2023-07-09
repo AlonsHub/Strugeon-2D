@@ -188,7 +188,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     void ApplyCharacterSheet()
     {
-        mercSheetInPlayerData.baseStatBlock = _mercSheet.baseStatBlock; //Copy the baseStatBlock straight off the prefab
+        mercSheetInPlayerData.statBlock = _mercSheet.statBlock; //Copy the baseStatBlock straight off the prefab
         mercSheetInPlayerData.mercClass = _mercSheet.mercClass; //also grab the merc class - or should this be added to the statblock? maybe dont?
         mercSheetInPlayerData.basicPrefs = _mercSheet.basicPrefs;
         _mercSheet = mercSheetInPlayerData; //beomce one with the sheet in data

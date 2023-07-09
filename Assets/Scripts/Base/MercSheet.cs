@@ -18,7 +18,7 @@ public class MercSheet
     public PillProfile pillProfile;
     [Tooltip("ref for instances of this prefabs, back to the Prefabs original clean sheet (should remain empty in prefab!)")]
     public MercSheetSO baseSheetSO; 
-    public StatBlock baseStatBlock; //ref to the base stat block
+    public StatBlock statBlock; //ref to the base stat block
 
     public BasicPrefs basicPrefs;
 
@@ -32,11 +32,11 @@ public class MercSheet
     public int _expToNextLevel => GameStats.ExpThresholdByLevel(_level);
     public Vector2Int _expFromAndToNextLevel => GameStats.ExpThresholdsByLevel(_level);
     //public int _minDamageBonus => GameStats.minDmgPerLevel * (_level-1); //you only start gaining bonuses from level 2
-    public int _minDamage => baseStatBlock.MinDamage(_level); //you only start gaining bonuses from level 2
+    public int _minDamage => (int)statBlock.MinDamage(_level); //you only start gaining bonuses from level 2
     //public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
-    public int _maxDamage => (int)baseStatBlock.MaxDamage(_level);
+    public int _maxDamage => (int)statBlock.MaxDamage(_level);
     //public int _maxHpBonus => GameStats.maxHpBonusPerLevel * (_level - 1);
-    public int _maxHp => (int)baseStatBlock.MaxHP(_level);
+    public int _maxHp => (int)statBlock.MaxHP(_level);
 
     public System.Action LevelUpAction;
 
@@ -55,7 +55,7 @@ public class MercSheet
     {
         characterName = mercName;
         prefab = MyPawnPrefabRef<Pawn>();
-        baseStatBlock = prefab._mercSheet.baseStatBlock;
+        statBlock = prefab._mercSheet.statBlock;
         mercClass = prefab._mercSheet.mercClass; //maybe can remove this from pawn init
 
         //temp_SpectrumProfile = new ItemSpectrumProfile();

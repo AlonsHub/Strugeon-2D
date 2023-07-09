@@ -22,25 +22,32 @@ public class StatBlock
     //public int accuracy; //?
 
     [Header("Advancement Scheme:"), Space(5f)]
-    public int maxHPPerLevel;
-    public int maxDamagePerLevel;
-    public int minDamagePerLevel;
+    //public int maxHPPerLevel;
+    //public int maxDamagePerLevel;
+    //public int minDamagePerLevel;
 
     public float maxHPPerLevelAsPercentage;
     public float maxDamagePerLevelAsPercentage;
-    public int minDamagePerLevelAsPercentage;
+    public float minDamagePerLevelAsPercentage;
 
 
-    //public int MinDamage(int level)
-    //{
-    //    return minDamage + (minDamagePerLevel * (level - 1));
-    //}
-    public int MinDamage(int level)
+    #region External Setters:
+
+    public void CopyAdvancementPercentages(StatBlock toCopy)
     {
-        int toReturn = minDamage;
+        maxHPPerLevelAsPercentage = toCopy.maxHPPerLevelAsPercentage;
+        minDamagePerLevelAsPercentage = toCopy.minDamagePerLevelAsPercentage;
+        maxDamagePerLevelAsPercentage = toCopy.maxDamagePerLevelAsPercentage;
+    }
+
+    #endregion
+
+    public float MinDamage(int level)
+    {
+        float toReturn = minDamage;
         for (int i = 0; i < level; i++)
         {
-            toReturn += toReturn * (minDamagePerLevelAsPercentage / 100); 
+            toReturn += toReturn * (minDamagePerLevelAsPercentage / 100f); 
         }
         return toReturn;
     }
@@ -49,22 +56,18 @@ public class StatBlock
     {
         return MinDamage(level) * (1 + maxDamagePerLevelAsPercentage/100f);
     }
-    //public int MaxDamage(int level)
-    //{
-    //    return maxDamage + (maxDamagePerLevel * (level - 1));
-    //}
+    
     public float MaxHP(int level)
     {
         float toReturn = maxHp;
         for (int i = 0; i < level; i++)
         {
-            toReturn += toReturn * (maxHPPerLevelAsPercentage / 100);
+            toReturn += toReturn * (maxHPPerLevelAsPercentage / 100f);
         }
         return toReturn;
     }
-    //public int MaxHP(int level)
-    //{
-    //    return maxHp + (maxHPPerLevel * (level - 1));
-    //}
+   
 
+
+    
 }

@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbdb73a425099884fb2403aa06c52dad, type: 3}
-  m_Name: Hadas_BaseBlock
+  m_Name: Priest_BaseBlock
   m_EditorClassIdentifier: 
-  mercName: 6
+  mercName: 1
   block:
     maxHp: 0
     maxDamage: 0
     minDamage: 0
     range: 0
+    maxHPPerLevelAsPercentage: 21
+    maxDamagePerLevelAsPercentage: 10
+    minDamagePerLevelAsPercentage: 20
