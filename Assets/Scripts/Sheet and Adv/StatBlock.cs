@@ -20,9 +20,9 @@ public class StatBlock
 
     //ToHit
     public int grazeChance;
-    public int grazeDamageModifier;
+    public int grazeDamagePercentage;
     public int critChance;
-    public int critDamageModifier;
+    public int critDamagePercentage;
     
 
     [Header("Advancement Scheme:"), Space(5f)]

@@ -52,7 +52,7 @@ public class BlindingItem : ActionItem, SA_Item //, SA_Item
             //Blinded blinded = weaponItem.toHit.gameObject.AddComponent<Blinded>();
             //blinded.SetMe(weaponItem.toHit.GetComponent<WeaponItem>(), duration);
 
-            BlindEffect blindEffect = new BlindEffect(weaponItem.toHit, blindSprite);
+            BlindEffect blindEffect = new BlindEffect(weaponItem.pawnToHit, blindSprite);
 
             BattleLogVerticalGroup.Instance.AddToNextEntry(addonPrefab);
         }

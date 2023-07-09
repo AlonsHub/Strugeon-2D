@@ -224,13 +224,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             }
         }
 
-        int finalMinDamage = _mercSheet._minDamage + minDamgeBenefit;
-        int finalMaxDamage = _mercSheet._maxDamage + maxDamgeBenefit;
-        finalMinDamage = Mathf.Clamp(finalMinDamage, 0, finalMaxDamage-1); //maintain range of at least 1
+        //int finalMinDamage = _mercSheet._minDamage + minDamgeBenefit;
+        //int finalMaxDamage = _mercSheet._maxDamage + maxDamgeBenefit;
+        //finalMinDamage = Mathf.Clamp(finalMinDamage, 0, finalMaxDamage-1); //maintain range of at least 1
         //finalMinDamage = Mathf.Clamp(finalMinDamage, 0, finalMaxDamage); //allows min == max damage
 
 
-        GetComponent<WeaponItem>().SetDamage(_mercSheet._minDamage+ minDamgeBenefit, _mercSheet._maxDamage+ maxDamgeBenefit);
+        //GetComponent<WeaponItem>().SetDamage(finalMinDamage, finalMaxDamage);
+        GetComponent<WeaponItem>().SetStatBlockAndBenefits(_mercSheet.statBlock, minDamgeBenefit, maxDamgeBenefit);
         //max hp bonus
         maxHP = _mercSheet._maxHp + maxHPBenefit;
 

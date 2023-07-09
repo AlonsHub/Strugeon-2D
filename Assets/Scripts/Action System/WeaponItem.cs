@@ -15,9 +15,12 @@ public class WeaponItem : ActionItem
     public FeetItem feetItem; //does the walking as an actionvariation added by weaponitem, but holding the feetItem in the List entry of actionsvariations 
 
     //added params:Range, Damage, ?
-    public int range;
-    public int minDamage, maxDamage;
+    public int range => statBlock.range;
+    public int maxDamage => statBlock.maxDamage;
+    public int minDamage => statBlock.minDamage;
 
+    //temp? BONUSES and Benefits? should refer to the items? can they be canacelled, destoried, amplified, muted during a fight? if so... then yes.
+    
     public GameObject arrowGfx; //arrow or spear
     [SerializeField]
     bool isRanged;
@@ -43,7 +46,7 @@ public class WeaponItem : ActionItem
 
     public List<Pawn> targets;
     public bool hasRedBuff;
-    public Pawn toHit;
+    public Pawn pawnToHit;
 
     LookAtter la;
 
@@ -52,7 +55,9 @@ public class WeaponItem : ActionItem
 
     
      public GameObject cachedProjectile; //public for addcomponent only!
-   
+
+    //TEMP! This should just be the weapon-related part of the block TBD, seperate Stat Block to components/modules
+    StatBlock statBlock;
 
     public override void Awake()
     {
@@ -93,9 +98,9 @@ public class WeaponItem : ActionItem
 
     public override void Action(ActionVariation av)
     {
-        toHit = av.target.GetComponent<Pawn>();
+        pawnToHit = av.target.GetComponent<Pawn>();
 
-        if (!toHit)
+        if (!pawnToHit)
         {
             Debug.Log("no tgt to hit");
             return;
@@ -103,13 +108,13 @@ public class WeaponItem : ActionItem
 
 
         //int dist = pawn.tileWalker.currentNode.GetDistanceToTarget(toHit.tileWalker.currentNode);
-        int dist = pawn.tileWalker.GetDistanceFromMeToYou(toHit.tileWalker);
+        int dist = pawn.tileWalker.GetDistanceFromMeToYou(pawnToHit.tileWalker);
 
 
 
         if (dist > range*14)
         {
-            StartCoroutine(WalkThenAttack(toHit));
+            StartCoroutine(WalkThenAttack(pawnToHit));
             return;
         }
 
@@ -150,7 +155,7 @@ public class WeaponItem : ActionItem
         cachedProjectile.transform.position = arrowSpawn.position;
         cachedProjectile.transform.rotation = arrowSpawn.rotation;
         //cachedProjectile.GetComponent<Arrow>().tgt = toHit.transform;
-        cachedProjectile.GetComponent<Arrow>().SetTarget(toHit.transform);
+        cachedProjectile.GetComponent<Arrow>().SetTarget(pawnToHit.transform);
 
         cachedProjectile.SetActive(true);
 
@@ -178,7 +183,7 @@ public class WeaponItem : ActionItem
             // Instantiate(effectData.effectGFXPrefab, go.transform.GetChild(0).GetChild(0));
 
             effectData.currentUses--;
-            toHit.TakeElementalDamage(bonusDamage, effectColour); // Should be toHit.TakeElementalDamage //should really just add to the rolled damamge and report both separatly
+            pawnToHit.TakeElementalDamage(bonusDamage, effectColour); // Should be toHit.TakeElementalDamage //should really just add to the rolled damamge and report both separatly
             if (effectData.currentUses <= 0)
             {
                 hasEffect = false;
@@ -187,9 +192,9 @@ public class WeaponItem : ActionItem
                 effectColour = Color.black;
             }
 
-            if(toHit == null || toHit.currentHP <= 0)
+            if(pawnToHit == null || pawnToHit.currentHP <= 0)
             {
-                BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
+                BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage, Color.red);
 
                 la.tgt = null;
                 //pawn.TurnDone = true;
@@ -206,7 +211,7 @@ public class WeaponItem : ActionItem
 
         if (rolledDamage < 0)
             rolledDamage = 0;
-
+        
         //status effect run
         StatusEffect[] outgoingDamageEffects = pawn.GetStatusEffectsByPredicate(x => x is I_StatusEffect_OutgoingDamageMod);
         if(outgoingDamageEffects != null && outgoingDamageEffects.Length !=0 )
@@ -216,11 +221,29 @@ public class WeaponItem : ActionItem
                 rolledDamage = (item as I_StatusEffect_OutgoingDamageMod).OperateOnDamage(rolledDamage);
             }
         }
-        toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+
+        //TEMP Check HitGrazeCrit here for now? 
+
+        int toHitRoll = Random.Range(1, 101); //1-100
+        if(toHitRoll <= statBlock.grazeChance)
+        {
+            //graze!
+            rolledDamage *= statBlock.grazeDamagePercentage / 100f; 
+        }
+        else if(toHitRoll >= 100 - statBlock.critChance)
+        {
+            rolledDamage *= statBlock.critDamagePercentage / 100f; 
+        }
+        //else! normal hit, change nothing
+        
+
+        //End HitGrazeCrit
+
+        pawnToHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
 
         hitAction?.Invoke();
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage ,Color.red);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage ,Color.red);
 
         la.tgt = null;
         //pawn.TurnDone = true;
@@ -232,7 +255,7 @@ public class WeaponItem : ActionItem
     {
         float rolledDamage = Random.Range(minDmg, maxDmg);
 
-        toHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        pawnToHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
         //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, toHit.Name, (int)rolledDamage, Color.red);
 
         //pawn.TurnDone = true; // this may be needed if turns get stuck around Ezra
@@ -369,10 +392,14 @@ public class WeaponItem : ActionItem
         minDamage += addMin;
         maxDamage += addMax;
     }
-    public void SetDamage(int addMin, int addMax)
+    //public void SetDamage(int addMin, int addMax)
+    //{
+    //    minDamage = addMin;
+    //    maxDamage = addMax;
+    //}
+    public void SetStatBlockAndBenefits(StatBlock _statBlock, int minDmgBonus, int maxDmgBonus)
     {
-        minDamage = addMin;
-        maxDamage = addMax;
+        statBlock = _statBlock; //TBD should only grab the weapon related data (should probably be sturct) TEMP
     }
 
     void OnAttack() //just something to have in the attackAction. Currently holds nothing

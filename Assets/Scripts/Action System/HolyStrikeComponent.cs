@@ -44,7 +44,7 @@ public class HolyStrikeComponent : MonoBehaviour //NOT AN ACTION ITEM!!!
             weaponItem.ExtraDamageTarget(minDmg, maxDmg);
 
             //List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(FloorGrid.Instance.GetTileByIndex(weaponItem.pawn.tileWalker.gridPos));
-            List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(weaponItem.toHit.GetGridPos());
+            List<FloorTile> neigbourTiles = FloorGrid.Instance.GetNeighbours(weaponItem.pawnToHit.GetGridPos());
             foreach (var neighbour in neigbourTiles) //linq Where would simplify this TBF
             {
                 if (neighbour.isEmpty || !neighbour.myOccupant)

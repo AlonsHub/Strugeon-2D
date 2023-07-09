@@ -17,7 +17,7 @@ public class AimRotate : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         startRot = animator.transform.rotation;
-        tgt = animator.GetComponent<WeaponItem>().toHit.transform;
+        tgt = animator.GetComponent<WeaponItem>().pawnToHit.transform;
 
         Vector3 relativePos = tgt.position - animator.transform.position;
 

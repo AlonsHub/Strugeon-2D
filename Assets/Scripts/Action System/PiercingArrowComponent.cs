@@ -49,7 +49,7 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
 
     public void HitRandomRelevantTarget()
     {
-        if (!CanPierceTarget(weaponItem.toHit)) //gathers relevant targets aswell
+        if (!CanPierceTarget(weaponItem.pawnToHit)) //gathers relevant targets aswell
             return;
 
         if(relevantTargets.Count ==0)
@@ -59,7 +59,7 @@ public class PiercingArrowComponent : MonoBehaviour //not a weapon item
         }
 
         //Delay this somehow to happen after the main damage
-        Arrow secondArrow = Instantiate(weaponItem.arrowGfx, weaponItem.toHit.transform.position, Quaternion.identity).GetComponent<Arrow>();
+        Arrow secondArrow = Instantiate(weaponItem.arrowGfx, weaponItem.pawnToHit.transform.position, Quaternion.identity).GetComponent<Arrow>();
         secondArrow.transform.localScale = secondArrow.transform.localScale / .6f;
         secondArrow.arrowSpeed /= 2; //current value is 10, so sets to 5 [23/02/22]
 
