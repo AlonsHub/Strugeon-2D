@@ -15,12 +15,25 @@ public class WeaponItem : ActionItem
     public FeetItem feetItem; //does the walking as an actionvariation added by weaponitem, but holding the feetItem in the List entry of actionsvariations 
 
     //added params:Range, Damage, ?
-    public int range => statBlock.range;
-    public int maxDamage => statBlock.maxDamage;
-    public int minDamage => statBlock.minDamage;
+    //public int range => statBlock.range;
+    public int range;
+
+    //I WANT THIS BACK TBD TBF
+    //public int maxDamage => pawn._mercSheet._maxDamage;
+    //public int minDamage => pawn._mercSheet._minDamage;
+    //I WANT THIS BACK
+
+    //THIS SHOULD NOT STAY! TBD TBF
+    public int maxDamage;
+    public int minDamage;
+
+
+    //TEMP! This should just be the weapon-related part of the block TBD, seperate Stat Block to components/modules
+    StatBlock statBlock;
+    
 
     //temp? BONUSES and Benefits? should refer to the items? can they be canacelled, destoried, amplified, muted during a fight? if so... then yes.
-    
+
     public GameObject arrowGfx; //arrow or spear
     [SerializeField]
     bool isRanged;
@@ -56,8 +69,7 @@ public class WeaponItem : ActionItem
     
      public GameObject cachedProjectile; //public for addcomponent only!
 
-    //TEMP! This should just be the weapon-related part of the block TBD, seperate Stat Block to components/modules
-    StatBlock statBlock;
+ 
 
     public override void Awake()
     {
@@ -68,26 +80,43 @@ public class WeaponItem : ActionItem
         //weaponPrefs = pawn._mercSheet.basicPrefs.weaponPrefs; //weaponPrefs is NOT a struct, so this REF does NOT duplicate memory, 
         //but currently this approach is abandoned
 
+        la = GetComponentInChildren<LookAtter>();
+
+
         base.Awake();
     }
-
     private void Start()
     {
         if (pawn.isEnemy)
             targets = RefMaster.Instance.mercs;
         else
             targets = RefMaster.Instance.enemyInstances;
+    }
+    public void Init(List<Pawn> tgts, StatBlock sb)
+    {
+        //if (pawn.isEnemy)
+        //    targets = RefMaster.Instance.mercs;
+        //else
+        //    targets = RefMaster.Instance.enemyInstances;
+        statBlock = sb;
 
-        if (feetItem || (feetItem = GetComponent<FeetItem>()))
+        //targets = tgts;
+
+        //TEMP! SHOULD BE THAT lamda expression ALL THE WAY
+        maxDamage = pawn._mercSheet._maxDamage;
+        minDamage = pawn._mercSheet._minDamage;
+        range = statBlock.range;
+        //TEMP! SHOULD BE THAT lamda expression ALL THE WAY
+
+        if (feetItem)
             feetItem.currentRangeInTiles = range; // maybe do this at Start()? // Yup... if at all
         // arrowSpawn = pawn.arrow
-        la = GetComponentInChildren<LookAtter>();
+        //la = GetComponentInChildren<LookAtter>();
 
         if(range > 1 && arrowGfx)
         {
             LoadAndCacheProjectile();
         }
-
     }
 
     private void LoadAndCacheProjectile()
@@ -397,7 +426,7 @@ public class WeaponItem : ActionItem
     //    minDamage = addMin;
     //    maxDamage = addMax;
     //}
-    public void SetStatBlockAndBenefits(StatBlock _statBlock, int minDmgBonus, int maxDmgBonus)
+    public void SetStatBlockAndBenefits(StatBlock _statBlock/*, int minDmgBonus, int maxDmgBonus*/)
     {
         statBlock = _statBlock; //TBD should only grab the weapon related data (should probably be sturct) TEMP
     }

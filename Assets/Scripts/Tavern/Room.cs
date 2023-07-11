@@ -11,7 +11,7 @@ public class Room
 
     public Squad squad; 
 
-    public bool isOccupied => (squad != null && squad.pawns.Count>0);
+    public bool isOccupied => (squad != null && squad.pawns != null && squad.pawns.Count>0);
 
     public string statusText;
 

@@ -18,6 +18,12 @@ public class StatBlock
     public int minDamage;
     public int maxDamage;
 
+    //TEMP BAD DONT LIKE THIS!
+    public int mercLevel; //for calculation purposes
+    public int minDamageBenefit; //from items!
+    public int maxDamageBenefit; //from items!
+    //TEMP BAD DONT LIKE THIS!
+
     //ToHit
     public int grazeChance;
     public int grazeDamagePercentage;
@@ -51,14 +57,14 @@ public class StatBlock
         float toReturn = minDamage;
         for (int i = 0; i < level; i++)
         {
-            toReturn += toReturn * (minDamagePerLevelAsPercentage / 100f); 
+            toReturn += toReturn * (minDamagePerLevelAsPercentage / 100f) + minDamageBenefit; 
         }
         return toReturn;
     }
 
     public float MaxDamage(int level)
     {
-        return MinDamage(level) * (1 + maxDamagePerLevelAsPercentage/100f);
+        return MinDamage(level) * (1 + maxDamagePerLevelAsPercentage/100f) + maxDamageBenefit;
     }
     
     public float MaxHP(int level)

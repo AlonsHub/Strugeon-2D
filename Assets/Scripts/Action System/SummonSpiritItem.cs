@@ -41,14 +41,14 @@ public class SummonSpiritItem : ActionItem, SA_Item
 
         List<FloorTile> adjTiles = new List<FloorTile>();
         //NEW
-        if (pawn.isEnemy)
-        {
-            pawn.targets = RefMaster.Instance.mercs;
-        }
-        else
-        {
-            pawn.targets = RefMaster.Instance.enemyInstances;
-        }
+        //if (pawn.isEnemy)
+        //{
+        //    pawn.targets = RefMaster.Instance.mercs;
+        //}
+        //else
+        //{
+        //    pawn.targets = RefMaster.Instance.enemyInstances;
+        //}
 
         foreach (var merc in pawn.targets)
         {

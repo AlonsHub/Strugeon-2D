@@ -243,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorGrid: {fileID: 0}
   gridPos: {x: 4, y: 3}
+  elevation: 0
   moveSpeed: 0
   offsetFromGrid: {x: 0, y: 0, z: 0}
   path: []
@@ -266,13 +267,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 462218377637529745}
-  baseweight: 0
+  baseweight: 4
   actionVariations: []
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 10
-  minDamage: 10
   maxDamage: 13
+  minDamage: 10
   arrowGfx: {fileID: 0}
   isRanged: 1
   arrowSpawn: {fileID: 0}
@@ -292,7 +293,7 @@ MonoBehaviour:
   damageType: 0
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &462218377637529745
 MonoBehaviour:
@@ -310,20 +311,33 @@ MonoBehaviour:
   maxHP: 200
   pawnName: Dryad
   GFX: {fileID: 23863303620698174}
+  _turnInfo:
+    isStartPin: 1
+    colour: {r: 0, g: 0, b: 0, a: 0}
   isEnemy: 1
   mercName: 0
   _mercSheet:
     mercClass: 0
     characterName: 0
+    pillProfile:
+      pills: []
+      dominant: 0
     baseSheetSO: {fileID: 0}
-    baseStatBlock:
-      maxHp: 0
-      maxDamage: 0
-      minDamage: 0
-      range: 0
-      maxHPPerLevel: 0
-      maxDamagePerLevel: 0
-      minDamagePerLevel: 0
+    statBlock:
+      maxHp: 200
+      range: 10
+      minDamage: 10
+      maxDamage: 13
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
+      grazeChance: 5
+      grazeDamagePercentage: 60
+      critChance: 10
+      critDamagePercentage: 180
+      maxHPPerLevelAsPercentage: 10
+      maxDamagePerLevelAsPercentage: 20
+      minDamagePerLevelAsPercentage: 10
     basicPrefs:
       weaponPrefs:
         baseAttackValue: 4

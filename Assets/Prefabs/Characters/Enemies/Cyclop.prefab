@@ -337,15 +337,25 @@ MonoBehaviour:
   _mercSheet:
     mercClass: 0
     characterName: 0
+    pillProfile:
+      pills: []
+      dominant: 0
     baseSheetSO: {fileID: 0}
-    baseStatBlock:
-      maxHp: 0
-      maxDamage: 0
-      minDamage: 0
-      range: 0
-      maxHPPerLevel: 0
-      maxDamagePerLevel: 0
-      minDamagePerLevel: 0
+    statBlock:
+      maxHp: 200
+      range: 1
+      minDamage: 10
+      maxDamage: 15
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
+      grazeChance: 5
+      grazeDamagePercentage: 70
+      critChance: 10
+      critDamagePercentage: 150
+      maxHPPerLevelAsPercentage: 10
+      maxDamagePerLevelAsPercentage: 20
+      minDamagePerLevelAsPercentage: 10
     basicPrefs:
       weaponPrefs:
         baseAttackValue: 1
@@ -452,13 +462,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 5808167037023471695}
-  baseweight: 0
+  baseweight: 4
   actionVariations: []
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  minDamage: 10
   maxDamage: 15
+  minDamage: 10
   arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}
@@ -478,7 +488,7 @@ MonoBehaviour:
   damageType: 0
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &946367663723661843
 MonoBehaviour:

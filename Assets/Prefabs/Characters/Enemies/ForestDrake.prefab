@@ -423,20 +423,33 @@ MonoBehaviour:
   maxHP: 200
   pawnName: Forest Drake
   GFX: {fileID: 6243158429807829216}
+  _turnInfo:
+    isStartPin: 1
+    colour: {r: 0, g: 0, b: 0, a: 0}
   isEnemy: 1
   mercName: 0
   _mercSheet:
     mercClass: 0
     characterName: 0
+    pillProfile:
+      pills: []
+      dominant: 0
     baseSheetSO: {fileID: 0}
-    baseStatBlock:
-      maxHp: 0
-      maxDamage: 0
-      minDamage: 0
-      range: 0
-      maxHPPerLevel: 0
-      maxDamagePerLevel: 0
-      minDamagePerLevel: 0
+    statBlock:
+      maxHp: 200
+      range: 1
+      minDamage: 12
+      maxDamage: 17
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
+      grazeChance: 5
+      grazeDamagePercentage: 50
+      critChance: 15
+      critDamagePercentage: 160
+      maxHPPerLevelAsPercentage: 10
+      maxDamagePerLevelAsPercentage: 20
+      minDamagePerLevelAsPercentage: 10
     basicPrefs:
       weaponPrefs:
         baseAttackValue: 4
@@ -517,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floorGrid: {fileID: 0}
   gridPos: {x: 4, y: 3}
+  elevation: 0
   moveSpeed: 0
   offsetFromGrid: {x: 0, y: 0, z: 0}
   path: []
@@ -540,13 +554,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 5808167037023471695}
-  baseweight: 0
+  baseweight: 4
   actionVariations: []
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  minDamage: 12
   maxDamage: 17
+  minDamage: 12
   arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}
@@ -566,7 +580,7 @@ MonoBehaviour:
   damageType: 2
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &4058428002439575057
 MonoBehaviour:

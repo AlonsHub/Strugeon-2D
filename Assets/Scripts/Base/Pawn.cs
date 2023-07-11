@@ -46,7 +46,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     //public ActionItem forDisplayPurposesOnly;
 
-    public List<Pawn> targets;
+    public List<Pawn> targets => isEnemy ? RefMaster.Instance.mercs : RefMaster.Instance.enemyInstances;
 
     public TileWalker tileWalker;
 
@@ -146,7 +146,8 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
     // end TEMP AF
     public int enemyLevel = -1; //should stay that way if not enemy
 
-    
+    //temp?
+    WeaponItem wi;
 
     public override void Init()
     {
@@ -163,14 +164,25 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         hasSAs = (saItems.Length != 0);
 
+        wi = GetComponent<WeaponItem>();
+
         if (isEnemy)
         {
-            targets = RefMaster.Instance.mercs;
+            //targets = RefMaster.Instance.mercs;
             name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
+
+            //This can be removed?
             EnemySheetAddon sheetAddon = gameObject.AddComponent<EnemySheetAddon>(); //why not just add this to the prefab? TBF
+
+            //Should we just cache the weapon item? trying now in temp above
+            //wi.SetStatBlockAndBenefits(_mercSheet.statBlock/*, minDamgeBenefit, maxDamgeBenefit*/); //for now we just want this, instead of the whole ApplyCharacterSheet
+            wi.Init(targets, _mercSheet.statBlock);
+
         }
         else
         {
+            //targets = RefMaster.Instance.enemyInstances;
+
             if ((mercSheetInPlayerData) == null)
             {
                 Debug.LogError("No sheet with merc name of: " + mercName.ToString());
@@ -230,12 +242,16 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         //finalMinDamage = Mathf.Clamp(finalMinDamage, 0, finalMaxDamage); //allows min == max damage
 
 
+        _mercSheet.statBlock.minDamageBenefit = minDamgeBenefit;
+        _mercSheet.statBlock.maxDamageBenefit = maxDamgeBenefit;
         //GetComponent<WeaponItem>().SetDamage(finalMinDamage, finalMaxDamage);
-        GetComponent<WeaponItem>().SetStatBlockAndBenefits(_mercSheet.statBlock, minDamgeBenefit, maxDamgeBenefit);
+        //wi.SetStatBlockAndBenefits(_mercSheet.statBlock/*, minDamgeBenefit, maxDamgeBenefit*/);
+        wi.Init(targets, _mercSheet.statBlock);
+
         //max hp bonus
         maxHP = _mercSheet._maxHp + maxHPBenefit;
 
-        targets = RefMaster.Instance.enemyInstances;
+        //targets = RefMaster.Instance.enemyInstances;
 
         name.Replace("(Clone)", ""); //can be removed from build - may pose problem for name searching, if any exist
 

@@ -48,6 +48,7 @@ public class CharmEffect : MonsterStatusEffect, I_StatusEffect_TurnEnd
 
     public override void EndEffect()
     {
+        //THIS SHOULD RE-SET the reference back to the Pawns.targets expression TBF TBD
         if (pawnToEffect.isEnemy)
             wi.targets = RefMaster.Instance.mercs;
         else
