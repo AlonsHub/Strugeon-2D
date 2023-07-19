@@ -63,7 +63,8 @@ public class CrewBlock : MonoBehaviour
         {
             //MercBlock mb = Instantiate(mercBlockPrefab, mercLayoutParent).GetComponent<MercBlock>();
             if (i<squad.pawns.Count && squad.pawns[i] != null)
-                _mercBlocks[i].SetMe(squad.pawns[i]._mercSheet);
+                //_mercBlocks[i].SetMe(squad.pawns[i]._mercSheet);
+                _mercBlocks[i].SetMe(PlayerDataMaster.Instance.GetMercSheetByName(squad.pawns[i].mercName)); //get the MS from playerdata, not from pawn prefab
             else
                 _mercBlocks[i].SetToEmpty();
         }

@@ -75,27 +75,26 @@ public class SquadBuilder2 : MonoBehaviour
 
 
         List<MercName> names = PlayerDataMaster.Instance.GetMercNamesByAssignment(MercAssignment.Available);
+        //List<MercSheet> _sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignment(MercAssignment.Available);
+        //List<MercSheet> _sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment>{ MercAssignment.Available });
 
         for (int i = 0; i < names.Count; i++)
         {
             availableSlots[i].gameObject.SetActive(true);
-            availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(names[i]));
+            //availableSlots[i].SetMe(MercPrefabs.Instance.EnumToPawnPrefab(_sheets[i]));
+            availableSlots[i].SetMe(PlayerDataMaster.Instance.GetMercSheetByName(names[i]));
         }
-        for (int i = names.Count; i < availableSlots.Count; i++)
-        {
-            availableSlots[i].gameObject.SetActive(false);
-        }
-
-        //if (availableSlots[0].isOccupied)
+        //for (int i = _sheets.Count; i < availableSlots.Count; i++)
         //{
-        //    mercDataDisplayer.SetMe(availableSlots[0].pawn);
+        //    availableSlots[i].gameObject.SetActive(false);
         //}
-
-        //for (int i = PartyMaster.Instance.availableMercPrefabs.Count; i < availableSlots.Length; i++)
         for (int i = names.Count; i < availableSlots.Count; i++)
         {
             availableSlots[i].SetMe(); //empty
+            availableSlots[i].gameObject.SetActive(false);
         }
+
+        
 
         for (int i = 0; i < ToRoom.squad.pawns.Count; i++)
         {

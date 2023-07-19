@@ -33,6 +33,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     //public TMP_Text nameText;
     public bool isOccupied = false;
     public Pawn pawn;
+    public MercSheet mercSheet;
 
     public bool isPartySlot;
 
@@ -61,20 +62,22 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     public void SetMe(MercSheet ms)
     {
         //gameObject.SetActive(true);
+        mercSheet = ms;
+        typeText.text = mercSheet.mercClass.ToString();
 
-        pawn = ms.MyPawnPrefabRef<Pawn>();
-        nameText.text = pawn.mercName.ToString();
-        typeText.text = ms.mercClass.ToString();
+        expBarDisplayer.SetBar(mercSheet);
 
-        expBarDisplayer.SetBar(ms);
-
-        img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
 
-        hpText.text = $"HP: {ms._maxHp}/{ms._maxHp}";
-        damageText.text = $"Damage: {ms._minDamage}-{ms._maxDamage}";
+        hpText.text = $"HP: {mercSheet._maxHp}/{mercSheet._maxHp}";
+        damageText.text = $"Damage: {mercSheet._minDamage}-{mercSheet._maxDamage}";
+
+        pawn = mercSheet.MyPawnPrefabRef<Pawn>();
+        img.sprite = pawn.PortraitSprite;
         abilitySprite.sprite = pawn.SASprite;
+        nameText.text = pawn.mercName.ToString();
+       
     }
 
 

@@ -232,8 +232,12 @@ public class TurnMachine : MonoBehaviour
 
         if (PartyMaster.Instance.currentSquad.pawns.Count > 0) //returns squad home?
         {
+            PartyMaster.Instance.currentSquad.isAvailable = true; //temp ALL DIS
+
             if (!PartyMaster.Instance.squads.Contains(PartyMaster.Instance.currentSquad)) //to prevent simpleSites (which do NOT remove squads) from adding duplicates 20/03/22 TBF AF (PartyMaster needs changing)
                 PartyMaster.Instance.squads.Add(new Squad(PartyMaster.Instance.currentSquad.pawns, PartyMaster.Instance.currentSquad.roomNumber));
+
+            //PlayerDataMaster.Instance.currentPlayerData.rooms[PartyMaster.Instance.currentSquad.roomNumber].is
         }
         else
         {

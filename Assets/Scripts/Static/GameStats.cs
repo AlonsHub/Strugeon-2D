@@ -61,4 +61,39 @@ public static class GameStats
         return new Vector2Int(pre, threshhold);
     }
 
+    public static int GetNumberFromFibonettaSequence(int level)
+    {
+        return (level > 3) ? FibonettaSequence(level): 100 * level;
+    }
+
+    static int FibonettaSequence(int numberAfterThree)
+    {
+        int start = 300;
+        int pre = 200;
+        int threshhold = 0;
+
+        for (int i = 1; i <= numberAfterThree - 3; i++)
+        {
+            threshhold = pre + start;
+            pre = start;
+            start = threshhold;
+        }
+        return threshhold;
+    }
+
+    public static Vector2Int GetFibonettaExpThresholdByLevel(int level)
+    {
+        int pre;
+        int threshold = GetNumberFromFibonettaSequence(level);
+        if (level == 1) //Fibbonachi can't work with an initial 0
+        {
+            pre = 0; //Sets inital "threshold" to be 0 (since no experience is needed to get from level 0 to 1)
+        }
+        else
+        {
+            pre = GetNumberFromFibonettaSequence(level-1);
+        }
+
+        return new Vector2Int(pre, threshold);
+    }
 }

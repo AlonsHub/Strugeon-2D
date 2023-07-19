@@ -46,7 +46,7 @@ public class Room
     public void ClearRoom()
     {
         //isOccupied = false;
-        squad = null;
+        squad = new Squad(roomNumber);
         SetStatusText("Vacant");
     }
 }

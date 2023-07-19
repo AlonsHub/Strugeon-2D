@@ -353,6 +353,11 @@ public class PlayerDataMaster : MonoBehaviour
         }
         return toReturn;
     }
+    public List<MercSheet> GetMercSheetsByAssignment(MercAssignment mercAssignment)
+    {
+        return currentPlayerData.mercSheets.Where(x => x.currentAssignment== mercAssignment).ToList();
+    }
+    
     public List<MercSheet> GetMercSheetsByAssignments(List<MercAssignment> mercAssignments)
     {
         return currentPlayerData.mercSheets.Where(x => mercAssignments.Contains(x.currentAssignment)).ToList();

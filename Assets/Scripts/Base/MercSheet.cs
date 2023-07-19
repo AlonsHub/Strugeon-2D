@@ -29,8 +29,8 @@ public class MercSheet
     public int _experience = 0;
     public int _level = 1;
 
-    public int _expToNextLevel => GameStats.ExpThresholdByLevel(_level);
-    public Vector2Int _expFromAndToNextLevel => GameStats.ExpThresholdsByLevel(_level);
+    public int _expToNextLevel => GameStats.GetNumberFromFibonettaSequence(_level);
+    public Vector2Int _expFromAndToNextLevel => GameStats.GetFibonettaExpThresholdByLevel(_level);
     //public int _minDamageBonus => GameStats.minDmgPerLevel * (_level-1); //you only start gaining bonuses from level 2
     public int _minDamage => (int)statBlock.MinDamage(_level); //you only start gaining bonuses from level 2
     //public int _maxDamageBonus => GameStats.maxDmgPerLevel * (_level - 1);
