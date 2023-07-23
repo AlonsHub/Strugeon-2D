@@ -297,31 +297,14 @@ public class SquadBuilder2 : MonoBehaviour
         gameObject.SetActive(true); //for when called by CrewBlock
         toRoom = r;
         _currentRoomIndex = r.roomNumber;
-        //_currentRoomIndex = PlayerDataMaster.Instance.currentPlayerData.rooms.IndexOf(r);
-        //temp af TBF
-        //if (r.squad == null || r.squad.pawns.Count ==0)
-        //return;
-        //if (r.squad != null)
-        //    tempSquad = r.squad;
-        //else
-        //    tempSquad = new Squad();
-        //isEdit = false; //Will be set true in EditSquadMode if relevant
-
-        //if(tempSquad != null && tempSquad.pawns.Count >0)
-        //{
-        //    EditSquadMode(tempSquad.pawns, r);
-        //}
-        //else
-        //{
-        //    tempSquad = new Squad();
-        //}
-
+        
         if (r.squad != null && r.squad.pawns.Count > 0)
         {
             //set partySlots by toRoom.size
             for (int i = 0; i < r.squad.pawns.Count; i++)
             {
-                partySlots[i].SetMe(r.squad.pawns[i]);
+                //partySlots[i].SetMe(r.squad.pawns[i]);
+                partySlots[i].SetMe(r.squad.pawns[i].mercSheetInPlayerData);
             }
             for (int i = r.squad.pawns.Count; i < partySlots.Length; i++)
             {
@@ -418,7 +401,7 @@ public class SquadBuilder2 : MonoBehaviour
 
         for (int i = 0; i < ToRoom.squad.pawns.Count; i++)
         {
-            partySlots[i].SetMe(ToRoom.squad.pawns[i]);
+            partySlots[i].SetMe(ToRoom.squad.pawns[i].mercSheetInPlayerData);
         }
         for (int i = ToRoom.squad.pawns.Count; i < partySlots.Length; i++)
         {
@@ -456,7 +439,8 @@ public class SquadBuilder2 : MonoBehaviour
         {
             availableSlots[i].gameObject.SetActive(true);
             
-            availableSlots[i].SetMe(sheets[i].MyPawnPrefabRef<Pawn>()); //prefer Pawn setter to MercSheet setter
+            //availableSlots[i].SetMe(sheets[i].MyPawnPrefabRef<Pawn>()); //prefer Pawn setter to MercSheet setter
+            availableSlots[i].SetMe(sheets[i]); //prefer Pawn setter to MercSheet setter
         }
 
         for (int i = sheets.Count; i < availableSlots.Count; i++)
