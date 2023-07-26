@@ -143,8 +143,8 @@ public class SquadPicker : MonoBehaviour
         int count = 0;
         foreach (var item in PlayerDataMaster.Instance.currentPlayerData.rooms)
         {
-            if (!item.squad.isAvailable)
-                continue;
+            //if (!item.squad.isAvailable)
+            //    continue;
 
             squadSlots[count].SetMe(item.squad);
             count++;

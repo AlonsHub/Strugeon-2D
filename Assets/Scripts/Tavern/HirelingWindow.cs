@@ -21,6 +21,11 @@ public class HirelingWindow : MonoBehaviour
 
     public void SetMe(MercName newMerc, HirelingMaster hm)
     {
+        //if(newMerc == MercName.None)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         mercName = newMerc;
         nameText.text = newMerc.ToString(); //interesting if this works or not
 

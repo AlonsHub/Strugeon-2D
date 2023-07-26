@@ -59,6 +59,7 @@ public class TileEffect : MonoBehaviour
     }
     protected void OnDisable()
     {
+        if(TurnMachine.Instance)
         TurnMachine.Instance.OnStartNewRound -= ReduceDurationByOne;
         floorTile.OnOccupantEnter -= TryApplyEffectToOccupant;
 

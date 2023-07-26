@@ -129,7 +129,7 @@ public class TurnMachine : MonoBehaviour
             currentTurnInfo.IsTurnDone = false;
             currentTurnInfo.TakeTurn();
 
-            yield return new WaitUntil(() => currentTurnInfo.IsTurnDone);
+            yield return new WaitUntil(() => currentTurnInfo == null || currentTurnInfo.IsTurnDone);
             currentTurnInfo.OnTurnEnd?.Invoke();
         }
     }
@@ -137,7 +137,7 @@ public class TurnMachine : MonoBehaviour
     /// Checks if win or lose states apply. If either, returns TRUE, and calls Win() or Lose(), AND StopTurnSequence().
     /// </summary>
     /// <returns></returns>
-    bool WinLoseCheck()
+    public bool WinLoseCheck()
     {
         if (RefMaster.Instance.enemyInstances.Count != 0 && RefMaster.Instance.mercs.Count != 0)
         {

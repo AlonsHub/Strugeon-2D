@@ -44,24 +44,30 @@ public class HirelingMaster : MonoBehaviour
         }
 
         //List<MercName> existing = PartyMaster.Instance.AllMercs();
-        List<MercName> existing = PlayerDataMaster.Instance.GetMercNamesByAssignments(new List<MercAssignment> {MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Hireable, MercAssignment.Room});
-        List<MercName> missing = new List<MercName>();
-        for (int i = 1; i < Enum.GetNames(typeof(MercName)).Length; i++) //0 == None
+        //List<MercName> existing = PlayerDataMaster.Instance.GetMercNamesByAssignments(new List<MercAssignment> {MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Hireable, MercAssignment.Room});
+        //List<MercName> missing = new List<MercName>();
+        //for (int i = 1; i < Enum.GetNames(typeof(MercName)).Length; i++) //0 == None
+        //{
+        //    if(!existing.Contains((MercName)i))
+        //    {
+        //        missing.Add((MercName)i);
+        //    }
+        //}
+
+        if (PlayerDataMaster.Instance.currentPlayerData.wildMercs.Count == 0)
         {
-            if(!existing.Contains((MercName)i))
-            {
-                missing.Add((MercName)i);
-            }
+            Debug.LogError("Congrats! You just lost Sturgeon");
+            return; //to the beginning or to whence you came!
         }
 
-        if(missing.Count == 0)
-        {
-            Debug.LogError("Should never happen");
-        }
+            //if(missing.Count == 0)
+            //{
+            //    Debug.LogError("Should never happen"); //Why not? pretty sure it should... things changed?
+            //}
 
-        int rand = UnityEngine.Random.Range(0, missing.Count); //0 is fine here since it's within the list "missing" not the mercName as int
+            int rand = UnityEngine.Random.Range(0, PlayerDataMaster.Instance.currentPlayerData.wildMercs.Count); //0 is fine here since it's within the list "missing" not the mercName as int
 
-        AddHireableToLog(missing[rand]);
+        AddHireableToLog(PlayerDataMaster.Instance.currentPlayerData.wildMercs[rand]);
 
         //^^^ Extracte to this AddHireableToLog
         //HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();

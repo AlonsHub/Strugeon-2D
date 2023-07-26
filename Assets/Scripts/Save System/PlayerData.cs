@@ -14,6 +14,8 @@ public class PlayerData
     public List<MercSheet> availableMercSheet;// = new List<MercSheet>();
     public List<MercName> hireableMercs;// = new List<MercName>();
 
+    public List<MercName> wildMercs;// = new List<MercName>();
+
     //squads
     //public List<List<MercName>> squadsAsMercNames;
     public List<MercName> squadsAsMercNameList; // comma seperated
@@ -50,7 +52,7 @@ public class PlayerData
     //site cooldowns?
     //
 
-    public int deadMercs = 0;
+    public int deadMercCount = 0;
     public int cowardMercs = 0;
     public int victories = 0;
     public int losses = 0;
@@ -80,6 +82,19 @@ public class PlayerData
         availableMercNames = new List<MercName>();
         availableMercSheet = new List<MercSheet>();
         hireableMercs = new List<MercName>();
+        wildMercs = new List<MercName>();
+
+        //temp
+        for (int i = 1; i < System.Enum.GetValues(typeof(MercName)).Length - 1; i++) //0 is NONE!
+        {
+            wildMercs.Add((MercName)i);
+        }
+
+        wildMercs.Remove(MercName.Shuki);
+        wildMercs.Remove(MercName.Yeho);
+        wildMercs.Remove(MercName.Smadi);
+
+        //end temp
 
         SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
         _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
@@ -99,6 +114,8 @@ public class PlayerData
     void CreateAddMerc(MercName newName, MercAssignment assignment)
     {
         MercSheet newSheet;
+        wildMercs.Remove(newName);
+
         switch (assignment) //other case are only used if this code is used to also load save
         {
             case MercAssignment.Null:
@@ -161,8 +178,7 @@ public class PlayerData
 
     public void RemoveMercSheet(MercName mn)
     {
-
-        if(!mercSheets.Remove(mercSheets.Where(x => x.characterName == mn).SingleOrDefault()))
+        if (!mercSheets.Remove(mercSheets.Where(x => x.characterName == mn).SingleOrDefault()))
         {
             Debug.LogError("couldn't find " + mn.ToString() + " to remove");
         }

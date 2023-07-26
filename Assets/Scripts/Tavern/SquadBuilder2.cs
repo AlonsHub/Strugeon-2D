@@ -446,7 +446,6 @@ public class SquadBuilder2 : MonoBehaviour
         for (int i = sheets.Count; i < availableSlots.Count; i++)
         {
             availableSlots[i].gameObject.SetActive(false);
-            //availableSlots[i].SetMe(); //empty
         }
     }
 
@@ -471,35 +470,9 @@ public class SquadBuilder2 : MonoBehaviour
     private IEnumerator CycleCrewCoroutine(int i) //TBF remove all confirm stuff and make this a method
     {
         yield return null;
-        //Room currentRoom = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
-        //if (currentRoom.squad != null && currentRoom.squad.pawns.Count > 0) //TBF, this is how we check if is occupied
-        //{
-        //    if (uneditedSquadPawns.Count == tempSquad.pawns.Count)
-        //    {
-        //        bool same = true;
-        //        foreach (var item in tempSquad.pawns)
-        //        {
-        //            if (!uneditedSquadPawns.Contains(item))
-        //                same = false;
-        //        }
-
-        //        if (same)
-        //            confirmCycleAnswer = false; //stops the wait for answer
-        //        else
-        //            cycleConfirmWindow.gameObject.SetActive(true);
-        //    }
-        //    else
-        //    {
-        //        cycleConfirmWindow.gameObject.SetActive(true); //turns on buttons that would decide true or false
-        //    }
-
-        //    //yield return StartCoroutine(nameof(CycleWaitForConfirm));
-
-            //if(confirmCycleAnswer.HasValue && confirmCycleAnswer.Value == true)
-            //{
-                CycleConfirm();
-            //}
-        //}
+        
+        CycleConfirm();
+        
 
         _currentRoomIndex += i;
         if (_currentRoomIndex < 0)
@@ -512,8 +485,6 @@ public class SquadBuilder2 : MonoBehaviour
         }
         Room r = Tavern.Instance.GetRoomByIndex(_currentRoomIndex);
         BetterSetToRoom(r);
-
-        //Refresh();
     }
     
     public void AddMercToParty(Pawn p)
@@ -541,5 +512,4 @@ public class SquadBuilder2 : MonoBehaviour
         OnAnyCrewChanges?.Invoke();
         //Refresh();
     }
-
 }

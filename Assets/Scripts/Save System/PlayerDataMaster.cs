@@ -508,7 +508,7 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.losses,
         currentPlayerData.numOfavailableMercs,
         currentPlayerData.cowardMercs,
-        currentPlayerData.deadMercs,
+        currentPlayerData.deadMercCount,
         currentPlayerData.gold,
         currentPlayerData.totalMercLevel };
     }

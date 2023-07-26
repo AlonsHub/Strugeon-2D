@@ -664,7 +664,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             PartyMaster.Instance.availableMercPrefabs.Remove(this);
             //TurnMaster.Instance.theDead.Add(mercName);
             RefMaster.Instance.AddDead(mercName);
-            PlayerDataMaster.Instance.currentPlayerData.deadMercs++;
+            PlayerDataMaster.Instance.currentPlayerData.deadMercCount++;
         }
         else
         {
@@ -672,11 +672,16 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             RefMaster.Instance.enemyInstances.Remove(this); //not ideal
         }
         //TurnMaster.Instance.RemoveTurnTaker(this);
+
+        turnDone = false;
         TurnMachine.Instance.RemoveALLInfosForTaker(this);
-
-
         tileWalker.currentNode.RemoveOccupant(true); //true also destorys the gameObject
+
+        //Call end-game check!
+
         yield return new WaitForEndOfFrame();
+        TurnMachine.Instance.WinLoseCheck();
+       
         //Destroy(gameObject);
     }
 
