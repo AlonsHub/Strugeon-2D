@@ -40,9 +40,22 @@ public class SpellButton : Hoverable
     private void Awake()
     {
         button = GetComponent<Button>();
-        // InteractableCheck();
+
+        DisableIfNotCastableWhatsoever();
+
         InteractableCheck();
     }
+
+    //Temp! this will not be relevant once spells are loaded from somewhere other than the prefab in the arena
+    private void DisableIfNotCastableWhatsoever()
+    {
+        if(skillCost > psionNoolProfile.nools[(int)nulColour].capacity)
+        {
+            //Disalbe all visual elemets, assuming they will readjust on their own
+            gameObject.SetActive(false);
+        }
+    }
+
 
     private void OnEnable()
     {
