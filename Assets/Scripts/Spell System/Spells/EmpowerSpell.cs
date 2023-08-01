@@ -3,24 +3,28 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BraverySpell : SpellButton
+public class EmpowerSpell : SpellButton
 {
-    //Pawn pawnTgt;
-    
+    public DamageModifier damageModifier;
 
     public override void OnButtonClick()
     {
         pawnTgt = MouseBehaviour.hitTarget;
+       
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is EmpowerEffect).Any())
             {
-                Debug.LogError($"Spell failed! This target already has {this.GetType()} in effect.");
+                //No need to stack a skill that lasts till end of round
+
+                //StatusEffect se = pawnTgt.statusEffects.Where(s => s is EmpowerEffect).SingleOrDefault();
+                //se.StackMe();
                 return;
             }
         }
-        new BraveryEffect(pawnTgt, effectIcon);
-    
+
+        damageModifier.mod = modifier * .0014f;
+        new EmpowerEffect(pawnTgt, effectIcon,damageModifier); //damageModifier comes from DamageModifyingSpell
 
         base.OnButtonClick();
     }
@@ -30,7 +34,7 @@ public class BraverySpell : SpellButton
         base.InteractableCheck();
         if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (pawnTgt.statusEffects.Where(s => s is BraveryEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is EmpowerEffect).Any())
             {
                 SetButtonInteractability(false);
             }

@@ -35,6 +35,8 @@ public class DamageRelatedStatusEffect : StatusEffect
     /// </summary>
     public override void Perform()
     {
+        if (damageModifier.currentDuration != -100) //temp TBF this is how we do infinite duration damage modifiers atm
+            return;
         damageModifier.currentDuration--;
         if (damageModifier.currentDuration <= 0)
         {

@@ -1301,6 +1301,11 @@ PrefabInstance:
       propertyPath: skillCost
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: damageModifier.currentDuration
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 3212094481327735728, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1336,6 +1341,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 91.35455
       objectReference: {fileID: 0}
+    - target: {fileID: 8089087349993830512, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8120686893250838154, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1349,6 +1359,11 @@ PrefabInstance:
     - target: {fileID: 8120686893311671255, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120686893687869152, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8120686893687869153, guid: 16bfc6b9dd503e94890f725e876b1833,
@@ -2903,17 +2918,17 @@ PrefabInstance:
     - target: {fileID: 4359554762573788632, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: skillCost
-      value: 80
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 5661146186740163935, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: skillCost
-      value: 100
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 5737377650291417464, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
       propertyPath: skillCost
-      value: 155
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 5737377650778110716, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
@@ -2939,6 +2954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: skillCost
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737377651527598645, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
+        type: 3}
+      propertyPath: damageModifier.currentDuration
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 6025478875901227695, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8,
         type: 3}
@@ -4598,7 +4618,7 @@ MonoBehaviour:
   myData: Vitality Theft - For 3 turns, adjacent mercs will Steal some HP from this
     enemy
   nulColour: 1
-  skillCost: 10
+  skillCost: 130
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,
     type: 3}
   checkOnEnable: 0

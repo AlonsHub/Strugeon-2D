@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SuggestSpell : SpellButton
@@ -22,5 +23,17 @@ public class SuggestSpell : SpellButton
         mouseBehaviour.HideMenus();
 
         base.OnButtonClick();
+    }
+
+    public override void InteractableCheck()
+    {
+        base.InteractableCheck();
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
+        {
+            if (pawnTgt.statusEffects.Where(s => s is SuggestEffect).Any())
+            {
+                SetButtonInteractability(false);
+            }
+        }
     }
 }

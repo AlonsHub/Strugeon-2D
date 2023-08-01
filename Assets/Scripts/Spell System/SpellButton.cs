@@ -127,13 +127,18 @@ public class SpellButton : Hoverable
 
     }
 
-    public void InteractableCheck()
+    public virtual void InteractableCheck()
     {
         //button.interactable = skillCost <= relevantBar.currentValue;
-        
+
         //button.interactable = skillCost <= psionProfile.GetValueByName(nulColour);
-        button.interactable = skillCost <= psionNoolProfile.nools[(int)nulColour].currentValue;
+        SetButtonInteractability(skillCost <= psionNoolProfile.nools[(int)nulColour].currentValue);
         
+    }
+
+    protected void SetButtonInteractability(bool isInteractable)
+    {
+        button.interactable = isInteractable;
     }
     
 }

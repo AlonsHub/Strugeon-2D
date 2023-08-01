@@ -148,6 +148,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
     //temp?
     WeaponItem wi;
+    public WeaponItem GetWeaponItem => wi;
 
     public override void Init()
     {
