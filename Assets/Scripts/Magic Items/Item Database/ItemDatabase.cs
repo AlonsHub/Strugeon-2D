@@ -76,7 +76,7 @@ public class ItemDatabase : MonoBehaviour
     {
         if(idToItemSO.ContainsKey(s))
         {
-            Debug.LogError($"{s} already exists");
+            //Debug.LogError($"{s} already exists");
             idToItemSO[s].magicItem = so.magicItem;
             return;
         }
