@@ -90,9 +90,12 @@ public class PlayerData
             wildMercs.Add((MercName)i);
         }
 
-        wildMercs.Remove(MercName.Shuki);
-        wildMercs.Remove(MercName.Yeho);
-        wildMercs.Remove(MercName.Smadi);
+        foreach (var item in GameStats.startMercNames)
+        {
+            wildMercs.Remove(item);
+        }
+
+        
 
         //end temp
 

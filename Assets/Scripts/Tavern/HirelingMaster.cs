@@ -56,7 +56,9 @@ public class HirelingMaster : MonoBehaviour
 
         if (PlayerDataMaster.Instance.currentPlayerData.wildMercs.Count == 0)
         {
+            if(PlayerDataMaster.Instance.currentPlayerData.deadMercCount == GameStats.allMercCount)
             Debug.LogError("Congrats! You just lost Sturgeon");
+
             return; //to the beginning or to whence you came!
         }
 

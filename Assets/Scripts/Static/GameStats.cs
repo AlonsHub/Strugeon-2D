@@ -11,6 +11,9 @@ public static class GameStats
     /// Merc-Related stats:
     /// </summary>
     public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
+
+    public static int allMercCount = 7;
+
     public static int expToLevel2 = 100;
     public static int maxHpBonusPerLevel = 10;
     public static int minDmgPerLevel = 2;

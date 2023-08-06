@@ -107,7 +107,7 @@ public class NoolProfile
 
     public void RegenAll()
     {
-        Debug.LogError("regen all");
+        //Debug.LogError("regen all");
         foreach (var item in nools)
         {
             item.Regen();
