@@ -29,7 +29,7 @@ public class SpellButton : Hoverable
         return null; //This is only relevant for spells which leave status effects
     }
 
-#if UNITY_EDITOR
+
     [ContextMenu("CopyDataToBSD")]
     public void CopyDataToBSD()
     {
@@ -39,8 +39,6 @@ public class SpellButton : Hoverable
         basicSpellData.noolColour = nulColour;
         basicSpellData.icon = effectIcon;
     }
-
-#endif
 
     //Experimental!
 
