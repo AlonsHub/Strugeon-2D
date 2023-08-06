@@ -27,10 +27,12 @@ public class SuggestSpell : SpellButton
 
     public override void InteractableCheck()
     {
+        pawnTgt = MouseBehaviour.hitTarget;
+
         base.InteractableCheck();
-        if (MouseBehaviour.hitTarget.statusEffects != null && MouseBehaviour.hitTarget.statusEffects.Count != 0)
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (MouseBehaviour.hitTarget.statusEffects.Where(s => s is SuggestEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is SuggestEffect).Any())
             {
                 SetButtonInteractability(false);
             }

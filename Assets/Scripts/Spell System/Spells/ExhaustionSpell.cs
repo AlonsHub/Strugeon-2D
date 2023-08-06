@@ -34,10 +34,12 @@ public class ExhaustionSpell : SpellButton
 
     public override void InteractableCheck()
     {
+        pawnTgt = MouseBehaviour.hitTarget;
+
         base.InteractableCheck();
-        if (MouseBehaviour.hitTarget.statusEffects != null && MouseBehaviour.hitTarget.statusEffects.Count != 0)
+        if (pawnTgt.statusEffects != null && pawnTgt.statusEffects.Count != 0)
         {
-            if (MouseBehaviour.hitTarget.statusEffects.Where(s => s is ExhaustionEffect).Any())
+            if (pawnTgt.statusEffects.Where(s => s is ExhaustionEffect).Any())
             {
                 SetButtonInteractability(false);
             }
