@@ -7,7 +7,6 @@ public class MarkedEffect : DamageRelatedStatusEffect, I_StatusEffect_IncomingDa
     public MarkedEffect(Pawn target, Sprite sprite, DamageModifier dm) : base(target, sprite, dm)
     {
         alignment = EffectAlignment.Negative;
-
         ApplyEffect();
     }
 

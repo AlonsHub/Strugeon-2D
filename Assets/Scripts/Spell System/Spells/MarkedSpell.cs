@@ -22,7 +22,7 @@ public class MarkedSpell : SpellButton
             }
         }
 
-        damageModifier.mod = modifier * .025f;
+        damageModifier.mod = modifier * .042f;
 
         new MarkedEffect(pawnTgt, effectIcon, damageModifier);
 
