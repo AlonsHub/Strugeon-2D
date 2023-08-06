@@ -253,18 +253,22 @@ public class WeaponItem : ActionItem
 
         //TEMP Check HitGrazeCrit here for now? 
 
+        Color _colOfDamage = SturgeonColours.Instance.noolYellow;
+
         int toHitRoll = Random.Range(1, 101); //1-100
         if(toHitRoll < statBlock.grazeChance)
         {
             //graze!
-            rolledDamage *= statBlock.grazeDamagePercentage / 100f; 
+            rolledDamage *= statBlock.grazeDamagePercentage / 100f;
+            _colOfDamage = SturgeonColours.Instance.skipGrey;
         }
         else if(toHitRoll >= 100 - statBlock.critChance)
         {
-            rolledDamage *= statBlock.critDamagePercentage / 100f; 
+            rolledDamage *= statBlock.critDamagePercentage / 100f;
+            _colOfDamage = SturgeonColours.Instance.noolOrange;
         }
         //else! normal hit, change nothing
-        
+
 
         //End HitGrazeCrit
 
@@ -272,7 +276,8 @@ public class WeaponItem : ActionItem
 
         hitAction?.Invoke();
 
-        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage ,Color.red);
+        //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage ,Color.red);
+        BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage , _colOfDamage);
 
         la.tgt = null;
         //pawn.TurnDone = true;
