@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-    //public enum ButtonColor {Red, Blue, Yellow, Purple};
 public class SpellButton : Hoverable
 {
-    //public ButtonColor buttonColor;
-    public NoolColour nulColour;
-   // public int maxValue; //full mana
-    public float skillCost; //the cost for using this skill once //TBF make ScriptableObjects which hold skills
-    //public int _currentValue; //current amount of relevant mana... not sure if needed.
+    public BasicSpellData basicSpellData;
 
+    public NoolColour nulColour;
+    public float skillCost; //the cost for using this skill once //TBF make ScriptableObjects which hold skills
+    
     [SerializeField]
     GameObject vfxPrefab;
 
@@ -25,11 +22,25 @@ public class SpellButton : Hoverable
 
     public Pawn pawnTgt;
 
-    //Experimental!
+    public Sprite GetEffectIcon { get => effectIcon; private set => effectIcon = value;}
+    //Experimental
     protected virtual System.Type GetStatusEffectType()
     {
         return null; //This is only relevant for spells which leave status effects
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("CopyDataToBSD")]
+    public void CopyDataToBSD()
+    {
+        basicSpellData.spellName = name;
+        basicSpellData.longDescription = GetMyData;
+        basicSpellData.noolCost = skillCost;
+        basicSpellData.noolColour = nulColour;
+        basicSpellData.icon = effectIcon;
+    }
+
+#endif
 
     //Experimental!
 

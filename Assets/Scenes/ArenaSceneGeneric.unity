@@ -1303,6 +1303,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
+      propertyPath: basicSpellData.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 9eeb7d46926023047acb641b0f98d593,
+        type: 3}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolCost
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellName
+      value: 'Button - Yellow Exhaustion '
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolColour
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.longDescription
+      value: Exhaustion - weakens enemy for 3 turns, reudcing their damage by x0.75
+        each time
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
       propertyPath: damageModifier.currentDuration
       value: -100
       objectReference: {fileID: 0}
@@ -4186,6 +4213,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myData: Flee! - Immediatly causes all mercs to escape with their lives, but not
     much else
+  basicSpellData:
+    spellName: 
+    longDescription: 
+    shortDescription: 
+    noolCost: 0
+    noolColour: 0
+    icon: {fileID: 0}
   nulColour: 5
   skillCost: 0.4
   vfxPrefab: {fileID: 0}
@@ -4617,6 +4651,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myData: Vitality Theft - For 3 turns, adjacent mercs will Steal some HP from this
     enemy
+  basicSpellData:
+    spellName: Button - Yellow Vitality Theft
+    longDescription: Vitality Theft - For 3 turns, adjacent mercs will Steal some
+      HP from this enemy
+    shortDescription: 
+    noolCost: 130
+    noolColour: 1
+    icon: {fileID: 21300000, guid: 9ca7db16a3201b4479d13192d342c8a4, type: 3}
   nulColour: 1
   skillCost: 130
   vfxPrefab: {fileID: 4645110662845780913, guid: 2abb9f287b5598044806dc40a443aebe,

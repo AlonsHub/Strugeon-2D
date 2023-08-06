@@ -3364,7 +3364,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 20
   m_TargetDisplay: 0
@@ -3378,7 +3378,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_Children: []
+  m_Children:
+  - {fileID: 1529088099}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4817,6 +4818,131 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f9a36374350fe04395775e3fdb2086a, type: 3}
+--- !u!1001 &1529088098
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 843780484}
+    m_Modifications:
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 397.73523
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 835.59314
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -222
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 32.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7006766739052615475, guid: 817f0a4c92e3966428be6c3de3222c66,
+        type: 3}
+      propertyPath: m_Name
+      value: IdleLog
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 817f0a4c92e3966428be6c3de3222c66, type: 3}
+--- !u!224 &1529088099 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7006766739052615472, guid: 817f0a4c92e3966428be6c3de3222c66,
+    type: 3}
+  m_PrefabInstance: {fileID: 1529088098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1534689150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12797,6 +12923,9 @@ MonoBehaviour:
   noolChartHider: {fileID: 197731649}
   colourInhaleOrder: 01000000030000000400000005000000020000000600000000000000
   coloursToAvoid: 020000000000000006000000
+  all_PsionSpells: {fileID: 11400000, guid: 49ee3d0f8b5c1f04fb784b3a872e16d8, type: 2}
+  prefabMessage: {fileID: 603072170079770908, guid: 908bcf26e4ec11046b4629a5a843e6c8,
+    type: 3}
 --- !u!1 &8283218130939936005 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1692192477807090773, guid: ab7d3f6e86f7dde40b9a9467bfbda07e,

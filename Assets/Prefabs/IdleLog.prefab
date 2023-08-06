@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7006766738071018674}
   - component: {fileID: 7006766738071018669}
   m_Layer: 5
-  m_Name: TEST_Button
+  m_Name: PeekToggler_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 7006766739052615472}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -221.9, y: 392.1}
-  m_SizeDelta: {x: 37.519386, y: 78.13699}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -22.899994, y: -25.899994}
+  m_SizeDelta: {x: 37.51938, y: 78.13699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7006766738071018675
 CanvasRenderer:
@@ -182,6 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d0d1d5c249a734c88a801330d2bfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicEntryPrefab: {fileID: 3975262425618653145, guid: ed9501f6f2dab164eb4b781bb483d177,
+    type: 3}
+  logParent: {fileID: 7006766739947731036}
 --- !u!114 &7006766739052615476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,14 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904faeb342e65f0478cb25c5a565854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peekSpeed: 400
-  hideSpeed: 400
-  moveAwayAmount: 50
-  openSprite: {fileID: 0}
-  closedSprite: {fileID: 0}
   sr: {fileID: 0}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
+  menuOpen: 0
   anim: {fileID: 7006766739052615479}
 --- !u!95 &7006766739052615479
 Animator:
@@ -329,8 +326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 132.7}
-  m_SizeDelta: {x: 0, y: -265.4361}
+  m_AnchoredPosition: {x: 1.699997, y: 324.23}
+  m_SizeDelta: {x: -25.595581, y: -742.0977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7006766739947731037
 MonoBehaviour:
@@ -350,7 +347,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 27.5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0

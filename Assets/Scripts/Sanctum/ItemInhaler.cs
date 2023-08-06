@@ -74,6 +74,10 @@ public class ItemInhaler : MonoBehaviour
 
     float[] _tempValues;
 
+    public All_PsionSpells all_PsionSpells;
+    [SerializeField] GameObject prefabMessage;
+
+    bool doBumpIdleLog = false;
     private void Awake()
     {
         if (!button)
@@ -82,6 +86,8 @@ public class ItemInhaler : MonoBehaviour
         button.onClick.AddListener(InhaleAndLogSelectedItem);
         inhaling = false;
         button.interactable = false;
+
+        all_PsionSpells.GetSpellThresholds();
     }
 
     void InhaleAndLogSelectedItem()
@@ -161,6 +167,16 @@ public class ItemInhaler : MonoBehaviour
                 s += $"hit! on {pill.colour}. Amount received {amount} \n";
                 values[(int)pill.colour] = amount;
 
+                BasicSpellData bsd = all_PsionSpells.CheckIfThresholdWillBePassed(pill.colour, noolProfile.nools[(int)pill.colour].capacity, amount);
+
+                if(bsd!=null)
+                {
+                    //PROMPT THE THING TO SHOW WE GOT THIS NEW SPELL
+
+                    IdleLog.Instance.RecieveGenericMessage(prefabMessage, new List<string> { bsd.spellName }, new List<Sprite> { bsd.icon });
+                    doBumpIdleLog = true;
+                }
+
                 noolProfile.nools[(int)pill.colour].capacity += amount;
 
                 //Add value to that nulcolours max value (psion profile)
@@ -234,8 +250,7 @@ public class ItemInhaler : MonoBehaviour
             {
                 continue;
             }
-            //processingColourIndicator.gameObject.SetActive(true);
-            //resultText.gameObject.SetActive(false);
+            
             float _timer = timePerBar;
             while (_timer >= 0)
             {
@@ -253,7 +268,6 @@ public class ItemInhaler : MonoBehaviour
                 //resultText.text = $"Inhaled {psionPillProfile.pills[i].colour} colour by {s[i]}.";
                 resultText.text = $"Inhaled {currentColour} colour by {_tempValues[(int)currentColour]}.";
                 pillPanel.PromptReward((int)currentColour, (int)s[(int)currentColour]);
-                //itemNulBarPanel.SetBarText(i, $"+{s[i]}");
             }
             else
             {
@@ -264,12 +278,6 @@ public class ItemInhaler : MonoBehaviour
             yield return new WaitForSeconds(timePerResult);
             //yield return new WaitUntil(() => Input.anyKey);
         }
-
-        //yield return new WaitUntil(() => Input.anyKey);
-        //itemNulBarPanel.TurnOffAllBarTexts();
-        //nulBarPanel.SetMe(); //resets to accomedate new max values
-        //psionNulBarPanel.SetMe();
-        
 
         FinalizeInhaleSequence();
 
@@ -286,18 +294,20 @@ public class ItemInhaler : MonoBehaviour
 
     private void FinalizeInhaleSequence()
     {
-        //processingColourIndicator.gameObject.SetActive(false);
         OnInhaleEnd?.Invoke();
         noolChartHider.SetAllHidersToValue(0f);
 
-        //pillPanel.SetToPsion();
-        //SanctumSelectedPanel.Instance.SetMeFull();
+        if(doBumpIdleLog)
+        {
+            IdleLog.Instance.BumpOpen();
+            doBumpIdleLog = false;
+        }
 
-        //resultText.gameObject.SetActive(false);
         inhaling = false;
-        //button.interactable = true;
+
+        //check if new spells are available
+
         skipButtonObj.SetActive(false);
-        //startGraph.SetAllToValue(0f);
     }
 
     bool RollChance(int x, int outOf)

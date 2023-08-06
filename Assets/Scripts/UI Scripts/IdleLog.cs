@@ -197,4 +197,9 @@ public class IdleLog : MonoBehaviour
 
         peekingMenu.HideMenu();
     }
+
+    public void BumpOpen()
+    {
+        peekingMenu.ShowMenu();
+    }
 }
