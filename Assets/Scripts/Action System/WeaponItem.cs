@@ -254,7 +254,7 @@ public class WeaponItem : ActionItem
         //TEMP Check HitGrazeCrit here for now? 
 
         int toHitRoll = Random.Range(1, 101); //1-100
-        if(toHitRoll <= statBlock.grazeChance)
+        if(toHitRoll < statBlock.grazeChance)
         {
             //graze!
             rolledDamage *= statBlock.grazeDamagePercentage / 100f; 

@@ -109,10 +109,13 @@ MonoBehaviour:
       range: 6
       minDamage: 22
       maxDamage: 27
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
       grazeChance: 5
-      grazeDamageModifier: 75
+      grazeDamagePercentage: 75
       critChance: 10
-      critDamageModifier: 155
+      critDamagePercentage: 155
       maxHPPerLevelAsPercentage: 19
       maxDamagePerLevelAsPercentage: 7
       minDamagePerLevelAsPercentage: 28
@@ -138,7 +141,6 @@ MonoBehaviour:
     - Celestial Ring
   initiativeBonus: 0
   hasSAs: 1
-  targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 2839758feb9ecea4a811b2b9c961690b, type: 3}
@@ -225,8 +227,8 @@ MonoBehaviour:
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 5
-  minDamage: 10
   maxDamage: 13
+  minDamage: 10
   arrowGfx: {fileID: 4948670397089572388, guid: f939928989446114e83788149f1282a0,
     type: 3}
   isRanged: 1
@@ -247,7 +249,7 @@ MonoBehaviour:
   damageType: 2
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &5092255476189858162
 MonoBehaviour:

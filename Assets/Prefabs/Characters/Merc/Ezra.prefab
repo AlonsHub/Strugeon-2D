@@ -106,10 +106,13 @@ MonoBehaviour:
       range: 1
       minDamage: 12
       maxDamage: 17
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
       grazeChance: 5
-      grazeDamageModifier: 70
+      grazeDamagePercentage: 70
       critChance: 10
-      critDamageModifier: 140
+      critDamagePercentage: 140
       maxHPPerLevelAsPercentage: 0
       maxDamagePerLevelAsPercentage: 0
       minDamagePerLevelAsPercentage: 0
@@ -139,7 +142,6 @@ MonoBehaviour:
     - Hunter's Tooth-Necklace
   initiativeBonus: 0
   hasSAs: 1
-  targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 33c674b46f2f5e940a1c1e8330a5d192, type: 3}
@@ -185,8 +187,8 @@ MonoBehaviour:
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  minDamage: 15
   maxDamage: 20
+  minDamage: 15
   arrowGfx: {fileID: 4948670397089572388, guid: e0b5341de768caf40a9744756b6bcb96,
     type: 3}
   isRanged: 0
@@ -207,7 +209,7 @@ MonoBehaviour:
   damageType: 2
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &6869497759092309598
 MonoBehaviour:

@@ -132,10 +132,13 @@ MonoBehaviour:
       range: 1
       minDamage: 14
       maxDamage: 19
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
       grazeChance: 5
-      grazeDamageModifier: 45
+      grazeDamagePercentage: 45
       critChance: 10
-      critDamageModifier: 140
+      critDamagePercentage: 140
       maxHPPerLevelAsPercentage: 21
       maxDamagePerLevelAsPercentage: 10
       minDamagePerLevelAsPercentage: 20
@@ -161,7 +164,6 @@ MonoBehaviour:
     - Amethyst Talisman
   initiativeBonus: 0
   hasSAs: 1
-  targets: []
   tileWalker: {fileID: 5182301774868751694}
   anim: {fileID: 6177665693654622096}
   portraitSprite: {fileID: 21300000, guid: 368e3c098bc16c343bd1c491221e1b13, type: 3}
@@ -224,8 +226,8 @@ MonoBehaviour:
   doTargetAllies: 0
   feetItem: {fileID: 0}
   range: 1
-  minDamage: 15
   maxDamage: 19
+  minDamage: 15
   arrowGfx: {fileID: 0}
   isRanged: 0
   arrowSpawn: {fileID: 0}
@@ -245,7 +247,7 @@ MonoBehaviour:
   damageType: 0
   targets: []
   hasRedBuff: 0
-  toHit: {fileID: 0}
+  pawnToHit: {fileID: 0}
   cachedProjectile: {fileID: 0}
 --- !u!114 &5092255476189858162
 MonoBehaviour:
