@@ -212,6 +212,25 @@ public class WeaponItem : ActionItem
             // Instantiate(effectData.effectGFXPrefab, go.transform.GetChild(0).GetChild(0));
 
             effectData.currentUses--;
+            switch (effectData.damageElement)
+            {
+                case WeaponEffect.blazing:
+                    effectColour = SturgeonColours.Instance.noolRed;
+                    break;
+                case WeaponEffect.electric:
+                    effectColour = SturgeonColours.Instance.noolBlue;
+                    break;
+                case WeaponEffect.frozen:
+                    effectColour = Color.white;
+                    break;
+                case WeaponEffect.crused:
+                    effectColour = SturgeonColours.Instance.noolBlack;
+                    break;
+                case WeaponEffect.non:
+                    break;
+                default:
+                    break;
+            }
             pawnToHit.TakeElementalDamage(bonusDamage, effectColour); // Should be toHit.TakeElementalDamage //should really just add to the rolled damamge and report both separatly
             if (effectData.currentUses <= 0)
             {
@@ -221,40 +240,23 @@ public class WeaponItem : ActionItem
                 effectColour = Color.black;
             }
 
+                BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)bonusDamage, Color.red);
             if(pawnToHit == null || pawnToHit.currentHP <= 0)
             {
-                BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Attack, pawnToHit.Name, (int)rolledDamage, Color.red);
-
                 la.tgt = null;
                 //pawn.TurnDone = true;
                 pawn.FinishAnimation();
                 return;
             }
         }
-        //if (hasRedBuff)
-        //{
-        //    rolledDamage *= 1.5f;
-        //    hasRedBuff = false;
-        //    pawn.RemoveIconByName("redBuff");
-        //}
+
 
         if (rolledDamage < 0)
             rolledDamage = 0;
         
         //status effect run
-        StatusEffect[] outgoingDamageEffects = pawn.GetStatusEffectsByPredicate(x => x is I_StatusEffect_OutgoingDamageMod);
-        if(outgoingDamageEffects != null && outgoingDamageEffects.Length !=0 )
-        {
-            foreach (var item in outgoingDamageEffects)
-            {
-                rolledDamage = (item as I_StatusEffect_OutgoingDamageMod).OperateOnDamage(rolledDamage);
-            }
-        }
-
-        //TEMP Check HitGrazeCrit here for now? 
 
         Color _colOfDamage = SturgeonColours.Instance.noolYellow;
-
         int toHitRoll = Random.Range(1, 101); //1-100
         if(toHitRoll < statBlock.grazeChance)
         {
@@ -268,6 +270,17 @@ public class WeaponItem : ActionItem
             _colOfDamage = SturgeonColours.Instance.noolOrange;
         }
         //else! normal hit, change nothing
+
+        StatusEffect[] outgoingDamageEffects = pawn.GetStatusEffectsByPredicate(x => x is I_StatusEffect_OutgoingDamageMod);
+        if(outgoingDamageEffects != null && outgoingDamageEffects.Length !=0 )
+        {
+            foreach (var item in outgoingDamageEffects)
+            {
+                rolledDamage = (item as I_StatusEffect_OutgoingDamageMod). OperateOnDamage(rolledDamage);
+            }
+        }
+
+        //TEMP Check HitGrazeCrit here for now? 
 
 
         //End HitGrazeCrit

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlindEffect : EndOfTurnStatusEffect
+public class BlindEffect : EndOfTurnStatusEffect, I_StatusEffect_OutgoingDamageMod
 {
     WeaponItem wi;
 
@@ -19,25 +19,30 @@ public class BlindEffect : EndOfTurnStatusEffect
 
     public override void ApplyEffect()
     {
-        wi = pawnToEffect.GetComponent<WeaponItem>();
-        if (!wi)
-        {
-            Debug.LogError("Weapon item not found");
-            return;
-        }
-        damage.x = wi.maxDamage;
-        damage.y = wi.minDamage;
-        damage.x = 0;
-        damage.y = 0;
+        //wi = pawnToEffect.GetComponent<WeaponItem>();
+        //if (!wi)
+        //{
+        //    Debug.LogError("Weapon item not found");
+        //    return;
+        //}
+        //damage.x = wi.maxDamage;
+        //damage.y = wi.minDamage;
+        //damage.x = 0;
+        //damage.y = 0;
         base.ApplyEffect();
     }
 
     public override void EndEffect()
     {
-        wi.maxDamage = damage.x;
-        wi.minDamage = damage.y;
+        //wi.maxDamage = damage.x;
+        //wi.minDamage = damage.y;
 
         base.EndEffect();
+    }
+
+    public float OperateOnDamage(float originalDamage)
+    {
+        return 0f;
     }
 
     public override void Perform()

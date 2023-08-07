@@ -564,10 +564,9 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
 
         //Spawn damage dmgtext with in a different color, with offset
         GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
-
-        //GameObject go = Instantiate(damagePrefab, transform.position + Vector3.right*damagePrefab.transform.lossyScale.x, damagePrefab.transform.rotation);
+        go.transform.position += Vector3.right * .4f - Vector3.up * .2f;
+        go.transform.localScale = new Vector3(.8f,.8f,1);
         TMP_Text t = go.GetComponentInChildren<TMP_Text>();
-        t.text = damage.ToString();
         t.color = colour;
 
         //Consider vaulnerabillities and weaknesses and such
@@ -586,7 +585,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
                 damage = carryOver >= 0 ? 0 : carryOver;
             }
         }
-
+        t.text = damage.ToString();
 
         currentHP -= damage;
         if (currentHP <= 0)

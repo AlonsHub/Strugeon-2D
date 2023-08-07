@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameStats
 {
 
-    public static int startingGold = 1000;
+    public static int startingGold = 30;
 
     /// <summary>
     /// Merc-Related stats:
