@@ -28,6 +28,11 @@ public class SimpleInventory : BaseInventory
         //starGraph.SetToItem(emptyItem);
         starGraph.SetAllToValue(0f);
     }
+    protected override void OnDisable()
+    {
+        SetCurrentItem();
+        base.OnDisable();
+    }
     public override void SetCurrentItem(MagicItem newItem)
     {
         selectedItem = newItem;

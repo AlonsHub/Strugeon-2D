@@ -19,6 +19,9 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     public Rarity rarity;
 
     public Sprite itemSprite; // consider keeping an enum to link with a dictionary
+    /// <summary>
+    /// DONT USE THIS AT ALL - THIS WILL BE REMOVED SOON!
+    /// </summary>
     public string spriteName;
 
     public EquipSlotType fittingSlotType;
@@ -67,23 +70,34 @@ public class MagicItem : IEquipable //change name to "ItemData" - unless it kill
     }
     public List<string> DataAsListOfStrings()
     {
+        List<string> toReturn = new List<string>();
+        List<object> objs = DataAsListOfObjects();
 
-        string classes = "";
-        foreach (var item in relevantClasses)
+        foreach (var item in objs)
         {
-            classes += $"{item}_";
+            toReturn.Add(item.ToString());
         }
-        return new List<string> { magicItemName, ((int)fittingSlotType).ToString(), ((int)statBenefit.statToBenefit).ToString(), myBenefit.Value().ToString(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
+        return toReturn;
     }
+    //public List<string> DataAsListOfStrings()
+    //{
+
+    //    string classes = "";
+    //    foreach (var item in relevantClasses)
+    //    {
+    //        classes += $"{item}_";
+    //    }
+    //    return new List<string> { magicItemName, ((int)fittingSlotType).ToString(), ((int)statBenefit.statToBenefit).ToString(), myBenefit.Value().ToString(), classes, pillProfile.AsStringData(),  goldValue.ToString(), spriteName };
+    //}
 
     public bool FetchSprite()
     {
-        if (itemSprite && itemSprite.name == spriteName) //TBD TBF !!!! TAKE A BETTER LOOK AT THIS LATER!
+        if (itemSprite && itemSprite.name == magicItemName) //TBD TBF !!!! TAKE A BETTER LOOK AT THIS LATER!
         {
             return true;
         }
 
-        itemSprite = Resources.Load<Sprite>($"ItemSprites/{spriteName}");
+        itemSprite = Resources.Load<Sprite>($"ItemSprites/{magicItemName}");
         return itemSprite; //if null, is false like in the if statement above
     }
 

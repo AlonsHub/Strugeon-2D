@@ -125,79 +125,47 @@ public class ItemInhaler : MonoBehaviour
 
         //One-shot roll
         int[] toHitChances = new int[7]; //7 -number of nool colours (sans white). Arry of % chance to Hit
-        int hitChanceTotal = 0;
-        int activeBarCount = 0;
-        //foreach (var pill in _item.pillProfile.pills)
-        //{
-        //    if (pill.potential <= 0 || coloursToAvoid.Contains(pill.colour))
-        //        continue;
-        //    //float psionPotential = _psionSpectrumProfile.GetValueByName(el.nulColour);
-        //    float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
-        //    float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
-        //    toHitChances[(int)pill.colour] = (int)chanceToHit;
-        //    hitChanceTotal += (int)chanceToHit;
-        //    activeBarCount++;
-        //}
-        //int barHits = 0;
-        
-        //float chanceForSingleBarHit = hitChanceTotal/activeBarCount; //total is chance out of 700, divide by 7 for %
+        //int hitChanceTotal = 0;
+        //int activeBarCount = 0;
 
-        
-        //foreach (var el in _item.spectrumProfile.elements)
-        //foreach (var pill in _item.pillProfile.pills)
-        foreach (var pill in _item.pillProfile.pills)
+        int attemptMaxTTL = 100;
+
+        while (hits == 0) //DANGER! CAN GO ON FOREVER!
         {
-            if(coloursToAvoid.Contains(pill.colour))
-                continue;
-            
-            float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
-            float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
-
-            values[(int)pill.colour] =0;
-            if (RollChance((int)chanceToHit, 100))
+            foreach (var pill in _item.pillProfile.pills)
             {
-                //HIT!
-                hits++;
-                //Roll Amount:
-                //float amountFactor = PlayerDataMaster.Instance.currentPlayerData.psionProgressionLevel >= 5 ? .5f : (0.2f * (1 - (noolProfile.nools[(int)pill.colour].capacity - 1) / 20)); //this should probably be 700 not 20, and reconsidered now that potential is used
-                //float amountFactor = PlayerDataMaster.Instance.currentPlayerData.psionProgressionLevel >= 5 ? .5f : .2f;
-                float amountFactor = .5f;
+                if (coloursToAvoid.Contains(pill.colour))
+                    continue;
 
-                float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
-                s += $"hit! on {pill.colour}. Amount received {amount} \n";
-                values[(int)pill.colour] = amount;
+                float psionPotential = psionPillProfile.pills[(int)pill.colour].potential;
+                float chanceToHit = pill.potential * psionPotential * chanceToHitFactor; //if items value = 5, psion potential = 3 -> 15% flat odd "to hit" on this colour
 
-                BasicSpellData bsd = all_PsionSpells.CheckIfThresholdWillBePassed(pill.colour, noolProfile.nools[(int)pill.colour].capacity, amount);
-
-                if(bsd!=null)
+                values[(int)pill.colour] = 0;
+                if (RollChance((int)chanceToHit, 100))
                 {
-                    //PROMPT THE THING TO SHOW WE GOT THIS NEW SPELL
+                    //HIT!
+                    hits++;
+                    float amountFactor = .5f;
 
-                    IdleLog.Instance.RecieveGenericMessage(prefabMessage, new List<string> { bsd.spellName }, new List<Sprite> { bsd.icon });
-                    doBumpIdleLog = true;
+                    float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
+                    s += $"hit! on {pill.colour}. Amount received {amount} \n";
+                    values[(int)pill.colour] = amount;
+
+                    CheckForNewSpells(pill, amount);
+
+                    //Add value to that nulcolours max value (psion profile)
+                    noolProfile.nools[(int)pill.colour].capacity += amount;
                 }
-
-                noolProfile.nools[(int)pill.colour].capacity += amount;
-
-                //Add value to that nulcolours max value (psion profile)
-                //PlayerDataMaster.Instance.AddToPsionNulMax(pill.colour, amount);
-
-                //This was the problem I think!
-                //Inventory.Instance.RemoveMagicItem(_item);
-                //_item = null;
             }
-        }
-        if(hits == 0)
-        {
             attemptCount++;
-            if(attemptCount>=maxAttempts)
+            if(attemptCount >= attemptMaxTTL)
             {
-                attemptCount = 0;
-                return "nothing. attempt count exceeded limit";
+                Debug.LogError($"{attemptMaxTTL} attempts failed. Item is broken.");
+                break;
             }
-           return InhaleSelectedItem();
         }
-        s += $"at {attemptCount + 1} attempt/s \n";
+
+        s += $"at {attemptCount} attempt/s \n";
 
 
         attemptCount = 0;
@@ -212,6 +180,20 @@ public class ItemInhaler : MonoBehaviour
         coro = StartCoroutine(SuccessfulInhaleSequence(values));
         return s;
     }
+
+    private void CheckForNewSpells(Pill pill, float amount)
+    {
+        BasicSpellData bsd = all_PsionSpells.CheckIfThresholdWillBePassed(pill.colour, noolProfile.nools[(int)pill.colour].capacity, amount);
+
+        if (bsd != null)
+        {
+            //PROMPT THE THING TO SHOW WE GOT THIS NEW SPELL
+
+            IdleLog.Instance.RecieveGenericMessage(prefabMessage, new List<string> { bsd.spellName }, new List<Sprite> { bsd.icon });
+            doBumpIdleLog = true;
+        }
+    }
+
     void RemoveMagicItemFromInventory()
     {
         if (_item != null)

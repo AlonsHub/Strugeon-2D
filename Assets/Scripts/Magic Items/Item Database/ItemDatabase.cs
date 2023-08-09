@@ -71,6 +71,19 @@ public class ItemDatabase : MonoBehaviour
         }
 
         Debug.Log("Item dataebase full-load completed successfully"); //will try and add a relevant-load (as opposed to full) TBF
+        FixAllItemSprites();
+
+    }
+
+    void FixAllItemSprites()
+    {
+        foreach (MagicItemSO item in idToItemSO.Values)
+        {
+            if(!item.magicItem.FetchSprite())
+            {
+                Debug.LogError($"problem fetching sprite for {item.magicItem.magicItemName}");
+            }
+        }
     }
     public void AddItem(string s, MagicItemSO so)
     {
