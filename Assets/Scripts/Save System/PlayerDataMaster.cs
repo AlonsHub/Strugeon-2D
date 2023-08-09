@@ -28,6 +28,11 @@ public class PlayerDataMaster : MonoBehaviour
     public Dictionary<string, float> SavedCooldowns { get => currentPlayerData.SiteCooldownTimes; private set => currentPlayerData.SiteCooldownTimes = value; } //to be read from and to
     public Dictionary<string, DateTime?> SiteCooldowns { get => currentPlayerData._siteCooldowns; private set => currentPlayerData._siteCooldowns = value; } //to be read from and to
 
+    /// <summary>
+    /// is true when ever a crew returns victorious
+    /// used mostly to prompt new hirelings
+    /// </summary>
+    public bool Victory; 
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,6 +41,7 @@ public class PlayerDataMaster : MonoBehaviour
             return;
         }
         Instance = this;
+        Victory = false;
 
         saveFolderPath = Application.dataPath + "/Resources/Saves/";
 

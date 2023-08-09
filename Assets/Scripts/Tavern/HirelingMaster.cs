@@ -37,22 +37,17 @@ public class HirelingMaster : MonoBehaviour
     }
     public void PromptNewHireling()
     {
-        if(!CheckForArrivals())
+        if(!PlayerDataMaster.Instance.Victory)
+        {
+            return;
+        }
+        PlayerDataMaster.Instance.Victory = false;
+
+        if (!CheckForArrivals())
         {
             Debug.LogWarning("You have all mercs already");
             return;
         }
-
-        //List<MercName> existing = PartyMaster.Instance.AllMercs();
-        //List<MercName> existing = PlayerDataMaster.Instance.GetMercNamesByAssignments(new List<MercAssignment> {MercAssignment.Available, MercAssignment.AwaySquad, MercAssignment.Hireable, MercAssignment.Room});
-        //List<MercName> missing = new List<MercName>();
-        //for (int i = 1; i < Enum.GetNames(typeof(MercName)).Length; i++) //0 == None
-        //{
-        //    if(!existing.Contains((MercName)i))
-        //    {
-        //        missing.Add((MercName)i);
-        //    }
-        //}
 
         if (PlayerDataMaster.Instance.currentPlayerData.wildMercs.Count == 0)
         {
@@ -62,25 +57,11 @@ public class HirelingMaster : MonoBehaviour
             return; //to the beginning or to whence you came!
         }
 
-            //if(missing.Count == 0)
-            //{
-            //    Debug.LogError("Should never happen"); //Why not? pretty sure it should... things changed?
-            //}
 
             int rand = UnityEngine.Random.Range(0, PlayerDataMaster.Instance.currentPlayerData.wildMercs.Count); //0 is fine here since it's within the list "missing" not the mercName as int
 
         AddHireableToLog(PlayerDataMaster.Instance.currentPlayerData.wildMercs[rand]);
 
-        //^^^ Extracte to this AddHireableToLog
-        //HirelingWindow hirelingWindow = Instantiate(newArrivalPrefab, idleLogParent).GetComponent<HirelingWindow>();
-        ////List<MercName> missing = Enum.(typeof(MercName)).ToList().Intersect(PartyMaster.Instance.AllMercs());
-        //hirelingWindow.SetMe(missing[rand], this);
-
-        //PlayerDataMaster.Instance.AddHireableMerc(missing[rand]); //Kinda sucks...
-
-        ////anim.SetTrigger("Open");
-        //idleLogParent.GetComponentInParent<PeekingMenu>().ShowMenu();
-        //End of Extraction
     }
 
     void AddHireableToLog(MercName mn)
