@@ -11,11 +11,11 @@ public class ResistenceEffect : DamageRelatedStatusEffect, I_StatusEffect_TurnSt
         ApplyEffect();
     }
 
-    //public override void Perform()
-    //{
-    //    damageModifier.currentDuration--;
-    //    if (damageModifier.currentDuration <= 0)                       
-    //        EndEffect();
-    //}
+    public override void Perform()
+    {
+        damageModifier.currentDuration--;
+        if (damageModifier.currentDuration <= 0)
+            EndEffect();
+    }
 
 }

@@ -10,7 +10,8 @@ public static class GameStats
     /// <summary>
     /// Merc-Related stats:
     /// </summary>
-    public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
+    //public static List<MercName> startMercNames = new List<MercName>{MercName.Shuki, MercName.Smadi, MercName.Yeho};
+    public static List<MercName> startMercNames;
 
     public static int allMercCount = 7;
 

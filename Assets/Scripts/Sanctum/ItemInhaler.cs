@@ -188,7 +188,7 @@ public class ItemInhaler : MonoBehaviour
         if (bsd != null)
         {
             //PROMPT THE THING TO SHOW WE GOT THIS NEW SPELL
-
+            PlayerDataMaster.Instance.currentPlayerData.openedSpellsAsString += $" {bsd.spellName},";
             IdleLog.Instance.RecieveGenericMessage(prefabMessage, new List<string> { bsd.spellName }, new List<Sprite> { bsd.icon });
             doBumpIdleLog = true;
         }

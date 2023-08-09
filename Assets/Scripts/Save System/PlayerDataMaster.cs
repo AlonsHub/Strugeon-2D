@@ -107,6 +107,8 @@ public class PlayerDataMaster : MonoBehaviour
     void LoadPlayerData(PlayerData pd)
     {
         currentPlayerData = pd;
+        GameStats.startMercNames = pd.startingMercs; //makes sure to set them, though not sure if it is that important.
+
 
         //currentPlayerData.SiteCooldownTimes = new Dictionary<string, float>();
         if (currentPlayerData.siteCooldowns == null && currentPlayerData.siteNames == null)
@@ -513,9 +515,10 @@ public class PlayerDataMaster : MonoBehaviour
         currentPlayerData.victories,
         currentPlayerData.losses,
         currentPlayerData.numOfavailableMercs,
-        currentPlayerData.cowardMercs,
+        currentPlayerData.StartingMercNamesAsString(),
         currentPlayerData.deadMercCount,
         currentPlayerData.gold,
-        currentPlayerData.totalMercLevel };
+        currentPlayerData.totalMercLevel,
+        currentPlayerData.openedSpellsAsString};
     }
 }

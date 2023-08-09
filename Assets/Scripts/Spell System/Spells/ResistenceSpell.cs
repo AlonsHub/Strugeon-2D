@@ -29,7 +29,7 @@ public class ResistenceSpell : SpellButton
         damageModifier.mod = modifier * 0.05f;
         //ResistenceEffect skipTurn_Effect = new ResistenceEffect(pawnTgt, effectIcon, damageModifier);
         //DamageModifier damageModifier = new DamageModifier();
-        ResistenceEffect freezeDamageReducation = new ResistenceEffect(pawnTgt, effectIcon, damageModifier);
+        ResistenceEffect resistanceEffect = new ResistenceEffect(pawnTgt, effectIcon, damageModifier);
 
         BattleLogVerticalGroup.Instance.AddPsionEntry(pawnTgt.Name, PsionActionSymbol.Yellow, SturgeonColours.Instance.noolYellow);
 

@@ -204,7 +204,9 @@ public class TurnMachine : MonoBehaviour
 
     private void Win()
     {
+
         PlayerDataMaster.Instance.currentPlayerData.victories++;
+        PlayerDataMaster.Instance.Victory = true; //currently only for hireling prompt! is reset by the prompt itself
 
         //Give reward
 

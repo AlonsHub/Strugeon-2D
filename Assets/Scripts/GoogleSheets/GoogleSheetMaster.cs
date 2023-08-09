@@ -273,7 +273,7 @@ public class GoogleSheetMaster : MonoBehaviour
                 //Dont fetch sprite yet!
                 ItemDatabase.Instance.AddItem(newItem.magicItemName, tempSO);
                 //ItemDatabase.Instance.insoilMystica = tempSO;
-                tempSO.CallFetch();
+                //tempSO.CallFetch();
             }
         }
     }

@@ -75,9 +75,26 @@ public class PlayerData
 
     public int psionProgressionLevel => psionSpectrum.SumOfAllCapacities() - 6; // reduce by [number of bars minus 1]
 
+    public List<MercName> startingMercs;
+    public string openedSpellsAsString; //temp! TBD
+    public string StartingMercNamesAsString()
+    {
+        string toReturn = "";
+        foreach (var item in startingMercs)
+        {
+            toReturn += $"{item},";
+        }
+        toReturn.Remove(toReturn.Length-1); //kills the last coma
+        return toReturn;
+    }
+
     public PlayerData()
     {
         mercSheets = new List<MercSheet>();
+        startingMercs = RandomizesStartingMercs();
+        GameStats.startMercNames = startingMercs; //makes sure to set them, though not sure if it is that important.
+
+        openedSpellsAsString = "";
 
         availableMercNames = new List<MercName>();
         availableMercSheet = new List<MercSheet>();
@@ -112,6 +129,24 @@ public class PlayerData
         
         pillProfile = new PillProfile(GameStats.startingPsionPotentail);
         noolProfile = new NoolProfile( GameStats.startingPsionCapacities, pillProfile);
+    }
+
+    List<MercName> RandomizesStartingMercs()
+    {
+        List<MercName> toReturn = new List<MercName>();
+        List<int> unusedIndecies= new List<int>(); //make sure to avoid 0! its none
+        for (int i = 1; i < System.Enum.GetValues(typeof(MercName)).Length; i++)
+        {
+            unusedIndecies.Add(i);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            System.Random random = new System.Random();
+            int rand = random.Next(0, unusedIndecies.Count);
+            toReturn.Add((MercName)unusedIndecies[rand]);
+            unusedIndecies.RemoveAt(rand);
+        }
+        return toReturn;
     }
 
     void CreateAddMerc(MercName newName, MercAssignment assignment)
