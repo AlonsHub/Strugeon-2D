@@ -32,17 +32,19 @@ public class SquadPicker : MonoBehaviour
     [SerializeField]
     GameObject clickOffMeButton; //this button needs to activate with the squad picker, but it is not a good fit to be it's child
                                  //so it comes on and off whenever this Enables/Disables
-                                
+
     //private void Start()
     //{
     //    gameObject.SetActive(false);
     //    //availavleSquads = PartyMaster.Instance.squads;
 
     //}
+    bool _justEnabled;
     private void OnEnable()
     {
         //Refresh();
         clickOffMeButton.SetActive(true);
+        _justEnabled = true;
     }
     public void Refresh()
     {
@@ -72,8 +74,6 @@ public class SquadPicker : MonoBehaviour
         transform.position = newPos;
 
         squadToggler.RefreshSlots();
-
-
 
         //if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
         //    return;
@@ -150,8 +150,16 @@ public class SquadPicker : MonoBehaviour
             count++;
         }
 
-       
-        
+
+        if (_justEnabled)
+        {
+            _justEnabled = false;
+            if (squadSlots[0].squad != null && squadSlots[0].squad.pawns != null && squadSlots[0].squad.pawns.Count != 0)
+                squadSlots[0].SelectMe();
+            //squadToggler.SelectIndex(0);
+        }
+
+
 
     }
 
@@ -180,15 +188,8 @@ public class SquadPicker : MonoBehaviour
             {
                 tgtSimpleSite.SendToArena(squadSlots[index].squad);
             }
-            //Debug.LogError("No squad selected or target site!");
             return;
         }
-        //if(squadToggler.selectedToggle == -1 || !tgtSite)
-        //{
-        //    Debug.LogError("No squad selected or target site!");
-        //    return;
-        //}
-
 
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);

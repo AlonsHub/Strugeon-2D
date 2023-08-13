@@ -148,6 +148,8 @@ public class ItemInhaler : MonoBehaviour
                     float amountFactor = .5f;
 
                     float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
+                    if (amount < 1)
+                        amount = 1;
                     s += $"hit! on {pill.colour}. Amount received {amount} \n";
                     values[(int)pill.colour] = amount;
 

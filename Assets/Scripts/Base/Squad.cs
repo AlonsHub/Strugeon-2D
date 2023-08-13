@@ -60,20 +60,13 @@ public class Squad : IEquatable<Squad>
 
 
         SetMercsToAssignment(MercAssignment.Room, roomNum);
-        //foreach (var item in pawns)
-        //{
-        //    item.mercSheetInPlayerData.SetToState(MercAssignment.Room, roomNum);
-        //}
-
-        //roomNumber = roomNum;
-        //squadName = pawns[0].Name + " Squad";
+       
         squadState = SquadState.InRoom;
     }
     public Squad(List<Pawn> newPawns, SquadState newState, int relevantNum) //weird that I don't use this... // USING IT NOW, thanks <3
     {
         pawns = new List<Pawn>();
         pawns.AddRange(newPawns); //reminder that these are just references to the prefabs, will be replaced with list of MercSheets
-
         switch (newState)
         {
             case SquadState.InRoom:
@@ -90,14 +83,6 @@ public class Squad : IEquatable<Squad>
             default:
                 break;
         }
-        //foreach (var item in pawns)
-        //{
-        //    item.mercSheetInPlayerData.SetToState(MercAssignment.Room, roomNum);
-        //}
-
-        //roomNumber = roomNum;
-        //squadName = pawns[0].Name + " Squad";
-        
         squadState = newState;
     }
 
@@ -169,7 +154,6 @@ public class Squad : IEquatable<Squad>
                 {
                     Debug.LogWarning("couldn't remove squad, it's OK if game is loading now, recently added squads that are OnRoute should not be PartyMaster.Sqauds so its fine"); //
                 }
-                PartyMaster.Instance.awaySquads.Add(this);
                 isAvailable = false;
                 if (this.roomNumber < 0)
                     this.roomNumber = roomNum;

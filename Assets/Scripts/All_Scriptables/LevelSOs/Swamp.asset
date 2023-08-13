@@ -16,29 +16,42 @@ MonoBehaviour:
     enemySet:
       enemyPrefabs:
       - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 030000000300000003000000
+      - {fileID: 462218377637529745, guid: a30265027ad27cc4e88bb71c542c2ae7, type: 3}
+      enemyLevels: 0100000001000000
     enemySetPack: {fileID: 11400000, guid: ca986a1626197a34b950b690dbff8350, type: 2}
     magicItem:
-      magicItemName: Minor Ruby Scepter
-      goldValue: 8
+      magicItemName: Obsidian Amulet
+      goldValue: 25
       pillProfile:
-        pills: []
+        pills:
+        - colour: 0
+          potential: 4
+        - colour: 1
+          potential: 3
+        - colour: 2
+          potential: 1
+        - colour: 3
+          potential: 1
+        - colour: 4
+          potential: 2
+        - colour: 5
+          potential: 4
+        - colour: 6
+          potential: 5
         dominant: 0
       rarity: 0
-      itemSprite: {fileID: 21300000, guid: 82c7e4947c5c882428854a1910ae2d4d, type: 2}
-      spriteName: RedGemWand
-      fittingSlotType: 1
+      itemSprite: {fileID: 21300000, guid: 5f1136d77a8700c408afc55e31afe754, type: 3}
+      spriteName: ObsidianAmulet
+      fittingSlotType: 2
       isEquipped: 0
       statBenefit:
-        statToBenefit: 1
-        value: 2
-      relevantClasses: 02000000
-    expReward: 85
+        statToBenefit: 0
+        value: 10
+      relevantClasses: 0000000001000000
+    expReward: 90
     levelPrefab: {fileID: 9129416172184191224, guid: d8379f29588514949bc9378b4a1de663,
       type: 3}
-    goldReward: 13
+    goldReward: 15
     difficulty: 1
     siteIcon: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
     escapeTile: {x: 0, y: 0}

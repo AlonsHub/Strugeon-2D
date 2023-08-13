@@ -102,47 +102,6 @@ public class SquadToggler : MonoBehaviour
         }
     }
 
-    //public void RefreshSquadSlots()
-    //{
-    //    foreach (var slot in squadSlots)
-    //    {
-    //        if(slot.)
-    //    }
-    //}
-
-    //void ValuesChanged()
-    //{
-    //    if (selectedToggle != -1)
-    //    {
-    //        //for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
-    //        //{
-    //        //    emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = offFrame;
-    //        //}
-    //        squadSlots[selectedToggle].DeSelectMe();
-    //    }
-
-    //    for (int i = 0; i < myToggles.Length; i++)
-    //    {
-    //        if(myToggles[i].isOn)
-    //        {
-    //            if(selectedToggle == i)
-    //            {
-    //                squadSlots[selectedToggle].DeSelectMe();
-    //                selectedToggle = -1;
-    //                return; // like the "break" two rows below, but also prevents reaching the "SelectMe()"
-    //            }
-    //            selectedToggle = i;
-    //            break;
-    //        }
-    //    }
-
-    //    //for (int i = 0; i < PartyMaster.Instance.squads[selectedToggle].pawns.Count; i++)
-    //    //{
-    //    //    emptyRowParents[selectedToggle].transform.GetChild(i).GetComponent<Image>().sprite = onFrame;
-    //    //}
-    //    squadSlots[selectedToggle].SelectMe();
-
-    //}
 
     public int SelectedIndex()
     {
@@ -154,5 +113,12 @@ public class SquadToggler : MonoBehaviour
             }
         }
         return -1;
+    }
+    public void SelectIndex(int toSelect)
+    {
+        if (squadSlots[toSelect].squad != null && squadSlots[toSelect].squad.pawns != null && squadSlots[toSelect].squad.pawns.Count != 0)
+        {
+            squadSlots[toSelect].SelectMe();
+        }
     }
 }

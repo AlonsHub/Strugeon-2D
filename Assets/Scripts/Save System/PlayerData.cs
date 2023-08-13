@@ -112,16 +112,11 @@ public class PlayerData
             wildMercs.Remove(item);
         }
 
-        
-
         //end temp
 
         SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
         _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
 
-        //siteRevealIntensity = 2;
-        //idRevealIntensity = 1;
-        //levelRevealIntensity = 0;
         siteRevealIntensity = 5;
         idRevealIntensity = 5;
         levelRevealIntensity = 5;
