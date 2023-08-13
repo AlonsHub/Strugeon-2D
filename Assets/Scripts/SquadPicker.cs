@@ -75,15 +75,6 @@ public class SquadPicker : MonoBehaviour
 
         squadToggler.RefreshSlots();
 
-        //if (PartyMaster.Instance.squads == null /*|| PartyMaster.Instance.squads.Count == 0*/)
-        //    return;
-
-        ///Consider unsetting all slots before setting them to avoid the GhostPrint of unavailable squads
-
-        //foreach (var item in squadSlots)
-        //{
-        //    item.UnSetMe();
-        //}
 
         int count = 0;
         foreach (var item in PlayerDataMaster.Instance.currentPlayerData.rooms)

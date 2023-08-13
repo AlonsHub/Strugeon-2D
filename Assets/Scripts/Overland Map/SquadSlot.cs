@@ -56,7 +56,9 @@ public class SquadSlot : MonoBehaviour
     {
         //turn on selected indicator
         indicator.SetActive(true);
+        toggle.isOn = true;
         isSelected = true;
+        isRelevant = true;
 
         //foreach (var item in mercSlotImages_BGs)
         //{

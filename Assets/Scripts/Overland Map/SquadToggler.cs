@@ -38,27 +38,11 @@ public class SquadToggler : MonoBehaviour
         {
             t.onValueChanged.AddListener(delegate { PickSquadInteractiveCheck(); });
         }
-        RefreshSlots();
-        //for (int i = 0; i < myToggles.Length; i++)
-        //{
-        //    if (squadSlots[i].isRelevant)
-        //    {
-        //        myToggles[i].onValueChanged.AddListener(delegate { ValuesChanged(); });
-        //    }
-        //    else
-        //    {
-        //        myToggles[i].enabled = false;
-        //    }
-        //}
-
-        //foreach (var t in myToggles)
-        //{
-        //    t.onValueChanged.AddListener(delegate { ValuesChanged(); });
-        //}
+        //RefreshSlots();
+        
     }
     private void OnEnable()
     {
-        
         RefreshSlots();
     }
     private void OnDestroy()
