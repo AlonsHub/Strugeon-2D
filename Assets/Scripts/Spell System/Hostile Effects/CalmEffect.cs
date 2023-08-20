@@ -6,9 +6,6 @@ using UnityEngine;
 public class CalmEffect : AfterActionWeightsEffect
 {
     
-    //int totalDuration = 2;
-    //int current;
-
     public CalmEffect(Pawn pawn, Sprite s, int duration) : base(pawn, s, duration)
     {
         alignment = EffectAlignment.Negative;
@@ -29,11 +26,12 @@ public class CalmEffect : AfterActionWeightsEffect
         {
             pawnToEffect.actionPool.Remove(item);
         }
-        current--;
-        if(current <= 0)
-        {
-            EndEffect();
-        }
+        //current--;
+        //if(current <= 0)
+        //{
+        //    EndEffect();
+        //}
+        base.Perform();
     }
 
     public override void StackMe()

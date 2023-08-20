@@ -1274,6 +1274,31 @@ PrefabInstance:
       propertyPath: skillCost
       value: 230
       objectReference: {fileID: 0}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a7ee9e9d9e61a174880a176be3286303,
+        type: 3}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.noolCost
+      value: 230
+      objectReference: {fileID: 0}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.spellName
+      value: Button - Purple Calm
+      objectReference: {fileID: 0}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.noolColour
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.spellDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 293519077, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.longDescription
+      value: Calm - prevents Special Ability use for 2 turns
+      objectReference: {fileID: 0}
     - target: {fileID: 1638968357, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -75.662964
@@ -1291,15 +1316,111 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d83fe50bdafca8a41ae05d9370c98400,
         type: 3}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: damageModifier.mod
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: d83fe50bdafca8a41ae05d9370c98400,
+        type: 3}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.noolCost
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.spellName
+      value: Button - Red Blind Rage
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.noolColour
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: damageModifier.mathOperator
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: damageModifier.totalDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638968358, guid: 16bfc6b9dd503e94890f725e876b1833, type: 3}
+      propertyPath: basicSpellData.longDescription
+      value: Blind Rage - Causes target to attack a random adjacent character, dealing
+        extra damage
+      objectReference: {fileID: 0}
     - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: skillCost
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 616abdc926b310947ba52e04ad4fdcfa,
+        type: 3}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolCost
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellName
+      value: Button - Purple Insight
+      objectReference: {fileID: 0}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolColour
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 333373171226749352, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.longDescription
+      value: Insight - see the target's next target!
+      objectReference: {fileID: 0}
     - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
       propertyPath: skillCost
       value: 155
+      objectReference: {fileID: 0}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: dbaa7119da6c34e44bab32b8c69af5a4,
+        type: 3}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolCost
+      value: 155
+      objectReference: {fileID: 0}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellName
+      value: Button - Blue Freeze
+      objectReference: {fileID: 0}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.noolColour
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 977825376790460395, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.longDescription
+      value: "Freeze - Skips the target\u2019s next turn"
       objectReference: {fileID: 0}
     - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
@@ -1326,6 +1447,11 @@ PrefabInstance:
         type: 3}
       propertyPath: basicSpellData.noolColour
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
+        type: 3}
+      propertyPath: basicSpellData.spellDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1291967171887484563, guid: 16bfc6b9dd503e94890f725e876b1833,
         type: 3}
@@ -2881,6 +3007,10 @@ PrefabInstance:
       propertyPath: skillCost
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 1553275160, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
+      propertyPath: basicSpellData.spellDuration
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1969700675, guid: 8e1e4b4fafa79fc4bbd78cfc20c152a8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -4235,6 +4365,7 @@ MonoBehaviour:
     shortDescription: 
     noolCost: 0
     noolColour: 0
+    spellDuration: 0
     icon: {fileID: 0}
   nulColour: 5
   skillCost: 0.4
@@ -4674,6 +4805,7 @@ MonoBehaviour:
     shortDescription: 
     noolCost: 130
     noolColour: 1
+    spellDuration: 0
     icon: {fileID: 21300000, guid: 9ca7db16a3201b4479d13192d342c8a4, type: 3}
   nulColour: 1
   skillCost: 130

@@ -14,16 +14,6 @@ public class BlindRageEffect : AfterActionWeightsEffect
         ApplyEffect();
     }
 
-    //public override void ApplyEffect()
-    //{
-    //    pawnToEffect.AddStatusEffect(this);
-    //}
-
-    //public override void EndEffect()
-    //{
-    //    pawnToEffect.RemoveStatusEffect(this);
-    //}
-
     public override void Perform()
     {
         List<Pawn> allPawns = new List<Pawn> (RefMaster.Instance.enemyInstances);
@@ -49,6 +39,7 @@ public class BlindRageEffect : AfterActionWeightsEffect
         Pawn target = adjPawns[Random.Range(0, adjPawns.Count)];
 
         pawnToEffect.actionPool.Add(new ActionVariation(pawnToEffect.GetComponent<WeaponItem>(), target.gameObject, 1000));
+        new BlindRageExtraDamageEffect(pawnToEffect, null, damageModifier);
 
         //also! needs to add damage to this strike!
 

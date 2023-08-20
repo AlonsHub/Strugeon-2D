@@ -9,7 +9,8 @@ public class Attacher : StatusEffectComponent, I_Attackable
     GameObject visualEffectPrefab;
     //Sprite visualAddon;
 
-    GameObject instantiateEffect;
+    GameObject instantiatedEffect;
+    GameObject instantiatedIcon;
 
     public void SetMeWithVFX(Pawn target, string buffIconName, int newMaxTTL, GameObject vfx)
     {
@@ -30,9 +31,10 @@ public class Attacher : StatusEffectComponent, I_Attackable
 
     public override void RemoveEffect()
     {
-        if (instantiateEffect)
-            Destroy(instantiateEffect);
-        Destroy(this);
+        if (instantiatedEffect)
+            Destroy(instantiatedEffect);
+        //base.RemoveEffect();
+        //Destroy(this);
         //base.RemoveEffect();
     }
 
@@ -40,6 +42,6 @@ public class Attacher : StatusEffectComponent, I_Attackable
     {
         //base.ApplyEffect(); //THIS ADDS AN ICON!
         if (visualEffectPrefab)
-            instantiateEffect = Instantiate(visualEffectPrefab, tgtPawn.transform);
+            instantiatedEffect = Instantiate(visualEffectPrefab, tgtPawn.transform);
     }
 }

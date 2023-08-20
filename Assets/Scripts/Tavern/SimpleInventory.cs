@@ -40,6 +40,8 @@ public class SimpleInventory : BaseInventory
         string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
         string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
 
+        List<Sprite> sprites = new List<Sprite> { selectedItem.itemSprite };
+
         selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, 
             $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>",
             $"<color=#{titleColorHex}> {selectedItem._Benefit().BenefitStatName()}</color>", 

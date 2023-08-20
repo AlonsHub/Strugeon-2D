@@ -19,7 +19,7 @@ public class BraverySpell : SpellButton
                 return;
             }
         }
-        new BraveryEffect(pawnTgt, effectIcon);
+        new BraveryEffect(pawnTgt, effectIcon,basicSpellData.spellDuration);
     
 
         base.OnButtonClick();

@@ -6,6 +6,8 @@ using UnityEngine;
 public class RootDownAttacher : Attacher
 {
     public int minDamage, maxDamage, spikeDamage;
+    public RootDownEffect rde;
+
     public void SetMeFull(Pawn target, string buffIconName, int newMaxTTL, GameObject rootVisual, int fullHP, int minD, int maxD, int spikeDmg)
     {
         base.SetMeWithVFX(target, buffIconName, newMaxTTL, rootVisual);
@@ -16,6 +18,20 @@ public class RootDownAttacher : Attacher
         attacherHP = fullHP;
 
     }
+    public void SetMeFull(Pawn target, string buffIconName, int newMaxTTL, GameObject rootVisual, int fullHP, int minD, int maxD, int spikeDmg, RootDownEffect rootDownEffect)
+    {
+        base.SetMeWithVFX(target, buffIconName, newMaxTTL, rootVisual);
+        ApplyEffect();
+
+        rde = rootDownEffect;
+
+        minDamage = minD;
+        maxDamage = maxD;
+        spikeDamage = spikeDmg;
+        attacherHP = fullHP;
+
+    }
+
     public override void ApplyEffect()
     {
         base.ApplyEffect();
@@ -34,16 +50,17 @@ public class RootDownAttacher : Attacher
 
     public override void RemoveEffect()
     {
+        //if (tgtPawn.isEnemy)
+        //{
+        //    RefMaster.Instance.mercs.Remove(tgtPawn);
+        //}
+        //else
+        //{
+        //    RefMaster.Instance.enemyInstances.Remove(tgtPawn);
+        //}
+        //tgtPawn.HasRoot = false;
+        rde.EndEffectFromAttacher();
         base.RemoveEffect();
-        if (tgtPawn.isEnemy)
-        {
-            RefMaster.Instance.mercs.Remove(tgtPawn);
-        }
-        else
-        {
-            RefMaster.Instance.enemyInstances.Remove(tgtPawn);
-        }
-        tgtPawn.HasRoot = false;
     }
 
 

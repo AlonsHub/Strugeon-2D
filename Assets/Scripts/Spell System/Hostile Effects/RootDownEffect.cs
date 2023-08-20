@@ -29,10 +29,34 @@ public class RootDownEffect : StatusEffect, I_StatusEffect_TurnStart
     {
         pawnToEffect.AddStatusEffect(this);
     }
+    public void EndEffectFromAttacher()
+    {
+        pawnToEffect.RemoveStatusEffect(this);
 
+        pawnToEffect.HasRoot = false;
+        if (pawnToEffect.isEnemy)
+        {
+            RefMaster.Instance.mercs.Remove(pawnToEffect);
+        }
+        else
+        {
+            RefMaster.Instance.enemyInstances.Remove(pawnToEffect);
+        }
+    }
     public override void EndEffect()
     {
         pawnToEffect.RemoveStatusEffect(this);
+
+        pawnToEffect.HasRoot = false;
+        if (pawnToEffect.isEnemy)
+        {
+            RefMaster.Instance.mercs.Remove(pawnToEffect);
+        }
+        else
+        {
+            RefMaster.Instance.enemyInstances.Remove(pawnToEffect);
+        }
+
         rootDownAttacher.RemoveEffect();
     }
 

@@ -9,7 +9,7 @@ public class BraveryEffect : AfterActionWeightsEffect
     /// Adds itself to a list of SuggestiveEffects on the pawn - to be analyzed just after actions were calculated!
     /// </summary>
     /// <param name="pawn"></param>
-    public BraveryEffect(Pawn pawn, Sprite s) : base(pawn, s)
+    public BraveryEffect(Pawn pawn, Sprite s, int duration) : base(pawn, s, duration)
     {
         alignment = EffectAlignment.Positive;
         ApplyEffect();
@@ -32,18 +32,10 @@ public class BraveryEffect : AfterActionWeightsEffect
 
         //remove icon symbol and whatnot
     }
-    //IEnumerator RemoveEffectFromPawn()
-    //{
-    //    yield return new WaitForEndOfFrame();
-    //    yield return new WaitForEndOfFrame();
-    //}
 
     public override void Perform()
     {
         pawnToEffect.actionPool.Remove(pawnToEffect.actionPool.Where(x => x.relevantItem is EscapeItem).FirstOrDefault());
-
-        EndEffect();
+        base.Perform();
     }
-
-   
 }

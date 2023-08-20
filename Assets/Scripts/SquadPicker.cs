@@ -44,6 +44,12 @@ public class SquadPicker : MonoBehaviour
     {
         //Refresh();
         clickOffMeButton.SetActive(true);
+
+        foreach (var item in squadSlots)
+        {
+            item.UnSetMe();
+        }
+
         _justEnabled = true;
     }
     public void Refresh()
@@ -134,8 +140,8 @@ public class SquadPicker : MonoBehaviour
         int count = 0;
         foreach (var item in PlayerDataMaster.Instance.currentPlayerData.rooms)
         {
-            //if (!item.squad.isAvailable)
-            //    continue;
+            if (!item.squad.isAvailable)
+                continue;
 
             squadSlots[count].SetMe(item.squad);
             count++;
@@ -158,10 +164,10 @@ public class SquadPicker : MonoBehaviour
     {
         clickOffMeButton.SetActive(false);
 
-        foreach (var item in squadSlots)
-        {
-            item.UnSetMe();
-        }
+        //foreach (var item in squadSlots)
+        //{
+        //    item.UnSetMe();
+        //}
 
         SiteDisplayer.Instance.SetOnOff(false);
 
@@ -171,13 +177,14 @@ public class SquadPicker : MonoBehaviour
     {
         //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
         int index = squadToggler.SelectedIndex();
+        Squad toSend = squadSlots[index].squad;
 
         //check if a squad is chosen:
         if (index == -1 || !tgtSite)
         {
             if(tgtSimpleSite)
             {
-                tgtSimpleSite.SendToArena(squadSlots[index].squad);
+                tgtSimpleSite.SendToArena(toSend);
             }
             return;
         }
@@ -185,12 +192,15 @@ public class SquadPicker : MonoBehaviour
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         
-        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(squadSlots[index].squad, tgtSite);
-        
+        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite);
 
-        squadSlots[index].squad.SetMercsToAssignment(MercAssignment.AwaySquad, squadSlots[index].squad.roomNumber); 
 
-        PlayerDataMaster.Instance.LogSquadDeparture(squadSlots[index].squad.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
+        toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
+
+        PlayerDataMaster.Instance.LogSquadDeparture(toSend.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
+
+        squadSlots[index].UnSetMe(); //weird but good
+
     }
 
     public void SetSite(SiteButton sb) //CRITICAL TBF! this is called in inspector //FIXED!

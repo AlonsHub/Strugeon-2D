@@ -71,13 +71,10 @@ public class SquadToggler : MonoBehaviour
         //check available squads
         foreach (var item in squadSlots)
         {
-            if (item.isRelevant)
+            if (item.isRelevant && item.squad!= null && item.squad.isAvailable)
             {
                 myToggles[count].interactable = true;
-                //myToggles[count].onValueChanged.AddListener(delegate { ValuesChanged(); });
                 count++;
-
-
             }
         }
         for (int i = count; i < squadSlots.Length; i++)

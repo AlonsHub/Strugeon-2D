@@ -723,7 +723,7 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         }
         else
         {
-            //Debug.LogError("Couldnt find icon of that ID");
+            Debug.LogError($"Couldnt find icon of ID:{iconName}");
             return; //no need to update
         }
 

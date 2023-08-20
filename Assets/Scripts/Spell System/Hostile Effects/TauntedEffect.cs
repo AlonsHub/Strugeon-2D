@@ -10,21 +10,21 @@ public class TauntedEffect : AfterActionWeightsEffect
     float multiplier = 1.65f; // max is 2f
 
     //int totalDuration = 2;
-    //int current;
-
+    //
+    
+    // 99.9% this is a typo, but I must check why this guy is pawnToAvoid :O
     public TauntedEffect(Pawn pawn, Sprite sprite, Pawn pawnToAvoid, int duration) : base(pawn, sprite, duration)
     {
         alignment = EffectAlignment.Negative;
         toAttack = pawnToAvoid;
+        
+
         ApplyEffect();
     }
 
     public override void ApplyEffect()
     {
-        //AddIconToPawnBar();
-
-        current = 0;
-
+        
         base.ApplyEffect();
     }
 
@@ -37,11 +37,12 @@ public class TauntedEffect : AfterActionWeightsEffect
             item.weight = (int)((float)item.weight * multiplier);
         }
 
-        current++;
-        if (current >= totalDuration)
-        {
-            EndEffect();
-        }
-    }
 
+        base.Perform();
+        //current++;
+        //if (current >= totalDuration)
+        //{
+        //    EndEffect();
+        //}
+    }
 }

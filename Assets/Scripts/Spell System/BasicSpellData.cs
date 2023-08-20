@@ -10,5 +10,9 @@ public class BasicSpellData
     public string shortDescription;
     public float noolCost;
     public NoolColour noolColour;
+    /// <summary>
+    /// Set to -1 if infinite?
+    /// </summary>
+    public int spellDuration; 
     public Sprite icon;
 }

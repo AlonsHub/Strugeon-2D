@@ -38,7 +38,11 @@ public class AfterActionWeightsEffect : StatusEffect, I_StatusEffect_ActionWeigh
 
     public override void Perform()
     {
-        
+        current--;
+        if (current <= 0)
+        {
+            EndEffect();
+        }
     }
 
 }

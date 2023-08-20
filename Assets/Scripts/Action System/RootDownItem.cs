@@ -103,7 +103,6 @@ public class RootDownItem : ActionItem, SA_Item
         }
 
 
-        RootDownAttacher rda = av.target.AddComponent<RootDownAttacher>();
 
 
         //Adds the StatusEffect to hook into this:
@@ -116,11 +115,12 @@ public class RootDownItem : ActionItem, SA_Item
                 return; //Delete self?
             }
         }
+        RootDownAttacher rda = av.target.AddComponent<RootDownAttacher>();
 
         rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel-1)*5 ), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
         
         RootDownEffect rde = new RootDownEffect(toRoot,rootDownSprite,rda);
-
+        rda.rde = rde;
         //Scaling up root with mavka level
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
