@@ -21,6 +21,9 @@ public class EquipInventoryManager : MonoBehaviour
 
     [SerializeField] //just to see them
     BasicDisplayer hoverDisplayer;
+    [SerializeField] //just to see them
+    ClassEggPanel eggPanel;
+
     //MercGearDisplayer mercGearDisplayer;
 
     List<MagicItem> relevantItems;
@@ -131,7 +134,7 @@ public class EquipInventoryManager : MonoBehaviour
             //if (!relevantItems[i].FetchSprite())
             //    continue;
 
-            displayers[i].SetItem(relevantItems[i]._Item(), relevantMercSheet, hoverDisplayer);
+            displayers[i].SetItem(relevantItems[i]._Item(), relevantMercSheet, hoverDisplayer, eggPanel);
         }
         for (int i = relevantItems.Count; i < displayers.Count; i++)
         {

@@ -20,6 +20,8 @@ public class SanctumSelectedPanel : BasicDisplayer
 
     [SerializeField]
     UnityEngine.UI.Button inhaleButton;
+    [SerializeField]
+    ClassEggPanel eggPanel;
 
     private void Awake() //TBF TBD LAZY
     {
@@ -45,6 +47,7 @@ public class SanctumSelectedPanel : BasicDisplayer
         }
         magicItem = item;
         inhaleButton.interactable = true;
+        eggPanel.SetEggs(item.relevantClasses);
         starGraphNoolBarPanel.SetToItem(item);
         base.SetMe(new List<string> { item.magicItemName, item._EquipSlotType().ToString(), item._Benefit().BenefitStatName(),item._Benefit().Value().ToString() ,item.goldValue.ToString(), item.ItemDescription(), item._Benefit().BenefitStatName()}, new List<Sprite> {item.itemSprite});
     }
@@ -56,6 +59,8 @@ public class SanctumSelectedPanel : BasicDisplayer
         }
         magicItem = null;
         inhaleButton.interactable = false;
+
+        eggPanel.SetEggs(new List<MercClass>());
         starGraphNoolBarPanel.SetToItem(emptyItem);
         base.SetMe(new List<string> { "", "", "", "", "", "", ""}, new List<Sprite> { emptyItem.itemSprite});
     }

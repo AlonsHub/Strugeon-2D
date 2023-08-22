@@ -22,8 +22,13 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
     //static MercGearDisplayer mercGearDisplayer;
     [SerializeField]
     BasicDisplayer hoverDisplayer;
+    [SerializeField]
+    ClassEggPanel hoverEggPanel;
 
-    
+
+    [SerializeField]
+    ClassEggPanel eggPanel;
+
     [SerializeField]
     private Sprite emptySprite;
 
@@ -55,25 +60,27 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
 
         //}
     }
-  
-    public void SetItem(MagicItem newItem, MercSheet sheet , BasicDisplayer bd)
+
+    public void SetItem(MagicItem newItem, MercSheet sheet, BasicDisplayer bd, ClassEggPanel _eggPanel)
     {
         mercSheet = sheet;
         magicItem = newItem;
         hoverDisplayer = bd;
+        eggPanel = _eggPanel;
         //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
         SetComparisonArrow();
-
-
-        //SetMe(new List<string> { magicItem.magicItemName, magicItem._Benefit().Value().ToString(), magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
+        if(eggPanel)
+        eggPanel.SetEggs(newItem.relevantClasses);
+        
         SetMe(new List<string> { magicItem.magicItemName, $"<color=#{ColorUtility.ToHtmlStringRGBA(_col)}>{(_currentDifference>0 ? "+" : "")}{_currentDifference}</color>", magicItem._Benefit().BenefitStatName()}, new List<Sprite> {magicItem.itemSprite, _comparisonArrow});
     }
     public void SetItem()
     {
         magicItem = null;
         hoverDisplayer = null ; //just in case
-
-        //SetMe(magicItem.magicItemName, magicItem.itemSprite); //no price on this one
+        
+        if (eggPanel)
+            eggPanel.SetEggs(new List<MercClass>());
 
         SetMe(new List<string> { "", ""}, new List<Sprite> {emptySprite});
     }
@@ -106,13 +113,8 @@ public class ItemDisplayer : BasicDisplayer, IPointerEnterHandler, IPointerExitH
         SetComparisonArrow();
 
         Vector3 newPos = transform.position;
-        //newPos.x = newPos.x > 400 ? newPos.x - 280f : newPos.x + 400f;
         newPos.x -= 350f;
         hoverDisplayer.transform.position = newPos;
-
-        //Color col = _currentDifference > 0 ? Color.green : Color.red;
-        //if (_currentDifference == 0)
-        //    col = Color.white;
 
 
         hoverDisplayer.SetMe(new List<string> { magicItem.magicItemName, magicItem.fittingSlotType.ToString(), magicItem._Benefit().BenefitStatName(), magicItem._Benefit().Value().ToString(), $"<color=#{ColorUtility.ToHtmlStringRGBA(_col)}>({(_currentDifference>0 ? "+" : "")}{_currentDifference})</color>", magicItem.ItemDescription(), magicItem.goldValue.ToString() }, new List<Sprite> { magicItem.itemSprite, _comparisonArrow });

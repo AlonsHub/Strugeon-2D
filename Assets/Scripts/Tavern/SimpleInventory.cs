@@ -8,6 +8,8 @@ public class SimpleInventory : BaseInventory
     MagicItem selectedItem; //currently selected item to display/sell
     [SerializeField]
     BasicDisplayer selectedItemDesplayer;
+    [SerializeField]
+    ClassEggPanel eggPanel;
 
     [SerializeField]
     StarGraph starGraph;
@@ -42,6 +44,7 @@ public class SimpleInventory : BaseInventory
 
         List<Sprite> sprites = new List<Sprite> { selectedItem.itemSprite };
 
+        eggPanel.SetEggs(selectedItem.relevantClasses);
         selectedItemDesplayer.SetMe(new List<string> { selectedItem.magicItemName, 
             $"<color=#{slotColorHex}> {selectedItem.fittingSlotType} | </color>",
             $"<color=#{titleColorHex}> {selectedItem._Benefit().BenefitStatName()}</color>", 
@@ -65,7 +68,8 @@ public class SimpleInventory : BaseInventory
             //Set as nothing
             string titleColorHex = ColorUtility.ToHtmlStringRGBA(titleColor);
             string slotColorHex = ColorUtility.ToHtmlStringRGBA(slotColor);
-
+            
+            eggPanel.SetEggs(new List<MercClass>());
             selectedItemDesplayer.SetMe(new List<string> { emptyItem.magicItemName,
             $"<color=#{slotColorHex}> {emptyItem.fittingSlotType} | </color>",
             $"<color=#{titleColorHex}> {emptyItem._Benefit().BenefitStatName()}</color>",
