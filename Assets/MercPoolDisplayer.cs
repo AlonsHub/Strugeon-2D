@@ -27,6 +27,7 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable, ISortableByDropd
 
     List<MercSheet> relevant;
 
+    public static System.Action CallToRefreshPool_PlusSubs;
 
     private void Awake()
     {
@@ -51,6 +52,11 @@ public class MercPoolDisplayer : MonoBehaviour, ISearchBarable, ISortableByDropd
         availableInRoomAndAway = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room, MercAssignment.AwaySquad });//Excluding Hireable
         relevant = availableInRoomAndAway;                                                                                                                              //relevant = PlayerDataMaster.Instance.currentPlayerData.mercSheets;
         DisplayRelevant();
+        CallToRefreshPool_PlusSubs += DisplayRelevant;
+    }
+    private void OnDisable()
+    {
+        CallToRefreshPool_PlusSubs -= DisplayRelevant;
     }
 
     private void DisplayRelevant()

@@ -200,8 +200,13 @@ public class EquipInventoryManager : MonoBehaviour
             //add to inventory
             Inventory.Instance.AddMagicItem(removedItem as MagicItem);
         }
+
+        MercPoolDisplayer.CallToRefreshPool_PlusSubs?.Invoke();
+
         if(lobbyMercDisplayer)
         lobbyMercDisplayer.DisplayGear(); //refreshes
+
+
         else if(MercGearDisplayer.Instance.isActiveAndEnabled)
         {
             MercGearDisplayer.Instance.SetMeFully(relevantMercSheet);
