@@ -481,14 +481,21 @@ MonoBehaviour:
       pills: []
       dominant: 0
     baseSheetSO: {fileID: 0}
-    baseStatBlock:
+    statBlock:
       maxHp: 0
-      maxDamage: 0
-      minDamage: 0
       range: 0
-      maxHPPerLevel: 0
-      maxDamagePerLevel: 0
-      minDamagePerLevel: 0
+      minDamage: 0
+      maxDamage: 0
+      mercLevel: 0
+      minDamageBenefit: 0
+      maxDamageBenefit: 0
+      grazeChance: 0
+      grazeDamagePercentage: 0
+      critChance: 0
+      critDamagePercentage: 0
+      maxHPPerLevelAsPercentage: 0
+      maxDamagePerLevelAsPercentage: 0
+      minDamagePerLevelAsPercentage: 0
     basicPrefs:
       weaponPrefs:
         baseAttackValue: 0
@@ -512,6 +519,8 @@ MonoBehaviour:
   comparisonArrowEquals: {fileID: 21300000, guid: 40c9711b8165b224fbfa117cce7ab0b5,
     type: 3}
   hoverDisplayer: {fileID: 0}
+  hoverEggPanel: {fileID: 0}
+  eggPanel: {fileID: 0}
   emptySprite: {fileID: 3983671566301948619, guid: 5db449eded7dfc642ab46a2f37e06b09,
     type: 3}
 --- !u!1 &7458815601211263193
@@ -588,7 +597,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.81
+  m_PixelsPerUnitMultiplier: 2.7
 --- !u!1001 &2965355174520524148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -839,7 +848,7 @@ PrefabInstance:
     - target: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
         type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
         type: 3}
@@ -848,8 +857,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
         type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: e353e210b91be3642a572bccfed08090, type: 2}
+    - target: {fileID: 9070593298622177803, guid: 4a67b15f69ae9b34ca3c416608b83141,
+        type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 4278190335
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a67b15f69ae9b34ca3c416608b83141, type: 3}
@@ -1003,12 +1017,12 @@ PrefabInstance:
     - target: {fileID: 5682115155765970156, guid: 7d67df3155ab44d48bf9d1e17d3e2fc0,
         type: 3}
       propertyPath: m_fontSize
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5682115155765970156, guid: 7d67df3155ab44d48bf9d1e17d3e2fc0,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d67df3155ab44d48bf9d1e17d3e2fc0, type: 3}

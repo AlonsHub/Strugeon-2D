@@ -11,7 +11,7 @@ public class LobbyMercDisplayer : BasicDisplayer
 
     [SerializeField, Tooltip("Not required")]
     MercGearDisplayer mgd;
-
+   
 
     [SerializeField]
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType

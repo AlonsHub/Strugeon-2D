@@ -14,4 +14,12 @@ public class ClassEggPanel : MonoBehaviour
             eggs[i].SetActive(classes.Contains((MercClass)i));
         }
     }
+    public void SetEgg(MercClass mercClass)
+    {
+        for (int i = 0; i < eggs.Count; i++)
+        {
+            eggs[i].SetActive((MercClass)i == mercClass);
+        }
+    }
+
 }

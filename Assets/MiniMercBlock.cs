@@ -8,10 +8,13 @@ public class MiniMercBlock : BasicDisplayer
 {
     [SerializeField]
     ExpBarDisplayer expSlider;
+    [SerializeField]
+    ClassEggPanel classEgg;
     public void SetMeFull(MercSheet ms)
     {
         gameObject.SetActive(true);
-        SetMe(new List<string> { ms.characterName.ToString(), ms.mercClass.ToString() }, new List<Sprite>() { });
+        classEgg.SetEgg(ms.mercClass);
+        SetMe(new List<string> { ms.characterName.ToString() }, new List<Sprite>() { });
         expSlider.SetBar(ms);
     }
     

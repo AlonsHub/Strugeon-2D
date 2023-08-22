@@ -23,6 +23,9 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     Image abilitySprite;
     [SerializeField]
+    TMP_Text abillityText;
+
+    [SerializeField]
     TMP_Text hpText;
     [SerializeField]
     TMP_Text damageText;
@@ -41,20 +44,25 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     SquadBuilder2 squadBuilder => Tavern.Instance.squadBuilder;
     [SerializeField]
     GameObject mercDisplayer;
-
+    [SerializeField]
+    ClassEggPanel eggPanel;
+    [SerializeField]
+    bool noClick;
 
     public void SetMe(Pawn p)
     {
         gameObject.SetActive(true);
         nameText.text = p.mercName.ToString();
-        typeText.text = p._mercSheet.mercClass.ToString();
+        //typeText.text = p._mercSheet.mercClass.ToString();
         pawn = p;
         img.sprite = pawn.PortraitSprite;
         img.color = new Color(1, 1, 1, 1);
         isOccupied = true;
 
+        eggPanel.SetEgg(p._mercSheet.mercClass);
         expBarDisplayer.SetBar(p._mercSheet);
 
+        abillityText.text = p.SA_Title;
         hpText.text = $"HP: {p._mercSheet._maxHp}/{p._mercSheet._maxHp}";
         damageText.text = $"Damage: {p._mercSheet._minDamage}-{p._mercSheet._maxDamage}";
         abilitySprite.sprite = p.SASprite;
@@ -63,7 +71,9 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     {
         //gameObject.SetActive(true);
         mercSheet = ms;
-        typeText.text = mercSheet.mercClass.ToString();
+        //typeText.text = mercSheet.mercClass.ToString(); 
+
+        eggPanel.SetEgg(ms.mercClass);
 
         expBarDisplayer.SetBar(mercSheet);
 
@@ -74,6 +84,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         damageText.text = $"Damage: {mercSheet._minDamage}-{mercSheet._maxDamage}";
 
         pawn = mercSheet.MyPawnPrefabRef<Pawn>();
+        abillityText.text = pawn.SA_Title;
         img.sprite = pawn.PortraitSprite;
         abilitySprite.sprite = pawn.SASprite;
         nameText.text = pawn.mercName.ToString();
@@ -86,9 +97,11 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         gameObject.SetActive(true);
 
         nameText.text = "";
-        typeText.text = "";
+        //typeText.text = "";
+        eggPanel.SetEggs(new List<MercClass>());
 
         expBarDisplayer.SetBar();
+        
 
 
         img.sprite = defaultPortraitSprite;
@@ -130,8 +143,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         pawn = null;
         
         nameText.text = "";
-        typeText.text = "";
-
+        //typeText.text = "";
+        eggPanel.SetEggs(new List<MercClass>());
         expBarDisplayer.SetBar();
 
 
@@ -149,6 +162,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
    
     public void OnPointerClick(PointerEventData eventData) // SET BY OCDE
     {
+        if (noClick)
+            return;
         if (!isOccupied)
         {
             Debug.LogWarning("Slot has no Pawn");
