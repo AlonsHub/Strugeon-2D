@@ -48,7 +48,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
     ClassEggPanel eggPanel;
     [SerializeField]
     bool noClick;
-
+    [SerializeField]
+    EquippedItemIcon[] equippedItemIcons;
     public void SetMe(Pawn p)
     {
         gameObject.SetActive(true);
@@ -66,6 +67,9 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         hpText.text = $"HP: {p._mercSheet._maxHp}/{p._mercSheet._maxHp}";
         damageText.text = $"Damage: {p._mercSheet._minDamage}-{p._mercSheet._maxDamage}";
         abilitySprite.sprite = p.SASprite;
+
+        SetEquipIcons();
+
     }
     public void SetMe(MercSheet ms)
     {
@@ -88,7 +92,8 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         img.sprite = pawn.PortraitSprite;
         abilitySprite.sprite = pawn.SASprite;
         nameText.text = pawn.mercName.ToString();
-       
+
+        SetEquipIcons();
     }
 
 
@@ -113,6 +118,21 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
 
         abilitySprite.sprite = null;
 
+    }
+
+    void SetEquipIcons()
+    {
+        for (int i = 0; i < equippedItemIcons.Length; i++)
+        {
+            equippedItemIcons[i].SetMe(mercSheet.gear.GetItemBySlot((EquipSlotType)i)._Item());
+        }
+    }
+    void UnSetEquipIcons()
+    {
+        for (int i = 0; i < equippedItemIcons.Length; i++)
+        {
+            equippedItemIcons[i].SetMeEmpty();
+        }
     }
 
     public void RemoveMerc()
@@ -147,6 +167,7 @@ public class RosterSlot : MonoBehaviour, IPointerClickHandler
         eggPanel.SetEggs(new List<MercClass>());
         expBarDisplayer.SetBar();
 
+        UnSetEquipIcons();
 
         img.sprite = defaultPortraitSprite;
         img.color = new Color(0, 0, 0, 0);

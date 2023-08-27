@@ -46,7 +46,12 @@ public class EscToX : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             //Debug.LogError($"USED {transform.parent.name}");
-            Current.myButton.onClick.Invoke();
+            CallMe();
         }
+    }
+
+    public void CallMe()
+    {
+        Current.myButton.onClick.Invoke();
     }
 }

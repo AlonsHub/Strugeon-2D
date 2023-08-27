@@ -69,6 +69,8 @@ public class EquipInventoryManager : MonoBehaviour
         //{
         //    Destroy(empties[i]);
         //}
+        hoverDisplayer.gameObject.SetActive(false);
+
         Inventory.Instance.OnInventoryChange -= RefreshInventory;
         Instance = null;
         //if (mercGearDisplayer)
