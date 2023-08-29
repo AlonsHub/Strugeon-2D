@@ -115,13 +115,8 @@ public class PlayerData
         //end temp
 
         SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
-        _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
-
-        //siteRevealIntensity = 5;
-        //idRevealIntensity = 5;
-        //levelRevealIntensity = 5;
+        _siteCooldowns = new Dictionary<string, DateTime?>(); //in date
         psionSpectrum = new PsionSpectrumProfile();
-        
         pillProfile = new PillProfile(GameStats.startingPsionPotentail);
         noolProfile = new NoolProfile( GameStats.startingPsionCapacities, pillProfile);
     }
