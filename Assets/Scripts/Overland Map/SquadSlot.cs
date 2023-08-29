@@ -87,6 +87,8 @@ public class SquadSlot : MonoBehaviour
             item.sprite = null;
             item.color = new Color(0, 0, 0, 0);
         }
+        isRelevant = false;
+        toggle.interactable = false;
     }
 
     public void OnChange()

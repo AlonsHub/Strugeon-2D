@@ -207,19 +207,4 @@ public class SiteDisplayer : MonoBehaviour
         difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
     }
-
-    //private void OnDisable()
-    //{
-    //    if (siteButton)
-    //        siteButton.SetHoverColor(false);
-    //}
-
- 
-    //public static void SetActiveToAllInstances(bool isActive) //may be depricated soon [24/02/22] TBF
-    //{
-    //    foreach (var item in Instances)
-    //    {
-    //        item.gameObject.SetActive(isActive);
-    //    }
-    //}
 }

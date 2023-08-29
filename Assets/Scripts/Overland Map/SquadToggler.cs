@@ -39,7 +39,7 @@ public class SquadToggler : MonoBehaviour
             t.onValueChanged.AddListener(delegate { PickSquadInteractiveCheck(); });
         }
         //RefreshSlots();
-        
+        PickSquadInteractiveCheck();
     }
     private void OnEnable()
     {
@@ -71,7 +71,7 @@ public class SquadToggler : MonoBehaviour
         //check available squads
         foreach (var item in squadSlots)
         {
-            if (item.isRelevant && item.squad!= null && item.squad.isAvailable)
+            if (item.isRelevant && item.squad!= null && item.squad.IsNotEmptyAndAvailable)
             {
                 myToggles[count].interactable = true;
                 count++;

@@ -40,6 +40,8 @@ public class Squad : IEquatable<Squad>
 
     public bool isAvailable = true;
 
+    public bool IsNotEmptyAndAvailable => isAvailable && pawns.Count > 0;
+
     public int roomNumber = -1;
     //public Squad(List<Pawn> newPawns)
     //{
