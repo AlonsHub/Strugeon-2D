@@ -66,6 +66,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     Button thisButton;
     private void Start()
     {
+        siteData.logicalDistance = Vector3.Distance(LoadTavernScene.tavernButtonTransform.position, transform.position) /100f;
+        
         //Reveal ring check
         if (!RevealRing.Instance.IsSiteInRing(siteData))
         { 
