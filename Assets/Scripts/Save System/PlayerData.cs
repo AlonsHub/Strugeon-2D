@@ -64,9 +64,9 @@ public class PlayerData
 
     
     /// Reveal ranges
-    public float siteRevealIntensity;
-    public float idRevealIntensity;
-    public float levelRevealIntensity;
+    public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/40f;
+    public float idRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity / 80f;
+    public float levelRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity / 120f;
 
     public PsionSpectrumProfile psionSpectrum;
 
@@ -117,9 +117,9 @@ public class PlayerData
         SiteCooldownTimes = new Dictionary<string, float>(); //in seconds
         _siteCooldowns = new Dictionary<string, DateTime?>(); //in date?
 
-        siteRevealIntensity = 5;
-        idRevealIntensity = 5;
-        levelRevealIntensity = 5;
+        //siteRevealIntensity = 5;
+        //idRevealIntensity = 5;
+        //levelRevealIntensity = 5;
         psionSpectrum = new PsionSpectrumProfile();
         
         pillProfile = new PillProfile(GameStats.startingPsionPotentail);
