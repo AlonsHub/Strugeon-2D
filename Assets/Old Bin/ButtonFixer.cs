@@ -31,6 +31,7 @@ public class ButtonFixer : MonoBehaviour
         {
             SiteButton newSB = Instantiate(siteButtonPrefab, site.transform.parent).GetComponent<SiteButton>();
             newSB.transform.localPosition = site.transform.localPosition;
+            
             newSB.levelSO = site.levelSO;
             newSB.pathCreator= site.pathCreator;
             newSB.siteData= site.siteData;

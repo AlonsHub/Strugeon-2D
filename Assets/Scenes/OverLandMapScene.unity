@@ -417,6 +417,11 @@ PrefabInstance:
       objectReference: {fileID: 829353984}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: siteData.siteName
       value: 1
       objectReference: {fileID: 0}
@@ -2652,6 +2657,11 @@ PrefabInstance:
       objectReference: {fileID: 793318767}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
@@ -3060,6 +3070,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1931883689}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: siteData.siteName
@@ -4023,11 +4038,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 134257376}
   timeText: {fileID: 1188211202}
   isCooldown: 0
@@ -4039,7 +4051,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 307391842}
+  thisImage: {fileID: 307391843}
 --- !u!114 &307391842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4291,6 +4304,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 195207039}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: siteData.siteName
@@ -4849,6 +4867,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 619482282}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: squadPickerObject
@@ -5608,6 +5631,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1876328218}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: siteData.siteName
@@ -6898,7 +6926,8 @@ MonoBehaviour:
   - {fileID: 847700694}
   - {fileID: 307391842}
   aplhaHitMinimumThreshold: 0
-  siteButtonPrefab: {fileID: 0}
+  siteButtonPrefab: {fileID: 1718309484027170363, guid: 638acd5ddcf27224d911be5ca1930480,
+    type: 3}
   selectedSitesToFix: []
 --- !u!1 &423259585
 GameObject:
@@ -7192,7 +7221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &436301545
@@ -7677,11 +7706,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1294750707}
   timeText: {fileID: 1617577219}
   isCooldown: 0
@@ -7693,7 +7719,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 474383870}
+  thisImage: {fileID: 474383871}
 --- !u!114 &474383870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8939,6 +8966,11 @@ PrefabInstance:
       objectReference: {fileID: 2099077781}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
@@ -9836,19 +9868,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 631395094}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &631395097 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4799434390420325786, guid: 9c486b98aa356a847a013b9a781b0298,
-    type: 3}
-  m_PrefabInstance: {fileID: 631395094}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &631395098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4799434390420325784, guid: 9c486b98aa356a847a013b9a781b0298,
     type: 3}
   m_PrefabInstance: {fileID: 631395094}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631395097}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 376e7e28f502acc4fbcb8c5013f0c761, type: 3}
@@ -10171,6 +10197,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 913352542}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: squadPickerObject
@@ -10507,18 +10538,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 4799434390964683820}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670187958}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 376e7e28f502acc4fbcb8c5013f0c761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &670187958 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4799434390420325786, guid: 9c486b98aa356a847a013b9a781b0298,
-    type: 3}
-  m_PrefabInstance: {fileID: 4799434390964683820}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &670187959 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4799434390420325787, guid: 9c486b98aa356a847a013b9a781b0298,
@@ -11797,11 +11822,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1948476922}
   timeText: {fileID: 959298342}
   isCooldown: 0
@@ -11813,7 +11835,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 779188009}
+  thisImage: {fileID: 779188010}
 --- !u!114 &779188009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12033,6 +12056,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1571295046}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: squadPickerObject
@@ -12680,11 +12708,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 410624736}
   timeText: {fileID: 1148241189}
   isCooldown: 0
@@ -12696,7 +12721,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 847700694}
+  thisImage: {fileID: 847700695}
 --- !u!114 &847700694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13092,19 +13118,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7239917258552384017}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &896285265 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7239917259275116608, guid: 24169d12d85ae4d43b274bc7af0e4ae5,
-    type: 3}
-  m_PrefabInstance: {fileID: 7239917258552384017}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &896285267 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7239917259275116610, guid: 24169d12d85ae4d43b274bc7af0e4ae5,
     type: 3}
   m_PrefabInstance: {fileID: 7239917258552384017}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 896285265}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 376e7e28f502acc4fbcb8c5013f0c761, type: 3}
@@ -13507,11 +13527,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 618371965}
   timeText: {fileID: 1238952987}
   isCooldown: 0
@@ -13523,7 +13540,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 949781231}
+  thisImage: {fileID: 949781232}
 --- !u!114 &949781231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14576,7 +14594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1042547692
@@ -15201,11 +15219,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1550422501}
   timeText: {fileID: 586610084}
   isCooldown: 0
@@ -15217,7 +15232,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1123427141}
+  thisImage: {fileID: 1123427142}
 --- !u!114 &1123427141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15812,11 +15828,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1414228670}
   timeText: {fileID: 421096202}
   isCooldown: 0
@@ -15828,7 +15841,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1156673409}
+  thisImage: {fileID: 1156673410}
 --- !u!114 &1156673409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15939,6 +15953,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 1894694564}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: squadPickerObject
@@ -16335,6 +16354,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 291745276}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: siteData.siteName
@@ -16907,6 +16931,11 @@ PrefabInstance:
       objectReference: {fileID: 1058996747}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
@@ -17254,6 +17283,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 252497869}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: squadPickerObject
@@ -19241,7 +19275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381419116
@@ -19605,7 +19639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1401575318
@@ -21189,7 +21223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1543337587
@@ -22316,7 +22350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642271530
@@ -22687,6 +22721,11 @@ PrefabInstance:
       objectReference: {fileID: 954126175}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: siteData.siteName
       value: 1
       objectReference: {fileID: 0}
@@ -23023,11 +23062,8 @@ MonoBehaviour:
   siteData:
     siteName: 4
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 631395097}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 631395096}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 758575418}
   timeText: {fileID: 1237220332}
   isCooldown: 0
@@ -23039,7 +23075,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1667936164}
+  thisImage: {fileID: 1667936165}
 --- !u!114 &1667936164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23456,7 +23493,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1682026383
@@ -24815,11 +24852,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1391575545}
   timeText: {fileID: 1547439867}
   isCooldown: 0
@@ -24831,7 +24865,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1771409228}
+  thisImage: {fileID: 1771409229}
 --- !u!114 &1771409228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26049,6 +26084,11 @@ PrefabInstance:
       propertyPath: pathCreator
       value: 
       objectReference: {fileID: 506970190}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
       propertyPath: siteData.siteName
@@ -27678,7 +27718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.59991, y: 30.700054}
+  m_AnchoredPosition: {x: 29.599926, y: 30.700092}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1942155089
@@ -28489,6 +28529,11 @@ PrefabInstance:
       objectReference: {fileID: 978683967}
     - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
         type: 3}
+      propertyPath: siteData.ETA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1718309484027170343, guid: 638acd5ddcf27224d911be5ca1930480,
+        type: 3}
       propertyPath: squadPickerObject
       value: 
       objectReference: {fileID: 702498088}
@@ -28824,11 +28869,8 @@ MonoBehaviour:
   siteData:
     siteName: 3
     logicalDistance: 4
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 1563235119}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 982349420}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 1577886659}
   timeText: {fileID: 1840056450}
   isCooldown: 0
@@ -28840,7 +28882,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 2031401995}
+  thisImage: {fileID: 2031401996}
 --- !u!114 &2031401995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30195,11 +30238,8 @@ MonoBehaviour:
   siteData:
     siteName: 4
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 670187958}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 745535110}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 4835977972843287042}
   timeText: {fileID: 7776704280608474208}
   isCooldown: 0
@@ -30211,7 +30251,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1718309484130519116}
+  thisImage: {fileID: 1718309484130519121}
 --- !u!224 &1718309484130519120
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30303,11 +30344,8 @@ MonoBehaviour:
   siteData:
     siteName: 2
     logicalDistance: 2
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 896285265}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1056017761}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 4835977972599908837}
   timeText: {fileID: 7776704280902500231}
   isCooldown: 0
@@ -30319,7 +30357,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1718309484357923755}
+  thisImage: {fileID: 1718309484357923766}
 --- !u!222 &1718309484357923753
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30601,11 +30640,8 @@ MonoBehaviour:
   siteData:
     siteName: 3
     logicalDistance: 4
-  ETA: 2
-  arrivedPanelOffset: {x: 0, y: 0, z: 0}
-  myDataDisplay: {fileID: 1105867175}
+    ETA: 2
   dataDisplayCenterTrans: {fileID: 1249347223}
-  buttons: {fileID: 0}
   clockAndTimerParent: {fileID: 4835977974419841555}
   timeText: {fileID: 7776704281246561393}
   isCooldown: 0
@@ -30617,7 +30653,8 @@ MonoBehaviour:
     isAvailable: 1
     roomNumber: -1
   isReady: 0
-  squadPickerObject: {fileID: 702498088}
+  thisButton: {fileID: 1718309484567246941}
+  thisImage: {fileID: 1718309484567246912}
 --- !u!222 &1718309484567246943
 CanvasRenderer:
   m_ObjectHideFlags: 0
