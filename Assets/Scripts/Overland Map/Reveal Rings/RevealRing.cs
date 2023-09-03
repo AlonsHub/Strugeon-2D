@@ -42,15 +42,6 @@ public class RevealRing : MonoBehaviour
         }
 
         Instance = this;
-
-        //siteRevealSlider.value = siteRevealIntensity;
-        //idRevealSlider.value = idRevealIntensity;
-        //levelRevealSlider.value = levelRevealIntensity;
-
-        //siteRevealSlider.onValueChanged.AddListener(delegate { SetSiteReveal();});
-        //idRevealSlider.onValueChanged.AddListener(delegate { SetIDReveal(); });
-        //levelRevealSlider.onValueChanged.AddListener(delegate { SetLevelReveal(); });
-
     }
 
     public int ExposureLevel(SiteData siteData)
@@ -81,27 +72,5 @@ public class RevealRing : MonoBehaviour
         {
             return (int)RevealRingType.Reward;
         }
-        
-
-
     }
-
-    //public void SetSiteReveal()
-    //{
-    //    //siteRevealIntensity = siteRevealSlider.value;
-    //    siteRevealIntensity = PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity;
-    //}
-    //public void SetIDReveal()
-    //{
-    //    //idRevealIntensity = idRevealSlider.value;
-    //    idRevealIntensity = PlayerDataMaster.Instance.currentPlayerData.idRevealIntensity;
-    //}
-    //public void SetLevelReveal()
-    //{
-    //    //levelRevealIntensity = levelRevealSlider.value;
-    //    levelRevealIntensity = PlayerDataMaster.Instance.currentPlayerData.levelRevealIntensity;
-
-    //}
-    //Gizmo parameters?
-    //Gizmo? - ONLY RELEVANT if calculated and not manually set
 }

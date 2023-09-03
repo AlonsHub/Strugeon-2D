@@ -64,12 +64,12 @@ public class PlayerData
 
     
     /// Reveal ranges
-    public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/80f;
-    public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/120f;
+    public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/90f;
+    public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/130f;
     //portrait amount
-    public float idRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/180f;
-    public float levelRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/220f;
-    public float rewardRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/280f;
+    public float idRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/170f;
+    public float levelRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/210f;
+    public float rewardRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/250f;
 
     public PsionSpectrumProfile psionSpectrum;
 
