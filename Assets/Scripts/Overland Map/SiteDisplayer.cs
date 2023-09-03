@@ -167,6 +167,79 @@ public class SiteDisplayer : MonoBehaviour
         difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
         goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
     }
+    public void SetMe(SiteButton sb, int exposureLevel) 
+    {
+        siteButton = sb;
+        levelData = sb.levelSO.levelData;
+        siteNameText.text = siteButton.siteData.siteName.ToString();
+
+        transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width / 2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2) ? -offset.y : offset.y, 0f);
+
+        if (exposureLevel >= (int)RevealRingType.EnemyAmount)
+        {
+            for (int i = 0; i < levelData.enemies.Count; i++)
+            {
+                if (i >= dwellerDisplayers.Count)
+                {
+
+                    DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
+
+                    if (exposureLevel >= (int)RevealRingType.EnemyID)
+                    {
+                        if (exposureLevel >= (int)RevealRingType.EnemyLevel)
+                            dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+                        else
+                            dweller.SetMe(levelData.enemies[i]);
+                    }
+                    else
+                    {
+                        dweller.SetMe();
+                    }
+
+
+                    dwellerDisplayers.Add(dweller);
+                }
+                else
+                {
+                    if (exposureLevel >= (int)RevealRingType.EnemyID)
+                    {
+                        if (exposureLevel >= (int)RevealRingType.EnemyLevel)
+                            dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+                        else
+                            dwellerDisplayers[i].SetMe(levelData.enemies[i]);
+                    }
+                    else
+                    {
+                        dwellerDisplayers[i].SetMe();
+                    }
+                }
+            }
+
+            if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
+            {
+                int delta = dwellerDisplayers.Count - levelData.enemies.Count;
+                for (int i = 1; i <= delta; i++)
+                {
+                    DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
+                    dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
+                    dd.KillMe();
+                }
+            } // BADDDD and easy to do otherwise TBF
+        }
+        else
+        {
+            for (int i = 0; i < dwellerDisplayers.Count; i++)
+            {
+                Destroy(dwellerDisplayers[i].gameObject);
+            }
+            dwellerDisplayers.Clear();
+        }
+
+        difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+
+            goldDisplayer.GetComponent<TMPro.TMP_Text>().text = (exposureLevel >= (int)RevealRingType.Reward) ? levelData.goldReward.ToString() : "???"; // come on, man...
+    }
+
 
     public void SetMe(SimpleSiteButton ssb)
     {

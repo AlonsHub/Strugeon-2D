@@ -8,8 +8,10 @@ public class RevealRing : MonoBehaviour
     public static RevealRing Instance;
 
     float siteRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity; 
+    float enemyAmountIntensity => PlayerDataMaster.Instance.currentPlayerData.enemyAmountRevealIntensity; 
     float idRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.idRevealIntensity; 
     float levelRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.levelRevealIntensity; 
+    float rewardRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.rewardRevealIntensity; 
     //float siteRevealIntensity { get => PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity; set => PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity = value; }
 
     //float idRevealIntensity { get => PlayerDataMaster.Instance.currentPlayerData.idRevealIntensity; set => PlayerDataMaster.Instance.currentPlayerData.idRevealIntensity = value; }
@@ -26,8 +28,10 @@ public class RevealRing : MonoBehaviour
     public bool IsSiteInRing(SiteData siteData) => (siteRevealIntensity >= siteData.logicalDistance); // this simplified check assumes all sites would be MANUALLY (in overlandmap scene) (pre)set each site with logicalDistances
     //As it is right now 09/05/22, the code does NOT need to "calcualte" any site's logicalDistance - as they are manually set
     //we should, however, find a better approach (one that allows us to simply place a site on the map, and logicalDistance would be set using a DistanceCalc() method)
+    public bool IsSiteInEnemyAmountRing(SiteData siteData) => (enemyAmountIntensity >= siteData.logicalDistance);
     public bool IsSiteInEnemyIDRing(SiteData siteData) => (idRevealIntensity >= siteData.logicalDistance);
     public bool IsSiteInEnemyLevelRing(SiteData siteData) => (levelRevealIntensity >= siteData.logicalDistance);
+    public bool IsSiteInRewardRing(SiteData siteData) => (rewardRevealIntensity >= siteData.logicalDistance);
     private void Awake()
     {
         if(Instance != null && Instance !=this)
@@ -46,6 +50,39 @@ public class RevealRing : MonoBehaviour
         //siteRevealSlider.onValueChanged.AddListener(delegate { SetSiteReveal();});
         //idRevealSlider.onValueChanged.AddListener(delegate { SetIDReveal(); });
         //levelRevealSlider.onValueChanged.AddListener(delegate { SetLevelReveal(); });
+
+    }
+
+    public int ExposureLevel(SiteData siteData)
+    {
+        int toReturn= -1; // not at all
+
+        if (!IsSiteInRing(siteData))
+        {
+            return -1;
+        }
+        else if(!IsSiteInEnemyAmountRing(siteData))
+        {
+            return (int)RevealRingType.Site;
+        }
+        else if(!IsSiteInEnemyIDRing(siteData))
+        {
+            return (int)RevealRingType.EnemyAmount;
+        }
+        else if(!IsSiteInEnemyLevelRing(siteData))
+        {
+            return (int)RevealRingType.EnemyID;
+        }
+        else if(!IsSiteInRewardRing(siteData))
+        {
+            return (int)RevealRingType.EnemyLevel;
+        }
+        else
+        {
+            return (int)RevealRingType.Reward;
+        }
+        
+
 
     }
 

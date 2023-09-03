@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class ButtonFixer : MonoBehaviour
@@ -29,7 +30,7 @@ public class ButtonFixer : MonoBehaviour
     {
         foreach (var site in selectedSitesToFix)
         {
-            SiteButton newSB = Instantiate(siteButtonPrefab, site.transform.parent).GetComponent<SiteButton>();
+            SiteButton newSB =   (PrefabUtility.InstantiatePrefab(siteButtonPrefab, site.transform.parent) as GameObject).GetComponent<SiteButton>();
             newSB.transform.localPosition = site.transform.localPosition;
             
             newSB.levelSO = site.levelSO;
@@ -42,6 +43,8 @@ public class ButtonFixer : MonoBehaviour
             newSB.thisImage.sprite = site.thisImage.sprite;
 
             newSB.gameObject.name = site.gameObject.name;
+
+            newSB.thisButton.onClick.AddListener(newSB.OnClick);
 
             site.gameObject.SetActive(false);
         }

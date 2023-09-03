@@ -19,12 +19,13 @@ public class DwellerDisplayer : MonoBehaviour
     public void SetMe(Pawn p)
     {
         portrait.sprite = p.FullPortraitSprite;
+        level.text = "";
         //level.text = levelText.ToString();
     }
     public void SetMe()
     {
         portrait.sprite = hiddenSprite;
-        //level.text = levelText.ToString();
+        level.text = "";
     }
 
     public void KillMe()

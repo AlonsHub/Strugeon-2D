@@ -37,7 +37,13 @@ public class SquadPicker : MonoBehaviour
 
     private void OnEnable()
     {
-        Instance = this; //TBF danger?
+        if (Instance == null)
+        {
+            //turn on, set self to instance and shut off
+            Instance = this;
+            gameObject.SetActive(false);
+            return;
+        }
         //Refresh();
         clickOffMeButton.SetActive(true);
 
@@ -154,9 +160,9 @@ public class SquadPicker : MonoBehaviour
     private void OnDisable()
     {
         clickOffMeButton.SetActive(false);
-
+        if(SiteDisplayer.Instance)
         SiteDisplayer.Instance.SetOnOff(false);
-        Instance = null; //TBF danger?
+        //Instance = null; //TBF danger?
     }
 
     public void SendSquad() //called by button in inspector

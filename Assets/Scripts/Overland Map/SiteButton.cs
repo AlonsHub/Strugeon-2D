@@ -251,8 +251,9 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         //    RandomSetSelf();
 
         SiteDisplayer.Instance.SetOnOff(true);
-        //displayer.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
-        SiteDisplayer.Instance.SetMe(this, RevealRing.Instance.IsSiteInEnemyIDRing(siteData), RevealRing.Instance.IsSiteInEnemyLevelRing(siteData)); //THIS SHOULD CHECK FOR ALL RINGS (other than reveal-site)!
+        
+        int exposure = RevealRing.Instance.ExposureLevel(siteData);
+        SiteDisplayer.Instance.SetMe(this, exposure);
 
     }
     //Color oldColor; //temp until new highlighted sprites are added
