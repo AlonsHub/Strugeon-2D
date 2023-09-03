@@ -70,7 +70,8 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         
         //Reveal ring check
         if (!RevealRing.Instance.IsSiteInRing(siteData))
-        { 
+        {
+            levelSO.levelData.isSet = false;
             gameObject.SetActive(false);
             return;
         }

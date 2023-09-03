@@ -47,6 +47,8 @@ public class SiteMaster : MonoBehaviour
         yield return new WaitForEndOfFrame();
         foreach (SiteButton sb in siteButtons)
         {
+            if (!RevealRing.Instance.IsSiteInRing(sb.siteData))
+                continue;
             //Need to check if it is on cooldown?
             if (!sb.isCooldown && (!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null))
             {
