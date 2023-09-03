@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SquadPicker : MonoBehaviour
 {
+    public static SquadPicker Instance;
+
     public List<Squad> availavleSquads;
     public Transform[] rowParents;
     public SquadSlot[] squadSlots;
@@ -35,6 +37,7 @@ public class SquadPicker : MonoBehaviour
 
     private void OnEnable()
     {
+        Instance = this; //TBF danger?
         //Refresh();
         clickOffMeButton.SetActive(true);
 
@@ -153,6 +156,7 @@ public class SquadPicker : MonoBehaviour
         clickOffMeButton.SetActive(false);
 
         SiteDisplayer.Instance.SetOnOff(false);
+        Instance = null; //TBF danger?
     }
 
     public void SendSquad() //called by button in inspector

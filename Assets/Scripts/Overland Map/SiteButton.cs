@@ -20,50 +20,51 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public SiteData siteData;
 
-    [Tooltip("Estiamted traveling duration in seconds")]
-    public float ETA; //estiamted duration in minutes
-    //public PathCreator pathCreator;
-    //public PathCreator pathCreatorReturn;
-
-    //public ArrivalPanel arrivedMissionPanel;
-    //public GameObject arrivedMissionIcon;
-    [SerializeField]
-    private Vector3 arrivedPanelOffset;
-
-    public GameObject myDataDisplay;
+    //[Tooltip("Estiamted traveling duration in seconds")]
+    public float ETA => siteData.ETA; 
+   
     public Transform dataDisplayCenterTrans; //in scene named "image" - it is the best transform as it is the background image for the DataDisplayer
-    //   public GameObject levelPrefab;
-
-    public GameObject buttons;
-
-    
+  
     private readonly int clockDelay = 1; //time between clock ticks //seeing how this works, it could honestly just be a string...
 
     public GameObject clockAndTimerParent;
     public TMPro.TMP_Text timeText;
 
+    [HideInInspector]
     public bool isCooldown;
+    [HideInInspector]
     public bool isWaitingForSquad;
 
     public PathCreator pathCreator; //path to site
 
+    [HideInInspector]
     public Squad readiedSquad;
+    [HideInInspector]
     public bool isReady = false;
     public bool isLevelDataSet { get => levelSO.levelData.isSet; set => levelSO.levelData.isSet = value; } //set means all level data has been set and hadn't been "used" yet. 
                                //Entering a site makes it !set, meaning it should be set again (i.e. re-set)
 
 
-    [SerializeField]
-    GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
-    SquadPicker _squadPicker; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
+    //[SerializeField]
+    //GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
+    SquadPicker _squadPicker => SquadPicker.Instance; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
 
     //private void Awake()
     //{
     //    if (SiteCooldowns == null)
     //        SiteCooldowns = new Dictionary<string, float>();
     //}
-
-    Button thisButton;
+    [SerializeField]
+    public Button thisButton;
+    [SerializeField]
+    public Image thisImage;
+    private void OnValidate()
+    {
+        if (!thisButton)
+            thisButton = GetComponent<Button>();
+        if (!thisImage)
+            thisImage = GetComponent<Image>();
+    }
     private void Start()
     {
         siteData.logicalDistance = Vector3.Distance(LoadTavernScene.tavernButtonTransform.position, transform.position) /100f;
@@ -77,8 +78,12 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
             //read if any site cooldown times exist
-            _squadPicker = squadPickerObject.GetComponent<SquadPicker>(); //TBF! terribly stupid! squad picker shouldn't be a gameobject, it should just be squad picker!
+            //_squadPicker = squadPickerObject.GetComponent<SquadPicker>(); //TBF! terribly stupid! squad picker shouldn't be a gameobject, it should just be squad picker!
+            if(!thisButton)
         thisButton = GetComponent<Button>();
+            if(!thisImage)
+            thisImage = GetComponent<Image>();
+
         //oldColor = thisButton.targetGraphic.color;
 
         //if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
@@ -120,7 +125,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
    
     public void OnClick()
     {
-        if (isCooldown || isWaitingForSquad || squadPickerObject.activeInHierarchy)
+        if (isCooldown || isWaitingForSquad || _squadPicker.gameObject.activeInHierarchy)
         {
             Debug.LogWarning("isCooldown or isWaitingForSquad or squadpicker is active");
             return;
@@ -133,7 +138,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
 
 
-        squadPickerObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
+        _squadPicker.gameObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
         _squadPicker.Refresh(dataDisplayCenterTrans); //chache this earlier! //cached as _squadPicker :)
         _squadPicker.SetSite(this);
     }
@@ -212,7 +217,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerExit(PointerEventData eventData)
     {
         //temp until new sprites arrive
-        if (squadPickerObject.activeInHierarchy)
+        if (_squadPicker.gameObject.activeInHierarchy)
             return;
 
         //SetHoverColor(false); //this makes it so only on hover over site the site will be coloured, (as opposed to: as long as it's displayer is up
@@ -229,7 +234,7 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isCooldown || isWaitingForSquad || isReady || squadPickerObject.activeInHierarchy)
+        if (isCooldown || isWaitingForSquad || isReady || _squadPicker.gameObject.activeInHierarchy)
         {
             //Debug.LogError("isCooldown or isWaitingForSquad or ready");
             return;

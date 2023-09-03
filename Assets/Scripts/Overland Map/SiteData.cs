@@ -12,7 +12,7 @@ public class SiteData
     public float logicalDistance; //for rings
     //cooldown
     //timeToArrive
-
+    public float ETA;
     //siteState - idle/live/isSet, waiting for squad, squad in position
 
     //readiedsquad // squadOTW
