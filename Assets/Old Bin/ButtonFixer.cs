@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine.UI;
 
 public class ButtonFixer : MonoBehaviour
@@ -24,7 +26,7 @@ public class ButtonFixer : MonoBehaviour
         foreach (Button button in buttons)
             button.image.alphaHitTestMinimumThreshold = aplhaHitMinimumThreshold;
     }
-
+#if UNITY_EDITOR
     [ContextMenu("Objs to prefabs")]
     public void FixObjectsToBePrefabs()
     {
@@ -50,6 +52,6 @@ public class ButtonFixer : MonoBehaviour
         }
 
     }
+#endif
 
-   
 }
