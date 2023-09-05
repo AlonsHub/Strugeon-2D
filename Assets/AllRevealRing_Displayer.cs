@@ -6,8 +6,20 @@ using UnityEngine;
 public enum RevealRingType {Site, EnemyAmount, EnemyID, EnemyLevel, Reward}; //TBF moved somewhere more prominent and also the order?
 public class AllRevealRing_Displayer : MonoBehaviour
 {
+
+    
+
     [SerializeField]
     GameObject[] imgs;
+
+    private void OnEnable()
+    {
+        GameStats.OnRevealRadiusChanged += SetRight;
+    }
+    private void OnDisable()
+    {
+        GameStats.OnRevealRadiusChanged -= SetRight;
+    }
     void SetRight()
     {
         imgs[(int)RevealRingType.Site].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity;
