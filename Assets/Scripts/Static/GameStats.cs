@@ -32,6 +32,8 @@ public static class GameStats
     //public static float startingFlatRegenRate = .2f;
 
     public static float[] revealRingRadiusMods = {80, 150, 200,250,300};
+    //public static float[] revealRingSteps = {5, 5, 5,5,5};
+    public static float revealRingStep = 50;
     public static System.Action OnRevealRadiusChanged;
 
 
@@ -109,5 +111,15 @@ public static class GameStats
     {
         revealRingRadiusMods[(int)revealRingType] = newRadius;
         OnRevealRadiusChanged?.Invoke();
+    }
+
+    public static float GetRevealIntensity(float purpleCapacity, RevealRingType revealRingType)
+    {
+        return (((int)(purpleCapacity)/revealRingStep) * revealRingStep) / revealRingRadiusMods[(int)revealRingType];
+    }
+
+    public static void SetStepSize(float stepSize)
+    {
+        revealRingStep = stepSize;
     }
 }
