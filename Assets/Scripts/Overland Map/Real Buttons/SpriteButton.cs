@@ -36,6 +36,12 @@ public class SpriteButton : MonoBehaviour
     #endregion
 
 
+    public void SetMe(UnityEngine.UI.Button button, Sprite reg)
+    {
+        hoverSprite = button.spriteState.highlightedSprite;
+        clickedSprite = button.spriteState.pressedSprite;
+        regularSprite = reg;
+    }
     private void Awake()
     {
         SetInteractive(true);
