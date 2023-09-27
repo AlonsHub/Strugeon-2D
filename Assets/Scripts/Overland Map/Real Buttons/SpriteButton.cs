@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 public class SpriteButton : MonoBehaviour
 {
-
     bool _interactive;
 
     [SerializeField]
@@ -15,9 +14,12 @@ public class SpriteButton : MonoBehaviour
 
     [SerializeField]
     SpriteRenderer spriteRenderer;
+    [SerializeField]
+    SpriteRenderer name_spriteRenderer;
 
     ButtonSprite_State _currentState;
     Sprite _currentSprite;
+
     #region Sprites for states
     [SerializeField]
     Sprite regularSprite;
@@ -41,7 +43,14 @@ public class SpriteButton : MonoBehaviour
         hoverSprite = button.spriteState.highlightedSprite;
         clickedSprite = button.spriteState.pressedSprite;
         regularSprite = reg;
+
+        //Get name sprite for sites - Resource<Load>() or Prefabber-like solution
     }
+    //[ContextMenu("Set to reg")]
+    //public void OnValidate()
+    //{
+    //    SetSpriteToState(ButtonSprite_State.Regular);
+    //}
     private void Awake()
     {
         SetInteractive(true);

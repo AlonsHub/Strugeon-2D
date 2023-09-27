@@ -13,24 +13,28 @@ public class SiteSwapper : MonoBehaviour
 
     [SerializeField]
     SiteButton[] canvasSiteButtonsToConvert;
-    [ContextMenu("DO IT")]
+    [ContextMenu("DO IT - Only works if Main Camera is orthographic")]
     public void CreateRealWorldSites()
     {
+        Camera mainCam = Camera.main;
+
+        mainCam.orthographic = true;
         //cycle through sites
         foreach (var item in canvasSiteButtonsToConvert)
         {
-            if (!item.gameObject.activeInHierarchy)
+            if (!item.gameObject.activeSelf)
                 continue;
 
-            GameObject go = Instantiate(realSitePrefab, newSitesParent);
+            GameObject go = PrefabUtility.InstantiatePrefab((UnityEngine.Object)realSitePrefab, newSitesParent) as GameObject;
 
             SpriteButton pb = go.GetComponentInChildren<SpriteButton>();
-
-            //go.transform.position = Camera.main.ScreenToWorldPoint(item.GetComponent<RectTransform>().);
+            
+            //ONLY WORKS IF MAIN CAM IS ORTHO!
             go.transform.position = Camera.main.ScreenToWorldPoint(item.transform.position);
-            //go.transform.localPosition = new Vector3(go.transform.localPosition.x, 0, go.transform.localPosition.z);
+            
              pb.SetMe( item.thisButton, item.thisImage.sprite);
         }
+        mainCam.orthographic = false;
         //spawn per site
         //position from ScreenToWorld 
         //set new parent and y value
