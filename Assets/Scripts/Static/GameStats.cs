@@ -31,8 +31,13 @@ public static class GameStats
     public static float[] startingPsionCapacities = {0,47,0,104,39,133,0}; //Psion Level 3 stats
     //public static float startingFlatRegenRate = .2f;
 
-    public static float[] revealRingRadiusMods = {80, 150, 200,250,300};
+    public static float[] revealRingRadiusMods = {1, 1.5f, 2,3,4};
     public static System.Action OnRevealRadiusChanged;
+
+    public static float GetModForRevealRadius(RevealRingType revealRingType)
+    {
+        return RevealRing.Instance.RingStepSize * revealRingRadiusMods[(int)revealRingType];
+    }
 
 
     public static int ExpThresholdByLevel(int level)

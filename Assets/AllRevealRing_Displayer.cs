@@ -11,6 +11,10 @@ public class AllRevealRing_Displayer : MonoBehaviour
 
     [SerializeField]
     GameObject[] imgs;
+    [SerializeField]
+    GameObject toToggle;
+
+
 
     private void OnEnable()
     {
@@ -32,17 +36,20 @@ public class AllRevealRing_Displayer : MonoBehaviour
     public void TurnOn()
     {
         SetRight();
-        foreach (var item in imgs)
-        {
-            item.gameObject.SetActive(true);
-        }
+        toToggle.SetActive(true);
+        //foreach (var item in imgs)
+        //{
+        //    item.gameObject.SetActive(true);
+        //}
     }
     public void TurnOff()
     {
-        foreach (var item in imgs)
-        {
-            item.gameObject.SetActive(false);
-        }
+        toToggle.SetActive(false);
+
+        //foreach (var item in imgs)
+        //{
+        //    item.gameObject.SetActive(false);
+        //}
     }
 
 }
