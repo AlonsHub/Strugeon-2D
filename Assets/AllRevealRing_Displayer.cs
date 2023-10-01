@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Gold and Item reward are united at the moment
-public enum RevealRingType {Site, EnemyAmount, EnemyID, EnemyLevel, Reward}; //TBF moved somewhere more prominent and also the order?
+public enum RevealRingType {Site, Difficulty, EnemyAmount, EnemyID, EnemyLevel, Reward}; //TBF moved somewhere more prominent and also the order?
 public class AllRevealRing_Displayer : MonoBehaviour
 {
 
@@ -27,6 +27,7 @@ public class AllRevealRing_Displayer : MonoBehaviour
     void SetRight()
     {
         imgs[(int)RevealRingType.Site].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity;
+        imgs[(int)RevealRingType.Difficulty].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.difficultyRevealIntensity;
         imgs[(int)RevealRingType.EnemyAmount].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.enemyAmountRevealIntensity;
         imgs[(int)RevealRingType.EnemyID].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.idRevealIntensity;
         imgs[(int)RevealRingType.EnemyLevel].transform.localScale = Vector3.one * PlayerDataMaster.Instance.currentPlayerData.levelRevealIntensity;

@@ -66,6 +66,7 @@ public class PlayerData
     /// Reveal ranges
     //public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.revealRingRadiusMods[(int)RevealRingType.Site];
     public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.GetModForRevealRadius(RevealRingType.Site);
+    public float difficultyRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.GetModForRevealRadius(RevealRingType.Difficulty);
     //public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.revealRingRadiusMods[(int)RevealRingType.EnemyAmount];
     public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.GetModForRevealRadius(RevealRingType.EnemyAmount);
     //portrait amount

@@ -107,66 +107,66 @@ public class SiteDisplayer : MonoBehaviour
     //TBF siteButton realtions are poblematic - they each have a sitedisplayer, why are they like thissss
     [SerializeField]
     Vector3 offset;
-    public void SetMe(SiteButton sb, bool idReveal, bool levelReveal) //In this version - ID reveal ALWAYS precedes LevelReveal, so idReveal == false, assumes levelReveal is also false
-    {
-        siteButton = sb;
-        levelData = sb.levelSO.levelData;
-        siteNameText.text = siteButton.siteData.siteName.ToString();
+    //public void SetMe(SiteButton sb, bool idReveal, bool levelReveal) //In this version - ID reveal ALWAYS precedes LevelReveal, so idReveal == false, assumes levelReveal is also false
+    //{
+    //    siteButton = sb;
+    //    levelData = sb.levelSO.levelData;
+    //    siteNameText.text = siteButton.siteData.siteName.ToString();
 
-        transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width/2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2)? -offset.y : offset.y, 0f);
+    //    transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width/2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2)? -offset.y : offset.y, 0f);
 
-        for (int i = 0; i < levelData.enemies.Count; i++)
-        {
-            if (i >= dwellerDisplayers.Count)
-            {
+    //    for (int i = 0; i < levelData.enemies.Count; i++)
+    //    {
+    //        if (i >= dwellerDisplayers.Count)
+    //        {
                 
-                DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
+    //            DwellerDisplayer dweller = Instantiate(dwellerPortraitPrefab, dwellerPortraitGroupRoot).GetComponent<DwellerDisplayer>();
 
-                if (idReveal)
-                {
-                    if (levelReveal)
-                        dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
-                    else
-                        dweller.SetMe(levelData.enemies[i]);
-                }
-                else
-                {
-                    dweller.SetMe();
-                }
+    //            if (idReveal)
+    //            {
+    //                if (levelReveal)
+    //                    dweller.SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+    //                else
+    //                    dweller.SetMe(levelData.enemies[i]);
+    //            }
+    //            else
+    //            {
+    //                dweller.SetMe();
+    //            }
 
                 
-                dwellerDisplayers.Add(dweller); 
-            }
-            else
-            {
-                if (idReveal)
-                {
-                    if (levelReveal)
-                        dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
-                    else
-                        dwellerDisplayers[i].SetMe(levelData.enemies[i]);
-                }
-                else
-                {
-                    dwellerDisplayers[i].SetMe();
-                }
-            }
-        }
+    //            dwellerDisplayers.Add(dweller); 
+    //        }
+    //        else
+    //        {
+    //            if (idReveal)
+    //            {
+    //                if (levelReveal)
+    //                    dwellerDisplayers[i].SetMe(levelData.enemies[i], levelData.enemyLevels[i]); //THIS SHOULD CHECK FOR enemyLevelRing
+    //                else
+    //                    dwellerDisplayers[i].SetMe(levelData.enemies[i]);
+    //            }
+    //            else
+    //            {
+    //                dwellerDisplayers[i].SetMe();
+    //            }
+    //        }
+    //    }
 
-        if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
-        {
-            int delta = dwellerDisplayers.Count - levelData.enemies.Count;
-            for (int i = 1; i <= delta; i++)
-            {
-                DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
-                dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
-                dd.KillMe();
-            }
-        } // BADDDD and easy to do otherwise TBF
+    //    if (levelData.enemies.Count < dwellerDisplayers.Count) // BADDDD and easy to do otherwise
+    //    {
+    //        int delta = dwellerDisplayers.Count - levelData.enemies.Count;
+    //        for (int i = 1; i <= delta; i++)
+    //        {
+    //            DwellerDisplayer dd = dwellerDisplayers[dwellerDisplayers.Count - 1].gameObject.GetComponentInParent<DwellerDisplayer>();
+    //            dwellerDisplayers.RemoveAt(dwellerDisplayers.Count - 1);
+    //            dd.KillMe();
+    //        }
+    //    } // BADDDD and easy to do otherwise TBF
 
-        difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
-        goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
-    }
+    //    difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+    //    goldDisplayer.GetComponent<TMPro.TMP_Text>().text = levelData.goldReward.ToString(); // come on, man...
+    //}
     public void SetMe(SiteButton sb, int exposureLevel) 
     {
         siteButton = sb;
@@ -174,6 +174,16 @@ public class SiteDisplayer : MonoBehaviour
         siteNameText.text = siteButton.siteData.siteName.ToString();
 
         transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width / 2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2) ? -offset.y : offset.y, 0f);
+
+        if(exposureLevel >= (int)RevealRingType.Difficulty) //keep this seperated for health reasons - cascade better late TBD TBF
+        {
+            difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+            difficultyImage.color = SturgeonColours.Instance.alphaWhite;
+        }
+        else
+        {
+            difficultyImage.color = SturgeonColours.Instance.transparentNothing;
+        }
 
         if (exposureLevel >= (int)RevealRingType.EnemyAmount)
         {
@@ -235,7 +245,7 @@ public class SiteDisplayer : MonoBehaviour
             dwellerDisplayers.Clear();
         }
 
-        difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
+        //difficultyImage.sprite = difficultySprties[(int)levelData.difficulty];
 
             goldDisplayer.GetComponent<TMPro.TMP_Text>().text = (exposureLevel >= (int)RevealRingType.Reward) ? levelData.goldReward.ToString() : "???"; // come on, man...
     }

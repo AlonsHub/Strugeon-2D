@@ -21,6 +21,9 @@ public class SturgeonColours : MonoBehaviour
     public Color noolPurple;
     public Color noolBlack;
     public Color noolWhite;
+
+    public Color transparentNothing = new Color(0,0,0,0);
+    public Color alphaWhite = new Color(1,1,1,1);
     
 
     private void Awake()
