@@ -8,50 +8,50 @@ using UnityEngine.UI;
 
 public class ButtonFixer : MonoBehaviour
 {
-    //TEMP AF
-    public Button[] buttons;
+//    //TEMP AF
+//    public Button[] buttons;
     
-    public float aplhaHitMinimumThreshold;
+//    public float aplhaHitMinimumThreshold;
 
-    [SerializeField]
-    GameObject siteButtonPrefab;
-    [SerializeField]
-    SiteButton[] selectedSitesToFix;
+//    [SerializeField]
+//    GameObject siteButtonPrefab;
+//    [SerializeField]
+//    SiteButton[] selectedSitesToFix;
     
-    void Awake()
-    {
-        //SO TEMPT OMG
-        buttons = GetComponentsInChildren<Button>();
+//    void Awake()
+//    {
+//        //SO TEMPT OMG
+//        buttons = GetComponentsInChildren<Button>();
 
-        foreach (Button button in buttons)
-            button.image.alphaHitTestMinimumThreshold = aplhaHitMinimumThreshold;
-    }
-#if UNITY_EDITOR
-    [ContextMenu("Objs to prefabs")]
-    public void FixObjectsToBePrefabs()
-    {
-        foreach (var site in selectedSitesToFix)
-        {
-            SiteButton newSB =   (PrefabUtility.InstantiatePrefab(siteButtonPrefab, site.transform.parent) as GameObject).GetComponent<SiteButton>();
-            newSB.transform.localPosition = site.transform.localPosition;
+//        foreach (Button button in buttons)
+//            button.image.alphaHitTestMinimumThreshold = aplhaHitMinimumThreshold;
+//    }
+//#if UNITY_EDITOR
+//    [ContextMenu("Objs to prefabs")]
+//    public void FixObjectsToBePrefabs()
+//    {
+//        foreach (var site in selectedSitesToFix)
+//        {
+//            SiteButton newSB =   (PrefabUtility.InstantiatePrefab(siteButtonPrefab, site.transform.parent) as GameObject).GetComponent<SiteButton>();
+//            newSB.transform.localPosition = site.transform.localPosition;
             
-            newSB.levelSO = site.levelSO;
-            newSB.pathCreator= site.pathCreator;
-            newSB.siteData= site.siteData;
+//            newSB.levelSO = site.levelSO;
+//            newSB.pathCreator= site.pathCreator;
+//            newSB.siteData= site.siteData;
 
-            SpriteState ss = site.thisButton.spriteState;
-            newSB.thisButton.spriteState= ss;
+//            SpriteState ss = site.thisButton.spriteState;
+//            newSB.thisButton.spriteState= ss;
 
-            newSB.thisImage.sprite = site.thisImage.sprite;
+//            newSB.thisImage.sprite = site.thisImage.sprite;
 
-            newSB.gameObject.name = site.gameObject.name;
+//            newSB.gameObject.name = site.gameObject.name;
 
-            newSB.thisButton.onClick.AddListener(newSB.OnClick);
+//            newSB.thisButton.onClick.AddListener(newSB.OnClick);
 
-            site.gameObject.SetActive(false);
-        }
+//            site.gameObject.SetActive(false);
+//        }
 
-    }
-#endif
+//    }
+//#endif
 
 }

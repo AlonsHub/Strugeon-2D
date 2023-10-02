@@ -939,4 +939,18 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
         return actionPool.Where(pred).ToArray();
     }
 
+
+    //private void OnMouseEnter()
+    //{
+    //    Debug.Log($"Mouse entered: {Name} aka {name}");
+
+    //    Hover_HpBar.Instance.SetMe(this);
+    //}
+    //private void OnMouseExit()
+    //{
+    //    Debug.Log($"Mouse exited: {Name} aka {name}");
+
+    //    Hover_HpBar.Instance.SetOff();
+    //}
+
 }

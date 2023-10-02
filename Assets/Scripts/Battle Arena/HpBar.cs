@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 //using UnityEngine.UI;
 
 
@@ -11,6 +13,8 @@ public class HpBar : MonoBehaviour
     public Transform spriteMaskTrans;
     public Transform rotatingParent;
     public Transform myParent;
+
+    //public TMPro.TMP_Text hpText;
 
     public Pawn pawn;
     // Start is called before the first frame update
@@ -54,4 +58,15 @@ public class HpBar : MonoBehaviour
         myParent.eulerAngles = newRot; 
         
     }
+
+    //private void OnMouseEnter()
+    //{
+    //    hpText.text = $"{pawn.currentHP} / {pawn.maxHP}";
+    //    hpText.gameObject.SetActive(true);
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    hpText.gameObject.SetActive(false);
+    //}
 }
