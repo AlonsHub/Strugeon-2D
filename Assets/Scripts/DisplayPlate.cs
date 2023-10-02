@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DisplayPlate : MonoBehaviour
+public class DisplayPlate : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public TurnTaker turnTaker => turnInfo.GetTurnTaker;
     public TurnInfo turnInfo;
@@ -103,5 +104,17 @@ public class DisplayPlate : MonoBehaviour
     {
         portraitOverlay.color = col;
         //portraitOverlay.= col;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!turnInfo.isStartPin)
+        Hover_HpBar.Instance.SetOff();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(!turnInfo.isStartPin)
+        Hover_HpBar.Instance.SetMe(turnTaker as Pawn);
     }
 }
