@@ -419,8 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00157b656fcc15046a2723bb16a13b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 200
-  maxHP: 200
+  currentHP: 250
+  maxHP: 250
   pawnName: Forest Drake
   GFX: {fileID: 6243158429807829216}
   _turnInfo:
@@ -436,17 +436,17 @@ MonoBehaviour:
       dominant: 0
     baseSheetSO: {fileID: 0}
     statBlock:
-      maxHp: 200
+      maxHp: 250
       range: 1
-      minDamage: 12
-      maxDamage: 17
+      minDamage: 7
+      maxDamage: 9
       mercLevel: 0
       minDamageBenefit: 0
       maxDamageBenefit: 0
       grazeChance: 5
-      grazeDamagePercentage: 50
+      grazeDamagePercentage: 70
       critChance: 15
-      critDamagePercentage: 160
+      critDamagePercentage: 250
       maxHPPerLevelAsPercentage: 10
       maxDamagePerLevelAsPercentage: 20
       minDamagePerLevelAsPercentage: 10
@@ -471,7 +471,6 @@ MonoBehaviour:
     gearStrings: []
   initiativeBonus: 0
   hasSAs: 1
-  targets: []
   tileWalker: {fileID: 2064929481214812438}
   anim: {fileID: 1078713653789809608}
   portraitSprite: {fileID: 21300000, guid: 3c4c379d518fb124bae59e4090065b79, type: 3}

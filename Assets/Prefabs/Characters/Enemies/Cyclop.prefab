@@ -344,14 +344,14 @@ MonoBehaviour:
     statBlock:
       maxHp: 200
       range: 1
-      minDamage: 10
-      maxDamage: 15
+      minDamage: 8
+      maxDamage: 10
       mercLevel: 0
       minDamageBenefit: 0
       maxDamageBenefit: 0
-      grazeChance: 5
+      grazeChance: 7
       grazeDamagePercentage: 70
-      critChance: 10
+      critChance: 15
       critDamagePercentage: 150
       maxHPPerLevelAsPercentage: 10
       maxDamagePerLevelAsPercentage: 20
@@ -377,11 +377,6 @@ MonoBehaviour:
     gearStrings: []
   initiativeBonus: 0
   hasSAs: 0
-  targets:
-  - {fileID: 5808167037023471695}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   tileWalker: {fileID: 2064929481214812438}
   anim: {fileID: 1078713653789809608}
   portraitSprite: {fileID: 21300000, guid: 8ccae57a3bb326141bc3b5ae69b73948, type: 3}
@@ -506,7 +501,7 @@ MonoBehaviour:
   baseweight: 50
   actionVariations: []
   doTargetAllies: 0
-  minDamage: 10
+  minDamage: 12
   maxDamage: 15
   minDamagePerLevel: 5
   maxDamagePerLevel: 5
