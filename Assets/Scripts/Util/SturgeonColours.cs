@@ -28,6 +28,7 @@ public class SturgeonColours : MonoBehaviour
     public Color critDamageTextColour;
     public Color grazeDamageTextColour;
     public Color normalDamageTextColour;
+    public Color healTextColour;
 
     private void Awake()
     {

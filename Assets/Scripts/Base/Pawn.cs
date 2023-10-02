@@ -660,6 +660,14 @@ public class Pawn : LiveBody, TurnTaker, GridPoser, PurpleTarget
             Die();
         }
     }
+
+    public override void Heal(int amount)
+    {
+        GameObject go = Instantiate(damagePrefab, transform.position, damagePrefab.transform.rotation);
+        go.GetComponent<DamageText>().SetDamageText(amount, SturgeonColours.Instance.healTextColour);
+
+        base.Heal(amount);
+    }
     public override void Die()
     {
         StartCoroutine(nameof(DelayedDeath));
