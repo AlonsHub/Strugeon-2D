@@ -12,6 +12,10 @@ public class DamageText : MonoBehaviour
 
     [SerializeField]
     float alphaSpeed;
+    [SerializeField]
+    float alphaDelay;
+
+    bool _doAlpha;
 
     [SerializeField]
     float ttl;
@@ -19,12 +23,19 @@ public class DamageText : MonoBehaviour
     public void SetDamageText(int dmg)
     {
         dmgTextDisplayer.text = dmg.ToString();
+
+        StartCoroutine(AlphaDelayed());
+
+
         Destroy(gameObject, ttl);
     }
     public void SetDamageText(int dmg, Color col)
     {
         dmgTextDisplayer.color = col;
         dmgTextDisplayer.text = dmg.ToString();
+
+        StartCoroutine(AlphaDelayed());
+
         Destroy(gameObject, ttl);
     }
 
@@ -32,7 +43,13 @@ public class DamageText : MonoBehaviour
     private void Update()
     {
         transform.position += Vector3.forward * riseSpeed * Time.deltaTime;
-        dmgTextDisplayer.alpha -= riseSpeed * Time.deltaTime * alphaSpeed;  
+        if(_doAlpha)
+        dmgTextDisplayer.alpha -= Time.deltaTime * alphaSpeed;  
     }
 
+    IEnumerator AlphaDelayed()
+    {
+        yield return new WaitForSeconds(alphaDelay);
+        _doAlpha = true;
+    }
 }

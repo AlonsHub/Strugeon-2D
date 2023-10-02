@@ -52,61 +52,63 @@ public class SiteMaster : MonoBehaviour
             //Need to check if it is on cooldown?
             if (!sb.isCooldown && (!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null))
             {
+                
                 Debug.Log("setting site");
-                sb.levelSO.levelData.SetLevelData((LairDifficulty)Random.Range(0, System.Enum.GetValues(typeof(LairDifficulty)).Length));
+                //sb.levelSO.levelData.SetLevelData((LairDifficulty)Random.Range(0, System.Enum.GetValues(typeof(LairDifficulty)).Length));
+                sb.levelSO.levelData.SetLevelData(sb.GetRandomRelevantDifficulty());
             }
         }
-        MakeSureSitesAreDiverese();
+        //MakeSureSitesAreDiverese();
     }
 
-    [ContextMenu("DiverseCheckOnSites")]
-    public void MakeSureSitesAreDiverese()
-    {
-        Debug.Log("DIVERSE!");
+    //[ContextMenu("DiverseCheckOnSites")]
+    //public void MakeSureSitesAreDiverese()
+    //{
+    //    Debug.Log("DIVERSE!");
 
-        int numberOfDifficulties = System.Enum.GetValues(typeof(LairDifficulty)).Length;
-        int[] countsPerDifficulty = new int[numberOfDifficulties];
+    //    int numberOfDifficulties = System.Enum.GetValues(typeof(LairDifficulty)).Length;
+    //    int[] countsPerDifficulty = new int[numberOfDifficulties];
 
-        for (int i = 0; i < numberOfDifficulties; i++)
-        {
-            countsPerDifficulty[i] = 0;
-        }
-        //int liveSiteCount = 0;
-        SiteButton[] liveSites = siteButtons.Where(x => x.levelSO.levelData.isSet).ToArray();
+    //    for (int i = 0; i < numberOfDifficulties; i++)
+    //    {
+    //        countsPerDifficulty[i] = 0;
+    //    }
+    //    //int liveSiteCount = 0;
+    //    SiteButton[] liveSites = siteButtons.Where(x => x.levelSO.levelData.isSet).ToArray();
 
-        foreach (var item in liveSites)
-        {
-            Debug.LogWarning($"{item.levelSO.name} isSet: {item.levelSO.levelData.isSet}");
-            countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
-        }
+    //    foreach (var item in liveSites)
+    //    {
+    //        Debug.LogWarning($"{item.levelSO.name} isSet: {item.levelSO.levelData.isSet}");
+    //        countsPerDifficulty[(int)item.levelSO.levelData.difficulty]++;
+    //    }
 
-        for (int i = 0; i < numberOfDifficulties; i++)
-        {
-            if(countsPerDifficulty[i] >= liveSites.Length)
-            {
-                //need to reset one!
-                //choose randomly, but set to a different difficulty - that is NOT i
-                countsPerDifficulty[i]--; //because this one is being changed, and it will not be the same difficulty
-                i++;
-                if(i>= numberOfDifficulties)
-                {
-                    i = 0;
-                }
-                countsPerDifficulty[i]++;
-                //should check if a random site is "good" reset
-                Debug.Log("resetting site");
-                //siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
-                liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
+    //    for (int i = 0; i < numberOfDifficulties; i++)
+    //    {
+    //        if(countsPerDifficulty[i] >= liveSites.Length)
+    //        {
+    //            //need to reset one!
+    //            //choose randomly, but set to a different difficulty - that is NOT i
+    //            countsPerDifficulty[i]--; //because this one is being changed, and it will not be the same difficulty
+    //            i++;
+    //            if(i>= numberOfDifficulties)
+    //            {
+    //                i = 0;
+    //            }
+    //            countsPerDifficulty[i]++;
+    //            //should check if a random site is "good" reset
+    //            Debug.Log("resetting site");
+    //            //siteButtons[Random.Range(0, siteButtons.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
+    //            liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData((LairDifficulty)i);
 
-                break;
-            }
-        }
+    //            break;
+    //        }
+    //    }
 
-        if(countsPerDifficulty[(int)LairDifficulty.Easy] <= 0)
-        {
-            liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData(LairDifficulty.Easy);
-        }
-    }
+    //    if(countsPerDifficulty[(int)LairDifficulty.Easy] <= 0)
+    //    {
+    //        liveSites[Random.Range(0, liveSites.Length)].levelSO.levelData.SetLevelData(LairDifficulty.Easy);
+    //    }
+    //}
 
 
 }

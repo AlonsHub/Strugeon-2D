@@ -58,6 +58,15 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public Button thisButton;
     [SerializeField]
     public Image thisImage;
+
+
+    public LairDifficulty[] relevantDifficulties;
+    public LairDifficulty GetRandomRelevantDifficulty()
+    {
+        return relevantDifficulties[UnityEngine.Random.Range(0, relevantDifficulties.Length)];
+    
+    }
+
     private void OnValidate()
     {
         if (!thisButton)
@@ -263,13 +272,13 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     //    thisButton.targetGraphic.color = setOn ? Color.red : oldColor;
     //}
 
-    void RandomSetSelf()
-    {
-        int rndDifficulty = UnityEngine.Random.Range(0, 3);
+    //void RandomSetSelf()
+    //{
+    //    int rndDifficulty = UnityEngine.Random.Range(0, 3);
 
-        levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty); //this "sets" level data
+    //    levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty); //this "sets" level data
 
-        SiteMaster.Instance.MakeSureSitesAreDiverese();
-        //isLevelDataSet = true; //this isSet => levelDataSO.levelData.isSet
-    }
+    //    SiteMaster.Instance.MakeSureSitesAreDiverese();
+    //    //isLevelDataSet = true; //this isSet => levelDataSO.levelData.isSet
+    //}
 }
