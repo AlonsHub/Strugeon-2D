@@ -111,7 +111,7 @@ public class PlayerData
         wildMercs = new List<MercName>();
 
         //temp
-        for (int i = 1; i < System.Enum.GetValues(typeof(MercName)).Length - 1; i++) //0 is NONE!
+        for (int i = 1; i < System.Enum.GetValues(typeof(MercName)).Length; i++) //0 is NONE!
         {
             wildMercs.Add((MercName)i);
         }
