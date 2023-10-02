@@ -5975,6 +5975,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TinaTurnMachina
       objectReference: {fileID: 0}
+    - target: {fileID: 1938133697107660186, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 1.27
+      objectReference: {fileID: 0}
     - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
       propertyPath: gap
@@ -5983,12 +5988,12 @@ PrefabInstance:
     - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
       propertyPath: maxPlates
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
       propertyPath: elementSize
-      value: 80
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 4788434577186603491, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
@@ -6013,13 +6018,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6588785703252859179, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 104.178406
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588785703252859179, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6588785703252859179, guid: b9e64d9c4ef0f64419e3e6a24ae40e54,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -64
+      value: -52.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9e64d9c4ef0f64419e3e6a24ae40e54, type: 3}
@@ -6802,7 +6812,7 @@ GameObject:
   - component: {fileID: 4363690052193623918}
   - component: {fileID: 1738391194}
   m_Layer: 5
-  m_Name: TurnOrder_BattleLog_Settings Canvas
+  m_Name: BattleLog_Settings Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7103,7 +7113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4363690053502378935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7161,7 +7171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &4363690053975842330
 CanvasRenderer:
   m_ObjectHideFlags: 0
