@@ -115,20 +115,45 @@ public class RootDownItem : ActionItem, SA_Item
                 return; //Delete self?
             }
         }
+
+        pawn.anim.SetTrigger("CastRoot"); //Calls "CallCastRoot" and "FinishAnimation"
+        StartCoroutine(WaitForRootCast(av, toRoot)); //
+        //RootDownAttacher rda = av.target.AddComponent<RootDownAttacher>();
+
+        //rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel-1)*5 ), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
+        
+        ////call this by animation event!
+        //RootDownEffect rde = new RootDownEffect(toRoot,rootDownSprite,rda);
+        //rda.rde = rde;
+        ////Scaling up root with mavka level
+
+        //BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
+
+        //attach a RootDown component to that pawn
+        //pawn.FinishAnimation(); //Calling the animation instead!
+
+    }
+    bool _rootCastCalled = false;
+    IEnumerator WaitForRootCast(ActionVariation av, Pawn toRoot)
+    {
+        yield return new WaitUntil(() => _rootCastCalled);
+        _rootCastCalled = false;
         RootDownAttacher rda = av.target.AddComponent<RootDownAttacher>();
 
-        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel-1)*5 ), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
-        
-        RootDownEffect rde = new RootDownEffect(toRoot,rootDownSprite,rda);
+        rda.SetMeFull(toRoot, rootDownSpriteName, rootDuration, rootVisual, (rootHP + (pawn.enemyLevel - 1) * 5), minDamage + (pawn.enemyLevel - 1) * 2, maxDamage + (pawn.enemyLevel - 1) * 2, spikeDamage + (pawn.enemyLevel - 1) * 3);
+
+        //call this by animation event!
+        RootDownEffect rde = new RootDownEffect(toRoot, rootDownSprite, rda);
         rda.rde = rde;
         //Scaling up root with mavka level
 
         BattleLogVerticalGroup.Instance.AddEntry(pawn.Name, ActionSymbol.Walk, toRoot.Name);
-
-        //attach a RootDown component to that pawn
-            pawn.FinishAnimation();
     }
 
+    public void CallRootCast()
+    {
+        _rootCastCalled = true;
+    }
     public override void CalculateVariations()
     {
         actionVariations.Clear();
