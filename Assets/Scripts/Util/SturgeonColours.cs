@@ -24,7 +24,10 @@ public class SturgeonColours : MonoBehaviour
 
     public Color transparentNothing = new Color(0,0,0,0);
     public Color alphaWhite = new Color(1,1,1,1);
-    
+
+    public Color critDamageTextColour;
+    public Color grazeDamageTextColour;
+    public Color normalDamageTextColour;
 
     private void Awake()
     {

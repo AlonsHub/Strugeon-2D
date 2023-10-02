@@ -21,6 +21,14 @@ public class DamageText : MonoBehaviour
         dmgTextDisplayer.text = dmg.ToString();
         Destroy(gameObject, ttl);
     }
+    public void SetDamageText(int dmg, Color col)
+    {
+        dmgTextDisplayer.color = col;
+        dmgTextDisplayer.text = dmg.ToString();
+        Destroy(gameObject, ttl);
+    }
+
+
     private void Update()
     {
         transform.position += Vector3.forward * riseSpeed * Time.deltaTime;

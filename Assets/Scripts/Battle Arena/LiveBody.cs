@@ -29,6 +29,15 @@ public abstract class LiveBody : MonoBehaviour, I_Attackable
         }
         return currentHP;
     }
+    public virtual int TakeDamage(int damage, bool? critOrGraze, Color col)
+    {
+        //do specific things for crit or graze? 
+
+        //Some characters may get more/less damage from crits and grazes
+
+        return TakeDamage(damage);
+    }
+
     public virtual void Heal(int amount)
     {
         currentHP += (int)(amount * finalHealModifier);

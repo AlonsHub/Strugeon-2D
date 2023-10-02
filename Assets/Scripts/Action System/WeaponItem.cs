@@ -253,21 +253,25 @@ public class WeaponItem : ActionItem
 
         if (rolledDamage < 0)
             rolledDamage = 0;
-        
-        //status effect run
 
-        Color _colOfDamage = SturgeonColours.Instance.noolYellow;
+        //status effect run
+        bool? _isCritOrGraze = null; //null = normal, true = crit, false = graze
+
+        //Color _colOfDamage = SturgeonColours.Instance.noolYellow;
+        Color _colOfDamage = SturgeonColours.Instance.normalDamageTextColour;
         int toHitRoll = Random.Range(1, 101); //1-100
         if(toHitRoll < statBlock.grazeChance)
         {
             //graze!
+            _isCritOrGraze = false;
             rolledDamage *= statBlock.grazeDamagePercentage / 100f;
-            _colOfDamage = SturgeonColours.Instance.skipGrey;
+            _colOfDamage = SturgeonColours.Instance.grazeDamageTextColour;
         }
         else if(toHitRoll >= 100 - statBlock.critChance)
         {
+            _isCritOrGraze = true;
             rolledDamage *= statBlock.critDamagePercentage / 100f;
-            _colOfDamage = SturgeonColours.Instance.noolOrange;
+            _colOfDamage = SturgeonColours.Instance.critDamageTextColour;
         }
         //else! normal hit, change nothing
 
@@ -285,7 +289,8 @@ public class WeaponItem : ActionItem
 
         //End HitGrazeCrit
 
-        pawnToHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        //pawnToHit.TakeDamage((int)rolledDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
+        pawnToHit.TakeDamage((int)rolledDamage,_isCritOrGraze , _colOfDamage); // add time delay to reduce HP only after hit (atm this is done in TakeDamage and ReduceHP methods in character)
 
         hitAction?.Invoke();
 
