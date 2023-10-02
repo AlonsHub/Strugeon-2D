@@ -20,7 +20,13 @@ public class Hover_HpBar : MonoBehaviour
     [SerializeField]
     TMPro.TMP_Text nameText;
 
-    public Pawn pawn;
+
+    [SerializeField]
+    Color enemyColour;
+    [SerializeField]
+    Color mercColour;
+
+    Pawn pawn;
 
     private void Awake()
     {
@@ -38,10 +44,14 @@ public class Hover_HpBar : MonoBehaviour
         pawn = p;
         //spriteMaskTrans.localScale = new Vector3(((float)pawn.currentHP / (float)pawn.maxHP), 1, 1); //full hp is (2,1,1)
         mask.fillAmount = (float)(pawn.currentHP / (float)pawn.maxHP);
+
+        mask.color = pawn.isEnemy ? enemyColour : mercColour;
+
         hpText.text = $"{pawn.currentHP} / {pawn.maxHP}";
         nameText.text = pawn.Name;
         gfxToToggle.SetActive(true);
     }
+
     public void SetOff()
     {
         gfxToToggle.SetActive(false);

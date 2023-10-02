@@ -7,6 +7,7 @@ public class ColliderForHP_Hover : MonoBehaviour
     [SerializeField]
     Pawn pawn;
 
+
     private void Awake()
     {
         if (!pawn)
