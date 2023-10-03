@@ -11,20 +11,26 @@ public class DwellerDisplayer : MonoBehaviour
     TMPro.TMP_Text level;
     [SerializeField]
     Sprite hiddenSprite;
+    [SerializeField]
+    Image questionMark;
     public void SetMe(Pawn p, int levelText)
     {
+        questionMark.gameObject.SetActive(false);
+        portrait.gameObject.SetActive(true);
         portrait.sprite = p.FullPortraitSprite;
         level.text = levelText.ToString();
     }    
     public void SetMe(Pawn p)
     {
+        questionMark.gameObject.SetActive(false);
+        portrait.gameObject.SetActive(true);
         portrait.sprite = p.FullPortraitSprite;
         level.text = "";
-        //level.text = levelText.ToString();
     }
     public void SetMe()
     {
-        portrait.sprite = hiddenSprite;
+        questionMark.gameObject.SetActive(true);
+        portrait.gameObject.SetActive(false);
         level.text = "";
     }
 

@@ -207,8 +207,6 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     }
 
-    
-
     public void UnSetArrivingSquad() //for cancelExpedition cases
     {
         isReady = false;
@@ -265,20 +263,5 @@ public class SiteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         SiteDisplayer.Instance.SetMe(this, exposure);
 
     }
-    //Color oldColor; //temp until new highlighted sprites are added
-
-    //public void SetHoverColor(bool setOn)
-    //{
-    //    thisButton.targetGraphic.color = setOn ? Color.red : oldColor;
-    //}
-
-    //void RandomSetSelf()
-    //{
-    //    int rndDifficulty = UnityEngine.Random.Range(0, 3);
-
-    //    levelSO.levelData.SetLevelData((LairDifficulty)rndDifficulty); //this "sets" level data
-
-    //    SiteMaster.Instance.MakeSureSitesAreDiverese();
-    //    //isLevelDataSet = true; //this isSet => levelDataSO.levelData.isSet
-    //}
+   
 }

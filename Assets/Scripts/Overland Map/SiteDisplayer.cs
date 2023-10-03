@@ -17,6 +17,11 @@ public class SiteDisplayer : MonoBehaviour
     Image difficultyImage;
     [SerializeField]
     GameObject dwellerPortraitPrefab;
+
+    [SerializeField]
+    GameObject dwellersText;
+    [SerializeField]
+    GameObject noDwellersQuestionMark;
     [SerializeField]
     Transform dwellerPortraitGroupRoot;
     [SerializeField]
@@ -187,6 +192,9 @@ public class SiteDisplayer : MonoBehaviour
 
         if (exposureLevel >= (int)RevealRingType.EnemyAmount)
         {
+            noDwellersQuestionMark.SetActive(false);
+            dwellersText.SetActive(true);
+
             for (int i = 0; i < levelData.enemies.Count; i++)
             {
                 if (i >= dwellerDisplayers.Count)
@@ -238,6 +246,8 @@ public class SiteDisplayer : MonoBehaviour
         }
         else
         {
+            noDwellersQuestionMark.SetActive(true);
+            dwellersText.SetActive(false);
             for (int i = 0; i < dwellerDisplayers.Count; i++)
             {
                 Destroy(dwellerDisplayers[i].gameObject);
