@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyMercDisplayer : BasicDisplayer
 {
@@ -16,12 +17,17 @@ public class LobbyMercDisplayer : BasicDisplayer
     [SerializeField]
     GearSlotDispayer[] gearSlots = new GearSlotDispayer[3]; // by EquipSlotType
 
+    [SerializeField]
+    ClassEggPanel classEggPanel;
+
     public bool SetMeFull(MercSheet mercSheet, MercPoolDisplayer poolDisplayer)
     {
         mercPoolDisplayer = poolDisplayer;
         sheet = mercSheet;
 
         Pawn p = mercSheet.MyPawnPrefabRef<Pawn>();
+
+        classEggPanel.SetEgg(sheet.mercClass);
 
         int maxHpBenefit = 0;
         int damageBenefit = 0;

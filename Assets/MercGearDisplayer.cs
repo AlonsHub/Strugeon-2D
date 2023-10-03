@@ -28,6 +28,11 @@ public class MercGearDisplayer : BasicDisplayer
     [SerializeField]
     Image leftImage;
 
+    [SerializeField]
+    ClassEggPanel classEggPanel;
+
+
+
     public MercSheet GetMercSheet { get => mercSheet; }
 
     public System.Action OnMercChange;
@@ -63,6 +68,8 @@ public class MercGearDisplayer : BasicDisplayer
         expBarDisplayer.SetBar(ms);
         Pawn p = ms.MyPawnPrefabRef<Pawn>();
         starGraph.SetToMerc(p._mercSheet);
+
+        classEggPanel.SetEgg(ms.mercClass);
         //starGraph.SetToMerc(ms); //for some reason, this is the wrong one? FIX THIS! TBF - constructed MercSheets do NOT copy the pill profile correctly/at-all
 
         List<MercSheet> _sheets = PlayerDataMaster.Instance.GetMercSheetsByAssignments(new List<MercAssignment> { MercAssignment.Available, MercAssignment.Room });
