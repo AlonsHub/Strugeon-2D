@@ -643,7 +643,6 @@ MonoBehaviour:
   pauseButtonImgs: []
   speedButton: {fileID: 0}
   pauseButton: {fileID: 0}
-  currentTimeScaleIndex: 0
   timeToggleButton: {fileID: 0}
   fastSpeed: 0
   isFast: 0
@@ -755,7 +754,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1113911
 --- !u!1 &4363690052565229752
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +901,6 @@ MonoBehaviour:
   pauseButtonImgs: []
   speedButton: {fileID: 0}
   pauseButton: {fileID: 0}
-  currentTimeScaleIndex: 0
   timeToggleButton: {fileID: 0}
   fastSpeed: 0
   isFast: 0
@@ -1043,6 +1041,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 904afa078f0ea0d469a2fa18d58bb0b0, type: 3}
   psionActionSprites: []
   maxChildren: 4
+  scrollbar: {fileID: 0}
 --- !u!1 &4363690052817233010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,14 +1133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904faeb342e65f0478cb25c5a565854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peekSpeed: 400
-  hideSpeed: 400
-  moveAwayAmount: 400
-  openSprite: {fileID: 0}
-  closedSprite: {fileID: 0}
   sr: {fileID: 0}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
+  menuOpen: 0
   anim: {fileID: 0}
 --- !u!1 &4363690052840430809
 GameObject:
@@ -1363,7 +1356,6 @@ MonoBehaviour:
   pauseButtonImgs: []
   speedButton: {fileID: 0}
   pauseButton: {fileID: 0}
-  currentTimeScaleIndex: 0
   timeToggleButton: {fileID: 0}
   fastSpeed: 0
   isFast: 0
@@ -1585,14 +1577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904faeb342e65f0478cb25c5a565854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peekSpeed: 400
-  hideSpeed: 400
-  moveAwayAmount: 0
-  openSprite: {fileID: 0}
-  closedSprite: {fileID: 0}
   sr: {fileID: 0}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
+  menuOpen: 0
   anim: {fileID: 0}
 --- !u!1 &4363690053295886955
 GameObject:
@@ -1736,14 +1722,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904faeb342e65f0478cb25c5a565854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  peekSpeed: 400
-  hideSpeed: 400
-  moveAwayAmount: 400
-  openSprite: {fileID: 0}
-  closedSprite: {fileID: 0}
   sr: {fileID: 0}
-  peekButton: {fileID: 0}
-  hideButton: {fileID: 0}
+  menuOpen: 0
   anim: {fileID: 0}
 --- !u!1 &4363690053341869146
 GameObject:
