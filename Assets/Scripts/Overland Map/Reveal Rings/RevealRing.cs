@@ -28,7 +28,7 @@ public class RevealRing : MonoBehaviour
     //[SerializeField]
     //UnityEngine.UI.Slider levelRevealSlider;
 
-    public bool IsSiteInRing(SiteData siteData) => (siteRevealIntensity >= (int)siteData.logicalDistance); // this simplified check assumes all sites would be MANUALLY (in overlandmap scene) (pre)set each site with logicalDistances
+    public bool IsSiteInRing(SiteData siteData) => (siteRevealIntensity >= siteData.logicalDistance); // this simplified check assumes all sites would be MANUALLY (in overlandmap scene) (pre)set each site with logicalDistances
     public bool IsSiteInDifficultyRing(SiteData siteData) => (difficultyRevealIntensity >= (int)siteData.logicalDistance); // this simplified check assumes all sites would be MANUALLY (in overlandmap scene) (pre)set each site with logicalDistances
     //As it is right now 09/05/22, the code does NOT need to "calcualte" any site's logicalDistance - as they are manually set
     //we should, however, find a better approach (one that allows us to simply place a site on the map, and logicalDistance would be set using a DistanceCalc() method)

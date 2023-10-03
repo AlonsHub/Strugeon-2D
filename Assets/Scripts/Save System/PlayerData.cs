@@ -65,17 +65,17 @@ public class PlayerData
     
     /// Reveal ranges
     //public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.revealRingRadiusMods[(int)RevealRingType.Site];
-    public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.GetModForRevealRadius(RevealRingType.Site);
-    public float difficultyRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.GetModForRevealRadius(RevealRingType.Difficulty);
+    public float siteRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity/RevealRing.Instance.RingStepSize)/GameStats.GetModForRevealRadius(RevealRingType.Site);
+    public float difficultyRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity / RevealRing.Instance.RingStepSize)/GameStats.GetModForRevealRadius(RevealRingType.Difficulty);
     //public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.revealRingRadiusMods[(int)RevealRingType.EnemyAmount];
-    public float enemyAmountRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.GetModForRevealRadius(RevealRingType.EnemyAmount);
+    public float enemyAmountRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity / RevealRing.Instance.RingStepSize) / GameStats.GetModForRevealRadius(RevealRingType.EnemyAmount);
     //portrait amount
     //public float idRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.revealRingRadiusMods[(int)RevealRingType.EnemyID];
-    public float idRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.GetModForRevealRadius(RevealRingType.EnemyID);
+    public float idRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity / RevealRing.Instance.RingStepSize) / GameStats.GetModForRevealRadius(RevealRingType.EnemyID);
     //public float levelRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.revealRingRadiusMods[(int)RevealRingType.EnemyLevel];
-    public float levelRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.GetModForRevealRadius(RevealRingType.EnemyLevel);
+    public float levelRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity / RevealRing.Instance.RingStepSize) / GameStats.GetModForRevealRadius(RevealRingType.EnemyLevel);
     //public float rewardRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.revealRingRadiusMods[(int)RevealRingType.Reward];
-    public float rewardRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/ GameStats.GetModForRevealRadius(RevealRingType.Reward);
+    public float rewardRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity / RevealRing.Instance.RingStepSize) / GameStats.GetModForRevealRadius(RevealRingType.Reward);
 
     public PsionSpectrumProfile psionSpectrum;
 

@@ -37,7 +37,7 @@ public static class GameStats
 
     public static float GetModForRevealRadius(RevealRingType revealRingType)
     {
-        return RevealRing.Instance.RingStepSize * revealRingRadiusMods[(int)revealRingType];
+        return revealRingRadiusMods[(int)revealRingType];
     }
 
 

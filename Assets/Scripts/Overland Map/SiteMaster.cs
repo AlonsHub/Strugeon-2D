@@ -48,7 +48,10 @@ public class SiteMaster : MonoBehaviour
         foreach (SiteButton sb in siteButtons)
         {
             if (!RevealRing.Instance.IsSiteInRing(sb.siteData))
+            {
+                sb.isReady = false;
                 continue;
+            }
             //Need to check if it is on cooldown?
             if (!sb.isCooldown && (!sb.levelSO.levelData.isSet || sb.levelSO.levelData.enemies == null))
             {
