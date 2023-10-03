@@ -7,7 +7,7 @@ public class RevealRing : MonoBehaviour
 {
     public static RevealRing Instance;
 
-    public float RingStepSize = 10;
+    public float RingStepSize;
 
     float siteRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.siteRevealIntensity; 
     float difficultyRevealIntensity => PlayerDataMaster.Instance.currentPlayerData.difficultyRevealIntensity; 

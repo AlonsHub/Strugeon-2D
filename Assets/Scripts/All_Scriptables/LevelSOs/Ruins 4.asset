@@ -15,45 +15,47 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
       - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 010000000100000001000000
+      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
+      enemyLevels: 0200000002000000020000000300000003000000
     enemySetPack: {fileID: 11400000, guid: 0e42e5f0f4acead458d17065d9a6be69, type: 2}
     magicItem:
-      magicItemName: Ironbark Visage
-      goldValue: 25
+      magicItemName: Ashwood Greatstaff
+      goldValue: 20
       pillProfile:
         pills:
         - colour: 0
-          potential: 2
+          potential: 6
         - colour: 1
-          potential: 3
-        - colour: 2
-          potential: 4
-        - colour: 3
-          potential: 5
-        - colour: 4
-          potential: 1
-        - colour: 5
           potential: 2
+        - colour: 2
+          potential: 3
+        - colour: 3
+          potential: 3
+        - colour: 4
+          potential: 8
+        - colour: 5
+          potential: 3
         - colour: 6
-          potential: 1
+          potential: 4
         dominant: 0
       rarity: 0
-      itemSprite: {fileID: 21300000, guid: d03b6936586cc4e49ac973a4681732a0, type: 3}
-      spriteName: Ironbark Visage
-      fittingSlotType: 0
+      itemSprite: {fileID: 21300000, guid: ea3844540c2d2b8458baa04dcca92cda, type: 3}
+      spriteName: Ashwood Greatstaff
+      fittingSlotType: 1
       isEquipped: 0
       statBenefit:
-        statToBenefit: 0
-        value: 20
-      relevantClasses: 00000000
-    expReward: 70
+        statToBenefit: 1
+        value: 5
+      relevantClasses: 000000000200000003000000
+    expReward: 315
     levelPrefab: {fileID: 9129416172184191224, guid: b0b0536055b2bf14bba68f43710b202d,
       type: 3}
-    goldReward: 8
-    difficulty: 0
+    goldReward: 22
+    difficulty: 2
     siteIcon: {fileID: 21300000, guid: 702e79274a07c7545b8a5f32b2fc20cb, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0
