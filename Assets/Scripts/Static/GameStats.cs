@@ -19,6 +19,7 @@ public static class GameStats
     public static int maxHpBonusPerLevel = 10;
     public static int minDmgPerLevel = 2;
     public static int maxDmgPerLevel = 3;
+    public static float inhaleAmountFactor = .8f;
 
     /// <summary>
     /// Tavern Stats

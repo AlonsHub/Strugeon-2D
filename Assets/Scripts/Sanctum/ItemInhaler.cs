@@ -145,9 +145,8 @@ public class ItemInhaler : MonoBehaviour
                 {
                     //HIT!
                     hits++;
-                    float amountFactor = .5f;
 
-                    float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * amountFactor;
+                    float amount = Random.Range(1, (int)psionPotential + 1) * pill.potential * GameStats.inhaleAmountFactor;
                     if (amount < 1)
                         amount = 1;
                     s += $"hit! on {pill.colour}. Amount received {amount} \n";
