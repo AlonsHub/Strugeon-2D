@@ -15,47 +15,46 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
-      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
-      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
-      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
-      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
-      enemyLevels: 0200000002000000020000000300000003000000
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
+      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
+      enemyLevels: 03000000030000000300000005000000
     enemySetPack: {fileID: 11400000, guid: 0e42e5f0f4acead458d17065d9a6be69, type: 2}
     magicItem:
-      magicItemName: Ironbark Piercer
-      goldValue: 20
+      magicItemName: Blacksmith's Hammer
+      goldValue: 8
       pillProfile:
         pills:
         - colour: 0
-          potential: 6
+          potential: 3
         - colour: 1
           potential: 2
         - colour: 2
-          potential: 0
+          potential: 6
         - colour: 3
-          potential: 0
+          potential: 5
         - colour: 4
-          potential: 7
-        - colour: 5
           potential: 4
+        - colour: 5
+          potential: 3
         - colour: 6
-          potential: 8
+          potential: 5
         dominant: 0
       rarity: 0
-      itemSprite: {fileID: 21300000, guid: 49037ff6f3504e347a9d9c73dbbd2f58, type: 3}
-      spriteName: Ironbark Piercer
+      itemSprite: {fileID: 21300000, guid: 656d996ff7239b442ae4130bcaae55e4, type: 3}
+      spriteName: Blacksmiths Hammer
       fittingSlotType: 1
       isEquipped: 0
       statBenefit:
         statToBenefit: 1
-        value: 5
+        value: 2
       relevantClasses: 0000000003000000
-    expReward: 315
+    expReward: 75
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 24
-    difficulty: 2
+    goldReward: 12
+    difficulty: 1
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

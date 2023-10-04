@@ -15,45 +15,47 @@ MonoBehaviour:
   levelData:
     enemySet:
       enemyPrefabs:
-      - {fileID: 5808167037023471695, guid: 595829a95bbdb3e49ae95116890c9ea1, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      - {fileID: 5808167037023471695, guid: 6a60b5f153d0064479958102762bcfc0, type: 3}
-      enemyLevels: 010000000100000001000000
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 5808167037023471695, guid: 6253e66307fc20c44ab800b435f856ae, type: 3}
+      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
+      - {fileID: 462218377637529745, guid: 63012c7f58ad8f14281dc17604c8bfe7, type: 3}
+      enemyLevels: 0300000004000000050000000800000008000000
     enemySetPack: {fileID: 11400000, guid: 0e42e5f0f4acead458d17065d9a6be69, type: 2}
     magicItem:
-      magicItemName: Feral Hide Vest
-      goldValue: 25
+      magicItemName: Jar of Toxin
+      goldValue: 7
       pillProfile:
         pills:
         - colour: 0
-          potential: 2
+          potential: 0
         - colour: 1
-          potential: 3
-        - colour: 2
-          potential: 4
-        - colour: 3
-          potential: 5
-        - colour: 4
-          potential: 1
-        - colour: 5
           potential: 2
+        - colour: 2
+          potential: 5
+        - colour: 3
+          potential: 0
+        - colour: 4
+          potential: 4
+        - colour: 5
+          potential: 1
         - colour: 6
           potential: 1
         dominant: 0
       rarity: 0
-      itemSprite: {fileID: 21300000, guid: 44fc4e56f316ab04c8f75cc588c579d7, type: 3}
-      spriteName: Feral Hide Vest
-      fittingSlotType: 0
+      itemSprite: {fileID: 21300000, guid: cf5b97f5afd254f4e962dabdf64c0b9f, type: 3}
+      spriteName: Jar Of Toxin
+      fittingSlotType: 1
       isEquipped: 0
       statBenefit:
-        statToBenefit: 0
-        value: 15
-      relevantClasses: 0300000001000000
-    expReward: 50
+        statToBenefit: 1
+        value: 3
+      relevantClasses: 0100000000000000
+    expReward: 315
     levelPrefab: {fileID: 9129416172184191224, guid: 1a833c74f95c7fc49ba342e3696af908,
       type: 3}
-    goldReward: 5
-    difficulty: 0
+    goldReward: 22
+    difficulty: 2
     siteIcon: {fileID: 21300000, guid: 6ff61c78f3fd1154c97034d418f51445, type: 3}
     escapeTile: {x: 0, y: 0}
     waitTimeHours: 0

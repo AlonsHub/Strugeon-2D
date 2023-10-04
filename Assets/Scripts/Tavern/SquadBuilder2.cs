@@ -51,6 +51,7 @@ public class SquadBuilder2 : MonoBehaviour
     private void OnEnable()
     {
         Init();
+        upgradePriceText.text = Prices.UpgradeCrewPriceAsText(toRoom.size);
     }
     //private void Awake()
     //{
