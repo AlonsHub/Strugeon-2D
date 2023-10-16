@@ -152,10 +152,10 @@ public class Squad : IEquatable<Squad>
                 break;
             case MercAssignment.AwaySquad:
                 
-                if(!PartyMaster.Instance.squads.Remove(this)) //should be managed by the squad itself in SetMercToAssignment? //HERE IT IS!
-                {
-                    Debug.LogWarning("couldn't remove squad, it's OK if game is loading now, recently added squads that are OnRoute should not be PartyMaster.Sqauds so its fine"); //
-                }
+                //if(!PartyMaster.Instance.squads.Remove(this)) //should be managed by the squad itself in SetMercToAssignment? //HERE IT IS!
+                //{
+                //    Debug.LogWarning("couldn't remove squad, it's OK if game is loading now, recently added squads that are OnRoute should not be PartyMaster.Sqauds so its fine"); //
+                //}
                 isAvailable = false;
                 if (this.roomNumber < 0)
                     this.roomNumber = roomNum;
