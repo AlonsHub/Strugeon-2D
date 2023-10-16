@@ -27,6 +27,9 @@ public class SquadPicker : MonoBehaviour
     Transform canvasTrans;
     [SerializeField]
     SiteButton tgtSite;
+    
+    NewSiteButton newTgtSite;
+
     SimpleSiteButton tgtSimpleSite;
 
     [SerializeField]
@@ -183,7 +186,7 @@ public class SquadPicker : MonoBehaviour
 
         GameObject go = Instantiate(followerPrefab, canvasTrans);
         
-        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite);
+        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite); //send to newTgtSite instead
 
         toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
 
@@ -196,6 +199,11 @@ public class SquadPicker : MonoBehaviour
     {
         tgtSite = sb;
     }
+    public void SetSite(NewSiteButton nsb) //CRITICAL TBF! this is called in inspector //FIXED!
+    {
+        newTgtSite = nsb;
+    }
+
      public void SetSimpleSite(SimpleSiteButton ssb) //CRITICAL TBF! this is called in inspector //FIXED!
     {
         tgtSimpleSite = ssb;

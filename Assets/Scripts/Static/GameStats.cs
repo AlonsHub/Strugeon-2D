@@ -117,13 +117,13 @@ public static class GameStats
         OnRevealRadiusChanged?.Invoke();
     }
 
-    public static float GetRevealIntensity(float purpleCapacity, RevealRingType revealRingType)
-    {
-        return (((int)(purpleCapacity)/revealRingStep) * revealRingStep) / revealRingRadiusMods[(int)revealRingType];
-    }
+    //public static float GetRevealIntensity(float purpleCapacity, RevealRingType revealRingType)
+    //{
+    //    return (((int)(purpleCapacity)/revealRingStep) * revealRingStep) / revealRingRadiusMods[(int)revealRingType];
+    //}
 
-    public static void SetStepSize(float stepSize)
-    {
-        revealRingStep = stepSize;
-    }
+    //public static void SetStepSize(float stepSize)
+    //{
+    //    revealRingStep = stepSize;
+    //}
 }

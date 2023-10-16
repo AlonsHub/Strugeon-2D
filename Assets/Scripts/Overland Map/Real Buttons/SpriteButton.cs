@@ -31,6 +31,8 @@ public class SpriteButton : MonoBehaviour
     Sprite disabledSprite;
     #endregion
 
+    bool _isMouseIn = false;
+
     #region OnStuffEvents
     public UnityEvent OnClick;
     public UnityEvent OnEnter;
@@ -43,7 +45,6 @@ public class SpriteButton : MonoBehaviour
         hoverSprite = button.spriteState.highlightedSprite;
         clickedSprite = button.spriteState.pressedSprite;
         regularSprite = reg;
-
         //Get name sprite for sites - Resource<Load>() or Prefabber-like solution
     }
     //[ContextMenu("Set to reg")]
@@ -70,6 +71,7 @@ public class SpriteButton : MonoBehaviour
         if (!_interactive)
             return;
 
+        _isMouseIn = true;
         SetSpriteToState(ButtonSprite_State.Hover);
         OnEnter.Invoke();
     }
@@ -78,6 +80,7 @@ public class SpriteButton : MonoBehaviour
     {
         if (!_interactive)
             return;
+        _isMouseIn = false;
         SetSpriteToState(ButtonSprite_State.Regular);
         OnExit.Invoke();
     }
@@ -109,7 +112,11 @@ public class SpriteButton : MonoBehaviour
     IEnumerator BackToRegular()
     {
         yield return new WaitForSeconds(_stayPressedTime);
+        if(_isMouseIn)
+        SetSpriteToState(ButtonSprite_State.Hover);
+        else
         SetSpriteToState(ButtonSprite_State.Regular);
+
     }
     public void SetInteractive(bool isInteractive)
     {
