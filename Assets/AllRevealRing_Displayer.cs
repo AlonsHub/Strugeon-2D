@@ -19,6 +19,7 @@ public class AllRevealRing_Displayer : MonoBehaviour
     private void OnEnable()
     {
         GameStats.OnRevealRadiusChanged += SetRight;
+        SetRight();
     }
     private void OnDisable()
     {

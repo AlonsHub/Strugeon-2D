@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -115,5 +115,15 @@ public static class GameStats
     {
         revealRingRadiusMods[(int)revealRingType] = newRadius;
         OnRevealRadiusChanged?.Invoke();
+    }
+
+    public static float GetRevealIntensity(float purpleCapacity, RevealRingType revealRingType)
+    {
+        return (((int)(purpleCapacity)/revealRingStep) * revealRingStep) / revealRingRadiusMods[(int)revealRingType];
+    }
+
+    public static void SetStepSize(float stepSize)
+    {
+        revealRingStep = stepSize;
     }
 }

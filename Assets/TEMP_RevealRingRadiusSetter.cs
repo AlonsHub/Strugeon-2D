@@ -9,6 +9,8 @@ public class TEMP_RevealRingRadiusSetter : MonoBehaviour
     TMP_InputField[] inputFields;
     [SerializeField]
     TMP_InputField purpleCheatInputField;
+    [SerializeField]
+    TMP_InputField setStepSizeField;
 
 
     private void OnEnable()
@@ -19,6 +21,7 @@ public class TEMP_RevealRingRadiusSetter : MonoBehaviour
         }
 
         purpleCheatInputField.text = PlayerDataMaster.Instance.currentPlayerData.noolProfile.nools[(int)NoolColour.Purple].capacity.ToString();
+        setStepSizeField.text = GameStats.revealRingStep.ToString();
     }
 
     public void SetSiteRevealRadiusRing()
@@ -77,6 +80,13 @@ public class TEMP_RevealRingRadiusSetter : MonoBehaviour
         //PlayerDataMaster.Instance.currentPlayerData.noolProfile.OnAnyValueChanged?.Invoke();
 
         //GameStats.OnRevealRadiusChanged?.Invoke();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+
+    }
+
+    public void SetRevealRingStep()
+    {
+        GameStats.SetStepSize(float.Parse(setStepSizeField.text));
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
 
     }

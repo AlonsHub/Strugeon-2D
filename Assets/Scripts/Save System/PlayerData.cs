@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +62,7 @@ public class PlayerData
 
     public List<MagicItem> magicItems;
 
-    
+
     /// Reveal ranges
     //public float siteRevealIntensity => noolProfile.nools[(int)NoolColour.Purple].capacity/GameStats.revealRingRadiusMods[(int)RevealRingType.Site];
     public float siteRevealIntensity => (noolProfile.nools[(int)NoolColour.Purple].capacity/RevealRing.Instance.RingStepSize)/GameStats.GetModForRevealRadius(RevealRingType.Site);
