@@ -67,16 +67,16 @@ public class NewSiteButton : MonoBehaviour
 
     }
 
-    private void OnValidate()
-    {
-        if (!thisButton)
-            thisButton = GetComponent<Button>();
-        if (!thisImage)
-            thisImage = GetComponent<Image>();
-    }
     private void Start()
     {
         siteData.logicalDistance = (Vector3.Distance(LoadTavernScene.tavernButtonTransform.position, transform.position));
+
+        if(!RevealRing.Instance)
+        {
+            isCooldown = false;
+            Invoke("LateStart", .2f); //give data displayers time to find themselves with their own starts/awakes - this sucks
+            return;
+        }
 
         //Reveal ring check
         if (!RevealRing.Instance.IsSiteInRing(siteData))
@@ -86,19 +86,8 @@ public class NewSiteButton : MonoBehaviour
             return;
         }
 
-        //read if any site cooldown times exist
-        //_squadPicker = squadPickerObject.GetComponent<SquadPicker>(); //TBF! terribly stupid! squad picker shouldn't be a gameobject, it should just be squad picker!
-        if (!thisButton)
-            thisButton = GetComponent<Button>();
-        if (!thisImage)
-            thisImage = GetComponent<Image>();
-
-        //oldColor = thisButton.targetGraphic.color;
-
-        //if (PlayerDataMaster.Instance.SavedCooldowns.ContainsKey(levelSO.name))
         if (PlayerDataMaster.Instance.SiteCooldowns.ContainsKey(levelSO.name) && PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].HasValue)
         {
-            //if (PlayerDataMaster.Instance.SavedCooldowns[levelSO.name] < maxCooldown)
             if (DateTime.Compare(PlayerDataMaster.Instance.SiteCooldowns[levelSO.name].Value, DateTime.Now) <= 0) // -1 if cooldown date is earlier than now (i.e. passed date, cooldown is off), 0 is equal (unlikely)
             {
                 isCooldown = false;
@@ -249,6 +238,12 @@ public class NewSiteButton : MonoBehaviour
 
         SiteDisplayer.Instance.SetOnOff(true);
 
+        //TEMP!
+        if(!RevealRing.Instance)
+        {
+            SiteDisplayer.Instance.SetMe(this, 5);
+            return;
+        }
         int exposure = RevealRing.Instance.ExposureLevel(siteData);
         SiteDisplayer.Instance.SetMe(this, exposure);
 

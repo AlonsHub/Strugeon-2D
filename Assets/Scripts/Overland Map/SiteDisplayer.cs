@@ -150,9 +150,10 @@ public class SiteDisplayer : MonoBehaviour
     {
         newSiteButton = nsb;
         levelData = nsb.levelSO.levelData;
-        siteNameText.text = siteButton.siteData.siteName.ToString();
+        siteNameText.text = newSiteButton.siteData.siteName.ToString();
 
-        transform.position = siteButton.transform.position + new Vector3((siteButton.transform.position.x > Screen.width / 2) ? -offset.x : offset.x, (siteButton.transform.position.y > Screen.height / 2) ? -offset.y : offset.y, 0f);
+        //transform.position = newSiteButton.transform.position + new Vector3((newSiteButton.transform.position.x > Screen.width / 2) ? -offset.x : offset.x, (newSiteButton.transform.position.y > Screen.height / 2) ? -offset.y : offset.y, 0f);
+        transform.position = newSiteButton.transform.position + new Vector3((Input.mousePosition.x > Screen.width / 2) ? -offset.x : offset.x, 0, (Input.mousePosition.y > Screen.height / 2) ? -offset.y : offset.y);
 
         if (exposureLevel >= (int)RevealRingType.Difficulty) //keep this seperated for health reasons - cascade better late TBD TBF
         {

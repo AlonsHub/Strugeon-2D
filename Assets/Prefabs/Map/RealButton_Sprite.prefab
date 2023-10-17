@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &297310105951008415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3463213381034364074}
+  m_Layer: 5
+  m_Name: TimerParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &3463213381034364074
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297310105951008415}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3749268452162203774}
+  m_Father: {fileID: 2214638410178758400}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3497590912949428676
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +66,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -0.923}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3749268452162203774}
+  - {fileID: 3463213381034364074}
   - {fileID: 266870755837486566}
   m_Father: {fileID: 9174349815902645082}
   m_RootOrder: 2
@@ -117,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3749268452162203774
 RectTransform:
   m_ObjectHideFlags: 0
@@ -125,11 +161,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8295363485896755295}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2214638410178758400}
+  m_Father: {fileID: 3463213381034364074}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -432,13 +468,46 @@ MonoBehaviour:
   disabledSprite: {fileID: 0}
   OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510634538833740862}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnEnter:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510634538833740862}
+        m_MethodName: OnHoverEnter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1510634538833740862}
+        m_MethodName: OnHoverExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9174349815902645083
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9174349815902645082}
-  - component: {fileID: 1502410878288682878}
+  - component: {fileID: 1510634538833740862}
   m_Layer: 0
   m_Name: RealButton_Sprite
   m_TagString: Untagged
@@ -473,7 +542,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1502410878288682878
+--- !u!114 &1510634538833740862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -482,17 +551,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 9174349815902645083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ae9874371fcfd7449ca326cf5c31789, type: 3}
+  m_Script: {fileID: 11500000, guid: 276d25844095c894590548ffdae2694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   displayer: {fileID: 266870755837486565}
-  levelSO: {fileID: 0}
+  levelSO: {fileID: 11400000, guid: 8ffd9bca2da72164085e82cf3778d7d2, type: 2}
   siteData:
     siteName: 0
     logicalDistance: 0
     ETA: 0
   dataDisplayCenterTrans: {fileID: 266870755680031447}
-  clockAndTimerParent: {fileID: 3497590912949428676}
+  clockAndTimerParent: {fileID: 297310105951008415}
   timeText: {fileID: 3769286682401899443}
   isCooldown: 0
   isWaitingForSquad: 0
@@ -505,7 +574,7 @@ MonoBehaviour:
   isReady: 0
   thisButton: {fileID: 0}
   thisImage: {fileID: 0}
-  relevantDifficulties: 
+  relevantDifficulties: 000000000100000002000000
 --- !u!1001 &7479713629180396967
 PrefabInstance:
   m_ObjectHideFlags: 0
