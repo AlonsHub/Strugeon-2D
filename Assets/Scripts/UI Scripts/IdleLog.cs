@@ -189,6 +189,34 @@ public class IdleLog : MonoBehaviour
         }
         return basicMessage;
     }
+    public BasicDisplayer RecieveNewMessageWithSiteRef(List<string> texts, List<Sprite> sprites, NewSiteButton siteRef) //THIS ASSUMES THERES BUTTON RELATED TO SITE IN THE PREFAB (i.e. go to battle button)
+    {
+        GameObject go = Instantiate(basicEntryPrefab, logParent);
+        go.GetComponentInChildren<Button>().onClick.AddListener(() => siteRef.OnClick()); //assuming the site is set to ready == true
+        BasicDisplayer basicMessage = go.GetComponent<BasicDisplayer>();
+        //List<TMP_Text> textBoxes = GetComponentsInChildren<TMP_Text>().ToList();
+
+        if (basicMessage.textBoxes.Count != texts.Count || basicMessage.images.Count != sprites.Count)
+        {
+            Debug.LogError("Bugged out. \"texts and boxes\" or \"images and sprites\" count not alligned");
+            return null;
+        }
+
+        for (int i = 0; i < texts.Count; i++)
+        {
+            basicMessage.textBoxes[i].text = texts[i];
+        }
+        for (int i = 0; i < sprites.Count; i++)
+        {
+            basicMessage.images[i].sprite = sprites[i];
+        }
+
+        if(!peekingMenu.menuOpen)
+        {
+            peekingMenu.ShowMenu();
+        }
+        return basicMessage;
+    }
 
     public void CloseIfEmptyCheck(int amountAboutToBeDestoryed)
     {

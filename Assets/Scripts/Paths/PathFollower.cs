@@ -29,13 +29,8 @@ public class PathFollower : MonoBehaviour
     {
         if (pathCreator != null)
         {
-            //Debug.LogError(pathCreator.path.cumulativeLengthAtEachVertex[pathCreator.path.cumulativeLengthAtEachVertex.Length - 1] + " is full length?");
             distanceTravelled += speed * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            //transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-
-
-            //transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z)); //Avishy
         }
     }
     public void SetDistanceTravelled(System.DateTime deptTime, float totalTravelTime)
@@ -52,4 +47,3 @@ public class PathFollower : MonoBehaviour
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
     }
 }
-//}

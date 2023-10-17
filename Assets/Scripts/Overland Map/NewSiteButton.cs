@@ -56,6 +56,9 @@ public class NewSiteButton : MonoBehaviour
     //}
     [SerializeField]
     public Button thisButton;
+
+    public SpriteButton spriteButton;
+
     [SerializeField]
     public Image thisImage;
 
@@ -137,7 +140,7 @@ public class NewSiteButton : MonoBehaviour
 
 
         _squadPicker.gameObject.SetActive(true); //should really disable and then enable to get the respositioning OnEnable //DONE!
-        _squadPicker.Refresh(dataDisplayCenterTrans); //chache this earlier! //cached as _squadPicker :)
+        _squadPicker.Refresh(transform); //chache this earlier! //cached as _squadPicker :)
         _squadPicker.SetSite(this);
     }
 
@@ -171,7 +174,9 @@ public class NewSiteButton : MonoBehaviour
     {
         isCooldown = true; //just making sure
         levelSO.levelData.isSet = false;
-        thisButton.interactable = false;
+        //thisButton.interactable = false;
+        spriteButton.SetInteractive(false);
+
 
         clockAndTimerParent.SetActive(true);
         //timeText.text = "00:" + ((int)((maxCooldown / 60) - (int)timer / 60)).ToString("00") + ":" + ((int)maxCooldown - (int)(timer - (int)timer / 60));
@@ -192,7 +197,8 @@ public class NewSiteButton : MonoBehaviour
         PlayerDataMaster.Instance.ClearSiteCooldown(levelSO.name);
         isCooldown = false;
         levelSO.levelData.isSet = true;
-        thisButton.interactable = true;
+        //thisButton.interactable = true;
+        spriteButton.SetInteractive(true);
 
     }
 

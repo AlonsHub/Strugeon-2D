@@ -10,6 +10,7 @@ public class SimpleFollower : MonoBehaviour
 {
     BasicDisplayer idleLogMessage;
     SiteButton destinationSite;
+    NewSiteButton newDestinationSite;
     public Squad squad;
 
     //timer stuff
@@ -28,6 +29,8 @@ public class SimpleFollower : MonoBehaviour
     [SerializeField]
     Image groupPortrait; //could be leader, or an icon or whatever
     [SerializeField]
+    SpriteRenderer portrait;
+    [SerializeField]
     private float stoppingDistance;
     [SerializeField]
     BasicTimer basicTimer;
@@ -36,29 +39,6 @@ public class SimpleFollower : MonoBehaviour
 
     PathCreator myPath;
 
-    /// <summary>
-    /// When you Instantiate() a prefab with this component on it:
-    /// It MUST be placed under the MapFollower canvas.
-    /// You MUST position it manually (i.e. set its position somewhere near the tavern?).
-    /// Then it would calculate its way to the destinationSite, taking {destinationSite.ETA} seconds to get there
-    /// </summary>
-    /// <param name="s"></param>
-    /// <param name="destination"></param>
-    //public void SetNewFollower(Squad s, SiteButton destination)
-    //{
-    //    destinationSite = destination;
-    //    squad = s;
-    //    groupPortrait.sprite = s.SquadPortrait;
-
-    //    destinationSite.isWaitingForSquad = true;
-
-    //    totalTravelTime = destinationSite.ETA;
-
-    //    transform.position = tavernPos;
-
-
-    //    StartCoroutine(nameof(WalkToTarget)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
-    //}
     public void SetNewFollowerWithPath(Squad s, SiteButton destination)
     {
         destinationSite = destination;
@@ -77,6 +57,24 @@ public class SimpleFollower : MonoBehaviour
 
         StartCoroutine(nameof(WalkToTargetWithPath)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
     }
+     public void SetNewFollowerWithPath(Squad s, NewSiteButton destination)
+    {
+        newDestinationSite = destination;
+        squad = s;
+        portrait.sprite = s.SquadPortrait;
+
+        myPath = destination.pathCreator;
+
+        newDestinationSite.isWaitingForSquad = true;
+
+        totalTravelTime = newDestinationSite.ETA;
+        _timeTraveled = 0f;
+
+        transform.position = newDestinationSite.pathCreator.path.GetPointAtTime(0f);
+
+
+        StartCoroutine(nameof(WalkToNewTargetWithPath)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
+    }
 
     /// <summary>
     /// Must already be Instantiated and positioned near tavern
@@ -84,38 +82,12 @@ public class SimpleFollower : MonoBehaviour
     /// <param name="s"></param>
     /// <param name="destination"></param>
     /// <param name="departTime"></param>
-    //public void SetLoadedFollower(Squad s, SiteButton destination, DateTime departTime)
-    //{
-    //    destinationSite = destination;
-    //    squad = s;
-    //    groupPortrait.sprite = s.SquadPortrait;
 
-    //    destinationSite.isWaitingForSquad = true;
-    //    //float delta = (float)(DateTime.Now - departTime).TotalSeconds - delayBeforeStart; //offsets whatever starting delay there would be
-    //    float delta = (float)(DateTime.Now - departTime).TotalSeconds;
-
-    //    if(delta >= destinationSite.ETA)
-    //    {
-    //        //place at site, and call arrive
-    //        //transform.position = destinationSite.transform.position + (transform.position - destinationSite.transform.position)*stoppingDistance;
-    //        transform.position = destinationSite.transform.position + (tavernPos - destinationSite.transform.position).normalized*stoppingDistance;
-    //        Arrived();
-    //        return;
-    //    }
-    //    //implied else (reutrn above)
-        
-    //    totalTravelTime = destinationSite.ETA - delta;
-
-    //    //advance to new starting position
-    //    transform.position = tavernPos + (destinationSite.transform.position - tavernPos) *(1- (destinationSite.ETA- delta)/destination.ETA);
-
-    //    StartCoroutine(nameof(WalkToTarget)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
-    //}
     public void SetLoadedFollowerWithPath(Squad s, SiteButton destination, DateTime departTime)
     {
         destinationSite = destination;
         squad = s;
-        groupPortrait.sprite = s.SquadPortrait;
+        portrait.sprite = s.SquadPortrait;
 
         myPath = destination.pathCreator;
 
@@ -125,9 +97,6 @@ public class SimpleFollower : MonoBehaviour
 
         if(_timeTraveled >= destinationSite.ETA)
         {
-            //place at site, and call arrive
-            //transform.position = destinationSite.transform.position + (transform.position - destinationSite.transform.position)*stoppingDistance;
-            //transform.position = destinationSite.transform.position + (tavernPos - destinationSite.transform.position).normalized*stoppingDistance;
             transform.position = destination.pathCreator.path.GetPointAtTime(1f, EndOfPathInstruction.Stop);
             Arrived();
             return;
@@ -143,34 +112,36 @@ public class SimpleFollower : MonoBehaviour
 
         StartCoroutine(nameof(WalkToTargetWithPath)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
     }
+    public void SetLoadedFollowerWithPath(Squad s, NewSiteButton destination, DateTime departTime)
+    {
+        newDestinationSite = destination;
+        squad = s;
+        portrait.sprite = s.SquadPortrait;
 
-    /// <summary>
-    /// Walks to destination from current position! (already placed on map!)
-    /// </summary>
-    /// <returns></returns>
-    //IEnumerator WalkToTarget()
-    //{
-    //    //Delay before Start walking ?
-    //    basicTimer.SetMe(totalTravelTime);
-    //    yield return new WaitForSeconds(delayBeforeStart);
+        myPath = destination.pathCreator;
 
-    //    Vector3 startPos = transform.position; //aka tavernPos
-    //    float t = 0;
-    //    if(destinationSite)
-    //    {
-    //        while (Vector3.Distance(transform.position, destinationSite.transform.position) > stoppingDistance)
-    //        {
-    //            yield return new WaitForFixedUpdate(); //caps follower movement and removes need for *Time.deltaTime
-    //            t += Time.fixedDeltaTime;
-    //            transform.position = Vector3.Lerp(startPos, destinationSite.transform.position, t/totalTravelTime);
-    //        }
-    //        Arrived();
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("no destination site for this follower: " + name);
-    //    }
-    //}
+        newDestinationSite.isWaitingForSquad = true;
+        //float delta = (float)(DateTime.Now - departTime).TotalSeconds - delayBeforeStart; //offsets whatever starting delay there would be
+        _timeTraveled = (float)(DateTime.Now - departTime).TotalSeconds;
+
+        if(_timeTraveled >= newDestinationSite.ETA)
+        {
+            transform.position = destination.pathCreator.path.GetPointAtTime(1f, EndOfPathInstruction.Stop);
+            Arrived();
+            return;
+        }
+        //implied else (reutrn above)
+        
+        totalTravelTime = newDestinationSite.ETA - _timeTraveled;
+
+        transform.position = myPath.path.GetPointAtTime(_timeTraveled / destination.ETA);
+        //advance to new starting position
+        //transform.position = tavernPos + (destinationSite.transform.position - tavernPos) *(1-(destinationSite.ETA- delta)/destination.ETA);
+        //transform.position = myPath.path.GetPointAtTime(1 - (destinationSite.ETA - delta) / destination.ETA);
+
+        StartCoroutine(nameof(WalkToNewTargetWithPath)); //better to start without delay, and ADD delay by yeilding in coroutine. making sure it runs, so it's easier to stop 
+    }
+
     IEnumerator WalkToTargetWithPath()
     {
         //Delay before Start walking ?
@@ -198,12 +169,39 @@ public class SimpleFollower : MonoBehaviour
             Debug.LogError("no destination site for this follower: " + name);
         }
     }
+     IEnumerator WalkToNewTargetWithPath()
+    {
+        //Delay before Start walking ?
+        basicTimer.SetMe(totalTravelTime);
+        yield return new WaitForSeconds(delayBeforeStart);
+
+        Vector3 startPos = transform.position; //aka tavernPos
+        //float t = 0;
+        if(newDestinationSite)
+        {
+            //while (Vector3.Distance(transform.position, destinationSite.transform.position) > stoppingDistance)
+            while (_timeTraveled<= newDestinationSite.ETA)
+            {
+                yield return new WaitForFixedUpdate(); //caps follower movement and removes need for *Time.deltaTime
+                _timeTraveled += Time.fixedDeltaTime;
+
+                transform.position = myPath.path.GetPointAtTime(_timeTraveled/ newDestinationSite.ETA, EndOfPathInstruction.Stop);
+
+                //transform.position = Vector3.Lerp(startPos, destinationSite.transform.position, t/totalTravelTime);
+            }
+            Arrived();
+        }
+        else
+        {
+            Debug.LogError("no destination site for this follower: " + name);
+        }
+    }
 
     void Arrived()
     {
         Debug.Log("follower arrived");
-        destinationSite.SetArrivedSquad(squad); //also removes from away squads
-        idleLogMessage = IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.squadName, destinationSite.levelSO.name }, new List<Sprite> { groupPortrait.sprite }, destinationSite);
+        newDestinationSite.SetArrivedSquad(squad); //also removes from away squads
+        idleLogMessage = IdleLog.Instance.RecieveNewMessageWithSiteRef(new List<string> { squad.squadName, newDestinationSite.levelSO.name }, new List<Sprite> { portrait.sprite }, newDestinationSite);
     }
 
     public void OnMyClick()
@@ -217,8 +215,8 @@ public class SimpleFollower : MonoBehaviour
         PartyMaster.Instance.squads.Add(squad);
 
         squad.isAvailable = true;
-       
-        destinationSite.UnSetArrivingSquad();
+
+        newDestinationSite.UnSetArrivingSquad();
         if(idleLogMessage)
         Destroy(idleLogMessage.gameObject);
         IdleLog.Instance.CloseIfEmptyCheck(1);

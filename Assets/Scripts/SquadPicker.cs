@@ -17,14 +17,14 @@ public class SquadPicker : MonoBehaviour
     [SerializeField]
     GameObject portraitPrefab;
     [SerializeField]
-    private Vector2 offset;
+    private Vector3 offset;
     [SerializeField]
     SquadToggler squadToggler; //public?
 
     [SerializeField]
     GameObject followerPrefab;
     [SerializeField]
-    Transform canvasTrans;
+    Transform parentTrans;
     [SerializeField]
     SiteButton tgtSite;
     
@@ -112,9 +112,9 @@ public class SquadPicker : MonoBehaviour
 
     public void Refresh(Transform centerOfData)
     {
-        Vector2 newPos = (Vector2)centerOfData.position + offset;
+        Vector3 newPos = centerOfData.position + offset;
 
-        if(centerOfData.position.x > Screen.width/2)
+        if(newPos.x > Screen.width/2)
         {
             newPos.x = centerOfData.position.x - offset.x;
         }
@@ -123,7 +123,7 @@ public class SquadPicker : MonoBehaviour
             newPos.x = centerOfData.position.x + offset.x;
         }
 
-        if (centerOfData.position.y > Screen.height / 2)
+        if (newPos.y > Screen.height / 2)
         {
             newPos.y = centerOfData.position.y - offset.y;
         }
@@ -134,7 +134,11 @@ public class SquadPicker : MonoBehaviour
 
         newPos.y = Mathf.Clamp(newPos.y, Screen.height / 4, Screen.height * 3 / 5);
 
+        newPos.z = -1f;
+
         transform.position = newPos;
+
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, -1f);
 
         squadToggler.RefreshSlots();
 
@@ -184,13 +188,39 @@ public class SquadPicker : MonoBehaviour
             return;
         }
 
-        GameObject go = Instantiate(followerPrefab, canvasTrans);
+        GameObject go = Instantiate(followerPrefab, parentTrans);
         
         go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite); //send to newTgtSite instead
 
         toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
 
         PlayerDataMaster.Instance.LogSquadDeparture(toSend.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
+
+        squadSlots[index].UnSetMe(); //weird but good
+    }
+    public void NewSendSquad() //called by button in inspector
+    {
+        //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
+        int index = squadToggler.SelectedIndex();
+        Squad toSend = squadSlots[index].squad;
+
+        //check if a squad is chosen:
+        if (index == -1 || !newTgtSite)
+        {
+            if(tgtSimpleSite)
+            {
+                tgtSimpleSite.SendToArena(toSend);
+            }
+            return;
+        }
+
+        GameObject go = Instantiate(followerPrefab, parentTrans);
+        
+        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, newTgtSite); //send to newTgtSite instead
+
+        toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
+
+        PlayerDataMaster.Instance.LogSquadDeparture(toSend.roomNumber, newTgtSite.siteData.siteName, System.DateTime.Now);
 
         squadSlots[index].UnSetMe(); //weird but good
     }

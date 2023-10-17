@@ -8,6 +8,8 @@ public class TravelLog : MonoBehaviour
     public static TravelLog Instance;
     [SerializeField]
     List<SiteButton> sites; //NOT PUBLIC!
+    [SerializeField]
+    List<NewSiteButton> newSites; //NOT PUBLIC!
     //public SiteButton GetSiteButtonByIndex()
     //{
 
@@ -30,7 +32,8 @@ public class TravelLog : MonoBehaviour
         //if(sites == null || sites.Count==0)
         //sites = FindObjectsOfType<SiteButton>().ToList(); //TBF AF NOW
 
-        Invoke(nameof(LateStart), .2f);
+        //Invoke(nameof(LateStart), .2f);
+        Invoke(nameof(NewLateStart), .2f);
     }
 
     void LateStart()
@@ -48,6 +51,24 @@ public class TravelLog : MonoBehaviour
                 //Squad temp = PartyMaster.Instance.squads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
                 //sf.SetLoadedFollower(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
                 sf.SetLoadedFollowerWithPath(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
+            }
+        }
+    }
+     void NewLateStart()
+    {
+        if(PlayerDataMaster.Instance.currentPlayerData.squadSitesAndTimesRemainning.Count>0)
+        {
+            foreach (var item in PlayerDataMaster.Instance.currentPlayerData.squadSitesAndTimesRemainning)
+            {
+                //SquadFollower sf = Instantiate(followerPrefab, followerCanvas).GetComponent<SquadFollower>();
+                Squad temp = PartyMaster.Instance.awaySquads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
+                if (temp == null)
+                    return;
+
+                SimpleFollower sf = Instantiate(followerPrefab, followerCanvas).GetComponent<SimpleFollower>();
+                //Squad temp = PartyMaster.Instance.squads.Where(x => x.roomNumber == item.squadIndex).FirstOrDefault();
+                //sf.SetLoadedFollower(temp, sites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
+                sf.SetLoadedFollowerWithPath(temp, newSites[(int)item.siteEnum], System.DateTime.Parse(item.timeOfDeparture));
             }
         }
     }
