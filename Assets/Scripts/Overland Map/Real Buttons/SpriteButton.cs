@@ -24,7 +24,7 @@ public class SpriteButton : MonoBehaviour
     [SerializeField]
     Sprite regularSprite;
     [SerializeField]
-    Sprite hoverSprite;
+    public Sprite hoverSprite;
     [SerializeField]
     Sprite clickedSprite;
     [SerializeField]

@@ -18,12 +18,12 @@ public class NewSiteButton : MonoBehaviour
     //public Level level; 
     public LevelSO levelSO;
 
-    public SiteData siteData;
+    public SiteData siteData; //re work needed!
 
     //[Tooltip("Estiamted traveling duration in seconds")]
     public float ETA => siteData.ETA;
 
-    public Transform dataDisplayCenterTrans; //in scene named "image" - it is the best transform as it is the background image for the DataDisplayer
+    public Transform dataDisplayCenterTrans; //maybe remove?
 
     private readonly int clockDelay = 1; //time between clock ticks //seeing how this works, it could honestly just be a string...
 
@@ -49,21 +49,74 @@ public class NewSiteButton : MonoBehaviour
     //GameObject squadPickerObject; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
     SquadPicker _squadPicker => SquadPicker.Instance; //turns-on on click - should be move here as it is now serialized in the OnClick event of SiteButtons
 
-    //private void Awake()
-    //{
-    //    if (SiteCooldowns == null)
-    //        SiteCooldowns = new Dictionary<string, float>();
-    //}
-    [SerializeField]
-    public Button thisButton;
-
     public SpriteButton spriteButton;
 
     [SerializeField]
-    public Image thisImage;
-
+    LevelSO[] forestSos;
+    [SerializeField]
+    LevelSO[] darkForestSos;
+    [SerializeField]
+    LevelSO[] ruinsSos;
+    [SerializeField]
+    LevelSO[] swampSos;
+    [SerializeField]
+    LevelSO[] lakeSos;
 
     public LairDifficulty[] relevantDifficulties;
+
+    static int[] counts = new int[5];
+    [ContextMenu("ClearCounts")]
+    public void ClearCounts()
+    {
+        for (int i = 0; i < counts.Length; i++)
+        {
+            counts[i] = 0;
+        }
+    }
+    [ContextMenu("NameFix")]
+    public void NameFix()
+    {
+        
+        name = spriteButton.hoverSprite.name;
+        switch (name)
+        {
+            case "Forest":
+                name += $" {counts[0]+1}";
+                levelSO = forestSos[counts[0]];
+                forestSos[counts[0]].name = spriteButton.hoverSprite.name + $" {counts[0] + 1}";
+                counts[0]++;
+                break;
+                case "DarkForest":
+                name += $" {counts[1] + 1}";
+                levelSO = darkForestSos[counts[1]];
+                darkForestSos[counts[1]].name = spriteButton.hoverSprite.name + $" {counts[1] + 1}";
+                counts[1]++;
+                break;
+                case "Ruins":
+                name += $" {counts[2] + 1}";
+                levelSO = ruinsSos[counts[2]];
+                ruinsSos[counts[2]].name = spriteButton.hoverSprite.name + $" {counts[2] + 1}";
+                counts[2]++;
+                break;
+                case "Swamp":
+                name += $" {counts[3] + 1}";
+                levelSO = swampSos[counts[3]];
+                swampSos[counts[3]].name = spriteButton.hoverSprite.name + $" {counts[3] + 1}";
+                counts[3]++;
+                break;
+                case "Lake":
+                name += $" {counts[4] + 1}";
+                levelSO = lakeSos[counts[4]];
+                lakeSos[counts[4]].name = spriteButton.hoverSprite.name+ $" {counts[4] + 1}";
+                counts[4]++;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+
     public LairDifficulty GetRandomRelevantDifficulty()
     {
         return relevantDifficulties[UnityEngine.Random.Range(0, relevantDifficulties.Length)];
