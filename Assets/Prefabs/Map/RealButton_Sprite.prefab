@@ -461,11 +461,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stayPressedTime: 0.1
   spriteRenderer: {fileID: 9174349814871881076}
-  name_spriteRenderer: {fileID: 6929325010181685229}
   regularSprite: {fileID: 21300000, guid: f34cfbbaa90618946b135b6edf717d6a, type: 3}
   hoverSprite: {fileID: 21300000, guid: 8bf4ee47be81b314aa4fd3315b699a88, type: 3}
   clickedSprite: {fileID: 21300000, guid: f56abb6300eea944ca5207898f5632bb, type: 3}
   disabledSprite: {fileID: 0}
+  stateSprites: []
+  stateColours:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.9837039, b: 0.3160377, a: 1}
+  - {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  - {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   OnClick:
     m_PersistentCalls:
       m_Calls:

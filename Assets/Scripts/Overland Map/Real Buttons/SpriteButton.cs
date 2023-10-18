@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 //enum ButtonSprite_State { Regular, Hover, Clicked, Disabled};
+enum ButtonStateColours { Regular, Hover, Pressed, Disabled}
 
 public class SpriteButton : MonoBehaviour
 {
@@ -14,11 +15,10 @@ public class SpriteButton : MonoBehaviour
 
     [SerializeField]
     SpriteRenderer spriteRenderer;
-    [SerializeField]
-    SpriteRenderer name_spriteRenderer;
 
     ButtonSprite_State _currentState;
     Sprite _currentSprite;
+
 
     #region Sprites for states
     [SerializeField]
@@ -29,7 +29,14 @@ public class SpriteButton : MonoBehaviour
     Sprite clickedSprite;
     [SerializeField]
     Sprite disabledSprite;
+
+    [SerializeField]
+    Sprite[] stateSprites;
     #endregion
+
+    [SerializeField]
+    Color[] stateColours; // currently setup as "fall-back mode" - does colour if the relevant sprite is missing
+
 
     bool _isMouseIn = false;
 
@@ -39,6 +46,17 @@ public class SpriteButton : MonoBehaviour
     public UnityEvent OnExit;
     #endregion
 
+    public void OnValidate()
+    {
+        if (stateSprites != null && stateSprites.Length != 0)
+            return;
+        stateSprites = new Sprite[4];
+        stateSprites[0] = regularSprite;
+        stateSprites[1] = hoverSprite;
+        stateSprites[2] = clickedSprite;
+        stateSprites[3] = disabledSprite;
+        //Get name sprite for sites - Resource<Load>() or Prefabber-like solution
+    }
 
     public void SetMe(UnityEngine.UI.Button button, Sprite reg)
     {
@@ -63,6 +81,8 @@ public class SpriteButton : MonoBehaviour
             return;
 
         SetSpriteToState(ButtonSprite_State.Clicked);
+        StartCoroutine(BackToRegular());
+
         OnClick.Invoke();
     }
 
@@ -88,26 +108,27 @@ public class SpriteButton : MonoBehaviour
     void SetSpriteToState(ButtonSprite_State state)
     {
         Sprite newSprite = null;
-        switch (state)
+        Color? newCol = null;
+        if(stateSprites[(int)_currentState] == null)
         {
-            case ButtonSprite_State.Regular:
-                newSprite = regularSprite;
-                break;
-            case ButtonSprite_State.Hover:
-                newSprite = hoverSprite;
-                break;
-            case ButtonSprite_State.Clicked:
-                newSprite = clickedSprite;
-                StartCoroutine(BackToRegular());
-                //Start interruptable time-out to return to regular?
-                break;
-            case ButtonSprite_State.Disabled:
-                newSprite = disabledSprite;
-                break;
-            default:
-                break;
+            newCol = Color.white; //reset previous tinting
         }
-        spriteRenderer.sprite = newSprite;
+        
+        if(stateSprites[(int)state] == null)
+        {
+            //fall-back to colour 
+            newCol = stateColours[(int)state];
+        }
+        else
+        {
+            newSprite = stateSprites[(int)state];
+        }
+
+
+        if (newSprite != null) //ASSUMING WE ALWAYS HAVE COLOURS AND WE NEVER DO BOTH COLOUR CHANGE AND SPRITE CHANGE!
+            spriteRenderer.sprite = newSprite;
+        else
+            spriteRenderer.color = newCol.Value;
     }
     IEnumerator BackToRegular()
     {

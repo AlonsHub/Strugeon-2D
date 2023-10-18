@@ -163,6 +163,7 @@ public class TurnMachine : MonoBehaviour
         StopCoroutine(nameof(TurnSequence));
         
         MouseBehaviour.Instance.ShutDown();
+        PartyMaster.Instance.awaySquads.Remove(PartyMaster.Instance.currentSquad);
         PartyMaster.Instance.currentSquad = null;
 
         RefMaster.Instance.ClearDeadAndCowards();

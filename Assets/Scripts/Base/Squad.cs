@@ -20,6 +20,13 @@ public class Squad : IEquatable<Squad>
 
     public Sprite SquadPortrait => (pawns[0].PortraitSprite); //or null if none?
 
+    MercAssignment _currentMercAssignment;
+
+    public bool isAvailable = true;
+
+    public bool IsNotEmptyAndAvailable => isAvailable && pawns.Count > 0;
+
+    public int roomNumber = -1;
     public Squad(int roomNum)
     {
         pawns = new List<Pawn>();
@@ -38,11 +45,6 @@ public class Squad : IEquatable<Squad>
         return sprites;
     }
 
-    public bool isAvailable = true;
-
-    public bool IsNotEmptyAndAvailable => isAvailable && pawns.Count > 0;
-
-    public int roomNumber = -1;
     //public Squad(List<Pawn> newPawns)
     //{
     //    pawns = new List<Pawn>();
@@ -151,11 +153,13 @@ public class Squad : IEquatable<Squad>
             case MercAssignment.Null:
                 break;
             case MercAssignment.AwaySquad:
-                
+
                 //if(!PartyMaster.Instance.squads.Remove(this)) //should be managed by the squad itself in SetMercToAssignment? //HERE IT IS!
                 //{
                 //    Debug.LogWarning("couldn't remove squad, it's OK if game is loading now, recently added squads that are OnRoute should not be PartyMaster.Sqauds so its fine"); //
                 //}
+                PartyMaster.Instance.awaySquads.Add(this);
+
                 isAvailable = false;
                 if (this.roomNumber < 0)
                     this.roomNumber = roomNum;

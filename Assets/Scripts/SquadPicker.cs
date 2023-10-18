@@ -172,32 +172,32 @@ public class SquadPicker : MonoBehaviour
         //Instance = null; //TBF danger?
     }
 
-    public void SendSquad() //called by button in inspector
-    {
-        //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
-        int index = squadToggler.SelectedIndex();
-        Squad toSend = squadSlots[index].squad;
+    //public void OLD_SendSquad() //called by button in inspector
+    //{
+    //    //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)
+    //    int index = squadToggler.SelectedIndex();
+    //    Squad toSend = squadSlots[index].squad;
 
-        //check if a squad is chosen:
-        if (index == -1 || !tgtSite)
-        {
-            if(tgtSimpleSite)
-            {
-                tgtSimpleSite.SendToArena(toSend);
-            }
-            return;
-        }
+    //    //check if a squad is chosen:
+    //    if (index == -1 || !tgtSite)
+    //    {
+    //        if(tgtSimpleSite)
+    //        {
+    //            tgtSimpleSite.SendToArena(toSend);
+    //        }
+    //        return;
+    //    }
 
-        GameObject go = Instantiate(followerPrefab, parentTrans);
+    //    GameObject go = Instantiate(followerPrefab, parentTrans);
         
-        go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite); //send to newTgtSite instead
+    //    go.GetComponent<SimpleFollower>().SetNewFollowerWithPath(toSend, tgtSite); //send to newTgtSite instead
 
-        toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
+    //    toSend.SetMercsToAssignment(MercAssignment.AwaySquad, toSend.roomNumber); 
 
-        PlayerDataMaster.Instance.LogSquadDeparture(toSend.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
+    //    PlayerDataMaster.Instance.LogSquadDeparture(toSend.roomNumber, tgtSite.siteData.siteName, System.DateTime.Now);
 
-        squadSlots[index].UnSetMe(); //weird but good
-    }
+    //    squadSlots[index].UnSetMe(); //weird but good
+    //}
     public void NewSendSquad() //called by button in inspector
     {
         //SquadPickerWindow is closed via serialized event listener (consider putting it into code instead)

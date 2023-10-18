@@ -212,6 +212,7 @@ public class SimpleFollower : MonoBehaviour
 
     public void CancleMe()
     {
+        PartyMaster.Instance.awaySquads.Remove(squad);
         PartyMaster.Instance.squads.Add(squad);
 
         squad.isAvailable = true;
